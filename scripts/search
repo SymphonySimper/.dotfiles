@@ -1,0 +1,5 @@
+#!/bin/bash
+
+URL='https://duckduckgo.com/?q='
+QUERY=$(echo '' | dmenu -p "Search")
+[ -n "$QUERY" ] && xdg-open "${URL}${QUERY}" 2> /dev/null
