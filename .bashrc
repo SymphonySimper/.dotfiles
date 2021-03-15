@@ -12,6 +12,7 @@ PS1="\W > "
 #Alias and Functions
 alias config='/usr/bin/git --git-dir=/home/s2b/.cfg/ --work-tree=/home/s2b'
 alias ls='ls --color=auto'
+alias cd='cd && ls'
 alias vi='nvim'
 alias svi='sudo vim'
 
