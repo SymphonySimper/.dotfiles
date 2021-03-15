@@ -7,7 +7,7 @@
 # PS1='[\u@\h \W]\$ '
 PS1="\W > "
 
-shopt -s autocd
+#shopt -s autocd
 
 #Alias and Functions
 alias config='/usr/bin/git --git-dir=/home/s2b/.cfg/ --work-tree=/home/s2b'
