@@ -25,6 +25,7 @@ alias cgau='config add -u'
 
 #Git alias
 alias g='git'
+alias gc='git clone'
 alias gs='git status'
 gm(){ git commit -m "$1"; }
 gamp(){ git add -u && git commit -m "$1" && git push; }
