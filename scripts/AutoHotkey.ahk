@@ -8,5 +8,5 @@ Run, alacritty
 return
 
 #+f::
-Run, firefox
+Run, firefox.exe
 return
