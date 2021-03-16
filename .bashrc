@@ -29,7 +29,7 @@ alias gc='git clone'
 alias gs='git status'
 gm(){ git commit -m "$1"; }
 gamp(){ git add -u && git commit -m "$1" && git push; }
-alias gp='git push'
+alias gp='git pull'
 alias ga='git add'
 alias gau='git add -u'
 alias gnotrack='git config --local status.showUntrackedFiles no'
