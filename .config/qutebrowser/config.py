@@ -211,6 +211,11 @@ c.statusbar.padding = {'bottom': 1, 'left': 1, 'right': 1, 'top': 1}
 #   - switching: Show the tab bar when switching tabs.
 c.tabs.show = 'never'
 
+# Hide the window decoration.  This setting requires a restart on
+# Wayland.
+# Type: Bool
+c.window.hide_decoration = True
+
 # Text color of the completion widget. May be a single color to use for
 # all columns or a list of three colors, one for each column.
 # Type: List of QtColor, or QtColor
