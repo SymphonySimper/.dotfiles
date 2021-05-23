@@ -81,4 +81,7 @@ pdf(){ zathura "$1" &disown; }
 #Flutter
 export PATH="$PATH:~/flutter/bin"
 
+#File/Dir permission
+alias letmein='sudo chmod u=rwx' 
+
 [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
