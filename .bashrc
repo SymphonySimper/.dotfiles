@@ -13,7 +13,7 @@ PS1="\W > "
 alias config='/usr/bin/git --git-dir=/home/s2b/.cfg/ --work-tree=/home/s2b'
 alias ls='ls --color=auto'
 alias vi='nvim'
-alias svi='sudo vim'
+alias svi='sudo nvim'
 
 #Alias for dot files
 alias cgs='config status'
