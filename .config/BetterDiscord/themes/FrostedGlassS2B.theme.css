@@ -14,12 +14,12 @@
 @import url('https://discordstyles.github.io/Addons/windows-titlebar.css');
 
 :root {
-  --background-image: url('https://i.imgur.com/qDElbsd.jpg');
-  --background-image-blur: 0px;
-  --background-image-size: 100%;
+  --background-image: url('https://i.imgur.com/qDElbsd.jpeg');
+  --background-image-blur: 5px;
+  --background-image-size: cover;
   --background-image-position: center;
   --popout-modal-image: var(--background-image);
-  --popout-modal-blur: 0px;
+  --popout-modal-blur: 5px;
   --popout-modal-size: cover;
   --popout-modal-position: center;
   --home-button-image: url('https://gibbu.github.io/BetterDiscord-Themes/FrostedGlass/assets/discord.svg');
@@ -32,7 +32,7 @@
   --popout-modal-brightness: 0.75;
   --gradient-primary: 33,33,33;
   --gradient-secondary: 17,17,17;
-  --link-colour: #DADADA;
+  --link-colour: #00b0f4;
   --scrollbar-colour: rgba(255,255,255,0.05);
   --gradient-direction: 320deg;
   --tint-colour: 255,51,159;
