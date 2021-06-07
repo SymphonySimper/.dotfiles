@@ -14,6 +14,7 @@ alias config='/usr/bin/git --git-dir=/home/s2b/.cfg/ --work-tree=/home/s2b'
 alias ls='ls --color=auto'
 alias vi='nvim'
 alias svi='sudo nvim'
+alias todo='nvim -c :Goyo ~/todo '
 
 #Alias for dot files
 alias cgs='config status'
@@ -86,4 +87,5 @@ alias letmein='sudo chmod 777'
 
 #Scripts
 alias song='bash /home/s2b/scripts/spotifydrun'
+
 [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
