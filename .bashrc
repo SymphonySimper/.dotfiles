@@ -84,4 +84,6 @@ export PATH="$PATH:~/flutter/bin"
 #File/Dir permission
 alias letmein='sudo chmod 777' 
 
+#Scripts
+alias song='bash /home/s2b/scripts/spotifydrun'
 [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx

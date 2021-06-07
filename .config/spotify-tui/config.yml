@@ -1,5 +1,6 @@
 behavior:
   tick_rate_milliseconds: 50
+  volume_increment: 1
 
 keybindings:
   increase_volume: "="
