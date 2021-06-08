@@ -61,6 +61,7 @@ alias bye='poweroff'
 alias q='exit'
 fnd(){ find ~ -name "$1"; }
 alias imlight='ps_mem -p $(pgrep -d, -u $USER)'
+yoink(){ xclip -sel c < "$1"; }
 
 #Mount
 alias mountnobita='sudo ntfs-3g /dev/sdb1 ~/nobita/'
