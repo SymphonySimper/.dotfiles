@@ -37,7 +37,8 @@ alias gnotrack='git config --local status.showUntrackedFiles no'
 
 #Folders
 alias ..='cd ..'
-alias cdreact='cd ~/lifeisfun/react'
+alias cdreact='cd ~/lifeisfun/react/'
+alias cdflutter='cd ~/lifeisfun/flutter/'
 
 #Scrcpy and wireless adb
 alias myscrcpy='scrcpy -f -n -m 1920'
