@@ -77,6 +77,7 @@ alias myface='ffplay /dev/video0 -loglevel quiet &disown'
 #p(){ ffplay "$1" -loglevel quiet -autoexit; }
 #pws(){ ffplay -vf "subtitles=$1:force_style='FontName=Poppins,Fontsize=24'" "$2" -loglevel quiet -autoexit; }
 p(){ mpv "$1"; }
+mkvTomp4(){ ffmpeg -i "$1" -codec copy "$2"; }
 
 #PDF
 pdf(){ zathura "$1" &disown; }
@@ -89,5 +90,15 @@ alias letmein='sudo chmod 777'
 
 #Scripts
 alias song='bash /home/s2b/scripts/spotifydrun'
+
+#Rank Arch Servers
+alias ua-drop-caches='sudo paccache -rk3; yay -Sc --aur --noconfirm'
+alias ua-update-all='export TMPFILE="$(mktemp)"; \
+	sudo true; \
+	rate-arch-mirrors --max-delay=21600 --save=$TMPFILE \
+	  && sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup \
+	  && sudo mv $TMPFILE /etc/pacman.d/mirrorlist \
+	  && ua-drop-caches \
+	  && yay -Syyu --noconfirm'
 
 [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
