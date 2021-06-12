@@ -14,7 +14,7 @@ alias config='/usr/bin/git --git-dir=/home/s2b/.cfg/ --work-tree=/home/s2b'
 alias ls='ls --color=auto'
 alias vi='nvim'
 alias svi='sudo nvim'
-alias todo='nvim -c :Goyo ~/todo '
+alias todo='nvim ~/todo '
 
 #Alias for dot files
 alias cgs='config status'
@@ -90,10 +90,11 @@ alias letmein='sudo chmod 777'
 
 #Scripts
 alias song='bash /home/s2b/scripts/spotifydrun'
+anime(){ bash /home/s2b/ani-cli/ani-cli "$1"; }
 
 #Rank Arch Servers
-alias ua-drop-caches='sudo paccache -rk3; yay -Sc --aur --noconfirm'
-alias ua-update-all='export TMPFILE="$(mktemp)"; \
+alias lenna-drop-caches='sudo paccache -rk3; yay -Sc --aur --noconfirm'
+alias lenna-update-all='export TMPFILE="$(mktemp)"; \
 	sudo true; \
 	rate-arch-mirrors --max-delay=21600 --save=$TMPFILE \
 	  && sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup \
