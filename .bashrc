@@ -93,8 +93,8 @@ alias song='bash /home/s2b/scripts/spotifydrun'
 anime(){ bash /home/s2b/ani-cli/ani-cli "$1"; }
 
 #Rank Arch Servers
-alias lenna-drop-caches='sudo paccache -rk3; yay -Sc --aur --noconfirm'
-alias lenna-update-all='export TMPFILE="$(mktemp)"; \
+alias lennaDropCaches='sudo paccache -rk3; yay -Sc --aur --noconfirm'
+alias lennaUpdateAll='export TMPFILE="$(mktemp)"; \
 	sudo true; \
 	rate-arch-mirrors --max-delay=21600 --save=$TMPFILE \
 	  && sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup \
