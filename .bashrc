@@ -72,11 +72,7 @@ alias mountusb='sudo mount -o umask=0,uid=nobody,gid=nobody'
 alias audio='pulsemixer --color 0'
 
 #Video
-alias myface='ffplay /dev/video0 -loglevel quiet &disown'
-#p(){ ffplay "$1" -loglevel quiet -autoexit; }
-#pws(){ ffplay -vf "subtitles=$1:force_style='FontName=Poppins,Fontsize=24'" "$2" -loglevel quiet -autoexit; }
-p(){ mpv "$1"; }
-mkvTomp4(){ ffmpeg -i "$1" -codec copy "$2"; }
+alias p='bash ~/scripts/video'
 
 #PDF
 pdf(){ zathura "$1" &disown; }

@@ -1,0 +1,34 @@
+#!/bin/bash
+
+#############
+#Video Stuff#
+#############
+
+function myFace(){ ffplay /dev/video0 -loglevel quiet &disown; }
+function convert(){ ffmpeg -i "$1" -codec copy "$2" ; }
+function play(){ mpv "$1"; }
+
+optstring=":fc:"
+
+if [[ ! $@ =~ ^\-.+ ]] #checks if there is any arguments
+then
+  play "$1" ;
+else
+	while getopts ${optstring} arg; do
+		case "${arg}" in 
+			f) myFace ;;
+			c) 
+				shift
+				convert "$1" "$2"
+				;;
+			*) exit 1 ;;
+		esac
+	done
+fi
+
+
+#If you want to use ffmpeg for playing video instead of mpv use this
+
+#p(){ ffplay "$1" -loglevel quiet -autoexit; } #Just to play the video
+
+#pws(){ ffplay -vf "subtitles=$1:force_style='FontName=Poppins,Fontsize=24    '" "$2" -loglevel quiet -autoexit; } #Play video with subtitle
