@@ -89,8 +89,8 @@ export PATH="$PATH:~/flutter/bin"
 alias letmein='sudo chmod 777' 
 
 #Scripts
-alias song='bash /home/s2b/scripts/spotifydrun'
-anime(){ bash /home/s2b/ani-cli/ani-cli "$1"; }
+alias song='bash $(pwd)/scripts/spotifydrun'
+anime(){ bash $(pwd)/ani-cli/ani-cli "$1"; }
 
 #Rank Arch Servers
 alias lennaDropCaches='sudo paccache -rk3; yay -Sc --aur --noconfirm'
