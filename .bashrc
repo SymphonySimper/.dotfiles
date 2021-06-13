@@ -14,7 +14,6 @@ alias config='/usr/bin/git --git-dir=/home/s2b/.cfg/ --work-tree=/home/s2b'
 alias ls='ls --color=auto'
 alias vi='nvim'
 alias svi='sudo nvim'
-alias todo='nvim ~/todo '
 
 #Alias for dot files
 alias cgs='config status'
@@ -92,6 +91,15 @@ alias song='bash $(pwd)/scripts/spotifydrun'
 anime(){ bash $(pwd)/ani-cli/ani-cli "$1"; }
 
 #Lazy Functions
+
+#ToDo
+todo(){
+	loc=$(pwd)/todo
+	case $1 in
+		-s) cat $loc ;;
+		*) nvim $loc ;;
+	esac;
+}
 
 #Dwm
 newDwm(){ cp config.def.h config.h && sudo make clean install; }
