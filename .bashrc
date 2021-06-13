@@ -87,14 +87,14 @@ alias letmein='sudo chmod 777'
 letItGo(){ chmod +x "$1"; }
 
 #Scripts
-alias song='bash $(pwd)/scripts/spotifydrun'
-anime(){ bash $(pwd)/ani-cli/ani-cli "$1"; }
+alias song='bash ~/scripts/spotifydrun'
+anime(){ bash ~/ani-cli/ani-cli "$1"; }
 
 #Lazy Functions
 
 #ToDo
 todo(){
-	loc=$(pwd)/todo
+	loc=~/todo
 	case $1 in
 		-s) cat $loc ;;
 		*) nvim $loc ;;
