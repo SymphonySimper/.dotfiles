@@ -82,15 +82,28 @@ mkvTomp4(){ ffmpeg -i "$1" -codec copy "$2"; }
 #PDF
 pdf(){ zathura "$1" &disown; }
 
-#Flutter
-export PATH="$PATH:~/flutter/bin"
 
 #File/Dir permission
 alias letmein='sudo chmod 777' 
+letItGo(){ chmod +x "$1"; }
 
 #Scripts
 alias song='bash $(pwd)/scripts/spotifydrun'
 anime(){ bash $(pwd)/ani-cli/ani-cli "$1"; }
+
+#Lazy Functions
+
+#Dwm
+newDwm(){ cp config.def.h config.h && sudo make clean install; }
+
+
+
+#############
+#Don't touch#
+#############
+
+#Flutter
+export PATH="$PATH:~/flutter/bin"
 
 #Rank Arch Servers
 alias lennaDropCaches='sudo paccache -rk3; yay -Sc --aur --noconfirm'
@@ -101,5 +114,5 @@ alias lennaUpdateAll='export TMPFILE="$(mktemp)"; \
 	  && sudo mv $TMPFILE /etc/pacman.d/mirrorlist \
 	  && lennaDropCaches \
 	  && yay -Syyu --noconfirm'
-
+#Startx
 [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
