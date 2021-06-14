@@ -1,0 +1,3 @@
+#config git
+cgm(){ config commit -m "$1"; }
+cgamp(){ config add -u && config commit -m "$1" && config push; }

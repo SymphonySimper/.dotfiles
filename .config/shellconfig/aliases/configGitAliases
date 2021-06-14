@@ -1,0 +1,5 @@
+#Config git alias
+alias cgs='config status'
+alias cgp='config push'
+alias cga='config add'
+alias cgau='config add -u'

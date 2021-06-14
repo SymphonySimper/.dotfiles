@@ -1,0 +1,3 @@
+#open pdf files
+
+pdf(){ zathura "$1" &disown; }

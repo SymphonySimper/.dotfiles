@@ -1,0 +1,2 @@
+ #Install dwm
+ newDwm(){ cp config.def.h config.h && sudo make clean install; }

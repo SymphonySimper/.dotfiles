@@ -1,0 +1,3 @@
+#Copy contents of a file to clipboard
+
+yoink(){ xclip -sel c < "$1"; }

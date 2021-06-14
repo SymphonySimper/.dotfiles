@@ -1,0 +1,4 @@
+#Folders
+alias ..='cd ..'
+alias cdreact='cd ~/lifeisfun/react/'
+alias cdflutter='cd ~/lifeisfun/flutter/'

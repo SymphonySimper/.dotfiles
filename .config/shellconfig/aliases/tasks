@@ -1,0 +1,7 @@
+#Tasks
+alias rmcache='rm -rf ~/.cache/*'
+alias rmme='rm -rf ~/.local/share/Trash/*'
+alias rmlinks='find . -xtype l -exec rm {} \;'
+alias bye='poweroff'
+alias q='exit'
+alias imlight='ps_mem -p $(pgrep -d, -u $USER)'

@@ -1,0 +1,2 @@
+#Anime
+anime(){ bash ~/ani-cli/ani-cli "$1"; }

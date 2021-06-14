@@ -1,0 +1,11 @@
+#!/bin/bash
+
+loc=~/todo
+
+show(){ cat $loc; }
+edit(){ nvim $loc; }
+
+case "$1" in
+	-s) show ;;
+	*) edit ;;
+esac

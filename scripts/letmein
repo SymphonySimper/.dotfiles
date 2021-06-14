@@ -1,0 +1,22 @@
+#!/bin/bash
+
+fullPerm(){ sudo chmod 777 "$1"; }
+execPerm(){ chmod +x "$1"; }
+
+optstring="a:"
+
+if [[ ! "$@" =~ ^/.-+ ]]
+then
+	execPerm "$1"
+else
+	while getopts ${optstring} arg; do
+		case "${arg}" in
+			-a) 
+				shift
+				fullPerm "$1"
+				;;
+			*) exit 1 ;;
+		
+		esac
+	done
+fi

@@ -8,7 +8,7 @@ function myFace(){ ffplay /dev/video0 -loglevel quiet &disown; }
 function convert(){ ffmpeg -i "$1" -codec copy "$2" ; }
 function play(){ mpv "$1"; }
 
-optstring=":fc:"
+optstring="fc:"
 
 if [[ ! $@ =~ ^\-.+ ]] #checks if there is any arguments
 then

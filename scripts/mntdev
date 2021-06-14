@@ -1,0 +1,21 @@
+#!/bin/bash
+
+mountnobita(){ sudo ntfs-3g /dev/sdb1 ~/nobita/; }
+umountnobita(){ sudo umount /dev/sdb1; }
+mountusb(){ sudo mount -o umask=0,uid=nobody,gid=nobody /dev/$1 ~/usb/; }
+umountusb(){ sudo umount /dev/$1; }
+
+optstring="mubo:"
+while getopts ${optstring} opt; do
+	case "${opt}" in
+		m) mountnobita ;;
+		u) umountnobita ;;
+		b) 
+			shift
+			mountusb $1 ;;
+		o)
+			shift
+			umountusb $1 ;;
+		*) exit 1 ;;
+	esac
+done
