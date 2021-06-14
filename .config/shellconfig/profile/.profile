@@ -1,5 +1,8 @@
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
+#Default Programs
+export EDITOR="nvim"
+
 #Paths
 export PATH="$PATH:$HOME/scripts"	#Scripts
 export PATH="$PATH:~/flutter/bin" 	#Flutter
