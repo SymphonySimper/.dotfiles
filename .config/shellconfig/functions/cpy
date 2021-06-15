@@ -1,1 +1,0 @@
-cpy(){ rsync -ah -progress "$1" "$2"; }
