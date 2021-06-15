@@ -6,9 +6,13 @@
 
 function myFace(){ ffplay /dev/video0 -loglevel quiet &disown; }
 function convert(){ ffmpeg -i "$1" -codec copy "$2" ; }
-function play(){ mpv "$1"; }
 
-optstring="fc:"
+function play(){ mpv "$1"; }						#Requires mpv
+
+function ytSearch(){ ytfzf -t "$1"; }					#Requires ytfzf
+function ytPlay(){ ytfzf -a "$1"; }					
+
+optstring="fc:s:p:"
 
 if [[ ! $@ =~ ^\-.+ ]] #checks if there is any arguments
 then
@@ -20,6 +24,14 @@ else
 			c) 
 				shift
 				convert "$1" "$2"
+				;;
+			s)
+				shift
+				ytSearch "$1"
+				;;
+			p)
+				shift
+				ytPlay "$1"
 				;;
 			*) exit 1 ;;
 		esac
