@@ -35,5 +35,6 @@ fi
 # /usr/bin/start-pulseaudio-x11 &
 feh --bg-scale ~/myPics/BG.png
 export _JAVA_AWT_WM_NONREPARENTING=1
+#systemctl --user set-environment DISPLAY=:0
 exec dwm
 
