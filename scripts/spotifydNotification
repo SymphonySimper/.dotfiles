@@ -1,11 +1,11 @@
 #!/bin/bash
+
 data="playerctl metadata --player=spotifyd -f"
 songName=$($data "{{xesam:title}}")
 artUrl=$($data "{{mpris:artUrl}}")
 path="~/.cache/albumArt.jpg"
 
 function albumImage(){ magick $artUrl ~/.cache/albumArt.jpg; }
-
 function notify(){ dunstify -h string:x-dunst-stack-tag:song -i $path  "$songName"; }
 
 albumImage
