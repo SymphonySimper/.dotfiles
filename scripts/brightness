@@ -1,0 +1,13 @@
+#!/bin/bash
+
+app=xbacklight
+getB=`$app -get`
+noti(){ dunstify -h string:x-dunst-stack-tag:brightness "Brightness: $getB" -h int:value:$getB; }
+
+function bUp(){ $app -inc 2 && noti; }
+function bDown(){ $app -dec 2 && noti; }
+
+case "$1" in
+	-u) bUp ;;
+	-d) bDown ;;
+esac

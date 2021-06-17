@@ -1,0 +1,23 @@
+#!/bin/bash
+
+app=pulsemixer
+noti="dunstify -h string:x-dunst-stack-tag:audio"
+getVol="$app --get-volume"
+getMute=`$app --get-mute`
+
+function notify(){
+	case "$1" in
+		-c) $noti "Volume: `$getVol | awk '{print $1}'`" -h int:value:`$getVol | awk '{print $1}'` ;;
+		-m) $noti "`[[ $getMute = 0 ]] && echo "Unmuted" || echo "Muted"`" ;;
+	esac
+}
+
+function volUp(){ $app --change-volume +2 && notify -c; } 
+function volDown(){ $app --change-volume -2 && notify -c; }
+function toggleMute(){ $app --toggle-mute && notify -m; }
+
+case "$1" in
+	-u) volUp ;;
+	-d) volDown ;;
+	-m) toggleMute ;;
+esac

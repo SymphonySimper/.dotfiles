@@ -2,7 +2,7 @@
 
 # pgrep picom && killall picom || picom -m 1.0 -i 1.0 -e 1.0 --vsync --backend glx --no-fading-openclose &
 
-function notify(){ dunstify "$1"; }
+function notify(){ dunstify -h string:x-dunst-stack-tag:picom "$1"; }
 
 function killPi(){ 
 	killall picom
