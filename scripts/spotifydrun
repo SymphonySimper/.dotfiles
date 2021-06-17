@@ -1,2 +1,2 @@
 #!/bin/bash
-! pgrep spotifyd && spotifyd; spt
+! pgrep spotifyd && spotifyd --on-song-change-hook spotifydNotification; spt
