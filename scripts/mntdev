@@ -24,8 +24,6 @@ while getopts ${optstring} opt; do
 		o)
 			shift
 			umountAll ;;
-
-
 		*) exit 1 ;;
 	esac
 done
