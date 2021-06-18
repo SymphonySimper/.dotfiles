@@ -3,12 +3,12 @@
 notify(){ dunstify -h string:x-dunst-stack-tag:mntdev "$1"; }
 
 mountnobita(){ sudo ntfs-3g /dev/sdb1 ~/nobita/ && notify "Nobita mounted"; }
-mountusb(){ sudo mount -o umask=0,uid=nobody,gid=nobody /dev/$1 ~/usb/ && notify "USB mounted"; }
+mountusb(){ sudo mount -o umask=0,uid=nobody,gid=nobody /dev/$1 ~/usb/ && notify "Usb mounted"; }
 ntfsmount(){ sudo ntfs-3g /dev/$1 ~/ntfs/ && notify "Ntfs mounted"; }
 umountdev(){ sudo umount /dev/$1 && notify "$2 umounted"; }
 
 whatp=$(lsblk | awk '/nobita/ || /usb/ || /ntfs/ {print $7}' | sed 's#^.*/##'| sed 's/[^_]\+/\L\u&/g')	#Gets the name of the mounted point
-whatd=$(lsblk | awk '/nobita/ || /usb/ || /ntfs/ {print $1}'| sed 's/[^\x00-\x7F]//g')			#Gets the mounted point
+whatd=$(lsblk | awk '/nobita/ || /usb/ || /ntfs/ {print $1}' | sed 's/[^\x00-\x7F]//g')			#Gets the mounted point
 umountAll(){ if [[ "$whatp" =~ nobita || ntfs || usb ]] ; then umountdev $whatd $whatp ; fi; }
 
 optstring="mu:n:o"
