@@ -1,0 +1,20 @@
+#!/bin/bash
+
+cmd="playerctl --player=spotifyd metadata -f"
+
+fetchArtUrl=$($cmd "{{mpris:artUrl}}")
+fetchTitle=$($cmd "{{xesam:title}}")
+
+function albumArt(){ curl -s $fetchArtUrl --output ~/.cache/albumArt.jpg; }
+#function albumArt(){ magick $fetchArtUrl ~/.cache/albumArt.jpg; }
+function notify(){ dunstify -h string:x-dunst-stack-tag:song -i ~/.cache/albumArt.jpg "$fetchTitle"; }
+
+albumArt && notify
+
+
+###Dosen't matter
+#pathArt=~/.cache/albumArt.jpg
+#readarray -t data < <(playerctl --player=spotifyd metadata -f "{{xesam:title}} {{mpris:artUrl}}" | sed -e 's/http/\nhttp/g')
+#function albumArt(){ magick "${data[1]}" $pathArt; }
+#function notify(){ dunstify -h string:x-dunst-stack-tag:song -i $pathArt "${data[0]}"; }
+#albumArt && notify
