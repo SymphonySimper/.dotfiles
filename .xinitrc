@@ -1,4 +1,10 @@
 #!/bin/sh
+ ## test for an existing bus daemon, just to be safe
+if test -z "$DBUS_SESSION_BUS_ADDRESS" ; then
+	## if not found, launch a new one
+        eval `dbus-launch --sh-syntax`
+        echo "D-Bus per-session daemon address is: $DBUS_SESSION_BUS_ADDRESS"
+fi
 
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
@@ -34,7 +40,5 @@ fi
 
 # /usr/bin/start-pulseaudio-x11 &
 feh --bg-scale ~/myPics/BG.png
-export _JAVA_AWT_WM_NONREPARENTING=1
-#systemctl --user set-environment DISPLAY=:0
 exec dwm
 
