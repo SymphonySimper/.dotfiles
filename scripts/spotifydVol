@@ -5,13 +5,13 @@ iconPath="~/assets/icons/brands/spotify.svg"
 getId=$(pulsemixer --list-sinks | awk '/librespot/ {print $4}' |  sed -e 's/[a-zA-Z]//g' -e 's/[<>,-]//g')
 
 lazy="pulsemixer --id $getId"
-getVol=$($lazy --get-volume | awk '{print $1}')
 getMute=$($lazy --get-mute)
 lazyNot="dunstify -h string:x-dunst-stack-tag:spotifydVol"
+getVol(){ $lazy --get-volume | awk '{print $1}'; }
 
 function notify(){
 	case "$1" in
-		-c) $lazyNot -i $iconPath "Volume: $getVol" -h int:value:$getVol ;;
+		-c) $lazyNot -i $iconPath "Volume: $(getVol)" -h int:value:$(getVol) ;;
 		-m) $lazyNot -i $iconPath "$( [[ $getMute == 0 ]] && echo "Muted" || echo "Unmuted")" ;;
 	esac
 }

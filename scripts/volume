@@ -1,14 +1,27 @@
 #!/bin/bash
 
-app=pulsemixer
+app="pulsemixer"
 noti="dunstify -h string:x-dunst-stack-tag:audio"
-getVol=$($app --get-volume | awk '{print $1}')
 getMute=$($app --get-mute)
+path="~/assets/icons/volume"
+muteI="$path/mute.svg"
+volChangeI="$path/volChange.svg"
+
+function getVol(){ $app --get-volume | awk '{print $1}'; }
+function muteNoti(){
+	if [[ $getMute == 0 ]]
+	then
+		$noti -i "$muteI" "Muted"
+	else
+		$noti -i "$volChangeI" "Unmuted"
+	fi
+
+}
 
 function notify(){
 	case "$1" in
-		-c) $noti "Volume: $getVol" -h int:value:$getVol ;;
-		-m) $noti "`[[ $getMute == 0 ]] && echo "Unmuted" || echo "Muted"`" ;;
+		-c) $noti -i "$volChangeI" "Volume: $(getVol)" -h int:value:$(getVol) ;;
+		-m) muteNoti ;;
 	esac
 }
 
