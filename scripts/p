@@ -4,13 +4,13 @@
 #Video Stuff#
 #############
 
-function myFace(){ ffplay /dev/video0 -loglevel quiet &disown; }
-function convert(){ ffmpeg -i "$1" -codec copy "$2" ; }
+myFace(){ ffplay /dev/video0 -loglevel quiet &disown; }
+convert(){ ffmpeg -i "$1" -codec copy "$2" ; }
 
-function play(){ mpv "$1"; }						#Requires mpv
+play(){ mpv "$1"; }						#Requires mpv
 
-function ytSearch(){ ytfzf -t "$1"; }					#Requires ytfzf
-function ytPlay(){ ytfzf -a "$1"; }					
+ytSearch(){ ytfzf -t "$1"; }					#Requires ytfzf
+ytPlay(){ ytfzf -a "$1"; }					
 
 optstring="fc:s:p:"
 

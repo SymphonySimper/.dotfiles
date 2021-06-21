@@ -9,15 +9,15 @@ getMute=$($lazy --get-mute)
 lazyNot="dunstify -h string:x-dunst-stack-tag:spotifydVol"
 getVol(){ $lazy --get-volume | awk '{print $1}'; }
 
-function notify(){
+notify(){
 	case "$1" in
 		-c) $lazyNot -i $iconPath "Volume: $(getVol)" -h int:value:$(getVol) ;;
 		-m) $lazyNot -i $iconPath "$( [[ $getMute == 0 ]] && echo "Muted" || echo "Unmuted")" ;;
 	esac
 }
 
-function changeVol(){ $lazy --change-volume $1; }
-function toggleMute(){ $lazy --toggle-mute; }
+changeVol(){ $lazy --change-volume $1; }
+toggleMute(){ $lazy --toggle-mute; }
 
 case "$1" in
 	-u) changeVol +2 && notify -c ;;

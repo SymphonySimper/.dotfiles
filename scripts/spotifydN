@@ -5,9 +5,9 @@ cmd="playerctl --player=spotifyd metadata -f"
 fetchArtUrl=$($cmd "{{mpris:artUrl}}")
 fetchTitle=$($cmd "{{xesam:title}}")
 
-function albumArt(){ curl -s $fetchArtUrl --output ~/.cache/albumArt.jpg; }
-#function albumArt(){ magick $fetchArtUrl ~/.cache/albumArt.jpg; }
-function notify(){ dunstify -h string:x-dunst-stack-tag:song -i ~/.cache/albumArt.jpg "$fetchTitle"; }
+albumArt(){ curl -s $fetchArtUrl --output ~/.cache/albumArt.jpg; }
+#albumArt(){ magick $fetchArtUrl ~/.cache/albumArt.jpg; }
+notify(){ dunstify -h string:x-dunst-stack-tag:song -i ~/.cache/albumArt.jpg "$fetchTitle"; }
 
 albumArt && notify
 

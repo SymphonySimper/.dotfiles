@@ -2,21 +2,11 @@
 
 # pgrep picom && killall picom || picom -m 1.0 -i 1.0 -e 1.0 --vsync --backend glx --no-fading-openclose &
 
-function notify(){ dunstify -h string:x-dunst-stack-tag:picom "$1"; }
+notify(){ dunstify -h string:x-dunst-stack-tag:picom "$1"; }
 
-function killPi(){ 
-	killall picom
-	notify "Picom is dead"
-}
+killPi(){ killall picom && notify "Picom is dead"; }
 
-function startPi(){
-	picom -m 1.0 -i 1.0 -e 1.0 --vsync --backend glx --no-fading-openclose &
-	notify "Picom is alive"
-}
+pi(){ picom -m 1.0 -i 1.0 -e 1.0 --vsync --backend glx --no-fading-openclose & }
+startPi(){ pi && notify "Picom is alive"; }
 
-if ( pgrep picom )
-then
-	killPi
-else 
-	startPi
-fi
+pgrep picom && killPi || startPi

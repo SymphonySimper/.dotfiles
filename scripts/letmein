@@ -1,7 +1,7 @@
 #!/bin/bash
 
-function fullPerm(){ sudo chmod 777 "$1"; }
-function execPerm(){ chmod +x "$1"; }
+fullPerm(){ sudo chmod 777 "$1"; }
+execPerm(){ chmod +x "$1"; }
 
 case "$1" in
 	-a) fullPerm "$2" ;;

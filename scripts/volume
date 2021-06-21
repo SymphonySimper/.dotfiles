@@ -7,8 +7,8 @@ path="~/assets/icons/volume"
 muteI="$path/mute.svg"
 volChangeI="$path/volChange.svg"
 
-function getVol(){ $app --get-volume | awk '{print $1}'; }
-function muteNoti(){
+getVol(){ $app --get-volume | awk '{print $1}'; }
+muteNoti(){
 	if [[ $getMute == 0 ]]
 	then
 		$noti -i "$muteI" "Muted"
@@ -18,16 +18,16 @@ function muteNoti(){
 
 }
 
-function notify(){
+notify(){
 	case "$1" in
 		-c) $noti -i "$volChangeI" "Volume: $(getVol)" -h int:value:$(getVol) ;;
 		-m) muteNoti ;;
 	esac
 }
 
-function volUp(){ $app --change-volume +2 && notify -c; } 
-function volDown(){ $app --change-volume -2 && notify -c; }
-function toggleMute(){ $app --toggle-mute && notify -m; }
+volUp(){ $app --change-volume +2 && notify -c; } 
+volDown(){ $app --change-volume -2 && notify -c; }
+toggleMute(){ $app --toggle-mute && notify -m; }
 
 case "$1" in
 	-u) volUp ;;
