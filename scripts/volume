@@ -6,31 +6,39 @@ getMute=$($app --get-mute)
 path="~/assets/icons/volume"
 muteI="$path/mute.svg"
 volChangeI="$path/volChange.svg"
+warningI="~/assets/icons/general/warning.svg"
 
 getVol(){ $app --get-volume | awk '{print $1}'; }
 muteNoti(){
 	if [[ $getMute == 0 ]]
 	then
-		$noti -i "$muteI" "Muted"
+		$noti -i $muteI "Muted"
 	else
-		$noti -i "$volChangeI" "Unmuted"
+		$noti -i $volChangeI "Unmuted"
 	fi
 
 }
 
 notify(){
 	case "$1" in
-		-c) $noti -i "$volChangeI" "Volume: $(getVol)" -h int:value:$(getVol) ;;
+		-c) $noti -i $volChangeI "Volume: $(getVol)" -h int:value:$(getVol) ;;
 		-m) muteNoti ;;
 	esac
 }
 
-volUp(){ $app --change-volume +2 && notify -c; } 
-volDown(){ $app --change-volume -2 && notify -c; }
+changeVol(){ 
+	if [[ $getMute == 0 ]]
+	then
+		$app --change-volume $1 && notify -c 
+	else
+		$noti -i $warningI "Audio is muted" "Unmute to change volume"
+	fi
+}
+
 toggleMute(){ $app --toggle-mute && notify -m; }
 
 case "$1" in
-	-u) volUp ;;
-	-d) volDown ;;
+	-u) changeVol +2 ;;
+	-d) changeVol -2 ;;
 	-m) toggleMute ;;
 esac
