@@ -2,7 +2,7 @@
 
 app="xbacklight"
 getB(){ $app -get; }
-noti(){ dunstify -h string:x-dunst-stack-tag:brightness "Brightness: $(getB)" -h int:value:$(getB); }
+noti(){ dunstify -h string:x-dunst-stack-tag:brightness -i ~/assets/icons/general/brightness.svg "Brightness: $(getB)" -h int:value:$(getB); }
 
 bUp(){ $app -inc 2 && noti; }
 bDown(){ $app -dec 2 && noti; }
