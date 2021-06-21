@@ -25,7 +25,7 @@ showBat(){
 		notifyBat $chargingI
 	elif [[ $getStat == Discharging ]]
 	then
-		if (( getCap <= 59 && getCap > 20 ))
+		if (( getCap <= 20 ))
 		then
 			notifyBat $fullI
 		else
