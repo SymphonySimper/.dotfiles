@@ -41,4 +41,3 @@ fi
 # /usr/bin/start-pulseaudio-x11 &
 feh --bg-scale ~/assets/myPics/BG.png
 exec dwm
-

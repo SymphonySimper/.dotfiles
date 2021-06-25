@@ -12,6 +12,7 @@ application/x-extension-xht=firefox.desktop
 x-scheme-handler/figma=figma-linux.desktop
 x-scheme-handler/eclipse+installer=_home_s2b_Downloads_eclipse-installer_.desktop
 x-scheme-handler/eclipse+command x-scheme-handler/eclipse+mpc=_home_s2b_eclipse_java-2021-03_eclipse_.desktop
+x-scheme-handler/tg=userapp-Telegram Desktop-VQZT50.desktop
 
 [Added Associations]
 x-scheme-handler/http=firefox.desktop;
@@ -27,3 +28,4 @@ application/x-extension-xht=firefox.desktop;
 image/jpeg=feh.desktop;
 image/png=feh.desktop;
 application/pdf=org.pwmt.zathura-pdf-poppler.desktop;
+x-scheme-handler/tg=userapp-Telegram Desktop-VQZT50.desktop;

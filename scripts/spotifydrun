@@ -1,2 +1,2 @@
 #!/bin/bash
-! pgrep spotifyd && spotifyd --autoplay --on-song-change-hook spotifydN ; spt
+! pgrep spotifyd && spotifyd --autoplay; spt
