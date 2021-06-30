@@ -1,0 +1,85 @@
+#!/bin/bash
+
+#Apps
+img="feh"
+p="mpv"
+pf="ffplay"
+cv="ffmpeg"
+ci="magick"
+pdf="zathura"
+
+#Paths
+whatImg=~/Downloads/What*
+
+
+viewImg(){
+	case "$1" in
+		-a) $img * ;;
+		-v) 
+			shift 
+			$img "$1"
+			;;
+		-w) $img $whatImg ;;
+		-d) $img $whatImg && rm -I $whatImg ;;
+	esac
+}
+
+playVideo(){
+	case "$1" in
+		-f) $pf /dev/video0 -loglevel quiet & ;;
+		*) $p "$1" ;;
+	esac
+}
+
+viewPdf(){ 
+	case "$1" in
+		-d) 
+			shift 
+			$pdf "$1" && rm -i "$1"
+			;;
+		*) $pdf "$1" ;;
+	esac
+}
+
+cV(){ $cv -i "$1" -codec copy "$2"; }
+cI(){ $ci "$1" "$2"; }
+
+
+options(){
+	case "$1" in
+		-a) viewImg -a ;;
+		-w) viewImg -w ;;
+		-f) playVideo -f ;;
+		-d) 	
+			shift
+			if [[ "$1" == *.pdf ]]
+			then
+				viewPdf -d "$1"
+			else
+				viewImg -d
+			fi
+			;;
+		-c)
+			shift
+			if [[ "$1" == *.mkv ]]
+			then
+				cV "$1" "$2"
+			elif [[ "$1" == *.webm ]]
+			then
+				cI "$1" "$2"
+			fi
+	esac
+}
+
+if [[ "$1" == *.jpeg || "$1" == *.jpg || "$1" == *.png ]]
+then
+	viewImg -v "$1"
+elif [[ "$1" == *.mkv || "$1" == *.mp4 || "$1" == *.gif || "$1" == *.avi ]]
+then
+	playVideo "$1"
+elif [[ "$1" == *.pdf ]]
+then
+	viewPdf "$1" 
+else
+	options "$@"
+fi
