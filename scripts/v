@@ -2,50 +2,52 @@
 
 #Apps
 iv="feh"
-p="mpv"
-pf="ffplay"
-cv="ffmpeg"
-ci="magick"
-pdfv="zathura"
+vv="mpv"
+vf="ffplay"
+vc="ffmpeg"
+vi="magick"
+pv="zathura"
 te="nvim"
 tv="cat"
 
 #Paths
-whatImg=~/Downloads/What*
+whatImg="$HOME/Downloads/What"*
 
-#Functions
-img(){
+if [[ "$1" == *.jpeg || "$1" == *.jpg || "$1" == *.png ]]
+then
+	$iv "$1"
+elif [[ "$1" == *.mkv || "$1" == *.mp4 || "$1" == *.gif || "$1" == *.avi || "$1" == *youtu* ]]
+then
+	$vv "$1"
+elif [[ "$1" == *.pdf ]]
+then
+	$pv "$1" 
+else
 	case "$1" in
 		-a) $iv * ;;
-		-v) 
-			shift 
-			$iv "$1"
-			;;
 		-w) $iv $whatImg ;;
-		-d) $iv $whatImg && rm -I $whatImg ;;
-	esac
-}
-
-video(){
-	case "$1" in
-		-f) $pf /dev/video0 -loglevel quiet & ;;
-		*) $p "$1" ;;
-	esac
-}
-
-pdf(){ 
-	case "$1" in
-		-d) 
-			shift 
-			$pdfv "$1" && rm -i "$1"
+		-f) $vf /dev/video0 ;;
+		-d) 	
+			shift
+			if [[ "$1" == *.pdf ]]
+			then
+				$pv "$1" && rm -i "$1"
+			else
+				$iv $whatImg && rm -I $whatImg
+			fi
 			;;
-		*) $pdfv "$1" ;;
-	esac
-}
-
-txt(){
-	case "$1" in
-		-v)	shift
+		-c)
+			shift
+			if [[ "$1" == *.mkv ]]
+			then
+				$vc -i "$1" -codec copy "$2"
+			elif [[ "$1" == *.webm ]]
+			then
+				$ic "$1" "$2"
+			fi
+			;;
+		-v) 
+			shift
 			$tv "$1"
 			;;
 		-s)
@@ -54,57 +56,4 @@ txt(){
 			;;
 		*) $te "$1" ;;
 	esac
-}
-
-cV(){ $cv -i "$1" -codec copy "$2"; }
-cI(){ $ci "$1" "$2"; }
-
-
-options(){
-	case "$1" in
-		-a) img -a ;;
-		-w) img -w ;;
-		-f) video -f ;;
-		-d) 	
-			shift
-			if [[ "$1" == *.pdf ]]
-			then
-				pdf -d "$1"
-			else
-				img -d
-			fi
-			;;
-		-c)
-			shift
-			if [[ "$1" == *.mkv ]]
-			then
-				cV "$1" "$2"
-			elif [[ "$1" == *.webm ]]
-			then
-				cI "$1" "$2"
-			fi
-			;;
-		-v) 
-			shift
-			txt -v "$1"
-			;;
-		-s)
-			shift
-			txt -s "$1"
-			;;
-		*) txt "$1" ;;
-	esac
-}
-
-if [[ "$1" == *.jpeg || "$1" == *.jpg || "$1" == *.png ]]
-then
-	img -v "$1"
-elif [[ "$1" == *.mkv || "$1" == *.mp4 || "$1" == *.gif || "$1" == *.avi || "$1" == *youtu* ]]
-then
-	video "$1"
-elif [[ "$1" == *.pdf ]]
-then
-	pdf "$1" 
-else
-	options "$@"
 fi
