@@ -2,12 +2,9 @@
 
 app="xbacklight"
 getB(){ $app -get; }
-noti(){ dunstify -h string:x-dunst-stack-tag:brightness -i ~/assets/icons/general/brightness.svg "Brightness: $(getB)" -h int:value:$(getB); }
-
-bUp(){ $app -inc 2 && noti; }
-bDown(){ $app -dec 2 && noti; }
+notify(){ dunstify -h string:x-dunst-stack-tag:brightness -i ~/assets/icons/general/brightness.svg "Brightness: $(getB)" -h int:value:$(getB); }
 
 case "$1" in
-	-u) bUp ;;
-	-d) bDown ;;
+	-u) $app -inc 2 && notify ;;
+	-d) $app -dec 2 && notify ;;
 esac
