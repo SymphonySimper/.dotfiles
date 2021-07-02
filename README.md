@@ -1,1 +1,1 @@
-My dotfiles for linux/windows
+My dotfiles for linux
