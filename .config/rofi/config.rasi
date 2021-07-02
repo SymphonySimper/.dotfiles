@@ -1,0 +1,9 @@
+configuration {
+	fixed-num-lines: true;
+	lines: 6;
+	fake-transparency:true;
+	fake-background: "~/assets/myPics/fakeBG.png";
+	font: "Poppins 12";
+}
+
+@theme "theme.rasi" 

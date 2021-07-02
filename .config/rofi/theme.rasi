@@ -1,0 +1,40 @@
+* {
+  background-color: transparent; 
+  border-color: #444;
+  text-color: #aaa;
+  spacing: 0;
+  fullscreen: true;
+}
+
+window {
+  margin: 513px 640px 348px 640px;
+}
+
+inputbar {
+  border: 0 0 0 0;
+  children: [prompt,entry];
+}
+
+prompt {
+  padding: 16px;
+  border: 0 0 0 0;
+}
+
+entry {
+  padding: 16px;
+}
+
+listview {
+  cycle: false;
+  margin: 0 0 -1px 0;
+  scrollbar: false;
+}
+
+element {
+ padding: 16px;
+ text-color: #bbb;
+}
+
+element selected {
+  background-color: #4445;
+}
