@@ -1,2 +1,6 @@
 #!/bin/bash
 figlet -f ~/.local/share/fonts/3d.flf  "$1" | lolcat
+
+#credits
+#https://www.youtube.com/watch?v=QGUmMtEnIkI
+#font https://raw.githubusercontent.com/xero/figlet-fonts/master/3d.flf
