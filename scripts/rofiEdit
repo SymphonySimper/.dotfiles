@@ -1,0 +1,6 @@
+#!/bin/bash
+path="$HOME/scripts/rofi"
+configs="$path/editConfigs"
+scripts="$path/editScripts"
+shell="$path/editShell"
+rofi -modi "scripts:$scripts,configs:$configs,shell:$shell" -show scripts
