@@ -1,3 +1,5 @@
 #!/bin/bash
 
-[ ! -z "$@" ] && xdg-open "${@}" &> /dev/null &
+if [ ! -z "$@" ]; then
+	xdg-open "${@}" &> /dev/null &
+fi

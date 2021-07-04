@@ -3,4 +3,4 @@
 search="$HOME/scripts/rofi/search"
 openUrl="$HOME/scripts/rofi/openUrl"
 
-rofi -modi "search:$search,url:$openUrl" -show search
+rofi -modi "search:$search,url:$openUrl" -show search -no-show-match

@@ -33,12 +33,21 @@ case "$1" in
 	-sa)
 		shift
 		v "$pathSA$1" &&
-		[ -f "$pathSA$1" ] && echo "$1		$pathSA$1" >> $shell &&	sortMe "$shell"
+		[ -f "$pathSA$1" ] && echo "$1			$pathSA$1" >> $shell &&	sortMe "$shell"
 		;;
 	-sf)
 		shift
 		v "$pathSF$1" &&
-		[ -f "$pathSF$1" ] && echo "$1		$pathSF$1" >> $shell &&	sortMe "$shell"
+		[ -f "$pathSF$1" ] && echo "$1			$pathSF$1" >> $shell &&	sortMe "$shell"
+		;;
+	-d)
+		shift
+		rm "$(cat $shell $scripts | grep "^$1" | awk  '{ print $2 }')" &&
+		if  grep -q "^$1" $shell ; then
+			sed "/^$1/d" -i $shell
+		elif  grep -q "^$1" $scripts ; then
+			sed "/^$1/d" -i $scripts
+		fi
 		;;
 	*) 	
 		echo $add > "$path$1" && 

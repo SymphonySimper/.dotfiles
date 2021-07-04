@@ -2,4 +2,6 @@
 
 url='https://duckduckgo.com/?q='
 
-[ ! -z "$@" ] && xdg-open "${url}${@}" &> /dev/null &
+if [ ! -z "$@" ]; then
+	xdg-open "${url}${@}" &> /dev/null &
+fi
