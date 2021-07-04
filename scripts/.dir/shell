@@ -1,8 +1,6 @@
-configGitAliases	/home/s2b/.config/shellconfig/aliases/configGitAliases
 fnd			/home/s2b/.config/shellconfig/functions/fnd
 folders			/home/s2b/.config/shellconfig/aliases/folders
 gitAliases		/home/s2b/.config/shellconfig/aliases/gitAliases
-gitManageConfig		/home/s2b/.config/shellconfig/fucntions/gitManageConfig
 gitManage		/home/s2b/.config/shellconfig/functions/gitManage
 newDwm			/home/s2b/.config/shellconfig/fucntions/newDwm
 pacmanAndYay		/home/s2b/.config/shellconfig/aliases/pacmanAndYay

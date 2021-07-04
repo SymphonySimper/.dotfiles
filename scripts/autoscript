@@ -33,12 +33,12 @@ case "$1" in
 	-sa)
 		shift
 		v "$pathSA$1" &&
-		[ -f "$pathSA$1" ] && echo "$1			$pathSA$1" >> $shell &&	sortMe "$shell"
+		[ -f "$pathSA$1" ] && echo "$1		$pathSA$1" >> $shell &&	sortMe "$shell"
 		;;
 	-sf)
 		shift
 		v "$pathSF$1" &&
-		[ -f "$pathSF$1" ] && echo "$1			$pathSF$1" >> $shell &&	sortMe "$shell"
+		[ -f "$pathSF$1" ] && echo "$1		$pathSF$1" >> $shell &&	sortMe "$shell"
 		;;
 	-d)
 		shift

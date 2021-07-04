@@ -6,3 +6,9 @@ alias gp='git pull'
 alias ga='git add'
 alias gau='git add -u'
 alias gnotrack='git config --local status.showUntrackedFiles no'
+
+#Config git alias
+alias cgs='config status'
+alias cgp='config push'
+alias cga='config add'
+alias cgau='config add -u'
