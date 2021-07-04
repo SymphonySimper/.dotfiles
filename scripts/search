@@ -1,5 +1,0 @@
-#!/bin/bash
-
-URL='https://duckduckgo.com/?q='
-QUERY=$(rofi -dmenu -p "Search")
-[ -n "$QUERY" ] && xdg-open "${URL}${QUERY}" 2> /dev/null

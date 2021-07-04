@@ -1,0 +1,5 @@
+#!/bin/bash
+
+url='https://duckduckgo.com/?q='
+
+[ ! -z "$@" ] && xdg-open "${url}${@}" &> /dev/null &

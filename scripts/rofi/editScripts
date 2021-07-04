@@ -3,7 +3,7 @@
 scripts="$HOME/scripts/.dir/scripts"
                                                          
 options=$( awk '{ print $1 }' $scripts )
-pathToE=$( grep "$1" $scripts | awk '{ print $2 }' )
+pathToE=$( grep "^$1" $scripts | awk '{ print $2 }' )
 
 if [ -z "$1" ]; then 
 	echo "$options"

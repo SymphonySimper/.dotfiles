@@ -3,7 +3,7 @@
 configs="$HOME/scripts/.dir/configs"
                                                          
 options=$( awk '{ print $1 }' $configs )
-pathToE=$( grep "$1" $configs | awk '{ print $2 }' )
+pathToE=$( grep "^$1" $configs | awk '{ print $2 }' )
 
 if [ -z "$1" ]; then 
 	echo "$options"

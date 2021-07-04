@@ -1,0 +1,50 @@
+#!/bin/bash
+
+path="$HOME/scripts/"
+pathR="$HOME/scripts/rofi/"
+pathA="$HOME/scripts/aliases/"
+pathSA="$HOME/.config/shellconfig/aliases/"
+pathSF="$HOME/.config/shellconfig/functions/"
+
+shell="$HOME/scripts/.dir/shell"
+scripts="$HOME/scripts/.dir/scripts"
+
+add="#!/bin/bash"
+
+sortMe(){ v -v $1 | sort -o $1; }
+
+case "$1" in
+	-r) 
+		shift
+		echo $add > "$pathR$1" && 
+		letmein "$pathR$1" &&
+		echo "$1		$pathR$1" >> $scripts &&
+		sortMe "$scripts" &&
+		v "$pathR$1"
+		;;
+	-a)
+		shift
+		echo $add > "$pathA$1" && 
+		letmein "$pathA$1" &&
+		echo "$1		$pathA$1" >> $scripts &&
+		sortMe "$scripts" &&
+		v "$pathA$1"
+		;;
+	-sa)
+		shift
+		v "$pathSA$1" &&
+		[ -f "$pathSA$1" ] && echo "$1		$pathSA$1" >> $shell &&	sortMe "$shell"
+		;;
+	-sf)
+		shift
+		v "$pathSF$1" &&
+		[ -f "$pathSF$1" ] && echo "$1		$pathSF$1" >> $shell &&	sortMe "$shell"
+		;;
+	*) 	
+		echo $add > "$path$1" && 
+		letmein "$path$1" &&
+		echo "$1		$path$1" >> $scripts &&
+		sortMe "$scripts" &&
+		v "$path$1"
+		;;
+esac
