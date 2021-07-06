@@ -11,49 +11,78 @@ scripts="$HOME/scripts/.dir/scripts"
 
 add="#!/bin/bash"
 
+warningI="$HOME/assets/icons/general/warning.svg"
+
 sortMe(){ v -v $1 | sort -o $1; }
+
+notify(){ dunstify -h string:x-dunst-stack-tag:autoscript -i $warningI "$1"; }
+
+createFile(){
+
+	case "$1" in
+		-sa) 
+			shift
+			if [ -f "$pathSA$1" ]; then
+				notify "File exists in aliases" 
+				v "$pathSA$1" && exit 1
+			else
+				v "$pathSA$1" &&                                                              	
+				[ -f "$pathSA$1" ] && echo "$1		$pathSA$1" >> $shell &&	sortMe "$shell"	
+			fi ;;
+		
+		-sf) 
+			shift
+			if [ -f "$pathSF$1" ]; then
+				notify "file exists in functions" 
+				v "$pathSF$1" && exit 1
+			else
+				v "$pathSF$1" &&                                                              	
+				[ -f "$pathSF$1" ] && echo "$1		$pathSF$1" >> $shell &&	sortMe "$shell"	
+			fi ;;
+
+		*)
+			if [ -f "$1" ]; then
+				notify "File exists"
+				v "$1" && exit 1
+			else
+				echo $add > "$1" &&
+				letmein "$1"
+			fi ;;
+	esac
+}
 
 case "$1" in
 	-r) 
 		shift
-		echo $add > "$pathR$1" && 
-		letmein "$pathR$1" &&
+		createFile "$pathR$1" &&
 		echo "$1		$pathR$1" >> $scripts &&
 		sortMe "$scripts" &&
-		v "$pathR$1"
-		;;
+		v "$pathR$1" ;;
 	-a)
 		shift
-		echo $add > "$pathA$1" && 
-		letmein "$pathA$1" &&
+		createFile "$pathA$1" &&
 		echo "$1		$pathA$1" >> $scripts &&
 		sortMe "$scripts" &&
-		v "$pathA$1"
-		;;
+		v "$pathA$1" ;;
 	-sa)
 		shift
-		v "$pathSA$1" &&
-		[ -f "$pathSA$1" ] && echo "$1		$pathSA$1" >> $shell &&	sortMe "$shell"
-		;;
+		createFile -sa "$1" ;;
 	-sf)
 		shift
-		v "$pathSF$1" &&
-		[ -f "$pathSF$1" ] && echo "$1		$pathSF$1" >> $shell &&	sortMe "$shell"
-		;;
+		createFile -sf "$1" ;;
 	-d)
 		shift
 		rm "$(cat $shell $scripts | grep "^$1" | awk  '{ print $2 }')" &&
 		if  grep -q "^$1" $shell ; then
-			sed "/^$1/d" -i $shell
+			sed "/^$1/d" -i $shell &&
+			notify "$1 rm from shell"
 		elif  grep -q "^$1" $scripts ; then
-			sed "/^$1/d" -i $scripts
-		fi
-		;;
+			sed "/^$1/d" -i $scripts &&
+			notify "$1 rm from scripts"
+		fi ;;
 	*) 	
-		echo $add > "$path$1" && 
-		letmein "$path$1" &&
+		createFile "$path$1" &&
 		echo "$1		$path$1" >> $scripts &&
 		sortMe "$scripts" &&
-		v "$path$1"
-		;;
+		v "$path$1" ;;
 esac
