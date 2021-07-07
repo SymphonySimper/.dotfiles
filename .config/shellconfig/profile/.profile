@@ -4,8 +4,8 @@
 export EDITOR="nvim"
 
 #Paths
-export PATH="$PATH:$HOME/scripts"		#Scripts
-export PATH="$PATH:$HOME/scripts/aliases"	#Alias scripts
+export PATH="$PATH:$HOME/.scripts"		#Scripts
+export PATH="$PATH:$HOME/.scripts/aliases"	#Alias scripts
 export PATH="$PATH:~/flutter/bin" 		#Flutter
 
 export _JAVA_AWT_WM_NONREPARENTING=1

@@ -1,5 +1,5 @@
 #!/bin/bash
-path="$HOME/scripts/rofi"
+path="$HOME/.scripts/rofi"
 configs="$path/editConfigs"
 scripts="$path/editScripts"
 shell="$path/editShell"

@@ -1,9 +1,9 @@
 #!/bin/bash
 
-scripts="$HOME/scripts/.dir/scripts"
+shell="$HOME/.scripts/.paths/shell"
                                                          
-options=$( awk '{ print $1 }' $scripts )
-pathToE=$( grep -w "^$1" $scripts | awk '{ print $2 }' )
+options=$( awk '{ print $1 }' $shell )
+pathToE=$( grep -w "^$1" $shell | awk '{ print $2 }' )
 
 if [ -z "$1" ]; then 
 	echo "$options"
