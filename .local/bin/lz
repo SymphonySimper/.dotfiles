@@ -4,14 +4,16 @@ RED=`tput setaf 1`
 RESET=`tput sgr0`
 BOLD=`tput bold`
 
-path="$HOME/.scripts/"
-pathR="$HOME/.scripts/rofi/"
-pathA="$HOME/.scripts/aliases/"
-pathSA="$HOME/.config/shellconfig/aliases/"
-pathSF="$HOME/.config/shellconfig/functions/"
+p="$HOME/.local/bin"
+ps="$HOME/.config/shell"
+path="$p/"
+pathR="$p/rofi"
+pathA="$p/aliases/"
+pathSA="$ps/aliases/"
+pathSF="$ps/functions/"
 
-shell="$HOME/.scripts/.paths/shell"
-scripts="$HOME/.scripts/.paths/scripts"
+shell="$p/.paths/shell"
+scripts="$p/.paths/scripts"
 
 add="#!/bin/bash"
 

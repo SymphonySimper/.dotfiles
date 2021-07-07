@@ -16,5 +16,5 @@ alias config='/usr/bin/git --git-dir=/home/s2b/.cfg/ --work-tree=/home/s2b'
 #Source#
 ########
 
-sloc=~/.config/shellconfig
+sloc="$HOME/.config/shell"
 for f in $sloc/aliases/* $sloc/functions/* ; do source "$f"; done
