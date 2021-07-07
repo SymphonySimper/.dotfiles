@@ -15,11 +15,9 @@ scripts="$HOME/scripts/.dir/scripts"
 
 add="#!/bin/bash"
 
-warningI="$HOME/assets/icons/general/warning.svg"
-
 sortMe(){ v -v $1 | sort -o $1; }
 
-notify(){ dunstify -h string:x-dunst-stack-tag:autoscript -i $warningI "$1"; }
+errorMsg(){ echo "${BOLD}${RED}$1${RESET}"; } 
 
 createFile(){
 
@@ -27,8 +25,7 @@ createFile(){
 		-sa) 
 			shift
 			if [ -f "$pathSA$1" ]; then
-				echo "${BOLD}${RED}File exists in aliases${RESET}" 
-				v "$pathSA$1" && exit 1
+				errorMsg "File exists in shell aliases" && exit 1
 			else
 				v "$pathSA$1" &&                                                              	
 				[ -f "$pathSA$1" ] && echo "$1		$pathSA$1" >> $shell &&	sortMe "$shell"	
@@ -37,8 +34,7 @@ createFile(){
 		-sf) 
 			shift
 			if [ -f "$pathSF$1" ]; then
-				notify "file exists in functions" 
-				v "$pathSF$1" && exit 1
+				errorMsg "File exists in shell functions" && exit 1
 			else
 				v "$pathSF$1" &&                                                              	
 				[ -f "$pathSF$1" ] && echo "$1		$pathSF$1" >> $shell &&	sortMe "$shell"	
@@ -46,8 +42,7 @@ createFile(){
 
 		*)
 			if [ -f "$1" ]; then
-				notify "File exists"
-				v "$1" && exit 1
+				errorMsg "File exists" && exit 1
 			else
 				echo $add > "$1" &&
 				letmein "$1"
@@ -77,12 +72,12 @@ case "$1" in
 	-d)
 		shift
 		rm "$(cat $shell $scripts | grep "^$1" | awk  '{ print $2 }')" &&
-		if  grep -qw "^$1" $shell ; then
+		if  ( grep -qw "^$1" $shell ) ; then
 			sed "/$1$/d" -i $shell &&
-			notify "$1 rm from shell"
-		elif  grep -qw "^$1" $scripts ; then
+			errorMsg "$1 rm from shell"
+		elif ( grep -qw "^$1" $scripts ) ; then
 			sed "/$1$/d" -i $scripts &&
-			notify "$1 rm from scripts"
+			errorMsg "$1 rm from scripts"
 		fi ;;
 	*) 	
 		createFile "$path$1" &&
