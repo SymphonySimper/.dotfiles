@@ -1,19 +1,19 @@
 #!/bin/bash
 
 #Icon imports
-path="~/assets/icons/storage"
+path="$HOME/.local/share/icons/storage"
 ntfsMntI="$path/ntfsMnt.svg"
 ntfsUmntI="$path/ntfsUmnt.svg"
 usbMntI="$path/usbMnt.svg"
 usbUmntI="$path/usbUmnt.svg"
-warningI="~/assets/icons/general/warning.svg"
+warningI="$HOME/.local/share/icons/general/warning.svg"
 
 notify="dunstify"
 
-mountnobita(){ sudo ntfs-3g /dev/sdb1 ~/nobita/ && $notify -i $ntfsMntI "Nobita mounted"; }
-ntfsmount(){ sudo ntfs-3g /dev/$1 ~/ntfs/ && $notify -i $ntfsMntI "Ntfs mounted"; }
+mountnobita(){ sudo ntfs-3g /dev/sdb1 $HOME/nobita/ && $notify -i $ntfsMntI "Nobita mounted"; }
+ntfsmount(){ sudo ntfs-3g /dev/$1 $HOME/ntfs/ && $notify -i $ntfsMntI "Ntfs mounted"; }
 
-mountusb(){ sudo mount -o umask=0,uid=nobody,gid=nobody /dev/$1 ~/usb/ && $notify -i $usbMntI "Usb mounted"; }
+mountusb(){ sudo mount -o umask=0,uid=nobody,gid=nobody /dev/$1 $HOME/usb/ && $notify -i $usbMntI "Usb mounted"; }
 
 umountdev(){ sudo umount /dev/$1 ; }
 

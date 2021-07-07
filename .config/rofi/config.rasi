@@ -2,9 +2,9 @@ configuration {
 	fixed-num-lines: true;
 	lines: 6;
 	fake-transparency:true;
-	fake-background: "~/assets/myPics/fakeBG.png";
+	fake-background: "~/.local/share/bg/fakeBG.png";
 	font: "Poppins 12";
-	modi: [run, "todo:~/.scripts/rofi/todo"];
+	modi: [run, "todo:~/.local/bin/rofi/todo"];
 }
 
 @theme "theme.rasi" 

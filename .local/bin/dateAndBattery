@@ -1,8 +1,8 @@
 #!/bin/bash
 
 notify="dunstify"
-pathBat="~/assets/icons/battery"
-pathDate="~/assets/icons/date"
+pathBat="$HOME/.local/share/icons/battery"
+pathDate="$HOME/.local/share/icons/date"
 lowI="$pathBat/low.svg"
 fullI="$pathBat/full.svg"
 chargingI="$pathBat/charging.svg"

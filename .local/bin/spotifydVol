@@ -1,7 +1,7 @@
 #!/bin/bash
 
-iconPath="~/assets/icons/brands/spotify.svg"
-warningI="~/assets/icons/general/warning.svg"
+iconPath="$HOME/.local/share/icons/brands/spotify.svg"
+warningI="$HOME/.local/share/icons/general/warning.svg"
 getId=$(pulsemixer --list-sinks | awk '/librespot/ {print $4}' |  sed -e 's/[a-zA-Z]//g' -e 's/[<>,-]//g')
 
 lazy="pulsemixer --id $getId"

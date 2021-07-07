@@ -1,6 +1,6 @@
 #!/bin/bash
 
-search="$HOME/.scripts/rofi/search"
-openUrl="$HOME/.scripts/rofi/openUrl"
+search="$HOME/.local/bin/rofi/search"
+openUrl="$HOME/.local/bin/rofi/openUrl"
 
 rofi -modi "search:$search,url:$openUrl" -show search -no-show-match

@@ -5,4 +5,4 @@ sudo dd if=/dev/zero of=/dev/sdb bs=4096 status=progress \
 && sudo parted /dev/sdb --script -- mkpart primary fat32 1MiB 100% \
 && sudo mkfs.vfat -F32 /dev/sdb1 \
 && sudo parted /dev/sdb --script print \
-&& dunstify -i ~/assets/icons/storage/usbMnt.svg
+&& dunstify -i $HOME/.local/share/icons/storage/usbMnt.svg

@@ -3,10 +3,10 @@
 app="pulsemixer"
 noti="dunstify -h string:x-dunst-stack-tag:audio"
 getMute=$($app --get-mute)
-path="~/assets/icons/volume"
+path="$HOME/.local/share/icons/volume"
 muteI="$path/mute.svg"
 volChangeI="$path/volChange.svg"
-warningI="~/assets/icons/general/warning.svg"
+warningI="$HOME/.local/share/icons/general/warning.svg"
 
 getVol(){ $app --get-volume | awk '{print $1}'; }
 muteNoti(){

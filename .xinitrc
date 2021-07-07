@@ -40,5 +40,5 @@ fi
 
 # /usr/bin/start-pulseaudio-x11 &
 xsetroot -name " "
-feh --bg-scale $HOME/assets/myPics/BG.png
+feh --bg-scale $HOME/.local/share/bg/BG.png
 exec dwm
