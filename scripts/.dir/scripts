@@ -22,7 +22,6 @@ search			/home/s2b/scripts/rofi/search
 shell			/home/s2b/scripts/.dir/shell
 spotifydrun		/home/s2b/scripts/spotifydrun
 spotifydVol		/home/s2b/scripts/spotifydVol
-todo			/home/s2b/scripts/todo
 v			/home/s2b/scripts/v
 volume			/home/s2b/scripts/volume
 wp			/home/s2b/scripts/aliases/wp

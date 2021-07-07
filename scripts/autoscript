@@ -71,11 +71,11 @@ case "$1" in
 		createFile -sf "$1" ;;
 	-d)
 		shift
-		rm "$(cat $shell $scripts | grep "^$1" | awk  '{ print $2 }')" &&
-		if  ( grep -qw "^$1" $shell ) ; then
+		rm "$(grep -w "$1" $scripts $shell | awk  '{ print $2 }')" &&
+		if  ( grep -qw "$1" $shell ) ; then
 			sed "/$1$/d" -i $shell &&
 			errorMsg "$1 rm from shell"
-		elif ( grep -qw "^$1" $scripts ) ; then
+		elif ( grep -qw "$1" $scripts ) ; then
 			sed "/$1$/d" -i $scripts &&
 			errorMsg "$1 rm from scripts"
 		fi ;;
