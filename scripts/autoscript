@@ -1,5 +1,9 @@
 #!/bin/bash
 
+RED=`tput setaf 1`
+RESET=`tput sgr0`
+BOLD=`tput bold`
+
 path="$HOME/scripts/"
 pathR="$HOME/scripts/rofi/"
 pathA="$HOME/scripts/aliases/"
@@ -23,7 +27,7 @@ createFile(){
 		-sa) 
 			shift
 			if [ -f "$pathSA$1" ]; then
-				notify "File exists in aliases" 
+				echo "${BOLD}${RED}File exists in aliases${RESET}" 
 				v "$pathSA$1" && exit 1
 			else
 				v "$pathSA$1" &&                                                              	
@@ -73,11 +77,11 @@ case "$1" in
 	-d)
 		shift
 		rm "$(cat $shell $scripts | grep "^$1" | awk  '{ print $2 }')" &&
-		if  grep -q "^$1" $shell ; then
-			sed "/^$1/d" -i $shell &&
+		if  grep -qw "^$1" $shell ; then
+			sed "/$1$/d" -i $shell &&
 			notify "$1 rm from shell"
-		elif  grep -q "^$1" $scripts ; then
-			sed "/^$1/d" -i $scripts &&
+		elif  grep -qw "^$1" $scripts ; then
+			sed "/$1$/d" -i $scripts &&
 			notify "$1 rm from scripts"
 		fi ;;
 	*) 	

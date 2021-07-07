@@ -6,6 +6,7 @@ editConfigs		/home/s2b/scripts/rofi/editConfigs
 editScripts		/home/s2b/scripts/rofi/editScripts
 editShell		/home/s2b/scripts/rofi/editShell
 figma			/home/s2b/scripts/aliases/figma
+folders			/home/s2b/scripts/.dir/folders
 formatUsbFat32		/home/s2b/scripts/formatUsbFat32
 gameMode		/home/s2b/scripts/gameMode
 letmein			/home/s2b/scripts/letmein
@@ -14,6 +15,7 @@ mntdev			/home/s2b/scripts/mntdev
 openUrl			/home/s2b/scripts/rofi/openUrl
 rofiEdit		/home/s2b/scripts/aliases/rofiEdit
 rofiOpen		/home/s2b/scripts/aliases/rofiOpen
+rofiTodo		/home/s2b/scripts/rofiTodo
 screenshot		/home/s2b/scripts/screenshot
 scripts			/home/s2b/scripts/.dir/scripts
 search			/home/s2b/scripts/rofi/search

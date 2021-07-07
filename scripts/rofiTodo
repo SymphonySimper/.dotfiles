@@ -1,0 +1,15 @@
+#!/bin/bash
+
+path="$HOME/.todo"
+
+
+if [ -z "${@}" ]; then
+	cat $path
+else
+	if ( grep -q "${@}" $path ); then
+		sed "/^${@}$/d" -i $path
+	else
+		echo "${@}" >> $path
+	fi
+ 	cat $path 
+fi
