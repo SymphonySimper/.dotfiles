@@ -3,6 +3,7 @@
 notify="dunstify"
 pathBat="$HOME/.local/share/icons/battery"
 pathDate="$HOME/.local/share/icons/date"
+todo="$HOME/.todo"
 lowI="$pathBat/low.svg"
 fullI="$pathBat/full.svg"
 chargingI="$pathBat/charging.svg"
@@ -39,4 +40,5 @@ getDate=$(date "+%D")
 getTime=$(date "+%r")
 notifyDate(){ $notify -h string:x-dunst-stack-tag:myDate -i $dateI "$getDate" "$getDateTxt"; }
 notifyTime(){ $notify -h string:x-dunst-stack-tag:myTime -i $clockI "$getTime"; }
-showBat && notifyDate && notifyTime
+todo(){ cat $todo | while read -r line ; do $notify "+" "$line"; done; }
+showBat; notifyDate; notifyTime; todo
