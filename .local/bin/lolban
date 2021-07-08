@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 figlet -f $HOME/.local/share/fonts/3d.flf  "$1" | lolcat
 
 #credits

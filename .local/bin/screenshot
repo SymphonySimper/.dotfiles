@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 selectRegion(){ maim -s -u | tee $HOME/Pictures/screenshots/$(date +%s).png | xclip -selection clipboard -t image/png; }
 selectWindow(){ maim -u -i $(xdotool getactivewindow) | tee $HOME/Pictures/screenshots/$(date +%s).png | xclip -selection clipboard -t image/png; }

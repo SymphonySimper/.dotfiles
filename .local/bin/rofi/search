@@ -1,7 +1,5 @@
-#!/bin/bash
+#!/bin/sh
 
 url='https://duckduckgo.com/?q='
 
-if [ ! -z "$@" ]; then
-	xdg-open "${url}${@}" &> /dev/null &
-fi
+[ ! -z "$@" ] && xdg-open "${url}${@}" > /dev/null 2>&1 &

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 iconPath="$HOME/.local/share/icons/brands/spotify.svg"
 warningI="$HOME/.local/share/icons/general/warning.svg"
@@ -12,13 +12,12 @@ getVol(){ $lazy --get-volume | awk '{print $1}'; }
 notify(){
 	case "$1" in
 		-c) $lazyNot -i $iconPath "Volume: $(getVol)" -h int:value:$(getVol) ;;
-		-m) $lazyNot -i $iconPath "$( [[ $getMute == 0 ]] && echo "Muted" || echo "Unmuted")" ;;
+		-m) $lazyNot -i $iconPath "$( [ $getMute -eq 0 ] && echo "Muted" || echo "Unmuted")" ;;
 	esac
 }
 
 changeVol(){ 
-	if [[ $getMute == 0 ]]
-	then
+	if [ $getMute -eq 0 ];then
 		$lazy --change-volume $1 && notify -c
 	else
 		$lazyNot -i $warningI "Spotifyd is muted" "unmute to change volume"

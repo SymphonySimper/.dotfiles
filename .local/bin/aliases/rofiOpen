@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 search="$HOME/.local/bin/rofi/search"
 openUrl="$HOME/.local/bin/rofi/openUrl"

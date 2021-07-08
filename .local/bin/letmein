@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 fullPerm(){ sudo chmod 777 "$1"; }
 execPerm(){ chmod +x "$1"; }

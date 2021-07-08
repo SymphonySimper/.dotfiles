@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 sudo dd if=/dev/zero of=/dev/sdb bs=4096 status=progress \
 && sudo parted /dev/sdb --script -- mklabel msdos \

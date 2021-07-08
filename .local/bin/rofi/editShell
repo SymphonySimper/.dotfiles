@@ -1,12 +1,8 @@
-#!/bin/bash
+#!/bin/sh
 
 shell="$HOME/.local/bin/.paths/shell"
                                                          
 options=$( awk '{ print $1 }' $shell )
 pathToE=$( grep -w "^$1" $shell | awk '{ print $2 }' )
 
-if [ -z "$1" ]; then 
-	echo "$options"
-else
-	alacritty -e v "$pathToE" &>/dev/null &
-fi
+[ -z "$1" ] && echo "$options" || alacritty -e v "$pathToE" > /dev/null 2>&1 &

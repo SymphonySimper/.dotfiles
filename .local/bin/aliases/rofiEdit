@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 path="$HOME/.local/bin/rofi"
 configs="$path/editConfigs"
 scripts="$path/editScripts"

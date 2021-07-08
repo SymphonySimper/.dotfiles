@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/bin/sh
+
+v="$EDITOR"
 
 RED=`tput setaf 1`
 RESET=`tput sgr0`
@@ -15,7 +17,7 @@ pathSF="$ps/functions/"
 shell="$p/.paths/shell"
 scripts="$p/.paths/scripts"
 
-add="#!/bin/bash"
+add="#!/bin/sh"
 
 sortMe(){ v -v $1 | sort -o $1; }
 
@@ -29,7 +31,7 @@ createFile(){
 			if [ -f "$pathSA$1" ]; then
 				errorMsg "File exists in shell aliases" && exit 1
 			else
-				v "$pathSA$1" &&                                                              	
+				$v "$pathSA$1" &&                                                              	
 				[ -f "$pathSA$1" ] && echo "$1		$pathSA$1" >> $shell &&	sortMe "$shell"	
 			fi ;;
 		
@@ -38,7 +40,7 @@ createFile(){
 			if [ -f "$pathSF$1" ]; then
 				errorMsg "File exists in shell functions" && exit 1
 			else
-				v "$pathSF$1" &&                                                              	
+				$v "$pathSF$1" &&                                                              	
 				[ -f "$pathSF$1" ] && echo "$1		$pathSF$1" >> $shell &&	sortMe "$shell"	
 			fi ;;
 
@@ -58,13 +60,13 @@ case "$1" in
 		createFile "$pathR$1" &&
 		echo "$1		$pathR$1" >> $scripts &&
 		sortMe "$scripts" &&
-		v "$pathR$1" ;;
+		$v "$pathR$1" ;;
 	-a)
 		shift
 		createFile "$pathA$1" &&
 		echo "$1		$pathA$1" >> $scripts &&
 		sortMe "$scripts" &&
-		v "$pathA$1" ;;
+		$v "$pathA$1" ;;
 	-sa)
 		shift
 		createFile -sa "$1" ;;
@@ -85,5 +87,5 @@ case "$1" in
 		createFile "$path$1" &&
 		echo "$1		$path$1" >> $scripts &&
 		sortMe "$scripts" &&
-		v "$path$1" ;;
+		$v "$path$1" ;;
 esac

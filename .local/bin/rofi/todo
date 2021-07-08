@@ -1,14 +1,5 @@
-#!/bin/bash
+#!/bin/sh
 
 path="$HOME/.todo"
 
-if [ -z "$@" ]; then
-	cat $path
-else
-	if ( grep -q "$@" $path ); then
-		sed "/^$@$/d" -i $path
-	else
-		echo "$@" >> $path
-	fi
- 	cat $path 
-fi
+[ -z "$@" ] && cat $path || { grep -q "$@" $path && sed "/^$@$/d" -i $path || echo "$@" >> $path; cat $path; }
