@@ -6,7 +6,7 @@ gitAliases		/home/s2b/.config/shell/aliases/gitAliases
 gitManage		/home/s2b/.config/shell/functions/gitManage
 newDwm			/home/s2b/.config/shell/fucntions/newDwm
 pacmanAndYay		/home/s2b/.config/shell/aliases/pacmanAndYay
-profile			/home/s2b/.config/shell/profile/.profile
+profile			/home/s2b/.config/shell/.profile
 programs		/home/s2b/.config/shell/aliases/programs
 rankServer		/home/s2b/.config/shell/aliases/rankServer
 tasks			/home/s2b/.config/shell/aliases/tasks

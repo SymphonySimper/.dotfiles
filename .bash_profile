@@ -1,1 +1,2 @@
-~/.config/shell/profile/.profile
+[[ -f ~/.bashrc ]] && . ~/.bashrc
+~/.config/shell/.profile
