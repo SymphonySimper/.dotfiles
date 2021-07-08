@@ -23,7 +23,7 @@ showBat(){
 	elif [ $getStat = Charging ];then
 		notifyBat $chargingI
 	elif [ $getStat = Discharging ];then
-		[ $(getCap) > 20 ] && notifyBat $fullI || notifyBat $lowI
+		[ $(getCap) -gt 20 ] && notifyBat $fullI || notifyBat $lowI
 	fi
 }
 
