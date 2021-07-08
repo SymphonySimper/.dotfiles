@@ -1,5 +1,6 @@
 brightness		/home/s2b/.local/bin/brightness
 configs			/home/s2b/.local/bin/.paths/configs
+dunstSound		/home/s2b/.local/bin/dunstSound
 editConfigs		/home/s2b/.local/bin/rofi/editConfigs
 editScripts		/home/s2b/.local/bin/rofi/editScripts
 editShell		/home/s2b/.local/bin/rofi/editShell
