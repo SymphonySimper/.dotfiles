@@ -3,3 +3,4 @@ add_newline = false
 [character]
 success_symbol = "[>](bold grey)"
 error_symbol = "[>](bold grey)"
+vicmd_symbol = "[v](bold red)"
