@@ -7,4 +7,4 @@ profile			/home/s2b/.config/shell/.profile
 xinitrc			/home/s2b/.xinitrc
 Xresources		/home/s2b/.Xresources
 zprofile		/home/s2b/.zprofile
-zshrc			/home/s2b/.config/shell/zsh/.zshrc
+zshrc			/home/s2b/.config/zsh/.zshrc

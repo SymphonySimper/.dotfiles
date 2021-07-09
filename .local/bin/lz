@@ -2,87 +2,31 @@
 
 v="$EDITOR"
 
-RED=`tput setaf 1`
-RESET=`tput sgr0`
-BOLD=`tput bold`
+red=`syl r`; bold=`syl B`; reset=`syl R`
 
 p="$HOME/.local/bin"
-ps="$HOME/.config/shell"
-path="$p/"
-pathR="$p/rofi"
-pathA="$p/aliases/"
-pathSA="$ps/aliases/"
-pathSF="$ps/functions/"
-
-shell="$p/.paths/shell"
+path="$p/"; pathR="$p/rofi"; pathA="$p/aliases/"
 scripts="$p/.paths/scripts"
 
 add="#!/bin/sh"
 
-sortMe(){ v -v $1 | sort -o $1; }
-
-errorMsg(){ echo "${BOLD}${RED}$1${RESET}"; } 
-
-createFile(){
-
-	case "$1" in
-		-sa) 
-			shift
-			if [ -f "$pathSA$1" ]; then
-				errorMsg "File exists in shell aliases" && exit 1
-			else
-				$v "$pathSA$1" &&                                                              	
-				[ -f "$pathSA$1" ] && echo "$1		$pathSA$1" >> $shell &&	sortMe "$shell"	
-			fi ;;
-		
-		-sf) 
-			shift
-			if [ -f "$pathSF$1" ]; then
-				errorMsg "File exists in shell functions" && exit 1
-			else
-				$v "$pathSF$1" &&                                                              	
-				[ -f "$pathSF$1" ] && echo "$1		$pathSF$1" >> $shell &&	sortMe "$shell"	
-			fi ;;
-
-		*)
-			if [ -f "$1" ]; then
-				errorMsg "File exists" && exit 1
-			else
-				echo $add > "$1" &&
-				letmein "$1"
-			fi ;;
-	esac
-}
-
+sortMe(){ cat $1 | sort -o $1; }
+errorMsg(){ echo "$bold$red$1$reset"; } 
+createFile(){ [ -f "$1" ] && (errorMsg "File exists" && exit 1) || (echo $add > "$1" && letmein "$1"); }
 case "$1" in
 	-r) 
-		shift
-		createFile "$pathR$1" &&
+		shift; createFile "$pathR$1" &&
 		echo "$1		$pathR$1" >> $scripts &&
 		sortMe "$scripts" &&
 		$v "$pathR$1" ;;
 	-a)
-		shift
-		createFile "$pathA$1" &&
+		shift; createFile "$pathA$1" &&
 		echo "$1		$pathA$1" >> $scripts &&
 		sortMe "$scripts" &&
 		$v "$pathA$1" ;;
-	-sa)
-		shift
-		createFile -sa "$1" ;;
-	-sf)
-		shift
-		createFile -sf "$1" ;;
 	-d)
-		shift
-		rm "$(grep -w "$1" $scripts $shell | awk  '{ print $2 }')" &&
-		if  ( grep -qw "$1" $shell ) ; then
-			sed "/$1$/d" -i $shell &&
-			errorMsg "$1 rm from shell"
-		elif ( grep -qw "$1" $scripts ) ; then
-			sed "/$1$/d" -i $scripts &&
-			errorMsg "$1 rm from scripts"
-		fi ;;
+		shift; rm "$(grep -w "$1" $scripts | awk '{ print $2 }')" &&
+		( grep -qw "$1" $scripts ) && (sed "/$1$/d" -i $scripts && errorMsg "$1 rm from scripts") || errorMsg "$1 not found" ;;
 	*) 	
 		createFile "$path$1" &&
 		echo "$1		$path$1" >> $scripts &&
