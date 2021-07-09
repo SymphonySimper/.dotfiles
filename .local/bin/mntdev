@@ -1,57 +1,32 @@
-#!/bin/bash
+#!/bin/sh
 
-#Icon imports
-path="$HOME/.local/share/icons/storage"
-ntfsMntI="$path/ntfsMnt.svg"
-ntfsUmntI="$path/ntfsUmnt.svg"
-usbMntI="$path/usbMnt.svg"
-usbUmntI="$path/usbUmnt.svg"
-warningI="$HOME/.local/share/icons/general/warning.svg"
+red=`syl red`; green=`syl green`; bold=`syl bold`; reset=`syl reset`
 
-notify="dunstify"
+error(){ echo "$bold$red$1$reset"; }
+success(){ echo "$bold$green$1$reset"; }
 
-mountnobita(){ sudo ntfs-3g /dev/sdb1 $HOME/nobita/ && $notify -i $ntfsMntI "Nobita mounted"; }
-ntfsmount(){ sudo ntfs-3g /dev/$1 $HOME/ntfs/ && $notify -i $ntfsMntI "Ntfs mounted"; }
+#Path
+nobita="$HOME/nobita"; ntfs="$HOME/ntfs"; usb="$HOME/usb"
 
-mountusb(){ sudo mount -o umask=0,uid=nobody,gid=nobody /dev/$1 $HOME/usb/ && $notify -i $usbMntI "Usb mounted"; }
+ntfsMount(){ sudo ntfs-3g /dev/$1 $2 && success "$3 mounted"; }
+mountUsb(){ sudo mount -o umask=0,uid=nobody,gid=nobody /dev/$1 $HOME/usb/ && success "Usb mounted"; }
+umountDev(){ sudo umount $1; }
 
-umountdev(){ sudo umount /dev/$1 ; }
-
-whatp=$(lsblk | awk '/nobita/ || /usb/ || /ntfs/ {print $7}' | sed 's#^.*/##;s/[^_]\+/\L\u&/g')	#Gets the name of the mounted point
-whatd=$(lsblk | awk '/nobita/ || /usb/ || /ntfs/ {print $1}' | sed 's/[^\x00-\x7F]//g')			#Gets the mounted point
-
-umountAll(){ 
-	if [[ "$whatp" == Nobita || "$whatp" == Ntfs || "$whatp" == Usb ]]
-	then
-		umountdev $whatd
-		if [[ "$whatp" == Nobita || "$whatp" == Ntfs ]]
-		then
-			$notify -i $ntfsUmntI "$whatp unmounted"
-		else
-			$notify -i $usbUmntI "Usb unmounted"
-		fi
-	else
-		$notify -i $warningI "No drives mounted" "! nobita || ntfs || usb"
-	fi
+#Gets the mounted point
+whatd=$(lsblk -lp | awk '/nobita/ || /usb/ || /ntfs/ {print $1}')
+umountAll(){
+	if lsblk | grep -q 'nobita'; then
+		umountDev $whatd && success "Nobita umounted"
+	elif lsblk | grep -q 'ntfs'; then
+		umountDev $whatd && success "Ntfs umounted"
+	elif lsblk | grep -q 'usb'; then
+		umountDev $whatd && success "Usb umounted"
+	else error "! nobita | ntfs | usb"; fi
 }
 
-optstring="mu:n:o"
-if [[ "$1" =~ - ]]; then
-	while getopts ${optstring} opt; do
-		case "${opt}" in
-			m) mountnobita ;;
-			u) 
-				shift
-				mountusb $1 ;;
-			n)	
-				shift
-				ntfsmount $1 ;;
-			o)
-				shift
-				umountAll ;;
-			*) exit 1 ;;
-		esac
-	done
-else 
-	echo "Enter a valid option" | lolcat
-fi
+case "$1" in
+	-u) shift; mountUsb $1 ;;
+	-n) shift; ntfsMount $1 $ntfs "Ntfs" ;;
+	-o) shift; umountAll ;;
+	*) ntfsMount sdb1 $nobita "Nobita" ;;
+esac

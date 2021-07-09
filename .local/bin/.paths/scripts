@@ -23,6 +23,7 @@ search			/home/s2b/.local/bin/rofi/search
 shell			/home/s2b/.local/bin/.paths/shell
 spotifydrun		/home/s2b/.local/bin/spotifydrun
 spotifydVol		/home/s2b/.local/bin/spotifydVol
+syl		/home/s2b/.local/bin/syl
 todo			/home/s2b/.local/bin/rofi/todo
 v			/home/s2b/.local/bin/v
 volume			/home/s2b/.local/bin/volume
