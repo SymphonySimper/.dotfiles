@@ -1,15 +1,15 @@
 #!/bin/sh
 
 case "$1" in
-	black) tput setaf 0 ;;
-	red) tput setaf 1 ;;
-	green) tput setaf 2 ;;
-	yellow) tput setaf 3 ;;
-	blue) tput setaf 4 ;;
-	magenta) tput setaf 5 ;;
-	cyan) tput setaf 6 ;;
-	white) tput setaf 7 ;;
-	bold) tput bold ;;
-	dim) tput dim ;;
-	reset) tput sgr0 ;;
+	b) tput setaf 0 ;;
+	r) tput setaf 1 ;;
+	g) tput setaf 2 ;;
+	y) tput setaf 3 ;;
+	bl) tput setaf 4 ;;
+	m) tput setaf 5 ;;
+	c) tput setaf 6 ;;
+	w) tput setaf 7 ;;
+	B) tput bold ;;
+	D) tput dim ;;
+	R) tput sgr0 ;;
 esac
