@@ -7,6 +7,13 @@ PS1="%1~ > "
 # Enable colors and change prompt:
 autoload -U colors && colors
 
+# Automatically cd into typed directory.
+setopt autocd
+
+# Disable ctrl-s to freeze terminal.
+stty stop undef
+setopt interactive_comments
+
 # History in cache directory:
 HISTSIZE=1000
 SAVEHIST=1000
