@@ -1,14 +1,8 @@
-add_newline = true
+add_newline = false
+
+[line_break]
+disabled = false
 
 [character]
-success_symbol = "[>](white)"
-
-[package]
-disabled = true
-
-[cmd_duration]
-min_time = 500
-format = "[$duration](bold yellow)"
-
-[nodejs]
-detect_folders = ["node_modules"]
+success_symbol = "[>](bold grey)"
+error_symbol = "[>](bold grey)"

@@ -94,3 +94,5 @@ for f in $sloc/aliases/* $sloc/functions/* ; do source "$f"; done
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 #Syntax hightlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+eval "$(starship init zsh)"
