@@ -7,6 +7,7 @@ export PATH="$PATH:$HOME/.local/bin/aliases"	#Alias scripts
 export PATH="$PATH:~/flutter/bin" 		#Flutter
 
 export ZDOTDIR="$HOME/.config/shell/zsh"
+export STARSHIP_CONFIG="$HOME/.config/starship/config.toml"
 
 export _JAVA_AWT_WM_NONREPARENTING=1
 

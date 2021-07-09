@@ -1,0 +1,14 @@
+add_newline = true
+
+[character]
+success_symbol = "[>](white)"
+
+[package]
+disabled = true
+
+[cmd_duration]
+min_time = 500
+format = "[$duration](bold yellow)"
+
+[nodejs]
+detect_folders = ["node_modules"]
