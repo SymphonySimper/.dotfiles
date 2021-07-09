@@ -4,6 +4,7 @@
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
+
 # PS1='[\u@\h \W]\$ '
 PS1="\W > "
 
@@ -17,7 +18,7 @@ alias config='/usr/bin/git --git-dir=/home/s2b/.cfg/ --work-tree=/home/s2b'
 ########
 
 sloc="$HOME/.config/shell"
-for f in $sloc/aliases/* $sloc/functions/* ; do source "$f"; done
+for f in $sloc/*; do source "$f"; done
 
 #Starship
 eval "$(starship init bash)"

@@ -1,0 +1,16 @@
+#Copy contents of a file to clipboard
+yoink(){ xclip -sel c < "$1"; }
+
+#Find
+fnd(){ find ~ -name "$1"; }
+
+#git
+gm(){ git commit -m "$1"; }
+gamp(){ git add -u && git commit -m "$1" && git push; }
+
+#config git
+cgm(){ config commit -m "$1"; }
+cgamp(){ config add -u && config commit -m "$1" && config push; }
+
+#Install dwm
+newDwm(){ cd ~/dwm && cp config.def.h config.h && sudo make clean install && cd; }

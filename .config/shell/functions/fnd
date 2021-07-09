@@ -1,3 +1,0 @@
-#Find
-
-fnd(){ find ~ -name "$1"; }

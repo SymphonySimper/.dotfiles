@@ -1,0 +1,44 @@
+#Git alias
+alias g='git'
+alias gc='git clone'
+alias gs='git status'
+alias gp='git pull'
+alias ga='git add'
+alias gau='git add -u'
+alias gnotrack='git config --local status.showUntrackedFiles no'
+
+#Config git alias
+alias cgs='config status'
+alias cgp='config push'
+alias cga='config add'
+alias cgau='config add -u'
+
+#Pacman/Packages/Yay
+alias p='sudo pacman'
+alias prm='p -Rns'
+alias amifat='lolban $(pacman -Q | wc -l)'
+alias rmzombies='p -Rns $(pacman -Qdtq)'
+alias y='yay'
+alias yrm='y -Rns'
+
+#Program
+alias ls='ls --color=auto'
+
+#Tasks
+alias rmcache='rm -rf ~/.cache/*'
+alias rmme='rm -rf ~/.local/share/Trash/*'
+alias rmlinks='find . -xtype l -exec rm {} \;'
+alias bye='poweroff'
+alias q='exit'
+alias imlight='ps_mem -p $(pgrep -d, -u $USER)'
+alias nobita='mntdev -n sdb1'
+
+#Rank Arch Servers
+alias ua-drop-caches='sudo paccache -rk3; yay -Sc --aur --noconfirm'
+alias lennaUpdateAll='export TMPFILE="$(mktemp)"; \
+    sudo true; \
+    rate-mirrors --save=$TMPFILE arch --max-delay=21600 \
+      && sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup \
+      && sudo mv $TMPFILE /etc/pacman.d/mirrorlist \
+      && ua-drop-caches \
+      && yay -Syyu --noconfirm'

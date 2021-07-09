@@ -1,6 +1,8 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+[[ "$COLORTERM" == (24bit|truecolor) || "${terminfo[colors]}" -eq '16777216' ]] || zmodload zsh/nearcolor
+
 #Prompt
 PS1="%1~ > "
 
@@ -87,8 +89,8 @@ fi
 #Alias and Functions
 alias config='/usr/bin/git --git-dir=/home/s2b/.cfg/ --work-tree=/home/s2b'
 #Source
-sloc="$HOME/.config/shell"
-for f in $sloc/aliases/* $sloc/functions/* ; do source "$f"; done
+sloc="$HOME/.config/shell/"
+for f in $sloc*; do source "$f"; done
 
 #Auto suggestions
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
