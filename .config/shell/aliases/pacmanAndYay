@@ -1,7 +1,7 @@
 #Pacman/Packages/Yay
-alias sp='sudo pacman'
-alias prm='sp -Rcns'
+alias p='sudo pacman'
+alias prm='p -Rns'
 alias amifat='lolban $(pacman -Q | wc -l)'
-alias rmzombies='sp -Rns $(pacman -Qdtq)'
+alias rmzombies='p -Rns $(pacman -Qdtq)'
 alias y='yay'
-alias yrm='y -Rcns'
+alias yrm='y -Rns'
