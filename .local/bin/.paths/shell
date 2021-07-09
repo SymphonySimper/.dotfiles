@@ -4,6 +4,7 @@ bashrc			/home/s2b/.bashrc
 folders			/home/s2b/.config/shell/folders
 functions		/home/s2b/.config/shell/functions
 profile			/home/s2b/.config/shell/.profile
+rankServers		/home/s2b/.config/shell/rankServers
 xinitrc			/home/s2b/.xinitrc
 Xresources		/home/s2b/.Xresources
 zprofile		/home/s2b/.zprofile
