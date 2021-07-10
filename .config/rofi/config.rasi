@@ -5,6 +5,7 @@ configuration {
 	fake-background: "~/.local/share/bg/fakeBG.png";
 	font: "Poppins 12";
 	modi: [run, "todo:~/.local/bin/rofi/todo"];
+	
 }
-
-@theme "theme.rasi" 
+@import "~/.cache/wal/colors-rofi-dark.rasi"
+@theme "theme.rasi"

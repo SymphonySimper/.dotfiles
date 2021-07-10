@@ -17,12 +17,13 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'frazrepo/vim-rainbow'
 Plug 'junegunn/goyo.vim'
 Plug 'ap/vim-css-color'
+Plug 'dylanaraps/wal.vim'
 
 call plug#end()
 
 map <leader>f :Goyo
 
-
+colorscheme wal
 " modify selected text using combining diacritics
 command! -range -nargs=0 Overline        call s:CombineSelection(<line1>, <line2>, '0305')
 command! -range -nargs=0 Underline       call s:CombineSelection(<line1>, <line2>, '0332')

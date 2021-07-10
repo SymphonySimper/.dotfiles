@@ -1,13 +1,11 @@
 * {
-  background-color: transparent; 
-  border-color: #444;
-  text-color: #aaa;
+  background: transparent;
   spacing: 0;
   fullscreen: true;
 }
 
 window {
-  margin: 513px 640px 120px 640px;
+  padding: 513px 640px 120px 640px;
 }
 
 inputbar {
@@ -32,9 +30,4 @@ listview {
 
 element {
  padding: 16px;
- text-color: #bbb;
-}
-
-element selected {
-  background-color: #4445;
 }

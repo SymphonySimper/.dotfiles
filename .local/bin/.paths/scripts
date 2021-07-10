@@ -27,4 +27,5 @@ syl		/home/s2b/.local/bin/syl
 todo			/home/s2b/.local/bin/rofi/todo
 v			/home/s2b/.local/bin/v
 volume			/home/s2b/.local/bin/volume
+wal-set		/home/s2b/.local/bin/wal-set
 wp			/home/s2b/.local/bin/aliases/wp

@@ -5,6 +5,15 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# Import colorscheme from 'wal' asynchronously
+# &   # Run the process in the background.
+# ( ) # Hide shell job control messages.
+# Not supported in the "fish" shell.
+(cat ~/.cache/wal/sequences &)
+
+# To add support for TTYs this line can be optionally added.
+source ~/.cache/wal/colors-tty.sh
+
 # PS1='[\u@\h \W]\$ '
 PS1="\W > "
 
