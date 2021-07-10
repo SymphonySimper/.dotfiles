@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #Apps
-iv="feh"
+iv="sxiv"
 vv="mpv"
 vf="ffplay"
 vc="ffmpeg"
@@ -17,7 +17,7 @@ case "$1" in
 	*.jpeg | *.jpg | *.png ) $iv "$1" ;;
 	*.mkv | *.mp4 | *.gif | *.avi | *youtu* ) $vv "$1" ;;
 	*.pdf ) $pv "$1" ;;
-	-a) $iv * ;;
+	-a) $iv -t * ;;
 	-w) $iv $whatImg ;;
 	-f) $vf /dev/video0 ;;
 	-d) 	

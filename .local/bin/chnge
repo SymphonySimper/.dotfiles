@@ -5,4 +5,9 @@ img="$HOME/Pictures/wallpapers"
 random=$(ls $img | shuf -n 1)
 alacrittyColor(){ $HOME/.local/bin/tools/alacritty-color > /dev/null 2>&1 ; }
 
-wal -qi $img/$random -n; feh --bg-scale $img/$random; alacrittyColor
+setThingy(){ wal -qi $1 -n; xwallpaper --zoom $1; alacrittyColor; }
+
+case "$1" in
+	-w) shift; setThingy $1 ;;
+	*) setThingy $img/$random ;;
+esac

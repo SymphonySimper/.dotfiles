@@ -1,1 +1,1 @@
-~/.config/shell/.profile
+/home/s2b/.config/shell/.profile
