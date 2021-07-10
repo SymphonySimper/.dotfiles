@@ -1,8 +1,10 @@
 #!/bin/sh
 
 scripts="$HOME/.local/bin/.paths/scripts"
-                                                         
+
+v=$EDITOR
+
 options=$( awk '{ print $1 }' $scripts )
 pathToE=$( grep -w "^$1" $scripts | awk '{ print $2 }' )
 
-[ -z "$1" ] && echo "$options" || alacritty -e v "$pathToE" > /dev/null 2>&1 &
+[ -z "$1" ] && echo "$options" || alacritty -e $v "$pathToE" > /dev/null 2>&1 &

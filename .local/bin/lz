@@ -5,7 +5,7 @@ v="$EDITOR"
 red=`syl r`; bold=`syl B`; reset=`syl R`
 
 p="$HOME/.local/bin"
-path="$p/"; pathR="$p/rofi"; pathA="$p/aliases/"; pathS="$HOME/.config/shell/"
+path="$p/"; pathR="$p/rofi"; pathA="$p/aliases/"; pathT="$p/tools/" pathS="$HOME/.config/shell/"
 scripts="$p/.paths/scripts"; shell="$p/.paths/shell"
 
 add="#!/bin/sh"
@@ -25,6 +25,11 @@ case "$1" in
 		echo "$1		$pathA$1" >> $scripts &&
 		sortMe "$scripts" &&
 		$v "$pathA$1" ;;
+	-t)
+		shift; createFile "$pathT$1" &&
+		echo "$1		$pathT$1" >> $scripts &&
+		sortMe "$scripts" &&
+		$v "$pathT$1" ;;
 	-sh)
 		shift; if [ -f "$pathS$1" ]; then 
 				errorMsg "File exists" && exit 1

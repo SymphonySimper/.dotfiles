@@ -1,8 +1,10 @@
 #!/bin/sh
 
 configs="$HOME/.local/bin/.paths/configs"
+
+v=$EDITOR
                                                          
 options=$( awk '{ print $1 }' $configs )
 pathToE=$( grep -w "^$1" $configs | awk '{ print $2 }' )
 
-[ -z "$1" ] && echo "$options" || alacritty -e v "$pathToE" > /dev/null 2>&1 &
+[ -z "$1" ] && echo "$options" || alacritty -e $v "$pathToE" > /dev/null 2>&1 &

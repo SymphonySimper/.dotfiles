@@ -760,6 +760,30 @@ background_opacity: 0.9
   #   - Debug
   #   - Trace
   #log_level: Warn
-
-  # Print all received window events.
-  #print_events: false
+# BEGIN ACE
+colors:
+  primary:
+    background: '#100f04'
+    foreground: '#ebe6df'
+  cursor:
+    text:       '#100f04'
+    cursor:     '#ebe6df'
+  normal:
+    black:      '#100f04'
+    red:        '#D8BD4F'
+    green:      '#B2A28E'
+    yellow:     '#CBB79D'
+    blue:       '#D7C8B3'
+    magenta:    '#EBD5A6'
+    cyan:       '#B6BAC9'
+    white:      '#ebe6df'
+  bright:
+    black:      '#a4a19c'
+    red:        '#D8BD4F'
+    green:      '#B2A28E'
+    yellow:     '#CBB79D'
+    blue:       '#D7C8B3'
+    magenta:    '#EBD5A6'
+    cyan:       '#B6BAC9'
+    white:      '#ebe6df'
+# END ACE

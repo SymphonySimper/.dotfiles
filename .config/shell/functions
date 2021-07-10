@@ -14,3 +14,9 @@ cgamp(){ config add -u && config commit -m "$1" && config push; }
 
 #Install dwm
 newDwm(){ cd ~/dwm && cp config.def.h config.h && sudo make clean install && cd; }
+
+#Wal and feh
+wal-tile() {
+    wal -n -i "$@"
+    feh --bg-tile "$(< "${HOME}/.cache/wal/wal")"
+}
