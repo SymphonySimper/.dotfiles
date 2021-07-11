@@ -12,7 +12,7 @@ add="#!/bin/sh"
 
 sortMe(){ cat $1 | sort -o $1; }
 errorMsg(){ echo "$bold$red$1$reset"; } 
-createFile(){ [ -f "$1" ] && (errorMsg "File exists" && exit 1) || (echo $add > "$1" && letmein "$1"); }
+createFile(){ [ -f "$1" ] && { errorMsg "File exists" && exit 1; } || { echo $add > "$1" && letmein "$1";} ; }
 
 case "$1" in
 	-r) 
