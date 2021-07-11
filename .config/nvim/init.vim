@@ -1,12 +1,20 @@
-syntax on
+let mapleader =" "
 
+if ! filereadable(system('echo -n "$XDG_CONFIG_HOME"/nvim/autoload/plug.vim'))
+	echo "Downloading junegunn/vim-plug to manage plugins..."
+	silent !mkdir -p "$XDG_CONFIG_HOME"/nvim/autoload/
+	silent !curl "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim" > "$XDG_CONFIG_HOME"/nvim/autoload/plug.vim
+	autocmd VimEnter * PlugInstall
+endif
+
+syntax on
+set clipboard=unnamedplus
 set number 
 set incsearch
 set smartindent
 let g:rainbow_active = 1
-let mapleader =" "
 
-call plug#begin('~/.vim/plugged')
+call plug#begin(system('echo -n "$XDG_CONFIG_HOME"/nvim/plugged'))
 
 Plug 'jiangmiao/auto-pairs'
 Plug 'frazrepo/vim-rainbow'
