@@ -3,17 +3,13 @@
 app="pulsemixer"
 noti="dunstify -h string:x-dunst-stack-tag:audio"
 getMute=$($app --get-mute)
-path="$HOME/.local/share/icons/volume"
-muteI="$path/mute.svg"
-volChangeI="$path/volChange.svg"
-warningI="$HOME/.local/share/icons/general/warning.svg"
 
 getVol(){ $app --get-volume | awk '{print $1}'; }
-muteNoti(){ [ $getMute -eq 0 ] && $noti -i $muteI "Muted" || $noti -i $volChangeI "Unmuted"; }
+muteNoti(){ [ $getMute -eq 0 ] && $noti "Muted" || $noti "Unmuted"; }
 
 notify(){
 	case "$1" in
-		-c) $noti -i $volChangeI "Volume: $(getVol)" -h int:value:$(getVol) ;;
+		-c) $noti "Volume: $(getVol)" -h int:value:$(getVol) ;;
 		-m) muteNoti ;;
 	esac
 }
@@ -22,7 +18,7 @@ changeVol(){
 	if [ $getMute -eq 0 ];then
 		$app --change-volume $1 && notify -c 
 	else
-		$noti -i $warningI "Audio is muted" "Unmute to change volume"
+		$noti "Audio is muted" "Unmute to change volume"
 	fi
 }
 

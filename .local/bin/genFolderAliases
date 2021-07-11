@@ -1,10 +1,7 @@
 #!/bin/sh
 
-i="$HOME/.local/share/icons/general"
-checkI="$i/checkBox.svg"
-
 path="$HOME/.local/bin/.paths/folders"
-folderAlias="$HOME/.config/shell/aliases/folders"
+folderAlias="$HOME/.config/shell/folders"
 
 cat $path | sort -o $path && awk '{print "alias "$1"=\"cd "$2"\"" }' $path >  $folderAlias  &&
-	dunstify -i $checkI "Folders aliases gen complete"
+	dunstify "Folders aliases gen complete"

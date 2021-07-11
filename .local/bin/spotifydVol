@@ -1,7 +1,5 @@
 #!/bin/sh
 
-iconPath="$HOME/.local/share/icons/brands/spotify.svg"
-warningI="$HOME/.local/share/icons/general/warning.svg"
 getId=$(pulsemixer --list-sinks | awk '/librespot/ {print $4}' |  sed -e 's/[a-zA-Z]//g' -e 's/[<>,-]//g')
 
 lazy="pulsemixer --id $getId"
@@ -11,8 +9,8 @@ getVol(){ $lazy --get-volume | awk '{print $1}'; }
 
 notify(){
 	case "$1" in
-		-c) $lazyNot -i $iconPath "Volume: $(getVol)" -h int:value:$(getVol) ;;
-		-m) $lazyNot -i $iconPath "$( [ $getMute -eq 0 ] && echo "Muted" || echo "Unmuted")" ;;
+		-c) $lazyNot "Volume: $(getVol)" -h int:value:$(getVol) ;;
+		-m) $lazyNot "$( [ $getMute -eq 0 ] && echo "Spotifyd Muted" || echo "Spotifyd Unmuted")" ;;
 	esac
 }
 
@@ -20,7 +18,7 @@ changeVol(){
 	if [ $getMute -eq 0 ];then
 		$lazy --change-volume $1 && notify -c
 	else
-		$lazyNot -i $warningI "Spotifyd is muted" "unmute to change volume"
+		$lazyNot "Spotifyd is muted" "unmute to change volume"
 	fi
 }
 

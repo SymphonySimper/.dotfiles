@@ -4,10 +4,9 @@ selectRegion(){ maim -s -u | tee $HOME/Pictures/screenshots/$(date +%s).png | xc
 selectWindow(){ maim -u -i $(xdotool getactivewindow) | tee $HOME/Pictures/screenshots/$(date +%s).png | xclip -selection clipboard -t image/png; }
 selectScreen(){ maim -m 1 -u | tee $HOME/Pictures/screenshots/$(date +%s).png | xclip -selection clipboard -t image/png; }
 
-notify(){ dunstify -i "$1" "$2" "Screenshot taken"; }
-path="$HOME/.local/share/icons/screenshot"
+notify(){ dunstify "$1" "Screenshot taken"; }
 case "$1" in
-	-r) selectRegion && notify "$path/region.svg" "Selected Region" ;;
-	-w) selectWindow && notify "$path/window.svg" "Selected Window" ;;
-	-s) selectScreen && notify "$path/screen.svg" "Selected Screen" ;;
+	-r) selectRegion && notify "Selected Region" ;;
+	-w) selectWindow && notify "Selected Window" ;;
+	-s) selectScreen && notify "Selected Screen" ;;
 esac
