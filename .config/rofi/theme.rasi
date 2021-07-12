@@ -1,6 +1,7 @@
 * {
-  background: transparent;
-  spacing: 0;
+  background-color: transparent; 
+  border-color: #444;
+  text-color: #aaa;  spacing: 0;
   fullscreen: true;
 }
 
@@ -30,4 +31,9 @@ listview {
 
 element {
  padding: 16px;
+ text-color: #bbb;
+}
+
+element selected {
+  background-color: #4445;
 }

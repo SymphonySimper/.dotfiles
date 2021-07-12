@@ -14,16 +14,18 @@ set incsearch
 set smartindent
 let g:rainbow_active = 1
 
+hi LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE 
+hi CursorLineNr term=bold cterm=NONE ctermfg=LightGrey ctermbg=NONE gui=NONE guifg=LightGrey guibg=NONE
+hi StatusLine term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
+hi EndOfBuffer term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
+
 call plug#begin(system('echo -n "$XDG_CONFIG_HOME"/nvim/plugged'))
 
 Plug 'jiangmiao/auto-pairs'
 Plug 'frazrepo/vim-rainbow'
 Plug 'junegunn/goyo.vim'
 Plug 'ap/vim-css-color'
-Plug 'dylanaraps/wal.vim'
 
 call plug#end()
-
-colorscheme wal
 
 map <leader>f :Goyo

@@ -173,11 +173,11 @@ font:
 #draw_bold_text_with_bright_colors: false
 
 # Colors (Tomorrow Night)
-# colors:
+colors:
   # Default colors
-  # primary:
-  #  background: '#111111'
-  #  foreground: '#aaaaaa'
+  primary:
+    background: '#111111'
+    foreground: '#aaaaaa'
 
     # Bright and dim foreground colors
     #
@@ -760,30 +760,3 @@ background_opacity: 0.9
   #   - Debug
   #   - Trace
   #log_level: Warn
-# BEGIN ACE
-colors:
-  primary:
-    background: '#22191f'
-    foreground: '#ecd5d8'
-  cursor:
-    text:       '#22191f'
-    cursor:     '#ecd5d8'
-  normal:
-    black:      '#22191f'
-    red:        '#C65F71'
-    green:      '#B37A84'
-    yellow:     '#C97987'
-    blue:       '#8C8A87'
-    magenta:    '#B5878F'
-    cyan:       '#CE969F'
-    white:      '#ecd5d8'
-  bright:
-    black:      '#a59597'
-    red:        '#C65F71'
-    green:      '#B37A84'
-    yellow:     '#C97987'
-    blue:       '#8C8A87'
-    magenta:    '#B5878F'
-    cyan:       '#CE969F'
-    white:      '#ecd5d8'
-# END ACE

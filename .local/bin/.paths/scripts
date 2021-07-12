@@ -1,6 +1,4 @@
-alacritty-color		/home/s2b/.local/bin/tools/alacritty-color
 brightness		/home/s2b/.local/bin/brightness
-chnge		/home/s2b/.local/bin/chnge
 configs			/home/s2b/.local/bin/.paths/configs
 dunstSound		/home/s2b/.local/bin/dunstSound
 editConfigs		/home/s2b/.local/bin/rofi/editConfigs

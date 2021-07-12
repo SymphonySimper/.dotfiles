@@ -1,13 +1,13 @@
 #!/bin/sh
 
 #Apps
-iv="sxiv"
-vv="mpv"
+iv="$IMAGEVIEWER"
+vv="$VIDEO"
 vf="ffplay"
 vc="ffmpeg"
 vi="magick"
-pv="zathura"
-te="nvim"
+pv="$READER"
+te="$EDITOR"
 tv="cat"
 
 #Paths

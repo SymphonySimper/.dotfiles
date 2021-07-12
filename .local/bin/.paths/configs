@@ -7,12 +7,9 @@ FrostedGlassS2B		/home/s2b/.config/BetterDiscord/themes/FrostedGlassS2B.theme.cs
 kitty			/home/s2b/.config/kitty/kitty.conf
 mimeapps		/home/s2b/.config/mimeapps.list
 mpv			/home/s2b/.config/mpv/mpv.conf
-ncspot			/home/s2b/.config/ncspot/config.toml
 nvim			/home/s2b/.config/nvim/init.vim
 qutebrowser		/home/s2b/.config/qutebrowser/config.py
 rofiConfig		/home/s2b/.config/rofi/config.rasi
 rofiTheme		/home/s2b/.config/rofi/theme.rasi
-spotifyd		/home/s2b/.config/spotifyd/spotifyd.conf
-spotify-tui		/home/s2b/.config/spotify-tui/config.yml
 starship		/home/s2b/.config/starship/config.toml
 zathura			/home/s2b/.config/zathura/zathurarc

@@ -7,5 +7,4 @@ configuration {
 	modi: [run, "todo:~/.local/bin/rofi/todo"];
 	
 }
-@import "~/.cache/wal/colors-rofi-dark.rasi"
 @theme "theme.rasi"
