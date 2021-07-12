@@ -1,6 +1,5 @@
 brightness		/home/s2b/.local/bin/brightness
 configs			/home/s2b/.local/bin/.paths/configs
-dunstSound		/home/s2b/.local/bin/dunstSound
 editConfigs		/home/s2b/.local/bin/rofi/editConfigs
 editScripts		/home/s2b/.local/bin/rofi/editScripts
 editShell		/home/s2b/.local/bin/rofi/editShell
@@ -21,11 +20,13 @@ screenshot		/home/s2b/.local/bin/screenshot
 scripts			/home/s2b/.local/bin/.paths/scripts
 search			/home/s2b/.local/bin/rofi/search
 shell			/home/s2b/.local/bin/.paths/shell
+sound-efx		/home/s2b/.local/bin/tools/sound-efx
 spotifydrun		/home/s2b/.local/bin/spotifydrun
 spotifydVol		/home/s2b/.local/bin/spotifydVol
 sxiv-key-handler		/home/s2b/.local/bin/tools/sxiv-key-handler
-syl		/home/s2b/.local/bin/syl
+syl		/home/s2b/.local/bin/tools/syl
 todo			/home/s2b/.local/bin/rofi/todo
+unix		/home/s2b/.local/bin/unix
 v			/home/s2b/.local/bin/v
 volume			/home/s2b/.local/bin/volume
 wp			/home/s2b/.local/bin/aliases/wp

@@ -1,4 +1,0 @@
-#!/bin/sh
-
-sound="$HOME/.local/share/sounds/storeDoorBellRing.ogg"
-paplay $sound

@@ -14,4 +14,5 @@ ERRFILE="$XDG_CACHE_HOME/X11/xsession-errors"
 xrdb -load "$HOME"/.config/x11/Xresources &
 xwallpaper --zoom "$HOME"/.local/share/bg/BG.png &
 xsetroot -name " " &
+dunst &
 exec dwm
