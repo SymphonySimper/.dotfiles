@@ -2,6 +2,7 @@
 
 path="$HOME/.local/bin/.paths/folders"
 folderAlias="$HOME/.config/shell/folders"
+checkBoxI="$HOME"/.local/share/icons/general/checkBox.svg
 
 cat $path | sort -o $path && awk '{print "alias "$1"=\"cd "$2"\"" }' $path >  $folderAlias  &&
-	dunstify "Folders aliases gen complete"
+	dunstify -i "$checkBoxI" "Folders aliases gen complete"

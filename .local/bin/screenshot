@@ -1,12 +1,16 @@
 #!/bin/sh
+dir="$HOME"/.local/share/icons/screenshot
+regionI="$dir"/screenSnip.svg
+fullScreenI="$dir"/fullScreen.svg
+windowI="$dir"/window.svg
 
 selectRegion(){ maim -s -u | tee $HOME/Pictures/screenshots/$(date +%s).png | xclip -selection clipboard -t image/png; }
 selectWindow(){ maim -u -i $(xdotool getactivewindow) | tee $HOME/Pictures/screenshots/$(date +%s).png | xclip -selection clipboard -t image/png; }
 selectScreen(){ maim -m 1 -u | tee $HOME/Pictures/screenshots/$(date +%s).png | xclip -selection clipboard -t image/png; }
 
-notify(){ dunstify "$1" "Screenshot taken"; }
+notify(){ dunstify -i "$1" "$2" "Screenshot taken"; }
 case "$1" in
-	-r) selectRegion && notify "Selected Region" ;;
-	-w) selectWindow && notify "Selected Window" ;;
-	-s) selectScreen && notify "Selected Screen" ;;
+	-r) selectRegion && notify "$regionI" "Selected Region" ;;
+	-w) selectWindow && notify "$windowI" "Selected Window" ;;
+	-s) selectScreen && notify "$fullScreenI" "Selected Screen" ;;
 esac

@@ -21,8 +21,6 @@ scripts			/home/s2b/.local/bin/.paths/scripts
 search			/home/s2b/.local/bin/rofi/search
 shell			/home/s2b/.local/bin/.paths/shell
 sound-efx		/home/s2b/.local/bin/tools/sound-efx
-spotifydrun		/home/s2b/.local/bin/spotifydrun
-spotifydVol		/home/s2b/.local/bin/spotifydVol
 sxiv-key-handler		/home/s2b/.local/bin/tools/sxiv-key-handler
 syl		/home/s2b/.local/bin/tools/syl
 todo			/home/s2b/.local/bin/rofi/todo

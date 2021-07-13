@@ -21,7 +21,7 @@ hi EndOfBuffer term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg
 
 call plug#begin(system('echo -n "$XDG_CONFIG_HOME"/nvim/plugged'))
 
-Plug 'jiangmiao/auto-pairs'
+"Plug 'jiangmiao/auto-pairs'
 Plug 'frazrepo/vim-rainbow'
 Plug 'junegunn/goyo.vim'
 Plug 'ap/vim-css-color'

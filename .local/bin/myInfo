@@ -1,18 +1,38 @@
 #!/bin/sh
 
 notify="dunstify"
-todo="$HOME/.todo"
+todo="$HOME"/.todo
+
+#Icons
+dir="$HOME"/.local/share/icons/myInfo
+
+batFullI="$dir"/batteryFull.svg
+lowBatI="$dir"/lowBatI.svg
+chargingI="$dir"/charging.svg
+saverI="$dir"/saver.svg
+
+dateI="$dir"/date.svg
+clockI="$dir"/clock.svg
 
 getStat=$(cat /sys/class/power_supply/BAT0/status)
-getCap(){ cat /sys/class/power_supply/BAT0/capacity; }
-notifyBat(){ $notify -h string:x-dunst-stack-tag:myBattery  "Battery level: $(getCap)%"; }
+getCap=$(cat /sys/class/power_supply/BAT0/capacity)
+notifyBat(){ $notify -h string:x-dunst-stack-tag:myBattery -i "$1"  "Battery level: $getCap%"; }
+bat(){
+	if [ $getStat = 'Unknown' ]; then
+		notifyBat "$saverI"
+	elif [ $getStat = 'Charging' ]; then
+		notifyBat "$chargingI"
+	elif [ $getStat = 'Discharging' ]; then
+		[ $getCap -gt 20 ] && notifyBat "$batFullI" || notifyBat "$lowBatI"
+	fi
+}
 
 getDateTxt=$(date "+%A %B %Y")
 getDate=$(date "+%D")
 getTime=$(date "+%r")
-notifyDate(){ $notify -h string:x-dunst-stack-tag:myDate "$getDate" "$getDateTxt"; }
+notifyDate(){ $notify -h string:x-dunst-stack-tag:myDate -i "$dateI" "$getDate" "$getDateTxt"; }
 
-notifyTime(){ $notify -h string:x-dunst-stack-tag:myTime  "$getTime"; }
+notifyTime(){ $notify -h string:x-dunst-stack-tag:myTime -i "$clockI"  "$getTime"; }
 todo(){ cat $todo | while read -r line ; do $notify "+" "$line"; done; }
 
-notifyBat; notifyDate; notifyTime; todo
+bat; notifyDate; notifyTime; todo
