@@ -23,6 +23,7 @@ shell			/home/s2b/.local/bin/.paths/shell
 sound-efx		/home/s2b/.local/bin/tools/sound-efx
 sxiv-key-handler		/home/s2b/.local/bin/tools/sxiv-key-handler
 syl		/home/s2b/.local/bin/tools/syl
+timer		/home/s2b/.local/bin/timer
 todo			/home/s2b/.local/bin/rofi/todo
 unix		/home/s2b/.local/bin/unix
 v			/home/s2b/.local/bin/v

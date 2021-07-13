@@ -42,6 +42,8 @@ export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
 export WGETRC="$XDG_CONFIG_HOME/wgetrc"
 export SQLITE_HISTORY=$XDG_DATA_HOME/sqlite_history
 export ICEAUTHORITY="$XDG_CACHE_HOME"/ICEauthority
+export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
+. "/home/s2b/.local/share/cargo/env"
 
 #Other settinfs
 export _JAVA_AWT_WM_NONREPARENTING=1

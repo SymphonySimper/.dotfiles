@@ -22,7 +22,7 @@ alias y='yay'
 alias yrm='y -Rns'
 
 #Program
-alias ls='ls --color=always'
+alias ls='exa'
 alias grep='grep --color=auto'
 
 #Tasks

@@ -1,5 +1,5 @@
 #!/bin/sh
 
-path="$HOME/.todo"
+path="$XDG_DATA_HOME/.todo"
 
 [ -z "$@" ] && cat $path || { grep -q "$@" $path && sed "/^$@$/d" -i $path || echo "$@" >> $path; cat $path; }

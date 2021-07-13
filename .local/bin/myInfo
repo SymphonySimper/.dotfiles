@@ -7,7 +7,7 @@ todo="$HOME"/.todo
 dir="$HOME"/.local/share/icons/myInfo
 
 batFullI="$dir"/batteryFull.svg
-lowBatI="$dir"/lowBatI.svg
+lowBatI="$dir"/lowBattery.svg
 chargingI="$dir"/charging.svg
 saverI="$dir"/saver.svg
 
