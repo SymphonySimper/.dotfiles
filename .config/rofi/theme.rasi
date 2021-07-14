@@ -1,7 +1,8 @@
 * {
   background-color: transparent; 
-  border-color: #444;
-  text-color: #aaa;  spacing: 0;
+  border-color: #222;
+  text-color: #bbb;
+  spacing: 0;
   fullscreen: true;
 }
 
@@ -35,5 +36,6 @@ element {
 }
 
 element selected {
-  background-color: #4445;
+  text-color: #aaa;
+  background-color: #2225;
 }

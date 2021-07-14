@@ -20,3 +20,6 @@ wal-tile() {
     wal -n -i "$@"
     feh --bg-tile "$(< "${HOME}/.cache/wal/wal")"
 }
+
+#cd with fzf
+cdrs(){ cd $(du -d 1 "$HOME"/lifeisfun/rust | awk '{print $2}' | fzf); }
