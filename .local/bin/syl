@@ -1,0 +1,15 @@
+#!/bin/sh
+
+case "$1" in
+	b) tput setaf 0 ;;
+	r) tput setaf 1 ;;
+	g) tput setaf 2 ;;
+	y) tput setaf 3 ;;
+	bl) tput setaf 4 ;;
+	m) tput setaf 5 ;;
+	c) tput setaf 6 ;;
+	w) tput setaf 7 ;;
+	B) tput bold ;;
+	D) tput dim ;;
+	R) tput sgr0 ;;
+esac

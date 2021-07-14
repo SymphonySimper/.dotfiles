@@ -1,7 +1,6 @@
 #!/bin/sh
 
-syl="$HOME"/.local/bin/tools/syl
-red=`$syl r`; green=`$syl g`; bold=`$syl B`; reset=`$syl R`
+red=`syl r`; green=`syl g`; bold=`syl B`; reset=`syl R`
 error(){ echo "$bold$red$1$reset"; }
 success(){ echo "$bold$green$1$reset"; }
 

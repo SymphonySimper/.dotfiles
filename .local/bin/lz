@@ -2,8 +2,7 @@
 
 v="$EDITOR"
 
-syl="$HOME"/.local/bin/tools/syl
-red=`$syl r`; bold=`$syl B`; reset=`$syl R`
+red=`syl r`; bold=`syl B`; reset=`syl R`
 
 p="$HOME/.local/bin"
 path="$p/"; pathR="$p/rofi"; pathA="$p/aliases/"; pathT="$p/tools/" pathS="$HOME/.config/shell/"

@@ -20,9 +20,9 @@ screenshot		/home/s2b/.local/bin/screenshot
 scripts			/home/s2b/.local/bin/.paths/scripts
 search			/home/s2b/.local/bin/rofi/search
 shell			/home/s2b/.local/bin/.paths/shell
-sound-efx		/home/s2b/.local/bin/tools/sound-efx
+soundEfx		/home/s2b/.local/bin/soundEfx
 sxiv-key-handler		/home/s2b/.local/bin/tools/sxiv-key-handler
-syl		/home/s2b/.local/bin/tools/syl
+syl		/home/s2b/.local/bin/syl
 timer		/home/s2b/.local/bin/timer
 todo			/home/s2b/.local/bin/rofi/todo
 unix		/home/s2b/.local/bin/unix
