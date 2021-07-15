@@ -29,11 +29,7 @@ Plug 'frazrepo/vim-rainbow'
 Plug 'junegunn/goyo.vim'
 Plug 'ap/vim-css-color'
 Plug 'rust-lang/rust.vim'
-Plug 'justinmk/vim-sneak'
 
 call plug#end()
-
-map f <Plug>Sneak_s
-map F <Plug>Sneak_S
 
 map <leader>f :Goyo

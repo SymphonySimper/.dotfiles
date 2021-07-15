@@ -1,6 +1,6 @@
 * {
   background-color: transparent; 
-  border-color: #222;
+  border-color: #444;
   text-color: #bbb;
   spacing: 0;
   fullscreen: true;
@@ -37,5 +37,5 @@ element {
 
 element selected {
   text-color: #aaa;
-  background-color: #2225;
+  background-color: #4445;
 }
