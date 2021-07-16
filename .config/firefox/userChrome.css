@@ -5,3 +5,7 @@ browser { background-color: #111111 !important; } */
 browser[type=content-primary],browser[type=content] > html {
     background: #111111 !important
 }
+
+#urlbar-background, #searchbar {
+    box-shadow: none !important;
+}
