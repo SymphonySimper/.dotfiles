@@ -3,6 +3,7 @@ bash_profile		/home/s2b/.bash_profile
 bashrc			/home/s2b/.bashrc
 folders			/home/s2b/.config/shell/folders
 functions		/home/s2b/.config/shell/functions
+fzfFolderAlias		/home/s2b/.config/shell/fzfFolderAlias
 profile			/home/s2b/.config/shell/.profile
 rankServers		/home/s2b/.config/shell/rankServers
 xinitrc			/home/s2b/.config/x11/xinitrc

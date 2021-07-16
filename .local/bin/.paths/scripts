@@ -5,6 +5,7 @@ editScripts		/home/s2b/.local/bin/rofi/editScripts
 editShell		/home/s2b/.local/bin/rofi/editShell
 figma			/home/s2b/.local/bin/aliases/figma
 folders			/home/s2b/.local/bin/.paths/folders
+fzfFolders			/home/s2b/.local/bin/.paths/fzfFolders
 formatUsbFat32		/home/s2b/.local/bin/formatUsbFat32
 gameMode		/home/s2b/.local/bin/gameMode
 genFolderAliases		/home/s2b/.local/bin/genFolderAliases

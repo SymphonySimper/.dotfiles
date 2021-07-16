@@ -1,8 +1,25 @@
 #!/bin/sh
 
-path="$HOME/.local/bin/.paths/folders"
-folderAlias="$HOME/.config/shell/folders"
+path="$HOME"/.local/bin/.paths/folders
+pathFzf="$HOME"/.local/bin/.paths/fzfFolders
+folderAlias="$HOME"/.config/shell/folders
+fzfFolderAlias="$HOME"/.config/shell/fzfFolderAlias
 checkBoxI="$HOME"/.local/share/icons/general/checkBox.svg
 
-cat $path | sort -o $path && awk '{print "alias "$1"=\"cd "$2"\"" }' $path >  $folderAlias  &&
-	dunstify -i "$checkBoxI" "Folders aliases gen complete"
+notify(){ dunstify -i "$checkBoxI" "$1 folder aliases gen complete"; }
+fzfFolders(){ 
+	cat $pathFzf |  sort -o $pathFzf
+	awk '{ print $1"(){ cd $(exa -d "$2"/*/ | fzf); }" }' $pathFzf > $fzfFolderAlias
+	notify "Fzf"
+}
+
+folders(){ 
+	cat $path |  sort -o $path
+	awk '{print "alias "$1"=\"cd "$2"\"" }' $path > $folderAlias
+	notify "General"
+}
+
+case "$1" in
+	-f) fzfFolders ;;
+	*) folders ;;
+esac

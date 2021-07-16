@@ -1,0 +1,23 @@
+/*
+step 1:
+	Since Firefox 69, you must go into about:config and set “toolkit.legacyUserProfileCustomizations.stylesheets” to “true” to enable these customizations. If you don’t, Firefox will ignore your userChrome.css and userContent.css files.
+
+step 2:
+ 	Go to "help" and copy the user profile directory
+step 3:
+	"mkdir chrome"
+step 4: 
+	Copy the userContent.css or ln -s it
+*/
+
+.personalize-button { display: none !important; }
+@-moz-document url-prefix(about:blank) {
+    html > body:empty {
+        background-color: #111111 !important;
+    }
+}
+@-moz-document url(about:blank) {
+    html > body:empty {
+        background-color: #111111 !important;
+    }
+}

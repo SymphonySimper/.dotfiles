@@ -1,7 +1,5 @@
 ..			..
-cdf		/home/s2b/lifeisfun/flutter
-cdl		/home/s2b/Downloads
-cdn		/home/s2b/importantnt/Notes
-cdr		/home/s2b/lifeisfun/react
-cdsh		/home/s2b/Pictures/screenshots
-cds		/home/s2b/.local/bin
+cdd		"$HOME"/Downloads
+cdn		"$HOME"/importantnt/Notes
+cds		"$HOME"/.local/bin
+cdsh		"$HOME"/Pictures/screenshots

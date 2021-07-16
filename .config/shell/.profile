@@ -49,7 +49,7 @@ export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 #fzf
-export FZF_DEFAULT_OPTS='--color=fg:#bbbbbb,bg:#111111,hl:#aaaaaa --color=fg+:#bbbbbb,bg+:#222222,hl+:#aaaaaa --color=info:#bbbbbb,prompt:#bbbbbb,pointer:#bbbbbb --color=marker:#111111,spinner:#111111,header:#111111'
+export FZF_DEFAULT_OPTS='--reverse --color=fg:#bbbbbb,bg:#111111,hl:#aaaaaa --color=fg+:#bbbbbb,bg+:#222222,hl+:#aaaaaa --color=info:#bbbbbb,prompt:#bbbbbb,pointer:#bbbbbb --color=marker:#111111,spinner:#111111,header:#111111'
 
 #StartX
 [ "$(tty)" = "/dev/tty1" ] && exec startx "$XINITRC"
