@@ -20,3 +20,6 @@ wal-tile() {
     wal -n -i "$@"
     feh --bg-tile "$(< "${HOME}/.cache/wal/wal")"
 }
+
+#Pacman
+isThere(){ pacman -Q | rg "$1"; }

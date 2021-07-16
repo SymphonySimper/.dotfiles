@@ -22,7 +22,8 @@ alias y='yay'
 alias yrm='y -Rns'
 
 #Program
-alias ls='exa --icons -F'
+alias ls='ls --color=auto'
+alias exa='exa --icons -F'
 alias grep='grep --color=auto'
 
 #Tasks
@@ -33,6 +34,7 @@ alias bye='poweroff'
 alias q='exit'
 alias imlight='ps_mem -p $(pgrep -d, -u $USER)'
 alias nobita='mntdev -n sdb1'
+alias ka='killall'
 
 #Clean up
 alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
