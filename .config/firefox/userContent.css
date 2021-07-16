@@ -8,6 +8,12 @@ step 3:
 	"mkdir chrome"
 step 4: 
 	Copy the userContent.css or ln -s it
+
+##Additional step##
+
+ -> In about:config, change browser.display.background_color to the color of your choice,
+ -> head to Firefox’s profile folder by finding it in about:profiles under “Root Directory”,
+ -> go to the chrome subfolder, open/create userChrome.css and append the following CSS (replacing #111111 by the color of your choice): 
 */
 
 .personalize-button { display: none !important; }
