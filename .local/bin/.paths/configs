@@ -12,4 +12,6 @@ qutebrowser		/home/s2b/.config/qutebrowser/config.py
 rofiConfig		/home/s2b/.config/rofi/config.rasi
 rofiTheme		/home/s2b/.config/rofi/theme.rasi
 starship		/home/s2b/.config/starship/config.toml
+sxhkd			/home/s2b/.config/sxhkd/sxhkdrc
+sxiv			/home/s2b/.config/sxiv/exec/key-handler
 zathura			/home/s2b/.config/zathura/zathurarc

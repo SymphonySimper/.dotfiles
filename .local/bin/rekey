@@ -1,0 +1,5 @@
+#!/bin/sh
+
+prgm="sxhkd"
+notify(){ dunstify -h string:x-dunst-stack-tag:sxhkd "$1"; }
+pgrep $prgm && killall $prgm; $prgm & notify "Restarting $prgm"

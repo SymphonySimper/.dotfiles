@@ -5,8 +5,8 @@ editScripts		/home/s2b/.local/bin/rofi/editScripts
 editShell		/home/s2b/.local/bin/rofi/editShell
 figma			/home/s2b/.local/bin/aliases/figma
 folders			/home/s2b/.local/bin/.paths/folders
-fzfFolders			/home/s2b/.local/bin/.paths/fzfFolders
 formatUsbFat32		/home/s2b/.local/bin/formatUsbFat32
+fzfFolders			/home/s2b/.local/bin/.paths/fzfFolders
 gameMode		/home/s2b/.local/bin/gameMode
 genFolderAliases		/home/s2b/.local/bin/genFolderAliases
 letmein			/home/s2b/.local/bin/letmein
@@ -15,6 +15,7 @@ lz			/home/s2b/.local/bin/lz
 mntdev			/home/s2b/.local/bin/mntdev
 myInfo		/home/s2b/.local/bin/myInfo
 openUrl			/home/s2b/.local/bin/rofi/openUrl
+rekey		/home/s2b/.local/bin/rekey
 rofiEdit		/home/s2b/.local/bin/aliases/rofiEdit
 rofiOpen		/home/s2b/.local/bin/aliases/rofiOpen
 screenshot		/home/s2b/.local/bin/screenshot
@@ -22,7 +23,6 @@ scripts			/home/s2b/.local/bin/.paths/scripts
 search			/home/s2b/.local/bin/rofi/search
 shell			/home/s2b/.local/bin/.paths/shell
 soundEfx		/home/s2b/.local/bin/soundEfx
-sxiv-key-handler		/home/s2b/.local/bin/tools/sxiv-key-handler
 syl		/home/s2b/.local/bin/syl
 timer		/home/s2b/.local/bin/timer
 todo			/home/s2b/.local/bin/rofi/todo
