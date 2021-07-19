@@ -4,5 +4,5 @@
 
 notify="dunstify -h string:x-dunst-stack-tag:picom"
 ( pgrep picom ) && ( killall picom && $notify "Picom is dead" ) || 
-	( ( picom -m 1.0 -i 1.0 -e 1.0 --vsync --backend glx --no-fading-openclose & ) && 
+	( ( picom & ) && 
 	$notify "Picom is alive" )

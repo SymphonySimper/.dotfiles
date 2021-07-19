@@ -1,4 +1,5 @@
 alacritty		/home/s2b/.config/alacritty/alacritty.yml
+bspwm			/home/s2b/.config/bspwm/bspwmrc
 DiscordRecolorS2B	/home/s2b/.config/BetterDiscord/themes/DiscordRecolorS2B.theme.css
 dunst			/home/s2b/.config/dunst/dunstrc
 dwm			/home/s2b/dwm/config.def.h
@@ -6,6 +7,7 @@ feh			/home/s2b/.config/feh/keys
 FrostedGlassS2B		/home/s2b/.config/BetterDiscord/themes/FrostedGlassS2B.theme.css
 kitty			/home/s2b/.config/kitty/kitty.conf
 mimeapps		/home/s2b/.config/mimeapps.list
+picom			/home/s2b/.config/picom/picom.conf
 mpv			/home/s2b/.config/mpv/mpv.conf
 nvim			/home/s2b/.config/nvim/init.vim
 qutebrowser		/home/s2b/.config/qutebrowser/config.py
