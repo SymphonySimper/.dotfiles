@@ -9,14 +9,7 @@ bspc config split_ratio          0.52
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
-bspc config automatic_scheme alternate
-bspc config initial_polarity second_child
-bspc config pointer_modifier lock
-bspc config pointer_action1 move
-bspc config pointer_action2 resize_side
-bspc config pointer_action3 resize_corner
 bspc config click_to_focus none
-
 bspc config single_monocle true
 
 bspc config focus_follows_pointer true
@@ -39,6 +32,7 @@ bspc rule -a firefox desktop='^2'
 bspc rule -a Zathura state=tiled
 bspc rule -a Discord desktop='^5'
 bspc rule -a obs desktop='^9'
+bspc rule -a qemu-system-x86_64 state=fullscreen
 
 #Chromium apps
 bspc rule -a *:www.figma.com__files:* desktop='^6'

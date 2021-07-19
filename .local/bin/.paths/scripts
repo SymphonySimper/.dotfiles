@@ -14,6 +14,7 @@ lolban			.local/bin/lolban
 lz			.local/bin/lz
 mntdev			.local/bin/mntdev
 myInfo			.local/bin/myInfo
+myqemu		.local/bin/myqemu
 openUrl			.local/bin/rofi/openUrl
 rekey			.local/bin/rekey
 rofiEdit		.local/bin/aliases/rofiEdit
