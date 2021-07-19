@@ -4,9 +4,10 @@ v="$EDITOR"
 
 red=`syl r`; bold=`syl B`; reset=`syl R`
 
-p="$HOME/.local/bin"
-path="$p/"; pathR="$p/rofi"; pathA="$p/aliases/"; pathT="$p/tools/" pathS="$HOME/.config/shell/"
+p=".local/bin"
+path="$p/"; pathR="$p/rofi"; pathA="$p/aliases/"; pathT="$p/tools/" pathS=".config/shell/"
 scripts="$p/.paths/scripts"; shell="$p/.paths/shell"
+home="$HOME"/
 
 add="#!/bin/sh"
 
@@ -39,7 +40,7 @@ case "$1" in
 				errorMsg "File not created"
 			fi ;;
 	-d)
-		shift; rm "$(grep -w "$1" $scripts $shell | awk '{ print $2 }')" &&
+		shift; rm "$home$(grep -w "$1" $scripts $shell | awk '{ print $2 }')" &&
 			if ( grep -qw "$1" $scripts ); then
 				sed "/$1$/d" -i $scripts && errorMsg "$1 rm from scripts"
 			elif ( grep -qw "$1" $shell ); then

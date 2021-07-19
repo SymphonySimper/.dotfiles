@@ -9,13 +9,13 @@ checkBoxI="$HOME"/.local/share/icons/general/checkBox.svg
 notify(){ dunstify -i "$checkBoxI" "$1 folder aliases gen complete"; }
 fzfFolders(){ 
 	cat $pathFzf |  sort -o $pathFzf
-	awk '{ print $1"(){ cd $(exa -d "$2"/*/ | fzf); }" }' $pathFzf > $fzfFolderAlias
+	awk '{ print $1"(){ cd $(exa -d \"$HOME\"/"$2"/*/ | fzf); }" }' $pathFzf > $fzfFolderAlias
 	notify "Fzf"
 }
 
 folders(){ 
 	cat $path |  sort -o $path
-	awk '{print "alias "$1"=\"cd "$2"\"" }' $path > $folderAlias
+	awk '{print "alias "$1"=\"cd \"$HOME\"/"$2"\"" }' $path > $folderAlias
 	notify "General"
 }
 
