@@ -16,14 +16,16 @@ alias cgau='config add -u'
 #Pacman/Packages/Yay
 alias p='sudo pacman'
 alias prm='p -Rns'
-alias amifat='lolban $(pacman -Q | wc -l)'
+alias amifat='pacman -Q | wc -l'
 alias rmzombies='p -Rns $(pacman -Qdtq)'
 alias y='yay'
 alias yrm='y -Rns'
+alias whoIsFat='y -P --stats'
+alias worthless='p -Rdd'
 
 #Program
 #alias ls='ls --color=auto'
-alias ls='exa --icons -F'
+alias ls='exa'
 alias grep='grep --color=auto'
 
 #Tasks
