@@ -19,6 +19,7 @@ openUrl			.local/bin/rofi/openUrl
 rekey			.local/bin/rekey
 rofiEdit		.local/bin/aliases/rofiEdit
 rofiOpen		.local/bin/aliases/rofiOpen
+screenRecord		.local/bin/screenRecord
 screenshot		.local/bin/screenshot
 scripts			.local/bin/.paths/scripts
 search			.local/bin/rofi/search
