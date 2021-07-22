@@ -8,6 +8,7 @@ folders			.local/bin/.paths/folders
 formatUsbFat32		.local/bin/formatUsbFat32
 fzfFolders		.local/bin/.paths/fzfFolders
 gameMode		.local/bin/gameMode
+genFirefox		.local/bin/genFirefox
 genFolderAliases	.local/bin/genFolderAliases
 letmein			.local/bin/letmein
 lolban			.local/bin/lolban
