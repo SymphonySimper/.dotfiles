@@ -1,1 +1,0 @@
-/home/s2b/.config/bash/bash_profile
