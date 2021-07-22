@@ -4,9 +4,12 @@ regionI="$dir"/screenSnip.svg
 fullScreenI="$dir"/fullScreen.svg
 windowI="$dir"/window.svg
 
-selectRegion(){ maim -s -u | tee $HOME/Pictures/screenshots/$(date +%s).png | xclip -selection clipboard -t image/png; }
-selectWindow(){ maim -u -i $(xdotool getactivewindow) | tee $HOME/Pictures/screenshots/$(date +%s).png | xclip -selection clipboard -t image/png; }
-selectScreen(){ maim -m 1 -u | tee $HOME/Pictures/screenshots/$(date +%s).png | xclip -selection clipboard -t image/png; }
+loc="$HOME"/pics/screenshots/$(date +%s).png
+save(){ tee $loc; }
+cpy(){ xclip -selection clipboard -t image/png; }
+selectRegion(){ maim -s -u | save | cpy; }
+selectWindow(){ maim -u -i $(xdotool getactivewindow) | save | cpy; }
+selectScreen(){ maim -m 1 -u | save | cpy; }
 
 notify(){ dunstify -i "$1" "$2" "Screenshot taken"; }
 case "$1" in
