@@ -2,7 +2,9 @@
 [[ $- != *i* ]] && return
 
 #Prompt
-PS1="%1~ > "
+precmd(){ precmd(){ echo ; }; }
+PS1="%1~ 
+> "
 
 # Enable colors and change prompt:
 autoload -U colors && colors
@@ -140,4 +142,4 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 #Syntax hightlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-eval "$(starship init zsh)"
+#eval "$(starship init zsh)"

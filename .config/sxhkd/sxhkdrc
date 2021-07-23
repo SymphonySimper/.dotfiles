@@ -11,8 +11,8 @@ XF86AudioLowerVolume
 	volume -d
 XF86AudioRaiseVolume
 	volume -u
-XF86AudioMute
-	voluem -m
+super + F4
+	volume -m
 
 # Brightness
 super + F5

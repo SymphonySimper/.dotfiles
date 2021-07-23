@@ -21,4 +21,4 @@ sloc="$HOME/.config/shell"
 for f in $sloc/*; do source "$f"; done
 
 #Starship
-eval "$(starship init bash)"
+#eval "$(starship init bash)"
