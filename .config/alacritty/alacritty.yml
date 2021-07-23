@@ -345,7 +345,7 @@ cursor:
   #   - _ Underline
   #   - | Beam
   #style: Block
-
+  blinking: Never
   # Vi mode cursor style
   #
   # If the vi mode cursor style is `None` or not specified, it will fall back to
