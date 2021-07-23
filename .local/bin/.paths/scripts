@@ -3,6 +3,7 @@ configs			.local/bin/.paths/configs
 editConfigs		.local/bin/rofi/editConfigs
 editScripts		.local/bin/rofi/editScripts
 editShell		.local/bin/rofi/editShell
+ff2mpv		.local/bin/aliases/ff2mpv
 figma			.local/bin/aliases/figma
 folders			.local/bin/.paths/folders
 formatUsbFat32		.local/bin/formatUsbFat32

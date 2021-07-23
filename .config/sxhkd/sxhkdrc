@@ -6,6 +6,10 @@ super + Return
 super + shift + f
 	$BROWSER
 
+# Open youtube links from clipboard
+super + shift + m
+	ff2mpv
+
 # Volume
 XF86AudioLowerVolume
 	volume -d

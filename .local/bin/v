@@ -2,7 +2,7 @@
 
 #Apps
 iv="$IMAGEVIEWER"
-vv="$VIDEO"
+vv="$VIDEOPLAYER"
 vf="ffplay"
 vc="ffmpeg"
 vi="magick"

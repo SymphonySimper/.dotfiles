@@ -4,7 +4,7 @@ export BROWSER="firefox"
 export TERMINAL="alacritty"
 export READER="zathura"
 export IMAGEVIEWER="sxiv"
-export VIDEO="mpv"
+export VIDEOPLAYER="mpv"
 
 #Paths
 export PATH="$PATH:$HOME/.local/bin"			#Scripts

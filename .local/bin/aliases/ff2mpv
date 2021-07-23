@@ -1,0 +1,3 @@
+#!/bin/sh
+
+v "$(xclip -selection clipboard -o)"
