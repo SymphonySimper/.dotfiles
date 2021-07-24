@@ -21,6 +21,8 @@ openUrl			.local/bin/rofi/openUrl
 rekey			.local/bin/rekey
 rofiEdit		.local/bin/aliases/rofiEdit
 rofiOpen		.local/bin/aliases/rofiOpen
+rofiTodo		.local/bin/aliases/rofiTodo
+rtimer		.local/bin/rofi/rtimer
 screenRecord		.local/bin/screenRecord
 screenshot		.local/bin/screenshot
 scripts			.local/bin/.paths/scripts
@@ -28,7 +30,7 @@ search			.local/bin/rofi/search
 shell			.local/bin/.paths/shell
 soundEfx		.local/bin/soundEfx
 syl			.local/bin/syl
-timer			.local/bin/timer
+timer		.local/bin/timer
 todo			.local/bin/rofi/todo
 unix		 	.local/bin/unix
 v			.local/bin/v

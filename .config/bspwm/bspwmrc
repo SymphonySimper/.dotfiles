@@ -33,7 +33,3 @@ bspc rule -a Zathura state=tiled
 bspc rule -a Discord desktop='^5'
 bspc rule -a obs desktop='^9'
 bspc rule -a qemu-system-x86_64 state=fullscreen
-
-#Chromium apps
-bspc rule -a *:www.figma.com__files:* desktop='^6'
-bspc rule -a *:web.whatsapp.com:* desktop='^7'

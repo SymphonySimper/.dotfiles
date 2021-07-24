@@ -4,7 +4,7 @@ configuration {
 	fake-transparency:true;
 	fake-background: "~/.local/share/bg/fakeBG.png";
 	font: "Poppins 12";
-	modi: [run, "todo:~/.local/bin/rofi/todo"];
+	modi: [run];
 	
 }
 @theme "theme.rasi"

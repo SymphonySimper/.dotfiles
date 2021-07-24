@@ -5,7 +5,7 @@ v="$EDITOR"
 red=`syl r`; bold=`syl B`; reset=`syl R`
 
 p=".local/bin"
-path="$p/"; pathR="$p/rofi"; pathA="$p/aliases/"; pathT="$p/tools/" pathS=".config/shell/"
+path="$p/"; pathR="$p/rofi/"; pathA="$p/aliases/"; pathT="$p/tools/" pathS=".config/shell/"
 scripts="$p/.paths/scripts"; shell="$p/.paths/shell"
 home="$HOME"/
 

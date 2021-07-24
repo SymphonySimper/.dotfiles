@@ -35,6 +35,8 @@ super + s
 	rofiOpen
 super + e
 	rofiEdit
+super + r
+	rofiTodo
 
 # Screenshot
 super + alt + s
