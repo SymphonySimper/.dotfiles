@@ -22,4 +22,4 @@ wal-tile() {
 }
 
 #Pacman
-isThere(){ pacman -Q | rg "$1"; }
+isThere(){ pacman -Q | grep "$1"; }
