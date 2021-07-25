@@ -4,7 +4,7 @@ configuration {
 	fake-transparency:true;
 	fake-background: "~/.local/share/bg/fakeBG.png";
 	font: "Poppins 12";
-	modi: [run];
+	modi: [run,window];
 	
 }
 @theme "theme.rasi"
