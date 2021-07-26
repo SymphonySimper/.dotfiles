@@ -1,5 +1,5 @@
 #Rank Arch Servers
-alias ua-drop-caches='sudo pacman -Sc --noconfirm; yay -Sc --aur --noconfirm'
+alias ua-drop-caches='sudo paccache -rk2; yay -Sc --aur --noconfirm'
 alias lennaUpdateAll='export TMPFILE="$(mktemp)"; \
     sudo true; \
     rate-mirrors --save=$TMPFILE arch --max-delay=21600 \
