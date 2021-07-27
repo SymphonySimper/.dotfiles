@@ -1,0 +1,7 @@
+#!/bin/sh
+
+p="$HOME"/.local/bin
+todo="$p"/rofi/todo
+timer="$p"/rofi/rtimer
+
+rofi -modi "todo:$todo,timer:$timer" -show todo
