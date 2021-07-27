@@ -1,56 +1,71 @@
 #!/bin/sh
 
+red=$(syl r); bold=$(syl B); reset=$(syl R)
+
+h="$HOME"
+shell=.config/shell
+
+bin=.local/bin
+binRofi="$bin"/rofi
+binAliases="$bin"/aliases
+
+paths="$bin"/.paths
+shellPaths="$paths"/shell
+binPaths="$paths"/scripts
+
 v="$EDITOR"
 
-red=`syl r`; bold=`syl B`; reset=`syl R`
+shebang="#!/bin/sh"
 
-p=".local/bin"
-path="$p/"; pathR="$p/rofi/"; pathA="$p/aliases/"; pathT="$p/tools/" pathS=".config/shell/"
-scripts="$p/.paths/scripts"; shell="$p/.paths/shell"
-home="$HOME"/
+errorMsg(){ echo "${bold}${red}${1}${reset}"; }
 
-add="#!/bin/sh"
+executable(){ letmein "$h/$1"; }
+addPath(){ echo "$1\t\t\t$2/$1" >> "$h/$3"; }
+sortPaths(){ cat "$h/$1" | sort -o "$h/$1"; }
 
-sortMe(){ cat $1 | sort -o $1; }
-errorMsg(){ echo "$bold$red$1$reset"; } 
-createFile(){ [ -f "$1" ] && { errorMsg "File exists" && exit 1; } || { echo $add > "$1" && letmein "$1";} ; }
+createBinFile(){
+	if [ -f "$h/$1/$2" ]; then
+		errorMsg "$2 already exists at $h/$1"
+	else
+		echo "$shebang" > "$h/$1/$2"
+		addPath "$2" "$1" "$binPaths"
+		sortPaths "$binPaths"
+		executable "$1/$2"
+		$v "$h/$1/$2"
+	fi
+}
+
+createShellFile(){
+	if [ -f "$h/$shell/$1" ]; then
+		errorMsg "$1 already exists at $h/$shell"
+	else
+		$v "$h/$shell/$1" &&
+		[ -f "$h/$shell/$1" ] && { addPath "$1" "$shell" "$shellPaths"; sortPaths "$shellPaths"; }
+	fi
+}
+
+deleteFile(){
+
+	loc=$(cat "$h/$binPaths" "$h/$shellPaths" | awk '{ print $2 }')
+	ifPresent(){ grep -wq "^$1" "$h/$2"; }	
+	if ( echo "$loc" | grep -qw "$1" ); then
+		rm "$h/$(echo "$loc" | grep -w "$1")"
+		if ( ifPresent "$1" "$binPaths" ); then
+		     sed "/^$1/d" -i "$h/$binPaths";
+		     errorMsg "$1 has been removed from $h/$bin"
+		elif ( ifPresent "$1" "$shellPaths" ); then
+		     sed "/^$1/d" -i "$h/$shellPaths";
+		     errorMsg "$1 has been removed $h/$shell"
+		fi
+	else
+		errorMsg "$1 not found"
+	fi
+}
 
 case "$1" in
-	-r) 
-		shift; createFile "$pathR$1" &&
-		echo "$1		$pathR$1" >> $scripts &&
-		sortMe "$scripts" &&
-		$v "$pathR$1" ;;
-	-a)
-		shift; createFile "$pathA$1" &&
-		echo "$1		$pathA$1" >> $scripts &&
-		sortMe "$scripts" &&
-		$v "$pathA$1" ;;
-	-t)
-		shift; createFile "$pathT$1" &&
-		echo "$1		$pathT$1" >> $scripts &&
-		sortMe "$scripts" &&
-		$v "$pathT$1" ;;
-	-sh)
-		shift; if [ -f "$pathS$1" ]; then 
-				errorMsg "File exists" && exit 1
-			else
-				$v $pathS$1 &&
-				[ -f "$pathS$1" ] && (echo "$1			$pathS$1" >> $shell && sortMe "$shell") ||
-				errorMsg "File not created"
-			fi ;;
-	-d)
-		shift; rm "$home$(grep -w "$1" $scripts $shell | awk '{ print $2 }')" &&
-			if ( grep -qw "$1" $scripts ); then
-				sed "/$1$/d" -i $scripts && errorMsg "$1 rm from scripts"
-			elif ( grep -qw "$1" $shell ); then
-				sed "/$1$/d" -i $shell && errorMsg "$1 rm from shell"
-			else 
-				errorMsg "$1 not found"
-			fi ;;
-	*) 	
-		createFile "$path$1" &&
-		echo "$1		$path$1" >> $scripts &&
-		sortMe "$scripts" &&
-		$v "$path$1" ;;
+	-a) shift; createBinFile "$binAliases" "$1" ;;
+	-r) shift; createBinFile "$binRofi" "$1" ;;
+	-sh) shift; createShellFile "$1" ;;
+	-d) shift; deleteFile "$1" ;;
+	*) createBinFile "$bin" "$1" ;;
 esac
