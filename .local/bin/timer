@@ -1,3 +1,6 @@
 #!/bin/sh
 
-( sleep "$1" && soundEfx )&
+timerI="$HOME"/.local/share/icons/general/timer.svg
+
+notify(){ dunstify -h string:x-dunst-stack-tag:timer -i "$timerI" "$1 is done"; }
+( sleep "$1" && { soundEfx & notify "$1"; } )&
