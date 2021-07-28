@@ -45,18 +45,18 @@ createShellFile(){
 }
 
 deleteFile(){
-
-	loc=$(cat "$h/$binPaths" "$h/$shellPaths" | awk '{ print $2 }')
-	ifPresent(){ grep -wq "^$1" "$h/$2"; }	
-	if ( echo "$loc" | grep -qw "$1" ); then
-		rm "$h/$(echo "$loc" | grep -w "$1")"
-		if ( ifPresent "$1" "$binPaths" ); then
-		     sed "/^$1/d" -i "$h/$binPaths";
-		     errorMsg "$1 has been removed from $h/$bin"
-		elif ( ifPresent "$1" "$shellPaths" ); then
-		     sed "/^$1/d" -i "$h/$shellPaths";
-		     errorMsg "$1 has been removed $h/$shell"
-		fi
+	yeet(){ 
+		rm "$h/$(grep -w "$2" "$h/$1" | awk '{ print $2 }')"
+		sed "/^$2/d" -i "$h/$1"
+	} 
+	ifPresent(){ grep -wq "^$1" "$h/$2"; }
+	msg="has been removed from"
+	if ( ifPresent "$1" "$binPaths" ); then
+		yeet "$binPaths" "$1"	
+	     errorMsg "$1 $msg $h/$bin"
+	elif ( ifPresent "$1" "$shellPaths" ); then
+		yeet "$shellPaths" "$1"	
+		errorMsg "$1 $msg $h/$shell"
 	else
 		errorMsg "$1 not found"
 	fi

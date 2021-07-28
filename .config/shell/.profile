@@ -1,8 +1,8 @@
 #Default Programs
-export EDITOR="nvim"
-export BROWSER="firefox"
 export TERMINAL="urxvtc"
 export SECONDTERMINAL="alacritty"
+export EDITOR="nvim"
+export BROWSER="firefox"
 export READER="zathura"
 export IMAGEVIEWER="sxiv"
 export VIDEOPLAYER="mpv"
