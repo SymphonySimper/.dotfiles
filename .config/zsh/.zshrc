@@ -6,6 +6,9 @@ precmd(){ precmd(){ echo ; }; }
 PS1="%1~ 
 > "
 
+# Turn off beep
+unsetopt BEEP
+
 # Enable colors and change prompt:
 autoload -U colors && colors
 

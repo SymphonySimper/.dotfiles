@@ -7,4 +7,4 @@ v=$EDITOR
 options=$( awk '{ print $1 }' $shell )
 pathToE=$( grep -w "^$1" $shell | awk '{ print $2 }' )
 
-[ -z "$1" ] && echo "$options" || alacritty -e $v "$pathToE" > /dev/null 2>&1 &
+[ -z "$1" ] && echo "$options" || $TERMINAL -e $v "$pathToE" > /dev/null 2>&1 &

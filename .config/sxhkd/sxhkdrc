@@ -1,6 +1,8 @@
 # Open Terminal
 super + Return
  	$TERMINAL
+super + shift + Return
+	$SECONDTERMINAL	
 
 # Open Browser
 super + shift + f
