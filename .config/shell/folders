@@ -1,6 +1,7 @@
 alias cdd="cd "$HOME"/dl"
 alias cdf="cd "$HOME"/lifeisfun/flutter"
 alias cdj="cd "$HOME"/lifeisfun/java"
+alias cdl="cd "$HOME"/importantnt/linux"
 alias cdn="cd "$HOME"/importantnt/Notes"
 alias cdns4="cd "$HOME"/importantnt/Notes/sem4"
 alias cdr="cd "$HOME"/lifeisfun/react"
