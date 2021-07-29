@@ -3,7 +3,7 @@ browser { background-color: #111111 !important; } */
 
 #browser vbox#appcontent tabbrowser, #content, #tabbrowser-tabpanels, 
 browser[type=content-primary],browser[type=content] > html {
-    background: #111111 !important
+    background: #000000 !important
 }
 
 #urlbar-background, #searchbar {

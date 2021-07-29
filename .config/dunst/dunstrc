@@ -16,7 +16,7 @@
     horizontal_padding = 8
     text_icon_padding = 0
     frame_width = 0
-    frame_color = "#444"
+    frame_color = "#333"
     separator_color = frame
     sort = yes
     idle_threshold = 0
@@ -68,20 +68,20 @@
     context = ctrl+shift+period
 
 [urgency_low]
-    background = "#111"
+    background = "#000"
     foreground = "#aaa"
-    timeout = 10
+    timeout = 5
     highlight = "#aaa"
 
 [urgency_normal]
-    background = "#111"
+    background = "#000"
     foreground = "#aaa"
-    timeout = 10
+    timeout = 5
     highlight = "#aaa"
 
 [urgency_critical]
-    background = "#111"
+    background = "#000"
     foreground = "#aaa"
-    timeout = 10
+    timeout = 5
     highlight = "#aaa"
 # vim: ft=cfg

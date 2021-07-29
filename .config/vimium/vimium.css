@@ -9,7 +9,7 @@
 }
 
 #vimiumHintMarkerContainer div span {
-  color: #111;
+  color: #000;
   text-shadow: none;
 }
 
@@ -18,17 +18,17 @@
 }
 
 #vimiumHintMarkerContainer div > .matchingCharacter ~ span {
-  color: #aaa;
+  color: #bbb;
 }
 
 #vomnibar {
-  background: #111;
+  background: #000;
   border: none;
 }
 
 #vomnibar .vomnibarSearchArea,
 #vomnibar input {
-  color: #bbb;
+  color: #aaa;
   background: transparent;
   border: none;
 }
@@ -43,7 +43,7 @@
 
 #vomnibar ul {
   padding: 0;
-  background: #111;
+  background: #000;
 }
 
 #vomnibar li {
@@ -56,39 +56,39 @@
 }
 
 #vomnibar li .vomnibarSource {
-  color: #aaa;
+  color: #bbb;
 }
 
 #vomnibar li em,
 #vomnibar li .vomnibarTitle {
-  color: #aaa;
+  color: #bbb;
 }
 
 #vomnibar li .vomnibarUrl {
-  color: #444;
+  color: #333;
 }
 
 #vomnibar li .vomnibarMatch {
-  color: #aaa;
+  color: #bbb;
   font-weight: normal;
 }
 
 #vomnibar li .vomnibarTitle .vomnibarMatch {
-  color: #aaa;
+  color: #bbb;
 }
 
 #vomnibar li.vomnibarSelected {
-  background-color: #111;
+  background-color: #000;
 }
 
 div.vimiumHUD {
-  background: #111;
+  background: #000;
   border: none;
 }
 
 div.vimiumHUD span#hud-find-input,
 div.vimiumHUD .vimiumHUDSearchAreaInner {
-  color: #bbb;
+  color: #aaa;
 }
 
 div.vimiumHUD .hud-find {

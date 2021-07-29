@@ -1,7 +1,7 @@
 * {
   background-color: transparent; 
-  border-color: #444;
-  text-color: #bbb;
+  border-color: #333;
+  text-color: #aaa;
   spacing: 0;
   fullscreen: true;
 }
@@ -32,10 +32,10 @@ listview {
 
 element {
  padding: 16px;
- text-color: #bbb;
+ text-color: #aaa;
 }
 
 element selected {
-  text-color: #aaa;
-  background-color: #4445;
+  text-color: #bbb;
+  background-color: #3335;
 }
