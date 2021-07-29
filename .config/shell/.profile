@@ -1,6 +1,6 @@
 #Default Programs
 export TERMINAL="urxvtc"
-export SECONDTERMINAL="alacritty"
+export SECONDTERMINAL="urxvt"
 export EDITOR="nvim"
 export BROWSER="firefox"
 export READER="zathura"
