@@ -1,5 +1,6 @@
 #Copy contents of a file to clipboard
 yoink(){ xclip -sel c < "$1"; }
+ourimg(){ xclip -sel c -t image/png < "$1"; } 
 
 #Find
 fnd(){ find ~ -name "$1"; }
