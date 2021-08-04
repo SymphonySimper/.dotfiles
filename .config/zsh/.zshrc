@@ -138,7 +138,7 @@ if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
 fi
 
 #Alias and Functions
-alias config='/usr/bin/git --git-dir=/home/s2b/.cfg/ --work-tree=/home/s2b'
+alias config='/usr/bin/git --git-dir="$HOME"/.cfg/ --work-tree="$HOME"'
 #Source
 sloc="$HOME/.config/shell/"
 for f in $sloc*; do source "$f"; done
