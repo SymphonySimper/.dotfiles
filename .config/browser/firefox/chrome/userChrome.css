@@ -9,3 +9,7 @@ browser[type=content-primary],browser[type=content] > html {
 #urlbar-background, #searchbar {
     box-shadow: none !important;
 }
+
+#webrtcIndicator {
+  display: none;
+}
