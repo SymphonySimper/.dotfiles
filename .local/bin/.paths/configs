@@ -8,8 +8,7 @@ rofiConfig		.config/rofi/config.rasi
 rofiTheme		.config/rofi/theme.rasi
 sxhkd			.config/sxhkd/sxhkdrc
 sxiv			.config/sxiv/exec/key-handler
-userChrome		.config/browser/firefox/chrome/userChrome.css
-userContent		.config/browser/firefox/chrome/userContent.css
-userPref		.config/browser/firefox/user.js
-vimium			.config/browser/vimium/vimium.css
+userChrome		.config/firefox/chrome/userChrome.css
+userContent		.config/firefox/chrome/userContent.css
+userPref		.config/firefox/user.js
 zathura			.config/zathura/zathurarc
