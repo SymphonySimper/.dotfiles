@@ -1,3 +1,4 @@
+alias cdc="cd "$HOME"/.config"
 alias cdd="cd "$HOME"/dl"
 alias cdf="cd "$HOME"/lifeisfun/flutter"
 alias cdj="cd "$HOME"/lifeisfun/java"

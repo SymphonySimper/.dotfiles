@@ -52,7 +52,7 @@ export RXVT_SOCKET="$XDG_RUNTIME_DIR"/urxvtd
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 #fzf
-export FZF_DEFAULT_OPTS='--reverse --color=fg:#bbbbbb,bg:#111111,hl:#aaaaaa --color=fg+:#bbbbbb,bg+:#222222,hl+:#aaaaaa --color=info:#bbbbbb,prompt:#bbbbbb,pointer:#bbbbbb --color=marker:#111111,spinner:#111111,header:#111111'
+export FZF_DEFAULT_OPTS='--reverse --color=fg:#aaaaaa,bg:#000000,hl:#bbbbbb --color=fg+:#aaaaaa,bg+:#111111,hl+:#bbbbbb --color=info:#aaaaaa,prompt:#aaaaaa,pointer:#aaaaaa --color=marker:#000000,spinner:#000000,header:#000000'
 
 #StartX
 [ "$(tty)" = "/dev/tty1" ] && exec startx "$XINITRC" > /dev/null 2>&1
