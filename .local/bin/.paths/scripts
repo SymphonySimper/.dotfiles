@@ -31,6 +31,7 @@ scripts			.local/bin/.paths/scripts
 search			.local/bin/rofi/search
 shell			.local/bin/.paths/shell
 soundEfx		.local/bin/soundEfx
+startup			.local/bin/startup
 syl			.local/bin/syl
 timer		.local/bin/timer
 todo			.local/bin/rofi/todo

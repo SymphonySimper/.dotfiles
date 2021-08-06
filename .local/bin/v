@@ -12,7 +12,7 @@ tv="cat"
 h="devour"
 
 #Paths
-whatImg="$HOME/Downloads/What"*
+whatImg="$HOME/dl/What"*
 
 case "$1" in
 	*.jpeg | *.jpg | *.png ) $h $iv "$1" ;;
