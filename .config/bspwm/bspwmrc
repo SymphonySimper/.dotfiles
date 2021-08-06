@@ -32,5 +32,5 @@ bspc rule -a firefox desktop='^2'
 bspc rule -a Zathura state=tiled
 bspc rule -a discord desktop='^5'
 bspc rule -a Steam desktop='^8'
-bspc rule -a obs desktop='^9'
+bspc rule -a obs desktop='^7'
 bspc rule -a qemu-system-x86_64 state=fullscreen
