@@ -14,6 +14,7 @@ autoload -U colors && colors
 
 # Automatically cd into typed directory.
 setopt autocd
+setopt auto_pushd
 
 # Disable ctrl-s to freeze terminal.
 stty stop undef
