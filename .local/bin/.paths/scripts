@@ -35,6 +35,7 @@ startup			.local/bin/startup
 syl			.local/bin/syl
 timer		.local/bin/timer
 todo			.local/bin/rofi/todo
+typin			.local/bin/aliases/typin
 unix		 	.local/bin/unix
 v			.local/bin/v
 volume			.local/bin/volume

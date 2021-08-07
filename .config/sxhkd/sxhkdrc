@@ -17,7 +17,7 @@ XF86AudioLowerVolume
 	volume -d
 XF86AudioRaiseVolume
 	volume -u
-super + F4
+XF86AudioMute
 	volume -m
 
 # Brightness
@@ -51,6 +51,10 @@ Print
 # My info
 super + b
 	myInfo
+
+# Screenkey
+XF86Calculator
+	typin
 
 # Kill active window
 super + q

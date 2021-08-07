@@ -1,0 +1,6 @@
+#!/bin/sh
+
+prgm='screenkey'
+startprgm(){ $prgm -s small --font-color grey --bg-color black --start-disabled -t 2 > /dev/null 2>&1 & }
+
+( pgrep "$prgm" ) && killall "$prgm" || startprgm
