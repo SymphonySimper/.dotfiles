@@ -8,10 +8,12 @@ fnd(){ find ~ -name "$1"; }
 #git
 gm(){ git commit -m "$1"; }
 gamp(){ git add -u && git commit -m "$1" && git push; }
+grm(){ git rm "$1" --cached; }
 
 #config git
 cgm(){ config commit -m "$1"; }
 cgamp(){ config add -u && config commit -m "$1" && config push; }
+cgrm(){ config rm "$1" --cached; }
 
 #Install dwm
 newDwm(){ cd ~/dwm && cp config.def.h config.h && sudo make clean install && cd; }

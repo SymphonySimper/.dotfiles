@@ -5,7 +5,7 @@ fzfFolderAlias		.config/shell/fzfFolderAlias
 profile			.config/shell/.profile
 rankServers		.config/shell/rankServers
 xinitrc			.config/x11/xinitrc
-Xresources		.config/x11/Xresources
 xmodmap			.config/x11/xmodmap
+Xresources		.config/x11/Xresources
 zprofile		.zprofile
 zshrc			.config/zsh/.zshrc
