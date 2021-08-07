@@ -4,8 +4,6 @@ red=$(syl r); bold=$(syl B); reset=$(syl R)
 
 h="$HOME"
 
-ca(){ /usr/bin/git --git-dir=$h/.cfg/ --work-tree=$h add "$h/$1"; }
-
 shell=.config/shell
 
 bin=.local/bin
@@ -34,8 +32,7 @@ createBinFile(){
 		addPath "$2" "$1" "$binPaths"
 		sortPaths "$binPaths"
 		executable "$1/$2"
-		$v "$h/$1/$2" &&
-		[ -f "$h/$1/$2" ] && ca "$1/$2" 
+		$v "$h/$1/$2"
 	fi
 }
 
@@ -45,7 +42,6 @@ createShellFile(){
 	else
 		$v "$h/$shell/$1" &&
 		[ -f "$h/$shell/$1" ] && { 
-			ca "$shell/$1"
 			addPath "$1" "$shell" "$shellPaths"
 			sortPaths "$shellPaths"
 		}
