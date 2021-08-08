@@ -8,10 +8,6 @@ super + shift + Return
 super + shift + f
 	$BROWSER
 
-# Open youtube links from clipboard
-super + shift + m
-	ff2mpv
-
 # Volume
 XF86AudioLowerVolume
 	volume -d
@@ -31,8 +27,8 @@ super + shift + p
 	gameMode
 
 # Rofi
-super + p
-	rofi -show run
+super + space
+	rofi -show run	
 super + s
 	rofiOpen
 super + e

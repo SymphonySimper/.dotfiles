@@ -6,7 +6,8 @@ nvim			.config/nvim/init.vim
 picom			.config/picom/picom.conf
 rofiConfig		.config/rofi/config.rasi
 rofiTheme		.config/rofi/theme.rasi
-sxhkd			.config/sxhkd/sxhkdrc
+mybinds			.config/sxhkd/mybinds
+bspwmhotkeys		.config/sxhkd/bspwmhotkeys
 sxiv			.config/sxiv/exec/key-handler
 userChrome		.config/firefox/chrome/userChrome.css
 userContent		.config/firefox/chrome/userContent.css
