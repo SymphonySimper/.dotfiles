@@ -3,7 +3,7 @@
 
 #Prompt
 precmd(){ precmd(){ echo ; }; }
-PS1="%1~ 
+PS1="%~ 
 > "
 
 # Turn off beep

@@ -7,6 +7,6 @@ xwallpaper --zoom "$HOME"/.local/share/bg/BG.png &
 xsetroot -cursor_name left_ptr
 urxvtd -q &
 dunst &
-sxhkd &
+sxhkd -c "$HOME"/.config/sxhkd/.sxhkdrc &
 unclutter --timeout 1 &
 discord &

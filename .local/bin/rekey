@@ -1,5 +1,13 @@
 #!/bin/sh
 
 prgm="sxhkd"
+
+loc="$HOME"/.config/sxhkd
+configLoc="$loc"/.sxhkdrc
+
 notify(){ dunstify -h string:x-dunst-stack-tag:sxhkd "$1"; }
-pgrep $prgm && killall $prgm; $prgm & notify "Restarting $prgm"
+
+pgrep "$prgm" && killall "$prgm"
+cat "$loc"/* > "$configLoc" &&
+"$prgm" -c "$configLoc" &
+notify "Restarting $prgm"

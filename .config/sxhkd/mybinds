@@ -1,0 +1,65 @@
+# Open Terminal
+super + Return
+ 	$TERMINAL
+super + shift + Return
+	$SECONDTERMINAL	
+
+# Open Browser
+super + shift + f
+	$BROWSER
+
+# Open youtube links from clipboard
+super + shift + m
+	ff2mpv
+
+# Volume
+XF86AudioLowerVolume
+	volume -d
+XF86AudioRaiseVolume
+	volume -u
+XF86AudioMute
+	volume -m
+
+# Brightness
+super + F5
+	brightness -u
+super + F6
+	brightness -d
+
+# Picom
+super + shift + p
+	gameMode
+
+# Rofi
+super + p
+	rofi -show run
+super + s
+	rofiOpen
+super + e
+	rofiEdit
+super + r
+	rofiTodo
+
+# Screenshot
+super + alt + s
+	screenshot -r
+super + alt + a
+	screenshot -w
+Print
+	screenshot -s
+
+# My info
+super + b
+	myInfo
+
+# Screenkey
+XF86Calculator
+	typin
+
+# Kill active window
+super + q
+	xdotool getwindowfocus windowkill
+
+# sxhkd
+super + Escape
+	rekey
