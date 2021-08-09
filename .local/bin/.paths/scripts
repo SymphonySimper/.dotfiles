@@ -1,4 +1,5 @@
 brightness		.local/bin/brightness
+cnvert			.local/bin/cnvert
 configs			.local/bin/.paths/configs
 editConfigs		.local/bin/rofi/editConfigs
 editScripts		.local/bin/rofi/editScripts

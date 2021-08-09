@@ -4,8 +4,6 @@
 iv="$IMAGEVIEWER"
 vv="$VIDEOPLAYER"
 vf="ffplay"
-vc="ffmpeg"
-vi="magick"
 pv="$READER"
 te="$EDITOR"
 tv="cat"
@@ -25,11 +23,6 @@ case "$1" in
 		shift; case "$1" in
 			*.pdf ) $h $pv "$1" && rm -i "$1" ;;
 			*) $h $iv $whatImg && rm -I $whatImg ;;
-		esac ;;
-	-c)
-		shift; case "$1" in
-			*.mkv) $vc -i "$1" -codec copy "$2" ;;
-			*.webm)	$ic "$1" "$2" ;;
 		esac ;;
 	-v) shift; $tv "$1" ;;
 	-s) shift; sudo $te "$1" ;;
