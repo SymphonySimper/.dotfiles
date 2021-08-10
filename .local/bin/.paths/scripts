@@ -21,6 +21,7 @@ mntdev			.local/bin/mntdev
 myInfo			.local/bin/myInfo
 myqemu		.local/bin/myqemu
 openUrl			.local/bin/rofi/openUrl
+pmixer			.local/bin/aliases/pmixer
 rekey			.local/bin/rekey
 rofiEdit		.local/bin/aliases/rofiEdit
 rofiOpen		.local/bin/aliases/rofiOpen

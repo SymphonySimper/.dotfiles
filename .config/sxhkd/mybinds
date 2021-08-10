@@ -15,6 +15,8 @@ XF86AudioRaiseVolume
 	volume -u
 XF86AudioMute
 	volume -m
+super + F2
+	pmixer
 
 # Brightness
 super + F5
