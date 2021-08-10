@@ -3,6 +3,7 @@
 # pgrep picom && killall picom || picom -m 1.0 -i 1.0 -e 1.0 --vsync --backend glx --no-fading-openclose &
 
 notify="dunstify -h string:x-dunst-stack-tag:picom"
+notify2="dunstify -h string:x-dunst-stack-tag:capsToEscape"
 
 service(){ systemctl --user "$1" touchcursor.service; } 
 capsToEsc(){ setxkbmap -option caps:escape; }
@@ -18,7 +19,8 @@ notPlaying(){
 	service "start" &&
 	$notify "Picom is alive"
 	sleep 1s
-	capsToEsc
+	capsToEsc &&
+	$notify2 "Capls lock remapped to Escape"
 }
 
 (pgrep picom) && playing || notPlaying
