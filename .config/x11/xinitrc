@@ -11,8 +11,5 @@ USERXSESSIONRC="$XDG_CACHE_HOME/X11/xsessionrc"
 ALTUSERXSESSION="$XDG_CACHE_HOME/X11/Xsession"
 ERRFILE="$XDG_CACHE_HOME/X11/xsession-errors"
 
-XMODMAP_LOC="$XDG_CONFIG_HOME"/x11/xmodmap
-[ -f "$XMODMAP_LOC" ] && xmodmap "$XMODMAP_LOC"
-
 startup &
 exec bspwm

@@ -9,6 +9,7 @@ rofiTheme		.config/rofi/theme.rasi
 mybinds			.config/sxhkd/mybinds
 bspwmhotkeys		.config/sxhkd/bspwmhotkeys
 sxiv			.config/sxiv/exec/key-handler
+touchcursor		.config/touchcursor/touchcursor.conf
 userChrome		.config/firefox/chrome/userChrome.css
 userContent		.config/firefox/chrome/userContent.css
 userPref		.config/firefox/user.js
