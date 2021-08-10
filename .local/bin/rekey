@@ -3,11 +3,44 @@
 prgm="sxhkd"
 
 loc="$HOME"/.config/sxhkd
+bspwmKey="$loc"/bspwmhotkeys
+myKey="$loc"/mybinds
+
 configLoc="$loc"/.sxhkdrc
+
+xLoc="$HOME"/.config/x11/xinitrc
 
 notify(){ dunstify -h string:x-dunst-stack-tag:sxhkd "$1"; }
 
-pgrep "$prgm" && killall "$prgm"
-cat "$loc"/* > "$configLoc" &&
-"$prgm" -c "$configLoc" &
-notify "Restarting $prgm"
+startPrgm(){
+	if [ -f "$configLoc" ]; then
+		pgrep "$prgm" && killall "$prgm"
+		{ "$prgm" -c "$configLoc" & } &&
+		notify "Restarting $prgm"
+	else
+		notify "Config file not found" "$prmg"
+	fi
+}
+
+if ( grep -q bspwm "$xLoc" ); then
+	if ( cat "$bspwmKey" "$myKey" | diff -q - "$configLoc" ); then
+		:
+	else
+		cat "$bspwmKey" "$myKey" > "$configLoc"
+	fi
+else
+	if ( cat "$myKey" | diff -q - "$configLoc" ); then
+		:
+	else
+		cat "$myKey" > "$configLoc"
+	fi
+
+fi
+
+if [ -f "$configLoc" ]; then
+	pgrep "$prgm" && killall "$prgm"
+	{ "$prgm" -c "$configLoc" & } &&
+	notify "Restarting $prgm"
+else
+	notify "Config file not found" "$prmg"
+fi
