@@ -54,10 +54,6 @@ super + b
 XF86Calculator
 	typin
 
-# Kill active window
-super + q
-	xdotool getwindowfocus windowkill
-
 # sxhkd
 super + Escape
 	rekey

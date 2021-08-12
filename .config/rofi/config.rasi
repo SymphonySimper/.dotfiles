@@ -5,6 +5,5 @@ configuration {
 	fake-background: "~/.local/share/bg/fakeBG.png";
 	font: "Poppins 12";
 	modi: [run,window];
-	
 }
 @theme "theme.rasi"
