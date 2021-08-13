@@ -4,10 +4,16 @@ img="qemu-img"
 sys="qemu-system-x86_64"
 
 createImage(){ $img create -f raw "$1" "$2"; }
-createIso(){ prime-run $sys -enable-kvm -cdrom "$1" -boot order=d -drive file="$2",format=raw -m 4G -cpu host -smp 4 -vga virtio -display sdl; }
-openImg(){ prime-run $sys -enable-kvm -boot order=d -drive file="$1",format=raw -m 4G -cpu host -smp 4 -vga virtio -display sdl; }
+createIso(){ $sys -enable-kvm -cdrom "$1" -boot order=d -drive file="$2",format=raw -m 4G -cpu host -smp 4 -vga virtio -display sdl; }
+openImg(){ $sys -enable-kvm -boot order=d -drive file="$1",format=raw -m 4G -cpu host -smp 4 -vga virtio -display sdl; }
+
+createVm(){ $sys -cdrom "$1" -boot order=d -drive file="$2",format=raw -m 4G -smp 4 -vga virtio -display sdl; }
+openVm(){ $sys -boot order=d -drive file="$1",format=raw -m 4G -smp 4 -vga virtio -display sdl; }
+
 case "$1" in
 	-i) shift; createImage "$1" "$2" ;;
 	-c) shift; createIso "$1" "$2" ;;
-	-o) shift; openImg "$1" ;;
+	-vmc) shift; createVm "$1" "$2" ;;
+	-vmo) shift; openVm "$1" ;;
+	*) openImg "$1" ;;
 esac

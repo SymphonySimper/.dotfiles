@@ -46,7 +46,8 @@ export ICEAUTHORITY="$XDG_CACHE_HOME"/ICEauthority
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export ANDROID_SDK_ROOT="$XDG_DATA_HOME"/android
 export RXVT_SOCKET="$XDG_RUNTIME_DIR"/urxvtd
-. "/home/s2b/.local/share/cargo/env"
+
+[ -f "$XDG_DATA_HOME"/cargo/env ] && . "$XDG_DATA_HOME"/cargo/env
 
 #Other settinfs
 export _JAVA_AWT_WM_NONREPARENTING=1
