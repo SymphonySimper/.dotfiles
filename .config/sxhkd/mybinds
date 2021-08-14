@@ -7,6 +7,8 @@ super + shift + Return
 # Open Browser
 super + shift + f
 	$BROWSER
+super + shift + m
+	ff2mpv
 
 # Volume
 XF86AudioLowerVolume
