@@ -2,7 +2,7 @@
 
 #XMODMAP_LOC="$XDG_CONFIG_HOME"/x11/xmodmap
 #[ -f "$XMODMAP_LOC" ] && xmodmap "$XMODMAP_LOC"
-setxkbmap -option caps:escape &
+setxkbmap -option caps:escape
 
 xrdb -load "$HOME"/.config/x11/Xresources
 picom -m 1.0 -i 1.0 -e 1.0 --vsync --backend glx --no-fading-openclose &
