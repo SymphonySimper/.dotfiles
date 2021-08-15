@@ -4,11 +4,13 @@ red=`syl r`; green=`syl g`; bold=`syl B`; reset=`syl R`
 error(){ echo "$bold$red$1$reset"; }
 success(){ echo "$bold$green$1$reset"; }
 
+perm="doas"
+
 #Path
 ntfs="$HOME/ntfs"; usb="$HOME/usb"
-ntfsMount(){ sudo ntfs-3g /dev/$1 $ntfs && success "Ntfs mounted"; }
-mountUsb(){ sudo mount -o umask=0,uid=nobody,gid=nobody /dev/$1 $usb && success "Usb mounted"; }
-umountDev(){ sudo umount $1; }
+ntfsMount(){ "$perm" ntfs-3g /dev/$1 $ntfs && success "Ntfs mounted"; }
+mountUsb(){ "$perm" mount -o umask=0,uid=nobody,gid=nobody /dev/$1 $usb && success "Usb mounted"; }
+umountDev(){ "$perm" umount $1; }
 
 #Gets the mounted point
 whatd=$(lsblk -lp | awk '/usb/ || /ntfs/ {print $1}')

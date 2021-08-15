@@ -25,6 +25,6 @@ case "$1" in
 			*) $h $iv $whatImg && rm -I $whatImg ;;
 		esac ;;
 	-v) shift; $tv "$1" ;;
-	-s) shift; sudo $te "$1" ;;
+	-s) shift; doas $te "$1" ;;
 	*) $te "$1" ;;
 esac

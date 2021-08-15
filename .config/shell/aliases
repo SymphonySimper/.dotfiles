@@ -14,7 +14,7 @@ alias cga='config add'
 alias cgau='config add -u'
 
 #Pacman/Packages/Yay
-alias p='sudo pacman'
+alias p='doas pacman'
 alias prm='p -Rns'
 alias amifat='pacman -Q | wc -l'
 alias rmzombies='p -Rns $(pacman -Qdtq)'

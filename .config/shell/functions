@@ -16,7 +16,7 @@ cgamp(){ config add -u && config commit -m "$1" && config push; }
 cgrm(){ config rm "$1" --cached; }
 
 #Install dwm
-newDwm(){ cd ~/dwm && cp config.def.h config.h && sudo make clean install && cd; }
+newDwm(){ cd ~/dwm && cp config.def.h config.h && doas make clean install && cd; }
 
 #Wal and feh
 wal-tile() {
