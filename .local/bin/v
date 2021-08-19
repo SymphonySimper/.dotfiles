@@ -30,6 +30,7 @@ main() {
 		-v) shift; $tv "$1" ;;
 		-s) shift; $perm $te "$1" ;;
 		-p) ls *.pdf | $dis | xargs -rI {} $h $pv {} ;;
+		-t) $te "$HOME"/.local/share/.todo ;;
 		*) [ -n "$@" ] && $te "$1" ;;
 	esac
 }
