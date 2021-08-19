@@ -13,9 +13,7 @@ bspc config click_to_focus none
 bspc config single_monocle true
 
 bspc config focus_follows_pointer true
-bspc config remove_disabled_monitors true
-bspc config remove_unplugged_monitors true
-bspc config merge_overlapping_monitors true
+bspc config ignore_ewmh_focus true
 
 # Colors
 bspc config normal_border_color	"#000000"

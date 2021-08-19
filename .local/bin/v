@@ -9,7 +9,6 @@ te="$EDITOR"
 tv="cat"
 h="devour"
 dis="fzf"
-
 perm="doas"
 
 #Paths
