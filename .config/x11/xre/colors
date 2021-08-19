@@ -1,22 +1,3 @@
-Xft.dpi: 125
-
-URxvt.scrollBar: false
-URxvt.font: xft:AnonymousPro:size=12:autohint=true
-URxvt.letterSpace: 1
-URxvt.internalBorder: 8
-
-URxvt*depth: 32
-URxvt.background: [90]#000000  
-!URxvt.fading: 10
-
-! Disable printing the terminal contents when pressing PrintScreen.
-URxvt.print-pipe: "cat > /dev/null"
-
-URxvt*skipBuiltinGlyphs: true
-
-URxvt.perl-ext:
-URxvt.perl-ext-common:
-
 ! special
 *.foreground:   #aaaaaa
 *.background:   #000000

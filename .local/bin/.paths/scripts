@@ -12,6 +12,7 @@ fzfFolders		.local/bin/.paths/fzfFolders
 gameMode		.local/bin/gameMode
 genFirefox		.local/bin/genFirefox
 genFolderAliases	.local/bin/genFolderAliases
+genXresources			.local/bin/genXresources
 kdenlive			.local/bin/aliases/kdenlive
 krita			.local/bin/aliases/krita
 letmein			.local/bin/letmein

@@ -26,5 +26,6 @@ case "$1" in
 		esac ;;
 	-v) shift; $tv "$1" ;;
 	-s) shift; doas $te "$1" ;;
+	-p) ls *.pdf | fzf | xargs -r -I {} $h $pv {} ;;
 	*) $te "$1" ;;
 esac

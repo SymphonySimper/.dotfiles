@@ -5,6 +5,8 @@ fzfFolderAlias		.config/shell/fzfFolderAlias
 profile			.config/shell/.profile
 rankServers		.config/shell/rankServers
 xinitrc			.config/x11/xinitrc
-Xresources		.config/x11/Xresources
+urxvtx			.config/x11/xre/urxvt
+colorsx			.config/x11/xre/colors
+dpi			.config/x11/xre/dpi
 zprofile		.zprofile
 zshrc			.config/zsh/.zshrc
