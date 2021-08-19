@@ -30,7 +30,7 @@ main() {
 		-v) shift; $tv "$1" ;;
 		-s) shift; $perm $te "$1" ;;
 		-p) ls *.pdf | $dis | xargs -rI {} $h $pv {} ;;
-		*) [ -f "$@" ] && $te "$1" ;;
+		*) [ -n "$@" ] && $te "$1" ;;
 	esac
 }
 
