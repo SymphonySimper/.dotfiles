@@ -4,6 +4,9 @@ configs			.local/bin/.paths/configs
 editConfigs		.local/bin/rofi/editConfigs
 editScripts		.local/bin/rofi/editScripts
 editShell		.local/bin/rofi/editShell
+fec			.local/bin/aliases/fec
+fesh			.local/bin/aliases/fesh
+fes			.local/bin/aliases/fes
 ff2mpv		.local/bin/aliases/ff2mpv
 figma			.local/bin/aliases/figma
 folders			.local/bin/.paths/folders
