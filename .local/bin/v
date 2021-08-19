@@ -6,7 +6,6 @@ vv="$VIDEOPLAYER"
 vf="ffplay"
 pv="$READER"
 te="$EDITOR"
-tv="cat"
 h="devour"
 dis="fzf"
 perm="doas"
@@ -26,7 +25,6 @@ main() {
 				*.pdf ) $h $pv "$1" && rm -i "$1" ;;
 				*) $h $iv $whatImg && rm -I $whatImg ;;
 			esac ;;
-		-v) shift; $tv "$1" ;;
 		-s) shift; $perm $te "$1" ;;
 		-p) ls *.pdf | $dis | xargs -rI {} $h $pv {} ;;
 		-t) $te "$HOME"/.local/share/.todo ;;
