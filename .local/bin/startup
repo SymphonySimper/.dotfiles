@@ -1,17 +1,18 @@
 #!/bin/sh
 
-#XMODMAP_LOC="$XDG_CONFIG_HOME"/x11/xmodmap
-#[ -f "$XMODMAP_LOC" ] && xmodmap "$XMODMAP_LOC"
+# XMODMAP_LOC="$XDG_CONFIG_HOME"/x11/xmodmap
+# [ -f "$XMODMAP_LOC" ] && xmodmap "$XMODMAP_LOC"
 setxkbmap -option caps:escape
 
 xrdb -load "$HOME"/.config/x11/Xresources
 picom -m 1.0 -i 1.0 -e 1.0 --vsync --backend glx --no-fading-openclose &
 xwallpaper --zoom "$HOME"/.local/share/bg/BG.png &
-#xsetroot -name " " &
+# xsetroot -name " " &
 xsetroot -cursor_name left_ptr
 
 urxvtd -q &
 dunst &
 sxhkd -c "$HOME"/.config/sxhkd/.sxhkdrc &
 unclutter --timeout 1 &
-discord &
+# discord &
+ripcord &
