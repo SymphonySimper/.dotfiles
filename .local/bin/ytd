@@ -9,16 +9,24 @@ aLoc='~/importantnt/audio/%(title)s.%(ext)s'
 ytdl="youtube-dl"
 getF(){ format=$($ytdl -F "$1") > /dev/null 2>&1; }
 dF(){ echo "$format" | grep "$1" | sed "s/\,.*//"; }
+getC(){ dF "$1" | tail -n 1 | cut -d ' ' -f 1; }
 
 av(){
 	case "$1" in
-		-a) shift; dF "audio"
+		-a) shift; dF 'audio'
 			qn "Enter audio format"
 			read af; echo ;;
-		-v) shift; dF "video" 
+		-v) shift; dF 'video' 
 			qn "Enter video format"
 			read vf; echo ;;
 	esac
+}
+
+hD(){
+	getF "$1"
+	af=$(getC 'audio')
+	vf=$(getC 'video')
+	$ytdl -f "$vf+$af" "$1" -o $vLoc
 }
 
 echo
@@ -29,10 +37,12 @@ case "$1" in
 		$ytdl -f "$af" "$1" -o $aLoc ;;
 	-v) shift
 		getF "$1"
+		af=$(getC 'audio')
 		av -v
-		$ytdl -f "$vf" "$1" -o $vLoc ;;
-	*) 
+		$ytdl -f "$vf+$af" "$1" -o $vLoc ;;
+	-s) shift 
 		getF "$1"
 		av -a; av -v;
 		$ytdl -f "$vf+$af" "$1" -o $vLoc ;;
+	*) hD "$1" ;;
 esac
