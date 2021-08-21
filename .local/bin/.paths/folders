@@ -1,8 +1,11 @@
+cda		importantnt/audio
 cdc		.config
 cdd		dl
 cdf		lifeisfun/flutter
+cdi		importantnt
 cdj		lifeisfun/java
-cdl		importantnt/linux
+cdl		lifeisfun
+cdlx		importantnt/linux
 cdn		importantnt/Notes
 cdns4		importantnt/Notes/sem4
 cdnt		ntfs
@@ -12,4 +15,5 @@ cdrvs		importantnt/recording/split
 cdsh		pics/screenshots
 cds		.local/bin
 cdu		usb
+cdv		importantnt/video
 cdvm		importantnt/virtualMachine

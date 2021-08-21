@@ -46,3 +46,4 @@ unix		 	.local/bin/unix
 v			.local/bin/v
 volume			.local/bin/volume
 wp			.local/bin/aliases/wp
+ytd			.local/bin/ytd
