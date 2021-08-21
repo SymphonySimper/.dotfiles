@@ -1,26 +1,27 @@
 #!/bin/sh
 
 bold=$(syl B); reset=$(syl R); yellow=$(syl y)
-qn(){ echo "\n${bold}${yellow}${1}${reset}\n"; }
+qn(){ echo "\n${bold}${yellow}${1}${reset}"; }
 
 vLoc='~/importantnt/video/%(title)s.%(ext)s'
 aLoc='~/importantnt/audio/%(title)s.%(ext)s'
 
 ytdl="youtube-dl"
 getF(){ format=$($ytdl -F "$1") > /dev/null 2>&1; }
-dF(){ echo "$format" | grep "$1"; }
+dF(){ echo "$format" | grep "$1" | sed "s/\,.*//"; }
 
 av(){
 	case "$1" in
 		-a) shift; dF "audio"
 			qn "Enter audio format"
-			read af ;;
+			read af; echo ;;
 		-v) shift; dF "video" 
 			qn "Enter video format"
-			read vf ;;
+			read vf; echo ;;
 	esac
 }
 
+echo
 case "$1" in 
 	-a) shift
 		getF "$1"
