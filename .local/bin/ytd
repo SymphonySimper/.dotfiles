@@ -33,13 +33,17 @@ echo
 case "$1" in 
 	-a) shift
 		getF "$1"
-		av -a
+		af=$(getC 'audio')
 		$ytdl -f "$af" "$1" -o $aLoc ;;
 	-v) shift
 		getF "$1"
 		af=$(getC 'audio')
 		av -v
 		$ytdl -f "$vf+$af" "$1" -o $vLoc ;;
+	-sa) shift
+		getF "$1"
+		av -a
+		$ytdl -f "$af" "$1" -o $aLoc ;;
 	-s) shift 
 		getF "$1"
 		av -a; av -v;
