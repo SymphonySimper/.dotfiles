@@ -6,8 +6,8 @@ autoload -U colors && colors
 
 #Prompt
 precmd(){ precmd(){ echo ; }; }
-PS1="%F{240}%~
-> "
+PS1="%B%F{240}%~%f
+>%b "
 
 # Turn off beep
 unsetopt BEEP

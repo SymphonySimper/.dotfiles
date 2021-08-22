@@ -25,7 +25,7 @@ alias worthless='p -Rdd'
 alias snitch='pactree'
 
 #Program
-#alias ls='ls --color=auto'
+alias ls='ls --color=auto'
 alias l='exa'
 alias grep='grep --color=auto'
 alias sudo='doas'
