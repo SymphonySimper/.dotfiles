@@ -27,10 +27,13 @@ mntdev			.local/bin/mntdev
 myInfo			.local/bin/myInfo
 myqemu			.local/bin/myqemu
 openUrl			.local/bin/rofi/openUrl
+playAudio			.local/bin/rofi/playAudio
+playVideo			.local/bin/rofi/playVideo
 pmixer			.local/bin/aliases/pmixer
 rekey			.local/bin/rekey
 rofiEdit		.local/bin/aliases/rofiEdit
 rofiOpen		.local/bin/aliases/rofiOpen
+rofiPlay			.local/bin/aliases/rofiPlay
 rofiTodo		.local/bin/aliases/rofiTodo
 rtimer			.local/bin/rofi/rtimer
 screenRecord		.local/bin/screenRecord

@@ -39,6 +39,8 @@ super + e
 	rofiEdit
 super + r
 	rofiTodo
+super + a
+	rofiPlay	
 
 # Screenshot
 super + alt + s
