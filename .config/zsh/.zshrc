@@ -1,16 +1,16 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# Enable colors and change prompt:
+autoload -U colors && colors
+
 #Prompt
 precmd(){ precmd(){ echo ; }; }
-PS1="%~ 
+PS1="%F{240}%~
 > "
 
 # Turn off beep
 unsetopt BEEP
-
-# Enable colors and change prompt:
-autoload -U colors && colors
 
 # Automatically cd into typed directory.
 setopt autocd
