@@ -1,12 +1,10 @@
 aliases			.config/shell/aliases
-folders			.config/shell/folders
+colorsx			.config/x11/xre/colors
+dpix			.config/x11/xre/dpi
 functions		.config/shell/functions
-fzfFolderAlias		.config/shell/fzfFolderAlias
 profile			.config/shell/.profile
 rankServers		.config/shell/rankServers
-xinitrc			.config/x11/xinitrc
 urxvtx			.config/x11/xre/urxvt
-colorsx			.config/x11/xre/colors
-dpi			.config/x11/xre/dpi
+xinitrc			.config/x11/xinitrc
 zprofile		.zprofile
 zshrc			.config/zsh/.zshrc

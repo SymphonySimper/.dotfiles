@@ -1,0 +1,5 @@
+#!/bin/sh
+
+loc="$HOME"/.local/bin/.paths/*
+
+for f in $loc; do cat $f | sort -o $f; done

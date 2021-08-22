@@ -26,7 +26,7 @@ alias snitch='pactree'
 
 #Program
 #alias ls='ls --color=auto'
-alias ls='exa'
+alias l='exa'
 alias grep='grep --color=auto'
 alias sudo='doas'
 
@@ -39,7 +39,7 @@ alias q='exit'
 alias imlight='ps_mem -p $(pgrep -d, -u $USER)'
 alias nobita='mntdev -n sdb1'
 alias ka='killall'
-alias j='cd "$(ls -D | fzf)"'
+alias j='cd "$(exa -aD | fzf)"'
 
 #Navigate dir
 alias ..='cd ..'
