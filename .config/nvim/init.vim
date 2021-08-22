@@ -35,4 +35,7 @@ Plug 'rust-lang/rust.vim'
 
 call plug#end()
 
+"This unsets the "last search pattern" register by hitting return
+nnoremap <CR> :noh<CR><CR>
+
 map <leader>f :Goyo
