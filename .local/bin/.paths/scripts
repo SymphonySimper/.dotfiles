@@ -28,6 +28,7 @@ myInfo			.local/bin/myInfo
 myqemu			.local/bin/myqemu
 openUrl			.local/bin/rofi/openUrl
 playAudio			.local/bin/rofi/playAudio
+playLofi			.local/bin/playLofi
 playVideo			.local/bin/rofi/playVideo
 pmixer			.local/bin/aliases/pmixer
 rekey			.local/bin/rekey

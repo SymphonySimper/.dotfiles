@@ -1,0 +1,11 @@
+#!/bin/sh
+
+loc="$HOME"/importantnt/audio/lofi
+
+isLofi="$(pgrep -la "$VIDEOPLAYER" | grep 'title=lofi' | cut -d ' ' -f 1)"
+
+if [ -n "$isLofi" ]; then
+	kill "$isLofi"
+else
+	"$VIDEOPLAYER" --title='lofi' --volume=50 --loop-playlist --shuffle "$loc"
+fi

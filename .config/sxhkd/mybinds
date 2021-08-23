@@ -20,6 +20,10 @@ XF86AudioMute
 super + F2
 	pmixer
 
+# Lofi
+super + F1
+	playLofi
+
 # Brightness
 super + F5
 	brightness -u
