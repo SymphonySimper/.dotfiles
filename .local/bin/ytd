@@ -29,6 +29,14 @@ hD(){
 	$ytdl -f "$vf+$af" "$1" -o $vLoc
 }
 
+playlist(){
+	qn "Entering Playlist Mode\n"
+	videoIds="$($ytdl --get-id "$1")" > /dev/null 2>&1
+	for id in $videoIds; do
+		hD "$id"	
+	done
+}
+
 echo
 case "$1" in 
 	-a) shift
@@ -48,5 +56,6 @@ case "$1" in
 		getF "$1"
 		av -a; av -v;
 		$ytdl -f "$vf+$af" "$1" -o $vLoc ;;
+	*playlist*) playlist "$1" ;;
 	*) hD "$1" ;;
 esac

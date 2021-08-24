@@ -5,7 +5,7 @@ sys="qemu-system-x86_64"
 
 createImage(){ $img create -f raw "$1" "$2"; }
 createIso(){ $sys -enable-kvm -cdrom "$1" -boot order=d -drive file="$2",format=raw -m 4G -cpu host -smp 4 -vga virtio -display sdl; }
-openImg(){ $sys -enable-kvm -boot order=d -drive file="$1",format=raw -m 4G -cpu host -smp 4 -vga virtio -display sdl; }
+openImg(){ $sys -enable-kvm -boot order=d -drive file="$1",format=raw -m 4G -cpu host -smp 4 -vga virtio -display sdl -soundhw all; }
 
 createVm(){ $sys -cdrom "$1" -boot order=d -drive file="$2",format=raw -m 4G -smp 4 -vga virtio -display sdl; }
 openVm(){ $sys -boot order=d -drive file="$1",format=raw -m 4G -smp 4 -vga virtio -display sdl; }

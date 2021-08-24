@@ -14,5 +14,6 @@ urxvtd -q &
 dunst &
 sxhkd -c "$HOME"/.config/sxhkd/.sxhkdrc &
 unclutter --timeout 1 &
+playLofi &
 # discord &
 # ripcord &
