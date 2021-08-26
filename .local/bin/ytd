@@ -22,20 +22,7 @@ av(){
 	esac
 }
 
-hD(){
-	getF "$1"
-	af=$(getC 'audio')
-	vf=$(getC 'video')
-	$ytdl -f "$vf+$af" "$1" -o $vLoc
-}
-
-playlist(){
-	qn "Entering Playlist Mode\n"
-	videoIds="$($ytdl --get-id "$1")" > /dev/null 2>&1
-	for id in $videoIds; do
-		hD "$id"	
-	done
-}
+dl(){ $ytdl "$1" -o $vLoc; }
 
 echo
 case "$1" in 
@@ -56,6 +43,11 @@ case "$1" in
 		getF "$1"
 		av -a; av -v;
 		$ytdl -f "$vf+$af" "$1" -o $vLoc ;;
-	*playlist*) playlist "$1" ;;
-	*) hD "$1" ;;
+	*playlist*)
+		qn "You're about to download a playlist"
+		echo "If you don't want to download cancel within 5s"
+		echo
+		sleep 5s
+		dl "$1" ;;
+	*) dl "$1";;
 esac

@@ -22,6 +22,7 @@ kdenlive     		.local/bin/aliases/kdenlive
 krita			.local/bin/aliases/krita
 letmein			.local/bin/letmein
 lolban			.local/bin/lolban
+loopVp			.local/bin/aliases/loopVp
 lz			.local/bin/lz
 mntdev			.local/bin/mntdev
 myInfo			.local/bin/myInfo

@@ -1,8 +1,6 @@
 configuration {
 	fixed-num-lines: true;
 	lines: 6;
-	fake-transparency:true;
-	fake-background: "~/.local/share/bg/fakeBG.png";
 	font: "Poppins 12";
 	modi: [run,window];
 }

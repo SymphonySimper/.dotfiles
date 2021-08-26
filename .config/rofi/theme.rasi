@@ -1,5 +1,5 @@
 * {
-  background-color: transparent; 
+  background-color: #000; 
   border-color: #333;
   text-color: #aaa;
   spacing: 0;
@@ -7,7 +7,7 @@
 }
 
 window {
-  margin: 50% 33.33% 11.11% 33.33%;
+  padding: 50% 33.33% 11.11% 33.33%;
 }
 
 inputbar {

@@ -5,5 +5,5 @@ loc="$HOME"/importantnt/audio
 if [ -z "$@" ]; then
 	ls -F $loc | grep -v /
 else
-	$VIDEOPLAYER --volume=50 $loc/"$1" > /dev/null 2>&1 &
+	$VIDEOPLAYER --volume=40 $loc/"$1" > /dev/null 2>&1 &
 fi
