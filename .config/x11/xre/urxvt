@@ -3,9 +3,9 @@ URxvt.font: xft:AnonymousPro:size=12:autohint=true
 URxvt.letterSpace: 1
 URxvt.internalBorder: 8
 
-!URxvt*depth: 32
-!URxvt.background: [90]#000000  
-!URxvt.fading: 10
+URxvt*depth: 32
+URxvt.background: [90]#000000  
+URxvt.fading: 20
 
 ! Disable printing the terminal contents when pressing PrintScreen.
 URxvt.print-pipe: "cat > /dev/null"
