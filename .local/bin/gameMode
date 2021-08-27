@@ -5,22 +5,22 @@
 notify="dunstify -h string:x-dunst-stack-tag:picom"
 notify2="dunstify -h string:x-dunst-stack-tag:capsToEscape"
 
+isPicom="$(pgrep picom)"
+isActive="$(systemctl --user is-active touchcursor.service)"
+
 service(){ systemctl --user "$1" touchcursor.service; } 
 capsToEsc(){ setxkbmap -option caps:escape; }
 
-playing(){
-	killall picom &&
-	service "stop" &&
-	capsToEsc &&
-	$notify "Picom is dead"
-}
-notPlaying(){
+if [ -z "$isPicom" -a "$isActive" = 'inactive' ]; then
 	picom > /dev/null 2>&1 &
-	service "start" &&
+	service "start"
 	$notify "Picom is alive"
 	sleep 1s
 	capsToEsc &&
 	$notify2 "Capls lock remapped to Escape"
-}
-
-(pgrep picom) && playing || notPlaying
+elif [ -n "$isPicom" -a "$isActive" = 'active' ]; then
+	killall picom &&
+	service "stop" &&
+	capsToEsc &&
+	$notify "Picom is dead"
+fi
