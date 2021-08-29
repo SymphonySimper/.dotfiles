@@ -3,7 +3,7 @@
 #
 
 # close and kill
-super + shift + c
+super + q
 	bspc node -c
 
 # quit/restart bspwm

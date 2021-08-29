@@ -45,6 +45,8 @@ super + r
 	rofiTodo
 super + a
 	rofiPlay	
+super + x
+	codingTime
 
 # Screenshot
 super + alt + s

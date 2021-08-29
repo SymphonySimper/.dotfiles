@@ -1,0 +1,19 @@
+#!/bin/sh
+
+loc="$HOME"/lifeisfun
+QUERY="$(exa -aD $loc | rofi -dmenu -p 'dir')"
+
+if [ -n "$QUERY" ]; then
+	if [ -n "$(exa -aD $loc/$QUERY)" ]; then
+		QUERY2="$loc/$QUERY/$(exa -aD $loc/$QUERY | rofi -dmenu -p 'sub dir')"
+	else
+		QUERY2="$loc/$QUERY"
+	fi
+else
+	exit 1
+fi
+
+bspc desktop -f 3
+for i in $(seq 2); do $TERMINAL -cd "$QUERY2"; done
+bspc node -f west
+bspc node -z right +400 0
