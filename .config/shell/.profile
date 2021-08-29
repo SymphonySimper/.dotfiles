@@ -51,6 +51,7 @@ export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 
 #Other settinfs
 export _JAVA_AWT_WM_NONREPARENTING=1
+export MANPAGER='less -Q'
 
 #fzf
 export FZF_DEFAULT_OPTS='--reverse --color=fg:#777777,hl:#bbbbbb --color=fg+:#aaaaaa,bg+:#000000,hl+:#bbbbbb --color=info:#aaaaaa,prompt:#aaaaaa,pointer:#aaaaaa --color=marker:#000000,spinner:#000000,header:#000000'
