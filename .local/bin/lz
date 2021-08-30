@@ -23,7 +23,7 @@ errorMsg(){ echo "${bold}${red}${1}${reset}"; }
 
 executable(){ letmein "$h/$1"; }
 addPath(){ echo "$1\t\t\t$2/$1" >> "$h/$3"; }
-sortPaths(){ cat "$h/$1" | sort -o "$h/$1"; }
+sortPaths(){ sort "$h/$1" -o "$h/$1"; }
 
 createBinFile(){
 	if [ -f "$h/$1/$2" ]; then

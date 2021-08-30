@@ -12,6 +12,8 @@ perm="doas"
 
 #Paths
 whatImg="$HOME/dl/What"*
+hosts="$HOME"/.local/share/.begone
+todo="$HOME"/.local/share/.todo
 
 main() {
 	case "$1" in
@@ -27,7 +29,8 @@ main() {
 			esac ;;
 		-s) shift; $perm $te "$1" ;;
 		-p) ls *.pdf | $dis | xargs -rI {} $h $pv {} ;;
-		-t) $te "$HOME"/.local/share/.todo ;;
+		-t) $te $todo ;;
+		-hosts) $te $hosts ;;
 		*) [ -n "$@" ] && $te "$1" ;;
 	esac
 }
