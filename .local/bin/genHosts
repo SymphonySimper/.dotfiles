@@ -18,5 +18,5 @@ else
 fi
 
 sort $BLOCKSOURCE -o $BLOCKSOURCE
-for LINE in $( cat $BLOCKSOURCE ); do echo "0.0.0.0\t\t$LINE" >> $TEMPFILE; done
+for LINE in $( cat $BLOCKSOURCE ); do echo "0.0.0.0\t\twww.$LINE" >> $TEMPFILE; done
 $PERM sed '/^# MY BLOCK/ r /dev/stdin' -i $LOC  < $TEMPFILE
