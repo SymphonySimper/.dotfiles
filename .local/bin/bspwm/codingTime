@@ -1,6 +1,8 @@
 #!/bin/sh
 
 loc="$HOME"/lifeisfun
+. "$HOME"/.local/bin/bspwm/codeSplit
+
 QUERY="$(exa -aD $loc | rofi -dmenu -p 'dir')"
 
 if [ -n "$QUERY" ]; then
@@ -13,7 +15,5 @@ else
 	exit 1
 fi
 
-bspc desktop -f 3
-for i in $(seq 2); do $TERMINAL -cd "$QUERY2"; done
-bspc node -f west
-bspc node -z right +400 0
+openTerminals(){ for i in $(seq 2); do $TERMINAL -cd "$QUERY2"; done; }
+codeSplit openTerminals 
