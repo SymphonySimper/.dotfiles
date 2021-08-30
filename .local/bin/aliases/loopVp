@@ -1,5 +1,0 @@
-#!/bin/sh
-
-loc="$HOME"/importantnt/video
-
-devour prime-run $VIDEOPLAYER --shuffle --loop-playlist "$loc"

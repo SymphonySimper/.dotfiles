@@ -1,6 +1,0 @@
-#!/bin/sh
-
-audio="$HOME"/importantnt/audio
-query="$(ls -F $audio | grep -v / | fzf)"
-
-[ -n "$query" ] && $VIDEOPLAYER $audio/"$query"

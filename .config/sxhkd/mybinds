@@ -8,7 +8,7 @@ super + shift + Return
 super + shift + f
 	$BROWSER
 super + shift + m
-	ff2mpv
+	prime-run $VIDEOPLAYER "$(xclip -selection clipboard -o)"
 
 # Volume
 XF86AudioLowerVolume
@@ -18,7 +18,7 @@ XF86AudioRaiseVolume
 XF86AudioMute
 	volume -m
 super + F2
-	pmixer
+	$TERMINAL -e pulsemixer
 
 # Lofi
 super + F1

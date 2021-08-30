@@ -2,6 +2,7 @@ aliases			.config/shell/aliases
 colorsx			.config/x11/xre/colors
 dpix			.config/x11/xre/dpi
 functions		.config/shell/functions
+fzfFunctions			.config/shell/fzfFunctions
 profile			.config/shell/.profile
 rankServers		.config/shell/rankServers
 urxvtx			.config/x11/xre/urxvt

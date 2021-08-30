@@ -1,6 +1,0 @@
-#!/bin/sh
-
-video="$HOME"/importantnt/video
-query="$(ls -F $video | grep -v / | fzf)"
-
-[ -n "$query" ] && devour prime-run $VIDEOPLAYER $video/"$query"

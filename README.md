@@ -1,1 +1,0 @@
-My dotfiles for linux.
