@@ -1,28 +1,43 @@
-#Copy contents of a file to clipboard
+# Copy contents of a file to clipboard
 yoink(){ xclip -sel c < "$1"; }
 ourimg(){ xclip -sel c -t image/png < "$1"; } 
 
-#Find
+# Find
 fnd(){ find ~ -name "$1"; }
 
-#git
+# git
 gm(){ git commit -m "$1"; }
 gamp(){ git add -u && git commit -m "$1" && git push; }
 grm(){ git rm "$1" --cached; }
 
-#config git
+# config git
 cgm(){ config commit -m "$1"; }
 cgamp(){ config add -u && config commit -m "$1" && config push; }
 cgrm(){ config rm "$1" --cached; }
 
-#Install dwm
-newDwm(){ cd ~/dwm && cp config.def.h config.h && doas make clean install && cd; }
+# Pacman
+isThere(){ pacman -Q | grep "$1"; }
 
-#Wal and feh
-wal-tile() {
-    wal -n -i "$@"
-    feh --bg-tile "$(< "${HOME}/.cache/wal/wal")"
+# Format USB
+formatUsbFat32(){
+	doas dd if=/dev/zero of=/dev/sdb bs=4096 status=progress \
+	&& doas parted /dev/sdb --script -- mklabel msdos \
+	&& doas parted /dev/sdb --script -- mkpart primary fat32 1MiB 100% \
+	&& doas mkfs.vfat -F32 /dev/sdb1 \
+	&& doas parted /dev/sdb --script print \
+	&& dunstify -i $HOME/.local/share/icons/storage/usbMnt.svg "Usb formated"
 }
 
-#Pacman
-isThere(){ pacman -Q | grep "$1"; }
+# LolBan
+lolban(){
+	figlet -f $HOME/.local/share/fonts/3d.flf  "$1" | lolcat
+	# credits
+	# https://www.youtube.com/watch?v=QGUmMtEnIkI
+	# font https://raw.githubusercontent.com/xero/figlet-fonts/master/3d.flf
+}
+
+# Sort Paths
+sortPaths(){
+	loc="$HOME"/.local/bin/.paths
+	for f in $loc/*; do sort $f -o $f; done
+}

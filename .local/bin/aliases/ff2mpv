@@ -1,3 +1,0 @@
-#!/bin/sh
-
-prime-run "$VIDEOPLAYER" "$(xclip -selection clipboard -o)"

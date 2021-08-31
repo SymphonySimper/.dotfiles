@@ -10,6 +10,7 @@ export VIDEOPLAYER="mpv"
 #Paths
 export PATH="$PATH:$HOME/.local/bin"			#Scripts
 export PATH="$PATH:$HOME/.local/bin/aliases"		#Alias scripts
+export PATH="$PATH:$HOME/.local/bin/gen"		#Gen scripts
 # export PATH="$PATH:$HOME/lifeisfun/flutter/bin" 	#Flutter
 
 export ZDOTDIR="$HOME"/.config/zsh

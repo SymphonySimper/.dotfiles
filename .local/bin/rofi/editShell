@@ -1,16 +1,10 @@
 #!/bin/sh
 
 shell="$HOME"/.local/bin/.paths/shell
-. "$HOME"/.local/bin/bspwm/codeSplit
 
 v=$EDITOR
 
 options=$( awk '{ print $1 }' $shell )
 pathToE=$( grep -w "^$1" $shell | awk '{ print $2 }' )
 
-openTerminal(){
-	$TERMINAL -e $v "$pathToE"
-	$TERMINAL
-}
-
-[ -z "$1" ] && echo "$options" || codeSplit openTerminal > /dev/null 2>&1 &
+[ -z "$1" ] && echo "$options" || $TERMINAL -e $v "$pathToE" > /dev/null 2>&1 &

@@ -4,6 +4,7 @@ dunst			.config/dunst/dunstrc
 mimeapps		.config/mimeapps.list
 mpv			.config/mpv/mpv.conf
 mybinds			.config/sxhkd/mybinds
+myBspwmBinds		.config/sxhkd/myBspwmBinds
 nvim			.config/nvim/init.vim
 picom			.config/picom/picom.conf
 rofiConfig		.config/rofi/config.rasi

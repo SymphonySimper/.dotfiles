@@ -4,6 +4,7 @@ prgm="sxhkd"
 
 loc="$HOME"/.config/sxhkd
 bspwmKey="$loc"/bspwmhotkeys
+myBspwmBinds="$loc"/myBspwmBinds
 myKey="$loc"/mybinds
 
 configLoc="$loc"/.sxhkdrc
@@ -22,17 +23,27 @@ startPrgm(){
 	fi
 }
 
+iclr="sed '/#/d; /^[[:space:]]*$/d'"
+createConfig(){
+	case "$1" in
+		-oa) eval $iclr $bspwmKey $myBspwmBinds $myKey ;;
+		-a) eval $iclr $bspwmKey $myBspwmBinds $myKey > $configLoc;;
+		-om) eval $iclr $myKey ;;
+		-m) eval $iclr $myKey > $configLoc;;
+	esac
+}
+
 if ( grep -q bspwm "$xLoc" ); then
-	if ( cat "$bspwmKey" "$myKey" | diff -q - "$configLoc" ); then
+	if ( createConfig -oa | diff -q - "$configLoc" ); then
 		:
 	else
-		cat "$bspwmKey" "$myKey" > "$configLoc"
+		createConfig -a
 	fi
 else
-	if ( cat "$myKey" | diff -q - "$configLoc" ); then
+	if ( createConfig -om | diff -q - "$configLoc" ); then
 		:
 	else
-		cat "$myKey" > "$configLoc"
+		createConfig -m
 	fi
 
 fi

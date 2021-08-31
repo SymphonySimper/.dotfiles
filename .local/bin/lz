@@ -10,6 +10,7 @@ bin=.local/bin
 binRofi="$bin"/rofi
 binAliases="$bin"/aliases
 binBspwm="$bin"/bspwm
+binGen="$bin"/gen
 
 paths="$bin"/.paths
 shellPaths="$paths"/shell
@@ -71,6 +72,7 @@ case "$1" in
 	-a) shift; createBinFile "$binAliases" "$1" ;;
 	-r) shift; createBinFile "$binRofi" "$1" ;;
 	-b) shift; createBinFile "$binBspwm" "$1" ;;
+	-g) shift; createBinFile "$binGen" "$1" ;;
 	-sh) shift; createShellFile "$1" ;;
 	-d) shift; deleteFile "$1" ;;
 	*) createBinFile "$bin" "$1" ;;

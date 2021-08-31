@@ -24,6 +24,10 @@ super + F2
 super + F1
 	playLofi
 
+# Get work done
+super + shift + F1
+	$TERMINAL -e genHosts
+
 # Brightness
 super + F5
 	brightness -u
