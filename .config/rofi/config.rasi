@@ -3,7 +3,5 @@ configuration {
 	lines: 6;
 	font: "Poppins 12";
 	modi: [run,window];
-	fake-transparency: true;
-	fake-background: "~/.local/share/bg/fakeBG.png";
 }
 @theme "theme.rasi"
