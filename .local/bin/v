@@ -9,13 +9,9 @@ te="$EDITOR"
 h="devour"
 dis="fzf"
 perm="doas"
-pager="less"
 
 #Paths
 whatImg="$HOME/dl/What"*
-hosts="$HOME"/.local/share/.begone
-todo="$HOME"/.local/share/.todo
-hexAlpha="$HOME"/.local/share/.hex-alpha
 
 main() {
 	case "$1" in
@@ -31,9 +27,6 @@ main() {
 			esac ;;
 		-s) shift; $perm $te "$1" ;;
 		-p) ls *.pdf | $dis | xargs -rI {} $h $pv {} ;;
-		-t) $te $todo ;;
-		-hosts) $te $hosts ;;
-		-ha) $pager $hexAlpha ;; 
 		*) [ -n "$@" ] && $te "$1" ;;
 	esac
 }

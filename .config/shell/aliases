@@ -1,4 +1,4 @@
-#Git alias
+# Git alias
 alias g='git'
 alias gc='git clone'
 alias gs='git status'
@@ -7,13 +7,13 @@ alias ga='git add'
 alias gau='git add -u'
 alias gnotrack='git config --local status.showUntrackedFiles no'
 
-#Config git alias
+# Config git alias
 alias cgs='config status'
 alias cgp='config push'
 alias cga='config add'
 alias cgau='config add -u'
 
-#Pacman/Packages/Yay
+# Pacman/Packages/AUR
 alias p='doas pacman'
 alias prm='p -Rns'
 alias amifat='pacman -Q | wc -l'
@@ -24,13 +24,13 @@ alias whoIsFat='y -P --stats'
 alias worthless='p -Rdd'
 alias snitch='pactree'
 
-#Program
+# Program
 alias ls='ls --color=auto'
 alias l='exa'
 alias grep='grep --color=auto'
 alias sudo='doas'
 
-#Tasks
+# Tasks
 alias rmcache='rm -rf ~/.cache/*'
 alias rmme='rm -rf ~/.local/share/Trash/*'
 alias rmlinks='find . -xtype l -exec rm {} \;'
@@ -39,12 +39,17 @@ alias q='exit'
 alias imlight='ps_mem -p $(pgrep -d, -u $USER)'
 alias nobita='mntdev -n sdb1'
 alias ka='killall'
+
+# Stuff
+alias hexA='less "$HOME"/.local/share/.hex-alpha'
+alias todo='$EDITOR "$HOME"/.local/share/.todo'
+alias begone='$EDITOR "$HOME"/.local/share/.begone'
+
+# Navigate dir
+alias ..='cd ..'
 alias j='cd "$(exa -aD | fzf)"'
 
-#Navigate dir
-alias ..='cd ..'
-
-#Clean up
+# Clean up
 alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 alias nvidia-settings='nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settings'
