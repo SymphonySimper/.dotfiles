@@ -30,14 +30,14 @@ formatUsbFat32(){
 
 # LolBan
 lolban(){
-	figlet -f $HOME/.local/share/fonts/3d.flf  "$1" | lolcat
+	figlet -f "$HOME"/.local/share/fonts/3d.flf  "$1" | lolcat
 	# credits
 	# https://www.youtube.com/watch?v=QGUmMtEnIkI
 	# font https://raw.githubusercontent.com/xero/figlet-fonts/master/3d.flf
 }
 
 # Sort Paths
-sortPaths(){
-	loc="$HOME"/.local/bin/.paths
-	for f in $loc/*; do sort $f -o $f; done
-}
+sortPaths(){ for f in "$HOME"/.local/bin/.paths/*; do sort $f -o $f; done; }
+
+# LoopVp
+loopVp(){ devour prime-run $VIDEOPLAYER --shuffle --loop-playlist "$HOME"/importantnt/video; }

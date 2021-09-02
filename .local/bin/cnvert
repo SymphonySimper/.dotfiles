@@ -1,9 +1,9 @@
 #!/bin/sh
 
 vc="ffmpeg"
-vi="magick"
+ic="magick"
 
 case "$1" in
 	*.mkv) $vc -i "$1" -codec copy "$2" ;;
-	*.webm)	$ic "$1" "$2" ;;
+	*.webm | *.webp) $ic "$1" "$2" ;;
 esac 

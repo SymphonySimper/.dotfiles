@@ -30,8 +30,3 @@ fv(){
 	query="$(ls -F $video | grep -v / | fzf)"
 	[ -n "$query" ] && devour prime-run $VIDEOPLAYER $video/"$query"
 }
-
-loopVp(){
-	loc="$HOME"/importantnt/video
-	devour prime-run $VIDEOPLAYER --shuffle --loop-playlist "$loc"
-}

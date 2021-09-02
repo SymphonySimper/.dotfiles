@@ -23,6 +23,7 @@ alias yrm='y -Rns'
 alias whoIsFat='y -P --stats'
 alias worthless='p -Rdd'
 alias snitch='pactree'
+alias update='p -Syu && y --noconfirm -Syu'
 
 # Program
 alias ls='ls --color=auto'
