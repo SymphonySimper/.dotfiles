@@ -5,5 +5,5 @@ super + x
 	"$HOME"/.local/bin/bspwm/codingTime
 
 # To resize left side window to approx 70%
-super + alt + r
+super + shift + x
 	bspc node -z right +400 0
