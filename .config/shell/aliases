@@ -45,10 +45,11 @@ alias ka='killall'
 alias hexA='less "$HOME"/.local/share/.hex-alpha'
 alias todo='$EDITOR "$HOME"/.local/share/.todo'
 alias begone='$EDITOR "$HOME"/.local/share/.begone'
+alias rb='devour $READER "$HOME"/lifeisfun/rust/rust-lang.pdf'
 
 # Navigate dir
 alias ..='cd ..'
-alias j='cd "$(exa -aD | fzf)"'
+alias j='cd "$(ls -aF | grep / | fzf)"'
 
 # Clean up
 alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
