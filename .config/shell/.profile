@@ -15,6 +15,7 @@ export PATH="$PATH:$HOME/.local/bin/gen"		#Gen scripts
 
 export ZDOTDIR="$HOME"/.config/zsh
 # export STARSHIP_CONFIG="$HOME"/.config/starship/config.toml
+export BMARK="$HOME"/.local/share/bmark/bookmarks
 
 # ~/ Clean-up:
 export XDG_CONFIG_HOME="$HOME"/.config

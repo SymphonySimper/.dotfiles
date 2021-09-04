@@ -1,23 +1,21 @@
 #!/bin/sh
 
-LOC="$HOME"/.local/share/.bookmark
-
 err(){ echo "$(syl r; syl B)${1}$(syl R)"; }
 succ(){ echo "$(syl g; syl B)${1}$(syl R)"; }
 
-sortBmark(){ sort $LOC -o $LOC; }
+sortBmark(){ sort $BMARK -o $BMARK; }
 addBookmark(){ 
-	if grep -qw "^$1" $LOC; then
+	if grep -qw "^$1" $BMARK; then
 		err "$1 already exists"
 	else
-		printf "%*s %s\n" -24 "$1" "$2" >> $LOC
+		printf "%*s %s\n" -24 "$1" "$2" >> $BMARK
 		succ "$1 added to Bookmarks"
 		sortBmark
 	fi
 }
 rmBookmark(){ 
-	if grep -qw "^$1" $LOC; then
-		sed "/^$1/d" -i $LOC
+	if grep -qw "^$1" $BMARK; then
+		sed "/^$1/d" -i $BMARK
 		succ "$1 deleted"
 		sortBmark
 	else
@@ -28,5 +26,5 @@ rmBookmark(){
 case "$1" in
 	add) shift; addBookmark "$1" "$2" ;;
 	rm) shift; rmBookmark "$1" ;;
-	edit) $EDITOR $LOC; sortBmark ;;
+	edit) $EDITOR $BMARK; sortBmark ;;
 esac
