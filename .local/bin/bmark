@@ -1,0 +1,32 @@
+#!/bin/sh
+
+LOC="$HOME"/.local/share/.bookmark
+
+err(){ echo "$(syl r; syl B)${1}$(syl R)"; }
+succ(){ echo "$(syl g; syl B)${1}$(syl R)"; }
+
+sortBmark(){ sort $LOC -o $LOC; }
+addBookmark(){ 
+	if grep -qw "^$1" $LOC; then
+		err "$1 already exists"
+	else
+		printf "%*s %s\n" -24 "$1" "$2" >> $LOC
+		succ "$1 added to Bookmarks"
+		sortBmark
+	fi
+}
+rmBookmark(){ 
+	if grep -qw "^$1" $LOC; then
+		sed "/^$1/d" -i $LOC
+		succ "$1 deleted"
+		sortBmark
+	else
+		err "Bookmark $1 not found"
+	fi
+}
+
+case "$1" in
+	add) shift; addBookmark "$1" "$2" ;;
+	rm) shift; rmBookmark "$1" ;;
+	edit) $EDITOR $LOC; sortBmark ;;
+esac

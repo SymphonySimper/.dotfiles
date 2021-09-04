@@ -1,6 +1,8 @@
 #!/bin/sh
 
-search="$HOME/.local/bin/rofi/search"
-openUrl="$HOME/.local/bin/rofi/openUrl"
+loc="$HOME"/.local/bin/rofi
+search="$loc"/search
+openUrl="$loc"/openUrl
+openBmark="$loc"/openBmark
 
-rofi -modi "search:$search,url:$openUrl" -show search -no-show-match
+rofi -modi "search:$search,bmark:$openBmark,url:$openUrl" -show search 

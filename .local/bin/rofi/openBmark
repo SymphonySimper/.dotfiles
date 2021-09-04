@@ -1,0 +1,11 @@
+#!/bin/sh
+
+LOC="$HOME"/.local/share/.bookmark
+
+URL="$( grep -w "^$1" $LOC | awk '{ print $2 }' )"
+
+if [ -z "$@" ]; then
+	cat $LOC
+else
+	xdg-open "$URL" > /dev/null 2>&1 &
+fi
