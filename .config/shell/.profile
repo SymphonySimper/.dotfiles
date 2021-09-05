@@ -11,7 +11,7 @@ export VIDEOPLAYER="mpv"
 export PATH="$PATH:$HOME/.local/bin"			#Scripts
 export PATH="$PATH:$HOME/.local/bin/aliases"		#Alias scripts
 export PATH="$PATH:$HOME/.local/bin/gen"		#Gen scripts
-# export PATH="$PATH:$HOME/lifeisfun/flutter/bin" 	#Flutter
+export PATH="$PATH:$HOME/lifeisfun/lang/flutter/bin" 	#Flutter
 
 export ZDOTDIR="$HOME"/.config/zsh
 # export STARSHIP_CONFIG="$HOME"/.config/starship/config.toml
@@ -43,18 +43,21 @@ export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export RXVT_SOCKET="$XDG_RUNTIME_DIR"/urxvtd
 export GOPATH="$XDG_DATA_HOME"/go
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
-# export ANDROID_SDK_HOME="$XDG_CONFIG_HOME"/android
-# export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
-# export ANDROID_SDK_ROOT="$XDG_DATA_HOME"/android
-# export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
-# export ATOM_HOME="$XDG_DATA_HOME"/atom
+export ANDROID_SDK_HOME="$XDG_CONFIG_HOME"/android
+export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
+export ANDROID_SDK_ROOT="$XDG_DATA_HOME"/android
+export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
+export ATOM_HOME="$XDG_DATA_HOME"/atom
 
 [ -f "$XDG_DATA_HOME"/cargo/env ] && . "$XDG_DATA_HOME"/cargo/env
 
 #Other settinfs
 export _JAVA_AWT_WM_NONREPARENTING=1
 export MANPAGER='less -Q'
-
+# export __NV_PRIME_RENDER_OFFLOAD=1
+# export __GLX_VENDOR_LIBRARY_NAME="nvidia"
+# export __VK_LAYER_NV_optimus="NVIDIA_only"
+ 
 #fzf
 export FZF_DEFAULT_OPTS='--reverse --color=fg:#777777,hl:#bbbbbb --color=fg+:#aaaaaa,bg+:#000000,hl+:#bbbbbb --color=info:#aaaaaa,prompt:#aaaaaa,pointer:#aaaaaa --color=marker:#000000,spinner:#000000,header:#000000'
 
