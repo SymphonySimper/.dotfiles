@@ -46,6 +46,7 @@ alias hexA='less "$HOME"/.local/share/.hex-alpha'
 alias todo='$EDITOR "$HOME"/.local/share/.todo'
 alias begone='$EDITOR "$HOME"/.local/share/.begone'
 alias rb='devour $READER "$HOME"/lifeisfun/rust/rust-lang.pdf'
+alias his='$EDITOR "$HOME"/.cache/zshhistory'
 
 # Navigate dir
 alias ..='cd ..'
