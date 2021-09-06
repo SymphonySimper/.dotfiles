@@ -1,6 +1,6 @@
 #!/bin/sh
 
-loc="$HOME"/importantnt/audio/lofi
+loc="$HOME"/importantnt/audio/.lofi
 
 isLofi="$(pgrep -la "$VIDEOPLAYER" | grep 'title=lofi' | cut -d ' ' -f 1)"
 

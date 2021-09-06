@@ -34,5 +34,5 @@ main() {
 if [ -n "$1" ]; then
 	main "$@"
 else
-	main "$(ls -F | grep -v / | $dis)"
+	main "$(ls -F | grep -v / | sed 's/*//g' | $dis)"
 fi

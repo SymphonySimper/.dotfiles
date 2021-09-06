@@ -7,8 +7,6 @@ super + shift + Return
 # Open Browser
 super + shift + f
 	$BROWSER
-super + shift + m
-	prime-run $VIDEOPLAYER "$(xclip -selection clipboard -o)"
 
 # Volume
 XF86AudioLowerVolume

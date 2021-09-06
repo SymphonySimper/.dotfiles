@@ -40,6 +40,7 @@ alias q='exit'
 alias imlight='ps_mem -p $(pgrep -d, -u $USER)'
 alias nobita='mntdev -n sdb1'
 alias ka='killall'
+alias touchy='systemctl --user start touchcursor.service'
 
 # Stuff
 alias hexA='less "$HOME"/.local/share/.hex-alpha'

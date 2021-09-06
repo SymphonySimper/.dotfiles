@@ -8,7 +8,7 @@ ALOC='~/importantnt/audio/%(title)s.%(ext)s'
 
 YTDL="youtube-dl"
 
-QUAL='80p'
+QUAL=''
 
 # EXPERMIENTAL
 # VFORMAT=''
