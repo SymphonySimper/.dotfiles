@@ -2,39 +2,15 @@
 
 # pgrep picom && killall picom || picom -m 1.0 -i 1.0 -e 1.0 --vsync --backend glx --no-fading-openclose &
 
-noti="dunstify -h string:x-dunst-stack-tag:"
-notify=${noti}gameMode
-notify2=${noti}capsToEsc
+notify="dunstify -h string:x-dunst-stack-tag:gameMode"
 warningI="$HOME"/.local/share/icons/general/warning.svg
 
 isPicom="$(pgrep picom)"
-isTouch="$(systemctl --user is-active touchcursor.service)"
 
-service(){ systemctl --user "$1" touchcursor.service; } 
-capsToEsc(){ setxkbmap -option caps:escape; }
-
-if [ -z "$isPicom" -a "$isTouch" = 'inactive' ]; then
-	picom > /dev/null 2>&1 &
-	service "start"
-	$notify "Picom is alive" "Touch cursor is activated"
-	sleep 1s
-	capsToEsc &&
-	$notify2 "Capls lock remapped to Escape"
-elif [ -n "$isPicom" -a "$isTouch" = 'active' ]; then
-	killall picom &&
-	service "stop" &&
-	capsToEsc &&
-	$notify "Picom is dead" "Touch cursor is deactivated"
-elif [ -z "$isPicom" -a "$isTouch" = 'active' ]; then
-	service "stop" &&
-	capsToEsc &&
-	$notify "Touch cursor is deactivated"
-elif [ -n "$isPicom" -a "$isTouch" = 'inactive' ]; then
-	service "start" &&
-	$notify "Touch cursor is activate"
-	sleep 1s
-	capsToEsc &&
-	$notify2 "Capls lock remapped to Escape"
+if [ -z $isPicom ]; then
+	picom &
+	$notify "Picom is alive"
 else
-	$notify -i "$warningI" "something went wrong"
+	killall picom
+	$notify "Picom is dead"
 fi

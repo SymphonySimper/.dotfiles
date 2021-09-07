@@ -39,8 +39,11 @@ lolban(){
 # Sort Paths
 sortPaths(){ for f in "$HOME"/.local/bin/.paths/*; do sort $f -o $f; done; }
 
-# LoopVp
-loopVp(){ devour prime-run $VIDEOPLAYER --shuffle --loop-playlist "$HOME"/importantnt/video; }
+# LoopV
+loopV(){ devour prime-run $VIDEOPLAYER --shuffle --loop-playlist "$HOME"/importantnt/video; }
 
 # LoopA
 loopA(){ $VIDEOPLAYER --shuffle --loop-playlist "$HOME"/importantnt/audio; }
+
+# Caps To ESC
+capsToEsc(){ setxkbmap -option caps:escape; }
