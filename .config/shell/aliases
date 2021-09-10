@@ -15,8 +15,8 @@ alias cgau='config add -u'
 
 # Package Manager
 alias e='doas emerge -aq'
-alias rmzombies='e --depclean'
-alias update='e --sync && e --update --deep --with-bdeps=y @world'
+alias rmzombies='doas emerge --depclean'
+alias update='doas emerge --sync && doas emerge -aq --update --deep --with-bdeps=y @world'
 alias amifat='equery list "*" | wc -l'
 
 # Program
