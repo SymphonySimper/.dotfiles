@@ -13,17 +13,11 @@ alias cgp='config push'
 alias cga='config add'
 alias cgau='config add -u'
 
-# Pacman/Packages/AUR
-alias p='doas pacman'
-alias prm='p -Rns'
-alias amifat='pacman -Q | wc -l'
-alias rmzombies='p -Rns $(pacman -Qdtq)'
-alias y='paru'
-alias yrm='y -Rns'
-alias whoIsFat='y -P --stats'
-alias worthless='p -Rdd'
-alias snitch='pactree'
-alias update='p -Syu && y --noconfirm -Syu'
+# Package Manager
+alias e='doas emerge -aq'
+alias rmzombies='e --depclean'
+alias update='e --sync && e --update --deep --with-bdeps=y @world'
+alias amifat='equery list "*" | wc -l'
 
 # Program
 alias ls='ls --color=auto'

@@ -15,8 +15,8 @@ cgm(){ config commit -m "$1"; }
 cgamp(){ config add -u && config commit -m "$1" && config push; }
 cgrm(){ config rm "$1" --cached; }
 
-# Pacman
-isThere(){ pacman -Q | grep "$1"; }
+# Package Manager
+isThere(){ equery list '*' | grep "$1"; }
 
 # Format USB
 formatUsbFat32(){
