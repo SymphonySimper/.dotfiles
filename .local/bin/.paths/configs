@@ -1,6 +1,7 @@
 bspwm			.config/bspwm/bspwmrc
 bspwmhotkeys		.config/sxhkd/bspwmhotkeys
 dunst			.config/dunst/dunstrc
+htop			.config/htop/htoprc
 mimeapps		.config/mimeapps.list
 mpv			.config/mpv/mpv.conf
 mybinds			.config/sxhkd/mybinds

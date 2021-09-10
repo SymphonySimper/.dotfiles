@@ -17,7 +17,7 @@ step 4:
 */
 
 .personalize-button { display: none !important; }
-
+.icon.icon-settings { display: none !important; }
 /* @-moz-document url-prefix(about:blank) {
     html > body:empty {
         background-color: #111111 !important;
