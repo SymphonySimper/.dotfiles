@@ -30,3 +30,9 @@ fv(){
 	query="$(ls -F $video | grep -v / | fzf)"
 	[ -n "$query" ] && devour prime-run $VIDEOPLAYER $video/"$query"
 }
+
+fdocs(){
+	LOC="$HOME"/.local/share/mydocs
+	QUERY="$(ls -F $LOC | grep -v / | fzf)"
+	$EDITOR $LOC/$QUERY
+}
