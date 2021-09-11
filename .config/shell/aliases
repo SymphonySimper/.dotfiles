@@ -19,6 +19,7 @@ alias rmzombies='$PERM emerge --depclean'
 alias update='$PERM emerge --sync && $PERM emerge -aq --update --deep --with-bdeps=y @world'
 alias amifat='equery list "*" | wc -l'
 alias erm='$PERM emerge -cav'
+alias newuse='$PERM emerge -aq --update --deep --newuse @world'
 
 # Program
 alias ls='ls --color=auto'

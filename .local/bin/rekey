@@ -1,46 +1,50 @@
 #!/bin/sh
 
-prgm="sxhkd"
+PRGM="sxhkd"
 
-loc="$HOME"/.config/sxhkd
-bspwmKey="$loc"/bspwmhotkeys
-myBspwmBinds="$loc"/myBspwmBinds
-myKey="$loc"/mybinds
+LOC="$HOME"/.config/sxhkd
+BSPWMKEY="$LOC"/bspwmhotkeys
+MYBSPWMBINDS="$LOC"/myBspwmBinds
+MYKEY="$LOC"/mybinds
 
-configLoc="$loc"/.sxhkdrc
+CONFIGLOC="$LOC"/.sxhkdrc
 
-xLoc="$HOME"/.config/x11/xinitrc
+XLOC="$HOME"/.config/x11/xinitrc
 
 notify(){ dunstify -h string:x-dunst-stack-tag:sxhkd "$1"; }
 
 startPrgm(){
-	if [ -f "$configLoc" ]; then
-		pgrep "$prgm" && killall "$prgm"
-		{ "$prgm" -c "$configLoc" & } &&
-		notify "Restarting $prgm"
+	if [ -f "$CONFIGLOC" ]; then
+		pgrep "$PRGM" && killall "$PRGM"
+		{ "$PRGM" -c "$CONFIGLOC" & } &&
+		notify "Restarting $PRGM"
 	else
-		notify "Config file not found" "$prmg"
+		notify "Config file not found" "$PRGM"
 	fi
 }
 
-iclr="sed '/#/d; /^[[:space:]]*$/d'"
+ICLR="sed '/#/d; /^[[:space:]]*$/d'"
 createConfig(){
 	case "$1" in
-		-oa) eval $iclr $bspwmKey $myBspwmBinds $myKey ;;
-		-a) eval $iclr $bspwmKey $myBspwmBinds $myKey > $configLoc;;
-		-om) eval $iclr $myKey ;;
-		-m) eval $iclr $myKey > $configLoc;;
+		-oa) eval $ICLR $BSPWMKEY $MYBSPWMBINDS $MYKEY ;;
+		-a) eval $ICLR $BSPWMKEY $MYBSPWMBINDS $MYKEY > $CONFIGLOC;;
+		-om) eval $ICLR $MYKEY ;;
+		-m) eval $ICLR $MYKEY > $CONFIGLOC;;
 	esac
 }
 
-if ( grep -q bspwm "$xLoc" ); then
-	if ( createConfig -oa | diff -q - "$configLoc" ); then
+if [ -f "$CONFIGLOC" ]; then
+	touch $CONFIGLOC
+fi
+
+if ( grep -q bspwm "$XLOC" ); then
+	if ( createConfig -oa | diff -q - "$CONFIGLOC" ); then
 		:
 	else
 		createConfig -a
 	fi
 else
-	if ( createConfig -om | diff -q - "$configLoc" ); then
+	if ( createConfig -om | diff -q - "$CONFIGLOC" ); then
 		:
 	else
 		createConfig -m
@@ -48,10 +52,10 @@ else
 
 fi
 
-if [ -f "$configLoc" ]; then
-	pgrep "$prgm" && killall "$prgm"
-	{ "$prgm" -c "$configLoc" & } &&
-	notify "Restarting $prgm"
+if [ -f "$CONFIGLOC" ]; then
+	pgrep "$PRGM" && killall "$PRGM"
+	{ "$PRGM" -c "$CONFIGLOC" & } &&
+	notify "Restarting $PRGM"
 else
-	notify "Config file not found" "$prmg"
+	notify "Config file not found" "$PRGM"
 fi

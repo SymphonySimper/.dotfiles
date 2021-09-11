@@ -9,13 +9,17 @@ super + shift + f
 	$BROWSER
 
 # Volume
-XF86AudioLowerVolume
-	volume -d
-XF86AudioRaiseVolume
-	volume -u
-XF86AudioMute
-	volume -m
 super + F2
+	volume -d
+super + F3
+	volume -u
+super + shift + F2
+	volume -D
+super + shift + F3
+	volume -U
+super + F4
+	volume -m
+super + F12
 	$TERMINAL -e pulsemixer
 
 # Lofi
@@ -23,7 +27,7 @@ super + F1
 	playLofi
 
 # Get work done
-super + shift + F1
+super + shift + F12
 	$TERMINAL -e genHosts
 
 # Brightness

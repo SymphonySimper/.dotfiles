@@ -33,5 +33,7 @@ toggleMute(){ $app --toggle-mute && notify -m; }
 case "$1" in
 	-u) changeVol +2 ;;
 	-d) changeVol -2 ;;
+	-U) changeVol +10 ;;
+	-D) changeVol -10 ;;
 	-m) toggleMute ;;
 esac
