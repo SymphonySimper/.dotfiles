@@ -58,3 +58,11 @@ cnvert(){
 		*.webm | *.webp) $ic "$1" "$2" ;;
 	esac 
 }
+
+# Letmein
+letmein(){
+	case "$1" in
+		-a) shift; $PERM chmod 777 "$1" ;;
+		*) chmod +x "$1" ;;
+	esac
+}

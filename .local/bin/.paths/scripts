@@ -14,7 +14,6 @@ genFolderAliases         .local/bin/gen/genFolderAliases
 genHosts                 .local/bin/gen/genHosts
 genXresources            .local/bin/gen/genXresources
 kdenlive                 .local/bin/aliases/kdenlive
-letmein	                 .local/bin/letmein
 lz                       .local/bin/lz
 mntdev                   .local/bin/mntdev
 myInfo                   .local/bin/myInfo

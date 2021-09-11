@@ -1,5 +1,9 @@
 #!/bin/sh
 
+REPO="git@github.com:SymphonySimper/bmark.git"
+REPOPARENTLOC="$(echo $BMARK | sed 's/bmark\/bookmarks//g')"
+REPOLOC="$(echo $BMARK | sed 's/bookmarks//g')"
+
 err(){ echo "$(syl r; syl B)${1}$(syl R)"; }
 succ(){ echo "$(syl g; syl B)${1}$(syl R)"; }
 
@@ -22,9 +26,34 @@ rmBookmark(){
 		err "Bookmark $1 not found"
 	fi
 }
+cloneRepo(){
+	if [ -f "$HOME"/.ssh/id*.pub ]; then
+		git -C $REPOPARENTLOC clone $REPO 
+	fi
+}
+pushRepo(){
+	if git -C $REPOLOC status | grep -q 'modified'; then
+		git -C $REPOLOC add -u \
+		&& git -C $REPOLOC commit -m "$1" \
+		&& git -C $REPOLOC push
+	else
+		succ "Nothing to commit"
+	fi
+}
 
+if [ ! -f $REPOLOC ]; then
+	err "$BMARK does not exist"
+	read -p "Would you like to clone it? [Y/n]" ANS
+	case "$ANS" in
+		[yY]*) cloneRepo ;;
+		[nN]*) exit 1 ;;
+		*) cloneRepo ;;
+	esac
+fi
 case "$1" in
 	add) shift; addBookmark "$1" "$2" ;;
 	rm) shift; rmBookmark "$1" ;;
 	edit) $EDITOR $BMARK; sortBmark ;;
+	clone) cloneRepo ;;
+	push) shift; pushRepo "$1" ;;
 esac

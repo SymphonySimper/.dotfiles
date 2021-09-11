@@ -22,7 +22,7 @@ shebang="#!/bin/sh"
 
 errorMsg(){ echo "${bold}${red}${1}${reset}"; }
 
-executable(){ letmein "$h/$1"; }
+executable(){ chmod +x "$h/$1"; }
 addPath(){ printf "%*s %s\n" -24 "$1" "$2/$1" >> "$h/$3"; }
 sortPaths(){ sort "$h/$1" -o "$h/$1"; }
 
