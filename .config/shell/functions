@@ -20,11 +20,11 @@ isThere(){ equery list '*' | grep "$1"; }
 
 # Format USB
 formatUsbFat32(){
-	doas dd if=/dev/zero of=/dev/sdb bs=4096 status=progress \
-	&& doas parted /dev/sdb --script -- mklabel msdos \
-	&& doas parted /dev/sdb --script -- mkpart primary fat32 1MiB 100% \
-	&& doas mkfs.vfat -F32 /dev/sdb1 \
-	&& doas parted /dev/sdb --script print \
+	$PERM dd if=/dev/zero of=/dev/sdb bs=4096 status=progress \
+	&& $PERM parted /dev/sdb --script -- mklabel msdos \
+	&& $PERM parted /dev/sdb --script -- mkpart primary fat32 1MiB 100% \
+	&& $PERM mkfs.vfat -F32 /dev/sdb1 \
+	&& $PERM parted /dev/sdb --script print \
 	&& dunstify -i $HOME/.local/share/icons/storage/usbMnt.svg "Usb formated"
 }
 
@@ -47,3 +47,14 @@ loopA(){ $VIDEOPLAYER --shuffle --loop-playlist "$HOME"/importantnt/audio; }
 
 # Caps To ESC
 capsToEsc(){ setxkbmap -option caps:escape; }
+
+# Cnvert
+cnvert(){
+	vc="ffmpeg"
+	ic="magick"
+	
+	case "$1" in
+		*.mkv) $vc -i "$1" -codec copy "$2" ;;
+		*.webm | *.webp) $ic "$1" "$2" ;;
+	esac 
+}

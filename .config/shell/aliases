@@ -14,27 +14,28 @@ alias cga='config add'
 alias cgau='config add -u'
 
 # Package Manager
-alias e='doas emerge -aq'
-alias rmzombies='doas emerge --depclean'
-alias update='doas emerge --sync && doas emerge -aq --update --deep --with-bdeps=y @world'
+alias e='$PERM emerge -aq'
+alias rmzombies='$PERM emerge --depclean'
+alias update='$PERM emerge --sync && $PERM emerge -aq --update --deep --with-bdeps=y @world'
 alias amifat='equery list "*" | wc -l'
+alias erm='$PERM emerge -cav'
 
 # Program
 alias ls='ls --color=auto'
 alias l='exa'
 alias grep='grep --color=auto'
-alias sudo='doas'
+alias sudo='$PERM'
 
 # Tasks
 alias rmcache='rm -rf ~/.cache/*'
 alias rmme='rm -rf ~/.local/share/Trash/*'
 alias rmlinks='find . -xtype l -exec rm {} \;'
-alias bye='poweroff'
 alias q='exit'
 alias imlight='ps_mem -p $(pgrep -d, -u $USER)'
 alias nobita='mntdev -n sdb1'
 alias ka='killall'
-alias touchy='systemctl --user start touchcursor.service'
+alias bye='$PERM poweroff'
+alias bbak='$PERM reboot'
 
 # Stuff
 alias hexA='less "$HOME"/.local/share/.hex-alpha'

@@ -2,7 +2,6 @@
 
 LOC=/etc/hosts
 BLOCKSOURCE="$HOME"/.local/share/.begone
-PERM='doas'
 TEMPFILE=$(mktemp)
 
 errorMsg(){ echo "$(syl r; syl B)${1}$(syl R)"; }

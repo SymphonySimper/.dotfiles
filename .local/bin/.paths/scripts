@@ -1,6 +1,5 @@
 bmark                    .local/bin/bmark
 brightness               .local/bin/brightness
-cnvert                   .local/bin/cnvert
 codeSplit                .local/bin/bspwm/codeSplit
 codingTime               .local/bin/bspwm/codingTime
 configs                  .local/bin/.paths/configs
@@ -46,5 +45,4 @@ typin                    .local/bin/aliases/typin
 unix                     .local/bin/unix
 v                        .local/bin/v
 volume                   .local/bin/volume
-wp                       .local/bin/aliases/wp
 ytd                      .local/bin/ytd

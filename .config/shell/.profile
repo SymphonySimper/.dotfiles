@@ -6,6 +6,7 @@ export BROWSER="firefox"
 export READER="zathura"
 export IMAGEVIEWER="sxiv"
 export VIDEOPLAYER="mpv"
+export PERM="doas"
 
 #Paths
 export PATH="$PATH:$HOME/.local/bin"			#Scripts

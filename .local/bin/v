@@ -8,7 +8,6 @@ pv="$READER"
 te="$EDITOR"
 h="devour"
 dis="fzf"
-perm="doas"
 
 #Paths
 whatImg="$HOME/dl/What"*
@@ -25,7 +24,7 @@ main() {
 				*.pdf ) $h $pv "$1" && rm -i "$1" ;;
 				*) $h $iv $whatImg && rm -I $whatImg ;;
 			esac ;;
-		-s) shift; $perm $te "$1" ;;
+		-s) shift; $PERM $te "$1" ;;
 		-p) ls *.pdf | $dis | xargs -rI {} $h $pv {} ;;
 		*) [ -n "$@" ] && $te "$1" ;;
 	esac
