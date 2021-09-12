@@ -31,7 +31,7 @@ alias less='less -Q'
 # Tasks
 alias rmcache='rm -rf ~/.cache/*'
 alias rmme='rm -rf ~/.local/share/Trash/*'
-alias rmlinks='find . -xtype l -exec rm {} \;'
+alias rmlinks='find . -xtype l -exec rm {} \+'
 alias q='exit'
 alias imlight='ps_mem -p $(pgrep -d, -u $USER)'
 alias nobita='mntdev -n sdb1'

@@ -12,7 +12,7 @@ prof="$HOME"/.config/shell/.profile
 isurxvtc(){ grep -q 'TERMINAL="urxvtc"' "$prof"; }
 isdwm(){ grep -q 'dwm' "$xin"; }
 
-fndf(){ find "$locx" -type f -not -name "$1" -exec cat {} \; > "$xre"; }
+fndf(){ find "$locx" -type f -not -name "$1" -exec cat {} \+ > "$xre"; }
 if [ -f "$xre" ]; then
 	if ( isurxvtc && isdwm ); then
 		cat "$locx"/* > "$xre"
