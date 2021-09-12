@@ -10,7 +10,6 @@ alias gnotrack='git config --local status.showUntrackedFiles no'
 # Config git alias
 alias cgs='config status'
 alias cgp='config push'
-alias cga='config add'
 alias cgau='config add -u'
 
 # Package Manager
