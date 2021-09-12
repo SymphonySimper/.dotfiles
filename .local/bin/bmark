@@ -41,7 +41,7 @@ pushRepo(){
 	fi
 }
 
-if [ ! -f $REPOLOC ]; then
+if [ ! -d $REPOLOC ]; then
 	err "$BMARK does not exist"
 	read -p "Would you like to clone it? [Y/n]" ANS
 	case "$ANS" in
@@ -56,4 +56,5 @@ case "$1" in
 	edit) $EDITOR $BMARK; sortBmark ;;
 	clone) cloneRepo ;;
 	push) shift; pushRepo "$1" ;;
+	*) err "Invalid argument" ;;
 esac

@@ -1,38 +1,41 @@
 #!/bin/sh
 
-notify="dunstify"
-todo="$XDG_DATA_HOME"/.todo
+NOTIFY="dunstify"
+TODOLOC="$XDG_DATA_HOME"/.todo
 
 #Icons
-dir="$HOME"/.local/share/icons/myInfo
-
-batFullI="$dir"/batteryFull.svg
-lowBatI="$dir"/lowBattery.svg
-chargingI="$dir"/charging.svg
-saverI="$dir"/saver.svg
-
-dateI="$dir"/date.svg
-clockI="$dir"/clock.svg
+DIR="$HOME"/.local/share/icons/myInfo
+BATFULLI="$DIR"/batteryFull.svg
+LOWBATI="$DIR"/lowBattery.svg
+CHARGINGI="$DIR"/charging.svg
+SAVERI="$DIR"/saver.svg
+DATEI="$DIR"/date.svg
+CLOCKI="$DIR"/clock.svg
 
 getStat=$(cat /sys/class/power_supply/BAT0/status)
 getCap=$(cat /sys/class/power_supply/BAT0/capacity)
-notifyBat(){ $notify -h string:x-dunst-stack-tag:myBattery -i "$1"  "Battery level: $getCap%"; }
+notifyBat(){ $NOTIFY -h string:x-dunst-stack-tag:myBattery -i "$1"  "Battery level: $getCap%"; }
 bat(){
 	if [ $getStat = 'Unknown' ]; then
-		notifyBat "$saverI"
+		notifyBat "$SAVERI"
 	elif [ $getStat = 'Charging' ]; then
-		notifyBat "$chargingI"
+		notifyBat "$CHARGINGI"
 	elif [ $getStat = 'Discharging' ]; then
-		[ $getCap -gt 20 ] && notifyBat "$batFullI" || notifyBat "$lowBatI"
+		[ $getCap -gt 20 ] && notifyBat "$BATFULLI" || notifyBat "$LOWBATI"
 	fi
 }
 
-getDateTxt=$(date "+%A %B %Y")
-getDate=$(date "+%D")
-getTime=$(date "+%r")
-notifyDate(){ $notify -h string:x-dunst-stack-tag:myDate -i "$dateI" "$getDate" "$getDateTxt"; }
+DATEP="date -u"
+getDateTxt=$($DATEP "+%A %B %Y")
+getDate=$($DATEP "+%d/%m/%Y")
+getTime=$($DATEP "+%r")
+notifyDate(){ $NOTIFY -h string:x-dunst-stack-tag:myDate -i "$DATEI" "$getDate" "$getDateTxt"; }
 
-notifyTime(){ $notify -h string:x-dunst-stack-tag:myTime -i "$clockI"  "$getTime"; }
-todo(){ cat $todo | while read -r line ; do $notify "+" "$line"; done; }
+notifyTime(){ $NOTIFY -h string:x-dunst-stack-tag:myTime -i "$CLOCKI"  "$getTime"; }
+listTodo(){
+	cat $TODOLOC | while read -r LINE; do
+		$NOTIFY "+" "$LINE"
+	done
+}
 
-bat; notifyDate; notifyTime; todo
+bat; notifyDate; notifyTime; listTodo
