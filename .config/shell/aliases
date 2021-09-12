@@ -20,6 +20,7 @@ alias update='$PERM emerge --sync && $PERM emerge -aq --update --deep --with-bde
 alias amifat='equery list "*" | wc -l'
 alias erm='$PERM emerge -cav'
 alias newuse='$PERM emerge -aq --update --deep --newuse @world'
+alias elist='equery list "*" | less'
 
 # Program
 alias ls='ls --color=auto'
@@ -45,6 +46,7 @@ alias todo='$EDITOR "$HOME"/.local/share/.todo'
 alias begone='$EDITOR "$HOME"/.local/share/.begone'
 alias rb='devour $READER "$HOME"/lifeisfun/rust/rust-lang.pdf'
 alias his='$EDITOR "$HOME"/.cache/zshhistory'
+alias kd='$EDITOR "$HOME"/.local/share/mydocs/compilekernel'
 
 # Navigate dir
 alias ..='cd ..'
