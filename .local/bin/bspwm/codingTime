@@ -1,15 +1,19 @@
 #!/bin/sh
 
-loc="$HOME"/lifeisfun
+LOC="$HOME"/lifeisfun
 . "$HOME"/.local/bin/bspwm/codeSplit
 
-QUERY="$(exa -aD $loc | rofi -dmenu -p 'dir')"
+QUERY="$(exa -aD $LOC | rofi -dmenu -p 'dir')"
 
 if [ -n "$QUERY" ]; then
-	if [ -n "$(exa -aD $loc/$QUERY)" ]; then
-		QUERY2="$loc/$QUERY/$(exa -aD $loc/$QUERY | rofi -dmenu -p 'sub dir')"
+	if [ "$QUERY" = 'rust' ]; then
+		bspc desktop -f '^4'
+		$TERMINAL -e devour $READER "$HOME"/lifeisfun/rust/rust-lang.pdf
+	fi
+	if [ -n "$(exa -aD $LOC/$QUERY)" ]; then
+		QUERY2="$LOC/$QUERY/$(exa -aD $LOC/$QUERY | rofi -dmenu -p 'sub dir')"
 	else
-		QUERY2="$loc/$QUERY"
+		QUERY2="$LOC/$QUERY"
 	fi
 else
 	exit 1
