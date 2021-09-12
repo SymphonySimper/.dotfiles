@@ -26,6 +26,7 @@ alias ls='ls --color=auto'
 alias l='exa'
 alias grep='grep --color=auto'
 alias sudo='$PERM'
+alias less='less -Q'
 
 # Tasks
 alias rmcache='rm -rf ~/.cache/*'

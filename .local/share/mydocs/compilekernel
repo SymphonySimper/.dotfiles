@@ -1,8 +1,8 @@
 cd /usr/src/linux
 make mrproper
 cp /home/s2b/.config/kernel/*.config .config
-make menuconfig
-make modules_prepare
+make -j13 menuconfig
+make -j13 modules_prepare
 make -j13 && make -j13 modules_install && make -j13 install
-genkernel --install --kernel-config=/usr/src/linux/.config initramfs
+genkernel --install --kernel-config=/usr/src/linux/.config --compress-initramfs-type=lz4 initramfs
 grub-mkconfig -o /boot/grub/grub.cfg
