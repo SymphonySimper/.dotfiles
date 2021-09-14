@@ -27,6 +27,7 @@ alias l='exa'
 alias grep='grep --color=auto'
 alias sudo='$PERM'
 alias less='less -Q'
+alias flex='neofetch'
 
 # Tasks
 alias rmcache='rm -rf ~/.cache/*'

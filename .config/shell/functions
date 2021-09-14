@@ -67,3 +67,6 @@ letmein(){
 		*) chmod +x "$1" ;;
 	esac
 }
+
+# Hey yo internet
+heyYoInt(){ while sleep 30s; ping -c 3 gnu.org; [ $? -ne 0 ]; do true; done && soundEfx; }
