@@ -27,7 +27,7 @@ bspc rule -a Screenkey manage=off
 bspc rule -a qemu-system-x86_64 state=fullscreen
 bspc rule -a Zathura state=tiled
 
-bspc rule -a firefox desktop='^2'
+bspc rule -a Firefox desktop='^2'
 bspc rule -a mpv desktop='^4'
 bspc rule -a discord desktop='^5'
 bspc rule -a Ripcord desktop='^5'
