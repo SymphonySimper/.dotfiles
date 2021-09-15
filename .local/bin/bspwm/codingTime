@@ -1,27 +1,49 @@
 #!/bin/sh
-
+ 
 LOC="$HOME"/lifeisfun
-. "$HOME"/.local/bin/bspwm/codeSplit
+TEMPFILE_LOC=/tmp/codingTime
 
-QUERY="$(exa -aD $LOC | rofi -dmenu -p 'dir')"
-
-openDoc(){
-	bspc desktop -f '^4'
-	case "$1" in
-		rust) $READER "$HOME"/lifeisfun/rust/rust-lang.pdf ;;
-	esac
-}
-
-if [ -n "$QUERY" ]; then
-	openDoc "$QUERY" &
-	if [ -n "$(exa -aD $LOC/$QUERY)" ]; then
-		QUERY2="$LOC/$QUERY/$(exa -aD $LOC/$QUERY | rofi -dmenu -p 'sub dir')"
-	else
-		QUERY2="$LOC/$QUERY"
-	fi
-else
-	exit 1
+if [ -n "$1" ]; then
+	echo "$1" >> $TEMPFILE_LOC	
 fi
 
-openTerminals(){ for i in $(seq 2); do $TERMINAL -cd "$QUERY2"; done; }
-codeSplit openTerminals 
+TEMPFILE_LENGTH="$(cat $TEMPFILE_LOC 2>/dev/null | wc -l)"
+
+if [ $TEMPFILE_LENGTH -eq 1 ]; then
+	HEAD="$(head -n 1 $TEMPFILE_LOC)"
+elif [ $TEMPFILE_LENGTH -eq 2 ]; then
+	HEAD="$(head -n 1 $TEMPFILE_LOC)"
+	TAIL="$(tail -n 1 $TEMPFILE_LOC)"
+fi
+
+open_doc(){
+	view_doc(){ { bspc desktop -f '^4' && $READER "$1"; }> /dev/null 2>&1 & }
+	case "$HEAD" in
+		rust) view_doc "$LOC"/rust/rust-lang.pdf ;;
+	esac
+}
+open_terminals(){
+	bspc desktop -f '^3'
+	for i in $(seq 2); do $TERMINAL -cd "$FINAL_QUERY_LOC" > /dev/null 2>&1; done
+	bspc node -f west
+	bspc node -z right +400 0
+	open_doc
+	rm $TEMPFILE_LOC
+}
+
+get_loc(){ ls -aF $1 | grep '/' | sed '/\.\./d; s/\///g'; }
+if [ -z "$@" ]; then
+	printf "\0prompt\037dir\n"
+	get_loc "$LOC"
+elif [ -n "$(exa -aD "$LOC/$HEAD" 2>/dev/null)" ] && [ $TEMPFILE_LENGTH -eq 1 ]; then
+	printf "\0prompt\037$HEAD\n"
+	get_loc "$LOC/$HEAD"
+elif [ -z "$(exa -aD "$LOC/$HEAD" 2>/dev/null)" ] && [ $TEMPFILE_LENGTH -eq 1 ]; then
+	FINAL_QUERY_LOC="$LOC/$HEAD"
+	open_terminals > /dev/null 2>&1
+fi
+
+if [ $(cat $TEMPFILE_LOC 2>/dev/null | wc -l) -eq 2 ]; then
+	FINAL_QUERY_LOC="$LOC/$HEAD/$TAIL"
+	open_terminals > /dev/null 2>&1
+fi

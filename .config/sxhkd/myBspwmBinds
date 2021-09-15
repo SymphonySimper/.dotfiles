@@ -2,7 +2,7 @@
 
 # To launch coidng time
 super + x
-	"$HOME"/.local/bin/bspwm/codingTime
+	rofi -show codingTime -modi "codingTime:$HOME/.local/bin/bspwm/codingTime"
 
 # To resize left side window to approx 70%
 super + shift + x
