@@ -1,8 +1,0 @@
-#!/bin/sh
-
-codeSplit(){ 
-	bspc desktop -f '^3'
-	$1
-	bspc node -f west
-	bspc node -z right +400 0
-}

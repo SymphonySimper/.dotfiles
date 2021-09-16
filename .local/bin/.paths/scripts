@@ -1,6 +1,5 @@
 bmark                    .local/bin/bmark
 brightness               .local/bin/brightness
-codeSplit                .local/bin/bspwm/codeSplit
 codingTime               .local/bin/bspwm/codingTime
 configs                  .local/bin/.paths/configs
 editConfigs              .local/bin/rofi/editConfigs

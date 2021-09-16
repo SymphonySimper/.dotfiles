@@ -17,7 +17,7 @@ set smartindent
 let g:rainbow_active = 1
 let g:rustfmt_autosave = 2
 
-hi LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE 
+hi LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 hi CursorLineNr term=bold cterm=NONE ctermfg=LightGrey ctermbg=NONE gui=NONE guifg=LightGrey guibg=NONE
 hi StatusLine term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 hi EndOfBuffer term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
@@ -33,6 +33,7 @@ Plug 'frazrepo/vim-rainbow'
 Plug 'junegunn/goyo.vim'
 Plug 'ap/vim-css-color'
 Plug 'rust-lang/rust.vim'
+Plug 'justinmk/vim-sneak'
 
 call plug#end()
 
@@ -47,5 +48,9 @@ nnoremap <C-l> <C-w>l
 
 " To remove trailing white spaces
 autocmd BufWritePre * :%s/\s\+$//e
+
+" Use sneak instead of standard s
+map f <Plug>Sneak_s
+map F <Plug>Sneak_S
 
 map <leader>f :Goyo
