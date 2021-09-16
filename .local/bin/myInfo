@@ -25,7 +25,7 @@ bat(){
 	fi
 }
 
-DATEP="date -u"
+DATEP="date"
 getDateTxt=$($DATEP "+%A %B %Y")
 getDate=$($DATEP "+%d/%m/%Y")
 getTime=$($DATEP "+%r")
