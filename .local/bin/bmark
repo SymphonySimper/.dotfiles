@@ -1,60 +1,62 @@
 #!/bin/sh
 
 REPO="git@github.com:SymphonySimper/bmark.git"
-REPOPARENTLOC="$(echo $BMARK | sed 's/bmark\/bookmarks//g')"
-REPOLOC="$(echo $BMARK | sed 's/bookmarks//g')"
+REPO_PARENT_LOC="$(echo $BMARK | sed 's/bmark\/bookmarks//g')"
+REPO_LOC="$(echo $BMARK | sed 's/bookmarks//g')"
 
 err(){ echo "$(syl r; syl B)${1}$(syl R)"; }
 succ(){ echo "$(syl g; syl B)${1}$(syl R)"; }
 
-sortBmark(){ sort $BMARK -o $BMARK; }
-addBookmark(){ 
+sort_bmark(){ sort $BMARK -o $BMARK; }
+add_bmark(){
 	if grep -qw "^$1" $BMARK; then
 		err "$1 already exists"
 	else
 		printf "%*s %s\n" -24 "$1" "$2" >> $BMARK
 		succ "$1 added to Bookmarks"
-		sortBmark
+		sort_bmark
 	fi
 }
-rmBookmark(){ 
+rm_bmark(){
 	if grep -qw "^$1" $BMARK; then
 		sed "/^$1/d" -i $BMARK
 		succ "$1 deleted"
-		sortBmark
+		sort_bmark
 	else
 		err "Bookmark $1 not found"
 	fi
 }
-cloneRepo(){
+clone_repo(){
 	if [ -f "$HOME"/.ssh/id*.pub ]; then
-		git -C $REPOPARENTLOC clone $REPO 
+		git -C $REPO_PARENT_LOC clone $REPO
 	fi
 }
-pushRepo(){
-	if git -C $REPOLOC status | grep -q 'modified'; then
-		git -C $REPOLOC add -u \
-		&& git -C $REPOLOC commit -m "$1" \
-		&& git -C $REPOLOC push
+push_repo(){
+	if git -C $REPO_LOC status | grep -q 'modified'; then
+		git -C $REPO_LOC add -u \
+		&& git -C $REPO_LOC commit -m "$1" \
+		&& git -C $REPO_LOC push
 	else
 		succ "Nothing to commit"
 	fi
 }
+status_repo(){ git -C $REPO_LOC status -v; }
 
-if [ ! -d $REPOLOC ]; then
+if [ ! -d $REPO_LOC ]; then
 	err "$BMARK does not exist"
 	read -p "Would you like to clone it? [Y/n]" ANS
 	case "$ANS" in
-		[yY]*) cloneRepo ;;
+		[yY]*) clone_repo ;;
 		[nN]*) exit 1 ;;
-		*) cloneRepo ;;
+		*) clone_repo ;;
 	esac
 fi
 case "$1" in
-	add) shift; addBookmark "$1" "$2" ;;
-	rm) shift; rmBookmark "$1" ;;
-	edit) $EDITOR $BMARK; sortBmark ;;
-	clone) cloneRepo ;;
-	push) shift; pushRepo "$1" ;;
+	add) shift; add_bmark "$1" "$2" ;;
+	rm) shift; rm_bmark "$1" ;;
+	edit) $EDITOR $BMARK; sort_bmark ;;
+	clone) clone_repo ;;
+	status) status_repo ;;
+	push) shift; push_repo "$1" ;;
 	*) err "Invalid argument" ;;
 esac
