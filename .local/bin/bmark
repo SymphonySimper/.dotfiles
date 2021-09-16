@@ -42,6 +42,9 @@ push_repo(){
 }
 status_repo(){ git -C $REPO_LOC status -v; }
 
+if git -C $REPO_LOC status | grep -q 'modified'; then
+	git -C $REPO_LOC add -u
+fi
 if [ ! -d $REPO_LOC ]; then
 	err "$BMARK does not exist"
 	read -p "Would you like to clone it? [Y/n]" ANS
