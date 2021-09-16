@@ -1,5 +1,11 @@
 #!/bin/sh
 
-url='https://duckduckgo.com/?q='
+URL='https://duckduckgo.com/?q='
+HISTORY="$HOME"/.cache/searchhis
 
-[ ! -z "$@" ] && $BROWSER "${url}${@}" > /dev/null 2>&1 &
+if [ -z "$@" ]; then
+	[ -f $HISTORY ] && cat $HISTORY
+else
+	! grep -qw "^$@" $HISTORY && echo "$@" >> $HISTORY
+	$BROWSER "${URL}${@}" > /dev/null 2>&1 &
+fi
