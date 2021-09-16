@@ -8,6 +8,7 @@ mybinds			.config/sxhkd/mybinds
 myBspwmBinds		.config/sxhkd/myBspwmBinds
 nvim			.config/nvim/init.vim
 picom			.config/picom/picom.conf
+portage			.config/portage/make.conf
 rofiConfig		.config/rofi/config.rasi
 rofiTheme		.config/rofi/theme.rasi
 sxiv			.config/sxiv/exec/key-handler
