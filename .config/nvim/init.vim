@@ -28,7 +28,7 @@ hi VertSplit term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=D
 
 call plug#begin(system('echo -n "$XDG_CONFIG_HOME"/nvim/plugged'))
 
-"Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
 Plug 'frazrepo/vim-rainbow'
 Plug 'junegunn/goyo.vim'
 Plug 'ap/vim-css-color'
@@ -36,13 +36,16 @@ Plug 'rust-lang/rust.vim'
 
 call plug#end()
 
-"This unsets the "last search pattern" register by hitting return
+" This unsets the "last search pattern" register by hitting return
 nnoremap <CR> :noh<CR><CR>
 
-"Switch splits with h,j,k,l
+" Switch splits with h,j,k,l
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
+" To remove trailing white spaces
+autocmd BufWritePre * :%s/\s\+$//e
 
 map <leader>f :Goyo

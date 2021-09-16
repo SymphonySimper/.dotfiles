@@ -41,7 +41,7 @@ alias bye='$PERM poweroff'
 alias bbak='$PERM reboot'
 
 # Stuff
-alias hexA='less "$HOME"/.local/share/.hex-alpha'
+alias hexA='less "$HOME"/.local/share/mydocs/hexAlpha'
 alias todo='$EDITOR "$HOME"/.local/share/.todo'
 alias begone='$EDITOR "$HOME"/.local/share/.begone'
 alias rb='devour $READER "$HOME"/lifeisfun/rust/rust-lang.pdf'

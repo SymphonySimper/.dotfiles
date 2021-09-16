@@ -4,7 +4,9 @@ cdd		dl
 cdf		lifeisfun/flutter
 cdi		importantnt
 cdj		lifeisfun/java
+cdlb		.local/bin
 cdl		lifeisfun
+cdls		.local/share
 cdlx		importantnt/linux
 cdn		importantnt/Notes
 cdns4		importantnt/Notes/sem4
@@ -14,7 +16,6 @@ cdrs		lifeisfun/rust
 cdrvs		importantnt/recording/split
 cdshh		.config/shell
 cdsh		pics/screenshots
-cds		.local/bin
 cdu		usb
 cdv		importantnt/video
 cdvm		importantnt/virtualMachine

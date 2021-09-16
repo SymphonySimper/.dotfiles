@@ -1,3 +1,5 @@
 [user]
 	email = SymphonySimper@users.noreply.github.com
 	name = SymphonySimper
+[core]
+	editor = nvim
