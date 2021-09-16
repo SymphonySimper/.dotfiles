@@ -1,19 +1,16 @@
 # Copy contents of a file to clipboard
 yoink(){ xclip -sel c < "$1"; }
-ourimg(){ xclip -sel c -t image/png < "$1"; } 
+ourimg(){ xclip -sel c -t image/png < "$1"; }
 
 # Find
 fnd(){ find ~ -name "$1"; }
 
 # git
-gm(){ git commit -m "$1"; }
-gamp(){ git add -u && git commit -m "$1" && git push; }
+ga(){ git add "$1"; }
 grm(){ git rm "$1" --cached; }
 
 # config git
 cga(){ config add "$1"; }
-cgm(){ config commit -m "$1"; }
-cgamp(){ config add -u && config commit -m "$1" && config push; }
 cgrm(){ config rm "$1" --cached; }
 
 # Package Manager
@@ -53,11 +50,11 @@ capsToEsc(){ setxkbmap -option caps:escape; }
 cnvert(){
 	vc="ffmpeg"
 	ic="magick"
-	
+
 	case "$1" in
 		*.mkv) $vc -i "$1" -codec copy "$2" ;;
 		*.webm | *.webp) $ic "$1" "$2" ;;
-	esac 
+	esac
 }
 
 # Letmein

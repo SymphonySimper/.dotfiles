@@ -2,13 +2,15 @@
 alias g='git'
 alias gc='git clone'
 alias gs='git status'
-alias gp='git pull'
-alias ga='git add'
+alias gp='git push'
+alias gpu='git pull'
 alias gau='git add -u'
+alias gm='git commit'
 alias gnotrack='git config --local status.showUntrackedFiles no'
 
 # Config git alias
 alias cgs='config status'
+alias cgm='config commit'
 alias cgp='config push'
 alias cgau='config add -u'
 
@@ -50,7 +52,7 @@ alias kd='$EDITOR "$HOME"/.local/share/mydocs/compilekernel'
 
 # Navigate dir
 alias ..='cd ..'
-alias j='cd "$(ls -aF | grep / | fzf)"'
+alias j='cd "$(ls -aF | grep / | sed "s/\///" | fzf)"'
 
 # Clean up
 alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
