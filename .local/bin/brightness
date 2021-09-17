@@ -1,8 +1,12 @@
 #!/bin/sh
 
 app="xbacklight"
-getB(){ $app -get; }
-notify(){ dunstify -h string:x-dunst-stack-tag:brightness -i $HOME/.local/share/icons/general/brightness.svg "Brightness: $(getB)" -h int:value:$(getB); }
+get_b(){ $app -get; }
+notify(){
+	dunstify -h string:x-dunst-stack-tag:brightness \
+		-i $HOME/.local/share/icons/general/brightness.svg \
+		"Brightness: $(get_b)" -h int:value:$(get_b)
+}
 
 case "$1" in
 	-u) $app -inc 2 && notify ;;

@@ -7,22 +7,22 @@ fa(){
 fec(){
 	loc="$HOME"/.local/bin/.paths/configs
 	query="$(awk '{ print $1 }' "$loc" | fzf)"
-	getLoc="$HOME/$(grep -w "$query" "$loc" | awk '{ print $2 }')"
-	[ -f "$getLoc" ] && "$EDITOR" "$getLoc"
+	get_loc="$HOME/$(grep -w "^$query." "$loc" | awk '{ print $2 }')"
+	[ -f "$get_loc" ] && "$EDITOR" "$get_loc"
 }
 
 fes(){
 	loc="$HOME"/.local/bin/.paths/scripts
 	query="$(awk '{ print $1 }' "$loc" | fzf)"
-	getLoc="$HOME/$(grep -w "$query" "$loc" | awk '{ print $2 }')"
-	[ -f "$getLoc" ] && "$EDITOR" "$getLoc"
+	get_loc="$HOME/$(grep -w "^$query." "$loc" | awk '{ print $2 }')"
+	[ -f "$get_loc" ] && "$EDITOR" "$get_loc"
 }
 
 fesh(){
 	loc="$HOME"/.local/bin/.paths/shell
 	query="$(awk '{ print $1 }' "$loc" | fzf)"
-	getLoc="$HOME/$(grep -w "$query" "$loc" | awk '{ print $2 }')"
-	[ -f "$getLoc" ] && "$EDITOR" "$getLoc"
+	get_loc="$HOME/$(grep -w "^$query." "$loc" | awk '{ print $2 }')"
+	[ -f "$get_loc" ] && "$EDITOR" "$get_loc"
 }
 
 fv(){
@@ -32,7 +32,7 @@ fv(){
 }
 
 fdocs(){
-	LOC="$HOME"/.local/share/mydocs
-	QUERY="$(ls -F $LOC | grep -v / | fzf)"
-	$EDITOR $LOC/$QUERY
+	loc="$HOME"/.local/share/my-docs
+	query="$(ls -F $LOC | grep -v / | fzf)"
+	$EDITOR $loc/$query
 }

@@ -16,9 +16,9 @@ alias cgau='config add -u'
 
 # Package Manager
 alias e='$PERM emerge -aq'
-alias rmzombies='$PERM emerge --depclean'
+alias rm_zombies='$PERM emerge --depclean'
 alias update='$PERM emerge -aq --sync && $PERM emerge -aq --update --deep --with-bdeps=y @world'
-alias amifat='equery list "*" | wc -l'
+alias am_i_fat='equery list "*" | wc -l'
 alias erm='$PERM emerge -cav'
 alias newuse='$PERM emerge -aq --update --deep --newuse @world'
 alias elist='equery list "*" | less'
@@ -32,23 +32,23 @@ alias less='less -Q'
 alias flex='neofetch'
 
 # Tasks
-alias rmcache='rm -rf ~/.cache/*'
-alias rmme='rm -rf ~/.local/share/Trash/*'
-alias rmlinks='find . -xtype l -exec rm {} \+'
+alias rm_cache='rm -rf ~/.cache/*'
+alias rm_me='rm -rf ~/.local/share/Trash/*'
+alias rm_links='find . -xtype l -exec rm {} \+'
 alias q='exit'
-alias imlight='ps_mem -p $(pgrep -d, -u $USER)'
+alias im_light='ps_mem -p $(pgrep -d, -u $USER)'
 alias nobita='mntdev -n sdb1'
 alias ka='killall'
 alias bye='$PERM poweroff'
 alias bbak='$PERM reboot'
 
 # Stuff
-alias hexA='less "$HOME"/.local/share/mydocs/hexAlpha'
+alias hex_a='less "$HOME"/.local/share/mydocs/hexAlpha'
 alias todo='$EDITOR "$HOME"/.local/share/.todo'
 alias begone='$EDITOR "$HOME"/.local/share/.begone'
 alias rb='devour $READER "$HOME"/lifeisfun/rust/rust-lang.pdf'
 alias his='$EDITOR "$HOME"/.cache/zshhistory'
-alias kd='$EDITOR "$HOME"/.local/share/mydocs/compilekernel'
+alias kd='$EDITOR "$HOME"/.local/share/my-docs/compile-kernel'
 
 # Navigate dir
 alias ..='cd ..'

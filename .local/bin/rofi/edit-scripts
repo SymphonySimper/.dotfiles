@@ -1,0 +1,8 @@
+#!/bin/sh
+
+scripts="$HOME"/.local/bin/.paths/scripts
+
+options=$( awk '{ print $1 }' $scripts )
+path_to_e=$( grep -w "^$1." $scripts | awk '{ print $2 }' )
+
+[ -z "$1" ] && echo "$options" || $TERMINAL -e $EDITOR "$path_to_e" > /dev/null 2>&1 &

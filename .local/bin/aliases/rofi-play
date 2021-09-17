@@ -1,7 +1,7 @@
 #!/bin/sh
 
 loc="$HOME"/.local/bin/rofi
-video="$loc"/playVideo
-audio="$loc"/playAudio
+video="$loc"/play-video
+audio="$loc"/play-audio
 
 rofi -modi "video:$video,audio:$audio" -show video

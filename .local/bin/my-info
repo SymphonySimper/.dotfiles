@@ -1,0 +1,41 @@
+#!/bin/sh
+
+notify="dunstify"
+todo_loc="$XDG_DATA_HOME"/.todo
+
+#Icons
+dir="$HOME"/.local/share/icons/myInfo
+bat_full_i="$dir"/battery-full.svg
+low_bat_i="$dir"/low-battery.svg
+charging_i="$dir"/charging.svg
+saver_i="$dir"/saver.svg
+date_i="$dir"/date.svg
+clock_i="$dir"/clock.svg
+
+get_stat=$(cat /sys/class/power_supply/BAT0/status)
+get_cap=$(cat /sys/class/power_supply/BAT0/capacity)
+notify_bat(){ $notify -h string:x-dunst-stack-tag:myBattery -i "$1"  "Battery level: $get_cap%"; }
+bat(){
+	if [ $get_stat = 'Unknown' ]; then
+		notify_bat "$saver_i"
+	elif [ $get_stat = 'Charging' ]; then
+		notify_bat "$charging_i"
+	elif [ $get_stat = 'Discharging' ]; then
+		[ $get_cap -gt 20 ] && notify_bat "$bat_full_i" || notify_bat "$low_bat_i"
+	fi
+}
+
+date_p="date"
+get_date_txt=$($date_p "+%A %B %Y")
+get_date=$($date_p "+%d/%m/%Y")
+get_time=$($date_p "+%r")
+notify_date(){ $notify -h string:x-dunst-stack-tag:myDate -i "$date_i" "$get_date" "$get_date_txt"; }
+
+notify_time(){ $notify -h string:x-dunst-stack-tag:myTime -i "$clock_i"  "$get_time"; }
+list_todo(){
+	cat $todo_loc | while read -r line; do
+		$notify "+" "$line"
+	done
+}
+
+bat; notify_date; notify_time; list_todo

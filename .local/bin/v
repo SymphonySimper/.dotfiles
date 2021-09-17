@@ -1,37 +1,37 @@
 #!/bin/sh
 
 #Apps
-IV="$IMAGEVIEWER"
-VV="$VIDEOPLAYER"
-VF="ffplay"
-PV="$READER"
-TE="$EDITOR"
-H="devour"
-DIS="fzf"
+iv="$IMAGEVIEWER"
+vv="$VIDEOPLAYER"
+vf="ffplay"
+pv="$READER"
+te="$EDITOR"
+h="devour"
+dis="fzf"
 
 #Paths
-WHAT_IMG="$HOME/dl/What"*
+what_img="$HOME/dl/What"*
 
 main() {
 	case "$1" in
-		*.jp*g | *.png | *.webp ) $H $IV "$1" ;;
-		*.mkv | *.mp4 | *.webm | *.gif | *.avi | *youtu* | *.mp3 ) $H prime-run $VV "$1" ;;
-		*.pdf ) $H $PV "$1" ;;
-		-a) ls | grep  'jpeg\|jpg\|png\|webp' | $H $IV -t - ;;
-		-w) $H $IV $WHAT_IMG ;;
-		-f) $H $VF /dev/video0 ;;
+		*.jp*g | *.png | *.webp ) $h $iv "$1" ;;
+		*.mkv | *.mp4 | *.webm | *.gif | *.avi | *youtu* | *.mp3 ) $h prime-run $vv "$1" ;;
+		*.pdf ) $h $pv "$1" ;;
+		-a) ls | grep  'jpeg\|jpg\|png\|webp' | $h $iv -t - ;;
+		-w) $h $iv $what_img ;;
+		-f) $h $vf /dev/video0 ;;
 		-d) shift; case "$1" in
-				*.pdf ) $H $PV "$1" && rm -i "$1" ;;
-				*) $H $IV $WHAT_IMG && rm -I $WHAT_IMG ;;
+				*.pdf ) $h $pv "$1" && rm -i "$1" ;;
+				*) $h $iv $what_img && rm -I $what_img ;;
 			esac ;;
-		-s) shift; $PERM $TE "$1" ;;
-		-p) ls *.pdf | $DIS | xargs -rI {} $H $PV {} ;;
-		*) [ -n "$@" ] && $TE "$1" ;;
+		-s) shift; $PERM $te "$1" ;;
+		-p) ls *.pdf | $dis | xargs -rI {} $h $pv {} ;;
+		*) [ -n "$@" ] && $te "$1" ;;
 	esac
 }
 
 if [ -n "$1" ]; then
 	main "$@"
 else
-	main "$(ls -aF | grep -v / | sed 's|[@*]||g' | $DIS)"
+	main "$(ls -aF | grep -v / | sed 's|[@*]||g' | $dis)"
 fi

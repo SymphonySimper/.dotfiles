@@ -1,0 +1,91 @@
+super + q
+	bspc node -c
+super + shift + {q,r}
+	bspc {quit,wm -r}
+super + m
+	bspc desktop -l next
+super + y
+	bspc node newest.marked.local -n newest.!automatic.local
+super + g
+	bspc node -s biggest.window
+super + {t,shift + t,alt + f,alt + m}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+super + ctrl + {m,x,y,z}
+	bspc node -g {marked,locked,sticky,private}
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+super + {_,shift + }c
+	bspc node -f {next,prev}.local.!hidden.window
+super + bracket{left,right}
+	bspc desktop -f {prev,next}.local
+super + {grave,Tab}
+	bspc {node,desktop} -f last
+super + {o,i}
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+super + alt + {h,j,k,l}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+super + alt + shift + {h,j,k,l}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+super + ctrl + {h,j,k,l}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
+super + x
+	rofi -show coding-time -modi "coding-time:$HOME/.local/bin/bspwm/coding-time"
+super + shift + x
+	bspc node -z right +400 0
+super + shift + m
+	bspc desktop -f '^4'; \
+	prime-run $VIDEOPLAYER "$(xclip -selection clipboard -o)"
+super + Return
+ 	$TERMINAL
+super + shift + Return
+	$SECONDTERMINAL
+super + shift + f
+	$BROWSER
+super + F2
+	volume -d
+super + F3
+	volume -u
+super + shift + F2
+	volume -D
+super + shift + F3
+	volume -U
+super + F4
+	volume -m
+super + F12
+	$TERMINAL -e pulsemixer
+super + F1
+	play-lofi
+super + shift + F12
+	$TERMINAL -e gen-hosts
+super + F5
+	brightness -u
+super + F6
+	brightness -d
+super + shift + p
+	game-mode
+super + space
+	rofi -show run
+super + s
+	rofi-open
+super + e
+	rofi-edit
+super + r
+	rofi-todo
+super + a
+	rofi-play
+super + alt + s
+	screenshot -r
+super + alt + a
+	screenshot -w
+Print
+	screenshot -s
+super + b
+	my-info
+XF86Calculator
+	typin
+super + Escape
+	re-key

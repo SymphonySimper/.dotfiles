@@ -7,73 +7,73 @@ h="$HOME"
 shell=.config/shell
 
 bin=.local/bin
-binRofi="$bin"/rofi
-binAliases="$bin"/aliases
-binBspwm="$bin"/bspwm
-binGen="$bin"/gen
+bin_rofi="$bin"/rofi
+bin_aliases="$bin"/aliases
+bin_bspwm="$bin"/bspwm
+bin_gen="$bin"/gen
 
 paths="$bin"/.paths
-shellPaths="$paths"/shell
-binPaths="$paths"/scripts
+shell_paths="$paths"/shell
+bin_paths="$paths"/scripts
 
 v="$EDITOR"
 
 shebang="#!/bin/sh"
 
-errorMsg(){ echo "${bold}${red}${1}${reset}"; }
+err(){ echo "${bold}${red}${1}${reset}"; }
 
 executable(){ chmod +x "$h/$1"; }
-addPath(){ printf "%*s %s\n" -24 "$1" "$2/$1" >> "$h/$3"; }
-sortPaths(){ sort "$h/$1" -o "$h/$1"; }
+add_path(){ printf "%*s %s\n" -24 "$1" "$2/$1" >> "$h/$3"; }
+sort_paths(){ sort "$h/$1" -o "$h/$1"; }
 
-createBinFile(){
+create_bin_file(){
 	if [ -f "$h/$1/$2" ]; then
-		errorMsg "$2 already exists at $h/$1"
+		err "$2 already exists at $h/$1"
 	else
 		echo "$shebang" > "$h/$1/$2"
-		addPath "$2" "$1" "$binPaths"
-		sortPaths "$binPaths"
+		add_path "$2" "$1" "$bin_paths"
+		sort_paths "$bin_paths"
 		executable "$1/$2"
 		$v "$h/$1/$2"
 	fi
 }
 
-createShellFile(){
+create_shell_file(){
 	if [ -f "$h/$shell/$1" ]; then
-		errorMsg "$1 already exists at $h/$shell"
+		err "$1 already exists at $h/$shell"
 	else
 		$v "$h/$shell/$1" &&
-		[ -f "$h/$shell/$1" ] && { 
-			addPath "$1" "$shell" "$shellPaths"
-			sortPaths "$shellPaths"
+		[ -f "$h/$shell/$1" ] && {
+			add_path "$1" "$shell" "$shell_paths"
+			sort_paths "$shell_paths"
 		}
 	fi
 }
 
-deleteFile(){
-	yeet(){ 
-		rm "$h/$(grep -w "$2" "$h/$1" | awk '{ print $2 }')"
+delete_file(){
+	yeet(){
+		rm "$h/$(grep -w "^$2." "$h/$1" | awk '{ print $2 }')"
 		sed "/^$2/d" -i "$h/$1"
-	} 
-	ifPresent(){ grep -wq "^$1" "$h/$2"; }
+	}
+	ifPresent(){ grep -wq "^$1." "$h/$2"; }
 	msg="has been removed from"
-	if ( ifPresent "$1" "$binPaths" ); then
-		yeet "$binPaths" "$1"	
-	     errorMsg "$1 $msg $h/$bin"
-	elif ( ifPresent "$1" "$shellPaths" ); then
-		yeet "$shellPaths" "$1"	
-		errorMsg "$1 $msg $h/$shell"
+	if ( ifPresent "$1" "$bin_paths" ); then
+		yeet "$bin_paths" "$1"
+	     err "$1 $msg $h/$bin"
+	elif ( ifPresent "$1" "$shell_paths" ); then
+		yeet "$shell_paths" "$1"
+		err "$1 $msg $h/$shell"
 	else
-		errorMsg "$1 not found"
+		err "$1 not found"
 	fi
 }
 
 case "$1" in
-	-a) shift; createBinFile "$binAliases" "$1" ;;
-	-r) shift; createBinFile "$binRofi" "$1" ;;
-	-b) shift; createBinFile "$binBspwm" "$1" ;;
-	-g) shift; createBinFile "$binGen" "$1" ;;
-	-sh) shift; createShellFile "$1" ;;
-	-d) shift; deleteFile "$1" ;;
-	*) createBinFile "$bin" "$1" ;;
+	-a) shift; create_bin_file "$bin_aliases" "$1" ;;
+	-r) shift; create_bin_file "$bin_rofi" "$1" ;;
+	-b) shift; create_bin_file "$bin_bspwm" "$1" ;;
+	-g) shift; create_bin_file "$bin_gen" "$1" ;;
+	-sh) shift; create_shell_file "$1" ;;
+	-d) shift; delete_file "$1" ;;
+	*) create_bin_file "$bin" "$1" ;;
 esac

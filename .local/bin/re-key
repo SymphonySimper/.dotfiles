@@ -1,0 +1,61 @@
+#!/bin/sh
+
+prgm="sxhkd"
+
+loc="$HOME"/.config/sxhkd
+bspwm_key="$loc"/bspwm-hotkeys
+my_bspwm_binds="$loc"/my-bspwm-binds
+my_key="$loc"/my-binds
+
+config_loc="$loc"/.sxhkdrc
+x_loc="$HOME"/.config/x11/xinitrc
+
+notify="dunstify -h string:x-dunst-stack-tag:sxhkd"
+warning_i="$HOME"/.local/share/icons/generla/warning.svg
+
+start_prgm(){
+	if [ -f "$config_loc" ]; then
+		pgrep "$prgm" && killall "$prgm"
+		{ "$prgm" -c "$config_loc" & } &&
+		$notify "Restarting $prgm"
+	else
+		$notify "Config file not found" "$prgm"
+	fi
+}
+
+iclr="sed '/#/d; /^[[:space:]]*$/d'"
+create_config(){
+	case "$1" in
+		-oa) eval $iclr $bspwm_key $my_bspwm_binds $my_key ;;
+		-a) eval $iclr $bspwm_key $my_bspwm_binds $my_key > $config_loc;;
+		-om) eval $iclr $my_key ;;
+		-m) eval $iclr $my_key > $config_loc;;
+	esac
+}
+
+if [ -f "$config_loc" ]; then
+	touch $config_loc
+fi
+
+if ( grep -q bspwm "$x_loc" ); then
+	if ( create_config -oa | diff -q - "$config_loc" ); then
+		$notify -i $warning_i "No change in config"
+	else
+		create_config -a
+	fi
+else
+	if ( create_config -om | diff -q - "$config_loc" ); then
+		$notify -i $warning_i "No change in config"
+	else
+		create_config -m
+	fi
+
+fi
+
+if [ -f "$config_loc" ]; then
+	pgrep "$prgm" && killall "$prgm"
+	{ "$prgm" -c "$config_loc" & } &&
+	$notify "Restarting $prgm"
+else
+	$notify "Config file not found" "$prgm"
+fi

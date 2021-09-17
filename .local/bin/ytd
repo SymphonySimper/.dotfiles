@@ -3,47 +3,47 @@
 qn(){ echo "\n$(syl y)${1}$(syl R)\n"; }
 err(){ echo "\n$(syl r; syl B)${1}$(syl R)\n"; }
 
-VLOC='~/importantnt/video/%(title)s.%(ext)s'
-ALOC='~/importantnt/audio/%(title)s.%(ext)s'
+vloc='~/importantnt/video/%(title)s.%(ext)s'
+aloc='~/importantnt/audio/%(title)s.%(ext)s'
 
-YTDL="youtube-dl"
+ytdl="youtube-dl"
 
-QUAL=''
+qual=''
 
 # EXPERMIENTAL
-# VFORMAT=''
-# AFORMAT=''
+# Vformat=''
+# Aformat=''
 
-getF(){ FORMAT="$($YTDL -F "$1")"; }
-dF(){ echo "$FORMAT" | grep -wE "$1" | sed "s/\,.*//"; }
-getC(){ dF "$1" | tail -n 1 | cut -d ' ' -f 1; }
-getVA(){
+get_f(){ format="$($ytdl -F "$1")"; }
+d_f(){ echo "$format" | grep -wE "$1" | sed "s/\,.*//"; }
+get_c(){ d_f "$1" | tail -n 1 | cut -d ' ' -f 1; }
+get_va(){
 	case "$1" in
-		-a) getC "audio" ;;
-		-v) getC "${QUAL}.*video" ;;
+		-a) get_c "audio" ;;
+		-v) get_c "${qual}.*video" ;;
 	esac
 }
 
 av(){
 	case "$1" in
-		-a) shift; dF 'audio'
+		-a) shift; d_f 'audio'
 			qn "Enter audio format"
-			read AF; echo ;;
-		-v) shift; dF 'video' 
+			read af; echo ;;
+		-v) shift; d_f 'video'
 			qn "Enter video format"
-			read VF; echo ;;
+			read vf; echo ;;
 	esac
 }
 
-dlav(){ $YTDL -f "$VF+$AF" "$1" -o $VLOC; }
+dl_av(){ $ytdl -f "$vf+$af" "$1" -o $vloc; }
 dl(){
-	if [ -z $QUAL ]; then
-		$YTDL "$1" -o $VLOC
+	if [ -z $qual ]; then
+		$ytdl "$1" -o $vloc
 	else
-		getF "$1"
-		AF="$(getVA -a)"
-		VF="$(getVA -v)"
-		if [ -z $VF ]; then
+		get_f "$1"
+		af="$(get_va -a)"
+		vf="$(get_va -v)"
+		if [ -z $vf ]; then
 			err "Requested Quality for $1 not found"
 			qn "Would you like to choose quality by yourself ? [y/n/a(choose both audio and video)/q]"
 			read ANS
@@ -52,21 +52,21 @@ dl(){
 				exit 1
 			elif [ $ANS = 'a' ]; then
 				av -a; av -v;
-				dlav "$1"
+				dl_av "$1"
 			elif [ $ANS = 'y' ]; then
-				if [ -n $AF ]; then
-					echo $AF
+				if [ -n $af ]; then
+					echo $af
 					av -v;
-					dlav "$1"
+					dl_av "$1"
 				else
 					av -a; av -v;
-					dlav "$1"
+					dl_av "$1"
 				fi
 			else
-				$YTDL "$1" -o $VLOC
+				$ytdl "$1" -o $vloc
 			fi
-		elif [ -n $VF ] && [ -n $AF ]; then
-			dlav "$1"
+		elif [ -n $vf ] && [ -n $af ]; then
+			dl_av "$1"
 		else
 			err "Invalid Formats"
 		fi
@@ -77,31 +77,31 @@ playlist(){
 	qn "You are entering playlist mode"
 	echo "You have 5 seconds to cancel this"
 	sleep 5s
-	VIDEOIDS="$($YTDL --get-id "$1")"
-	for ID in $VIDEOIDS; do
-		dl "$ID"
+	video_ids="$($ytdl --get-id "$1")"
+	for id in $video_ids; do
+		dl "$id"
 	done
 }
 
 echo
 case "$1" in
 	-a) shift
-		getF "$1"
-		AF=$(getC 'audio')
-		$YTDL -f "$AF" "$1" -o $ALOC ;;
+		get_f "$1"
+		af=$(get_c 'audio')
+		$ytdl -f "$af" "$1" -o $aloc ;;
 	-v) shift
-		getF "$1"
-		AF=$(getC 'video')
+		get_f "$1"
+		af=$(get_c 'video')
 		av -v
-		$YTDL -f "$VF+$AF" "$1" -o $VLOC ;;
+		$ytdl -f "$vf+$af" "$1" -o $vloc ;;
 	-sa) shift
-		getF "$1"
+		get_f "$1"
 		av -a
-		$YTDL -f "$AF" "$1" -o $ALOC ;;
-	-s) shift 
-		getF "$1"
+		$ytdl -f "$af" "$1" -o $aloc ;;
+	-s) shift
+		get_f "$1"
 		av -a; av -v;
-		$YTDL -f "$VF+$AF" "$1" -o $VLOC ;;
+		$ytdl -f "$vf+$af" "$1" -o $vloc ;;
 	*playlist*) playlist "$1";;
 	*) dl "$1" ;;
 esac

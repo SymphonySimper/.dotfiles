@@ -1,0 +1,14 @@
+#!/bin/sh
+
+img="qemu-img"
+sys="qemu-system-x86_64"
+
+create_image(){ $img create -f raw "$1" "$2"; }
+create_iso(){ $sys -enable-kvm -cdrom "$1" -boot order=d -drive file="$2",format=raw -m 4G -cpu host -smp 4 -vga virtio -display sdl; }
+open_img(){ $sys -enable-kvm -boot order=d -drive file="$1",format=raw -m 4G -cpu host -smp 4 -vga virtio -display sdl -soundhw all; }
+
+case "$1" in
+	-i) shift; create_image "$1" "$2" ;;
+	-c) shift; create_iso "$1" "$2" ;;
+	*) open_img "$1" ;;
+esac

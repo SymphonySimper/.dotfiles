@@ -1,12 +1,10 @@
 aliases                  .config/shell/aliases
-bruh                     .config/shell/bruh
-colorsx                  .config/x11/xre/colors
-dpix                     .config/x11/xre/dpi
+colors-x                 .config/x11/xre/colors
+dpi-x                    .config/x11/xre/dpi
 functions                .config/shell/functions
-fzfFunctions             .config/shell/fzfFunctions
+fzf-functions            .config/shell/fzf-functions
 profile                  .config/shell/.profile
-rankServers              .config/shell/rankServers
-urxvtx                   .config/x11/xre/urxvt
+urxvt-x                  .config/x11/xre/urxvt
 xinitrc                  .config/x11/xinitrc
 zprofile                 .zprofile
 zshrc                    .config/zsh/.zshrc

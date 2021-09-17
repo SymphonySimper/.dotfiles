@@ -1,9 +1,0 @@
-#!/bin/sh
-
-URL="$( grep -w "^$1" $BMARK | awk '{ print $2 }' )"
-
-if [ -z "$@" ]; then
-	cat $BMARK
-else
-	$BROWSER "$URL" > /dev/null 2>&1 &
-fi

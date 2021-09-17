@@ -2,7 +2,7 @@
 super + Return
  	$TERMINAL
 super + shift + Return
-	$SECONDTERMINAL	
+	$SECONDTERMINAL
 
 # Open Browser
 super + shift + f
@@ -24,11 +24,11 @@ super + F12
 
 # Lofi
 super + F1
-	playLofi
+	play-lofi
 
 # Get work done
 super + shift + F12
-	$TERMINAL -e genHosts
+	$TERMINAL -e gen-hosts
 
 # Brightness
 super + F5
@@ -38,19 +38,19 @@ super + F6
 
 # Picom
 super + shift + p
-	gameMode
+	game-mode
 
 # Rofi
 super + space
-	rofi -show run	
+	rofi -show run
 super + s
-	rofiOpen
+	rofi-open
 super + e
-	rofiEdit
+	rofi-edit
 super + r
-	rofiTodo
+	rofi-todo
 super + a
-	rofiPlay	
+	rofi-play
 
 # Screenshot
 super + alt + s
@@ -62,7 +62,7 @@ Print
 
 # My info
 super + b
-	myInfo
+	my-info
 
 # Screenkey
 XF86Calculator
@@ -70,4 +70,4 @@ XF86Calculator
 
 # sxhkd
 super + Escape
-	rekey
+	re-key

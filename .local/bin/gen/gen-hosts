@@ -1,0 +1,39 @@
+#!/bin/sh
+
+loc=/etc/hosts
+block_source="$HOME"/.local/share/.begone
+tempfile=$(mktemp)
+
+err(){ echo "$(syl r; syl B)${1}$(syl R)"; }
+
+noti='dunstify -h string:x-dunst-stack-tag:genHosts'
+notify(){
+	case "$1" in
+		on) $noti "Get Work Done mode is on" "Begone sites are gone" ;;
+		off) $noti "Get Work Done mode is off" "Begone? more like never gone" ;;
+	esac
+}
+
+clear_block(){
+	if grep -q '^# MY BlocK' $loc; then
+		if grep -q '^# MY END BlocK' $loc; then
+			$PERM sed '/^# MY BlocK/, /^# MY END BlocK/ { /^# MY BlocK/! { /^# MY END BlocK/!d; }}' -i $loc
+		else
+			err "MY END BlocK is absent"
+		fi
+	else
+		err 'MY BlocK is absent'
+	fi
+	notify off
+}
+
+add_block(){
+	sort $block_source -o $block_source
+	for line in $( cat $block_source ); do echo "0.0.0.0\t\twww.$line" >> $tempfile; done
+	$PERM sed '/^# MY BlocK/ r /dev/stdin' -i $loc  < $tempfile
+	notify on
+}
+
+is_block="$(awk '/^# MY BlocK$/{flag=1;next}/^# MY END BlocK$/{flag=0}flag' $loc)"
+
+[ -n "$is_block" ] && clear_block || add_block

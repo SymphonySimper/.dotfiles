@@ -1,0 +1,9 @@
+#!/bin/sh
+
+url="$( grep -w "^$1" $BMARK | awk '{ print $2 }' )"
+
+if [ -z "$@" ]; then
+	cat $BMARK
+else
+	$BROWSER "$url" > /dev/null 2>&1 &
+fi

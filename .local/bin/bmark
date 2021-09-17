@@ -1,8 +1,8 @@
 #!/bin/sh
 
-REPO="git@github.com:SymphonySimper/bmark.git"
-REPO_PARENT_LOC="$(echo $BMARK | sed 's/bmark\/bookmarks//g')"
-REPO_LOC="$(echo $BMARK | sed 's/bookmarks//g')"
+repo="git@github.com:SymphonySimper/bmark.git"
+repo_parent_loc="$(echo $BMARK | sed 's/bmark\/bookmarks//g')"
+repo_loc="$(echo $BMARK | sed 's/bookmarks//g')"
 
 err(){ echo "$(syl r; syl B)${1}$(syl R)"; }
 succ(){ echo "$(syl g; syl B)${1}$(syl R)"; }
@@ -28,24 +28,24 @@ rm_bmark(){
 }
 clone_repo(){
 	if [ -f "$HOME"/.ssh/id*.pub ]; then
-		git -C $REPO_PARENT_LOC clone $REPO
+		git -C $repo_parent_loc clone $repo
 	fi
 }
 push_repo(){
-	if git -C $REPO_LOC status | grep -q 'modified'; then
-		git -C $REPO_LOC add -u \
-		&& git -C $REPO_LOC commit -m "$1" \
-		&& git -C $REPO_LOC push
+	if git -C $repo_loc status | grep -q 'modified'; then
+		git -C $repo_loc add -u \
+		&& git -C $repo_loc commit -m "$1" \
+		&& git -C $repo_loc push
 	else
 		succ "Nothing to commit"
 	fi
 }
-status_repo(){ git -C $REPO_LOC status -v; }
+status_repo(){ git -C $repo_loc status -v; }
 
-if git -C $REPO_LOC status | grep -q 'modified'; then
-	git -C $REPO_LOC add -u
+if git -C $repo_loc status | grep -q 'modified'; then
+	git -C $repo_loc add -u
 fi
-if [ ! -d $REPO_LOC ]; then
+if [ ! -d $repo_loc ]; then
 	err "$BMARK does not exist"
 	read -p "Would you like to clone it? [Y/n]" ANS
 	case "$ANS" in

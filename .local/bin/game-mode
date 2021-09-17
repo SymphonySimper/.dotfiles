@@ -3,14 +3,14 @@
 # pgrep picom && killall picom || picom -m 1.0 -i 1.0 -e 1.0 --vsync --backend glx --no-fading-openclose &
 
 notify="dunstify -h string:x-dunst-stack-tag:gameMode"
-warningI="$HOME"/.local/share/icons/general/warning.svg
+warning_i="$HOME"/.local/share/icons/general/warning.svg
 
-isPicom="$(pgrep picom)"
+is_picom="$(pgrep picom)"
 
-if [ -z $isPicom ]; then
+if [ -z $is_picom ]; then
 	picom &
 	$notify "Picom is alive"
 else
 	killall picom
-	$notify "Picom is dead"
+	$notify -i $warning_i "Picom is dead"
 fi

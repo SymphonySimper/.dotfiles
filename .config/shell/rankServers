@@ -1,9 +1,0 @@
-#Rank Arch Servers
-alias ua-drop-caches='doas pacman -Sc --noconfirm ; paru -Sc --aur --noconfirm'
-alias lennaUpdateAll='export TMPFILE="$(mktemp)"; \
-    doas true; \
-    rate-mirrors --save=$TMPFILE arch --max-delay=21600 \
-      && doas mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup \
-      && doas mv $TMPFILE /etc/pacman.d/mirrorlist \
-      && ua-drop-caches \
-      && paru -Syyu --noconfirm'

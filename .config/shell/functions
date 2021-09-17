@@ -14,10 +14,10 @@ cga(){ config add "$1"; }
 cgrm(){ config rm "$1" --cached; }
 
 # Package Manager
-isThere(){ equery list '*' | grep -i "$1"; }
+is_there(){ equery list '*' | grep -i "$1"; }
 
 # Format USB
-formatUsbFat32(){
+format_usb_fat32(){
 	$PERM dd if=/dev/zero of=/dev/sdb bs=4096 status=progress \
 	&& $PERM parted /dev/sdb --script -- mklabel msdos \
 	&& $PERM parted /dev/sdb --script -- mkpart primary fat32 1MiB 100% \
@@ -35,16 +35,16 @@ lolban(){
 }
 
 # Sort Paths
-sortPaths(){ for f in "$HOME"/.local/bin/.paths/*; do sort $f -o $f; done; }
+sort_paths(){ for f in "$HOME"/.local/bin/.paths/*; do sort $f -o $f; done; }
 
-# LoopV
-loopV(){ devour prime-run $VIDEOPLAYER --shuffle --loop-playlist "$HOME"/importantnt/video; }
+# Loop Video
+loop_v(){ devour prime-run $VIDEOPLAYER --shuffle --loop-playlist "$HOME"/importantnt/video; }
 
-# LoopA
-loopA(){ $VIDEOPLAYER --shuffle --loop-playlist "$HOME"/importantnt/audio; }
+# Loop Audio
+loop_a(){ $VIDEOPLAYER --shuffle --loop-playlist "$HOME"/importantnt/audio; }
 
 # Caps To ESC
-capsToEsc(){ setxkbmap -option caps:escape; }
+caps-to-esc(){ setxkbmap -option caps:escape; }
 
 # Cnvert
 cnvert(){
@@ -66,4 +66,4 @@ letmein(){
 }
 
 # Hey yo internet
-heyYoInt(){ while sleep 30s; ping -c 3 gnu.org; [ $? -ne 0 ]; do true; done && soundEfx; }
+hey-yo-int(){ while sleep 30s; ping -c 3 gnu.org; [ $? -ne 0 ]; do true; done && sound-efx; }

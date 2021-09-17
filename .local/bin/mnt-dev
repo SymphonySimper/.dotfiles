@@ -1,0 +1,28 @@
+#!/bin/sh
+
+red=`syl r`; green=`syl g`; bold=`syl B`; reset=`syl R`
+error(){ echo "${bold}${red}${1}${reset}"; }
+success(){ echo "${bold}${green}${1}${reset}"; }
+
+#Path
+ntfs="$HOME/ntfs"; usb="$HOME/usb"
+ntfs_mount(){ "$PERM" ntfs-3g /dev/$1 $ntfs && success "Ntfs mounted"; }
+mount_usn(){ "$PERM" mount -o umask=0,uid=nobody,gid=nobody /dev/$1 $usb && success "Usb mounted"; }
+umount_dev(){ "$PERM" umount $1; }
+
+#Gets the mounted point
+what_d=$(lsblk -lp | awk '/usb/ || /ntfs/ {print $1}')
+umount_all(){
+	if lsblk | grep -q 'ntfs'; then
+		umount_dev $what_d && success "Ntfs umounted"
+	elif lsblk | grep -q 'usb'; then
+		umount_dev $what_d && success "Usb umounted"
+	else error "No drives found"; exit 1; fi
+}
+
+case "$1" in
+	-u) shift; mount_usn $1 ;;
+	-n) shift; ntfs_mount $1 ;;
+	-o) shift; umount_all ;;
+	*) error "Invalid option"; echo "-u for usb\n-n for ntfs\n-o for umount"; exit 1 ;;
+esac
