@@ -12,4 +12,4 @@ ALTUSERXSESSION="$XDG_CACHE_HOME/X11/Xsession"
 ERRFILE="$XDG_CACHE_HOME/X11/xsession-errors"
 
 startup &
-exec bspwm
+exec dbus-launch --exit-with-session bspwm
