@@ -21,6 +21,7 @@ alias update='$PERM emerge -aq --sync && $PERM emerge -aq --update --deep --with
 alias am_i_fat='equery list "*" | wc -l'
 alias erm='$PERM emerge -cav'
 alias newuse='$PERM emerge -aq --update --deep --newuse @world'
+alias changed_use='$PERM emerge -aq --changed-use --deep @world'
 alias elist='equery list "*" | less'
 
 # Program
