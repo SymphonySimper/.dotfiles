@@ -14,6 +14,12 @@ set clipboard=unnamedplus
 set number
 set incsearch
 set smartindent
+
+" Reduce tab length to 4 from 8
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+
 let g:rainbow_active = 1
 let g:rustfmt_autosave = 2
 
