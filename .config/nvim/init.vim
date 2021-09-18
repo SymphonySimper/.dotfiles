@@ -46,11 +46,20 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" To remove trailing white spaces
-autocmd BufWritePre * :%s/\s\+$//e
+" Create new tab with ctrl + t
+nnoremap <silent> <C-t> :tabnew<CR>
 
 " Use sneak instead of standard s
 map f <Plug>Sneak_s
 map F <Plug>Sneak_S
 
-map <leader>f :Goyo
+"" LEADER COMBOS
+
+" Open goyo
+map <leader>g :Goyo
+
+" To replace string
+map <leader>f :%s//g<Left><Left>
+
+" To remove trailing white spaces
+autocmd BufWritePre * :%s/\s\+$//e
