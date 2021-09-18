@@ -15,6 +15,11 @@ cgrm(){ config rm "$1" --cached; }
 
 # Package Manager
 is_there(){ equery list '*' | grep -i "$1"; }
+add_repo(){
+	$PERM eselect repository enable "$1" \
+	&& $PERM emaint sync -r "$1" \
+	&& $PERM emerge --sync
+}
 
 # Format USB
 format_usb_fat32(){
