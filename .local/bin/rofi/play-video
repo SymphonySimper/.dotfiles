@@ -3,7 +3,7 @@
 loc="$HOME"/importantnt/video
 
 if [ -z "$@" ]; then
-	ls -F $loc | grep -v /
+	ls -F $loc | grep -v '/\|.part'
 else
 	prime-run $VIDEOPLAYER $loc/"$1" > /dev/null 2>&1 &
 fi

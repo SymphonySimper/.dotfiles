@@ -27,12 +27,12 @@ fesh(){
 
 fv(){
 	video="$HOME"/importantnt/video
-	query="$(ls -F $video | grep -v / | fzf)"
+	query="$(ls -F $video | grep -v '/\|.part' | fzf)"
 	[ -n "$query" ] && devour prime-run $VIDEOPLAYER $video/"$query"
 }
 
 fdocs(){
 	loc="$HOME"/.local/share/my-docs
-	query="$(ls -F $LOC | grep -v / | fzf)"
+	query="$(ls -F $LOC | grep -v '/\|.part' | fzf)"
 	$EDITOR $loc/$query
 }
