@@ -77,12 +77,17 @@ playlist(){
 	qn "You are entering playlist mode"
 	echo "You have 5 seconds to cancel this"
 	printf "Countdown: "
-	for i in $(seq 5); do sleep 1s && printf "$(syl r;syl B)${i}$(syl R)  "; done
-	echo
-	video_ids="$($ytdl --get-id "$1")"
-	for id in $video_ids; do
-		dl "$id"
-	done
+	for i in $(seq 5 | sort -r); do sleep 1s && printf "$(syl r;syl B)${i}$(syl R)  "; done
+	qn "Initiating download"
+
+	if [ -z $qual ]; then
+		dl "$1"
+	else
+		video_ids="$($ytdl --get-id "$1")"
+		for id in $video_ids; do
+			dl "$id"
+		done
+	fi
 }
 
 echo

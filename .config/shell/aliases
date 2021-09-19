@@ -42,6 +42,7 @@ alias nobita='mntdev -n sdb1'
 alias ka='killall'
 alias bye='$PERM poweroff'
 alias bbak='$PERM reboot'
+alias temp='watch sensors'
 
 # Stuff
 alias hex_a='less "$HOME"/.local/share/mydocs/hexAlpha'
