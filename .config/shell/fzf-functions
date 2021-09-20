@@ -1,6 +1,6 @@
 fa(){
 	audio="$HOME"/importantnt/audio
-	query="$(ls -F $audio | grep -v / | fzf)"
+	query="$(ls -F $audio | grep -v '/\|.part' | fzf)"
 	[ -n "$query" ] && $VIDEOPLAYER $audio/"$query"
 }
 

@@ -31,7 +31,10 @@ main() {
 }
 
 if [ -n "$1" ]; then
-	main "$@"
+	case "$1" in
+		-x) shift; main "$1/$(ls -aF "$1" | grep -v / | sed 's|[@*]||g' | $dis)" ;;
+		*)main "$@"
+	esac
 else
 	main "$(ls -aF | grep -v / | sed 's|[@*]||g' | $dis)"
 fi

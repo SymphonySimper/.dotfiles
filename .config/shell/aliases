@@ -56,6 +56,9 @@ alias kd='$EDITOR "$HOME"/.local/share/my-docs/compile-kernel'
 alias ..='cd ..'
 alias j='cd "$(ls -aF | grep / | sed "s/\///" | fzf)"'
 
+# Open files in download folders with v
+alias vdd='v -x "$HOME"/dl'
+
 # Clean up
 alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
