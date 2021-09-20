@@ -8,7 +8,6 @@ my_bspwm_binds="$loc"/my-bspwm-binds
 my_key="$loc"/my-binds
 
 config_loc="$loc"/.sxhkdrc
-x_loc="$HOME"/.config/x11/xinitrc
 
 notify="dunstify -h string:x-dunst-stack-tag:sxhkd"
 warning_i="$HOME"/.local/share/icons/generla/warning.svg
@@ -37,7 +36,7 @@ if [ -f "$config_loc" ]; then
 	touch $config_loc
 fi
 
-if ( grep -q bspwm "$x_loc" ); then
+if [ $WM = 'bspwm' ]; then
 	if ( create_config -oa | diff -q - "$config_loc" ); then
 		$notify -i $warning_i "No change in config"
 	else

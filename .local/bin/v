@@ -32,8 +32,11 @@ main() {
 
 if [ -n "$1" ]; then
 	case "$1" in
-		-x) shift; main "$1/$(ls -aF "$1" | grep -v / | sed 's|[@*]||g' | $dis)" ;;
-		*)main "$@"
+		-x) shift
+			query="$(ls -aF "$1" | grep -v / | sed 's|[@*]||g' | $dis)"
+			[ -n "$query" ] && main "${1}/${query}"
+			;;
+		*) main "$@" ;;
 	esac
 else
 	main "$(ls -aF | grep -v / | sed 's|[@*]||g' | $dis)"

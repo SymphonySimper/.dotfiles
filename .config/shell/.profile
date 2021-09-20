@@ -58,9 +58,12 @@ export MANPAGER='less -Q'
 # export __NV_PRIME_RENDER_OFFLOAD=1
 # export __GLX_VENDOR_LIBRARY_NAME="nvidia"
 # export __VK_LAYER_NV_optimus="NVIDIA_only"
- 
-#fzf
-export FZF_DEFAULT_OPTS='--reverse --color=fg:#777777,hl:#bbbbbb --color=fg+:#aaaaaa,bg+:#000000,hl+:#bbbbbb --color=info:#aaaaaa,prompt:#aaaaaa,pointer:#aaaaaa --color=marker:#000000,spinner:#000000,header:#000000'
+
+# fzf
+export FZF_DEFAULT_OPTS='--no-mouse --reverse --preview-window=border-sharp --color=fg:#777777,hl:#bbbbbb --color=fg+:#aaaaaa,bg+:#000000,hl+:#bbbbbb --color=info:#aaaaaa,prompt:#aaaaaa,pointer:#aaaaaa --color=marker:#000000,spinner:#000000,header:#000000'
+
+# window manager name
+[ -f "$XINITRC" ] && export WM="$(tail -n 1 "$XINITRC" | cut -d ' ' -f 4)"
 
 #StartX
 [ "$(tty)" = "/dev/tty1" ] && exec startx "$XINITRC" > /dev/null 2>&1

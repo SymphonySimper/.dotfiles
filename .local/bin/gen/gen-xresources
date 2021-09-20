@@ -1,28 +1,22 @@
 #!/bin/sh
 
 loc="$HOME"/.config/x11
-
 loc_x="$loc"/xre
-
 xre="$loc"/Xresources
-xin="$loc"/xinitrc
 
-prof="$HOME"/.config/shell/.profile
-
-is_urxvtc(){ grep -q 'TERMINAL="urxvtc"' "$prof"; }
-is_dwm(){ grep -q 'dwm' "$xin"; }
+is_urxvtc=$([ $TERMINAL = 'urxvtc' ] && echo 0 || echo 1)
+is_dwm=$([ $WM = 'dwm' ] && echo 0 || echo 1)
 
 fndf(){ find "$loc_x" -type f -not -name "$1" -exec cat {} \+ > "$xre"; }
 if [ -f "$xre" ]; then
-	if ( is_urxvtc && is_dwm ); then
+	if [ $is_urxvtc -eq 0 ] && [ $is_dwm -eq 0 ]; then
 		cat "$loc_x"/* > "$xre"
-	elif ( is_urxvtc || is_dwm); then
-		if ( is_urxvtc ); then
+	elif [ $is_urxvtc -eq 0 ] || [ $is_dwm -eq 0 ]; then
+		if [ $is_urxvtc -eq 0 ]; then
 			fndf 'dwm'
-		elif ( is_dwm ); then
+		elif [ $is_dwm -eq 0 ]; then
 			fndf 'urxvt'
 		fi
 	fi
 fi
-
 xrdb -load "$xre"
