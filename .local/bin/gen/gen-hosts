@@ -15,14 +15,14 @@ notify(){
 }
 
 clear_block(){
-	if grep -q '^# MY BlocK' $loc; then
-		if grep -q '^# MY END BlocK' $loc; then
-			$PERM sed '/^# MY BlocK/, /^# MY END BlocK/ { /^# MY BlocK/! { /^# MY END BlocK/!d; }}' -i $loc
+	if grep -q '^# MY BLOCK' $loc; then
+		if grep -q '^# MY END BLOCK' $loc; then
+			$PERM sed '/^# MY BLOCK/, /^# MY END BLOCK/ { /^# MY BLOCK/! { /^# MY END BLOCK/!d; }}' -i $loc
 		else
-			err "MY END BlocK is absent"
+			err "MY END BLOCK is absent"
 		fi
 	else
-		err 'MY BlocK is absent'
+		err 'MY BLOCK is absent'
 	fi
 	notify off
 }
@@ -30,10 +30,10 @@ clear_block(){
 add_block(){
 	sort $block_source -o $block_source
 	for line in $( cat $block_source ); do echo "0.0.0.0\t\twww.$line" >> $tempfile; done
-	$PERM sed '/^# MY BlocK/ r /dev/stdin' -i $loc  < $tempfile
+	$PERM sed '/^# MY BLOCK/ r /dev/stdin' -i $loc  < $tempfile
 	notify on
 }
 
-is_block="$(awk '/^# MY BlocK$/{flag=1;next}/^# MY END BlocK$/{flag=0}flag' $loc)"
+is_block="$(awk '/^# MY BLOCK$/{flag=1;next}/^# MY END BLOCK$/{flag=0}flag' $loc)"
 
 [ -n "$is_block" ] && clear_block || add_block
