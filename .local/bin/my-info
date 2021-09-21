@@ -2,6 +2,7 @@
 
 notify="dunstify"
 todo_loc="$XDG_DATA_HOME"/.todo
+begone_loc="$HOME"/.cache/begone
 
 #Icons
 dir="$HOME"/.local/share/icons/my-info
@@ -11,6 +12,7 @@ charging_i="$dir"/charging.svg
 saver_i="$dir"/saver.svg
 date_i="$dir"/date.svg
 clock_i="$dir"/clock.svg
+warning_i="$HOME"/.local/share/icons/general/warning.svg
 
 get_stat=$(cat /sys/class/power_supply/BAT0/status)
 get_cap=$(cat /sys/class/power_supply/BAT0/capacity)
@@ -40,5 +42,25 @@ list_todo(){
 	$notify -h string:x-dunst-stack-tag:todo "TODO" "$(cat $temp_file)"
 	rm $temp_file
 }
+get_mode(){
+	notify_mode(){
+		get_mode_noti="$notify -h string:x-dunst-stack-tag:get_mode"
+		case "$1" in
+			on) $get_mode_noti -i $warning_i 'Work Mode' 'on' ;;
+			off) $get_mode_noti 'Work Mode' 'off' ;;
+			gaming) $get_mode_noti 'Gaming Mode' 'on' ;;
+		esac
+	}
+	if [ -f "$begone_loc" ]; then
+		case "$(cat $begone_loc | cut -d ' ' -f 2)" in
+			all) notify_mode 'on' ;;
+			am) notify_mode 'off' ;;
+		esac
+	elif [ -z "$(pgrep picom)" ]; then
+		notify_mode 'gaming'
+	else
+		notify_mode 'off'
+	fi
+}
 
-bat; notify_date; notify_time; list_todo
+bat; notify_date; notify_time; list_todo; get_mode

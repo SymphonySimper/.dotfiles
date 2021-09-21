@@ -8,9 +8,11 @@ warning_i="$HOME"/.local/share/icons/general/warning.svg
 is_picom="$(pgrep picom)"
 
 if [ -z $is_picom ]; then
-	picom &
+	$TERMINAL -e gen-hosts \
+	&& picom &
 	$notify "Picom is alive"
 else
-	killall picom
-	$notify -i $warning_i "Picom is dead"
+	$TERMINAL -e gen-hosts 'clear' \
+	&& killall picom \
+	&& $notify -i $warning_i "Picom is dead"
 fi
