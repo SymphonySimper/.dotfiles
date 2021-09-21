@@ -1,35 +1,87 @@
 #!/bin/sh
 
-loc=/etc/hosts
-block_source="$HOME"/.local/share/.begone
-tempfile=$(mktemp)
+hosts_file=/etc/hosts
+block_source="$HOME"/.local/share/block-source
+ad_malware_block="$block_source"/ad-malware-block
+block_fgps="$block_source"/block-fgps
+cache_file="$HOME"/.cache/begone
+my_block="$HOME"/.local/share/.begone
 
 err(){ echo "$(syl r; syl B)${1}$(syl R)"; }
 
+warning_i="$HOME"/.local/share/icons/general/warning.svg
 noti='dunstify -h string:x-dunst-stack-tag:genHosts'
 notify(){
 	case "$1" in
 		on) $noti "Get Work Done mode is on" "Begone sites are gone" ;;
 		off) $noti "Get Work Done mode is off" "Begone? more like never gone" ;;
+		update) $noti "Updating repo" ;;
+		err) shift; $noti -i $warning "$1" ;;
 	esac
 }
 
 clear_block(){
-	if grep -q '^# MY BLOCK' $loc && grep -q '^# MY END BLOCK' $loc; then
-			$PERM sed '/^# MY BLOCK/, /^# MY END BLOCK/ { /^# MY BLOCK/! { /^# MY END BLOCK/!d; }}' -i $loc
+	if grep -q '^# MY BLOCK' $hosts_file && grep -q '^# MY END BLOCK' $hosts_file; then
+			$PERM sed '/^# MY BLOCK/, /^# MY END BLOCK/ { /^# MY BLOCK/! { /^# MY END BLOCK/!d; }}' -i $hosts_file
 	else
 		err 'MY BLOCK is absent'
+		notify err 'MY BLOCK is absent'
+		exit 1
 	fi
-	notify off
 }
 
+update_hosts_repo(){
+	curl_hosts(){ curl -s "$1" | sed -ne '/Start/,$ p' > "$2"; }
+	[ ! -d $block_source ] && mkdir "$block_source"
+	notify 'update'
+	curl_hosts "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts" $ad_malware_block
+	curl_hosts "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts" $block_fgps
+}
 add_block(){
-	sort $block_source -o $block_source
-	for line in $( cat $block_source ); do echo "0.0.0.0\t\twww.$line" >> $tempfile; done
-	$PERM sed '/^# MY BLOCK/ r /dev/stdin' -i $loc  < $tempfile
-	notify on
+	add_block_hosts(){
+		case "$1" in
+			all)
+				sort -o $my_block $my_block
+				temp_file=$(mktemp)
+				temp_file2=$(mktemp)
+				while read -r line; do
+					echo "0.0.0.0\t$line" >> $temp_file2
+				done < $my_block
+				cat $block_fgps $temp_file2 > $temp_file
+				$PERM sed '/^# MY BLOCK/ r /dev/stdin' -i $hosts_file  < $temp_file \
+				&& notify 'on'
+				rm $temp_file
+				;;
+			am) $PERM sed '/^# MY BLOCK/ r /dev/stdin' -i $hosts_file  < $ad_malware_block \
+				&& notify 'off'
+				;;
+		esac
+	}
+		add_block_hosts "$1" \
+		&& echo "added $1" > $cache_file
+}
+change_block(){
+	clear_block \
+	&& if [ -f $cache_file ]; then
+		if [ -z "$(cat $cache_file)" ]; then
+			add_block 'am'
+		else
+			case "$(cat $cache_file | cut -d ' ' -f 2)" in
+				am) add_block 'all';;
+				all) add_block 'am' ;;
+			esac
+		fi
+	else
+		add_block 'am'
+	fi
 }
 
-is_block="$(awk '/^# MY BLOCK$/{flag=1;next}/^# MY END BLOCK$/{flag=0}flag' $loc)"
-
-[ -n "$is_block" ] && clear_block || add_block
+if [ ! -f $ad_malware_block ] || [ ! -f $block_fgps ]; then
+	update_hosts_repo
+fi
+case "$1" in
+	update) update_hosts_repo ;;
+	clear) clear_block; rm $cache_file ;;
+	edit) $EDITOR $my_block && sort -o $my_block $my_block ;;
+	*) change_block ;;
+esac

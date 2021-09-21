@@ -2,6 +2,7 @@
 export TERMINAL="urxvtc"
 export SECONDTERMINAL="urxvt"
 export EDITOR="nvim"
+export VISUAL="$EDITOR"
 export BROWSER="firefox"
 export READER="zathura"
 export IMAGEVIEWER="sxiv"
