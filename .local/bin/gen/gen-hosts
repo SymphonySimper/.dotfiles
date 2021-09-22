@@ -13,10 +13,10 @@ warning_i="$HOME"/.local/share/icons/general/warning.svg
 noti='dunstify -h string:x-dunst-stack-tag:genHosts'
 notify(){
 	case "$1" in
-		on) $noti "Get Work Done mode is on" "Begone sites are gone" ;;
+		on) $noti -i $warning_i "Get Work Done mode is on" "Begone sites are gone" ;;
 		off) $noti "Get Work Done mode is off" "Begone? more like never gone" ;;
 		update) $noti "Updating repo" ;;
-		err) shift; $noti -i $warning "$1" ;;
+		err) shift; $noti -i $warning_i "$1" ;;
 	esac
 }
 

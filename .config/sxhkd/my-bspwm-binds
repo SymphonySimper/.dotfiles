@@ -10,6 +10,6 @@ super + shift + x
 
 # Play copied url
 super + shift + m
-	bspc desktop -f '^4'; \
+	bspc desktop -f '^5'; \
 	prime-run $VIDEOPLAYER "$(xclip -selection clipboard -o)"
 

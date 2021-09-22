@@ -58,7 +58,11 @@ alias j='cd "$(ls -aF | grep / | sed "s/\///" | fzf)"'
 
 # Open files in download folders with v
 alias vdd='v -x "$HOME"/dl'
-alias vns3s='v -x "$HOME"/importantnt/Notes/Sem3/se'
+
+# Rust
+alias cb='cargo build'
+alias cr='cargo run'
+alias cbr='cargo build && cargo run'
 
 # Clean up
 alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
