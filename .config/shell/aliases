@@ -57,17 +57,13 @@ alias jj='cd ~$(dirs -v | fzf | cut -f 1)'
 # Open files in download folders with v
 alias vdd='v -x "$HOME"/dl'
 
-# Rust
-alias cb='cargo build'
-alias cr='cargo run'
-alias cbr='cargo build && cargo run'
-
 # Stuff
 alias hex_a='less "$HOME"/.local/share/my-docs/hex-alpha'
 alias todo='$EDITOR "$HOME"/.local/share/.todo'
 alias begone='$EDITOR "$HOME"/.local/share/.begone'
 alias rb='devour $READER "$HOME"/lifeisfun/rust/rust-lang.pdf'
 alias kd='$EDITOR "$HOME"/.local/share/my-docs/compile-kernel'
+alias hosts='$PERM $EDITOR /etc/hosts'
 
 # Clean up
 alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
