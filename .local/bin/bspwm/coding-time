@@ -22,9 +22,17 @@ open_doc(){
 		rust) view_doc "$loc"/rust/rust-lang.pdf ;;
 	esac
 }
+
 open_terminals(){
+	is_src=$(exa -aD "$final_query_loc" 2>/dev/null | grep -w 'src\|lib')
+	if [ -n "$is_src" ]; then
+		final_query_loc_src="$final_query_loc/$is_src"
+	else
+		final_query_loc_src="$final_query_loc"
+	fi
 	bspc desktop -f '^3'
-	for i in $(seq 2); do $TERMINAL -cd "$final_query_loc" > /dev/null 2>&1; done
+	$TERMINAL -cd "$final_query_loc_src" > /dev/null 2>&1
+	$TERMINAL -cd "$final_query_loc" > /dev/null 2>&1
 	bspc node -f west
 	bspc node -z right +400 0
 	open_doc
@@ -32,6 +40,7 @@ open_terminals(){
 }
 
 get_loc(){ ls -aF $1 | grep '/' | sed '/\.\./d; s/\///g'; }
+
 if [ -z "$@" ]; then
 	printf "\0prompt\037dir\n"
 	get_loc "$loc"
