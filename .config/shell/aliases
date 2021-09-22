@@ -44,17 +44,15 @@ alias bye='$PERM poweroff'
 alias bbak='$PERM reboot'
 alias temp='watch sensors'
 
-# Stuff
-alias hex_a='less "$HOME"/.local/share/mydocs/hexAlpha'
-alias todo='$EDITOR "$HOME"/.local/share/.todo'
-alias begone='$EDITOR "$HOME"/.local/share/.begone'
-alias rb='devour $READER "$HOME"/lifeisfun/rust/rust-lang.pdf'
-alias his='$EDITOR "$HOME"/.cache/zshhistory'
-alias kd='$EDITOR "$HOME"/.local/share/my-docs/compile-kernel'
+# Shell History
+alias his='$EDITOR $HISTFILE'
+alias huh='eval "$(tac $HISTFILE | fzf)"'
+alias bruh='eval "$(tail -n 1 $HISTFILE)"'
 
 # Navigate dir
 alias ..='cd ..'
 alias j='cd "$(ls -aF | grep / | sed "s/\///" | fzf)"'
+alias jj='cd ~$(dirs -v | fzf | cut -f 1)'
 
 # Open files in download folders with v
 alias vdd='v -x "$HOME"/dl'
@@ -63,6 +61,13 @@ alias vdd='v -x "$HOME"/dl'
 alias cb='cargo build'
 alias cr='cargo run'
 alias cbr='cargo build && cargo run'
+
+# Stuff
+alias hex_a='less "$HOME"/.local/share/my-docs/hex-alpha'
+alias todo='$EDITOR "$HOME"/.local/share/.todo'
+alias begone='$EDITOR "$HOME"/.local/share/.begone'
+alias rb='devour $READER "$HOME"/lifeisfun/rust/rust-lang.pdf'
+alias kd='$EDITOR "$HOME"/.local/share/my-docs/compile-kernel'
 
 # Clean up
 alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'

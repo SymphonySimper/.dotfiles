@@ -23,7 +23,7 @@ setopt interactive_comments
 # History in cache directory:
 HISTSIZE=10000
 SAVEHIST=10000
-HISTFILE=~/.cache/zshhistory
+HISTFILE="$HOME"/.cache/zshhistory
 
 autoload -U compinit && compinit -u
 zstyle ':completion:*' menu select
