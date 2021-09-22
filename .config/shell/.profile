@@ -42,6 +42,7 @@ export SQLITE_HISTORY=$XDG_DATA_HOME/sqlite_history
 export ICEAUTHORITY="$XDG_CACHE_HOME"/ICEauthority
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
+export RUST_BACKTRACE='1'
 export RXVT_SOCKET="$XDG_RUNTIME_DIR"/urxvtd
 export GOPATH="$XDG_DATA_HOME"/go
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
