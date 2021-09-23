@@ -1,5 +1,21 @@
 set shell sh
+
 cmd open ${{ v "$f" }}
 
-map H :set hidden!
-map x delete
+
+## Unbind defaults
+map c
+map d
+
+## Changed defaults
+# def c
+map C clear
+# def d
+map x cut
+
+## My binds
+map . :set hidden!
+map DD delete
+map dl dragon
+
+source ~/.config/lf/lf-folders

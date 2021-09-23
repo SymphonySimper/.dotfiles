@@ -41,5 +41,5 @@ if [ -n "$1" ]; then
 		*) main "$(echo $@ | eval $proper_2)" ;;
 	esac
 else
-	main "$(ls -aF | grep -v / | eval $proper_1 | $dis | eval $poper_2)"
+	main "$(ls -aF | grep -v / | eval $proper_1 | $dis | eval $proper_2)"
 fi
