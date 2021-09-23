@@ -1,0 +1,14 @@
+#!/bin/sh
+
+temp_file=$(mktemp)
+file=$(mktemp)
+
+get_files(){
+	echo "$1" | sed 's|/home|\n/home|g' > $file
+	while read -r line; do
+		echo "$line" | sed '/^[[:space:]]*$/d' >> $temp_file
+	done < $file
+}
+
+get_files "$1" > /dev/null 2>&1 \
+&& [ -n "$(cat $temp_file 2>/dev/null)" ] && cat $temp_file | dragon -a -I
