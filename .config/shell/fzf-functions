@@ -1,7 +1,7 @@
 fa(){
 	audio="$HOME"/importantnt/audio
-	query="$(ls -F $audio | grep -v '/\|.part' | fzf)"
-	[ -n "$query" ] && $VIDEOPLAYER $audio/"$query"
+	query="$(ls -F $audio | grep -v '/\|.part' | fzf | sed 's|\$|\\\$|g')"
+	[ -n "$query" ] && $VIDEOPLAYER $audio/"$($query | sed 's/\$//g')"
 }
 
 fec(){
@@ -27,8 +27,9 @@ fesh(){
 
 fv(){
 	video="$HOME"/importantnt/video
-	query="$(ls -F $video | grep -v '/\|.part' | fzf)"
-	[ -n "$query" ] && devour prime-run $VIDEOPLAYER $video/"$query"
+	query="$(ls -F $video | grep -v '/\|.part' | fzf | sed 's|\$|\\\$|g')"
+	[ -n "$query" ] && devour prime-run $VIDEOPLAYER \
+	$video/"$query"
 }
 
 fdocs(){
