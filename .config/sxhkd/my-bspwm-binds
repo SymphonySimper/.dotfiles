@@ -6,6 +6,7 @@ super + x
 
 # To resize left side window to approx 70%
 super + shift + x
+	bspc node -f west; \
 	bspc node -z right +400 0
 
 # Play copied url

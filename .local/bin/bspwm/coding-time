@@ -16,8 +16,8 @@ elif [ $tempfile_length -eq 2 ]; then
 	tail_line="$(tail -n 1 $tempfile_loc)"
 fi
 
+view_doc(){ { bspc desktop -f '^4' && $READER "$1"; }> /dev/null 2>&1 & }
 open_doc(){
-	view_doc(){ { bspc desktop -f '^4' && $READER "$1"; }> /dev/null 2>&1 & }
 	case "$head_line" in
 		rust) view_doc "$loc"/rust/rust-lang.pdf ;;
 	esac
