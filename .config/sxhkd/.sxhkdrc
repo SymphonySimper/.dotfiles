@@ -37,7 +37,7 @@ super + x
 super + shift + x
 	bspc node -z right +400 0
 super + shift + m
-	bspc desktop -f '^4'; \
+	bspc desktop -f '^5'; \
 	prime-run $VIDEOPLAYER "$(xclip -selection clipboard -o)"
 super + Return
  	$TERMINAL
@@ -85,6 +85,8 @@ Print
 	screenshot -s
 super + b
 	my-info
+super + shift + b
+	goals
 XF86Calculator
 	typin
 super + Escape

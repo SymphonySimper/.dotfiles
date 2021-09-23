@@ -11,6 +11,7 @@ game-mode                .local/bin/game-mode
 gen-folder-aliases       .local/bin/gen/gen-folder-aliases
 gen-hosts                .local/bin/gen/gen-hosts
 gen-xresources           .local/bin/gen/gen-xresources
+goals                    .local/bin/goals
 kdenlive                 .local/bin/aliases/kdenlive
 lz                       .local/bin/lz
 mnt-dev                  .local/bin/mnt-dev
@@ -31,7 +32,6 @@ screenshot               .local/bin/screenshot
 scripts                  .local/bin/.paths/scripts
 search                   .local/bin/rofi/search
 shell                    .local/bin/.paths/shell
-some                     .local/bin/some
 sound-efx                .local/bin/sound-efx
 startup                  .local/bin/startup
 syl                      .local/bin/syl

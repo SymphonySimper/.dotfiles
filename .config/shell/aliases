@@ -46,8 +46,7 @@ alias temp='watch sensors'
 
 # Shell History
 alias his='$EDITOR $HISTFILE'
-alias huh='eval "$(tac $HISTFILE | fzf)"'
-alias bruh='eval "$(tail -n 1 $HISTFILE)"'
+alias huh='eval "$(tac $HISTFILE | grep -v "q\|bye\|bbak\|exit\|clear" | fzf)"'
 
 # Navigate dir
 alias ..='cd ..'

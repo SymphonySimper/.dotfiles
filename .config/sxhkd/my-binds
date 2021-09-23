@@ -63,6 +63,8 @@ Print
 # My info
 super + b
 	my-info
+super + shift + b
+	goals
 
 # Screenkey
 XF86Calculator
