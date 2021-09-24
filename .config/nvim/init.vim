@@ -31,6 +31,8 @@ hi TabLineFill term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg
 hi TabLine term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 hi TabLineSel term=bold cterm=NONE ctermfg=LightGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 hi VertSplit term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
+hi Floaterm term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
+hi FloatermBorder term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 
 call plug#begin(system('echo -n "$XDG_CONFIG_HOME"/nvim/plugged'))
 
@@ -40,8 +42,8 @@ Plug 'junegunn/goyo.vim'
 Plug 'ap/vim-css-color'
 Plug 'rust-lang/rust.vim'
 Plug 'justinmk/vim-sneak'
-
-call plug#end()
+Plug 'ptzz/lf.vim'
+Plug 'voldikss/vim-floaterm'
 
 " This unsets the "last search pattern" register by hitting return
 nnoremap <CR> :noh<CR><CR>
@@ -60,12 +62,11 @@ map f <Plug>Sneak_s
 map F <Plug>Sneak_S
 
 "" LEADER COMBOS
-
 " Open goyo
 map <leader>g :Goyo
 
 " To replace string
-map <leader>f :%s//g<Left><Left>
+map <leader>r :%s//g<Left><Left>
 
 " To remove trailing white spaces
 autocmd BufWritePre * :%s/\s\+$//e
