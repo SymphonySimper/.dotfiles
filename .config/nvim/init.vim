@@ -44,6 +44,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'ptzz/lf.vim'
 Plug 'voldikss/vim-floaterm'
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
@@ -65,7 +66,10 @@ map F <Plug>Sneak_S
 
 "" LEADER COMBOS
 " Open goyo
-map <leader>g :Goyo
+map <leader>g :Goyo<CR>
+
+" Open fzf
+map <leader>l :BLines<CR>
 
 " To replace string
 map <leader>r :%s//g<Left><Left>
