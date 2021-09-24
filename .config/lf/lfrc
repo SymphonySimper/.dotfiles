@@ -1,7 +1,9 @@
 set shell sh
 
-cmd open ${{ v "$f" }}
+set previewer ~/.local/bin/lf/lf-previewer
+set cleaner ~/.local/bin/lf/lf-clear-img
 
+cmd open ${{ v "$f" }}
 
 ## Unbind defaults
 map c
@@ -14,7 +16,7 @@ map C clear
 map x cut
 
 ## My binds
-map dr ${{ ~/.local/bin/lf/dr-file "$fx" }}
+map dr ${{ ~/.local/bin/lf/lf-dr-file "$fx" }}
 
 # basic functions
 map . :set hidden!
