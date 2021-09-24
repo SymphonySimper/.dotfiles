@@ -45,10 +45,24 @@ Plug 'justinmk/vim-sneak'
 Plug 'ptzz/lf.vim'
 Plug 'voldikss/vim-floaterm'
 Plug 'junegunn/fzf.vim'
+Plug 'Jorengarenar/vim-MvVis'
 
 call plug#end()
 
-" This unsets the "last search pattern" register by hitting return
+" FZF
+let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' }}
+
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+let $FZF_DEFAULT_OPTS = '--layout=reverse --preview-window=border-sharp'
+let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/**' --glob '!build/**' --glob '!.dart_tool/**' --glob '!.idea' --glob '!node_modules'"
+
+" -------------------- Key binds --------------------
+
+" This unsets the last search pattern register by hitting return
 nnoremap <CR> :noh<CR><CR>
 
 " Switch splits with h,j,k,l
@@ -64,12 +78,13 @@ nnoremap <silent> <C-t> :tabnew<CR>
 map f <Plug>Sneak_s
 map F <Plug>Sneak_S
 
-"" LEADER COMBOS
+" -------------------- LEADER COMBOS --------------------
 " Open goyo
 map <leader>g :Goyo<CR>
 
 " Open fzf
-map <leader>l :BLines<CR>
+map <leader>s :BLines<CR>
+map <leader>p :Files<CR>
 
 " To replace string
 map <leader>r :%s//g<Left><Left>
