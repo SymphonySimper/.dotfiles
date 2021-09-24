@@ -11,6 +11,7 @@ bin_rofi="$bin"/rofi
 bin_aliases="$bin"/aliases
 bin_bspwm="$bin"/bspwm
 bin_gen="$bin"/gen
+bin_lf="$bin"/lf
 
 paths="$bin"/.paths
 shell_paths="$paths"/shell
@@ -73,6 +74,7 @@ case "$1" in
 	-r) shift; create_bin_file "$bin_rofi" "$1" ;;
 	-b) shift; create_bin_file "$bin_bspwm" "$1" ;;
 	-g) shift; create_bin_file "$bin_gen" "$1" ;;
+	-l) shift; create_bin_file "$bin_lf" "$1" ;;
 	-sh) shift; create_shell_file "$1" ;;
 	-d) shift; delete_file "$1" ;;
 	*) create_bin_file "$bin" "$1" ;;

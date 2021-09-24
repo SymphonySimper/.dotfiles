@@ -14,8 +14,10 @@ map C clear
 map x cut
 
 ## My binds
+map dr ${{ ~/.local/bin/lf/dr-file "$fx" }}
+
+# basic functions
 map . :set hidden!
 map DD delete
-map dl dragon
 
 source ~/.config/lf/lf-folders
