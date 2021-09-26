@@ -118,7 +118,7 @@ preexec() { echo -ne "$cursorBeam" ;} # Use beam shape cursor for each new promp
 # Use lf to switch directories and bind it to ctrl-o
 lfcd () {
     tmp="$(mktemp)"
-    lfp -last-dir-path="$tmp" "$@"
+    lfp -last-dir-path="$tmp"
     if [ -f "$tmp" ]; then
         dir="$(cat "$tmp")"
         rm -f "$tmp" >/dev/null
