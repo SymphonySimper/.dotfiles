@@ -4,7 +4,7 @@
 # Enable colors and change prompt:
 autoload -U colors && colors
 
-#Prompt
+# Prompt
 precmd(){ precmd(){ echo ; }; }
 PS1="%B%F{240}%~%f
 >%b "
@@ -34,7 +34,7 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
 
-#Keybinds
+# Keybinds
 typeset -g -A key
 
 key[Home]="${terminfo[khome]}"
@@ -64,7 +64,7 @@ key[Shift-Tab]="${terminfo[kcbt]}"
 [[ -n "${key[PageDown]}"  ]] && bindkey -- "${key[PageDown]}"   end-of-buffer-or-history
 [[ -n "${key[Shift-Tab]}" ]] && bindkey -- "${key[Shift-Tab]}"  reverse-menu-complete
 
-#My Binds
+# My Binds
 
 key[Control-Left]="${terminfo[kLFT5]}"
 key[Control-Right]="${terminfo[kRIT5]}"
@@ -138,16 +138,8 @@ if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
 	add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
 fi
 
-#Alias and Functions
+# Alias and Functions
 alias config='/usr/bin/git --git-dir="$HOME"/.cfg/ --work-tree="$HOME"'
-#Source
+# Source
 sloc="$HOME/.config/shell/"
 for f in $sloc*; do source "$f"; done
-
-#Auto suggestions
-#source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-#Syntax hightlighting
-[ -f /usr/share/zsh/site-functions/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh/site-functions/zsh-syntax-highlighting.zsh
-
-#eval "$(starship init zsh)"

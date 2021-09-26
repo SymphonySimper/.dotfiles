@@ -1,4 +1,4 @@
-#Default Programs
+# Default Programs
 export TERMINAL="urxvtc"
 export SECONDTERMINAL="urxvt"
 export EDITOR="nvim"
@@ -9,11 +9,11 @@ export IMAGEVIEWER="sxiv"
 export VIDEOPLAYER="mpv"
 export PERM="doas"
 
-#Paths
-export PATH="$PATH:$HOME/.local/bin"			#Scripts
-export PATH="$PATH:$HOME/.local/bin/aliases"		#Alias scripts
-export PATH="$PATH:$HOME/.local/bin/gen"		#Gen scripts
-export PATH="$PATH:$HOME/lifeisfun/lang/flutter/bin" 	#Flutter
+# Paths
+export PATH="$PATH:$HOME/.local/bin"					# Scripts
+export PATH="$PATH:$HOME/.local/bin/aliases"			# Alias scripts
+export PATH="$PATH:$HOME/.local/bin/gen"				# Gen scripts
+export PATH="$PATH:$HOME/lifeisfun/lang/flutter/bin" 	# Flutter
 
 export ZDOTDIR="$HOME"/.config/zsh
 # export STARSHIP_CONFIG="$HOME"/.config/starship/config.toml
@@ -54,7 +54,7 @@ export ATOM_HOME="$XDG_DATA_HOME"/atom
 
 [ -f "$XDG_DATA_HOME"/cargo/env ] && . "$XDG_DATA_HOME"/cargo/env
 
-#Other settinfs
+# Other settinfs
 export _JAVA_AWT_WM_NONREPARENTING=1
 export MANPAGER='less -Q'
 # export __NV_PRIME_RENDER_OFFLOAD=1
@@ -63,7 +63,6 @@ export MANPAGER='less -Q'
 
 # fzf
 # https://github.com/fnune/base16-fzf/blob/master/bash/base16-grayscale-dark.config
-# FZF_DEFAULT_OPTS=" --no-mouse --reverse --preview-window=border-none"
 _gen_fzf_default_opts() {
 	local color00='#000000'
 	local color01='#252525'
@@ -95,5 +94,5 @@ _gen_fzf_default_opts
 # window manager name
 [ -f "$XINITRC" ] && export WM="$(tail -n 1 "$XINITRC" | cut -d ' ' -f 4)"
 
-#StartX
+# StartX
 [ "$(tty)" = "/dev/tty1" ] && exec startx "$XINITRC" > /dev/null 2>&1
