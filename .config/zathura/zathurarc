@@ -4,33 +4,41 @@ set page-padding 1
 set selection-clipboard clipboard
 map = zoom in
 
-set recolor "true"
+# Base16 Grayscale Dark
+# https://raw.githubusercontent.com/HaoZeke/base16-zathura/main/build_schemes/colors/base16-grayscale-dark.config
 
-set completion-bg "#000000"
-set completion-fg "#aaaaaa"
-set completion-group-bg "#000000"
-set completion-group-fg "#b5bd68"
-set completion-highlight-bg "#aaaaaa"
-set completion-highlight-fg "#000000"
-set recolor-lightcolor "#000000"
-set recolor-darkcolor "#aaaaaa"
-set default-bg "#000000"
-set inputbar-bg "#000000"
-set inputbar-fg "#aaaaaa"
-set notification-bg "#000000"
-set notification-fg "#aaaaaa"
-set notification-error-bg "#cc6666"
-set notification-error-fg "#aaaaaa"
-set notification-warning-bg "#cc6666"
-set notification-warning-fg "#aaaaaa"
-set statusbar-bg "#000000"
-set statusbar-fg "#aaaaaa"
-set index-bg "#000000"
-set index-fg "#aaaaaa"
-set index-active-bg "#aaaaaa"
-set index-active-fg "#000000"
-set render-loading-bg "#000000"
-set render-loading-fg "#aaaaaa"
+set default-bg                  "#000000"
+set default-fg                  "#252525"
+
+set statusbar-fg                "#ababab"
+set statusbar-bg                "#464646"
+
+set inputbar-bg                 "#000000"
+set inputbar-fg                 "#f7f7f7"
+
+set notification-bg             "#000000"
+set notification-fg             "#f7f7f7"
+
+set notification-error-bg       "#000000"
+set notification-error-fg       "#7c7c7c"
+
+set notification-warning-bg     "#000000"
+set notification-warning-fg     "#7c7c7c"
+
+set highlight-color             "#a0a0a0"
+set highlight-active-color      "#686868"
+
+set completion-bg               "#252525"
+set completion-fg               "#686868"
+
+set completion-highlight-fg     "#f7f7f7"
+set completion-highlight-bg     "#686868"
+
+set recolor-lightcolor          "#000000"
+set recolor-darkcolor           "#e3e3e3"
+
+set recolor                     "true"
+set recolor-keephue             "true"
 
 set window-title-home-tilde true
 set statusbar-basename true

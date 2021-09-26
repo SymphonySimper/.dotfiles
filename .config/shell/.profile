@@ -62,7 +62,35 @@ export MANPAGER='less -Q'
 # export __VK_LAYER_NV_optimus="NVIDIA_only"
 
 # fzf
-export FZF_DEFAULT_OPTS='--no-mouse --reverse --preview-window=border-none --color=fg:#777777,hl:#bbbbbb --color=fg+:#aaaaaa,bg+:#000000,hl+:#bbbbbb --color=info:#aaaaaa,prompt:#aaaaaa,pointer:#aaaaaa --color=marker:#000000,spinner:#000000,header:#000000'
+# https://github.com/fnune/base16-fzf/blob/master/bash/base16-grayscale-dark.config
+# FZF_DEFAULT_OPTS=" --no-mouse --reverse --preview-window=border-none"
+_gen_fzf_default_opts() {
+	local color00='#000000'
+	local color01='#252525'
+	local color02='#464646'
+	local color03='#525252'
+	local color04='#ababab'
+	local color05='#b9b9b9'
+	local color06='#e3e3e3'
+	local color07='#f7f7f7'
+	local color08='#7c7c7c'
+	local color09='#999999'
+	local color0A='#a0a0a0'
+	local color0B='#8e8e8e'
+	local color0C='#868686'
+	local color0D='#686868'
+	local color0E='#747474'
+	local color0F='#5e5e5e'
+
+	export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+	--no-mouse --reverse --preview-window=border-none \
+	--color=bg+:$color00,spinner:$color0C,hl:$color0D \
+	--color=fg:$color04,header:$color0D,info:$color0A,pointer:$color0C \
+	--color=marker:$color0C,fg+:$color06,prompt:$color0A,hl+:$color0D"
+
+	}
+
+_gen_fzf_default_opts
 
 # window manager name
 [ -f "$XINITRC" ] && export WM="$(tail -n 1 "$XINITRC" | cut -d ' ' -f 4)"

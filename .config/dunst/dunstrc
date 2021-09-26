@@ -42,7 +42,7 @@
 
     sticky_history = false
     history_length = 20
-    
+
     dmenu = /usr/bin/dmenu -p dunst:
     browser = /usr/bin/firefox -new-tab
     always_run_script = true
@@ -66,7 +66,6 @@
     close_all = ctrl+shift+space
     history = ctrl+grave
     context = ctrl+shift+period
-
 [urgency_low]
     background = "#000"
     foreground = "#aaa"

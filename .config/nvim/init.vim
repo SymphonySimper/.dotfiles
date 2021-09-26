@@ -7,6 +7,7 @@ endif
 
 syntax on
 syntax enable
+set nosecure
 filetype plugin indent on
 set clipboard=unnamedplus
 set number
@@ -17,8 +18,6 @@ set smartindent
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-
-let g:rustfmt_autosave = 2
 
 set termguicolors
 colorscheme the-black
@@ -36,6 +35,8 @@ Plug 'Jorengarenar/vim-MvVis'
 Plug 'unblevable/quick-scope'
 
 call plug#end()
+
+let g:rustfmt_autosave = 2
 
 " FZF
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' }}
