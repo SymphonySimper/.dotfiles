@@ -48,5 +48,4 @@ typin                    .local/bin/aliases/typin
 unix                     .local/bin/unix
 v                        .local/bin/v
 volume                   .local/bin/volume
-xdbus                    .local/bin/cron/xdbus
 ytd                      .local/bin/ytd
