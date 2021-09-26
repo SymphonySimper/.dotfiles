@@ -76,6 +76,15 @@ bindkey \^u backward-kill-line
 bindkey \^k kill-line
 bindkey \^y yank
 
+bindkey -s '^f' 'j\n'
+bindkey -s '^F' 'jj\n'
+bindkey -s '^b' 'huh\n'
+bindkey -s '^s' 'fes\n'
+bindkey -s '^g' 'fec\n'
+bindkey -s '^h' 'fesh\n'
+bindkey -s '^v' 'fv\n'
+bindkey -s '^a' 'fa\n'
+
 # vi mode
 bindkey -v
 export KEYTIMEOUT=1
@@ -109,7 +118,7 @@ preexec() { echo -ne "$cursorBeam" ;} # Use beam shape cursor for each new promp
 # Use lf to switch directories and bind it to ctrl-o
 lfcd () {
     tmp="$(mktemp)"
-    lf -last-dir-path="$tmp" "$@"
+    lfp -last-dir-path="$tmp" "$@"
     if [ -f "$tmp" ]; then
         dir="$(cat "$tmp")"
         rm -f "$tmp" >/dev/null
@@ -117,11 +126,7 @@ lfcd () {
     fi
 }
 bindkey -s '^o' 'lfcd\n'
-
-bindkey -s '^a' 'bc -lq\n'
-
-bindkey -s '^f' 'cd "$(dirname "$(fzf)")"\n'
-
+bindkey -s '^q' 'bc -lq\n'
 bindkey '^[[P' delete-char
 
 # Edit line in vim with ctrl-e:

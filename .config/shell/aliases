@@ -27,6 +27,7 @@ alias elist='equery list "*" | less'
 # Program
 alias ls='ls --color=auto'
 alias l='exa'
+alias vi='nvim'
 alias grep='grep --color=auto'
 alias sudo='$PERM'
 alias less='less -Q'

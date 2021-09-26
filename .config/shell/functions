@@ -81,18 +81,3 @@ hey-yo-int(){ while sleep 30s; ping -c 3 gnu.org; [ $? -ne 0 ]; do true; done &&
 
 # mkdir and cd
 mcd(){ mkdir -p "$1" && cd "$1"; }
-
-# to cd into dir when qutting lf
-lfcd () {
-    tmp="$(mktemp)"
-    lf -last-dir-path="$tmp" "$@"
-    if [ -f "$tmp" ]; then
-        dir="$(cat "$tmp")"
-        rm -f "$tmp"
-        if [ -d "$dir" ]; then
-            if [ "$dir" != "$(pwd)" ]; then
-                cd "$dir"
-            fi
-        fi
-    fi
-}

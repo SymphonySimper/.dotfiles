@@ -12,8 +12,8 @@ dis="fzf"
 #Paths
 what_img="$HOME/dl/What"*
 
-proper_1="sed 's|[@*]||g'"
-proper_2="sed 's|\\$|\\\\$|g'"
+sed_1="sed 's|[@*]||g'"
+sed_2="sed 's|\\$|\\\\$|g'"
 main() {
 	case "$1" in
 		*.jp*g | *.png | *.webp ) $h $iv "$1" ;;
@@ -35,11 +35,11 @@ main() {
 if [ -n "$1" ]; then
 	case "$1" in
 		-x) shift
-			query="$(ls -aF "$1" | grep -v / | eval $proper_1 | $dis | eval $proper_2)"
+			query="$(ls -aF "$1" | grep -v / | eval $sed_1 | $dis | eval $sed_2)"
 			[ -n "$query" ] && main "${1}/${query}"
 			;;
-		*) main "$(echo $@ | eval $proper_2)" ;;
+		*) main $(echo $@ | eval $sed_2) ;;
 	esac
 else
-	main "$(ls -aF | grep -v / | eval $proper_1 | $dis | eval $proper_2)"
+	main "$(ls -aF | grep -v / | eval $sed_1 | $dis | eval $sed_2)"
 fi
