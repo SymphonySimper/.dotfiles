@@ -1,10 +1,7 @@
 bmark                    .local/bin/bmark
 brightness               .local/bin/brightness
-lf-clear-img             .local/bin/lf/lf-clear-img
 coding-time              .local/bin/bspwm/coding-time
 configs                  .local/bin/.paths/configs
-lf-draw-img              .local/bin/lf/lf-draw-img
-lf-dr-file               .local/bin/lf/lf-dr-file
 edit-configs             .local/bin/rofi/edit-configs
 edit-scripts             .local/bin/rofi/edit-scripts
 edit-shell               .local/bin/rofi/edit-shell
@@ -15,8 +12,13 @@ gen-folder-aliases       .local/bin/gen/gen-folder-aliases
 gen-hosts                .local/bin/gen/gen-hosts
 gen-xresources           .local/bin/gen/gen-xresources
 goals                    .local/bin/goals
+i-slept                  .local/bin/i-slept
 kdenlive                 .local/bin/aliases/kdenlive
+lf-clear-img             .local/bin/lf/lf-clear-img
+lf-draw-img              .local/bin/lf/lf-draw-img
+lf-dr-file               .local/bin/lf/lf-dr-file
 lf-p                     .local/bin/lf/lf-p
+lf-previewer             .local/bin/lf/lf-previewer
 lz                       .local/bin/lz
 mnt-dev                  .local/bin/mnt-dev
 my-info                  .local/bin/my-info
@@ -26,7 +28,6 @@ open-url                 .local/bin/rofi/open-url
 play-audio               .local/bin/rofi/play-audio
 play-lofi                .local/bin/play-lofi
 play-video               .local/bin/rofi/play-video
-lf-previewer             .local/bin/lf/lf-previewer
 re-key                   .local/bin/re-key
 rofi-edit                .local/bin/aliases/rofi-edit
 rofi-open                .local/bin/aliases/rofi-open
@@ -37,6 +38,7 @@ screenshot               .local/bin/screenshot
 scripts                  .local/bin/.paths/scripts
 search                   .local/bin/rofi/search
 shell                    .local/bin/.paths/shell
+sleep-time               .local/bin/cron/sleep-time
 sound-efx                .local/bin/sound-efx
 startup                  .local/bin/startup
 syl                      .local/bin/syl
@@ -46,4 +48,5 @@ typin                    .local/bin/aliases/typin
 unix                     .local/bin/unix
 v                        .local/bin/v
 volume                   .local/bin/volume
+xdbus                    .local/bin/cron/xdbus
 ytd                      .local/bin/ytd

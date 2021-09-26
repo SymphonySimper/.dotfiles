@@ -1,0 +1,5 @@
+#!/bin/sh
+
+warning_i="$HOME"/.local/share/icons/general/warning.svg
+sound-efx &
+dunstify -i $warning_i "Time to sleep" "Its $(date '+%r')"

@@ -33,6 +33,7 @@ clear_block(){
 update_hosts_repo(){
 	curl_hosts(){ curl -s "$1" | sed -ne '/Start/,$ p' > "$2"; }
 	[ ! -d $block_source ] && mkdir "$block_source"
+	sound-efx &
 	notify 'update'
 	curl_hosts "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts" $ad_malware_block
 	curl_hosts "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts" $block_fgps

@@ -1,5 +1,3 @@
-let mapleader =" "
-
 if ! filereadable(system('echo -n "$XDG_CONFIG_HOME"/nvim/autoload/plug.vim'))
 	echo "Downloading junegunn/vim-plug to manage plugins..."
 	silent !mkdir -p "$XDG_CONFIG_HOME"/nvim/autoload/
@@ -20,24 +18,13 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 
-let g:rainbow_active = 1
 let g:rustfmt_autosave = 2
 
-hi LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
-hi CursorLineNr term=bold cterm=NONE ctermfg=LightGrey ctermbg=NONE gui=NONE guifg=LightGrey guibg=NONE
-hi StatusLine term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
-hi EndOfBuffer term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
-hi TabLineFill term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
-hi TabLine term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
-hi TabLineSel term=bold cterm=NONE ctermfg=LightGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
-hi VertSplit term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
-hi Floaterm term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
-hi FloatermBorder term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
+set termguicolors
+colorscheme the-black
 
 call plug#begin(system('echo -n "$XDG_CONFIG_HOME"/nvim/plugged'))
 
-" Plug 'jiangmiao/auto-pairs'
-Plug 'frazrepo/vim-rainbow'
 Plug 'junegunn/goyo.vim'
 Plug 'ap/vim-css-color'
 Plug 'rust-lang/rust.vim'
@@ -46,6 +33,7 @@ Plug 'ptzz/lf.vim'
 Plug 'voldikss/vim-floaterm'
 Plug 'junegunn/fzf.vim'
 Plug 'Jorengarenar/vim-MvVis'
+Plug 'unblevable/quick-scope'
 
 call plug#end()
 
@@ -60,7 +48,14 @@ let g:fzf_action = {
 let $FZF_DEFAULT_OPTS = '--layout=reverse --preview-window=border-sharp'
 let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/**' --glob '!build/**' --glob '!.dart_tool/**' --glob '!.idea' --glob '!node_modules'"
 
+" Quick-Scope
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+hi QuickScopePrimary guifg='#14E882' gui=underline term=bold
+hi QuickScopeSecondary guifg='#FF3333' gui=underline term=bold
+
 " -------------------- Key binds --------------------
+
+let mapleader =" "
 
 " This unsets the last search pattern register by hitting return
 nnoremap <CR> :noh<CR><CR>
@@ -73,10 +68,6 @@ nnoremap <C-l> <C-w>l
 
 " Create new tab with ctrl + t
 nnoremap <silent> <C-t> :tabnew<CR>
-
-" Use sneak instead of standard s
-map f <Plug>Sneak_s
-map F <Plug>Sneak_S
 
 " -------------------- LEADER COMBOS --------------------
 " Open goyo

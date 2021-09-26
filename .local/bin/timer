@@ -3,4 +3,20 @@
 timer_i="$HOME"/.local/share/icons/general/timer.svg
 
 notify(){ dunstify -h string:x-dunst-stack-tag:timer -i "$timer_i" "$1 is done"; }
-( sleep "$1" && { sound-efx & notify "$1"; } )&
+
+get_time_left(){
+	timer="$(ps aux | grep -e 'timer' | grep -v 'nvim\|-tl')"
+	if [ $(echo "$timer" | wc -l) -gt 1 ]; then
+		time_stamps=$(echo "$timer" | awk '{ print $9 }')
+		grep_time=$(echo $time_stamps | cut -d ' ' -f 2 | sed 's/:/./g' | tail -n1)
+		timer_created_time=$(echo $time_stamps | cut -d ' ' -f 1 | sed 's/:/./g' | head -n1)
+		echo $grep_time
+		echo $timer_created_time
+		echo "time left $(echo "$grep_time - $timer_created_time" | bc)"
+	fi
+}
+
+case "$1" in
+	-tl) get_time_left ;;
+	*) ( sleep "$1" && { sound-efx & notify "$1"; } )& ;;
+esac

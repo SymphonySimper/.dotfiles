@@ -12,6 +12,7 @@ bin_aliases="$bin"/aliases
 bin_bspwm="$bin"/bspwm
 bin_gen="$bin"/gen
 bin_lf="$bin"/lf
+bin_cron="$bin"/cron
 
 paths="$bin"/.paths
 shell_paths="$paths"/shell
@@ -75,6 +76,7 @@ case "$1" in
 	-b) shift; create_bin_file "$bin_bspwm" "$1" ;;
 	-g) shift; create_bin_file "$bin_gen" "$1" ;;
 	-l) shift; create_bin_file "$bin_lf" "$1" ;;
+	-c) shift; create_bin_file "$bin_cron" "$1" ;;
 	-sh) shift; create_shell_file "$1" ;;
 	-d) shift; delete_file "$1" ;;
 	*) create_bin_file "$bin" "$1" ;;
