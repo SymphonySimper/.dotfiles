@@ -7,8 +7,8 @@ mimeapps			.config/mimeapps.list
 mpv					.config/mpv/mpv.conf
 my-binds			.config/sxhkd/my-binds
 my-bspwm-binds		.config/sxhkd/my-bspwm-binds
-nvim				.config/nvim/init.vim
 nvim-color			.config/nvim/colors/the-black.vim
+nvim				.config/nvim/init.vim
 picom				.config/picom/picom.conf
 portage				.config/portage/make.conf
 rofi-config			.config/rofi/config.rasi
