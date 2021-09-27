@@ -52,10 +52,6 @@ super + r
 super + a
 	rofi-play
 
-# lfp
-super + f
-	$TERMINAL -e lfp
-
 # Screenshot
 super + alt + s
 	screenshot -r
