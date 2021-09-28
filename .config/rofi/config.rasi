@@ -3,6 +3,5 @@ configuration {
 	lines: 6;
 	font: "Poppins 12";
 	modi: [run,window];
-	fuzzy: true;
 }
 @theme "theme.rasi"

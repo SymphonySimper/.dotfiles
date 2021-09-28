@@ -58,12 +58,12 @@ add_block(){
 				;;
 		esac
 	}
-		add_block_hosts "$1" \
+		clear_block \
+		&& add_block_hosts "$1" \
 		&& echo "added $1" > $cache_file
 }
 change_block(){
-	clear_block \
-	&& if [ -f $cache_file ]; then
+	if [ -f $cache_file ]; then
 		if [ -z "$(cat $cache_file)" ]; then
 			add_block 'am'
 		else
@@ -84,5 +84,7 @@ case "$1" in
 	update) update_hosts_repo ;;
 	clear) clear_block; rm $cache_file ;;
 	edit) $EDITOR $my_block && sort -o $my_block $my_block ;;
+	all) add_block 'all' ;;
+	am) add_block 'am' ;;
 	*) change_block ;;
 esac
