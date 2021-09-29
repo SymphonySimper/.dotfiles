@@ -45,10 +45,11 @@ export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export RUST_BACKTRACE='1'
 export RXVT_SOCKET="$XDG_RUNTIME_DIR"/urxvtd
 export GOPATH="$XDG_DATA_HOME"/go
-export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
+# export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 export ANDROID_SDK_HOME="$XDG_CONFIG_HOME"/android
 export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
 export ANDROID_SDK_ROOT="$XDG_DATA_HOME"/android
+export CHROME_EXECUTABLE="chromium"
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
 export ATOM_HOME="$XDG_DATA_HOME"/atom
 
