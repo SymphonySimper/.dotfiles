@@ -26,7 +26,6 @@ main() {
 				*.pdf ) $h $pv "$1" && rm -i "$1" ;;
 				*) $h $iv $what_img && rm -I $what_img ;;
 			esac ;;
-		-s) shift; $PERM $te "$1" ;;
 		-p) ls *.pdf | $dis | xargs -rI {} $h $pv {} ;;
 		*) [ -n "$@" ] && $te "$1" ;;
 	esac
@@ -38,7 +37,7 @@ if [ -n "$1" ]; then
 			query="$(ls -aF "$1" | grep -v / | eval $sed_1 | $dis | eval $sed_2)"
 			[ -n "$query" ] && main "${1}/${query}"
 			;;
-		*) main $(echo $@ | eval $sed_2) ;;
+		*) main "$(echo $@ | eval $sed_2)" ;;
 	esac
 else
 	main "$(ls -aF | grep -v / | eval $sed_1 | $dis | eval $sed_2)"
