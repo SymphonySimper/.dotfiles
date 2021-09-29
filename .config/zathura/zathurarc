@@ -37,7 +37,7 @@ set completion-highlight-bg     "#686868"
 set recolor-lightcolor          "#000000"
 set recolor-darkcolor           "#e3e3e3"
 
-set recolor                     "true"
+set recolor                     "false"
 set recolor-keephue             "true"
 
 set window-title-home-tilde true

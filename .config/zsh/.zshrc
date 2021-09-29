@@ -77,7 +77,7 @@ bindkey \^k kill-line
 bindkey \^y yank
 
 bindkey -s '^f' 'j\n'
-bindkey -s '^F' 'jj\n'
+bindkey -s '^p' 'jj\n'
 bindkey -s '^b' 'huh\n'
 bindkey -s '^s' 'fes\n'
 bindkey -s '^g' 'fec\n'
