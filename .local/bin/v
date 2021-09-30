@@ -1,8 +1,8 @@
 #!/bin/sh
 
 #Apps
-iv="$IMAGEVIEWER"
-vv="$VIDEOPLAYER"
+iv="$IMAGE_VIEWER"
+vv="$VIDEO_PLAYER"
 vf="ffplay"
 pv="$READER"
 te="$EDITOR"

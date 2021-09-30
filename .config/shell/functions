@@ -49,13 +49,13 @@ sort_paths(){
 # Loop Video
 loop_v(){
 	case "$1" in
-		-a) $VIDEOPLAYER --no-video --shuffle --loop-playlist "$HOME"/importantnt/video ;;
-		*) devour prime-run $VIDEOPLAYER --shuffle --loop-playlist "$HOME"/importantnt/video ;;
+		-a) $VIDEO_PLAYER --no-video --shuffle --loop-playlist "$HOME"/importantnt/video ;;
+		*) devour prime-run $VIDEO_PLAYER --shuffle --loop-playlist "$HOME"/importantnt/video ;;
 	esac
 }
 
 # Loop Audio
-loop_a(){ $VIDEOPLAYER --shuffle --loop-playlist "$HOME"/importantnt/audio; }
+loop_a(){ $VIDEO_PLAYER --shuffle --loop-playlist "$HOME"/importantnt/audio; }
 
 # Caps To ESC
 caps_to_esc(){ setxkbmap -option caps:escape; }

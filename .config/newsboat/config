@@ -1,4 +1,5 @@
 auto-reload yes
+# browser "firefox %u"
 
 bind-key j down
 bind-key k up
@@ -19,8 +20,7 @@ bind-key D pb-download
 bind-key U show-urls
 bind-key x pb-delete
 
-macro y set browser "v %u" ; open-in-browser ; set browser "elinks %u"
-macro f set browser "firefox u" ; open-in-browser ; set browser "elinks %u"
+macro m set browser "v %u" ; open-in-browser ; set browser "elinks %u"
 
 color info					color237		default		bold
 color article				default			default

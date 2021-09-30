@@ -2,11 +2,15 @@
 super + Return
  	$TERMINAL
 super + shift + Return
-	$SECONDTERMINAL
+	$SECOND_TERMINAL
 
 # Open Browser
 super + shift + f
 	$BROWSER
+
+# Open Rss reader
+super + n
+	$TERMINAL -e $RSS_READER
 
 # Volume
 super + F2

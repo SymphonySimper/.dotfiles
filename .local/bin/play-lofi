@@ -2,10 +2,10 @@
 
 loc="$HOME"/importantnt/audio/.lofi
 
-is_lofi="$(pgrep -la "$VIDEOPLAYER" | grep 'title=lofi' | cut -d ' ' -f 1)"
+is_lofi="$(pgrep -la "$VIDEO_PLAYER" | grep 'title=lofi' | cut -d ' ' -f 1)"
 
 if [ -n "$is_lofi" ]; then
 	kill "$is_lofi"
 else
-	"$VIDEOPLAYER" --title='lofi' --volume=50 --loop-playlist --shuffle "$loc"
+	"$VIDEO_PLAYER" --title='lofi' --volume=50 --loop-playlist --shuffle "$loc"
 fi

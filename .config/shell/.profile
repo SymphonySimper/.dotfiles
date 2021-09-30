@@ -1,13 +1,14 @@
 # Default Programs
 export TERMINAL="urxvtc"
-export SECONDTERMINAL="urxvt"
+export SECOND_TERMINAL="urxvt"
 export EDITOR="nvim"
 export VISUAL="$EDITOR"
 export BROWSER="firefox"
 export READER="zathura"
-export IMAGEVIEWER="sxiv"
-export VIDEOPLAYER="mpv"
+export IMAGE_VIEWER="sxiv"
+export VIDEO_PLAYER="mpv"
 export PERM="doas"
+export RSS_READER="newsboat"
 
 # Paths
 export PATH="$PATH:$HOME/.local/bin"					# Scripts
