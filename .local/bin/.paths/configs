@@ -7,6 +7,8 @@ mimeapps			.config/mimeapps.list
 mpv					.config/mpv/mpv.conf
 my-binds			.config/sxhkd/my-binds
 my-bspwm-binds		.config/sxhkd/my-bspwm-binds
+newsboat-cfg		.config/newsboat/config
+newsboat-url		.config/newsboat/urls
 nvim-color			.config/nvim/colors/the-black.vim
 nvim				.config/nvim/init.vim
 picom				.config/picom/picom.conf
@@ -18,6 +20,5 @@ touchcursor			.config/touchcursor/touchcursor.conf
 userChrome			.config/firefox/chrome/userChrome.css
 userContent			.config/firefox/chrome/userContent.css
 user-pref			.config/firefox/my-user.js
+ytfzf				.config/ytfzf/conf.sh
 zathura				.config/zathura/zathurarc
-newsboat-cfg		.config/newsboat/config
-newsboat-url		.config/newsboat/urls
