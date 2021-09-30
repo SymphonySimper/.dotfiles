@@ -1,7 +1,4 @@
-/* tabbrowser tabpanels { background-color: #111111 !important; }
-browser { background-color: #111111 !important; } */
-
-#browser vbox#appcontent tabbrowser, #content, #tabbrowser-tabpanels, 
+#browser vbox#appcontent tabbrowser, #content, #tabbrowser-tabpanels,
 browser[type=content-primary],browser[type=content] > html {
     background: #000000 !important
 }

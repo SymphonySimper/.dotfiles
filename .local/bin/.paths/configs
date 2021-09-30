@@ -20,5 +20,4 @@ touchcursor			.config/touchcursor/touchcursor.conf
 userChrome			.config/firefox/chrome/userChrome.css
 userContent			.config/firefox/chrome/userContent.css
 user-pref			.config/firefox/my-user.js
-ytfzf				.config/ytfzf/conf.sh
 zathura				.config/zathura/zathurarc
