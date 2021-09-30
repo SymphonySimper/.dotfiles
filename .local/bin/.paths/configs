@@ -19,3 +19,5 @@ userChrome			.config/firefox/chrome/userChrome.css
 userContent			.config/firefox/chrome/userContent.css
 user-pref			.config/firefox/my-user.js
 zathura				.config/zathura/zathurarc
+newsboat-cfg		.config/newsboat/config
+newsboat-url		.config/newsboat/urls
