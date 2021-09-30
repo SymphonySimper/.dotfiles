@@ -55,6 +55,9 @@ super + r
 	rofi-todo
 super + a
 	rofi-play
+super + shift + q
+	rofi -modi "Power Options:$HOME/.local/bin/rofi/power-options" \
+	-show 'Power Options'
 
 # Screenshot
 super + alt + s

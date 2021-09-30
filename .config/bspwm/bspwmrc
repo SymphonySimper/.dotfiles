@@ -29,6 +29,7 @@ bspc rule -a Zathura state=tiled
 
 bspc rule -a Firefox desktop='^2'
 bspc rule -a mpv desktop='^5' follow=on
+bspc rule -a discord desktop='^7'
 bspc rule -a qBittorrent desktop='^6'
 bspc rule -a Gimp desktop='^7'
 bspc rule -a Steam desktop='^8'

@@ -4,7 +4,7 @@ url='https://duckduckgo.com/?q='
 search_history="$HOME"/.cache/searchhis
 
 if [ -z "$@" ]; then
-	[ -f $search_history ] && cat $search_history
+	[ -f $search_history ] && tac $search_history
 else
 	! grep -qw "^$@" $search_history && echo "$@" >> $search_history
 	$BROWSER "${url}${@}" > /dev/null 2>&1 &

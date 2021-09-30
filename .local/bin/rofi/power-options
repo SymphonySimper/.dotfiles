@@ -1,0 +1,17 @@
+#!/bin/sh
+
+if [ -z "$@" ]; then
+	printf "%s\n%s\n%s\n" "Logout" "Poweroff" "Reboot"
+	[ $WM = 'bspwm' ] && echo 'Restartwm'
+	echo 'nah'
+else
+	case "$@" in
+		Logout) pkill -KILL -u $(who | cut -d ' ' -f1) ;;
+		Poweroff) $PERM poweroff ;;
+		Reboot) $PERM reboot ;;
+		Restartwm)
+			bspc wm -r \
+			&& dunstify "Restarting $WM"
+			;;
+	esac
+fi

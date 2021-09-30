@@ -7,8 +7,8 @@ super + q
 	bspc node -c
 
 # quit/restart bspwm
-super + shift + {q,r}
-	bspc {quit,wm -r}
+super + shift + r
+	bspc wm -r
 
 # alternate between the tiled and monocle layout
 super + m
