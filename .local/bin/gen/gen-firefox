@@ -1,0 +1,24 @@
+#!/bin/sh
+cfg_fox="$HOME"/.config/firefox
+main_fox="$HOME"/.mozilla/firefox
+
+ghack_user_js_raw="https://raw.githubusercontent.com/arkenfox/user.js/master/user.js"
+my_user_js="$cfg_fox"/my-user.js
+user_chrome="$cfg_fox"/chrome
+ghack_user_js="$cfg_fox"/ghack-user.js
+
+default_user=$(cat "$main_fox"/profiles.ini 2>/dev/null | grep 'Default' | cut -d '=' -f2)
+update_ghack(){ curl "$ghack_user_js_raw" > $ghack_user_js; }
+stuff_to_main(){
+	cat $my_user_js $ghack_user_js > "$main_fox/$default_user"/user.js
+	cp -rv $user_chrome "$main_fox/$default_user"
+}
+
+if [ ! -f $ghack_user_js ]; then
+	update_ghack
+fi
+
+case "$1" in
+	update) update_ghack && stuff_to_main ;;
+	*) stuff_to_main ;;
+esac

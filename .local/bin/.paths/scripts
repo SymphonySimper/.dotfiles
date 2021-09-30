@@ -8,6 +8,7 @@ edit-shell               .local/bin/rofi/edit-shell
 folders                  .local/bin/.paths/folders
 fzf-folders              .local/bin/.paths/fzf-folders
 game-mode                .local/bin/game-mode
+gen-firefox              .local/bin/gen/gen-firefox
 gen-folder-aliases       .local/bin/gen/gen-folder-aliases
 gen-hosts                .local/bin/gen/gen-hosts
 gen-xresources           .local/bin/gen/gen-xresources

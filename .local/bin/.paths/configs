@@ -17,5 +17,5 @@ sxiv				.config/sxiv/exec/key-handler
 touchcursor			.config/touchcursor/touchcursor.conf
 userChrome			.config/firefox/chrome/userChrome.css
 userContent			.config/firefox/chrome/userContent.css
-user-pref			.config/firefox/user.js
+user-pref			.config/firefox/my-user.js
 zathura				.config/zathura/zathurarc
