@@ -21,6 +21,7 @@ bind-key U show-urls
 bind-key x pb-delete
 
 macro m set browser "v %u" ; open-in-browser ; set browser "elinks %u"
+macro w set browser "w3m %u" ; open-in-browser ; set browser "elinks %u"
 
 color info					color237		default		bold
 color article				default			default
