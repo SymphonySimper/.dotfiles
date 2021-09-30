@@ -32,6 +32,7 @@ alias grep='grep --color=auto'
 alias sudo='$PERM'
 alias less='less -Q'
 alias flex='neofetch'
+alias ytf='ytfzf -t'
 
 # Tasks
 alias rm_cache='rm -rf ~/.cache/*'

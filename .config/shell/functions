@@ -85,4 +85,5 @@ hey_yo_int(){ while sleep 30s; ping -c 3 gnu.org; [ $? -ne 0 ]; do true; done &&
 # mkdir and cd
 mcd(){ mkdir -p "$1" && cd "$1"; }
 
+# cron
 cp_cron(){ crontab -l > "$HOME"/.config/cron/crontab; }
