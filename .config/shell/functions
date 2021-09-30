@@ -80,7 +80,9 @@ letmein(){
 }
 
 # Hey yo internet
-hey-yo-int(){ while sleep 30s; ping -c 3 gnu.org; [ $? -ne 0 ]; do true; done && sound-efx; }
+hey_yo_int(){ while sleep 30s; ping -c 3 gnu.org; [ $? -ne 0 ]; do true; done && sound-efx; }
 
 # mkdir and cd
 mcd(){ mkdir -p "$1" && cd "$1"; }
+
+cp_cron(){ crontab -l > "$HOME"/.config/cron/crontab; }

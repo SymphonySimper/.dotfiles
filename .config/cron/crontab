@@ -1,0 +1,10 @@
+SHELL=/bin/sh
+PATH=/home/s2b/.local/bin:/home/s2b/.local/bin/gen:/home/s2b/.local/bin/cron:/usr/bin:/usr/sbin:/bin:/sbin
+DISPLAY=:0
+XDG_RUNTIME_DIR=/run/user/1000
+XAUTHORITY=/run/user/1000/Xauthority
+
+0 0 */4 * * gen-hosts update
+0 0 */4 * * gen-firfox update
+0 23 * * * sleep-time
+30 23 * * * sleep-time
