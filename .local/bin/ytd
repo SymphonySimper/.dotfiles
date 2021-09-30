@@ -90,8 +90,14 @@ playlist(){
 	fi
 }
 
+get_link(){
+	link=$(ytfzf -Lt "$1")
+	dl $link
+}
+
 echo
 case "$1" in
+	-S) shift; get_link "$1" ;;
 	-a) shift
 		get_f "$1"
 		af=$(get_c 'audio')

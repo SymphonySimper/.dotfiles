@@ -39,15 +39,14 @@ call plug#end()
 let g:rustfmt_autosave = 2
 
 " FZF
+
+let $FZF_DEFAULT_OPTS = $FZF_DEFAULT_OPTS
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' }}
 
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
-
-let $FZF_DEFAULT_OPTS = '--layout=reverse --preview-window=border-sharp'
-let $FZF_DEFAULT_COMMAND = "rg --files --hidden --glob '!.git/**' --glob '!build/**' --glob '!.dart_tool/**' --glob '!.idea' --glob '!node_modules'"
 
 " Quick-Scope
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
@@ -76,7 +75,6 @@ map <leader>g :Goyo<CR>
 
 " Open fzf
 map <leader>s :BLines<CR>
-map <leader>p :Files<CR>
 
 " To replace string
 map <leader>r :%s//g<Left><Left>
