@@ -62,29 +62,27 @@ add_block(){
 		&& add_block_hosts "$1" \
 		&& echo "added $1" > $cache_file
 }
-change_block(){
-	if [ -f $cache_file ]; then
-		if [ -z "$(cat $cache_file)" ]; then
-			add_block 'am'
-		else
-			case "$(cat $cache_file | cut -d ' ' -f 2)" in
-				am) add_block 'all';;
-				all) add_block 'am' ;;
-			esac
-		fi
-	else
-		add_block 'am'
-	fi
+
+main(){
+	case "$1" in
+		clear) clear_block; rm $cache_file ;;
+		am) add_block 'am' ;;
+		all) add_block 'all' ;;
+		edit) $EDITOR $my_block && sort -o $my_block $my_block ;;
+		update) update_hosts_repo ;;
+	esac
+}
+rofi_menu(){
+	query="$(echo "clear\nam\nall\nedit\nupdate" | rofi -dmenu -p 'gen-hosts')"
+	main "$query"
 }
 
 if [ ! -f $ad_malware_block ] || [ ! -f $block_fgps ]; then
 	update_hosts_repo
 fi
-case "$1" in
-	update) update_hosts_repo ;;
-	clear) clear_block; rm $cache_file ;;
-	edit) $EDITOR $my_block && sort -o $my_block $my_block ;;
-	all) add_block 'all' ;;
-	am) add_block 'am' ;;
-	*) change_block ;;
-esac
+
+if [ -z "$@" ]; then
+	rofi_menu
+else
+	main "$@"
+fi

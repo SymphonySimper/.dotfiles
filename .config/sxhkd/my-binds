@@ -32,11 +32,7 @@ super + F1
 
 # Get work done
 super + shift + F12
-	$TERMINAL -e gen-hosts 'clear'
-super + F11
-	$TERMINAL -e gen-hosts 'am'
-super + shift + F11
-	$TERMINAL -e gen-hosts 'all'
+	$TERMINAL -e gen-hosts
 
 # Brightness
 super + F5
