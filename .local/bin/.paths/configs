@@ -16,7 +16,6 @@ portage				.config/portage/make.conf
 rofi-config			.config/rofi/config.rasi
 rofi-theme			.config/rofi/theme.rasi
 sxiv				.config/sxiv/exec/key-handler
-touchcursor			.config/touchcursor/touchcursor.conf
 userChrome			.config/firefox/chrome/userChrome.css
 userContent			.config/firefox/chrome/userContent.css
 user-pref			.config/firefox/my-user.js

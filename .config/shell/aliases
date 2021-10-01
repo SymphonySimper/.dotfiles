@@ -9,7 +9,7 @@ alias gm='git commit'
 alias gnotrack='git config --local status.showUntrackedFiles no'
 
 # Config git alias
-alias cgs='config status -v'
+alias cgs='config status'
 alias cgm='config commit'
 alias cgp='config push'
 alias cgau='config add -u'

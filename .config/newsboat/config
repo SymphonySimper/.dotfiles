@@ -1,5 +1,6 @@
 auto-reload yes
-# browser "firefox %u"
+browser "firefox %u"
+max-browser-tabs 8
 
 bind-key j down
 bind-key k up
@@ -19,6 +20,7 @@ bind-key N prev-unread
 bind-key D pb-download
 bind-key U show-urls
 bind-key x pb-delete
+bind-key ^O open-all-unread-in-browser-and-mark-read
 
 macro m set browser "v %u" ; open-in-browser ; set browser "elinks %u"
 macro w set browser "w3m %u" ; open-in-browser ; set browser "elinks %u"
