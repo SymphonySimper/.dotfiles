@@ -8,10 +8,20 @@ fnd(){ find ~ -name "$1"; }
 # git
 ga(){ git add "$1"; }
 grm(){ git rm "$1" --cached; }
+gamp(){
+	git add -u \
+	&& git commit \
+	&& git push
+}
 
 # config git
 cga(){ config add "$1"; }
 cgrm(){ config rm "$1" --cached; }
+cgamp(){
+	config add -u \
+	&& config commit \
+	&& config push
+}
 
 # Package Manager
 is_there(){ equery list '*' | grep -i "$1"; }
@@ -19,7 +29,12 @@ compile_time(){ $PERM qlop -tHv "$1"; }
 add_repo(){
 	$PERM eselect repository enable "$1" \
 	&& $PERM emaint sync -r "$1" \
-	&& $PERM emerge --sync
+	&& $PERM e --sync
+}
+unmask(){
+	$PERM e "$1" --autounmask \
+	&& $PERM etc-update \
+	&& $PERM e "$1"
 }
 
 # Format USB
