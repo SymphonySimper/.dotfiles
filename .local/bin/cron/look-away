@@ -1,0 +1,17 @@
+#!/bin/sh
+
+warning_i="$HOME"/.local/share/icons/general/warning.svg
+
+notify(){ dunstify -i $warning_i "$1" "You have been starring at the pc for $2"; }
+time_stare=0
+while :; do
+	sleep 15m
+	time_stare=$((time_stare + 15))
+	sound-efx &
+	if [ $time_stare -eq 60 ]; then
+		time_stare=0
+		notify 'Take a break!' '1h'
+	else
+		notify 'Look away!'	'15m'
+	fi
+done

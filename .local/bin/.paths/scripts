@@ -20,6 +20,7 @@ lf-draw-img              .local/bin/lf/lf-draw-img
 lf-dr-file               .local/bin/lf/lf-dr-file
 lf-p                     .local/bin/lf/lf-p
 lf-previewer             .local/bin/lf/lf-previewer
+look-away                .local/bin/cron/look-away
 lz                       .local/bin/lz
 mnt-dev                  .local/bin/mnt-dev
 my-info                  .local/bin/my-info
