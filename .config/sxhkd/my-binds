@@ -46,7 +46,7 @@ super + shift + p
 
 # Rofi
 super + space
-	rofi -show run
+	rofi-run
 super + s
 	rofi-open
 super + e

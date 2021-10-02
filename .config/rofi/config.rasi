@@ -2,6 +2,6 @@ configuration {
 	fixed-num-lines: true;
 	lines: 6;
 	font: "Poppins 12";
-	modi: [run,window];
+	modi: [run];
 }
 @theme "theme.rasi"

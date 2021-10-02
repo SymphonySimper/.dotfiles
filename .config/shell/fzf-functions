@@ -34,6 +34,6 @@ fv(){
 
 fdocs(){
 	loc="$HOME"/.local/share/my-docs
-	query="$(ls -F $LOC | grep -v '/\|.part' | fzf)"
+	query="$(ls -F $loc | grep -v '/\|.part' | fzf)"
 	$EDITOR $loc/$query
 }

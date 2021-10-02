@@ -31,11 +31,6 @@ add_repo(){
 	&& $PERM emaint sync -r "$1" \
 	&& $PERM e --sync
 }
-unmask(){
-	$PERM e "$1" --autounmask \
-	&& $PERM etc-update \
-	&& $PERM e "$1"
-}
 
 # Format USB
 format_usb_fat32(){

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+open_appimage="$HOME"/.local/bin/rofi/open-appimage
+
+rofi -modi "run,i-run:$open_appimage,window" -show run

@@ -25,6 +25,7 @@ lz                       .local/bin/lz
 mnt-dev                  .local/bin/mnt-dev
 my-info                  .local/bin/my-info
 my-qemu                  .local/bin/my-qemu
+open-appimage            .local/bin/rofi/open-appimage
 open-bmark               .local/bin/rofi/open-bmark
 open-url                 .local/bin/rofi/open-url
 play-audio               .local/bin/rofi/play-audio
@@ -35,6 +36,7 @@ re-key                   .local/bin/re-key
 rofi-edit                .local/bin/aliases/rofi-edit
 rofi-open                .local/bin/aliases/rofi-open
 rofi-play                .local/bin/aliases/rofi-play
+rofi-run                 .local/bin/aliases/rofi-run
 rofi-todo                .local/bin/aliases/rofi-todo
 r-timer                  .local/bin/rofi/r-timer
 screenshot               .local/bin/screenshot

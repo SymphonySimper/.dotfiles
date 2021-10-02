@@ -3,8 +3,3 @@
 warning_i="$HOME"/.local/share/icons/general/warning.svg
 sound-efx &
 dunstify -i $warning_i "Time to sleep" "Its $(date '+%r')"
-
-query=$(echo "I'm going to sleep\nNah" | rofi -dmenu -p 'Sleep time' );
-case "$query" in
-	*sleep*) $PERM poweroff ;;
-esac

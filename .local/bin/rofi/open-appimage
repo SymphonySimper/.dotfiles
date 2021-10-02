@@ -1,0 +1,10 @@
+#!/bin/sh
+
+loc="$HOME"/.local/appimage
+
+if [ -z "$@" ]; then
+	ls $loc
+else
+	app="$@"
+	[ -f "$loc/$app" ] && "$loc/$app" > /dev/null 2>&1 &
+fi
