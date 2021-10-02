@@ -6,7 +6,10 @@ if [ -z "$@" ]; then
 	echo 'nah'
 else
 	case "$@" in
-		Logout) pkill -KILL -u $(who | cut -d ' ' -f1) ;;
+		Logout)
+			[ $WM = 'bspwm' ] && bspc quit \
+			|| pkill -KILL -u $USER
+			;;
 		Poweroff) $PERM poweroff ;;
 		Reboot) $PERM reboot ;;
 		Restartwm)
