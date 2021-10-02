@@ -32,10 +32,12 @@ bspc rule -a mpv desktop='^5' follow=on
 bspc rule -a discord desktop='^6'
 bspc rule -a qBittorrent desktop='^6'
 bspc rule -a Gimp desktop='^7'
-bspc rule -a Steam desktop='^8'
 bspc rule -a obs desktop='^10'
 
-# Games
+# Games related
+bspc rule -a Steam desktop='^8'
+bspc rule -a heroic desktop='^8'
+
 bspc rule -a csgo_linux64 desktop='^9'
 bspc rule -a PortalWars-Linux-Shipping desktop='^9'
 bspc rule -a steam_app_230410 desktop='^9'
