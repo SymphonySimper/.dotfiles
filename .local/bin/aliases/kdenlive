@@ -1,3 +1,0 @@
-#!/bin/sh
-
-prime-run "$XDG_DATA_HOME"/appimages/kdenlive*.appimage & > /dev/null 2>&1

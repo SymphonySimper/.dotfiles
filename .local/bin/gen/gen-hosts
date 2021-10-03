@@ -31,7 +31,7 @@ clear_block(){
 }
 
 update_hosts_repo(){
-	curl_hosts(){ curl -s "$1" | sed -ne '/Start/,$ p' > "$2"; }
+	curl_hosts(){ curl -s "$1" | sed -ne '/Start/,$ p' | sed '/#/d; /^[[:space:]]*$/d' > "$2"; }
 	[ ! -d $block_source ] && mkdir "$block_source"
 	sound-efx &
 	notify 'update'
