@@ -7,12 +7,30 @@ warning_i="$HOME"/.local/share/icons/general/warning.svg
 
 is_picom="$(pgrep picom)"
 
-if [ -z $is_picom ]; then
-	$TERMINAL -e gen-hosts \
-	&& picom &
-	$notify "Picom is alive"
-else
-	$TERMINAL -e gen-hosts 'clear' \
-	&& killall picom \
-	&& $notify -i $warning_i "Picom is dead"
-fi
+toggle(){
+	if [ -z $is_picom ]; then
+		$TERMINAL -e gen-hosts \
+		&& handle_picom
+	else
+		$TERMINAL -e gen-hosts 'clear' \
+		&& handle_picom
+	fi
+}
+
+handle_picom(){
+	if [ -z $is_picom ]; then
+		picom > /dev/null 2>&1 &
+		$notify "Picom is alive"
+	else
+		killall picom \
+		&& $notify -i $warning_i "Picom is dead"
+	fi
+}
+
+options(){ printf "%s\n%s\n%s\n" 'toggle' 'toggle-picom'; }
+query=$(options | rofi -dmenu -p 'Game-mode')
+
+case "$query" in
+	toggle) toggle ;;
+	toggle-picom) handle_picom ;;
+esac
