@@ -1,7 +1,7 @@
 #!/bin/sh
 
 app="xbacklight"
-get_b(){ $app -get; }
+get_b(){ $app -get | cut -d '.' -f1; }
 notify(){
 	dunstify -h string:x-dunst-stack-tag:brightness \
 		-i $HOME/.local/share/icons/general/brightness.svg \
