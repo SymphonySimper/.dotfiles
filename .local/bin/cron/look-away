@@ -3,21 +3,23 @@
 warning_i="$HOME"/.local/share/icons/general/warning.svg
 
 notify(){ dunstify -h 'string:x-dunst-stack-tag:look-away' -i $warning_i "$1" "You have been starring at the pc for $2"; }
+echo_time(){ echo "<b><i>${1}</i></b>"; }
+
 time_stare=0
 hours=0
 while :; do
-	sleep 1s
+	sleep 15m
 	time_stare=$((time_stare + 15))
 	sound-efx &
 	if [ $(echo "$time_stare % 60" | bc) -eq 0 ]; then
 		time_stare=0
 		hours=$((hours + 1))
-		notify 'Take a break!' "<b>${hours}h</b>"
+		notify 'Take a break!' "$(echo_time "${hours}h")"
 	else
 		if [ $hours -ne 0 ]; then
-			notify 'Look away!'	"<b>${hours}h ${time_stare}m</b>"
+			notify 'Look away!'	"$(echo_time "${hours}h ${time_stare}m")"
 		else
-			notify 'Look away!'	"<b>${time_stare}m</b>"
+			notify 'Look away!'	"$(echo_time "${time_stare}m")"
 		fi
 	fi
 done
