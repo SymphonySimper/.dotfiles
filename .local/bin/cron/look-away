@@ -2,16 +2,22 @@
 
 warning_i="$HOME"/.local/share/icons/general/warning.svg
 
-notify(){ dunstify -i $warning_i "$1" "You have been starring at the pc for $2"; }
+notify(){ dunstify -h 'string:x-dunst-stack-tag:look-away' -i $warning_i "$1" "You have been starring at the pc for $2"; }
 time_stare=0
+hours=0
 while :; do
-	sleep 15m
+	sleep 1s
 	time_stare=$((time_stare + 15))
 	sound-efx &
-	if [ $time_stare -eq 60 ]; then
+	if [ $(echo "$time_stare % 60" | bc) -eq 0 ]; then
 		time_stare=0
-		notify 'Take a break!' '1h'
+		hours=$((hours + 1))
+		notify 'Take a break!' "<b>${hours}h</b>"
 	else
-		notify 'Look away!'	'15m'
+		if [ $hours -ne 0 ]; then
+			notify 'Look away!'	"<b>${hours}h ${time_stare}m</b>"
+		else
+			notify 'Look away!'	"<b>${time_stare}m</b>"
+		fi
 	fi
 done
