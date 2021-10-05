@@ -6,6 +6,7 @@ repo_loc="$(echo $BMARK | sed 's/bookmarks//g')"
 
 err(){ echo "$(syl r; syl B)${1}$(syl R)"; }
 succ(){ echo "$(syl g; syl B)${1}$(syl R)"; }
+git_c="git -C $repo_loc"
 
 sort_bmark(){ sort $BMARK -o $BMARK; }
 add_bmark(){
@@ -32,18 +33,18 @@ clone_repo(){
 	fi
 }
 push_repo(){
-	if git -C $repo_loc status | grep -q 'modified'; then
-		git -C $repo_loc add -u \
-		&& git -C $repo_loc commit -m "$1" \
-		&& git -C $repo_loc push
+	if $git_c status | grep -q 'modified'; then
+		$git_c add -u \
+		&& $git_c commit -m "$1" \
+		&& $git_c push
 	else
 		succ "Nothing to commit"
 	fi
 }
-status_repo(){ git -C $repo_loc status -v; }
+status_repo(){ $git_c status -v; }
 
-if git -C $repo_loc status | grep -q 'modified'; then
-	git -C $repo_loc add -u
+if $git_c status | grep -q 'modified'; then
+	$git_c add -u
 fi
 if [ ! -d $repo_loc ]; then
 	err "$BMARK does not exist"
