@@ -1,8 +1,9 @@
 #!/bin/sh
 
-red=$(syl r); bold=$(syl B); reset=$(syl R)
-
+bold=$(syl B); reset=$(syl R)
 h="$HOME"
+
+config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 
 shell=.config/shell
 
@@ -22,7 +23,7 @@ v="$EDITOR"
 
 shebang="#!/bin/sh"
 
-err(){ echo "${bold}${red}${1}${reset}"; }
+err(){ echo "${bold}${1}${reset}"; }
 
 executable(){ chmod +x "$h/$1"; }
 add_path(){ printf "%*s %s\n" -24 "$1" "$2/$1" >> "$h/$3"; }
@@ -37,6 +38,7 @@ create_bin_file(){
 		sort_paths "$bin_paths"
 		executable "$1/$2"
 		$v "$h/$1/$2"
+		$config add "$h/$1/$2"
 	fi
 }
 
@@ -48,20 +50,24 @@ create_shell_file(){
 		[ -f "$h/$shell/$1" ] && {
 			add_path "$1" "$shell" "$shell_paths"
 			sort_paths "$shell_paths"
+			$config add "$h/$shell/$1"
 		}
 	fi
 }
 
+yeet(){
+	to_rm="$h/$(grep -w "^$2." "$h/$1" | awk '{ print $2 }')"
+	rm "$to_rm" \
+	&& $config rm "$to_rm" --cached \
+	&& sed "/^$2/d" -i "$h/$1"
+}
+
 delete_file(){
-	yeet(){
-		rm "$h/$(grep -w "^$2." "$h/$1" | awk '{ print $2 }')"
-		sed "/^$2/d" -i "$h/$1"
-	}
 	ifPresent(){ grep -wq "^$1." "$h/$2"; }
 	msg="has been removed from"
 	if ( ifPresent "$1" "$bin_paths" ); then
-		yeet "$bin_paths" "$1"
-	     err "$1 $msg $h/$bin"
+		yeet "$bin_paths" "$1" \
+	    && err "$1 $msg $h/$bin"
 	elif ( ifPresent "$1" "$shell_paths" ); then
 		yeet "$shell_paths" "$1"
 		err "$1 $msg $h/$shell"
