@@ -4,7 +4,7 @@ warning_i="$HOME"/.local/share/icons/general/warning.svg
 log=/tmp/look-away
 
 notify(){ dunstify -h 'string:x-dunst-stack-tag:look-away' -i $warning_i "$1" "You have been starring at the pc for $2"; }
-echo_time(){ echo "<u><i>${1}</i></u>"; }
+echo_time(){ echo "<b><u><i>${1}</i></u></b>"; }
 save_log(){ echo_time "$1" >> /tmp/look-away; }
 
 time_stare=0
