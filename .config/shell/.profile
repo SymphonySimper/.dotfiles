@@ -7,7 +7,7 @@ export BROWSER="firefox"
 export READER="zathura"
 export IMAGE_VIEWER="sxiv"
 export VIDEO_PLAYER="mpv"
-export PERM="sudo"
+export PERM="doas"
 export RSS_READER="newsboat"
 
 # Paths
