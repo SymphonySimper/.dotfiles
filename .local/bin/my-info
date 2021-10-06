@@ -3,6 +3,7 @@
 notify="dunstify"
 todo_loc="$XDG_DATA_HOME"/.todo
 begone_loc="$HOME"/.cache/begone
+look_away_loc=/tmp/look-away
 
 #Icons
 dir="$HOME"/.local/share/icons/my-info
@@ -31,9 +32,9 @@ date_p="date"
 get_date_txt=$($date_p "+%A %B %Y")
 get_date=$($date_p "+%d/%m/%Y")
 get_time=$($date_p "+%r")
-notify_date(){ $notify -h string:x-dunst-stack-tag:myDate -i "$date_i" "$get_date" "$get_date_txt"; }
+notify_date(){ $notify -h string:x-dunst-stack-tag:my-date -i "$date_i" "$get_date" "$get_date_txt"; }
 
-notify_time(){ $notify -h string:x-dunst-stack-tag:myTime -i "$clock_i"  "$get_time"; }
+notify_time(){ $notify -h string:x-dunst-stack-tag:my-time -i "$clock_i"  "$get_time"; }
 list_todo(){
 	temp_file=$(mktemp)
 	while read -r line; do
@@ -44,7 +45,7 @@ list_todo(){
 }
 get_mode(){
 	notify_mode(){
-		get_mode_noti="$notify -h string:x-dunst-stack-tag:get_mode"
+		get_mode_noti="$notify -h string:x-dunst-stack-tag:get-mode"
 		case "$1" in
 			on) $get_mode_noti -i $warning_i 'Work Mode' 'on' ;;
 			off) $get_mode_noti 'Work Mode' 'off' ;;
@@ -63,4 +64,13 @@ get_mode(){
 	fi
 }
 
-bat; notify_date; notify_time; list_todo; get_mode
+
+notify_time_on(){ $notify -h 'string:x-dunst-stack-tag:get-time-on' 'You have been using lenna for' "${time_on}"; }
+get_time_on(){
+	if [ -f $look_away_loc ]; then
+		time_on="$(cat $look_away_loc | tail -n 1)"
+		notify_time_on
+	fi
+}
+
+bat; notify_date; notify_time; list_todo; get_mode; get_time_on
