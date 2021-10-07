@@ -1,0 +1,101 @@
+/*
+ Modified version of: https://github.com/ysjn/vimium-simply-dark
+*/
+
+#vimiumHintMarkerContainer div.internalVimiumHintMarker, #vimiumHintMarkerContainer div.vimiumHintMarker {
+  padding: 4px;
+  background: #14E882;
+  border: none;
+}
+
+#vimiumHintMarkerContainer div span {
+  color: #000;
+  text-shadow: none;
+}
+
+#vimiumHintMarkerContainer div > .matchingCharacter {
+  opacity: 0.4;
+}
+
+#vimiumHintMarkerContainer div > .matchingCharacter ~ span {
+  color: #bbb;
+}
+
+#vomnibar {
+  background: #000;
+  border: none;
+}
+
+#vomnibar .vomnibarSearchArea,
+#vomnibar input {
+  color: #aaa;
+  background: transparent;
+  border: none;
+}
+
+#vomnibar .vomnibarSearchArea {
+  padding: 8px;
+}
+
+#vomnibar input {
+  padding: 0;
+}
+
+#vomnibar ul {
+  padding: 0;
+  background: #000;
+}
+
+#vomnibar li {
+  padding: 4px;
+}
+
+#vomnibar li .vomnibarTopHalf,
+#vomnibar li .vomnibarBottomHalf {
+  padding: 4px;
+}
+
+#vomnibar li .vomnibarSource {
+  color: #bbb;
+}
+
+#vomnibar li em,
+#vomnibar li .vomnibarTitle {
+  color: #bbb;
+}
+
+#vomnibar li .vomnibarUrl {
+  color: #333;
+}
+
+#vomnibar li .vomnibarMatch {
+  color: #bbb;
+  font-weight: normal;
+}
+
+#vomnibar li .vomnibarTitle .vomnibarMatch {
+  color: #bbb;
+}
+
+#vomnibar li.vomnibarSelected {
+  background-color: #000;
+}
+
+div.vimiumHUD {
+  background: #000;
+  border: none;
+}
+
+div.vimiumHUD span#hud-find-input,
+div.vimiumHUD .vimiumHUDSearchAreaInner {
+  color: #aaa;
+}
+
+div.vimiumHUD .hud-find {
+  background-color: transparent;
+  border: none;
+}
+
+div.vimiumHUD .vimiumHUDSearchArea {
+  background-color: transparent;
+}
