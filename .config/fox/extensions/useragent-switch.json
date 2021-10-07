@@ -1,7 +1,9 @@
 {
   "blacklist": [
     "addons.mozilla.org",
-    "vault.bitwarden.com"
+    "vault.bitwarden.com",
+    "gitlab.com",
+    "github.com"
   ],
   "cache": true,
   "custom": {},
@@ -22,6 +24,6 @@
   "siblings": {},
   "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4482.0 Safari/537.36 Edg/92.0.874.0",
   "whitelist": [],
-  "json-guid": "21c57361-7840-4a9c-b970-41351f24a4d1",
+  "json-guid": "08baa40f-99b5-4eb1-a9fb-c30e665b2ba5",
   "json-forced": false
 }
