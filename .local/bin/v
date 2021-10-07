@@ -17,7 +17,10 @@ sed_2="sed 's|\\$|\\\\$|g'"
 main() {
 	case "$1" in
 		*.jp*g | *.png | *.webp ) $h $iv "$1" ;;
-		*.mkv | *.mp4 | *.webm | *.gif | *.avi | *youtu* | *.mp3 ) $h prime-run $vv "$1" ;;
+		*.mkv | *.mp4 | *.webm | *.gif | *.avi | *youtu* )
+			$h prime-run $vv "$1"
+			;;
+		*.mp3 | *.ogg ) $vv "$1" ;;
 		*.pdf ) $h $pv "$1" ;;
 		*.svg ) $BROWSER "$1" ;;
 		-a) ls | grep  'jpeg\|jpg\|png\|webp' | $h $iv -t - ;;
