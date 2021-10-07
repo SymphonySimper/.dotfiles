@@ -1,0 +1,21 @@
+#!/bin/sh
+
+cfg_fox="$HOME"/.config/firefox
+my_user_js="$cfg_fox"/my-user.js
+user_chrome="$cfg_fox"/chrome
+
+librewolf_loc="$HOME"/.librewolf
+firefox_loc="$HOME"/.mozilla/firefox
+
+get_def_user(){ default_user=$(cat $1/profiles.ini 2>/dev/null | grep 'Default' | cut -d '=' -f2 | tail -n1); }
+
+stuff_to_main(){
+	get_def_user $1
+	cat $my_user_js > $1/$default_user/user.js
+	cp -rv $user_chrome $1/$default_user
+}
+
+case $BROWSER in
+	'firefox') stuff_to_main $firefox_loc ;;
+	'librewolf') stuff_to_main $librewolf_loc ;;
+esac
