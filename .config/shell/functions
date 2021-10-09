@@ -27,9 +27,14 @@ cgamp(){
 is_there(){ equery list '*' | grep -i "$1"; }
 compile_time(){ $PERM qlop -tHv "$1"; }
 add_repo(){
-	$PERM eselect repository enable "$1" \
-	&& $PERM emaint sync -r "$1" \
-	&& $PERM e --sync
+	$PERM eselect repository enable "$1"
+	$PERM emaint sync -r "$1"
+	$PERm emerge --sync
+}
+unmask(){
+	$PERM emerge -a "$1" --autounmask
+	$PERM etc-update
+	$PERM emerge -a "$1"
 }
 
 # Format USB
