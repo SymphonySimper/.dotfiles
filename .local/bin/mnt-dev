@@ -11,7 +11,7 @@ mount_usn(){ "$PERM" mount -o umask=0,uid=nobody,gid=nobody /dev/$1 $usb && succ
 umount_dev(){ "$PERM" umount $1; }
 
 #Gets the mounted point
-what_d=$(lsblk -lp | awk '/usb/ || /ntfs/ {print $1}')
+what_d=$(lsblk -lnp | awk '/usb/ || /ntfs/ {print $1}')
 umount_all(){
 	if lsblk | grep -q 'ntfs'; then
 		umount_dev $what_d && success "Ntfs umounted"
