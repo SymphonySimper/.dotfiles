@@ -9,21 +9,23 @@
   "custom": {},
   "exactMatch": false,
   "faqs": true,
+  "json-forced": false,
+  "json-guid": "8a0e998d-1da3-4cc2-b4e2-7d8ee753b6e5",
   "last-update": 1633538266600,
-  "log": false,
+  "log": true,
   "mode": "blacklist",
   "parser": {},
   "popup-browser": "Edge",
+  "popup-os": "Windows",
   "protected": [
     "google.com/recaptcha",
     "gstatic.com/recaptcha",
     "accounts.google.com",
     "accounts.youtube.com",
-    "gitlab.com/users/sign_in"
+    "gitlab.com/users/sign_in",
+    "www.youtube.com"
   ],
   "siblings": {},
   "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4482.0 Safari/537.36 Edg/92.0.874.0",
-  "whitelist": [],
-  "json-guid": "08baa40f-99b5-4eb1-a9fb-c30e665b2ba5",
-  "json-forced": false
+  "whitelist": []
 }

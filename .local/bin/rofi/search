@@ -1,18 +1,22 @@
 #!/bin/sh
 
+# Search Urls
 s_url='https://duckduckgo.com/?q='
 yt_url='https://www.youtube.com/results?search_query='
+pling_url='https://www.pling.com/find?search='
+
+# Bang function
+search_websites(){ $BROWSER "${1}$(echo "$3" | sed "s/\;${2}//g")" > /dev/null 2>&1 & }
 
 search_history="$HOME"/.cache/searchhis
-
-search_youtube(){ $BROWSER "${yt_url}$(echo "$@" | sed 's/\;y//g')"; }
 
 if [ -z "$@" ]; then
 	[ -f $search_history ] && tac $search_history
 else
 	! grep -qw "^$@" $search_history && echo "$@" >> $search_history
 	case "$@" in
-		\;y*) $BROWSER "${yt_url}$(echo "$@" | sed 's/\;y//g')" > /dev/null 2>&1 & ;;
+		\;y*) search_websites "${yt_url}" 'y' "$@" ;;
+		\;p*) search_websites "${pling_url}" 'p' "$@" ;;
 		*)$BROWSER "${s_url}${@}" > /dev/null 2>&1 & ;;
 	esac
 fi

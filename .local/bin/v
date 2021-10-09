@@ -23,6 +23,7 @@ main() {
 		*.mp3 | *.ogg ) $vv "$1" ;;
 		*.pdf ) $h $pv "$1" ;;
 		*.svg ) $BROWSER "$1" ;;
+		*.img ) my-qemu "$1" ;;
 		-a) ls | grep  'jpeg\|jpg\|png\|webp' | $h $iv -t - ;;
 		-w) $h $iv $what_img ;;
 		-f) $h $vf /dev/video0 ;;

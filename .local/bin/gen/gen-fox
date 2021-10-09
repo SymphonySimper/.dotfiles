@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cfg_fox="$HOME"/.config/firefox
+cfg_fox="$HOME"/.config/fox
 my_user_js="$cfg_fox"/my-user.js
 user_chrome="$cfg_fox"/chrome
 

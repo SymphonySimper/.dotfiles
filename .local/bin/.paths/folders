@@ -17,5 +17,6 @@ clb			.local/bin
 cls			.local/share
 clx			importantnt/linux
 cnt			ntfs
+cre			importantnt/recording
 crs			lifeisfun/rust
 cvm			importantnt/virtualMachine
