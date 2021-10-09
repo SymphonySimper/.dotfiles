@@ -33,6 +33,7 @@ bspc rule -a mpv desktop='^5' follow=on
 bspc rule -a discord desktop='^6'
 bspc rule -a qBittorrent desktop='^6'
 bspc rule -a Gimp desktop='^7'
+bspc rule -a Ld-linux-x86-64.so.2 desktop='^7'
 bspc rule -a obs desktop='^10'
 
 # Games related
