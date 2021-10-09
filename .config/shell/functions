@@ -29,12 +29,12 @@ compile_time(){ $PERM qlop -tHv "$1"; }
 add_repo(){
 	$PERM eselect repository enable "$1"
 	$PERM emaint sync -r "$1"
-	$PERm emerge --sync
+	e --sync
 }
 unmask(){
-	$PERM emerge -a "$1" --autounmask
+	e -a "$1" --autounmask
 	$PERM etc-update
-	$PERM emerge -a "$1"
+	e "$1"
 }
 
 # Format USB

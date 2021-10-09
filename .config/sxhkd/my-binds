@@ -77,6 +77,10 @@ super + shift + b
 XF86Calculator
 	typin
 
+# htop
+super + F11
+	$TERMINAL -e htop
+
 # sxhkd
 super + Escape
 	re-key
