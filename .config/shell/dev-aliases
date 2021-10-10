@@ -2,7 +2,7 @@
 alias cn='cargo new'
 alias cb='cargo build'
 alias cr='cargo run'
-alias ct='cargo test'
+alias ct='cargo test -- --show-output'
 alias cbr='cargo build && cargo run'
 
 # Java

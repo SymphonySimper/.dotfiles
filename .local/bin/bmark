@@ -13,7 +13,7 @@ add_bmark(){
 	if grep -qw "^$1" $BMARK; then
 		err "$1 already exists"
 	else
-		printf "%24s %s\n" "$1" "$2" >> $BMARK
+		printf "%*s %s\n" -24 "$1" "$2" >> $BMARK
 		succ "$1 added to Bookmarks"
 		sort_bmark
 	fi

@@ -3,7 +3,7 @@
 loc="$HOME"/importantnt/audio
 
 if [ -z "$@" ]; then
-	ls -F $loc | grep -v '/\|.part'
+	ls -F $loc | grep -v '/\|.part' | shuf
 else
 	$VIDEO_PLAYER $loc/"$1" > /dev/null 2>&1 &
 fi
