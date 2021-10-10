@@ -8,7 +8,7 @@ cdh			.config/shell
 cdi			importantnt
 cdj			lifeisfun/java
 cdl			lifeisfun
-cdn			importantnt/Notes
+cdn			importantnt/notes
 cdr			lifeisfun/react
 cds			pics/screenshots
 cdu			usb
@@ -19,4 +19,4 @@ clx			importantnt/linux
 cnt			ntfs
 cre			importantnt/recording
 crs			lifeisfun/rust
-cvm			importantnt/virtualMachine
+cvm			importantnt/virtual-machine

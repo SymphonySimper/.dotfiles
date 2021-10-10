@@ -60,6 +60,7 @@ alias cdk='cd /usr/src/linux'
 
 # Open files in download folders with v
 alias vdd='v -x "$HOME"/dl'
+alias vvm='v -x "$HOME"/importantnt/virtual-machine'
 
 # Stuff
 alias hex_a='less "$HOME"/.local/share/my-docs/hex-alpha'
