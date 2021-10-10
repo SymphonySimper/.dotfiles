@@ -3,9 +3,24 @@
 img="qemu-img"
 sys="qemu-system-x86_64"
 
-create_image(){ $img create -f raw "$1" "$2"; }
-create_iso(){ $sys -enable-kvm -cdrom "$1" -boot order=d -drive file="$2",format=raw -m 4G -cpu host -smp 4 -vga virtio -display sdl -device AC97; }
-open_img(){ $sys -enable-kvm -boot order=d -drive file="$1",format=raw -m 4G -cpu host -smp 4 -vga virtio -display sdl -device AC97; }
+aud='AC97'
+dis='sdl'
+mem='4G'
+smp='4'
+fmt='raw'
+vga='virtio'
+
+create_image(){ $img create -f $fmt "$1" "$2"; }
+create_iso(){
+	$sys -enable-kvm -cdrom "$1" -boot order=d \
+	-drive file="$2",format=$fmt -m $mem -cpu host -smp $smp \
+	-vga $vga -display $dis -device $aud
+}
+open_img(){
+	$sys -enable-kvm -boot order=d \
+	-drive file="$1",format=$fmt -m $mem -cpu host -smp $smp \
+	-vga $vga -display $dis -device $aud
+}
 
 case "$1" in
 	-i) shift; create_image "$1" "$2" ;;
