@@ -33,6 +33,7 @@ Plug 'voldikss/vim-floaterm'
 Plug 'junegunn/fzf.vim'
 Plug 'Jorengarenar/vim-MvVis'
 Plug 'unblevable/quick-scope'
+Plug 'dhruvasagar/vim-table-mode'
 
 call plug#end()
 

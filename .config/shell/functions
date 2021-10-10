@@ -2,9 +2,6 @@
 yoink(){ xclip -sel c < "$1"; }
 ourimg(){ xclip -sel c -t image/png < "$1"; }
 
-# Find
-fnd(){ find ~ -name "$1"; }
-
 # git
 ga(){ git add "$1"; }
 grm(){ git rm "$1" --cached; }
@@ -102,3 +99,12 @@ mcd(){ mkdir -p "$1" && cd "$1"; }
 
 # cron
 cp_cron(){ crontab -l > "$HOME"/.config/cron/crontab; }
+
+# time-table
+time_table(){
+	loc="$HOME"/.local/share/.time-table
+	case "$1" in
+		-e) $EDITOR $loc ;;
+		*) cat $loc
+	esac
+}

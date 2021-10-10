@@ -8,3 +8,6 @@ alias cbr='cargo build && cargo run'
 # Java
 alias java='/usr/lib64/openjdk-11/bin/java'
 alias javac='/usr/lib64/openjdk-11/bin/javac'
+
+# Python
+alias py='python'
