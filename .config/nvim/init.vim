@@ -79,6 +79,8 @@ map <leader>s :BLines<CR>
 
 " To replace string
 map <leader>r :%s//g<Left><Left>
+map <leader>c :s//g<Left><Left>
+map <leader>C :s//g<Left><Left><Left><Left>
 
 " To remove trailing white spaces
 autocmd BufWritePre * :%s/\s\+$//e
