@@ -13,16 +13,8 @@ super + n
 	$TERMINAL -e $RSS_READER
 
 # Volume
-super + F2
-	volume -d
-super + F3
-	volume -u
-super + shift + F2
-	volume -D
-super + shift + F3
-	volume -U
-super + F4
-	volume -m
+super + {F2,F3,F4,shift + F2,shift + F3}
+	volume -{d,u,m,D,U}
 super + F12
 	$TERMINAL -e pulsemixer
 
@@ -35,35 +27,23 @@ super + shift + F12
 	$TERMINAL -e gen-hosts
 
 # Brightness
-super + F5
-	brightness -u
-super + F6
-	brightness -d
+super + {F5,F6}
+	brightness -{u,d}
 
 # Picom
 super + shift + p
 	game-mode
 
 # Rofi
-super + space
-	rofi-run
-super + s
-	rofi-open
-super + e
-	rofi-edit
-super + r
-	rofi-todo
-super + a
-	rofi-play
+super + {space,s,e,r,a}
+	rofi-{run,open,edit,todo,play}
 super + shift + q
 	rofi -modi "Power Options:$HOME/.local/bin/rofi/power-options" \
 	-show 'Power Options'
 
 # Screenshot
-super + alt + s
-	screenshot -r
-super + alt + a
-	screenshot -w
+super + alt + {s,a}
+	screenshot -{r,w}
 Print
 	screenshot -s
 
