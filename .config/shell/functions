@@ -28,6 +28,7 @@ add_repo(){
 	$PERM emaint sync -r "$1"
 	e --sync
 }
+del_repo(){ $PERM eselect repository remove "$1"; }
 unmask(){
 	e -a "$1" --autounmask
 	$PERM etc-update
