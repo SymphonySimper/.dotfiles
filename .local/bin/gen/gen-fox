@@ -3,17 +3,58 @@
 cfg_fox="$HOME"/.config/fox
 my_user_js="$cfg_fox"/my-user.js
 user_chrome="$cfg_fox"/chrome
+wolf_cfg="$cfg_fox"/wolf/librewolf.overrides.cfg
 
 librewolf_loc="$HOME"/.librewolf
 firefox_loc="$HOME"/.mozilla/firefox
 
-get_def_user(){ default_user=$(cat $1/profiles.ini 2>/dev/null | grep 'Default' | cut -d '=' -f2 | tail -n1); }
+ask_qn(){
+	read -p "$(syl B)${1}$(syl R)[y/N]: " ans
+	case "$ans" in
+		[yY]* ) ans='yes' ;;
+		[nN]* ) ans='no' ;;
+	esac
+}
+err(){ echo "$(syl B; syl r)${1}$(syl R)"; }
 
+get_def_user(){ default_user=$(cat $1/profiles.ini 2>/dev/null | grep 'Default' | cut -d '=' -f2 | tail -n1); }
 stuff_to_main(){
 	get_def_user $1
-	cat $my_user_js > $1/$default_user/user.js
-	cp -rv $user_chrome $1/$default_user
+	if [ -d $1/$default_user/chrome ]; then
+		err 'Chrome folder already exists'
+		ask_qn 'rm chrome folder'
+		if [ $ans = 'yes' ]; then
+			rm -rf $1/$default_user/chrome
+			ln -s $user_chrome $1/$default_user/chrome
+		fi
+	else
+		ln -s $user_chrome $1/$default_user/chrome
+	fi
+	if [ -f $1/$default_user/user.js ]; then
+		err 'user.js file already exists'
+		ask_qn 'rm user.js file'
+		if [ $ans = 'yes' ]; then
+			rm $1/$default_user/user.js
+			ln -s $my_user_js $1/$default_user/user.js
+		fi
+	else
+		ln -s $my_user_js $1/$default_user/user.js
+	fi
 }
+
+
+if [ $BROWSER = 'librewolf' ]; then
+	if [ -f $librewolf_loc/librewolf.overrides.cfg ]; then
+		err 'overrides.cfg file already exists'
+		ask_qn 'rm overrides.cfg file'
+		if [ $ans = 'yes' ]; then
+			rm $librewolf_loc/librewolf.overrides.cfg
+			ln -s $wolf_cfg $librewolf_loc/librewolf.overrides.cfg
+		fi
+	else
+		ln -s $wolf_cfg $librewolf_loc/librewolf.overrides.cfg
+	fi
+fi
 
 case $BROWSER in
 	'firefox') stuff_to_main $firefox_loc ;;

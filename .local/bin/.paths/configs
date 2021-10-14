@@ -9,6 +9,7 @@ fox-user-pref				.config/fox/my-user.js
 fox-vimium-css				.config/fox/extensions/vimium.css
 fox-vimium-options			.config/fox/extensions/vimium-options.json
 fox-yt-enhancer				.config/fox/extensions/yt-enhancer.json
+fox-wolf-cfg				.config/fox/wolf/librewolf.overrides.cfg
 htop						.config/htop/htoprc
 lf							.config/lf/lfrc
 mimeapps					.config/mimeapps.list
