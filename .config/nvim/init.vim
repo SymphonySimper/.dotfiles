@@ -95,5 +95,11 @@ map <leader>r :%s//g<Left><Left>
 map <leader>c :s//g<Left><Left>
 map <leader>C :s//g<Left><Left><Left><Left>
 
+" Line options
+map <leader>ol :Overline<CR>
+map <leader>ul :Underline<CR>
+map <leader>dl :DoubleUnderline<CR>
+map <leader>st :Strikethrough<CR>
+
 " To remove trailing white spaces
 autocmd BufWritePre * :%s/\s\+$//e
