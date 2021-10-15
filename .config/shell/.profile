@@ -16,10 +16,6 @@ export PATH="$PATH:$HOME/.local/bin/aliases"			# Alias scripts
 export PATH="$PATH:$HOME/.local/bin/gen"				# Gen scripts
 export PATH="$PATH:$HOME/lifeisfun/lang/flutter/bin" 	# Flutter
 
-export ZDOTDIR="$HOME"/.config/zsh
-# export STARSHIP_CONFIG="$HOME"/.config/starship/config.toml
-export BMARK="$HOME"/.local/share/bmark/bookmarks
-
 # ~/ Clean-up:
 export XDG_CONFIG_HOME="$HOME"/.config
 export XDG_DATA_HOME="$HOME"/.local/share
@@ -53,6 +49,13 @@ export ANDROID_SDK_ROOT="$XDG_DATA_HOME"/android
 export CHROME_EXECUTABLE="chromium"
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
 export ATOM_HOME="$XDG_DATA_HOME"/atom
+
+# My loc exports
+export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
+# export STARSHIP_CONFIG="$HOME"/.config/starship/config.toml
+export BMARK="$XDG_DATA_HOME"/bmark/bookmarks
+export VIMWIKI="$XDG_DATA_HOME"/vimwiki
+
 
 [ -f "$XDG_DATA_HOME"/cargo/env ] && . "$XDG_DATA_HOME"/cargo/env
 

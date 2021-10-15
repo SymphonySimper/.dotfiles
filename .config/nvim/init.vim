@@ -63,8 +63,11 @@ hi QuickScopePrimary guifg='#14E882' gui=underline term=bold
 hi QuickScopeSecondary guifg='#FF3333' gui=underline term=bold
 
 " vimwiki
-let g:vimwiki_list = [{'path': "$XDG_DATA_HOME/mywiki/",
-                      \ 'path_html': "$XDG_DATA_HOME/mywiki_html"}]
+let g:vimwiki_list = [{'path': "$VIMWIKI",
+                      \ 'path_html': "$XDG_DATA_HOME/mywiki_html",
+					  \ 'auto_diary_index':1}]
+autocmd BufEnter diary.wiki :VimwikiDiaryGenerateLinks
+
 " |---------------|
 " | Line commands |
 " |---------------|

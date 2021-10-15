@@ -7,5 +7,4 @@ fzf-functions            .config/shell/fzf-functions
 profile                  .config/shell/.profile
 urxvt-x                  .config/x11/xre/urxvt
 xinitrc                  .config/x11/xinitrc
-zprofile                 .zprofile
 zshrc                    .config/zsh/.zshrc
