@@ -61,6 +61,10 @@ XF86Calculator
 super + F11
 	$TERMINAL -e htop
 
+# vimwiki
+super + w
+	$TERMINAL -e $EDITOR $VIMWIKI/index.wiki
+
 # sxhkd
 super + Escape
 	re-key
