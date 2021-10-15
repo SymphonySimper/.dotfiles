@@ -2,11 +2,17 @@
 " This is a modified version of base16-grayscale-dark
 " Original repo https://github.com/chriskempson/base16-vim/blob/master/colors/base16-grayscale-dark.vim
 
-if !has("gui_running")
-  if exists("g:base16_shell_path")
-    execute "silent !/bin/sh ".g:base16_shell_path."/base16-grayscale-dark.sh"
-  endif
-endif
+" if !has("gui_running")
+"   if exists("g:base16_shell_path")
+"     execute "silent !/bin/sh ".g:base16_shell_path."/base16-grayscale-dark.sh"
+"   endif
+" endif
+
+set background=dark
+highlight clear
+syntax reset
+
+let g:colors_name="the-black"
 
 " GUI color definitions
 let s:gui00        = "000000E6"

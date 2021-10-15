@@ -22,9 +22,12 @@ set shiftwidth=4
 set termguicolors
 colorscheme the-black
 
+" |---------|
+" | Plugins |
+" |---------|
+
 call plug#begin(system('echo -n "$XDG_CONFIG_HOME"/nvim/plugged'))
 
-Plug 'junegunn/goyo.vim'
 Plug 'ap/vim-css-color'
 Plug 'rust-lang/rust.vim'
 Plug 'justinmk/vim-sneak'
@@ -38,10 +41,14 @@ Plug 'vimwiki/vimwiki'
 
 call plug#end()
 
+" |-----------------|
+" | Plugin Settings |
+" |-----------------|
+
+" Rust
 let g:rustfmt_autosave = 2
 
 " FZF
-
 let $FZF_DEFAULT_OPTS = $FZF_DEFAULT_OPTS
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' }}
 
@@ -58,8 +65,9 @@ hi QuickScopeSecondary guifg='#FF3333' gui=underline term=bold
 " vimwiki
 let g:vimwiki_list = [{'path': "$XDG_DATA_HOME/mywiki/",
                       \ 'path_html': "$XDG_DATA_HOME/mywiki_html"}]
-
-" --------------------- Custom Commands -------------
+" |---------------|
+" | Line commands |
+" |---------------|
 
 " modify selected text using combining diacritics
 command! -range -nargs=0 Overline        call s:CombineSelection(<line1>, <line2>, '0305')
@@ -72,7 +80,9 @@ function! s:CombineSelection(line1, line2, cp)
   execute a:line1.','.a:line2.'s/\%V[^[:cntrl:]]/&'.char.'/ge'
 endfunction
 
-" -------------------- Key binds --------------------
+" |-----------|
+" | Key binds |
+" |-----------|
 
 let mapleader =" "
 
@@ -88,9 +98,9 @@ nnoremap <C-l> <C-w>l
 " Create new tab with ctrl + t
 nnoremap <silent> <C-t> :tabnew<CR>
 
-" -------------------- LEADER COMBOS --------------------
-" Open goyo
-map <leader>g :Goyo<CR>
+" |---------------|
+" | Leader combos |
+" |---------------|
 
 " Open fzf
 map <leader>s :BLines<CR>
