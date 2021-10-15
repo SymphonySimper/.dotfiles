@@ -1,9 +1,4 @@
-fa(){
-	audio="$HOME"/importantnt/audio
-	query="$(ls -F $audio | grep -v '/\|.part' | fzf | sed 's|\$|\\\$|g')"
-	[ -n "$query" ] && $VIDEO_PLAYER $audio/"$($query | sed 's/\$//g')"
-}
-
+# Open scipts/configs/shell-file
 fec(){
 	loc="$HOME"/.local/bin/.paths/configs
 	query="$(awk '{ print $1 }' "$loc" | fzf)"
@@ -25,6 +20,7 @@ fesh(){
 	[ -f "$get_loc" ] && "$EDITOR" "$get_loc"
 }
 
+# Play video/audio
 fv(){
 	video="$HOME"/importantnt/video
 	query="$(ls -F $video | grep -v '/\|.part' | fzf | sed 's|\$|\\\$|g')"
@@ -32,8 +28,21 @@ fv(){
 	$video/"$query"
 }
 
+fa(){
+	audio="$HOME"/importantnt/audio
+	query="$(ls -F $audio | grep -v '/\|.part' | fzf | sed 's|\$|\\\$|g')"
+	[ -n "$query" ] && $VIDEO_PLAYER $audio/"$($query | sed 's/\$//g')"
+}
+
+# Docs
 fdocs(){
 	loc="$HOME"/.local/share/my-docs
 	query="$(ls -F $loc | grep -v '/\|.part' | fzf)"
 	$EDITOR $loc/$query
 }
+
+# Package manager
+is_there(){ equery list '*' | fzf; }
+
+# keybinds
+is_mybind(){ cat "$XDG_CONFIG_HOME/sxhkd/.sxhkdrc" | fzf; }

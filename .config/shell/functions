@@ -21,7 +21,6 @@ cgamp(){
 }
 
 # Package Manager
-is_there(){ equery list '*' | grep -i "$1"; }
 compile_time(){ $PERM qlop -tHv "$1"; }
 add_repo(){
 	$PERM eselect repository enable "$1"
