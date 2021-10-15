@@ -34,6 +34,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'Jorengarenar/vim-MvVis'
 Plug 'unblevable/quick-scope'
 Plug 'dhruvasagar/vim-table-mode'
+Plug 'vimwiki/vimwiki'
 
 call plug#end()
 
@@ -53,6 +54,10 @@ let g:fzf_action = {
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 hi QuickScopePrimary guifg='#14E882' gui=underline term=bold
 hi QuickScopeSecondary guifg='#FF3333' gui=underline term=bold
+
+" vimwiki
+let g:vimwiki_list = [{'path': "$XDG_DATA_HOME/mywiki/",
+                      \ 'path_html': "$XDG_DATA_HOME/mywiki_html"}]
 
 " --------------------- Custom Commands -------------
 
