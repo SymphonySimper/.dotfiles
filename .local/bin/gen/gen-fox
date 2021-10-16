@@ -17,7 +17,7 @@ ask_qn(){
 	esac
 }
 
-get_def_user(){ default_user=$(cat $1/profiles.ini 2>/dev/null | grep 'Default' | cut -d '=' -f2 | tail -n1); }
+get_def_user(){ default_user=$(cat $1/profiles.ini 2>/dev/null | grep 'Default' | grep -v 'Default=1' | cut -d '=' -f2); }
 create_link(){
 	if [ $1 $2 ]; then
 		echo "$2 file already exists"
