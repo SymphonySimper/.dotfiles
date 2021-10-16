@@ -30,7 +30,6 @@ call plug#begin(system('echo -n "$XDG_CONFIG_HOME"/nvim/plugged'))
 
 Plug 'ap/vim-css-color'
 Plug 'rust-lang/rust.vim'
-Plug 'justinmk/vim-sneak'
 Plug 'ptzz/lf.vim'
 Plug 'voldikss/vim-floaterm'
 Plug 'junegunn/fzf.vim'
