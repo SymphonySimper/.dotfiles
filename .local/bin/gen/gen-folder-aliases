@@ -1,6 +1,6 @@
 #!/bin/sh
 
-path="$HOME"/.local/bin/.paths/folders
+folders_path="$HOME"/.local/bin/.paths/folders
 path_fzf="$HOME"/.local/bin/.paths/fzf-folders
 folder_alias="$HOME"/.config/shell/folders
 lf_alias="$HOME"/.config/lf/lf-folders
@@ -9,11 +9,13 @@ check_box_i="$HOME"/.local/share/icons/general/check-box.svg
 
 notify(){ dunstify -i "$check_box_i" "$1 folder aliases gen complete"; }
 
-sort $path -o $path
+sort $folders_path -o $folders_path
 sort $path_fzf -o $path_fzf
-awk '{print "alias "$1"=\"cd \"$HOME\"/"$2"\"" }' $path > $folder_alias \
+
+awk '{ printf("alias %s=\"cd $HOME/%s\"\n", $1, $2) }' $folders_path > $folder_alias \
 	&& 	notify "General"
-awk '{print "map "$1" cd ~/"$2"" }' $path > $lf_alias \
+awk '{printf("map %s cd ~/%s\n", $1, $2 ) }' $folders_path > $lf_alias \
 	&& notify "lf"
-awk '{ print $1"(){ cd \"$HOME\"/"$2"/$(ls -aF \"$HOME\"/"$2" | grep / | sed \"s/\\///g\" | fzf); }" }' $path_fzf > $fzf_folder_alias \
+awk '{ printf("%s(){ cd \"$HOME/%s/$(ls -aF $HOME/%s | grep / | sed \"s/\\///g\" | fzf)\"; }\n", $1, $2, $2) }' $path_fzf > $fzf_folder_alias \
 	&& notify "Fzf"
+

@@ -38,7 +38,7 @@ fa(){
 fdocs(){
 	loc="$HOME"/.local/share/my-docs
 	query="$(ls -F $loc | grep -v '/\|.part' | fzf)"
-	$EDITOR $loc/$query
+	[ -f $loc/$query ] && $EDITOR $loc/$query
 }
 
 # Package manager
