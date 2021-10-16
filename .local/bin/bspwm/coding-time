@@ -1,7 +1,7 @@
 #!/bin/sh
 
 loc="$HOME"/lifeisfun
-tempfile_loc=/tmp/codingTime
+tempfile_loc=/tmp/coding-time
 
 if [ -n "$1" ]; then
 	echo "$1" >> $tempfile_loc
@@ -39,7 +39,7 @@ open_terminals(){
 	rm $tempfile_loc
 }
 
-get_loc(){ ls -aF $1 | grep '/' | sed '/\.\./d; s/\///g'; }
+get_loc(){ ls -aF $1 | grep '/' | grep -v '.git' | sed '/\.\./d; s/\///g'; }
 
 if [ -z "$@" ]; then
 	printf "\0prompt\037dir\n"

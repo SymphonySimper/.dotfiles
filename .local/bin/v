@@ -12,6 +12,7 @@ dis="fzf"
 #Paths
 what_img="$HOME/dl/What"*
 
+grep_1="grep -v '/\|.class'"
 sed_1="sed 's|[@*]||g'"
 sed_2="sed 's|\\$|\\\\$|g'"
 main() {
@@ -39,11 +40,11 @@ main() {
 if [ -n "$1" ]; then
 	case "$1" in
 		-x) shift
-			query="$(ls -aF "$1" | grep -v / | eval $sed_1 | $dis | eval $sed_2)"
+			query="$(ls -aF "$1" | eval $grep_1 | eval $sed_1 | $dis | eval $sed_2)"
 			[ -n "$query" ] && main "${1}/${query}"
 			;;
 		*) main "$(echo $@ | eval $sed_2)" ;;
 	esac
 else
-	main "$(ls -aF | grep -v / | eval $sed_1 | $dis | eval $sed_2)"
+	main "$(ls -aF | eval $grep_1 | eval $sed_1 | $dis | eval $sed_2)"
 fi
