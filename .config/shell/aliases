@@ -1,12 +1,13 @@
 # Git alias
 alias g='git'
 alias gc='git clone'
-alias gs='git status -v'
+alias gs='git status'
 alias gp='git push'
 alias gpu='git pull'
 alias gau='git add -u'
 alias gm='git commit'
 alias gnotrack='git config --local status.showUntrackedFiles no'
+alias gpm='git push --set-upstream origin main'
 
 # Config git alias
 alias cgs='config status'
