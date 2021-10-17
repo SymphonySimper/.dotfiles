@@ -6,6 +6,7 @@ yt_url='https://www.youtube.com/results?search_query='
 pling_url='https://www.pling.com/find?search='
 # startpage_url='https://www.startpage.com/sp/search?query='
 google_url='https://www.google.com/search?hl=en&q='
+amazon_in_url='https://www.amazon.in/s?k='
 
 # Bang function
 search_websites(){ $BROWSER "${1}$(echo "$3" | sed "s/\;${2}//g")" > /dev/null 2>&1 & }
@@ -21,6 +22,7 @@ else
 		*\;p*) search_websites "${pling_url}" 'p' "$@" ;;
 		# *\;s*) search_websites "${startpage_url}" 's' "$@" ;;
 		*\;g*) search_websites "${google_url}" 'g' "$@" ;;
+		*\;a*) search_websites "${amazon_in_url}" 'a' "$@" ;;
 		*)$BROWSER "${s_url}${@}" > /dev/null 2>&1 & ;;
 	esac
 fi
