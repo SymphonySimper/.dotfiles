@@ -1,14 +1,34 @@
-# Default Programs
-export TERMINAL="urxvtc"
-export SECOND_TERMINAL="urxvt"
-export EDITOR="nvim"
-export VISUAL="$EDITOR"
-export BROWSER="librewolf"
+# Helper functions
+is_present_prog(){
+	if which $1 | grep -q 'not found'; then
+		return 1
+	else
+		return 0
+	fi
+}
+select_default_prog(){
+	if is_present_prog "$2"; then
+		export "$1"="$2"
+	elif is_present_prog "$3"; then
+		export "$1"="$3"
+	elif [ -n "$4" ]; then
+		is_present_prog "$4" \
+			&& export "$1"="$4"
+	fi
+}
+
+## Default Programs
 export READER="zathura"
 export IMAGE_VIEWER="sxiv"
 export VIDEO_PLAYER="mpv"
-export PERM="doas"
 export RSS_READER="newsboat"
+
+select_default_prog 'BROWSER' 'librewolf' 'firefox' 'chromium'
+select_default_prog 'PERM' 'doas' 'sudo'
+select_default_prog 'EDITOR' 'nvim' 'vim' 'nano'
+export VISUAL="$EDITOR"
+select_default_prog 'TERMINAL' 'urxvtc' 'alacritty' 'kitty'
+select_default_prog 'SECOND_TERMINAL' 'urxvt' 'alacritty' 'kitty'
 
 # Paths
 export PATH="$PATH:$HOME/.local/bin"					# Scripts
