@@ -6,7 +6,8 @@ err(){ echo "\n$(syl r; syl B)${1}$(syl R)\n"; }
 vloc='~/importantnt/video/%(title)s.%(ext)s'
 aloc='~/importantnt/audio/%(title)s.%(ext)s'
 
-ytdl="youtube-dl"
+#ytdl="youtube-dl"
+ytdl="yt-dlp"
 
 qual=''
 
