@@ -14,7 +14,7 @@ add_bmark(){
 		err "$1 already exists"
 	else
 		printf "%*s %s\n" -24 "$1" "$2" >> $BMARK
-		succ "$1 added to Bookmarks"
+		succ "$1 added to bmarks"
 		sort_bmark
 	fi
 }
@@ -24,7 +24,17 @@ rm_bmark(){
 		succ "$1 deleted"
 		sort_bmark
 	else
-		err "Bookmark $1 not found"
+		err "bmark $1 not found"
+	fi
+}
+cp_bmark(){
+	is_there="$(grep -w "^$1" $BMARK)"
+	if [ -n "$is_there" ]; then
+		echo "$(echo "$is_there" | awk '{ print $2 }')" \
+			| xclip -sel c
+		echo "bmark \`$1\` is copied to clipboard"
+	else
+		err "bmark $1 not found"
 	fi
 }
 clone_repo(){
@@ -62,5 +72,6 @@ case "$1" in
 	clone) clone_repo ;;
 	status) status_repo ;;
 	push) shift; push_repo "$1" ;;
+	cp) shift; cp_bmark "$1" ;;
 	*) err "Invalid argument" ;;
 esac
