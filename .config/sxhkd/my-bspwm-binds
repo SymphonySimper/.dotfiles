@@ -1,21 +1,21 @@
 # My bspwm binds
 
 # To launch coidng time
-super + x
+alt + x
 	rofi -show coding-time -modi "coding-time:$HOME/.local/bin/bspwm/coding-time"
 
 # To resize left side window to approx 70%
-super + shift + x
+alt + shift + x
 	bspc node -f west; \
 	bspc node -z right +400 0
 
 # Play copied url
-super + shift + m
+alt + shift + m
 	bspc desktop -f '^5'; \
 	prime-run $VIDEO_PLAYER "$(xclip -selection clipboard -o)"
 
 # lfp
-super + f
+alt + f
 	bspc desktop -f '^7'; \
 	$TERMINAL -e lfp
 

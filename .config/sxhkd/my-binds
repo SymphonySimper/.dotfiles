@@ -1,56 +1,56 @@
 # Open Terminal
-super + Return
+alt + Return
  	$TERMINAL
-super + shift + Return
+alt + shift + Return
 	$SECOND_TERMINAL
 
 # Open Browser
-super + shift + f
+alt + shift + f
 	$BROWSER
 
 # Open Rss reader
-super + n
+alt + n
 	$TERMINAL -e $RSS_READER
 
 # Volume
-super + {F2,F3,F4,shift + F2,shift + F3}
+alt + {F2,F3,F4,shift + F2,shift + F3}
 	volume -{d,u,m,D,U}
-super + F12
+alt + F12
 	$TERMINAL -e pulsemixer
 
 # Lofi
-super + F1
+alt + F1
 	play-lofi
 
 # Get work done
-super + shift + F12
+alt + shift + F12
 	$TERMINAL -e gen-hosts
 
 # Brightness
-super + {F5,F6}
+alt + {F5,F6}
 	brightness -{u,d}
 
 # Picom
-super + shift + p
+alt + shift + p
 	game-mode
 
 # Rofi
-super + {space,s,e,r,a}
+alt + {space,s,e,r,a}
 	rofi-{run,open,edit,todo,play}
-super + shift + q
+alt + shift + q
 	rofi -modi "Power Options:$HOME/.local/bin/rofi/power-options" \
 	-show 'Power Options'
 
 # Screenshot
-super + alt + {s,a}
+alt + shift + {s,a}
 	screenshot -{r,w}
 Print
 	screenshot -s
 
 # My info
-super + b
+alt + b
 	my-info
-super + shift + b
+alt + shift + b
 	goals
 
 # Screenkey
@@ -58,13 +58,13 @@ XF86Calculator
 	typin
 
 # htop
-super + F11
+alt + F11
 	$TERMINAL -e htop
 
 # vimwiki
-super + w
+alt + w
 	$TERMINAL -e $EDITOR $VIMWIKI/index.wiki
 
 # sxhkd
-super + Escape
+alt + Escape
 	re-key
