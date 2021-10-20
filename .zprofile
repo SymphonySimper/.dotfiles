@@ -1,1 +1,0 @@
-/home/s2b/.config/shell/.profile
