@@ -1,5 +1,5 @@
 auto-reload yes
-browser "firefox %u"
+browser "$BROWSER %u"
 max-browser-tabs 8
 
 bind-key j down

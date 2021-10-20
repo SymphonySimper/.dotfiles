@@ -2,9 +2,16 @@
 
 loc="$HOME"/.local/appimage
 
+open_app='"$loc/$app" > /dev/null 2>&1 &'
 if [ -z "$@" ]; then
 	ls $loc
 else
 	app="$@"
-	[ -f "$loc/$app" ] && "$loc/$app" > /dev/null 2>&1 &
+	if [ -f "$loc/$app" ]; then
+		if echo "$app" | grep -qi 'kden\|olive'; then
+			prime-run "$loc/$app" > /dev/null 2>&1 &
+		else
+			"$loc/$app" > /dev/null 2>&1 &
+		fi
+	fi
 fi
