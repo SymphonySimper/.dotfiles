@@ -21,18 +21,22 @@ fesh(){
 }
 
 # Play video/audio
-fv(){
-	video="$HOME"/importantnt/video
-	query="$(ls -F $video | grep -v '/\|.part' | fzf | sed 's|\$|\\\$|g')"
-	[ -n "$query" ] && devour prime-run $VIDEO_PLAYER \
-	$video/"$query"
+fzf_play(){
+	query="$(ls -F "$1" | grep -v '/\|.part' | fzf | sed 's|\$|\\\$|g')"
+	file_loc="$1/$query"
+	if [ -n "$query" ]; then
+		if echo "$1" | grep -qi 'audio'; then
+			$VIDEO_PLAYER "$file_loc"
+		else
+			devour prime-run $VIDEO_PLAYER \
+			"$file_loc"
+		fi
+	fi
 }
 
-fa(){
-	audio="$HOME"/importantnt/audio
-	query="$(ls -F $audio | grep -v '/\|.part' | fzf | sed 's|\$|\\\$|g')"
-	[ -n "$query" ] && $VIDEO_PLAYER $audio/"$($query | sed 's/\$//g')"
-}
+fv(){ fzf_play "$HOME"/importantnt/video; }
+fa(){ fzf_play "$HOME"/importantnt/audio; }
+fm(){ fzf_play "$HOME"/importantnt/movies; }
 
 # Docs
 fdocs(){

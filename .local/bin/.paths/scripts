@@ -5,6 +5,7 @@ configs                  .local/bin/.paths/configs
 edit-configs             .local/bin/rofi/edit-configs
 edit-scripts             .local/bin/rofi/edit-scripts
 edit-shell               .local/bin/rofi/edit-shell
+figma                    .local/bin/aliases/figma
 folders                  .local/bin/.paths/folders
 fzf-folders              .local/bin/.paths/fzf-folders
 game-mode                .local/bin/game-mode
