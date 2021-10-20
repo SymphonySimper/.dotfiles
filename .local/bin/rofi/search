@@ -11,7 +11,7 @@ amazon_in_url='https://www.amazon.in/s?k='
 # Bang function
 search_websites(){ $BROWSER "${1}$(echo "$3" | sed "s/\;${2}//g")" > /dev/null 2>&1 & }
 
-search_history="$HOME"/.cache/searchhis
+search_history="$HOME"/.cache/search-history
 
 if [ -z "$@" ]; then
 	[ -f $search_history ] && tac $search_history
