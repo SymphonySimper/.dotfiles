@@ -3,7 +3,6 @@ configuration {
 	lines: 6;
 	font: "Poppins 12";
 	modi: [run];
-	matching: "fuzzy";
 
 	kb-mode-next: "Alt+Tab";
 }
