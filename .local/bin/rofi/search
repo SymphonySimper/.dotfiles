@@ -7,6 +7,7 @@ pling_url='https://www.pling.com/find?search='
 # startpage_url='https://www.startpage.com/sp/search?query='
 google_url='https://www.google.com/search?hl=en&q='
 amazon_in_url='https://www.amazon.in/s?k='
+github_url='https://github.com/search?q='
 
 # Bang function
 search_websites(){ $BROWSER "${1}$(echo "$3" | sed "s/\;${2}//g")" > /dev/null 2>&1 & }
@@ -18,6 +19,7 @@ if [ -z "$@" ]; then
 else
 	! grep -qw "^$@" $search_history && echo "$@" >> $search_history
 	case "$@" in
+		*\;gh*) search_websites "${github_url}" 'gh' "$@" ;;
 		*\;y*) search_websites "${yt_url}" 'y' "$@" ;;
 		*\;p*) search_websites "${pling_url}" 'p' "$@" ;;
 		# *\;s*) search_websites "${startpage_url}" 's' "$@" ;;

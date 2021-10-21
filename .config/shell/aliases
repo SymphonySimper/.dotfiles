@@ -37,6 +37,7 @@ alias doas='$PERM'
 alias less='less -Q'
 alias flex='neofetch'
 alias ytf='ytfzf -t'
+alias rofi_keys='rofi -show keys'
 
 # Tasks
 alias rm_cache='rm -rf ~/.cache/*'

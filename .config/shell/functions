@@ -3,8 +3,8 @@ yoink(){ xclip -sel c < "$1"; }
 ourimg(){ xclip -sel c -t image/png < "$1"; }
 
 # git
-ga(){ git add "$1"; }
-grm(){ git rm "$1" --cached; }
+ga(){ git add $@; }
+grm(){ git rm $@ --cached; }
 gamp(){
 	git add -u \
 	&& git commit \
@@ -12,8 +12,8 @@ gamp(){
 }
 
 # config git
-cga(){ config add "$1"; }
-cgrm(){ config rm "$1" --cached; }
+cga(){ config add $@; }
+cgrm(){ config rm $@ --cached; }
 cgamp(){
 	config add -u \
 	&& config commit \
