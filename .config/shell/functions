@@ -97,8 +97,16 @@ hey_yo_int(){ while sleep 30s; ping -c 3 gnu.org; [ $? -ne 0 ]; do true; done &&
 # mkdir and cd
 mcd(){ mkdir -p "$1" && cd "$1"; }
 
-# cron
+# cp functions
 cp_cron(){ crontab -l > "$HOME"/.config/cron/crontab; }
+cp_portage(){
+	loc="$HOME"/.config/portage
+	cp -v /etc/portage/make.conf "$loc"/make.conf
+	[ ! -d "$loc"/package.use ] && mkdir "$loc"/package.use
+	for f in /etc/portage/package.use/*; do
+		cp -v $f "$loc"/package.use
+	done
+}
 
 # time-table
 time_table(){

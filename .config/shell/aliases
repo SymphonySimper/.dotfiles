@@ -70,7 +70,7 @@ alias vvm='v -x "$HOME"/importantnt/virtual-machine'
 alias hex_a='less "$HOME"/.local/share/my-docs/hex-alpha'
 alias todo='$EDITOR "$HOME"/.local/share/.todo'
 alias begone='$EDITOR "$HOME"/.local/share/.begone'
-alias rb='devour $READER "$HOME"/lifeisfun/rust/rust-lang.pdf'
+alias rb='devour $READER "$HOME"/lifeisfun/rust/rust-by-example.pdf'
 alias kd='$EDITOR "$HOME"/.local/share/my-docs/compile-kernel'
 alias hosts='$PERM $EDITOR /etc/hosts'
 
