@@ -39,3 +39,22 @@ is_there(){ equery list '*' | fzf; }
 
 # keybinds
 is_mybind(){ cat "$XDG_CONFIG_HOME/sxhkd/.sxhkdrc" | fzf; }
+
+j(){
+	temp_file=$(mktemp)
+	ls_prog="ls -aF"
+	get_path(){ cat $temp_file | tr '\n' '/'; }
+	choose_loc(){ eval $ls_prog $(get_path) | grep / | sed "s/\///" | fzf; }
+	echo $(pwd) >> $temp_file
+	while :; do
+		if [ -n "$(eval $ls_prog $(get_path) | grep / 2>/dev/null)" ];then
+			loc=$(choose_loc)
+			echo $loc >> $temp_file
+			if [ "$loc" = '.' ]; then
+				cd $(get_path)
+				rm $temp_file
+				break
+			fi
+		fi
+	done
+}

@@ -57,7 +57,6 @@ alias huh='eval "$(tac $HISTFILE | grep -v "q\|bye\|bbak\|exit\|clear" | fzf)"'
 
 # Navigate dir
 alias ..='cd ..'
-alias j='cd "$(ls -aF | grep / | sed "s/\///" | fzf)"'
 alias jj='cd ~$(dirs -v | fzf | cut -f 1)'
 alias cdp='cd /etc/portage'
 alias cdk='cd /usr/src/linux'
