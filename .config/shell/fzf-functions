@@ -48,14 +48,12 @@ j(){
 	choose_loc(){ eval $ls_prog $(get_path) | grep / | sed "s/\///" | fzf; }
 	echo $(pwd) >> $temp_file
 	while :; do
-		if [ -n "$(eval $ls_prog $(get_path) | grep / 2>/dev/null)" ];then
-			loc=$(choose_loc)
-			echo $loc >> $temp_file
-			if [ "$loc" = '.' ]; then
-				cd $(get_path)
-				rm $temp_file
-				break
-			fi
+		loc=$(choose_loc)
+		echo $loc >> $temp_file
+		if [ "$loc" = '.' ]; then
+			cd $(get_path)
+			rm $temp_file
+			break
 		fi
 	done
 }
