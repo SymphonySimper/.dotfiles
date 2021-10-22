@@ -40,6 +40,7 @@ is_there(){ equery list '*' | fzf; }
 # keybinds
 is_mybind(){ cat "$XDG_CONFIG_HOME/sxhkd/.sxhkdrc" | fzf; }
 
+# j
 j(){
 	temp_file=$(mktemp)
 	ls_prog="ls -aF"
