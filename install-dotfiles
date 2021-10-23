@@ -1,0 +1,36 @@
+#!/bin/sh
+
+git clone --bare https://github.com/SymphonySimper/DotFiles.git $HOME/.cfg
+
+function config { /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@; }
+mkdir -p .config-backup
+config checkout
+
+create_symlinks(){
+	# symlinks
+	ln -sv "$HOME"/.local/bin/lf/lf-p "$HOME"/.local/bin/aliases/lfp
+	ln -sv "$HOME"/.config/shell/.profile "$HOME"/.zprofile
+}
+
+create_dirs(){
+	mkdir -vp "$HOME"/usb "$HOME"/ntfs
+	mkdir -vp "$HOME"/dl "$HOME"/pics/screenshots
+	mkdir -vp "$HOME"/importantnt "$HOME"/lifeisfun
+	mkdir -vp "$HOME"/.local/src "$HOME"/.local/appimage
+}
+
+if [ $? = 0 ]; then
+  echo "Checked out config."
+
+  echo "Creating symliks."
+  create_symlinks
+
+  echo "Creating directories."
+  create_dirs
+else
+    echo "Backing up pre-existing dot files.";
+    config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .config-backup/{}
+fi
+
+config checkout
+config config status.showUntrackedFiles no
