@@ -1,16 +1,10 @@
 # Open Terminal
-alt + Return
- 	$TERMINAL
-alt + shift + Return
-	$SECOND_TERMINAL
+alt + {Return,shift + Return}
+ 	{$TERMINAL,$SECOND_TERMINAL}
 
 # Open Browser
 alt + shift + f
 	$BROWSER
-
-# Open Rss reader
-alt + n
-	$TERMINAL -e $RSS_READER
 
 # Volume
 alt + {F2,F3,F4,shift + F2,shift + F3}

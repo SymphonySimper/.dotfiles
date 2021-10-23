@@ -12,12 +12,9 @@ fox-wolf-cfg				.config/fox/wolf/librewolf.overrides.cfg
 fox-yt-enhancer				.config/fox/extensions/yt-enhancer.json
 htop						.config/htop/htoprc
 lf							.config/lf/lfrc
-mimeapps					.config/mimeapps.list
 mpv							.config/mpv/mpv.conf
 my-binds					.config/sxhkd/my-binds
 my-bspwm-binds				.config/sxhkd/my-bspwm-binds
-newsboat-cfg				.config/newsboat/config
-newsboat-url				.config/newsboat/urls
 nvim-color					.config/nvim/colors/the-black.vim
 nvim						.config/nvim/init.vim
 picom						.config/picom/picom.conf
