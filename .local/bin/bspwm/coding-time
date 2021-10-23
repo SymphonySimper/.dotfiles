@@ -4,9 +4,8 @@ temp_file=/tmp/coding-time
 
 ls_prog="ls -aF"
 sed_1="sed 's/\///'"
-sed_2="sed '/^[[:space:]]*$/d'"
 
-get_path(){ cat $temp_file | eval $sed_2 | tr '\n' '/'; }
+get_path(){ cat $temp_file | tr '\n' '/'; }
 choose_loc(){ eval $ls_prog $(get_path) | grep / | eval $sed_1; }
 
 view_doc(){ { bspc desktop -f '^4' && $READER "$1"; }> /dev/null 2>&1 & }
@@ -32,15 +31,16 @@ open_terminals(){
 	rm $temp_file
 }
 
-if [ -f $temp_file ] && [ "$(eval $sed_2 $temp_file | tail -n 1)" = '..' ]; then
-	eval $sed_2 $temp_file | head -n -2  > /tmp/coding-temp
+if [ -f $temp_file ] && [ "$(tail -n 1 $temp_file)" = '..' ]; then
+	head -n -2 $temp_file > /tmp/coding-temp
 	mv /tmp/coding-temp $temp_file
 fi
 
 if [ ! -f $temp_file ]; then
 	echo "$HOME/lifeisfun" > $temp_file
 fi
-echo "$1" >> $temp_file
+
+[ -n "$1" ] && echo "$1" >> $temp_file
 
 if [ "$1" = '.' ]; then
 	open_terminals

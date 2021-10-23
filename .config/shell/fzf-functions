@@ -54,6 +54,9 @@ j(){
 			cd $(get_path)
 			rm $temp_file
 			break
+		elif [ -z "$loc" ]; then
+			rm $temp_file
+			break
 		fi
 	done
 }
