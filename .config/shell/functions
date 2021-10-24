@@ -62,7 +62,7 @@ sort_paths(){
 loop_v(){
 	case "$1" in
 		-a) $VIDEO_PLAYER --no-video --shuffle --loop-playlist "$HOME"/importantnt/video ;;
-		*) devour prime-run $VIDEO_PLAYER --shuffle --loop-playlist "$HOME"/importantnt/video ;;
+		*) $SWALLOW $USE_GPU $VIDEO_PLAYER --shuffle --loop-playlist "$HOME"/importantnt/video ;;
 	esac
 }
 

@@ -29,6 +29,8 @@ select_default_prog 'EDITOR' 'nvim' 'vim' 'nano'
 export VISUAL="$EDITOR"
 select_default_prog 'TERMINAL' 'urxvtc' 'alacritty' 'kitty'
 select_default_prog 'SECOND_TERMINAL' 'urxvt' 'alacritty' 'kitty'
+select_default_prog 'SWALLOW' 'devour' ''
+select_default_prog 'USE_GPU' 'prime-run' ''
 
 # Paths
 export PATH="$PATH:$HOME/.local/bin"					# Scripts

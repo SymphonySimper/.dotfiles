@@ -9,7 +9,7 @@ else
 	app="$@"
 	if [ -f "$loc/$app" ]; then
 		if echo "$app" | grep -qi 'kden\|olive'; then
-			prime-run "$loc/$app" > /dev/null 2>&1 &
+			$USE_GPU "$loc/$app" > /dev/null 2>&1 &
 		else
 			"$loc/$app" > /dev/null 2>&1 &
 		fi

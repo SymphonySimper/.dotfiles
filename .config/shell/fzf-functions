@@ -17,7 +17,7 @@ fzf_play(){
 		if echo "$1" | grep -qi 'audio'; then
 			$VIDEO_PLAYER "$file_loc"
 		else
-			devour prime-run $VIDEO_PLAYER \
+			$SWALLOW $USE_GPU $VIDEO_PLAYER \
 			"$file_loc"
 		fi
 	fi

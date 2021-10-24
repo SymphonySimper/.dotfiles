@@ -3,5 +3,10 @@
 if [ -z "$@" ]; then
 	cat $BMARK
 else
-	$BROWSER $(echo "$1" | awk '{ print $2 }') > /dev/null 2>&1 &
+	url="$(echo "$1" | awk '{ print $3 }')"
+	if echo "$1" | grep -wq 'app'; then
+		chromium --app="${url}" > /dev/null 2>&1 &
+	else
+		$BROWSER "${url}" > /dev/null 2>&1 &
+	fi
 fi

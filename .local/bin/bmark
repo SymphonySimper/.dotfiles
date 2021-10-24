@@ -8,12 +8,17 @@ err(){ echo "$(syl r; syl B)${1}$(syl R)"; }
 succ(){ echo "$(syl g; syl B)${1}$(syl R)"; }
 git_c="git -C $repo_loc"
 
+append_bmark(){ printf "%*s %4s %s\n" -24 "$1" "$2" "$3" >> $BMARK; }
 sort_bmark(){ sort $BMARK -o $BMARK; }
 add_bmark(){
 	if grep -qw "^$1" $BMARK; then
 		err "$1 already exists"
 	else
-		printf "%*s %s\n" -24 "$1" "$2" >> $BMARK
+		read -p "Is this an app [y/N] " ans
+		case "$ans" in
+			[yY]*) append_bmark "$1" 'app' "$2" ;;
+			*) append_bmark "$1" 'site' "$2" ;;
+		esac
 		succ "$1 added to bmarks"
 		sort_bmark
 	fi
@@ -30,7 +35,7 @@ rm_bmark(){
 cp_bmark(){
 	is_there="$(grep -w "^$1" $BMARK)"
 	if [ -n "$is_there" ]; then
-		echo "$(echo "$is_there" | awk '{ print $2 }')" \
+		echo "$(echo "$is_there" | awk '{ print $3 }')" \
 			| xclip -sel c
 		echo "bmark \`$1\` is copied to clipboard"
 	else
@@ -66,7 +71,7 @@ if [ ! -d $repo_loc ]; then
 	esac
 fi
 case "$1" in
-	add) shift; add_bmark "$1" "$2" ;;
+	add) shift; add_bmark "$1" "$2";;
 	rm) shift; rm_bmark "$1" ;;
 	edit) $EDITOR $BMARK; sort_bmark ;;
 	clone) clone_repo ;;

@@ -6,7 +6,7 @@ vv="$VIDEO_PLAYER"
 vf="ffplay"
 pv="$READER"
 te="$EDITOR"
-h="devour"
+h="$SWALLOW"
 dis="fzf"
 
 #Paths
@@ -19,7 +19,7 @@ main() {
 	case "$1" in
 		*.jp*g | *.png | *.webp ) $h $iv "$1" ;;
 		*.mkv | *.mp4 | *.webm | *.gif | *.avi | *youtu* )
-			$h prime-run $vv "$1"
+			$h $USE_GPU $vv "$1"
 			;;
 		*.mp3 | *.ogg ) $vv "$1" ;;
 		*.pdf ) $h $pv "$1" ;;
