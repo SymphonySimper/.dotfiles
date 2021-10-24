@@ -25,30 +25,15 @@ start_prgm(){
 iclr="sed '/#/d; /^[[:space:]]*$/d'"
 create_config(){
 	case "$1" in
-		-oa) eval $iclr $bspwm_key $my_bspwm_binds $my_key ;;
 		-a) eval $iclr $bspwm_key $my_bspwm_binds $my_key > $config_loc;;
-		-om) eval $iclr $my_key ;;
 		-m) eval $iclr $my_key > $config_loc;;
 	esac
 }
 
-if [ -f "$config_loc" ]; then
-	touch $config_loc
-fi
-
 if [ $WM = 'bspwm' ]; then
-	if ( create_config -oa | diff -q - "$config_loc" ); then
-		$notify -i $warning_i "No change in config"
-	else
 		create_config -a
-	fi
 else
-	if ( create_config -om | diff -q - "$config_loc" ); then
-		$notify -i $warning_i "No change in config"
-	else
 		create_config -m
-	fi
-
 fi
 
 if [ -f "$config_loc" ]; then
