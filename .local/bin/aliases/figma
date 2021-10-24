@@ -1,3 +1,0 @@
-#!/bin/sh
-
-chromium --app='https://www.figma.com/' > /dev/null 2>&1

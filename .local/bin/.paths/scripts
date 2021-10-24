@@ -2,11 +2,9 @@ bmark                    .local/bin/bmark
 brightness               .local/bin/brightness
 coding-time              .local/bin/bspwm/coding-time
 configs                  .local/bin/.paths/configs
-discord                  .local/bin/aliases/discord
 edit-configs             .local/bin/rofi/edit-configs
 edit-scripts             .local/bin/rofi/edit-scripts
 edit-shell               .local/bin/rofi/edit-shell
-figma                    .local/bin/aliases/figma
 folders                  .local/bin/.paths/folders
 fzf-folders              .local/bin/.paths/fzf-folders
 game-mode                .local/bin/game-mode
