@@ -44,19 +44,55 @@ is_mybind(){ cat "$XDG_CONFIG_HOME/sxhkd/.sxhkdrc" | fzf; }
 j(){
 	temp_file=$(mktemp)
 	ls_prog="ls -aF"
+	is_api='no'
 	get_path(){ cat $temp_file | tr '\n' '/'; }
 	choose_loc(){ eval $ls_prog $(get_path) | grep / | sed "s/\///" | fzf; }
-	echo $(pwd) >> $temp_file
+	if [ -z "$1" ]; then
+		echo $(pwd) >> $temp_file
+	else
+		case "$1" in
+			-g) echo $(pwd) >> $temp_file; is_api='yes' ;;
+			-a)
+				shift
+				echo "$1" >> $temp_file
+				is_api='yes'
+				;;
+			*) echo "$1" >> $temp_file ;;
+		esac
+	fi
 	while :; do
 		loc=$(choose_loc)
 		echo $loc >> $temp_file
 		if [ "$loc" = '.' ]; then
-			cd $(get_path)
-			rm $temp_file
-			break
+			if [ "$is_api" = 'yes' ]; then
+				echo $(get_path)
+				rm $temp_file
+				break
+			else
+				cd $(get_path)
+				rm $temp_file
+				break
+			fi
 		elif [ -z "$loc" ]; then
 			rm $temp_file
 			break
 		fi
 	done
+}
+
+# fli
+fli(){
+	loc="$(j -a $HOME/lifeisfun)"
+	if [ -n "$loc" ] && [ "$WM" = 'bspwm' ]; then
+		is_src=$(ls -F "$loc" 2>/dev/null | grep -w '/\|src\|lib')
+		if [ -n "$is_src" ]; then
+			loc_src="$loc/$is_src"
+		else
+			loc_src="$loc"
+		fi
+		cd "$loc_src"
+		$TERMINAL -cd "$loc"
+		bspc node -f west
+		bspc node -z right +400 0
+	fi
 }

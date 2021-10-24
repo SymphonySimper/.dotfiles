@@ -17,7 +17,7 @@ alias cgau='config add -u'
 
 # Package Manager
 alias e='$PERM emerge -av'
-alias update='$PERM emerge -q --sync && e --update --deep --with-bdeps=y @world'
+alias update='$PERM emerge -q --sync && e --update --deep --with-bdeps=y @world && e --depclean'
 alias am_i_fat='equery list "*" | wc -l'
 alias erm='e -c'
 alias newuse='e --update --deep --newuse @world'
