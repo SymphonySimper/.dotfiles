@@ -1,5 +1,9 @@
 #!/bin/sh
 
-warning_i="$HOME"/.local/share/icons/general/warning.svg
+. "$HOME"/.zprofile
+
 sound-efx &
-dunstify -i $warning_i "Time to sleep" "Its $(date '+%r')"
+query=$(echo 'yah\nnah' | rofi -dmenu -p 'Are you going to sleep?' \
+	-mesg "Its $(date '+%r')" -no-custom)
+
+[ "$query" = 'yah' ] && $PERM poweroff
