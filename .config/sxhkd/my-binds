@@ -59,6 +59,10 @@ alt + F11
 alt + w
 	$TERMINAL -e $EDITOR $VIMWIKI/index.wiki
 
+# dunst
+ctrl + .
+	dunstctl action
+
 # sxhkd
 alt + Escape
 	re-key

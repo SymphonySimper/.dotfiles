@@ -43,9 +43,9 @@
     sticky_history = false
     history_length = 20
 
-    dmenu = /usr/bin/dmenu -p dunst:
-    # browser = /usr/bin/firefox -new-tab
-    browser = $BROWSER
+    dmenu = /usr/bin/rofi -dmenu
+    browser = /usr/bin/librewolf
+
     always_run_script = true
     title = Dunst
     class = Dunst
