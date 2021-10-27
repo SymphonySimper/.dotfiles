@@ -60,7 +60,7 @@ alt + w
 	$TERMINAL -e $EDITOR $VIMWIKI/index.wiki
 
 # dunst
-ctrl + .
+alt + shift + space
 	dunstctl action
 
 # sxhkd
