@@ -13,7 +13,7 @@ bspc config click_to_focus none
 bspc config single_monocle true
 
 bspc config focus_follows_pointer true
-bspc config ignore_ewmh_focus true
+# bspc config ignore_ewmh_focus true
 
 # Colors
 bspc config normal_border_color	"#000000"
@@ -27,8 +27,8 @@ bspc rule -a Screenkey manage=off
 bspc rule -a qemu-system-x86_64 state=fullscreen
 bspc rule -a Zathura state=tiled
 
-bspc rule -a Firefox desktop='^2'
-bspc rule -a LibreWolf desktop='^2'
+bspc rule -a Firefox desktop='^2' follow=on
+bspc rule -a LibreWolf desktop='^2' follow=on
 bspc rule -a mpv desktop='^5' follow=on
 bspc rule -a discord desktop='^6'
 bspc rule -a Signal desktop='^6'
