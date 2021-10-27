@@ -3,5 +3,23 @@
 timer_i="$HOME"/.local/share/icons/general/timer.svg
 
 notify(){ dunstify -h string:x-dunst-stack-tag:timer -i "$timer_i" "$1 is done"; }
+action(){
+	echo 'snooze\nstop' | rofi -dmenu -p 'action' \
+		-mesg "$time time done" -only-match
+}
+snooze(){ sleep 5m; sound-efx & query=$(action); }
 
-( sleep "$1" && { sound-efx & notify "$1"; } ) &
+time="$1"
+
+sleep "$time"
+if [ $? -eq 0 ]; then
+	sound-efx &
+
+	query=$(action)
+	while :; do
+		case "$query" in
+			'snooze') snooze ;;
+			'stop') break ;;
+		esac
+	done
+fi
