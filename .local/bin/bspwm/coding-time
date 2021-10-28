@@ -9,10 +9,11 @@ get_path(){ cat $temp_file | tr '\n' '/'; }
 choose_loc(){ eval $ls_prog $(get_path) | grep / | eval $sed_1; }
 
 view_doc(){ { bspc desktop -f '^4' && $READER "$1"; }> /dev/null 2>&1 & }
-is_doc(){ grep -iw 'rust' $temp_file; }
+is_doc(){ grep -i 'rust\|computer-network' $temp_file; }
 open_doc(){
 	case "$(is_doc)" in
 		'rust') view_doc "$HOME"/lifeisfun/rust/rust-lang.pdf ;;
+		'computer-network') view_doc "$HOME"/importantnt/notes/sem5/cnl/cnl-manual.pdf ;;
 	esac
 }
 open_terminals(){
