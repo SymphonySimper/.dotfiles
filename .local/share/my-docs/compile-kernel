@@ -8,5 +8,6 @@ make -j13 menuconfig
 make -j13 modules_prepare
 make -j13 && make -j13 modules_install && make -j13 install
 genkernel --install --kernel-config=/usr/src/linux/.config --compress-initramfs-type=lz4 --microcode-initramfs initramfs
+emerge --ask @module-rebuild
 grub-mkconfig -o /boot/grub/grub.cfg
 cp .config /home/s2b/.config/kernel/$(uname -r).config
