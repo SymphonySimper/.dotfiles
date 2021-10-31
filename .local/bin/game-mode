@@ -28,9 +28,11 @@ handle_picom(){
 }
 
 options(){ printf "%s\n%s\n%s\n" 'toggle' 'toggle-picom'; }
-query=$(options | rofi -dmenu -p 'Game-mode')
+# query=$(options | rofi -dmenu -p 'Game-mode')
+#
+# case "$query" in
+# 	toggle) toggle ;;
+# 	toggle-picom) handle_picom ;;
+# esac
 
-case "$query" in
-	toggle) toggle ;;
-	toggle-picom) handle_picom ;;
-esac
+handle_picom

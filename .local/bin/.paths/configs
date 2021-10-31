@@ -2,6 +2,7 @@ bspwm						.config/bspwm/bspwmrc
 bspwm-hotkeys				.config/sxhkd/bspwm-hotkeys
 dunst						.config/dunst/dunstrc
 fox-dark-reader				.config/fox/extensions/dark-reader.json
+fox-localcdn				.config/fox/extensions/localcdn.txt
 fox-useragent-switch		.config/fox/extensions/useragent-switch.json
 fox-userChrome				.config/fox/chrome/userChrome.css
 fox-userContent				.config/fox/chrome/userContent.css

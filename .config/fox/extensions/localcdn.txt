@@ -1,0 +1,32 @@
+{
+  "allowedDomainsGoogleFonts": {},
+  "allowlistedDomains": {
+    "https://fonts.google.com/": true
+  },
+  "amountInjected": 0,
+  "badgeDefaultBackgroundColor": "#666666",
+  "badgeDefaultTextColor": "#FFFFFF",
+  "badgeHTMLFilterBackgroundColor": "#FF0000",
+  "badgeHTMLfilterTextColor": "#FFFFFF",
+  "badgeMissingResourceBackgroundColor": "#0000FF",
+  "badgeMissingResourceTextColor": "#FFFFFF",
+  "blockGoogleFonts": true,
+  "blockMissing": false,
+  "changeBadgeColorMissingResources": false,
+  "defaultRangeStatistic": "week",
+  "disablePrefetch": true,
+  "domainsManipulateDOM": {},
+  "enableLogging": false,
+  "enforceStaging": false,
+  "hideDonationButton": false,
+  "internalStatistics": false,
+  "internalStatisticsData": {},
+  "lastMappingUpdate": "2020-01-01",
+  "negateHtmlFilterList": false,
+  "selectedIcon": "Default",
+  "showIconBadge": true,
+  "storageType": "local",
+  "stripMetadata": true,
+  "updateNotification": 0,
+  "xhrTestDomain": "localcdn.org"
+}
