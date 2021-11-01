@@ -16,7 +16,10 @@ add_bmark(){
 	else
 		read -p "Is this an app [y/N] " ans
 		case "$ans" in
-			[yY]*) append_bmark "$1" 'app' "$2" ;;
+			[yY]*)
+					echo 'added as a chromium app'
+					append_bmark "$1" 'app' "$2"
+					;;
 			*) append_bmark "$1" 'site' "$2" ;;
 		esac
 		succ "$1 added to bmarks"
