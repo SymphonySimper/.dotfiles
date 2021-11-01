@@ -45,24 +45,27 @@ j(){
 	temp_file=$(mktemp)
 	ls_prog="ls -aF"
 	is_api='no'
+
 	get_path(){ cat $temp_file | tr '\n' '/'; }
 	choose_loc(){ eval $ls_prog $(get_path) | grep / | sed "s/\///" | fzf; }
+	echo_path(){ echo $1 | sed 's| |\\ |g' >> $temp_file; }
+
 	if [ -z "$1" ]; then
-		echo $(pwd) >> $temp_file
+		echo_path "$(pwd)"
 	else
 		case "$1" in
-			-g) echo $(pwd) >> $temp_file; is_api='yes' ;;
+			-g) echo_path "$(pwd)"; is_api='yes' ;;
 			-a)
 				shift
-				echo "$1" >> $temp_file
+				echo_path "$1"
 				is_api='yes'
 				;;
-			*) echo "$1" >> $temp_file ;;
+			*) echo_path "$1" ;;
 		esac
 	fi
 	while :; do
 		loc=$(choose_loc)
-		echo $loc >> $temp_file
+		echo_path "$loc"
 		if [ "$loc" = '.' ]; then
 			if [ "$is_api" = 'yes' ]; then
 				echo $(get_path)
@@ -74,6 +77,7 @@ j(){
 				break
 			fi
 		elif [ -z "$loc" ]; then
+			cat $temp_file
 			rm $temp_file
 			break
 		fi
@@ -83,7 +87,7 @@ j(){
 # fli
 fli(){
 	loc="$(j -a $HOME/lifeisfun)"
-	if [ -n "$loc" ] && [ "$WM" = 'bspwm' ]; then
+	if [ $(echo "$loc" | wc -c) -gt 20 ] && [ "$WM" = 'bspwm' ]; then
 		is_src=$(ls -F "$loc" 2>/dev/null | grep -w '/\|src\|lib')
 		if [ -n "$is_src" ]; then
 			loc_src="$loc/$is_src"

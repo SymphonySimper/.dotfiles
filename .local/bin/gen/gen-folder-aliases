@@ -16,6 +16,9 @@ awk '{ printf("alias %s=\"cd $HOME/%s\"\n", $1, $2) }' $folders_path > $folder_a
 	&& 	notify "General"
 awk '{printf("map %s cd ~/%s\n", $1, $2 ) }' $folders_path > $lf_alias \
 	&& notify "lf"
-awk '{ printf("%s(){ cd \"$HOME/%s/$(ls -aF $HOME/%s | grep / | sed \"s/\\///g\" | fzf)\"; }\n", $1, $2, $2) }' $path_fzf > $fzf_folder_alias \
-	&& notify "Fzf"
+# awk '{ printf("%s(){ cd \"$HOME/%s/$(ls -aF $HOME/%s | grep / | sed \"s/\\///g\" | fzf)\"; }\n", $1, $2, $2) }' $path_fzf > $fzf_folder_alias \
+	# && notify "Fzf"
 
+
+awk '{ printf("%s(){ j \"$HOME\"/%s; }\n", $1, $2) }' $path_fzf > $fzf_folder_alias \
+	&& notify 'new fzf'

@@ -116,3 +116,6 @@ time_table(){
 		*) cat $loc
 	esac
 }
+
+# small video
+small_video(){ ffmpeg -i $1 -vcodec libx265 -crf 28 "$(echo $1 | cut -d '.' -f1).mp4"; }

@@ -36,15 +36,16 @@ main() {
 		*) [ -n "$@" ] && $te "$1" ;;
 	esac
 }
+list_file() { ls -aF "$1" | eval $grep_1 | eval $sed_1 | $dis | eval $sed_2; }
 
 if [ -n "$1" ]; then
 	case "$1" in
 		-x) shift
-			query="$(ls -aF "$1" | eval $grep_1 | eval $sed_1 | $dis | eval $sed_2)"
+			query="$(list_file $1)"
 			[ -n "$query" ] && main "${1}/${query}"
 			;;
 		*) main "$(echo $@ | eval $sed_2)" ;;
 	esac
 else
-	main "$(ls -aF | eval $grep_1 | eval $sed_1 | $dis | eval $sed_2)"
+	main "$(list_file $(pwd))"
 fi
