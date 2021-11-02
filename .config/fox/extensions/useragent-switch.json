@@ -3,14 +3,15 @@
     "addons.mozilla.org",
     "vault.bitwarden.com",
     "gitlab.com",
-    "github.com"
+    "github.com",
+    "open.spotify.com"
   ],
   "cache": true,
   "custom": {},
   "exactMatch": false,
   "faqs": true,
   "json-forced": false,
-  "json-guid": "cc569f4c-477a-4918-918d-8a3256c36495",
+  "json-guid": "0e5aecdf-c76e-4467-995d-eb23bdd05625",
   "last-update": 1633538266600,
   "log": true,
   "mode": "blacklist",
