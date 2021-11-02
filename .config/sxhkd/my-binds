@@ -12,9 +12,9 @@ alt + {F2,F3,F4,shift + F2,shift + F3}
 alt + F12
 	$TERMINAL -e pulsemixer
 
-# Lofi
-alt + F1
-	play-lofi
+# Music
+alt + {F1,shift + F1}
+	{play-lofi,bmark open spotify}
 
 # Get work done
 alt + shift + F12
