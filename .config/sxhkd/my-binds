@@ -14,7 +14,7 @@ alt + F12
 
 # Music
 alt + {F1,shift + F1}
-	{play-lofi,bmark open spotify}
+	{play-bg,bmark open spotify}
 
 # Get work done
 alt + shift + F12

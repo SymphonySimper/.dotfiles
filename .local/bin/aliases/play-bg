@@ -1,0 +1,10 @@
+#!/bin/sh
+
+loc="$HOME"/importantnt/audio/.bg
+
+is_bg="$(pgrep -la "$VIDEO_PLAYER" | grep 'title=bg' | cut -d ' ' -f 1)"
+if [ -n "$is_bg" ]; then
+	kill "$is_bg"
+else
+	"$VIDEO_PLAYER" --title='bg' --volume=50 --loop-playlist --shuffle "$loc"
+fi

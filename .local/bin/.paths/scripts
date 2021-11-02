@@ -29,7 +29,7 @@ open-appimage            .local/bin/rofi/open-appimage
 open-bmark               .local/bin/rofi/open-bmark
 open-url                 .local/bin/rofi/open-url
 play-audio               .local/bin/rofi/play-audio
-play-lofi                .local/bin/play-lofi
+play-bg                  .local/bin/aliases/play-bg
 play-movie               .local/bin/rofi/play-movie
 play-video               .local/bin/rofi/play-video
 power-options            .local/bin/rofi/power-options
