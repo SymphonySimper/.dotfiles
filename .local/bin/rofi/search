@@ -1,5 +1,8 @@
 #!/bin/sh
 
+search_history="$HOME"/.cache/search-history
+
+## Bang function
 # Search Urls
 s_url='https://duckduckgo.com/?q='
 yt_url='https://www.youtube.com/results?search_query='
@@ -13,11 +16,15 @@ dribble_url='https://dribbble.com/search/'
 pexels_url='https://www.pexels.com/search/'
 unsplash_url='https://unsplash.com/s/photos/'
 
-# Bang function
 search_websites(){ $BROWSER "${1}$(echo "$3" | sed "s/\;${2}//g")" > /dev/null 2>&1 & }
 
-search_history="$HOME"/.cache/search-history
-
+search_engine(){
+	if bmark list 2> /dev/null | grep -qw "^$@"; then
+		bmark open "$@"
+	else
+		$BROWSER "${s_url}${@}" > /dev/null 2>&1 &
+	fi
+}
 if [ -z "$@" ]; then
 	[ -f $search_history ] && tac $search_history
 else
@@ -33,6 +40,6 @@ else
 		# *\;p*) search_websites "${pling_url}" 'p' "$@" ;;
 		# *\;s*) search_websites "${startpage_url}" 's' "$@" ;;
 		*\;y*) search_websites "${yt_url}" 'y' "$@" ;;
-		*)$BROWSER "${s_url}${@}" > /dev/null 2>&1 & ;;
+		*) search_engine "$@" ;;
 	esac
 fi
