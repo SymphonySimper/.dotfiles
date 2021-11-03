@@ -9,6 +9,7 @@ google_url='https://www.google.com/search?hl=en&q='
 amazon_in_url='https://www.amazon.in/s?k='
 github_url='https://github.com/search?q='
 gogoanime_url='https://gogoanime.vc//search.html?keyword='
+dribble_url='https://dribbble.com/search/'
 
 # Bang function
 search_websites(){ $BROWSER "${1}$(echo "$3" | sed "s/\;${2}//g")" > /dev/null 2>&1 & }
@@ -22,11 +23,12 @@ else
 	case "$@" in
 		*\;gh*) search_websites "${github_url}" 'gh' "$@" ;;
 		*\;go*) search_websites "${gogoanime_url}" 'go' "$@" ;;
-		*\;y*) search_websites "${yt_url}" 'y' "$@" ;;
+		*\;a*) search_websites "${amazon_in_url}" 'a' "$@" ;;
+		*\;d*) search_websites "${dribble_url}" 'd' "$@" ;;
+		*\;g*) search_websites "${google_url}" 'g' "$@" ;;
 		*\;p*) search_websites "${pling_url}" 'p' "$@" ;;
 		# *\;s*) search_websites "${startpage_url}" 's' "$@" ;;
-		*\;g*) search_websites "${google_url}" 'g' "$@" ;;
-		*\;a*) search_websites "${amazon_in_url}" 'a' "$@" ;;
+		*\;y*) search_websites "${yt_url}" 'y' "$@" ;;
 		*)$BROWSER "${s_url}${@}" > /dev/null 2>&1 & ;;
 	esac
 fi

@@ -50,7 +50,7 @@ open_bmark(){
 	is_there="$(grep -w "^$1" $bmark_loc)"
 	if [ -n "$is_there" ]; then
 		url="$(echo "$is_there" | awk '{ print $3 }')"
-		if echo "$1" | grep -wq 'app'; then
+		if echo "$is_there" | grep -wq 'app'; then
 			$CHROME_EXECUTABLE --app="${url}" > /dev/null 2>&1 &
 		else
 			$BROWSER "${url}" > /dev/null 2>&1 &
