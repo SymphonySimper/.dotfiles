@@ -6,6 +6,10 @@ alt + {Return,shift + Return}
 alt + shift + f
 	$BROWSER
 
+# Open Lf
+alt + f
+	$TERMINAL -e lfp
+
 # Volume
 alt + {F2,F3,F4,shift + F2,shift + F3}
 	volume -{d,u,m,D,U}

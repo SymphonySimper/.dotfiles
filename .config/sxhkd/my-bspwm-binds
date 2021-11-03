@@ -13,9 +13,3 @@ alt + shift + x
 alt + shift + m
 	bspc desktop -f '^5'; \
 	prime-run $VIDEO_PLAYER "$(xclip -selection clipboard -o)"
-
-# lfp
-alt + f
-	bspc desktop -f '^9'; \
-	$TERMINAL -e lfp
-
