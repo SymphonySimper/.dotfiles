@@ -16,6 +16,6 @@ alt + shift + m
 
 # lfp
 alt + f
-	bspc desktop -f '^7'; \
+	bspc desktop -f '^9'; \
 	$TERMINAL -e lfp
 
