@@ -1,18 +1,15 @@
 #!/bin/sh
 
-bmark_loc="$XDG_DATA_HOME"/bmark/bookmarks
-repo="git@github.com:SymphonySimper/bmark.git"
-repo_parent_loc="$(echo $bmark_loc | sed 's/bmark\/bookmarks//g')"
-repo_loc="$(echo $bmark_loc | sed 's/bookmarks//g')"
+bmark_loc="$XDG_CONFIG_HOME"/bmark
+bmark_bookmarks="$bmark_loc"/bookmarks
 
 err(){ echo "$(syl r; syl B)${1}$(syl R)"; }
 succ(){ echo "$(syl g; syl B)${1}$(syl R)"; }
-git_c="git -C $repo_loc"
 
-append_bmark(){ printf "%*s %4s %s\n" -24 "$1" "$2" "$3" >> $bmark_loc; }
-sort_bmark(){ sort $bmark_loc -o $bmark_loc; }
+append_bmark(){ printf "%*s %4s %s\n" -24 "$1" "$2" "$3" >> $bmark_bookmarks; }
+sort_bmark(){ sort $bmark_bookmarks -o $bmark_bookmarks; }
 add_bmark(){
-	if grep -qw "^$1" $bmark_loc; then
+	if grep -qw "^$1" $bmark_bookmarks; then
 		err "$1 already exists"
 	else
 		read -p "Is this an app [y/N] " ans
@@ -28,8 +25,8 @@ add_bmark(){
 	fi
 }
 rm_bmark(){
-	if grep -qw "^$1" $bmark_loc; then
-		sed "/^$1/d" -i $bmark_loc
+	if grep -qw "^$1" $bmark_bookmarks; then
+		sed "/^$1/d" -i $bmark_bookmarks
 		succ "$1 deleted"
 		sort_bmark
 	else
@@ -37,7 +34,7 @@ rm_bmark(){
 	fi
 }
 cp_bmark(){
-	is_there="$(grep -w "^$1" $bmark_loc)"
+	is_there="$(grep -w "^$1" $bmark_bookmarks)"
 	if [ -n "$is_there" ]; then
 		echo "$(echo "$is_there" | awk '{ print $3 }')" \
 			| xclip -sel c
@@ -47,7 +44,7 @@ cp_bmark(){
 	fi
 }
 open_bmark(){
-	is_there="$(grep -w "^$1" $bmark_loc)"
+	is_there="$(grep -w "^$1" $bmark_bookmarks)"
 	if [ -n "$is_there" ]; then
 		url="$(echo "$is_there" | awk '{ print $3 }')"
 		if echo "$is_there" | grep -wq 'app'; then
@@ -60,42 +57,15 @@ open_bmark(){
 	fi
 }
 
-clone_repo(){
-	if [ -f "$HOME"/.ssh/id*.pub ]; then
-		git -C $repo_parent_loc clone $repo
-	fi
-}
-push_repo(){
-	if $git_c status | grep -q 'modified'; then
-		$git_c commit -m "$1" \
-		&& $git_c push
-	else
-		succ "Nothing to commit"
-	fi
-}
-status_repo(){ $git_c status -v; }
+[ ! -d $bmark_loc ] && mkdir -p $bmark_loc
+[ ! -f $bmark_bookmarks ] && touch $bmark_bookmarks
 
-if $git_c status | grep -q 'modified'; then
-	$git_c add -u
-fi
-if [ ! -d $repo_loc ]; then
-	err "$bmark_loc does not exist"
-	read -p "Would you like to clone it? [Y/n]" ANS
-	case "$ANS" in
-		[yY]*) clone_repo ;;
-		[nN]*) exit 1 ;;
-		*) clone_repo ;;
-	esac
-fi
 case "$1" in
 	add) shift; add_bmark "$1" "$2";;
 	rm) shift; rm_bmark "$1" ;;
-	edit) $EDITOR $bmark_loc; sort_bmark ;;
-	clone) clone_repo ;;
-	status) status_repo ;;
-	push) shift; push_repo "$1" ;;
+	edit) $EDITOR $bmark_bookmarks; sort_bmark ;;
 	cp) shift; cp_bmark "$1" ;;
-	list) cat $bmark_loc ;;
+	list) cat $bmark_bookmarks ;;
 	open) shift; open_bmark "$1" ;;
 	*) err "Invalid argument" ;;
 esac
