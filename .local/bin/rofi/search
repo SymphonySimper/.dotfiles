@@ -17,6 +17,7 @@ dribble_url='https://dribbble.com/search/'
 pexels_url='https://www.pexels.com/search/'
 unsplash_url='https://unsplash.com/s/photos/'
 superbolter_url='https://www.superbolter.com/search/'
+wiby_url='https://wiby.me/?q='
 
 # Primary search engine
 s_url="$duckduckgo_url"
@@ -30,6 +31,7 @@ search_engine(){
 		$BROWSER "${s_url}${@}" > /dev/null 2>&1 &
 	fi
 }
+
 if [ -z "$@" ]; then
 	[ -f $search_history ] && tac $search_history
 else
@@ -43,6 +45,7 @@ else
 		*\;d*) search_websites "${duckduckgo_url}" 'd' "$@" ;;
 		*\;g*) search_websites "${google_url}" 'g' "$@" ;;
 		*\;p*) search_websites "${pexels_url}" 'p' "$@" ;;
+		*\;w*) search_websites "${wiby_url}" 'w' "$@" ;;
 		*\;u*) search_websites "${unsplash_url}" 'u' "$@" ;;
 		# *\;p*) search_websites "${pling_url}" 'p' "$@" ;;
 		# *\;s*) search_websites "${startpage_url}" 's' "$@" ;;
