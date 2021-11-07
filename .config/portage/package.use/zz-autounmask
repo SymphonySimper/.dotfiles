@@ -370,3 +370,9 @@
 # required by media-gfx/blender-2.93.0-r1::gentoo[ffmpeg]
 # required by blender (argument)
 >=media-video/ffmpeg-4.4-r1 mp3 theora jpeg2k vpx xvid vorbis opus
+# required by virtual/libcrypt-2::gentoo
+# required by sys-libs/pam-1.5.1_p20210622-r1::gentoo
+# required by sys-apps/shadow-4.9-r3::gentoo[pam]
+# required by net-misc/openssh-8.6_p1-r2::gentoo
+# required by @__auto_slot_operator_replace_installed__ (argument)
+>=sys-libs/libxcrypt-4.4.25 abi_x86_32

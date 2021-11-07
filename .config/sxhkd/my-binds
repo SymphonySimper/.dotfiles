@@ -67,6 +67,10 @@ alt + w
 alt + shift + space
 	dunstctl action
 
+# Play copied url
+alt + shift + m
+	prime-run $VIDEO_PLAYER "$(xclip -selection clipboard -o)"
+
 # sxhkd
 alt + Escape
 	re-key

@@ -8,8 +8,3 @@ alt + x
 alt + shift + x
 	bspc node -f west; \
 	bspc node -z right +400 0
-
-# Play copied url
-alt + shift + m
-	bspc desktop -f '^5'; \
-	prime-run $VIDEO_PLAYER "$(xclip -selection clipboard -o)"
