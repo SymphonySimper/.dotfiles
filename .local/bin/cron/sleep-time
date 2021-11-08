@@ -3,7 +3,10 @@
 . "$HOME"/.zprofile
 
 sound-efx &
-query=$(echo 'yah\nnah' | rofi -dmenu -p 'Are you going to sleep?' \
-	-mesg "Its $(date '+%r')" -no-custom)
 
-[ "$query" = 'yah' ] && $PERM poweroff
+while :;do
+	query=$(echo 'yah\nnah' | rofi -dmenu -p 'Are you going to sleep?' \
+		-mesg "Its $(date '+%r')" -no-custom)
+
+	[ "$query" = 'yah' ] && $PERM poweroff || sleep 30m
+done

@@ -4,14 +4,15 @@
     "vault.bitwarden.com",
     "gitlab.com",
     "github.com",
-    "open.spotify.com"
+    "open.spotify.com",
+    "hotstar.com"
   ],
   "cache": true,
   "custom": {},
   "exactMatch": false,
   "faqs": true,
   "json-forced": false,
-  "json-guid": "0e5aecdf-c76e-4467-995d-eb23bdd05625",
+  "json-guid": "62152d97-b10f-4fa9-a378-0eb122e45269",
   "last-update": 1633538266600,
   "log": true,
   "mode": "blacklist",

@@ -6,6 +6,5 @@ XAUTHORITY=/run/user/1000/Xauthority
 
 0 0 */4 * * gen-hosts update
 0 0 */4 * * gen-firfox update
-0 23 * * * sleep-time
-30 23 * * * sleep-time
+0 22 * * * sleep-time
 # */30 * * * * newsboat -x reload
