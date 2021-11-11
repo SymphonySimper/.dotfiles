@@ -30,6 +30,7 @@ bspc rule -a Zathura state=tiled
 bspc rule -a Firefox desktop='^2' follow=on
 bspc rule -a LibreWolf desktop='^2' follow=on
 bspc rule -a mpv desktop='^5' follow=on
+bspc rule -a Com.github.xournalpp.xournalpp desktop='^5' follow=on
 bspc rule -a Signal desktop='^6'
 bspc rule -a discord desktop='^6'
 bspc rule -a *:www.figma.com desktop='^7'

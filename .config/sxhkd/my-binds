@@ -63,6 +63,11 @@ alt + F11
 alt + w
 	$TERMINAL -e $EDITOR $VIMWIKI/index.wiki
 
+# xournalpp
+alt + n
+	rofi -modi "Notes:$HOME/.local/bin/rofi/notes" \
+	-show 'Notes' -no-custom
+
 # dunst
 alt + shift + space
 	dunstctl action

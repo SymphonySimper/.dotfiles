@@ -1,0 +1,10 @@
+#!/bin/sh
+
+loc="$HOME"/importantnt/notes
+files="$(find $loc -name '*.xopp' -type f)"
+
+if [ -z "$@" ]; then
+	echo "$files" | awk -F '/' '{ print $NF }'
+else
+	xournalpp "$(echo "$files" | grep "$@")" > /dev/null 2>&1 &
+fi

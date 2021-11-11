@@ -2,7 +2,8 @@
 
 # To launch coidng time
 alt + x
-	rofi -show coding-time -modi "coding-time:$HOME/.local/bin/bspwm/coding-time" -no-custom
+	rofi -modi "Coding time:$HOME/.local/bin/bspwm/coding-time" \
+	-show 'Coding time' -no-custom
 
 # To resize left side window to approx 70%
 alt + shift + x
