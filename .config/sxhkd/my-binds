@@ -1,54 +1,54 @@
 # Open Terminal
-alt + {Return,shift + Return}
+super + {Return,shift + Return}
  	{$TERMINAL,$SECOND_TERMINAL}
 
 # Open Browser
-alt + shift + f
+super + shift + f
 	$BROWSER
 
 # Open Lf
-alt + f
+super + f
 	$TERMINAL -e lfp
 
 # Volume
-alt + {F2,F3,F4,shift + F2,shift + F3}
+super + {F2,F3,F4,shift + F2,shift + F3}
 	volume -{d,u,m,D,U}
-alt + F12
+super + F12
 	$TERMINAL -e pulsemixer
 
 # Music
-alt + {F1,shift + F1}
+super + {F1,shift + F1}
 	{play-bg,bmark open spotify}
 
 # Get work done
-alt + shift + F12
+super + shift + F12
 	$TERMINAL -e gen-hosts
 
 # Brightness
-alt + {F5,F6}
+super + {F5,F6}
 	brightness -{u,d}
 
 # Picom
-alt + shift + p
+super + shift + p
 	game-mode
 
 # Rofi
-alt + {space,s,e,r,a}
+super + {space,s,e,r,a}
 	rofi-{run,open,edit,todo,play}
-alt + shift + q
+super + shift + q
 	rofi -modi "Power Options:$HOME/.local/bin/rofi/power-options" \
 	-show 'Power Options'
 
 # Screenshot
-alt + shift + {s,a}
+super + shift + {s,a}
 	screenshot -{r,w}
 Print
 	screenshot -s
 
 # My info
-alt + b
+super + b
 	my-info
-alt + shift + b
+super + shift + b
 	goals
 
 # Screenkey
@@ -56,26 +56,26 @@ XF86Calculator
 	typin
 
 # htop
-alt + F11
+super + F11
 	$TERMINAL -e htop
 
 # vimwiki
-alt + w
+super + w
 	$TERMINAL -e $EDITOR $VIMWIKI/index.wiki
 
 # xournalpp
-alt + n
+super + n
 	rofi -modi "Notes:$HOME/.local/bin/rofi/notes" \
 	-show 'Notes' -no-custom
 
 # dunst
-alt + shift + space
+super + shift + space
 	dunstctl action
 
 # Play copied url
-alt + shift + m
+super + shift + m
 	prime-run $VIDEO_PLAYER "$(xclip -selection clipboard -o)"
 
 # sxhkd
-alt + Escape
+super + Escape
 	re-key

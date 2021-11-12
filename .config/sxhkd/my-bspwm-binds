@@ -1,11 +1,11 @@
 # My bspwm binds
 
 # To launch coidng time
-alt + x
+super + x
 	rofi -modi "Coding time:$HOME/.local/bin/bspwm/coding-time" \
 	-show 'Coding time' -no-custom
 
 # To resize left side window to approx 70%
-alt + shift + x
+super + shift + x
 	bspc node -f west; \
 	bspc node -z right +400 0
