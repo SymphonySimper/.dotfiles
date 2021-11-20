@@ -1,3 +1,4 @@
+blender                  .local/bin/aliases/blender
 bmark                    .local/bin/bmark
 brightness               .local/bin/brightness
 coding-time              .local/bin/bspwm/coding-time
