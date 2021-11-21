@@ -8,6 +8,9 @@ pv="$READER"
 te="$EDITOR"
 h="$SWALLOW"
 dis="fzf"
+vg="inkscape"
+nt="xournalpp"
+td="blender"
 
 #Paths
 what_img="$HOME/dl/What"*
@@ -25,6 +28,9 @@ main() {
 		*.pdf ) $h $pv "$1" ;;
 		*.svg ) $BROWSER "$1" ;;
 		*.img ) my-qemu "$1" ;;
+		*.svg | *.eps | *.ai ) $h $vg "$1" ;;
+		*.xopp ) $h $nt "$1" ;;
+		*.blend ) $h $USE_GPU $td "$1" ;;
 		-a) ls | grep  'jpeg\|jpg\|png\|webp' | $h $iv -t - ;;
 		-w) $h $iv $what_img ;;
 		-f) $h $vf /dev/video0 ;;
