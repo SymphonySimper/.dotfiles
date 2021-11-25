@@ -13,7 +13,7 @@ is_doc(){ grep -i 'rust\|computer-network' $temp_file; }
 open_doc(){
 	case "$(is_doc)" in
 		'rust') view_doc "$HOME"/lifeisfun/rust/rust-lang.pdf ;;
-		'computer-network') view_doc "$HOME"/importantnt/notes/sem5/cnl/cnl-manual.pdf ;;
+		'computer-network') view_doc "$HOME"/importantnt/ebooks/notes/sem5/cnl/cnl-manual.pdf ;;
 	esac
 }
 open_terminals(){
