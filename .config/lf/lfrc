@@ -3,26 +3,11 @@ set shell sh
 set previewer ~/.local/bin/lf/lf-previewer
 set cleaner ~/.local/bin/lf/lf-clear-img
 
+# |-----------------|
+# | Custom Commands |
+# |-----------------|
+
 cmd open ${{ v "$f" }}
-
-## Unbind defaults
-map c
-map d
-
-## Changed defaults
-# def c
-map C clear
-# def d
-map x cut
-
-## My binds
-map dr ${{ ~/.local/bin/lf/lf-dr-file "$fx" }}
-
-# basic functions
-map . :set hidden!
-map DD delete
-
-source ~/.config/lf/lf-folders
 
 %{{
     w=$(tput cols)
@@ -34,3 +19,30 @@ source ~/.config/lf/lf-folders
         lf -remote "send $id set ratios 1:2:3:5"
     fi
 }}
+
+cmd mkdir %{{
+	read -p "Dir name: " ans
+	mkdir $ans
+}}
+
+# |----------|
+# | My binds |
+# |----------|
+
+## Unbind defaults
+map c
+map d
+
+## Changed defaults
+# def c
+map C clear
+# def d
+map x cut
+
+map dr ${{ ~/.local/bin/lf/lf-dr-file "$fx" }}
+
+# basic functions
+map . :set hidden!
+map DD delete
+
+source ~/.config/lf/lf-folders
