@@ -1,5 +1,7 @@
 #!/bin/sh
 
+printf "\000use-hot-keys\037true\n"
+
 loc="$HOME"/importantnt/notes
 files="$(find $loc -name '*.xopp' -type f)"
 
