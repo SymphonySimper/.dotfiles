@@ -9,6 +9,8 @@ set cleaner ~/.local/bin/lf/lf-clear-img
 
 cmd open ${{ v "$f" }}
 
+cmd open_sep %{{ $TERMINAL -e v $f }}
+
 %{{
     w=$(tput cols)
     if [ $w -le 80 ]; then
@@ -41,8 +43,11 @@ map x cut
 
 map dr ${{ ~/.local/bin/lf/lf-dr-file "$fx" }}
 
-# basic functions
+## Basic functions
 map . :set hidden!
 map DD delete
+
+# Open files with v in seperate terminals
+map <enter> open_sep
 
 source ~/.config/lf/lf-folders
