@@ -63,13 +63,13 @@ hi QuickScopeSecondary guifg='#FF3333' gui=underline term=bold
 
 " vimwiki
 let g:vimwiki_list = [{'path': "$VIMWIKI",
-                      \ 'path_html': "$XDG_DATA_HOME/mywiki_html",
+                      \ 'path_html': "$XDG_DATA_HOME/mywiki-html",
 					  \ 'auto_diary_index':1}]
 autocmd BufEnter diary.wiki :VimwikiDiaryGenerateLinks
 
-autocmd FileType vimwiki inoremap <buffer><CR>
+autocmd FileType vimwiki inoremap <silent><buffer><CR>
             \ <C-]><Esc>:VimwikiReturn 3 5<CR>
-autocmd FileType vimwiki inoremap <buffer><C-K>
+autocmd FileType vimwiki inoremap <silent><buffer><C-K>
               \ <Esc>:VimwikiReturn 2 2<CR>
 
 " |---------------|

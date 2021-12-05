@@ -75,7 +75,7 @@ export ATOM_HOME="$XDG_DATA_HOME"/atom
 # My loc exports
 export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
 # export STARSHIP_CONFIG="$HOME"/.config/starship/config.toml
-export VIMWIKI="$XDG_DATA_HOME"/vimwiki
+export VIMWIKI="$XDG_DATA_HOME"/mywiki
 
 
 [ -f "$XDG_DATA_HOME"/cargo/env ] && . "$XDG_DATA_HOME"/cargo/env
