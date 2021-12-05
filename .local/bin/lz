@@ -76,6 +76,24 @@ delete_file(){
 	fi
 }
 
+yank(){
+	to_cp="$h/$(grep -w "^$2." "$h/$1" | awk '{ print $2 }')"
+	cat $to_cp | yoink
+}
+yank_file(){
+	ifPresent(){ grep -wq "^$1." "$h/$2"; }
+	msg="has been copied to clipboard"
+	if ( ifPresent "$1" "$bin_paths" ); then
+		yank "$bin_paths" "$1" \
+	    && err "$1 $msg $h/$bin"
+	elif ( ifPresent "$1" "$shell_paths" ); then
+		yank "$shell_paths" "$1"
+		err "$1 $msg $h/$shell"
+	else
+		err "$1 not found"
+	fi
+}
+
 case "$1" in
 	-a) shift; create_bin_file "$bin_aliases" "$1" ;;
 	-r) shift; create_bin_file "$bin_rofi" "$1" ;;
@@ -85,5 +103,6 @@ case "$1" in
 	-c) shift; create_bin_file "$bin_cron" "$1" ;;
 	-sh) shift; create_shell_file "$1" ;;
 	-d) shift; delete_file "$1" ;;
+	-cp) shift; yank_file "$1" ;;
 	*) create_bin_file "$bin" "$1" ;;
 esac

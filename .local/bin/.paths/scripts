@@ -26,6 +26,7 @@ lz                       .local/bin/lz
 mnt-dev                  .local/bin/mnt-dev
 my-info                  .local/bin/my-info
 my-qemu                  .local/bin/my-qemu
+mywiki                   .local/bin/mywiki
 notes                    .local/bin/rofi/notes
 open-appimage            .local/bin/rofi/open-appimage
 open-bmark               .local/bin/rofi/open-bmark
@@ -56,4 +57,5 @@ typin                    .local/bin/aliases/typin
 unix                     .local/bin/unix
 v                        .local/bin/v
 volume                   .local/bin/volume
+yoink                    .local/bin/yoink
 ytd                      .local/bin/ytd

@@ -70,7 +70,10 @@ autocmd BufEnter diary.wiki :VimwikiDiaryGenerateLinks
 autocmd FileType vimwiki inoremap <silent><buffer><CR>
             \ <C-]><Esc>:VimwikiReturn 3 5<CR>
 autocmd FileType vimwiki inoremap <silent><buffer><C-K>
-              \ <Esc>:VimwikiReturn 2 2<CR>
+            \ <Esc>:VimwikiReturn 2 2<CR>
+autocmd FileType vimwiki nnoremap <silent><buffer><leader>h
+			\ <Esc>:VimwikiAll2HTML<CR>
+" autocmd BufWritePost *.wiki :VimwikiAll2HTML
 
 " |---------------|
 " | Line commands |

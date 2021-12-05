@@ -1,8 +1,8 @@
 # Copy contents of a file to clipboard
-yoink(){
-	[ -p /dev/stdin ] && cat | xclip -sel c \
-	|| xclip -sel c < $@
-}
+# yoink(){
+# 	[ -p /dev/stdin ] && cat | xclip -sel c \
+# 	|| xclip -sel c < $@
+# }
 ourimg(){ xclip -sel c -t image/png < "$1"; }
 
 # git

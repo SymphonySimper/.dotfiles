@@ -1,0 +1,52 @@
+#!/bin/sh
+
+err(){ echo $(syl r;syl B)$@$(syl R); }
+
+if [ ! -z "$@" ]; then
+	git_c='git -C'
+
+	repos=$(mktemp)
+	while read -r r; do
+		echo $r >> $repos
+	done <<- EOF
+	$VIMWIKI
+	$XDG_DATA_HOME/mywiki-ui-ux
+	$XDG_DATA_HOME/mywiki-html
+	EOF
+
+	for_repos(){
+		for r in $(cat $repos); do
+			if ! $git_c $r status | grep -q 'nothing to commit'; then
+				$git_c $r $@
+				echo
+			fi
+		done
+	}
+	repo_status=$(for_repos 'status')
+
+	wiki_status(){ [ -z "$repo_status" ] && echo "Nothing to commit" || for_repos 'status'; }
+	wiki_push(){
+		[ -z "$repo_status" ] && { echo "Nothing to push"; return 1; }
+
+		read -p 'Give a commit message: ' msg
+		if [ -z "$msg" ]; then
+			err "No msg found!"
+		else
+			for_repos 'add' '.'
+			for_repos 'commit' '-m' "$msg"
+			for_repos 'push'
+		fi
+	}
+
+	case "$@" in
+		status) wiki_status ;;
+		push) wiki_push ;;
+		edit)
+			wiki="$VIMWIKI"/index.wiki
+			$EDITOR $wiki
+			$EDITOR $wiki -c VimwikiAll2HTML -c q
+			;;
+	esac
+else
+	err 'Pass some arguments(status, push, edit)'
+fi

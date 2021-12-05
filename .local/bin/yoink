@@ -1,0 +1,3 @@
+#!/bin/sh
+[ -p /dev/stdin ] && cat | xclip -sel c \
+|| xclip -sel c < $@
