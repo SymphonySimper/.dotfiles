@@ -67,6 +67,11 @@ let g:vimwiki_list = [{'path': "$VIMWIKI",
 					  \ 'auto_diary_index':1}]
 autocmd BufEnter diary.wiki :VimwikiDiaryGenerateLinks
 
+autocmd FileType vimwiki inoremap <buffer><CR>
+            \ <C-]><Esc>:VimwikiReturn 3 5<CR>
+autocmd FileType vimwiki inoremap <buffer><C-K>
+              \ <Esc>:VimwikiReturn 2 2<CR>
+
 " |---------------|
 " | Line commands |
 " |---------------|
