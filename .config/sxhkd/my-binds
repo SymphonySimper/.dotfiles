@@ -61,7 +61,7 @@ super + F11
 
 # vimwiki
 super + w
-	$TERMINAL -e $EDITOR $VIMWIKI/index.wiki
+	$TERMINAL -e mywiki edit
 
 # xournalpp
 super + n
