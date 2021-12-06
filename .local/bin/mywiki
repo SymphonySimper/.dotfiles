@@ -17,24 +17,29 @@ if [ ! -z "$@" ]; then
 	for_repos(){
 		for r in $(cat $repos); do
 			if ! $git_c $r status | grep -q 'nothing to commit'; then
-				$git_c $r $@
-				echo
+				case "$1" in
+					status) $git_c $r status ;;
+					push)
+						shift
+						$git_c $r add .
+						$git_c $r commit -m "$@"
+						$git_c $r push
+						;;
+				esac
 			fi
 		done
 	}
-	repo_status=$(for_repos 'status')
+	repo_status=$(for_repos status)
 
-	wiki_status(){ [ -z "$repo_status" ] && echo "Nothing to commit" || for_repos 'status'; }
+	wiki_status(){ [ -z "$repo_status" ] && echo "Nothing to commit" || for_repos status; }
 	wiki_push(){
 		[ -z "$repo_status" ] && { echo "Nothing to push"; return 1; }
 
-		read -p 'Give a commit message: ' msg
+		IFS= read -r -p 'Give a commit message: ' msg
 		if [ -z "$msg" ]; then
 			err "No msg found!"
 		else
-			for_repos 'add' '.'
-			for_repos 'commit' '-m' "$msg"
-			for_repos 'push'
+			for i in $(seq $(cat $repos | wc -l)); do for_repos push "$msg"; done
 		fi
 	}
 
