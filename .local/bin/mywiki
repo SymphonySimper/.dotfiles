@@ -10,7 +10,7 @@ if [ ! -z "$@" ]; then
 		echo $r >> $repos
 	done <<- EOF
 	$VIMWIKI
-	$XDG_DATA_HOME/mywiki-ui-ux
+	$XDG_DATA_HOME/mywiki-ui-ux-private
 	$XDG_DATA_HOME/mywiki-html
 	EOF
 
