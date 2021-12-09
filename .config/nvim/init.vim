@@ -37,6 +37,7 @@ Plug 'Jorengarenar/vim-MvVis'
 Plug 'unblevable/quick-scope'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'vimwiki/vimwiki'
+Plug 'mattn/calendar-vim'
 
 call plug#end()
 
@@ -76,6 +77,24 @@ autocmd FileType vimwiki inoremap <silent><buffer><C-K>
 autocmd FileType vimwiki nnoremap <silent><buffer><leader>h
 			\ <Esc>:VimwikiAll2HTML<CR>
 " autocmd BufWritePost *.wiki :VimwikiAll2HTML
+" calendar integration for vimwiki
+
+au BufRead,BufNewFile *.wiki set filetype=vimwiki
+:autocmd FileType vimwiki map <leader>d :VimwikiMakeDiaryNote<CR>
+function! ToggleCalendar()
+  execute ":Calendar"
+  if exists("g:calendar_open")
+    if g:calendar_open == 1
+      execute "q"
+      unlet g:calendar_open
+    else
+      g:calendar_open = 1
+    end
+  else
+    let g:calendar_open = 1
+  end
+endfunction
+:autocmd FileType vimwiki map <leader>ca :call ToggleCalendar()<CR>
 
 " |---------------|
 " | Line commands |
