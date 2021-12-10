@@ -36,12 +36,14 @@ notify_date(){ $notify -h string:x-dunst-stack-tag:my-date -i "$date_i" "$get_da
 
 notify_time(){ $notify -h string:x-dunst-stack-tag:my-time -i "$clock_i" "$get_time" "$(uptime -p)"; }
 list_todo(){
-	temp_file=$(mktemp)
-	while read -r line; do
-		echo "+ $line" >> $temp_file
-	done < $todo_loc
-	$notify -h string:x-dunst-stack-tag:todo "TODO" "$(cat $temp_file)"
-	rm $temp_file
+	if [ -n "$(cat $todo_loc)" ]; then
+		temp_file=$(mktemp)
+		while read -r line; do
+			echo "+ $line" >> $temp_file
+		done < $todo_loc
+			$notify -h string:x-dunst-stack-tag:todo "TODO" "$(cat $temp_file)"
+		rm $temp_file
+	fi
 }
 get_mode(){
 	notify_mode(){

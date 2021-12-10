@@ -4,4 +4,4 @@ p="$HOME"/.local/bin
 todo="$p"/rofi/todo
 timer="$p"/rofi/r-timer
 
-rofi -modi "todo:$todo,timer:$timer" -show todo
+rofi -modi "todo:$todo,timer:$timer" -show timer
