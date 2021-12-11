@@ -1,6 +1,6 @@
 # Helper functions
 is_present_prog(){
-	if which $1 | grep -q 'not found'; then
+	if [ -z "$(command -v $1)" ] ; then
 		return 1
 	else
 		return 0

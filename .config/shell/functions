@@ -95,7 +95,14 @@ letmein(){
 }
 
 # Hey yo internet
-hey_yo_int(){ while sleep 30s; ping -c 3 gnu.org; [ $? -ne 0 ]; do true; done && sound-efx; }
+hey_yo_int(){
+	is_int="$(ping -c 3 gnu.org 2> /dev/null)"
+	if [ -z "$is_int" ]; then
+		while sleep 30s; ping -c 3 gnu.org; [ $? -ne 0 ]; do true; done && sound-efx;
+	else
+		echo "$is_int"
+	fi
+}
 
 # mkdir and cd
 mcd(){ mkdir -p "$1" && cd "$1"; }

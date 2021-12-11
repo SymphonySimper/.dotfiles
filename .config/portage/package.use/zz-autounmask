@@ -376,3 +376,8 @@
 # required by net-misc/openssh-8.6_p1-r2::gentoo
 # required by @__auto_slot_operator_replace_installed__ (argument)
 >=sys-libs/libxcrypt-4.4.25 abi_x86_32
+# required by gnome-base/gnome-keyring-40.0::gentoo
+# required by virtual/secret-service-0::gentoo
+# required by app-crypt/libsecret-0.20.4-r1::gentoo
+# required by libsecret (argument)
+>=app-crypt/gcr-3.40.0 gtk
