@@ -22,8 +22,10 @@ open_img(){
 	-vga $vga -display $dis -device $aud
 }
 
+show_help(){ echo "-i - create image [file name] [size]\n-c - create iso [iso] [img]"; }
 case "$1" in
 	-i) shift; create_image "$1" "$2" ;;
 	-c) shift; create_iso "$1" "$2" ;;
+	-h) show_help ;;
 	*) open_img "$1" ;;
 esac

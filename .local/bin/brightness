@@ -8,7 +8,14 @@ notify(){
 		"Brightness: $(get_b)" -h int:value:$(get_b)
 }
 
+toggle(){
+	l1=$1; l2=$2
+	[ $(get_b) -eq $l1 ] && { $app -set $l2 && notify; } \
+		|| { $app -set $l1 && notify; }
+}
+
 case "$1" in
 	-u) $app -inc 2 && notify ;;
 	-d) $app -dec 2 && notify ;;
+	-t) shift; toggle $1 $2 ;;
 esac

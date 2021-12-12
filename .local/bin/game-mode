@@ -26,13 +26,14 @@ handle_picom(){
 		&& $notify -i $warning_i "Picom is dead"
 	fi
 }
+handle_brightness(){ brightness -t 10 100; }
 
-options(){ printf "%s\n%s\n%s\n" 'toggle' 'toggle-picom'; }
-# query=$(options | rofi -dmenu -p 'Game-mode')
-#
-# case "$query" in
-# 	toggle) toggle ;;
-# 	toggle-picom) handle_picom ;;
-# esac
+options(){ printf "%s\n%s\n%s\n" 'picom and brightness' 'toggle picom' 'brightness'; }
+query=$(options | rofi -dmenu -p 'Game-mode')
 
-handle_picom
+case "$query" in
+	# toggle) toggle ;;
+	'toggle picom') handle_picom ;;
+	'picom and brightness') handle_picom && handle_brightness ;;
+	'brightness') handle_brightness ;;
+esac
