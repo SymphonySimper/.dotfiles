@@ -16,6 +16,8 @@ lf							.config/lf/lfrc
 mpv							.config/mpv/mpv.conf
 my-binds					.config/sxhkd/my-binds
 my-bspwm-binds				.config/sxhkd/my-bspwm-binds
+newsboat-config				.config/newsboat/config
+newsboat-urls				.config/newsboat/urls
 nvim-color					.config/nvim/colors/the-black.vim
 nvim						.config/nvim/init.vim
 picom						.config/picom/picom.conf

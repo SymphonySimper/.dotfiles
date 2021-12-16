@@ -64,9 +64,13 @@ super + w
 	$TERMINAL -e mywiki edit
 
 # xournalpp
-super + n
+super + shift + n
 	rofi -modi "Notes:$HOME/.local/bin/rofi/notes" \
 	-show 'Notes' -no-custom
+
+# RSS
+super + n
+	$TERMINAL -e $RSS_READER
 
 # dunst
 super + shift + space
