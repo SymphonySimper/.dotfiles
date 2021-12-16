@@ -381,3 +381,11 @@
 # required by app-crypt/libsecret-0.20.4-r1::gentoo
 # required by libsecret (argument)
 >=app-crypt/gcr-3.40.0 gtk
+# required by games-util/steam-client-meta-0-r20210804::steam-overlay[video_cards_nvidia]
+# required by games-util/steam-meta-0-r20160817::steam-overlay
+# required by @selected
+# required by @world (argument)
+=x11-drivers/nvidia-drivers-470.86-r2 abi_x86_32
+# required by x11-misc/urxvt-font-size-1.3::gentoo
+# required by urxvt-font-size (argument)
+>=x11-terms/rxvt-unicode-9.26-r2 perl
