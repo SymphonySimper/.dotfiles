@@ -19,7 +19,7 @@ cga(){ config add $@; }
 cgrm(){ config rm $@ --cached; }
 cgamp(){
 	config add -u \
-	&& config commit \
+	&& [ -z "$@" ] && config commit || config commit -m "$@" \
 	&& config push
 }
 
