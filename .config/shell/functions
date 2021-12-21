@@ -10,7 +10,7 @@ ga(){ git add $@; }
 grm(){ git rm $@ --cached; }
 gamp(){
 	git add -u \
-	&& git commit \
+	&& [ -z "$@" ] && git commit || git commit -m "$@" \
 	&& git push
 }
 
