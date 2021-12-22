@@ -3,6 +3,7 @@ bmark                    .local/bin/bmark
 brightness               .local/bin/brightness
 coding-time              .local/bin/bspwm/coding-time
 configs                  .local/bin/.paths/configs
+dirc                     .local/bin/dirc
 edit-configs             .local/bin/rofi/edit-configs
 edit-scripts             .local/bin/rofi/edit-scripts
 edit-shell               .local/bin/rofi/edit-shell
