@@ -21,7 +21,7 @@ clone_repo(){
 }
 
 del_loop(){
-	echo "\nRemoving comments..."
+	printf "\nRemoving comments...\n"
 	for f in $(find $f_path -type f ! -path '*.git/*' ! -name '.gitignore' ! -name 'install-script'); do
 		case "$f" in
 			*.c) sed '/\/\//d' -i $f ;;
