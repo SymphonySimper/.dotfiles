@@ -115,6 +115,11 @@ zle -N zle-line-init
 echo -ne "$cursorBeam" # Use beam shape cursor on startup.
 preexec() { echo -ne "$cursorBeam" ;} # Use beam shape cursor for each new prompt.
 
+# this is to yank to system/primary clipboard in vi mode
+vi-yank-xclip() { zle vi-yank; echo "$CUTBUFFER" | yoink; }
+zle -N vi-yank-xclip
+bindkey -M vicmd 'y' vi-yank-xclip
+
 # Use lf to switch directories and bind it to ctrl-o
 lfcd () {
     tmp="$(mktemp)"
