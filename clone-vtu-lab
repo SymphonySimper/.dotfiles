@@ -1,0 +1,88 @@
+#!/bin/sh
+
+repo_url="https://github.com/SymphonySimper/vtu-lab.git"
+repo_zip_url="https://github.com/SymphonySimper/vtu-lab/archive/refs/heads/main.zip"
+
+c_path=$(pwd)
+f_path="$c_path"/vtu-lab
+x_path="$c_path"/vtu-lab-main
+
+clone_zip_repo(){ unzip main.zip && mv -v "$x_path" "$f_path" && rm -v main.zip; }
+clone_repo(){
+	if [ -n "$(command -v git)" ]; then
+		git clone "$repo_url"
+	elif [ -n "$(command -v wget)" ]; then
+		wget "$repo_zip_url" \
+			&& clone_zip_repo
+	elif [ -n "$(command -v curl)" ]; then
+		curl -Lk "$repo_zip_url" > main.zip \
+			&& clone_zip_repo
+	fi
+}
+
+del_loop(){
+	echo "\nRemoving comments..."
+	for f in $(find $f_path -type f ! -path '*.git/*' ! -name '.gitignore' ! -name 'install-script'); do
+		case "$f" in
+			*.c) sed '/\/\//d' -i $f ;;
+			*.java) sed '/\/\//d' -i $f ;;
+		esac
+	done
+}
+del_comments(){
+	if [ ! -d "$f_path" ]; then
+		clone_repo
+		del_loop
+	else
+		echo "$f_path folder already exist"
+		read -p "Would you like to reomve it?[y/N]: " ans
+		case "$ans" in
+			[yY]*)
+				rm -rf "$f_path"
+				clone_repo
+				del_loop
+				;;
+			*)
+				read -p "Do you want to continue with rm comments?[y/N]: " ans
+				case $ans in
+					[yY]*) del_loop ;;
+					*) exit 1 ;;
+				esac
+				;;
+		esac
+	fi
+
+}
+
+main(){
+if ! echo $1 | grep -q '^[12]$'; then
+	echo 'Invalid choice!'
+else
+	case $1 in
+		1)
+			if [ ! -d "$f_path" ]; then
+				clone_repo
+			else
+				echo "$f_path folder already exist"
+				read -p "Would you like to reomve it?[y/N]: " ans
+				case "$ans" in
+					[yY]*)
+						rm -rf "$f_path"
+						clone_repo
+						;;
+					*) exit 1 ;;
+				esac
+			fi
+			;;
+		2) del_comments ;;
+	esac
+fi
+}
+
+if [ -z $1 ]; then
+	echo "1) with comments(recommended)\n2) without comments"
+	read -p 'Enter your choice[1/2]: ' type
+	main $type
+else
+	main $1
+fi
