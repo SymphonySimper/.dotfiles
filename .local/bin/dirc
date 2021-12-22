@@ -3,9 +3,9 @@
 term_cols=$(tput cols)
 term_cols_fn=$((term_cols - 34))
 
-find_dirs(){ find "$1" -maxdepth $2 -not -path . -type d; }
-find_files(){ find "$1" -maxdepth $2 -type f; }
-count(){ printf "$@" | wc -l; }
+find_dirs(){ find "$1" -maxdepth $2 -type d; }
+find_files(){ find "$1" -maxdepth $2 -not -type d; }
+count(){ [ -n "$@" ] && echo "$@" | wc -l || echo 0; }
 
 print_msg(){
 	printf "| %-*.*s | %-12s | %-12s |\n" $term_cols_fn $term_cols_fn "$1" "$2" "$3"
@@ -18,11 +18,12 @@ find_all_dirs_count(){
 	print_hr
 
 	while read -r d; do
-		dir_count=$(count "$(find_dirs "$d" $1)")
+		dir_count=$(( $(count "$(find_dirs "$d" $1)") - 1 ))
 		file_count=$(count "$(find_files "$d" $1)")
+		# echo $(count "$(find_files "$d" $1)")
 		print_msg "$d" $dir_count $file_count
 		total_dirs=$((total_dirs + dir_count))
-		total_files=$((total_files + $file_count))
+		total_files=$((total_files + file_count))
 	done <<- EOF
 	$(find_dirs . $1)
 	EOF
