@@ -7,9 +7,7 @@ find_dirs(){ find "$1" -maxdepth $2 -type d; }
 find_files(){ find "$1" -maxdepth $2 -not -type d; }
 count(){ [ -n "$@" ] && echo "$@" | wc -l || echo 0; }
 
-print_msg(){
-	printf "| %-*.*s | %-12s | %-12s |\n" $term_cols_fn $term_cols_fn "$1" "$2" "$3"
-}
+print_msg(){ printf "| %-*.*s | %-12s | %-12s |\n" $term_cols_fn $term_cols_fn "$1" "$2" "$3"; }
 print_hr(){ printf '%-*s\n' $term_cols ' ' | tr ' ' -; }
 
 find_all_dirs_count(){
@@ -20,7 +18,6 @@ find_all_dirs_count(){
 	while read -r d; do
 		dir_count=$(( $(count "$(find_dirs "$d" $1)") - 1 ))
 		file_count=$(count "$(find_files "$d" $1)")
-		# echo $(count "$(find_files "$d" $1)")
 		print_msg "$d" $dir_count $file_count
 		total_dirs=$((total_dirs + dir_count))
 		total_files=$((total_files + file_count))
@@ -35,4 +32,3 @@ find_all_dirs_count(){
 }
 
 [ -z "$1" ] && find_all_dirs_count 1 || find_all_dirs_count $1
-
