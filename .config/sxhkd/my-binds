@@ -2,13 +2,9 @@
 super + {Return,shift + Return}
  	{$TERMINAL,$SECOND_TERMINAL}
 
-# Open Browser
-super + shift + f
-	$BROWSER
-
-# Open Lf
-super + f
-	$TERMINAL -e lfp
+# Open Browser/ Lf
+super + {f, shift + f}
+	{$TERMINAL -e lfp,$BROWSER}
 
 # Volume
 super + {F2,F3,F4,shift + F2,shift + F3}
@@ -45,11 +41,9 @@ super + shift + {s,a}
 Print
 	screenshot -s
 
-# My info
-super + b
-	my-info
-super + shift + b
-	goals
+# My info/ goals
+super + {b,shift + b}
+	{my-info,goals}
 
 # Screenkey
 XF86Calculator
@@ -79,6 +73,10 @@ super + shift + space
 # Play copied url
 super + shift + m
 	prime-run $VIDEO_PLAYER "$(xclip -selection clipboard -o)"
+
+# bmark
+super + i
+	bmark open figma
 
 # sxhkd
 super + Escape

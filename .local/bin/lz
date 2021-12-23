@@ -28,6 +28,7 @@ err(){ echo "${bold}${1}${reset}"; }
 executable(){ chmod +x "$h/$1"; }
 add_path(){ printf "%*s %s\n" -24 "$1" "$2/$1" >> "$h/$3"; }
 sort_paths(){ sort "$h/$1" -o "$h/$1"; }
+# does_it_exist(){
 
 create_bin_file(){
 	if [ -f "$h/$1/$2" ]; then

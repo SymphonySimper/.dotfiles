@@ -1,6 +1,15 @@
 #!/bin/sh
 
-prgm='screenkey'
-startprgm(){ $prgm -s small --font-color grey --bg-color black --start-disabled -t 2 > /dev/null 2>&1 & }
+warning_i="$HOME"/.local/share/icons/general/warning.svg
 
-( pgrep "$prgm" ) && killall "$prgm" || startprgm
+prgm='screenkey'
+startprgm(){ $prgm -s small --font-color '#b9b9b9' --bg-color black --start-disabled -t 2 > /dev/null 2>&1 & }
+noti="dunstify -h string:x-dunst-stack-tag:typing"
+notify(){
+	case "$1" in
+		'on') $noti 'Screenkey alive' ;;
+		'off') $noti -i $warning_i 'Screenkey dead' ;;
+	esac
+}
+
+( pgrep "$prgm" ) && { killall "$prgm" && notify 'off'; } || { startprgm && notify 'on'; }
