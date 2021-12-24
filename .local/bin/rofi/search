@@ -19,6 +19,7 @@ unsplash_url='https://unsplash.com/s/photos/'
 superbolter_url='https://www.superbolter.com/search/'
 wiby_url='https://wiby.me/?q='
 protondb_url='https://www.protondb.com/search?q='
+gentoo_url='https://wiki.gentoo.org/index.php?title=Special%3ASearch&search='
 
 # Primary search engine
 s_url="$duckduckgo_url"
@@ -39,6 +40,7 @@ else
 	! grep -qw "^$@" $search_history && echo "$@" >> $search_history
 	case "$@" in
 		*\;dr*) search_websites "${dribble_url}" 'dr' "$@" ;;
+		*\;ge*) search_websites "${gentoo_url}" 'ge' "$@" ;;
 		*\;gh*) search_websites "${github_url}" 'gh' "$@" ;;
 		*\;go*) search_websites "${gogoanime_url}" 'go' "$@" ;;
 		*\;sb*) search_websites "${superbolter_url}" 'sb' "$@" ;;
