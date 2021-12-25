@@ -11,6 +11,9 @@ https://linuxjournal.com/node/feed "article"
 https://tecmint.com/feed "article"
 https://www.cyberciti.biz/feed/ "aricle"
 
+https://www.kernel.org/feeds/all.atom.xml "kernel.org"
+https://www.kernel.org/feeds/kdist.xml "kernel.org"
+
 # https://www.reddit.com/r/linux.rss "reddit"
 # https://www.reddit.com/r/bspwm.rss "reddit"
 # https://www.reddit.com/r/commandline.rss "reddit"

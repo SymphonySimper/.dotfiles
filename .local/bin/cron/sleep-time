@@ -6,7 +6,7 @@ sound-efx &
 
 while :;do
 	query=$(echo 'yah\nnah' | rofi -dmenu -p 'Are you going to sleep?' \
-		-mesg "Its $(date '+%r')" -no-custom)
+		-mesg "Its $(date -u '+%r')" -no-custom)
 
 	[ "$query" = 'yah' ] && $PERM poweroff || sleep 30m
 done

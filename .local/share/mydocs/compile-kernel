@@ -4,6 +4,7 @@ eselect kernel set
 cd /usr/src/linux
 make mrproper
 cp /home/s2b/.config/kernel/*.config .config
+make olddefconfig
 make -j13 menuconfig
 make -j13 modules_prepare
 make -j13 && make -j13 modules_install && make -j13 install
