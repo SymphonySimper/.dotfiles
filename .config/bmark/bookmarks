@@ -26,6 +26,7 @@ jaze                     site https://login.airfiber.co.in/customer_portal
 jtsi                     site https://meet.jit.si
 lapaninja                site https://www.lapa.ninja/
 linuxdie                 site https://linux.die.net/
+mywiki-local             site file:///home/s2b/.local/share/mywiki-html/index.html
 mywiki                   site https://symphonysimper.github.io/mywiki-html/
 pastebin                 site https://pastebin.com/u/SymphonySimper
 pling                    site https://www.pling.com/

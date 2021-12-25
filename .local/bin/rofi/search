@@ -20,6 +20,7 @@ superbolter_url='https://www.superbolter.com/search/'
 wiby_url='https://wiby.me/?q='
 protondb_url='https://www.protondb.com/search?q='
 gentoo_url='https://wiki.gentoo.org/index.php?title=Special%3ASearch&search='
+giphy_url='https://giphy.com/search/'
 
 # Primary search engine
 s_url="$duckduckgo_url"
@@ -42,6 +43,7 @@ else
 		*\;dr*) search_websites "${dribble_url}" 'dr' "$@" ;;
 		*\;ge*) search_websites "${gentoo_url}" 'ge' "$@" ;;
 		*\;gh*) search_websites "${github_url}" 'gh' "$@" ;;
+		*\;gi*) search_websites "${giphy_url}" 'gi' "$@" ;;
 		*\;go*) search_websites "${gogoanime_url}" 'go' "$@" ;;
 		*\;sb*) search_websites "${superbolter_url}" 'sb' "$@" ;;
 		*\;pb*) search_websites "${protondb_url}" 'pb' "$@" ;;
