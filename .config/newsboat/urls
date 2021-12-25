@@ -13,6 +13,7 @@ https://www.cyberciti.biz/feed/ "aricle"
 
 https://www.kernel.org/feeds/all.atom.xml "kernel.org"
 https://www.kernel.org/feeds/kdist.xml "kernel.org"
+http://lore.kernel.org/all/new.atom "kernel.org"
 
 # https://www.reddit.com/r/linux.rss "reddit"
 # https://www.reddit.com/r/bspwm.rss "reddit"
