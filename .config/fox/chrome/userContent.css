@@ -10,3 +10,7 @@
         background-color: #000000 !important;
     }
 }
+
+/*:host, :root{
+--in-content-page-background: #000000 !important;
+}*/

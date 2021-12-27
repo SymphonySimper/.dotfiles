@@ -38,12 +38,17 @@ Plug 'unblevable/quick-scope'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'vimwiki/vimwiki'
 Plug 'mattn/calendar-vim'
+Plug 'tpope/vim-surround'
+Plug 'takac/vim-hardtime'
 
 call plug#end()
 
 " |-----------------|
 " | Plugin Settings |
 " |-----------------|
+
+" Hardtime
+let g:hardtime_default_on = 1
 
 " Rust
 let g:rustfmt_autosave = 2
@@ -56,6 +61,10 @@ let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
+
+" Open fzf
+map <leader>s :BLines<CR>
+
 
 " Quick-Scope
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
@@ -132,9 +141,6 @@ nnoremap <silent> <C-t> :tabnew<CR>
 " |---------------|
 " | Leader combos |
 " |---------------|
-
-" Open fzf
-map <leader>s :BLines<CR>
 
 " To replace string
 map <leader>r :%s//g<Left><Left>
