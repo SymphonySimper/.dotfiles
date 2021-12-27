@@ -28,7 +28,7 @@ bat(){
 	fi
 }
 
-date_p="date -u"
+date_p="date"
 get_date_txt=$($date_p "+%A %B %Y")
 get_date=$($date_p "+%d/%m/%Y")
 get_time=$($date_p "+%r")
