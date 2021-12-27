@@ -34,9 +34,6 @@ fdocs(){
 	[ -f $loc/$query ] && $EDITOR $loc/$query
 }
 
-# Package manager
-is_there(){ equery list '*' | fzf; }
-
 # keybinds
 is_mybind(){ cat "$XDG_CONFIG_HOME/sxhkd/.sxhkdrc" | fzf; }
 
