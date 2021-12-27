@@ -30,7 +30,7 @@ alias elist='equery list "*" | less'
 
 # Program
 alias ls='ls --color=auto'
-alias l='exa'
+alias l='ls'
 alias vi='$EDITOR'
 alias vs='$PERM $EDITOR'
 alias vw='mywiki edit'
