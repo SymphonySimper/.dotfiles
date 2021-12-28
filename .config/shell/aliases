@@ -43,6 +43,11 @@ alias flex='neofetch'
 alias ytf='ytfzf -t'
 alias rofi_keys='rofi -show keys'
 
+# My scripts
+alias y='yoink'
+alias vdd='v -x "$HOME"/dl'
+alias vvm='v -x "$HOME"/importantnt/virtual-machine'
+
 # Tasks
 alias rm_cache='rm -rf ~/.cache/*'
 alias rm_me='rm -rf ~/.local/share/Trash/*'
@@ -64,10 +69,6 @@ alias ..='cd ..'
 alias jj='cd ~$(dirs -v | fzf | cut -f 1)'
 alias cdp='cd /etc/portage'
 alias cdk='cd /usr/src/linux'
-
-# Open files in download folders with v
-alias vdd='v -x "$HOME"/dl'
-alias vvm='v -x "$HOME"/importantnt/virtual-machine'
 
 # Stuff
 alias hex_a='less "$HOME"/.local/share/mydocs/hex-alpha'

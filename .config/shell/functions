@@ -138,7 +138,7 @@ video_to_gif(){
 }
 
 # to find a program is running or not
-is_alive(){ ps aux | grep "$@" | head -n 1; }
+is_alive(){ ps aux | grep "$@" | grep -v 'grep'; }
 
 # Package manager
 is_there(){
