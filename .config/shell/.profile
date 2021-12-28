@@ -1,20 +1,11 @@
 # Helper functions
-is_present_prog(){
-	if [ -z "$(command -v $1)" ] ; then
-		return 1
-	else
-		return 0
-	fi
-}
+is_present_prog(){ [ -z "$(command -v $1)" ] && return 1 || return 0; }
 select_default_prog(){
-	if is_present_prog "$2"; then
-		export "$1"="$2"
-	elif is_present_prog "$3"; then
-		export "$1"="$3"
-	elif [ -n "$4" ]; then
-		is_present_prog "$4" \
-			&& export "$1"="$4"
-	fi
+	key="$1"
+	shift
+	for p in "$@"; do
+		is_present_prog "$p" && export "$key"="$p"; break
+	done
 }
 
 ## Default Programs
