@@ -4,7 +4,6 @@ DISPLAY=:0
 XDG_RUNTIME_DIR=/run/user/1000
 XAUTHORITY=/run/user/1000/Xauthority
 
-0 0 */4 * * gen-hosts update
-0 0 */4 * * gen-firfox update
+0 20 */4 * * gen-hosts update
 0 22 * * * sleep-time
 */30 * * * * newsboat -x reload
