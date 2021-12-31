@@ -2,6 +2,7 @@ cap			.local/appimage
 cda			importantnt/audio
 cdc			.config
 cdd			dl
+cde			importantnt/ebooks
 cdf			lifeisfun/flutter
 cdg			.local/src
 cdh			.config/shell
@@ -14,6 +15,7 @@ cdr			lifeisfun/react
 cds			pics/screenshots
 cdu			usb
 cdv			importantnt/video
+cen			importantnt/ebooks/notes
 clb			.local/bin
 cld			lifeisfun/design
 cls			.local/share
