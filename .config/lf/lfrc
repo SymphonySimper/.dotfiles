@@ -23,7 +23,8 @@ cmd open_sep %{{ $TERMINAL -e v $f }}
 }}
 
 cmd mkdir %{{
-	read -p "Dir name: " ans
+	echo "Dir name: "
+	read ans
 	mkdir $ans
 }}
 
