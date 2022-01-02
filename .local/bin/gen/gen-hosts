@@ -30,31 +30,46 @@ clear_block(){
 	fi
 }
 
+sed_1="sed '/#/d; /^[[:space:]]*$/d'"
 update_hosts_repo(){
-	curl_hosts(){ curl -s "$1" | sed -ne '/Start/,$ p' | sed '/#/d; /^[[:space:]]*$/d' > "$2"; }
+	curl_hosts(){ curl -s "$1" | sed -ne '/Start/,$ p' | eval "$sed_1"  > "$2"; }
 	[ ! -d $block_source ] && mkdir "$block_source"
 	sound-efx &
 	notify 'update'
 	curl_hosts "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts" $ad_malware_block
 	curl_hosts "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts" $block_fgps
 }
+
+my_block_tempfile=$(mktemp)
+my_block_temp(){
+	while read -r line; do
+		echo "0.0.0.0\t$line" >> $my_block_tempfile
+	done <<- EOF
+	$(cat $my_block | eval "$sed_1")
+	EOF
+}
+
+
 add_block(){
 	add_block_hosts(){
 		case "$1" in
 			all)
 				sort -o $my_block $my_block
 				temp_file=$(mktemp)
-				temp_file2=$(mktemp)
-				while read -r line; do
-					echo "0.0.0.0\t$line" >> $temp_file2
-				done < $my_block
-				cat $block_fgps $temp_file2 > $temp_file
+				cat $block_fgps $my_block_tempfile > $temp_file
 				$PERM sed '/^# MY BLOCK/ r /dev/stdin' -i $hosts_file  < $temp_file \
 				&& notify 'on'
-				rm $temp_file
+				rm $temp_file $my_block_tempfile
 				;;
 			am) $PERM sed '/^# MY BLOCK/ r /dev/stdin' -i $hosts_file  < $ad_malware_block \
 				&& notify 'off'
+				;;
+			begone)
+				temp_file=$(mktemp)
+				my_block_temp
+				$PERM sed '/^# MY BLOCK/ r /dev/stdin' -i $hosts_file  < $my_block_tempfile \
+				&& notify 'on'
+				rm $my_block_tempfile
 				;;
 		esac
 	}
@@ -68,12 +83,13 @@ main(){
 		clear) clear_block; rm $cache_file ;;
 		am) add_block 'am' ;;
 		all) add_block 'all' ;;
+		begone) add_block 'begone' ;;
 		edit) $EDITOR $my_block && sort -o $my_block $my_block ;;
 		update) update_hosts_repo ;;
 	esac
 }
 rofi_menu(){
-	query="$(echo "clear\nam\nall\nedit\nupdate" | rofi -dmenu -p 'gen-hosts')"
+	query="$(echo "clear\nam\nall\nbegone\nedit\nupdate" | rofi -dmenu -p 'gen-hosts')"
 	main "$query"
 }
 

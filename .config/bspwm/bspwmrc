@@ -38,6 +38,7 @@ bspc rule -a *:www.figma.com desktop='^7' follow=on
 bspc rule -a Ld-linux-x86-64.so.2 desktop='^7'
 bspc rule -a Gimp-2.10 desktop='^8'
 bspc rule -a Gimp desktop='^8'
+bspc rule -a krita desktop='^8'
 bspc rule -a qBittorrent desktop='^9'
 bspc rule -a obs desktop='^10'
 
