@@ -39,8 +39,8 @@ list_todo(){
 	if [ -n "$(cat $todo_loc)" ]; then
 		temp_file=$(mktemp)
 		while read -r line; do
-			echo "+ $line" >> $temp_file
-		done < $todo_loc
+			echo "+ $line"
+		done < $todo_loc > $temp_file
 			$notify -h string:x-dunst-stack-tag:todo "TODO" "$(cat $temp_file)"
 		rm $temp_file
 	fi
@@ -49,15 +49,17 @@ get_mode(){
 	notify_mode(){
 		get_mode_noti="$notify -h string:x-dunst-stack-tag:get-mode"
 		case "$1" in
-			on) $get_mode_noti -i $warning_i 'Work Mode' 'on' ;;
-			off) $get_mode_noti 'Work Mode' 'off' ;;
-			gaming) $get_mode_noti 'Gaming Mode' 'on' ;;
+			'on') $get_mode_noti -i $warning_i 'Work Mode' 'on' ;;
+			'off') $get_mode_noti 'Work Mode' 'off' ;;
+			'begone') $get_mode_noti -i $warning_i 'Begone Mode' 'on' ;;
+			'gaming') $get_mode_noti 'Gaming Mode' 'on' ;;
 		esac
 	}
 	if [ -f "$begone_loc" ]; then
 		case "$(cat $begone_loc | cut -d ' ' -f 2)" in
-			all) notify_mode 'on' ;;
-			am) notify_mode 'off' ;;
+			'all') notify_mode 'on' ;;
+			'am') notify_mode 'off' ;;
+			'begone') notify_mode 'begone' ;;
 		esac
 	elif [ -z "$(pgrep picom)" ]; then
 		notify_mode 'gaming'
