@@ -153,5 +153,8 @@ map <leader>ul :Underline<CR>
 map <leader>dl :DoubleUnderline<CR>
 map <leader>st :Strikethrough<CR>
 
+" To sort file contents
+autocmd BufWritePre folders,fzf-folders,scripts,shell,configs :sort
+
 " To remove trailing white spaces
 autocmd BufWritePre * :%s/\s\+$//e
