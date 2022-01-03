@@ -29,8 +29,8 @@ super + shift + p
 	game-mode
 
 # Rofi
-super + {space,s,e,r,a}
-	rofi-{run,open,edit,todo,play}
+super + {space,s,e,r,a,shift+n}
+	rofi-{run,open,edit,todo,play,notes}
 super + shift + q
 	rofi -modi "Power Options:$HOME/.local/bin/rofi/power-options" \
 	-show 'Power Options'
@@ -56,11 +56,6 @@ super + F11
 # vimwiki
 super + w
 	$TERMINAL -e mywiki edit
-
-# xournalpp
-super + shift + n
-	rofi -modi "Notes:$HOME/.local/bin/rofi/notes" \
-	-show 'Notes' -no-custom
 
 # RSS
 super + n

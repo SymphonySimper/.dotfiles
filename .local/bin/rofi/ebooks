@@ -1,0 +1,13 @@
+#!/bin/sh
+
+loc="$HOME"/importantnt/ebooks
+
+if [ -z "$@" ]; then
+	ls $loc
+elif [ "$@" = '..' ]; then
+	ls $loc
+elif [ -d "$loc/$@" ]; then
+	find "$loc/$@" -name '*.pdf' -type f | cut -d '/' -f 6-
+elif [ -f "$loc/$@" ]; then
+	$READER "$loc/$@" > /dev/null 2>&1 &
+fi

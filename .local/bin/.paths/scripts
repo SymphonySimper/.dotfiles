@@ -4,6 +4,7 @@ brightness               .local/bin/brightness
 coding-time              .local/bin/bspwm/coding-time
 configs                  .local/bin/.paths/configs
 dfc                      .local/bin/dfc
+ebooks                   .local/bin/rofi/ebooks
 edit-configs             .local/bin/rofi/edit-configs
 edit-scripts             .local/bin/rofi/edit-scripts
 edit-shell               .local/bin/rofi/edit-shell
@@ -39,6 +40,7 @@ play-video               .local/bin/rofi/play-video
 power-options            .local/bin/rofi/power-options
 re-key                   .local/bin/re-key
 rofi-edit                .local/bin/aliases/rofi-edit
+rofi-notes               .local/bin/aliases/rofi-notes
 rofi-open                .local/bin/aliases/rofi-open
 rofi-play                .local/bin/aliases/rofi-play
 rofi-run                 .local/bin/aliases/rofi-run
