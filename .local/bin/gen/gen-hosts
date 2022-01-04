@@ -30,9 +30,11 @@ clear_block(){
 	fi
 }
 
+
 sed_1="sed '/#/d; /^[[:space:]]*$/d'"
+curl_hosts(){ curl -s "$1" | sed -ne '/Start/,$ p' | eval "$sed_1"  > "$2"; }
+
 update_hosts_repo(){
-	curl_hosts(){ curl -s "$1" | sed -ne '/Start/,$ p' | eval "$sed_1"  > "$2"; }
 	[ ! -d $block_source ] && mkdir "$block_source"
 	sound-efx &
 	notify 'update'
@@ -49,45 +51,48 @@ my_block_temp(){
 	EOF
 }
 
+write_block_hosts(){ $PERM sed '/^# MY BLOCK/ r /dev/stdin' -i "$hosts_file"  < "$1"; }
+
+add_block_hosts(){
+	case "$1" in
+		'all')
+			sort -o $my_block $my_block
+			temp_file=$(mktemp)
+			cat $block_fgps $my_block_tempfile > $temp_file
+			write_block_hosts "$temp_file" \
+			&& notify 'on'
+			rm $temp_file $my_block_tempfile
+			;;
+		'am') write_block_hosts $ad_malware_block \
+			&& notify 'off'
+			;;
+		'begone')
+			temp_file=$(mktemp)
+			my_block_temp
+			write_block_hosts $my_block_tempfile \
+			&& notify 'on'
+			rm $my_block_tempfile
+			;;
+	esac
+}
 
 add_block(){
-	add_block_hosts(){
-		case "$1" in
-			all)
-				sort -o $my_block $my_block
-				temp_file=$(mktemp)
-				cat $block_fgps $my_block_tempfile > $temp_file
-				$PERM sed '/^# MY BLOCK/ r /dev/stdin' -i $hosts_file  < $temp_file \
-				&& notify 'on'
-				rm $temp_file $my_block_tempfile
-				;;
-			am) $PERM sed '/^# MY BLOCK/ r /dev/stdin' -i $hosts_file  < $ad_malware_block \
-				&& notify 'off'
-				;;
-			begone)
-				temp_file=$(mktemp)
-				my_block_temp
-				$PERM sed '/^# MY BLOCK/ r /dev/stdin' -i $hosts_file  < $my_block_tempfile \
-				&& notify 'on'
-				rm $my_block_tempfile
-				;;
-		esac
-	}
-		clear_block \
-		&& add_block_hosts "$1" \
-		&& echo "added $1" > $cache_file
+	clear_block \
+	&& add_block_hosts "$1" \
+	&& echo "added $1" > $cache_file
 }
 
 main(){
 	case "$1" in
-		clear) clear_block; rm $cache_file ;;
-		am) add_block 'am' ;;
-		all) add_block 'all' ;;
-		begone) add_block 'begone' ;;
-		edit) $EDITOR $my_block && sort -o $my_block $my_block ;;
-		update) update_hosts_repo ;;
+		'clear') clear_block; rm $cache_file ;;
+		'am') add_block 'am' ;;
+		'all') add_block 'all' ;;
+		'begone') add_block 'begone' ;;
+		'edit') $EDITOR $my_block && sort -o $my_block $my_block ;;
+		'update') update_hosts_repo ;;
 	esac
 }
+
 rofi_menu(){
 	query="$(echo "clear\nam\nall\nbegone\nedit\nupdate" | rofi -dmenu -p 'gen-hosts')"
 	main "$query"
