@@ -59,6 +59,8 @@ let g:rustfmt_autosave = 2
 " FZF
 let $FZF_DEFAULT_OPTS = $FZF_DEFAULT_OPTS
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'border': 'sharp' }}
+autocmd! FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
