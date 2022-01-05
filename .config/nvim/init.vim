@@ -67,6 +67,7 @@ let g:fzf_action = {
 
 " Open fzf
 map <leader>s :BLines<CR>
+map <leader>f :Files<CR>
 
 
 " Quick-Scope
@@ -110,7 +111,7 @@ endfunction
 
 " lf
 let g:lf_map_keys = 0
-map <leader>f :LfCurrentFileExistingOrNewTab<CR>
+map <leader>l :LfCurrentFileExistingOrNewTab<CR>
 
 " |---------------|
 " | Line commands |
