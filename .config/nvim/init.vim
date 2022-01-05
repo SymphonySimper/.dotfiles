@@ -22,6 +22,9 @@ set shiftwidth=4
 set termguicolors
 colorscheme the-black
 
+" Set leader key to space
+let mapleader =" "
+
 " |---------|
 " | Plugins |
 " |---------|
@@ -105,6 +108,10 @@ function! ToggleCalendar()
 endfunction
 :autocmd FileType vimwiki map <leader>ca :call ToggleCalendar()<CR>
 
+" lf
+let g:lf_map_keys = 0
+map <leader>f :LfCurrentFileExistingOrNewTab<CR>
+
 " |---------------|
 " | Line commands |
 " |---------------|
@@ -124,8 +131,6 @@ endfunction
 " | Key binds |
 " |-----------|
 
-let mapleader =" "
-
 " This unsets the last search pattern register by hitting return
 nnoremap <CR> :noh<CR><CR>
 
@@ -136,7 +141,7 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 " Create new tab with ctrl + t
-nnoremap <silent> <C-t> :tabnew<CR>
+nnoremap <C-t> :tabnew <Right>
 
 " |---------------|
 " | Leader combos |

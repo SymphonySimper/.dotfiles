@@ -28,6 +28,12 @@ cmd mkdir %{{
 	mkdir $ans
 }}
 
+cmd touch %{{
+	echo "File name: "
+	read ans
+	touch $ans
+}}
+
 # |----------|
 # | My binds |
 # |----------|
@@ -51,4 +57,6 @@ map DD delete
 # Open files with v in seperate terminals
 map <enter> open_sep
 
+# Create file
+map t touch
 source ~/.config/lf/lf-folders
