@@ -143,8 +143,24 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" Create new tab with ctrl + t
-nnoremap <C-t> :tabnew <Right>
+" Go to last active tab
+au TabLeave * let g:lasttab = tabpagenr()
+nnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
+vnoremap <silent> <c-l> :exe "tabn ".g:lasttab<cr>
+
+" Use H and L to move to the previous/next tabpage
+nnoremap H gT
+nnoremap L gt
+
+" vim like naviagation for tabs
+nnoremap th  :tabfirst<CR>
+nnoremap tk  :tabnext<CR>
+nnoremap tj  :tabprev<CR>
+nnoremap tl  :tablast<CR>
+nnoremap tt  :tabedit<Space>
+nnoremap tn  :tabnext<Space>
+nnoremap tm  :tabm<Space>
+nnoremap td  :tabclose<CR>
 
 " |---------------|
 " | Leader combos |
@@ -161,8 +177,28 @@ map <leader>ul :Underline<CR>
 map <leader>dl :DoubleUnderline<CR>
 map <leader>st :Strikethrough<CR>
 
+" Go to tab by number
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 :tablast<cr>
+
+" |---------------|
+" | autocmd stuff |
+" |---------------|
+
 " To sort file contents
 autocmd BufWritePre folders,fzf-folders,scripts,shell,configs :sort
+
+" Open files always in new tabs
+" autocmd VimEnter * tab all
+" autocmd BufAdd * exe 'tablast | tabe "' . expand( "<afile") .'"'
 
 " To remove trailing white spaces
 autocmd BufWritePre * :%s/\s\+$//e
