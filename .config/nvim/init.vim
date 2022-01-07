@@ -197,8 +197,8 @@ noremap <leader>0 :tablast<cr>
 autocmd BufWritePre folders,fzf-folders,scripts,shell,configs :sort
 
 " Open files always in new tabs
-" autocmd VimEnter * tab all
-" autocmd BufAdd * exe 'tablast | tabe "' . expand( "<afile") .'"'
+autocmd VimEnter * tab all
+autocmd BufAdd * exe 'tablast | tabe "' . expand( "<afile") .'"'
 
 " To remove trailing white spaces
 autocmd BufWritePre * :%s/\s\+$//e
