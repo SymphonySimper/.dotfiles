@@ -29,6 +29,7 @@ mnt-dev                  .local/bin/mnt-dev
 my-info                  .local/bin/my-info
 my-qemu                  .local/bin/my-qemu
 mywiki                   .local/bin/mywiki
+my-xrandr                .local/bin/my-xrandr
 notes                    .local/bin/rofi/notes
 open-appimage            .local/bin/rofi/open-appimage
 open-bmark               .local/bin/rofi/open-bmark
