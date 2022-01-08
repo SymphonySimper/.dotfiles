@@ -113,7 +113,10 @@ export LS_COLORS='rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;
 # Timezone
 export TZ='Asia/Kolkata'
 
-# window manager name
+# Wallpaper
+export WALLPAPER="$XDG_DATA_HOME"/mypics/bg.png
+
+# Window manager name
 [ -f "$XINITRC" ] && export WM="$(tail -n 1 "$XINITRC" | cut -d ' ' -f 4)"
 
 # StartX

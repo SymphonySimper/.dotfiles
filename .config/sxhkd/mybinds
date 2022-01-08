@@ -43,7 +43,7 @@ Print
 
 # My info/ goals
 super + {b,shift + b}
-	{my-info,goals}
+	{myinfo,goals}
 
 # Screenkey
 XF86Calculator
@@ -75,4 +75,4 @@ super + i
 
 # sxhkd
 super + Escape
-	re-key
+	rekey

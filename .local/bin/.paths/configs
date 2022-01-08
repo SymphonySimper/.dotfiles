@@ -14,8 +14,8 @@ fox-yt-enhancer				.config/fox/extensions/yt-enhancer.json
 htop						.config/htop/htoprc
 lf							.config/lf/lfrc
 mpv							.config/mpv/mpv.conf
-my-binds					.config/sxhkd/my-binds
-my-bspwm-binds				.config/sxhkd/my-bspwm-binds
+mybinds						.config/sxhkd/mybinds
+mybspwm-binds				.config/sxhkd/mybspwm-binds
 newsboat-config				.config/newsboat/config
 newsboat-urls				.config/newsboat/urls
 nvim						.config/nvim/init.vim
