@@ -24,8 +24,6 @@ extd="$(gm_info 'connected' | grep -v "$primary")"
 
 [ -z "$extd" ] && { echo 'No external dispalys connected'; exit 1; }
 
- xwallpaper --zoom "$WALLPAPER"
-
 bspwm_rules(){
 	case "$1" in
 		'one') bspc monitor -d 1 2 3 4 5 6 7 8 9 0 ;;
@@ -55,3 +53,9 @@ case "$1" in
 	'duplicate') duplicate_display ;;
 	'del') del_display ;;
 esac
+
+xwallpaper --zoom "$WALLPAPER"
+
+# Ref
+# https://bbs.archlinux.org/viewtopic.php?id=222050
+# https://github.com/BrodieRobertson/scripts/blob/master/dmonitor
