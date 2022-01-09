@@ -62,6 +62,9 @@ let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffse
 autocmd! FileType fzf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
+" [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
+
 let g:fzf_action = {
       \ 'enter': 'drop',
       \ 'ctrl-t': 'tab drop',
