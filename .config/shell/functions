@@ -6,12 +6,12 @@
 ourimg(){ xclip -sel c -t image/png < "$1"; }
 
 # git
-ga(){ git add $@; }
-grm(){ git rm $@ --cached; }
+ga(){ g add $@; }
+grm(){ g rm $@ --cached; }
 gamp(){
-	git add -u \
-	&& [ -z "$@" ] && git commit || git commit -m "$@" \
-	&& git push
+	g add -u \
+	&& [ -z "$@" ] && g commit || g commit -m "$@" \
+	&& g push
 }
 
 # config git

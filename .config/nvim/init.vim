@@ -10,7 +10,7 @@ syntax enable
 set nosecure
 filetype plugin indent on
 set clipboard=unnamedplus
-set relativenumber
+set number relativenumber
 set incsearch
 set smartindent
 
