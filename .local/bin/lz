@@ -14,6 +14,7 @@ bin_bspwm="$bin"/bspwm
 bin_gen="$bin"/gen
 bin_lf="$bin"/lf
 bin_cron="$bin"/cron
+bin_helper="$bin"/helper
 
 paths="$bin"/.paths
 shell_paths="$paths"/shell
@@ -28,9 +29,10 @@ err(){ echo "${bold}${1}${reset}"; }
 executable(){ chmod +x "$h/$1"; }
 add_path(){ printf "%*s %s\n" -24 "$1" "$2/$1" >> "$h/$3"; }
 sort_paths(){ sort "$h/$1" -o "$h/$1"; }
-# does_it_exist(){
+no_filename(){ [ -z "$1" ] && { err "No filename given"; exit 1; }; }
 
 create_bin_file(){
+	no_filename "$2"
 	if [ -f "$h/$1/$2" ]; then
 		err "$2 already exists at $h/$1"
 	else
@@ -44,6 +46,7 @@ create_bin_file(){
 }
 
 create_shell_file(){
+	no_filename "$2"
 	if [ -f "$h/$shell/$1" ]; then
 		err "$1 already exists at $h/$shell"
 	else
@@ -102,8 +105,10 @@ case "$1" in
 	-g) shift; create_bin_file "$bin_gen" "$1" ;;
 	-l) shift; create_bin_file "$bin_lf" "$1" ;;
 	-c) shift; create_bin_file "$bin_cron" "$1" ;;
+	-h) shift; create_bin_file "$bin_helper" "$1" ;;
 	-sh) shift; create_shell_file "$1" ;;
 	-d) shift; delete_file "$1" ;;
 	-cp) shift; yank_file "$1" ;;
+	-*) err "$1 not vaild option" ;;
 	*) create_bin_file "$bin" "$1" ;;
 esac

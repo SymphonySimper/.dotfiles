@@ -98,13 +98,13 @@ _gen_fzf_default_opts() {
 	local color0E='#747474'
 	local color0F='#5e5e5e'
 
+	# --preview='"$HOME"/.local/bin/helper/fzf-preview {}' \
 	export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
-	--no-mouse --reverse --preview-window=border-none \
-	--color=bg+:$color00,spinner:$color0C,hl:$color0D \
-	--color=fg:$color04,header:$color0D,info:$color0A,pointer:$color0C \
-	--color=marker:$color0C,fg+:$color06,prompt:$color0A,hl+:$color0D"
-
-	}
+		--no-mouse --reverse --preview-window=border-none \
+		--color=bg+:$color00,spinner:$color0C,hl:$color0D \
+		--color=fg:$color04,header:$color0D,info:$color0A,pointer:$color0C \
+		--color=marker:$color0C,fg+:$color06,prompt:$color0A,hl+:$color0D"
+}
 
 _gen_fzf_default_opts
 
