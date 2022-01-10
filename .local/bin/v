@@ -27,7 +27,7 @@ main() {
 		*.mp3 | *.ogg ) $vv "$1" ;;
 		*.pdf ) $h $pv "$1" ;;
 		*.svg ) $BROWSER "$1" ;;
-		*.img ) my-qemu "$1" ;;
+		*.img ) myqemu "$1" ;;
 		*.svg | *.eps | *.ai ) $h $vg "$1" ;;
 		*.xopp ) $h $nt "$1" ;;
 		*.blend ) $h $USE_GPU $td "$1" ;;

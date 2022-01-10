@@ -203,6 +203,9 @@ nnoremap <leader>d :da
 " To sort file contents
 autocmd BufWritePre folders,fzf-folders,scripts,shell,configs :sort
 
+" For groff files
+autocmd BufWritePre *.ms,*.mom :%s/^\.\(\w*\)/\.\U\1/g
+
 " Open files always in new tabs
 autocmd VimEnter * tab all
 autocmd BufAdd * exe 'tablast | tabe "' . expand( "<afile") .'"'
