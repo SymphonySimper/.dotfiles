@@ -213,5 +213,9 @@ autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
 autocmd VimEnter * tab all
 autocmd BufAdd * exe 'tablast | tabe "' . expand( "<afile") .'"'
 
-" To remove trailing white spaces
-autocmd BufWritePre * :%s/\s\+$//e
+" Automatically deletes all trailing whitespace and newlines at end of file on save. & reset cursor position
+ 	autocmd BufWritePre * let currPos = getpos(".")
+	autocmd BufWritePre * %s/\s\+$//e
+	autocmd BufWritePre * %s/\n\+\%$//e
+	autocmd BufWritePre *.[ch] %s/\%$/\r/e
+  	autocmd BufWritePre * cal cursor(currPos[1], currPos[2])
