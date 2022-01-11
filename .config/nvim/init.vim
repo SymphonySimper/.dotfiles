@@ -172,9 +172,8 @@ nnoremap td  :tabclose<CR>
 " |---------------|
 
 " To replace string
-map <leader>r :%s//g<Left><Left>
-map <leader>c :s//g<Left><Left>
-map <leader>C :s//g<Left><Left><Left><Left>
+map <leader>R :%s//g<Left><Left>
+map <leader>r :s//g<Left><Left>
 
 " Capitalize first letter of each word in a line
 map <leader>u :s/\<./\u&/g<bar>:noh<CR>
@@ -200,6 +199,10 @@ noremap <leader>0 :tablast<CR>
 " To delete stuff between two brackets
 nnoremap <leader>d :da
 
+" Compile stuff
+noremap <leader>c :silent !compiler -f "%"<CR>
+
+
 " |---------------|
 " | autocmd stuff |
 " |---------------|
@@ -208,7 +211,7 @@ nnoremap <leader>d :da
 autocmd BufWritePre folders,fzf-folders,scripts,shell,configs :sort
 
 " For groff files
-autocmd BufWritePost *.ms,*.mom :silent !compiler "%"
+autocmd BufWritePost *.ms,*.mom :silent !compiler -p "%"
 autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
 " autocmd BufWritePre *.ms,*.mom :%s/^\.\(\w*\)/\.\U\1/g
 
