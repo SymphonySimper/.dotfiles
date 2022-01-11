@@ -1,5 +1,6 @@
 .de pic-a4
-\X'pdf: pdfpic \\$1 \\$2 \\$3 0 8.268i
+.\"\X'pdf: pdfpic \\$1 \\$2 \\$3 0 6i \" 8.268i
+.\".PSPIC -I 1i \\$3 \\$1 \\$3 0 6i \" 8.268i
 ..
 
 .de head

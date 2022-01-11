@@ -176,6 +176,9 @@ map <leader>r :%s//g<Left><Left>
 map <leader>c :s//g<Left><Left>
 map <leader>C :s//g<Left><Left><Left><Left>
 
+" Capitalize first letter of each word in a line
+map <leader>u :s/\<./\u&/g<bar>:noh<CR>
+
 " Line options
 map <leader>ol :Overline<CR>
 map <leader>ul :Underline<CR>
