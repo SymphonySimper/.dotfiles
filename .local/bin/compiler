@@ -1,0 +1,20 @@
+#!/bin/sh
+
+file=$(readlink -f "$1")
+dir=${file%/*}
+ext="${file##*.}"
+filename="${file##*/}"
+jname="${filename%.*}"
+
+is_alive(){ ps aux | grep -i "$1" | grep -qv 'grep'; }
+open_pdf(){ is_alive "${jname}.pdf" || \
+	{ [ -f "$dir/${jname}.pdf" ] && $READER "$dir/${jname}.pdf" > /dev/null 2>&1 & }
+}
+
+[ -d "$dir" ] || exit 1
+
+case "$ext" in
+	ms) groff -mspdf -U -tepR -Tpdf -P-pa4 "$file" > "$dir/$jname.pdf" ;;
+esac
+
+open_pdf

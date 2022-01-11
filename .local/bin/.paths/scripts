@@ -2,6 +2,7 @@ blender                  .local/bin/aliases/blender
 bmark                    .local/bin/bmark
 brightness               .local/bin/brightness
 coding-time              .local/bin/bspwm/coding-time
+compiler                 .local/bin/compiler
 configs                  .local/bin/.paths/configs
 dfc                      .local/bin/dfc
 ebooks                   .local/bin/rofi/ebooks

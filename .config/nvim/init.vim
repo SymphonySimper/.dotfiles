@@ -43,6 +43,7 @@ Plug 'vimwiki/vimwiki'
 Plug 'mattn/calendar-vim'
 Plug 'tpope/vim-surround'
 Plug 'takac/vim-hardtime'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 call plug#end()
 
@@ -204,7 +205,9 @@ nnoremap <leader>d :da
 autocmd BufWritePre folders,fzf-folders,scripts,shell,configs :sort
 
 " For groff files
-autocmd BufWritePre *.ms,*.mom :%s/^\.\(\w*\)/\.\U\1/g
+autocmd BufWritePost *.ms,*.mom :silent !compiler "%"
+autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
+" autocmd BufWritePre *.ms,*.mom :%s/^\.\(\w*\)/\.\U\1/g
 
 " Open files always in new tabs
 autocmd VimEnter * tab all
