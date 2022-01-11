@@ -79,10 +79,12 @@ caps_to_esc(){ setxkbmap -option caps:escape; }
 cnvert(){
 	vc="ffmpeg"
 	ic="magick"
+	cn="convert"
 
 	case "$1" in
 		*.mkv) $vc -i "$1" -codec copy "$2" ;;
 		*.webm | *.webp) $ic "$1" "$2" ;;
+		'pdf') shift; $cn "$1" "${1%\.*}.pdf" ;;
 	esac
 }
 
