@@ -200,7 +200,7 @@ noremap <leader>0 :tablast<CR>
 nnoremap <leader>d :da
 
 " Compile stuff
-noremap <leader>c :silent !compiler -f "%"<CR>
+noremap <silent><leader>c :silent !compiler -f "%"<CR>
 
 
 " |---------------|
