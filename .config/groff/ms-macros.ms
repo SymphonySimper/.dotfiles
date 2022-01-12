@@ -15,3 +15,39 @@
 .NH \\n[arg]
 .XN \\*[title]
 ..
+
+.de mhead
+.ie (\B'\\$1') \{\
+.	nr arg \\$1
+.	ds title \\$2
+.	nr pageno \\$3
+.\}
+.el \{\
+.	nr arg 1
+.	ds title \\$1
+.	nr pageno \\$2
+.\}
+.NH \\n[arg]
+.XA \\n[pageno]
+\\*[title]
+..
+
+.de yohead
+.ds opt \\$1
+.ie (\B'\\$1') \{\
+.	mhead \\$@
+.\}
+.el \{\
+.	ie "\\$1"\fRstart\fP" \{\
+.		ds title \\$2
+.		NH
+\\*[title]
+.		XS 1
+\\*[title]
+.	\}
+.	ie "\\$1"\fRend\fP" \{\
+.		mhead \\$@
+.		XE
+.	\}
+.\}
+..
