@@ -2,7 +2,7 @@
 
 git clone --bare https://github.com/SymphonySimper/DotFiles.git $HOME/.cfg
 
-function config { /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@; }
+config(){ /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@; }
 mkdir -p .config-backup
 config checkout
 
@@ -19,7 +19,7 @@ create_dirs(){
 	mkdir -vp "$HOME"/.local/src "$HOME"/.local/appimage
 }
 
-if [ $? = 0 ]; then
+if [ $? -eq 0 ]; then
   echo "Checked out config."
 
   echo "Creating symliks."
@@ -29,7 +29,7 @@ if [ $? = 0 ]; then
   create_dirs
 else
     echo "Backing up pre-existing dot files.";
-    config checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .config-backup/{}
+    config checkout 2>&1 | egrep "\s+\." | awk '{print $1}' | xargs -I{} mv {} .config-backup/{}
 fi
 
 config checkout
