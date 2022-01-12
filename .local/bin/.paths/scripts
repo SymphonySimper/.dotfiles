@@ -2,7 +2,6 @@ blender                  .local/bin/aliases/blender
 bmark                    .local/bin/bmark
 brightness               .local/bin/brightness
 coding-time              .local/bin/bspwm/coding-time
-compiler                 .local/bin/compiler
 configs                  .local/bin/.paths/configs
 dfc                      .local/bin/dfc
 ebooks                   .local/bin/rofi/ebooks
@@ -17,6 +16,7 @@ gen-fox                  .local/bin/gen/gen-fox
 gen-hosts                .local/bin/gen/gen-hosts
 gen-xresources           .local/bin/gen/gen-xresources
 goals                    .local/bin/goals
+groff-ms                 .local/bin/groff-ms
 i-slept                  .local/bin/i-slept
 kdenlive                 .local/bin/aliases/kdenlive
 lf-clear-img             .local/bin/lf/lf-clear-img

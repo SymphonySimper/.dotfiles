@@ -200,7 +200,7 @@ noremap <leader>0 :tablast<CR>
 nnoremap <leader>d :da
 
 " Compile stuff
-noremap <silent><leader>c :silent !compiler -f "%"<CR>
+noremap <silent><leader>c :silent !groff-ms -f "%"<CR>
 
 
 " |---------------|
@@ -211,7 +211,7 @@ noremap <silent><leader>c :silent !compiler -f "%"<CR>
 autocmd BufWritePre folders,fzf-folders,scripts,shell,configs :sort
 
 " For groff files
-autocmd BufWritePost *.ms,*.mom :silent !compiler -p "%"
+autocmd BufWritePost *.ms :silent !groff-ms -p "%"
 autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff
 " autocmd BufWritePre *.ms,*.mom :%s/^\.\(\w*\)/\.\U\1/g
 
