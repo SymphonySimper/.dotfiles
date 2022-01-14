@@ -35,16 +35,23 @@ bspc rule -a Zathura state=tiled
 bspc rule -a Firefox desktop='^2' follow=on
 bspc rule -a *:Toolkit state=floating sticky=on
 bspc rule -a LibreWolf desktop='^2' follow=on
+
 bspc rule -a mpv desktop='^5' follow=on
 bspc rule -a Com.github.xournalpp.xournalpp desktop='^5' follow=on
-bspc rule -a Signal desktop='^6'
-bspc rule -a discord desktop='^6'
+
+bspc rule -a Signal desktop='^6' state=fullscreen
+bspc rule -a discord desktop='^6' state=fullscreen
+bspc rule -a Slack desktop='^6' state=fullscreen
+
 bspc rule -a *:www.figma.com desktop='^7' follow=on
 bspc rule -a Ld-linux-x86-64.so.2 desktop='^7'
+
 bspc rule -a Gimp-2.10 desktop='^8'
 bspc rule -a Gimp desktop='^8'
 bspc rule -a krita desktop='^8'
+
 bspc rule -a qBittorrent desktop='^9'
+
 bspc rule -a obs desktop='^10'
 
 # Games related
