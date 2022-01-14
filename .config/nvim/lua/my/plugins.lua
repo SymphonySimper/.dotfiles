@@ -40,7 +40,7 @@ return packer.startup(function(use)
 	use 'tpope/vim-surround'
 	use 'nvim-telescope/telescope.nvim'
 	use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-	use 'nvim-telescope/telescope-media-files.nvim'
+
 	-- cmp plugins
   use 'hrsh7th/nvim-cmp'
 	use 'hrsh7th/cmp-buffer'
@@ -57,6 +57,12 @@ return packer.startup(function(use)
 	-- lsp
 	use 'neovim/nvim-lspconfig'
 	use 'williamboman/nvim-lsp-installer'
+
+  -- Treesitter
+  use {
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
+  }
 
 	-- Lazy
 	use {
