@@ -38,6 +38,7 @@ local leader_map = {
 	{ 'c', ':silent !groff-ms -f %'..e },
 	{ 'f', ':Telescop find_files'..e },
 	{ 's', ':Telescope live_grep'..e },
+	{ 'e', ':NvimTreeToggle'..e },
 }
 
 local le = '<leader>'

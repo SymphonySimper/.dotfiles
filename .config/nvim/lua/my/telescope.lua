@@ -99,4 +99,3 @@ local full_theme = {
 -- telescope.builtin.live_grep(full_theme())
 -- telescope.builtin.current_buffer_fuzzy_find(full_theme())
 telescope.load_extension('fzf')
-telescope.load_extension('media_files')

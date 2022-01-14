@@ -32,27 +32,36 @@ end
 return packer.startup(function(use)
 
 	use "wbthomason/packer.nvim"
-	use "nvim-lua/popup.nvim" 
+	use "nvim-lua/popup.nvim"
   use "nvim-lua/plenary.nvim"
 	use 'ap/vim-css-color'
 	use 'Jorengarenar/vim-MvVis'
 	use 'unblevable/quick-scope'
 	use 'tpope/vim-surround'
+	use 'kyazdani42/nvim-tree.lua'
+	use 'kyazdani42/nvim-web-devicons'
+	use 'akinsho/toggleterm.nvim'
+
+	-- Telescope
 	use 'nvim-telescope/telescope.nvim'
 	use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+
+	-- Gitsings
+	use 'lewis6991/gitsigns.nvim'
 
 	-- cmp plugins
   use 'hrsh7th/nvim-cmp'
 	use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
-  use 'hrsh7th/cmp-cmdline' 
-  use 'saadparwaiz1/cmp_luasnip'  
+  use 'hrsh7th/cmp-cmdline'
+  use 'saadparwaiz1/cmp_luasnip'
 	use 'hrsh7th/cmp-nvim-lsp'
 	use 'hrsh7th/cmp-nvim-lua'
+	use 'numToStr/Comment.nvim'
 
 	-- snippets
   use 'L3MON4D3/LuaSnip'
-	use 'rafamadriz/friendly-snippets' 
+	use 'rafamadriz/friendly-snippets'
 
 	-- lsp
 	use 'neovim/nvim-lspconfig'
@@ -63,6 +72,7 @@ return packer.startup(function(use)
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
   }
+	use 'JoosepAlviste/nvim-ts-context-commentstring'
 
 	-- Lazy
 	use {
