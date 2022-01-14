@@ -35,20 +35,29 @@ return packer.startup(function(use)
 	use "nvim-lua/popup.nvim" 
   use "nvim-lua/plenary.nvim"
 	use 'ap/vim-css-color'
-	use 'rust-lang/rust.vim'
 	use 'ptzz/lf.vim'
 	use 'voldikss/vim-floaterm'
 	use 'junegunn/fzf.vim'
 	use 'Jorengarenar/vim-MvVis'
 	use 'unblevable/quick-scope'
-	use 'dhruvasagar/vim-table-mode'
-	use {
-		{ 'vimwiki/vimwiki', opt = true, ft = "wiki" },
-		{ 'mattn/calendar-vim', opt = true }
-	}
+  use 'hrsh7th/nvim-cmp'
+	use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-path'
+  use 'hrsh7th/cmp-cmdline' 
+  use 'saadparwaiz1/cmp_luasnip'  
+  use 'L3MON4D3/LuaSnip'
+	use 'rafamadriz/friendly-snippets' 
 	use 'tpope/vim-surround'
 	use 'takac/vim-hardtime'
-	use {'iamcco/markdown-preview.nvim', opt = true, run = 'cd app && npm install', cmd = 'MarkdownPreview'}
+
+	-- Lazy
+	use {
+		{ 'vimwiki/vimwiki', opt = true, ft = 'wiki' },
+		{ 'mattn/calendar-vim', opt = true }
+	}
+	use { 'dhruvasagar/vim-table-mode', opt = true, cmd = 'TableMode' }
+	use { 'rust-lang/rust.vim', opt = true, ft = 'rs' }
+	use { 'iamcco/markdown-preview.nvim', opt = true, run = 'cd app && npm install', cmd = 'MarkdownPreview'}
 
   if PACKER_BOOTSTRAP then
     require("packer").sync()
