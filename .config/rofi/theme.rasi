@@ -8,7 +8,7 @@
 
 window {
   padding: 50% 33.33% 11.11% 33.33%;
-  background-color: #000000E6;
+  background-color: #000000CC;
 }
 
 inputbar {

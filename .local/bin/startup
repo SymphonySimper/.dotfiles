@@ -7,7 +7,7 @@ picom -m 1.0 -i 1.0 -e 1.0 --vsync --backend glx --no-fading-openclose &
 xwallpaper --zoom "$WALLPAPER" &
 xsetroot -cursor_name left_ptr
 
-urxvtd -q &
+[ "$TERMINAL" = 'urxvtc' ] && urxvtd -q &
 dunst &
 sxhkd -c "$HOME"/.config/sxhkd/.sxhkdrc &
 unclutter --timeout 1 &
