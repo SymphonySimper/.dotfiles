@@ -389,3 +389,11 @@
 # required by x11-misc/urxvt-font-size-1.3::gentoo
 # required by urxvt-font-size (argument)
 >=x11-terms/rxvt-unicode-9.26-r2 perl
+# required by app-editors/neovim-0.5.1::gentoo[lua_single_target_luajit]
+# required by @selected
+# required by @world (argument)
+>=dev-lua/lpeg-1.0.2-r101 lua_targets_luajit
+# required by app-editors/neovim-0.5.1::gentoo[lua_single_target_luajit]
+# required by @selected
+# required by @world (argument)
+>=dev-lua/mpack-1.0.9 lua_targets_luajit
