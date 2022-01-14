@@ -14,7 +14,7 @@ M.setup = function()
 
   local config = {
     -- disable virtual text
-    virtual_text = false,
+    virtual_text = true,
     -- show signs
     signs = {
       active = signs,
@@ -25,7 +25,7 @@ M.setup = function()
     float = {
       focusable = false,
       style = "minimal",
-      border = "rounded",
+      border = "sharp",
       source = "always",
       header = "",
       prefix = "",
@@ -35,11 +35,11 @@ M.setup = function()
   vim.diagnostic.config(config)
 
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-    border = "rounded",
+    border = "sharp",
   })
 
   vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    border = "rounded",
+    border = "sharp",
   })
 end
 

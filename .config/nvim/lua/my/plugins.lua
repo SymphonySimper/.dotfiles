@@ -38,7 +38,9 @@ return packer.startup(function(use)
 	use 'Jorengarenar/vim-MvVis'
 	use 'unblevable/quick-scope'
 	use 'tpope/vim-surround'
-
+	use 'nvim-telescope/telescope.nvim'
+	use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+	use 'nvim-telescope/telescope-media-files.nvim'
 	-- cmp plugins
   use 'hrsh7th/nvim-cmp'
 	use 'hrsh7th/cmp-buffer'

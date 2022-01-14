@@ -36,7 +36,8 @@ local leader_map = {
 	{ 'u', [[:s/\<./\u&/g<bar>:noh]]..e },
 	{ 'd', ':da' },
 	{ 'c', ':silent !groff-ms -f %'..e },
-	{ 'l', ':Lex 30'..e },
+	{ 'f', ':Telescop find_files'..e },
+	{ 's', ':Telescope live_grep'..e },
 }
 
 local le = '<leader>'
@@ -45,7 +46,7 @@ for i, v in pairs(leader_map) do
 end
 
 local function Ins(str)
-	present = false
+	local present = false
 	for i, v in pairs({l, s, r}) do
 		if (string.match(str, v) ~= nil) then
 			present = true
