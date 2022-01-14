@@ -33,6 +33,9 @@ local normal_map = {
 local leader_map = {
 	{ "R", ":%s//g"..l..l },
 	{ "r", ":s//g"..l..l },
+	{ "u", [[:s/\<./\u&/g<bar>:noh]]..e},
+	{ "d", ":da"},
+	{ "c", ":silent !groff-ms -f %"..e}
 }
 
 local le = "<leader>"
