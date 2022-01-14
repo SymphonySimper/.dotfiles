@@ -62,7 +62,7 @@ function M.setup(colors)
     hi.Conceal      = { guifg = M.colors.base0D, guibg = M.colors.base00, gui = nil,    guisp = nil }
     hi.Cursor       = { guifg = M.colors.base00, guibg = M.colors.base05, gui = nil,    guisp = nil }
     hi.NonText      = { guifg = M.colors.base03, guibg = nil,             gui = nil,    guisp = nil }
-    hi.LineNr       = { guifg = M.colors.base04, guibg = M.colors.base00, gui = nil,    guisp = nil }
+    hi.LineNr       = { guifg = M.colors.base03, guibg = M.colors.base00, gui = nil,    guisp = nil }
     hi.SignColumn   = { guifg = M.colors.base04, guibg = M.colors.base00, gui = nil,    guisp = nil }
     hi.StatusLine   = { guifg = M.colors.base04, guibg = M.colors.base00, gui = 'none', guisp = nil }
     hi.StatusLineNC = { guifg = M.colors.base01, guibg = M.colors.base00, gui = 'none', guisp = nil }
