@@ -35,29 +35,45 @@ return packer.startup(function(use)
 	use "nvim-lua/popup.nvim" 
   use "nvim-lua/plenary.nvim"
 	use 'ap/vim-css-color'
-	use 'ptzz/lf.vim'
-	use 'voldikss/vim-floaterm'
-	use 'junegunn/fzf.vim'
 	use 'Jorengarenar/vim-MvVis'
 	use 'unblevable/quick-scope'
+	use 'tpope/vim-surround'
+
+	-- cmp plugins
   use 'hrsh7th/nvim-cmp'
 	use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-cmdline' 
   use 'saadparwaiz1/cmp_luasnip'  
+	use 'hrsh7th/cmp-nvim-lsp'
+	use 'hrsh7th/cmp-nvim-lua'
+
+	-- snippets
   use 'L3MON4D3/LuaSnip'
 	use 'rafamadriz/friendly-snippets' 
-	use 'tpope/vim-surround'
-	use 'takac/vim-hardtime'
+
+	-- lsp
+	use 'neovim/nvim-lspconfig'
+	use 'williamboman/nvim-lsp-installer'
 
 	-- Lazy
 	use {
-		{ 'vimwiki/vimwiki', opt = true, ft = 'wiki' },
-		{ 'mattn/calendar-vim', opt = true }
+				'vimwiki/vimwiki',
+				config = function()
+				vim.g.vimwiki_list = {
+					{
+						path = os.getenv('VIMWIKI'),
+						path_html = os.getenv('XDG_DATA_HOME')..'/mywiki-html',
+						diary_rel_path = 'personal/diary/',
+						auto_diary_index = 1,
+					},
+				}
+				end
 	}
-	use { 'dhruvasagar/vim-table-mode', opt = true, cmd = 'TableMode' }
-	use { 'rust-lang/rust.vim', opt = true, ft = 'rs' }
-	use { 'iamcco/markdown-preview.nvim', opt = true, run = 'cd app && npm install', cmd = 'MarkdownPreview'}
+
+	use { 'dhruvasagar/vim-table-mode',  cmd = 'TableMode' }
+	use { 'rust-lang/rust.vim',  ft = 'rs' }
+	use { 'iamcco/markdown-preview.nvim', run = 'cd app && npm install', cmd = 'MarkdownPreview'}
 
   if PACKER_BOOTSTRAP then
     require("packer").sync()
