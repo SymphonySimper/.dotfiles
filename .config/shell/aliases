@@ -18,6 +18,7 @@ alias cgs='config status'
 alias cgm='config commit'
 alias cgp='config push'
 alias cgau='config add -u'
+alias cglz='lazygit --git-dir="$HOME"/.cfg/ --work-tree="$HOME"'
 
 # Package Manager
 alias e='$PERM emerge -avq'
