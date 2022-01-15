@@ -28,16 +28,20 @@ local normal_map = {
 	{ "td", ":tabclose" .. e },
 }
 
+local tel = ":Telescope"
+
 local leader_map = {
 	{ "R", ":%s//g" .. l .. l },
 	{ "r", ":s//g" .. l .. l },
 	{ "u", [[:s/\<./\u&/g<bar>:noh]] .. e },
 	{ "d", ":da" },
 	{ "c", ":silent !groff-ms -f %" .. e },
-	{ "f", ":Telescop find_files" .. e },
-	{ "s", ":Telescope live_grep" .. e },
 	{ "e", ":NvimTreeToggle" .. e },
 	{ "F", ":Format" .. e },
+	{ "p", tel .. " find_files" .. e },
+	{ "s", tel .. " current_buffer_fuzzy_find" .. e },
+	{ "S", tel .. " live_grep" .. e },
+	{ "m", tel .. " diagnostics" .. e },
 }
 
 local le = "<leader>"

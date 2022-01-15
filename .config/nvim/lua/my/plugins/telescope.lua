@@ -14,6 +14,8 @@ telescope.setup({
 			results = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
 			preview = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
 		},
+		color_devicons = false,
+		layout_config = { prompt_position = "top" },
 		path_display = { "smart" },
 
 		mappings = {
