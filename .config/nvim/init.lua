@@ -1,12 +1,12 @@
 local contents = {
-	'autocmd',
-	'colorscheme',
-	'keymaps',
-	'lsp',
-	'options',
-	'plugins'
+	"autocmd",
+	"colorscheme",
+	"keymaps",
+	"lsp",
+	"options",
+	"plugins",
 }
 
 for _, v in pairs(contents) do
-	require('my.'..v)
+	require("my." .. v)
 end

@@ -1,4 +1,3 @@
-
 local cmds = {
 	-- To sort file contents
 	[[ autocmd BufWritePre folders,fzf-folders,scripts,shell,configs :sort ]],
@@ -14,9 +13,10 @@ local cmds = {
 	[[ autocmd BufWritePre * %s/\s\+$//e ]],
 	[[ autocmd BufWritePre * %s/\n\+\%$//e ]],
 	[[ autocmd BufWritePre *.[ch] %s/\%$/\r/e ]],
-	[[autocmd BufWritePre * cal cursor(currPos[1], currPos[2])]],
+	[[ autocmd BufWritePre * cal cursor(currPos[1], currPos[2]) ]],
+	[[ autocmd BufWritePre * Format ]],
 }
 
-for i, v in pairs(cmds) do
+for _, v in pairs(cmds) do
 	vim.cmd(v)
 end
