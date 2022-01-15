@@ -14,6 +14,7 @@ local plugins = {
 	"impatient",
 	"indentline",
 	"devicons",
+	"autopairs",
 	-- 'rust',
 }
 

@@ -52,6 +52,7 @@ return packer.startup(function(use)
 			require("rust-tools").setup({})
 		end,
 	})
+	use("windwp/nvim-autopairs")
 
 	-- Telescope
 	use("nvim-telescope/telescope.nvim")
