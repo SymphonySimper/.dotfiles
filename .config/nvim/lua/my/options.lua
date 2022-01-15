@@ -1,3 +1,5 @@
+local tab = 4
+
 local options = {
 	backup = false,
 	swapfile = false,
@@ -7,10 +9,10 @@ local options = {
 	undofile = true,
 	clipboard = "unnamedplus",
 	relativenumber = true,
-	tabstop = 2,
-	softtabstop = 2,
-	shiftwidth = 2,
-	-- wrap = false,
+	tabstop = tab,
+	softtabstop = tab,
+	shiftwidth = tab,
+	wrap = false,
 	scrolloff = 8,
 	sidescrolloff = 8,
 	termguicolors = true,

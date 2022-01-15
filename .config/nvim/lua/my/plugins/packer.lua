@@ -19,7 +19,7 @@ end
 vim.cmd [[
   augroup packer_user_config
     autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
+    autocmd BufWritePost packer.lua source <afile> | PackerSync
   augroup end
 ]]
 
@@ -30,17 +30,22 @@ if not status_ok then
 end
 
 return packer.startup(function(use)
-
 	use "wbthomason/packer.nvim"
 	use "nvim-lua/popup.nvim"
-  use "nvim-lua/plenary.nvim"
+	use "nvim-lua/plenary.nvim"
 	use 'ap/vim-css-color'
-	use 'Jorengarenar/vim-MvVis'
+	-- use 'Jorengarenar/vim-MvVis'
 	use 'unblevable/quick-scope'
 	use 'tpope/vim-surround'
 	use 'kyazdani42/nvim-tree.lua'
 	use 'kyazdani42/nvim-web-devicons'
 	use 'akinsho/toggleterm.nvim'
+	use 'booperlv/nvim-gomove'
+	use 'Pocco81/AutoSave.nvim'
+	use 'andweeb/presence.nvim'
+	use	'vimwiki/vimwiki'
+	use 'lewis6991/impatient.nvim'
+	use "lukas-reineke/indent-blankline.nvim"
 
 	-- Telescope
 	use 'nvim-telescope/telescope.nvim'
@@ -50,50 +55,35 @@ return packer.startup(function(use)
 	use 'lewis6991/gitsigns.nvim'
 
 	-- cmp plugins
-  use 'hrsh7th/nvim-cmp'
+	use 'hrsh7th/nvim-cmp'
 	use 'hrsh7th/cmp-buffer'
-  use 'hrsh7th/cmp-path'
-  use 'hrsh7th/cmp-cmdline'
-  use 'saadparwaiz1/cmp_luasnip'
+	use 'hrsh7th/cmp-path'
+  	use 'hrsh7th/cmp-cmdline'
+  	use 'saadparwaiz1/cmp_luasnip'
 	use 'hrsh7th/cmp-nvim-lsp'
 	use 'hrsh7th/cmp-nvim-lua'
 	use 'numToStr/Comment.nvim'
 
 	-- snippets
-  use 'L3MON4D3/LuaSnip'
+	use 'L3MON4D3/LuaSnip'
 	use 'rafamadriz/friendly-snippets'
 
 	-- lsp
 	use 'neovim/nvim-lspconfig'
 	use 'williamboman/nvim-lsp-installer'
+	use "jose-elias-alvarez/null-ls.nvim"
 
-  -- Treesitter
-  use {
-    "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate",
-  }
+	-- Treesitter
+	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', }
 	use 'JoosepAlviste/nvim-ts-context-commentstring'
 
 	-- Lazy
-	use {
-				'vimwiki/vimwiki',
-				config = function()
-				vim.g.vimwiki_list = {
-					{
-						path = os.getenv('VIMWIKI'),
-						path_html = os.getenv('XDG_DATA_HOME')..'/mywiki-html',
-						diary_rel_path = 'personal/diary/',
-						auto_diary_index = 1,
-					},
-				}
-				end
-	}
-
+	use { 'ThePrimeagen/vim-be-good', cmd = 'VimBeGood' }
 	use { 'dhruvasagar/vim-table-mode',  cmd = 'TableMode' }
 	use { 'rust-lang/rust.vim',  ft = 'rs' }
 	use { 'iamcco/markdown-preview.nvim', run = 'cd app && npm install', cmd = 'MarkdownPreview'}
 
-  if PACKER_BOOTSTRAP then
-    require("packer").sync()
-  end
+	if PACKER_BOOTSTRAP then
+	  require("packer").sync()
+	end
 end)

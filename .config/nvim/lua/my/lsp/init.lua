@@ -3,5 +3,14 @@ if not status_ok then
 	return
 end
 
-require('my.lsp.lsp-installer')
+local lsp_files = {
+	'lsp-installer',
+	'null-ls',
+	-- 'rust',
+}
+
+for _, v in pairs(lsp_files) do
+	require('my.lsp.'..v)
+end
+
 require("my.lsp.handlers").setup()

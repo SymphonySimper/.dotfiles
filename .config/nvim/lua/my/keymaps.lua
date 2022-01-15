@@ -1,7 +1,5 @@
 local k = vim.api.nvim_set_keymap
 local o = { noremap = true, silent = true }
-local to = { silent = true }
-
 
 local e = '<CR>'
 local s = '<Space>'
@@ -42,13 +40,13 @@ local leader_map = {
 }
 
 local le = '<leader>'
-for i, v in pairs(leader_map) do
+for _, v in pairs(leader_map) do
 	table.insert(normal_map, { le..v[1], v[2] })
 end
 
 local function Ins(str)
 	local present = false
-	for i, v in pairs({l, s, r}) do
+	for _, v in pairs({l, s, r}) do
 		if (string.match(str, v) ~= nil) then
 			present = true
 			break
@@ -57,7 +55,7 @@ local function Ins(str)
 	return present
 end
 
-for i, v in pairs(normal_map) do
+for _, v in pairs(normal_map) do
 	if Ins(v[2]) then
 			k('n', v[1], v[2], { noremap = true })
 	else

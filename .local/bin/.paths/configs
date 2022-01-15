@@ -1,3 +1,4 @@
+alacritty					.config/alacritty/alacritty.yml
 bspwm						.config/bspwm/bspwmrc
 bspwm-hotkeys				.config/sxhkd/bspwm-hotkeys
 dunst						.config/dunst/dunstrc
@@ -19,8 +20,7 @@ mybinds						.config/sxhkd/mybinds
 mybspwm-binds				.config/sxhkd/mybspwm-binds
 newsboat-config				.config/newsboat/config
 newsboat-urls				.config/newsboat/urls
-nvim						.config/nvim/init.vim
-nvim-color					.config/nvim/colors/the-black.vim
+nvim						.config/nvim/init.lua
 picom						.config/picom/picom.conf
 portage						.config/portage/make.conf
 rofi-config					.config/rofi/config.rasi

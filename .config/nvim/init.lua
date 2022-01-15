@@ -1,13 +1,12 @@
-require "my.autocmd"
-require "my.cmp"
-require "my.colorscheme"
-require "my.keymaps"
-require "my.lsp"
-require "my.options"
-require "my.plugins"
-require "my.telescope"
-require "my.treesitter"
-require "my.comment"
-require "my.gitsigns"
-require "my.nvim-tree"
-require "my.toggleterm"
+local contents = {
+	'autocmd',
+	'colorscheme',
+	'keymaps',
+	'lsp',
+	'options',
+	'plugins'
+}
+
+for _, v in pairs(contents) do
+	require('my.'..v)
+end
