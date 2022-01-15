@@ -7,6 +7,13 @@ local actions = require("telescope.actions")
 
 telescope.setup({
 	defaults = {
+
+		borderchars = {
+			-- { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+			prompt = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+			results = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+			preview = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+		},
 		path_display = { "smart" },
 
 		mappings = {
@@ -85,15 +92,6 @@ telescope.setup({
 		},
 	},
 })
-
-local full_theme = {
-	borderchars = {
-		{ "─", "│", "─", "│", "┌", "┐", "┘", "└" },
-		prompt = { "─", "│", " ", "│", "┌", "┐", "│", "│" },
-		results = { "─", "│", "─", "│", "├", "┤", "┘", "└" },
-		preview = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
-	},
-}
 
 -- telescope.builtin.live_grep(full_theme())
 -- telescope.builtin.current_buffer_fuzzy_find(full_theme())
