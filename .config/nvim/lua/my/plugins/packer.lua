@@ -53,13 +53,11 @@ return packer.startup(function(use)
 		end,
 	})
 	use("windwp/nvim-autopairs")
+	use("lewis6991/gitsigns.nvim")
 
 	-- Telescope
 	use("nvim-telescope/telescope.nvim")
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
-
-	-- Gitsings
-	use("lewis6991/gitsigns.nvim")
 
 	-- cmp plugins
 	use("hrsh7th/nvim-cmp")
