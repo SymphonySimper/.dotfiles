@@ -1,6 +1,7 @@
 blender                  .local/bin/aliases/blender
 bmark                    .local/bin/bmark
 brightness               .local/bin/brightness
+chd                      .local/bin/helper/chd
 coding-time              .local/bin/bspwm/coding-time
 configs                  .local/bin/.paths/configs
 dfc                      .local/bin/dfc
@@ -20,8 +21,8 @@ groff-ms                 .local/bin/groff-ms
 i-slept                  .local/bin/i-slept
 kdenlive                 .local/bin/aliases/kdenlive
 lf-clear-img             .local/bin/lf/lf-clear-img
-lf-draw-img              .local/bin/lf/lf-draw-img
 lf-dr-file               .local/bin/lf/lf-dr-file
+lf-draw-img              .local/bin/lf/lf-draw-img
 lf-p                     .local/bin/lf/lf-p
 lf-previewer             .local/bin/lf/lf-previewer
 look-away                .local/bin/cron/look-away
@@ -40,6 +41,7 @@ play-bg                  .local/bin/aliases/play-bg
 play-movie               .local/bin/rofi/play-movie
 play-video               .local/bin/rofi/play-video
 power-options            .local/bin/rofi/power-options
+r-timer                  .local/bin/rofi/r-timer
 rekey                    .local/bin/rekey
 rofi-edit                .local/bin/aliases/rofi-edit
 rofi-notes               .local/bin/aliases/rofi-notes
@@ -47,7 +49,6 @@ rofi-open                .local/bin/aliases/rofi-open
 rofi-play                .local/bin/aliases/rofi-play
 rofi-run                 .local/bin/aliases/rofi-run
 rofi-todo                .local/bin/aliases/rofi-todo
-r-timer                  .local/bin/rofi/r-timer
 screenshot               .local/bin/screenshot
 scripts                  .local/bin/.paths/scripts
 search                   .local/bin/rofi/search

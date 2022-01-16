@@ -1,6 +1,7 @@
 #!/bin/sh
 
 temp_file=/tmp/coding-time
+chd="$HOME"/.local/bin/helper/chd
 
 ls_prog="ls -aF"
 sed_1="sed 's/\///'"
@@ -24,8 +25,8 @@ open_terminals(){
 		loc="$(get_path)"
 	fi
 	bspc desktop -f '^3'
-	$TERMINAL --working-directory "$loc" > /dev/null 2>&1 &
-	$TERMINAL --working-directory "$(get_path)" > /dev/null 2>&1 &
+	$TERMINAL -e $chd  "$loc" > /dev/null 2>&1 &
+	$TERMINAL -e $chd  "$(get_path)" > /dev/null 2>&1 &
 	sleep 0.1s
 	bspc node -f west
 	bspc node -z right +400 0
