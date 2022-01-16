@@ -14,7 +14,9 @@ local cmds = {
 	[[ autocmd BufWritePre * %s/\n\+\%$//e ]],
 	[[ autocmd BufWritePre *.[ch] %s/\%$/\r/e ]],
 	[[ autocmd BufWritePre * cal cursor(currPos[1], currPos[2]) ]],
-	[[ autocmd BufWritePre * Format ]],
+	[[ autocmd BufWritePre * lua vim.lsp.buf.formatting() ]],
+	[[ autocmd BufRead,BufNewFile colors,dpi,urxvt :set filetype=xdefaults ]],
+	[[ autocmd BufWritePost colors,dpi,urxvt :silent !gen-xresources ]],
 }
 
 for _, v in pairs(cmds) do

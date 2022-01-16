@@ -1,6 +1,6 @@
 URxvt.scrollBar: false
-URxvt.font: xft:Anonymous Pro:size=12:autohint=true
-!URxvt.font: xft:JetBrains Mono:size=12:autohint=true
+! URxvt.font: xft:Anonymous Pro:size=12:autohint=true
+URxvt.font: xft:JetBrains Mono:size=11:autohint=true
 URxvt.letterSpace: 1
 URxvt.internalBorder: 8
 

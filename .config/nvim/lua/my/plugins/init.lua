@@ -13,7 +13,7 @@ local plugins = {
 	"gomove",
 	"impatient",
 	"indentline",
-	"devicons",
+	-- "devicons",
 	"autopairs",
 	-- 'rust',
 }

@@ -18,7 +18,7 @@ select_default_prog 'BROWSER' 'librewolf' 'firefox' 'chromium'
 select_default_prog 'PERM' 'doas' 'sudo'
 select_default_prog 'EDITOR' 'nvim' 'vim' 'nano'
 export VISUAL="$EDITOR"
-select_default_prog 'TERMINAL' 'alacritty' 'urxvtc' 'kitty'
+select_default_prog 'TERMINAL' 'urxvtc' 'alacritty' 'kitty'
 select_default_prog 'SECOND_TERMINAL' 'urxvt' 'alacritty' 'kitty'
 select_default_prog 'SWALLOW' 'devour' ''
 select_default_prog 'USE_GPU' 'prime-run' ''
