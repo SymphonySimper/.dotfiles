@@ -1,0 +1,23 @@
+#!/bin/sh
+
+link="https://cheat.sh/"
+temp_file=/tmp/chtsh
+search_his="$XDG_CACHE_HOME"/chtsh
+
+word_count=$(echo $@ | wc -w)
+cut_word(){ echo "$1" | cut -d ' ' -f $2; }
+
+if [ -z "$@" ]; then
+	[ -f $search_his ] || touch $search_his
+	cat $search_his
+elif [ $word_count -gt 1 ]; then
+	grep -q "^$@$" $search_his || echo "$@" >> $search_his
+	lang=$(cut_word "$@" '1')
+	query=$(cut_word "$@" '2-')
+
+	{
+		curl -s "${link}/${lang}/${query}" > $temp_file \
+			&& $TERMINAL -e less $temp_file
+	} > /dev/null 2>&1 &
+	# { sleep 30s; rm $temp_file; } > /dev/null 2>&1 &
+fi

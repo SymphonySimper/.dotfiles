@@ -34,6 +34,8 @@ super + {space,s,e,r,a,shift+n}
 super + shift + q
 	rofi -modi "Power Options:$HOME/.local/bin/rofi/power-options" \
 	-show 'Power Options'
+super + i
+	rofi -modi "cht.sh:$HOME/.local/bin/rofi/chtsh" -show "cht.sh"
 
 # Screenshot
 super + shift + {s,a}
@@ -70,7 +72,7 @@ super + shift + m
 	prime-run $VIDEO_PLAYER "$(xclip -selection clipboard -o)"
 
 # bmark
-super + i
+super + shift + i
 	bmark open figma
 
 # sxhkd
