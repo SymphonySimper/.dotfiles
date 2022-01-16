@@ -26,7 +26,7 @@ open_terminals(){
 	fi
 	bspc desktop -f '^3'
 	$TERMINAL -e $chd  "$loc" > /dev/null 2>&1 &
-	$TERMINAL -e $chd  "$(get_path)" > /dev/null 2>&1 &
+	# $TERMINAL -e $chd  "$(get_path)" > /dev/null 2>&1 &
 	sleep 0.1s
 	bspc node -f west
 	bspc node -z right +400 0

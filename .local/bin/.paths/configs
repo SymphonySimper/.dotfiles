@@ -20,7 +20,7 @@ mybinds						.config/sxhkd/mybinds
 mybspwm-binds				.config/sxhkd/mybspwm-binds
 newsboat-config				.config/newsboat/config
 newsboat-urls				.config/newsboat/urls
-nvim						.config/nvim/
+nvim						.config/nvim
 picom						.config/picom/picom.conf
 portage						.config/portage/make.conf
 rofi-config					.config/rofi/config.rasi
