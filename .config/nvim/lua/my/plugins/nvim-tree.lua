@@ -93,7 +93,7 @@ nvim_tree.setup({
 			},
 		},
 		number = false,
-		relativenumber = false,
+		relativenumber = true,
 	},
 	quit_on_open = 0,
 	git_hl = 1,
