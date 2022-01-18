@@ -1,6 +1,6 @@
 local cmds = {
 	-- To sort file contents
-	[[ autocmd BufWritePre folders,fzf-folders,scripts,shell,configs :sort ]],
+	[[ autocmd BufWritePre folders,fzf-folders,scripts,shell,configs,.begone :sort ]],
 	-- For groff files
 	[[ autocmd BufWritePost *.ms :silent !groff-ms -p "%" ]],
 	[[ autocmd BufRead,BufNewFile *.ms,*.me,*.mom,*.man set filetype=groff ]],
