@@ -5,6 +5,7 @@ chd                      .local/bin/helper/chd
 chtsh                    .local/bin/rofi/chtsh
 coding-time              .local/bin/bspwm/coding-time
 configs                  .local/bin/.paths/configs
+countdown                .local/bin/helper/countdown
 dfc                      .local/bin/dfc
 ebooks                   .local/bin/rofi/ebooks
 edit-configs             .local/bin/rofi/edit-configs
@@ -28,6 +29,7 @@ lf-p                     .local/bin/lf/lf-p
 lf-previewer             .local/bin/lf/lf-previewer
 look-away                .local/bin/cron/look-away
 lz                       .local/bin/lz
+manager                  .local/bin/helper/manager
 mntdev                   .local/bin/mntdev
 myinfo                   .local/bin/myinfo
 myqemu                   .local/bin/myqemu

@@ -1,0 +1,13 @@
+#!/bin/sh
+
+while :; do
+	hour=$(date +%H)
+	if [ $hour -lt 5 ] && [ $hour -gt 22 ]; then
+		[ $WM = 'bspwm'] && {
+			bspc desktop -f 9
+			$TERMINAL -e "$HOME"/.local/bin/helper/countdown 'Shutting down in' 1 15
+		}
+		$PERM poweroff
+	fi
+	sleep 5m
+done
