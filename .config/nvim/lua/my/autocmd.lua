@@ -17,6 +17,7 @@ local cmds = {
 	[[ autocmd BufWritePre * lua vim.lsp.buf.formatting() ]],
 	[[ autocmd BufRead,BufNewFile colors,dpi,urxvt :set filetype=xdefaults ]],
 	[[ autocmd BufWritePost colors,dpi,urxvt :silent !gen-xresources ]],
+	[[ autocmd BufRead,BufNewFile * lua print(vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())) ]],
 }
 
 for _, v in pairs(cmds) do
