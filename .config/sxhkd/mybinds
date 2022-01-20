@@ -12,10 +12,6 @@ super + {F2,F3,F4,shift + F2,shift + F3}
 super + F12
 	$TERMINAL -e pulsemixer
 
-# Music
-super + {F1,shift + F1}
-	{play-bg,bmark open spotify}
-
 # Get work done
 super + shift + F12
 	$TERMINAL -e gen-hosts
