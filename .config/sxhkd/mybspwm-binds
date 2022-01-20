@@ -9,8 +9,3 @@ super + x
 super + shift + x
 	bspc node -f west; \
 	bspc node -z right +400 0
-
-# Open ncspot
-super + F1
-	bspc desktop -f '^10'; \
-	$TERMINAL -e ncspot

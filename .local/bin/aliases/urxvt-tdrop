@@ -1,0 +1,6 @@
+#!/bin/sh
+
+[ -z "$@" ] && exit 1
+n=$1
+shift
+tdrop -am -w 80% -h 80% -x 10% -y 10% -n $n urxvt -e $@

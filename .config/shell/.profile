@@ -27,6 +27,7 @@ select_default_prog 'USE_GPU' 'prime-run' ''
 export PATH="$PATH:$HOME/.local/bin"					# Scripts
 export PATH="$PATH:$HOME/.local/bin/aliases"			# Alias scripts
 export PATH="$PATH:$HOME/.local/bin/gen"				# Gen scripts
+export PATH="$PATH:$HOME/.local/bin/helper"				# Helper scripts
 export PATH="$PATH:$HOME/lifeisfun/lang/flutter/bin" 	# Flutter
 
 # ~/ Clean-up:

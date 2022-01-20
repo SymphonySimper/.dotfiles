@@ -29,7 +29,7 @@ lf-p                     .local/bin/lf/lf-p
 lf-previewer             .local/bin/lf/lf-previewer
 look-away                .local/bin/cron/look-away
 lz                       .local/bin/lz
-manager                  .local/bin/helper/manager
+manager                  .local/bin/cron/manager
 mntdev                   .local/bin/mntdev
 myinfo                   .local/bin/myinfo
 myqemu                   .local/bin/myqemu
@@ -64,6 +64,7 @@ timer                    .local/bin/timer
 todo                     .local/bin/rofi/todo
 typin                    .local/bin/aliases/typin
 unix                     .local/bin/unix
+urxvt-tdrop              .local/bin/aliases/urxvt-tdrop
 v                        .local/bin/v
 volume                   .local/bin/volume
 yoink                    .local/bin/yoink

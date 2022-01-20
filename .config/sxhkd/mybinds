@@ -3,8 +3,8 @@ super + {Return,shift + Return}
  	{$TERMINAL,$SECOND_TERMINAL}
 
 # Open Browser/ Lf
-super + {f, shift + f}
-	{$TERMINAL -e lfp,$BROWSER}
+super + shift + f
+	$BROWSER
 
 # Volume
 super + {F2,F3,F4,shift + F2,shift + F3}
@@ -66,6 +66,14 @@ super + shift + space
 # Play copied url
 super + shift + m
 	prime-run $VIDEO_PLAYER "$(xclip -selection clipboard -o)"
+
+# Scratchpad
+mytdrop='tdrop -am -w 80% -h 80% -x 10% -y 10%'
+
+super + F1
+	urxvt-tdrop 1 ncspot
+super + f
+	urxvt-tdrop 2 lfp
 
 # bmark
 super + shift + i

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 temp_file=/tmp/coding-time
-chd="$HOME"/.local/bin/helper/chd
+chd='chd'
 
 ls_prog="ls -aF"
 sed_1="sed 's/\///'"

@@ -92,7 +92,7 @@ fli(){
 			loc_src="$loc"
 		fi
 		cd "$loc_src"
-		$TERMINAL -e "$HOME"/.local/bin/helper/chd "$loc" > /dev/null 2>&1 &
+		$TERMINAL -e chd "$loc" > /dev/null 2>&1 &
 		bspc node -f west
 		bspc node -z right +400 0
 	fi
