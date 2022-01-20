@@ -14,4 +14,7 @@ sxhkd -c "$HOME"/.config/sxhkd/.sxhkdrc &
 unclutter --timeout 1 &
 "$HOME"/.local/bin/cron/look-away &
 
+firefox &
 # signal-desktop &
+discord &
+slack &
