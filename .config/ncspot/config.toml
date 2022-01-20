@@ -1,0 +1,26 @@
+[saved_state]
+volume = 80
+
+[keybindings]
+"=" = "volup"
+"+" = "volup 10"
+"_" = "voldown 10"
+
+[theme]
+background = "#000000E6"
+primary = "#aaaaaa"
+secondary = "#444444"
+title = "#bbbbbb"
+playing = "#aaaaaa"
+playing_selected = "#aaaaaa"
+playing_bg = "#444444"
+highlight = "#bbbbbb"
+highlight_bg = "#444444"
+error = "#bbbbbb"
+error_bg = "red"
+statusbar = "#bbbbbb"
+statusbar_progress = "#444444"
+statusbar_bg = "#000000"
+cmdline = "#bbbbbb"
+cmdline_bg = "#000000"
+search_match = "#aaaaaa"
