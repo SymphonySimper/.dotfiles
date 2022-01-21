@@ -1,6 +1,6 @@
 #!/bin/sh
 
-manager &
+"$HOME"/.local/bin/cron/manager &
 setxkbmap -option caps:escape
 
 xrdb -load "$HOME"/.config/x11/Xresources

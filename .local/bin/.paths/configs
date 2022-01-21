@@ -18,6 +18,7 @@ lf							.config/lf/lfrc
 mpv							.config/mpv/mpv.conf
 mybinds						.config/sxhkd/mybinds
 mybspwm-binds				.config/sxhkd/mybspwm-binds
+ncspot						.config/ncspot/config.toml
 newsboat-config				.config/newsboat/config
 newsboat-urls				.config/newsboat/urls
 nvim						.config/nvim
