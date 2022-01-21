@@ -3,8 +3,8 @@ volume = 80
 
 [keybindings]
 "=" = "volup"
-"+" = "volup 10"
-"_" = "voldown 10"
+# "+" = "volup 10"
+# "_" = "voldown 10"
 
 [theme]
 background = "#000000E6"
