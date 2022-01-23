@@ -3,11 +3,11 @@ local autosave = require("autosave")
 autosave.setup({
 	enabled = true,
 	execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
-	events = { "InsertLeave", "TextChanged" },
+	events = { "InsertLeave" },
 	conditions = {
 		exists = true,
 		filename_is_not = { "packer.lua" },
-		filetype_is_not = {},
+		filetype_is_not = { "vimwiki", "markdown", "groff" },
 		modifiable = true,
 	},
 	write_all_buffers = true,

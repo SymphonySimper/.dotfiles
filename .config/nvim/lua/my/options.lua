@@ -21,6 +21,7 @@ local options = {
 	sidescrolloff = 8,
 	termguicolors = true,
 	updatetime = 300,
+	nrformats = "alpha",
 }
 
 for k, v in pairs(options) do

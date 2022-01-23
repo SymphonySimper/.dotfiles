@@ -1,3 +1,5 @@
+gapless = true
+
 [saved_state]
 volume = 80
 

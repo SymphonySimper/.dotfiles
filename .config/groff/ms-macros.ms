@@ -28,3 +28,11 @@
 .NH \\n[arg]
 \\*[title]
 ..
+
+.de BL
+.IP \(bu 2
+..
+
+.de plink
+.pdfhref W -D \\$@
+..
