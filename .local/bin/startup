@@ -16,5 +16,5 @@ unclutter --timeout 1 &
 
 # firefox &
 # signal-desktop &
-discord &
+# discord &
 # slack &

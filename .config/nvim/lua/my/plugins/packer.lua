@@ -54,6 +54,10 @@ return packer.startup(function(use)
 	})
 	use("windwp/nvim-autopairs")
 	use("lewis6991/gitsigns.nvim")
+	use("dhruvasagar/vim-table-mode")
+	use("ThePrimeagen/vim-be-good")
+	use("rust-lang/rust.vim")
+	use("iamcco/markdown-preview.nvim")
 
 	-- Telescope
 	use("nvim-telescope/telescope.nvim")
@@ -81,12 +85,6 @@ return packer.startup(function(use)
 	-- Treesitter
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 	use("JoosepAlviste/nvim-ts-context-commentstring")
-
-	-- Lazy
-	use({ "ThePrimeagen/vim-be-good", cmd = "VimBeGood" })
-	use({ "dhruvasagar/vim-table-mode", cmd = "TableMode" })
-	use({ "rust-lang/rust.vim", ft = "rs" })
-	use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", cmd = "MarkdownPreview" })
 
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()
