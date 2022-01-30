@@ -7,8 +7,8 @@ alias cbr='cargo build && cargo run'
 
 # Java
 if cat /etc/*-release | grep -qi 'gentoo'; then
-	alias java='/usr/lib64/openjdk-11/bin/java'
-	alias javac='/usr/lib64/openjdk-11/bin/javac'
+	alias java='/usr/lib64/openjdk-17/bin/java'
+	alias javac='/usr/lib64/openjdk-17/bin/javac'
 fi
 
 # Python

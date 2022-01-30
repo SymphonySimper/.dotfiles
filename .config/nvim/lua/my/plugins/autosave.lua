@@ -7,7 +7,7 @@ autosave.setup({
 	conditions = {
 		exists = true,
 		filename_is_not = { "packer.lua" },
-		filetype_is_not = { "vimwiki", "markdown", "groff" },
+		-- filetype_is_not = { "vimwiki", "markdown", "groff" },
 		modifiable = true,
 	},
 	write_all_buffers = true,
