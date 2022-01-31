@@ -26,6 +26,7 @@ local normal_map = {
 	{ "tt", ":tabedit" .. s },
 	{ "tm", ":tabm" .. s },
 	{ "td", ":tabclose" .. e },
+	{ "<C-g>", ":lua _LAZYGIT_TOGGLE()" .. e },
 }
 
 local tel = ":Telescope"
@@ -37,7 +38,7 @@ local leader_map = {
 	{ "d", ":da" },
 	{ "c", ":silent !groff-ms -f %" .. e },
 	{ "e", ":NvimTreeToggle" .. e },
-	{ "F", ":Format" .. e },
+	{ "f", ":lua vim.lsp.buf.formatting()" .. e },
 	{ "p", tel .. " find_files" .. e },
 	{ "s", tel .. " current_buffer_fuzzy_find" .. e },
 	{ "S", tel .. " live_grep" .. e },
