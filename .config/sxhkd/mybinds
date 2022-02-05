@@ -68,8 +68,6 @@ super + shift + m
 	prime-run $VIDEO_PLAYER "$(xclip -selection clipboard -o)"
 
 # Scratchpad
-mytdrop='tdrop -am -w 80% -h 80% -x 10% -y 10%'
-
 super + F1
 	urxvt-tdrop 1 ncspot
 super + f
@@ -78,6 +76,10 @@ super + f
 # bmark
 super + shift + i
 	bmark open figma
+
+# Lockscren
+super + p
+	slock
 
 # sxhkd
 super + Escape

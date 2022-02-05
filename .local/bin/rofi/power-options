@@ -1,18 +1,26 @@
 #!/bin/sh
 
 if [ -z "$@" ]; then
-	printf "%s\n%s\n%s\n" "getout" "bye" "bbak"
-	[ $WM = 'bspwm' ] && echo 'refresh'
-	echo 'nah'
+	while read -r l; do
+		echo $l
+	done <<- EOF
+	lock
+	getout
+	bye
+	bbak
+	$([ $WM = 'bspwm' ] && echo 'refresh')
+	nah
+	EOF
 else
 	case "$@" in
-		getout)
+		'lock') slock > /dev/null 2>&1 & ;;
+		'getout')
 			[ $WM = 'bspwm' ] && bspc quit \
 			|| pkill -KILL -u $USER
 			;;
-		bye) $PERM poweroff ;;
-		bbak) $PERM reboot ;;
-		refresh)
+		'bye') $PERM poweroff ;;
+		'bbak') $PERM reboot ;;
+		'refresh')
 			bspc wm -r \
 			&& dunstify "Restarting $WM"
 			;;
