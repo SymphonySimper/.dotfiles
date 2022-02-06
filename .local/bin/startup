@@ -15,7 +15,8 @@ unclutter --timeout 1 &
 "$HOME"/.local/bin/cron/look-away &
 
 # firefox &
+"$HOME"/.local/appimage/Ferdi-5.7.0.AppImage &
 # signal-desktop &
-bmark open wp &
-discord &
-slack &
+# bmark open wp &
+# discord &
+# slack &

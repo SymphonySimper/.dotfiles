@@ -44,6 +44,7 @@ bspc rule -a Signal desktop='^6'
 bspc rule -a discord desktop='^6'
 bspc rule -a Slack desktop='^6'
 bspc rule -a *:web.whatsapp.com desktop='^6'
+bspc rule -a Ferdi desktop='^6'
 
 bspc rule -a *:www.figma.com desktop='^7' follow=on
 bspc rule -a Ld-linux-x86-64.so.2 desktop='^7'
