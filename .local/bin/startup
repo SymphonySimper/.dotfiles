@@ -16,5 +16,6 @@ unclutter --timeout 1 &
 
 # firefox &
 # signal-desktop &
-# discord &
-# slack &
+bmark open wp &
+discord &
+slack &
