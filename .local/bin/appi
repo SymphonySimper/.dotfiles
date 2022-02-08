@@ -1,0 +1,17 @@
+#!/bin/sh
+
+loc="$HOME"/.local/appimage
+
+listvar=$(find $loc -iname '*.appimage')
+
+list(){
+	while read -r l; do
+		echo $l
+	done <<- EOF
+	$listvar
+	EOF
+}
+
+case "$1" in
+	'list') list ;;
+esac
