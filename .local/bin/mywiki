@@ -39,7 +39,7 @@ if [ ! -z "$@" ]; then
 		if [ -z "$msg" ]; then
 			err "No msg found!"
 		else
-			for i in $(seq $(cat $repos | wc -l)); do for_repos push "$msg"; done
+			for i in $(seq $(wc -l < $repos)); do for_repos push "$msg"; done
 		fi
 	}
 

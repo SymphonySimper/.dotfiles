@@ -6,7 +6,7 @@ chd='chd'
 ls_prog="ls -aF"
 sed_1="sed 's/\///'"
 
-get_path(){ cat $temp_file | tr '\n' '/'; }
+get_path(){ tr '\n' '/' < $temp_file; }
 choose_loc(){ eval $ls_prog $(get_path) | grep / | eval $sed_1; }
 
 view_doc(){ { bspc desktop -f '^4' && $READER "$1"; }> /dev/null 2>&1 & }

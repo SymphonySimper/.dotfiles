@@ -82,7 +82,7 @@ delete_file(){
 
 yank(){
 	to_cp="$h/$(grep -w "^$2." "$h/$1" | awk '{ print $2 }')"
-	cat $to_cp | yoink
+	yoink $to_cp
 }
 yank_file(){
 	ifPresent(){ grep -wq "^$1." "$h/$2"; }

@@ -31,7 +31,7 @@ prepare_px(){
 	# sed -n '/^\.\\\"START PAGE COUNT HERE$/,$p' "$file"
 	sed '/^\.\\\"START PAGE COUNT HERE$/q' "$1" > $top_half
 	sed '1,/^\.\\\"START PAGE COUNT HERE$/d' "$1" > $bottom_half
-	cat $bottom_half | grep '^\.mhead\|^\.bp$' \
+	grep '^\.mhead\|^\.bp$' $bottom_half \
 		| tr '"' '|' | cut -d '|' -f2 > $pages
 
 	page_count=1
@@ -46,7 +46,7 @@ prepare_px(){
 
 	px=$(mktemp)
 	l_no=1
-	l_c=$(cat $heads_with_no | wc -l)
+	l_c=$(wc -l < $heads_with_no)
 	while read -r line; do
 		title=$(echo $line | cut -d '|' -f1)
 		pg_no=$(echo $line | cut -d '|' -f2)

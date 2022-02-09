@@ -14,9 +14,12 @@ sxhkd -c "$HOME"/.config/sxhkd/.sxhkdrc &
 unclutter --timeout 1 &
 "$HOME"/.local/bin/cron/look-away &
 
-# firefox &
-# "$HOME"/.local/appimage/Ferdi-5.7.0.AppImage &
-# signal-desktop &
-# bmark open wp &
-discord &
-# slack &
+{
+	sleep 10s
+	# firefox &
+	# "$HOME"/.local/appimage/Ferdi-5.7.0.AppImage &
+	# signal-desktop &
+	# bmark open wp &
+	discord &
+	# slack &
+} &
