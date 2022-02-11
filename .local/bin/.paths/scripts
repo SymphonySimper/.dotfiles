@@ -40,6 +40,7 @@ notes                    .local/bin/rofi/notes
 open-appimage            .local/bin/rofi/open-appimage
 open-bmark               .local/bin/rofi/open-bmark
 open-flatpak             .local/bin/rofi/open-flatpak
+open-spotify             .local/bin/bspwm/open-spotify
 open-url                 .local/bin/rofi/open-url
 play-audio               .local/bin/rofi/play-audio
 play-bg                  .local/bin/aliases/play-bg

@@ -1,0 +1,9 @@
+#!/bin/sh
+
+is_spotify=$(pgrep -x spotify | wc -c)
+if [ $is_spotify -eq 0 ]; then
+	bspc desktop -f '^6'
+	spotify &
+else
+	bspc desktop -f '^6'
+fi

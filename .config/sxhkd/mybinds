@@ -68,8 +68,8 @@ super + shift + m
 	prime-run $VIDEO_PLAYER "$(xclip -selection clipboard -o)"
 
 # Scratchpad
-super + F1
-	urxvt-tdrop 1 ncspot
+# super + F1
+# 	urxvt-tdrop 1 ncspot
 super + f
 	urxvt-tdrop 2 lfp
 

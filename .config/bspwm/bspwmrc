@@ -42,6 +42,7 @@ bspc rule -a Com.github.xournalpp.xournalpp desktop='^5' follow=on
 bspc desktop '^6' --layout monocle
 bspc rule -a Signal desktop='^6'
 bspc rule -a discord desktop='^6'
+bspc rule -a Spotify desktop='^6'
 bspc rule -a Slack desktop='^6'
 bspc rule -a *:web.whatsapp.com desktop='^6'
 bspc rule -a Ferdi desktop='^6'

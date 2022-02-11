@@ -9,3 +9,7 @@ super + x
 super + shift + x
 	bspc node -f west; \
 	bspc node -z right +400 0
+
+# Open spotify
+super + F1
+	"$HOME"/.local/bin/bspwm/open-spotify
