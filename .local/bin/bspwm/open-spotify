@@ -1,9 +1,16 @@
 #!/bin/sh
 
 is_spotify=$(pgrep -x spotify | wc -c)
-if [ $is_spotify -eq 0 ]; then
-	bspc desktop -f '^6'
-	spotify &
-else
-	bspc desktop -f '^6'
-fi
+open_spotify(){
+	if [ $is_spotify -eq 0 ]; then
+		bspc desktop -f '^6'
+		spotify &
+	else
+		bspc desktop -f '^6'
+	fi
+}
+
+case "$1" in
+	kill) [ $is_spotify -gt 0 ] && killall spotify ;;
+	*) open_spotify ;;
+esac
