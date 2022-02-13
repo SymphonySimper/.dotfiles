@@ -61,7 +61,9 @@ super + n
 
 # dunst
 super + shift + space
-	dunstctl action
+	dunstctl close-all
+# super + shift + ctrl + space
+# 	dunstctl action
 
 # Play copied url
 super + shift + m

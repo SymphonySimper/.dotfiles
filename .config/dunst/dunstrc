@@ -1,7 +1,9 @@
 [global]
     monitor = 0
     follow = mouse
-    geometry = "300x15-30+20"
+    # geometry = "300x15-30+20"
+	width = 300
+	height = 600
     progress_bar = true
     progress_bar_height = 10
     progress_bar_frame_width = 1
@@ -37,14 +39,14 @@
 
     icon_position = left
     min_icon_size = 0
-    max_icon_size = 42
+    max_icon_size = 32
     icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
 
     sticky_history = false
     history_length = 20
 
     dmenu = /usr/bin/rofi -dmenu
-    browser = /usr/bin/librewolf
+    browser = /usr/bin/firefox
 
     always_run_script = true
     title = Dunst
