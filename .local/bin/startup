@@ -20,6 +20,7 @@ unclutter --timeout 1 &
 	# "$HOME"/.local/appimage/Ferdi-5.7.0.AppImage &
 	# signal-desktop &
 	# bmark open wp &
+	noisetorch -i -s $(pactl get-default-source) -t 95 &
 	discord &
 	# spotify &
 	# slack &
