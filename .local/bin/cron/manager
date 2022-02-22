@@ -2,6 +2,6 @@
 
 while :; do
 	hour=$(date +%H)
-	[ $hour -lt 5 ] || [ $hour -gt 22 ] && $PERM poweroff
+	[ $hour -lt 5 ] || [ $hour -gt 21 ] && $PERM poweroff
 	sleep 5m
 done
