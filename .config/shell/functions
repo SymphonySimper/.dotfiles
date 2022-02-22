@@ -111,6 +111,7 @@ mcd(){ mkdir -p "$1" && cd "$1"; }
 
 # cp functions
 cp_cron(){ crontab -l > "$HOME"/.config/cron/crontab; }
+
 cp_portage(){
 	loc="$HOME"/.config/portage
 	cp -v /etc/portage/make.conf "$loc"/make.conf

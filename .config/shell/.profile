@@ -22,6 +22,7 @@ select_default_prog 'TERMINAL' 'urxvtc' 'alacritty' 'kitty'
 select_default_prog 'SECOND_TERMINAL' 'urxvt' 'alacritty' 'kitty'
 select_default_prog 'SWALLOW' 'devour' ''
 select_default_prog 'USE_GPU' 'prime-run' ''
+select_default_prog 'CHROME_EXECUTABLE' 'chromium' 'brave'
 
 # Paths
 export PATH="$PATH:$HOME/.local/bin"					# Scripts
@@ -60,7 +61,6 @@ export GOPATH="$XDG_DATA_HOME"/go
 export ANDROID_SDK_HOME="$XDG_CONFIG_HOME"/android
 export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
 export ANDROID_SDK_ROOT="$XDG_DATA_HOME"/android
-export CHROME_EXECUTABLE="chromium"
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
 export ATOM_HOME="$XDG_DATA_HOME"/atom
 
