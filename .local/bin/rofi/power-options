@@ -18,8 +18,8 @@ else
 			[ $WM = 'bspwm' ] && bspc quit \
 			|| pkill -KILL -u $USER
 			;;
-		'bye') $PERM poweroff ;;
-		'bbak') $PERM reboot ;;
+		'bye') $PERM systemctl poweroff ;;
+		'bbak') $PERM systemctl reboot ;;
 		'refresh')
 			bspc wm -r \
 			&& dunstify "Restarting $WM"

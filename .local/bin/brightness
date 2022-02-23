@@ -1,6 +1,7 @@
 #!/bin/sh
 
 app="xbacklight"
+lbf="$XDG_CACHE_HOME"/last-brightness
 get_b(){ $app -get | cut -d '.' -f1; }
 notify(){
 	dunstify -h string:x-dunst-stack-tag:brightness \
@@ -8,14 +9,20 @@ notify(){
 		"Brightness: $(get_b)" -h int:value:$(get_b)
 }
 
-toggle(){
-	l1=$1; l2=$2
-	[ $(get_b) -eq $l1 ] && { $app -set $l2 && notify; } \
-		|| { $app -set $l1 && notify; }
+toggle_max(){
+	[ $(get_b) -lt 100 ] && get_b > $lbf
+
+	if [ $(get_b) -lt 100 ]; then
+		$app -set 100
+	else
+		$app -set $(cat $lbf)
+	fi
 }
 
 case "$1" in
-	-u) $app -inc 2 && notify ;;
-	-d) $app -dec 2 && notify ;;
-	-t) shift; toggle $1 $2 ;;
+	-u) $app -inc 2 ;;
+	-d) $app -dec 2 ;;
+	-s) shift; $app -set $1 ;;
+	-t) toggle_max ;;
 esac
+notify

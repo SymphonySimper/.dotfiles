@@ -12,6 +12,7 @@ ebooks                   .local/bin/rofi/ebooks
 edit-configs             .local/bin/rofi/edit-configs
 edit-scripts             .local/bin/rofi/edit-scripts
 edit-shell               .local/bin/rofi/edit-shell
+fetch                    .local/bin/helper/fetch
 folders                  .local/bin/.paths/folders
 fzf-folders              .local/bin/.paths/fzf-folders
 game-mode                .local/bin/game-mode
@@ -37,7 +38,6 @@ myqemu                   .local/bin/myqemu
 mywiki                   .local/bin/mywiki
 myxrandr                .local/bin/myxrandr
 notes                    .local/bin/rofi/notes
-open-appimage            .local/bin/rofi/open-appimage
 open-bmark               .local/bin/rofi/open-bmark
 open-flatpak             .local/bin/rofi/open-flatpak
 open-spotify             .local/bin/bspwm/open-spotify
@@ -46,6 +46,7 @@ play-audio               .local/bin/rofi/play-audio
 play-bg                  .local/bin/aliases/play-bg
 play-movie               .local/bin/rofi/play-movie
 play-video               .local/bin/rofi/play-video
+pm                       .local/bin/pm
 power-options            .local/bin/rofi/power-options
 rekey                    .local/bin/rekey
 rofi-edit                .local/bin/aliases/rofi-edit

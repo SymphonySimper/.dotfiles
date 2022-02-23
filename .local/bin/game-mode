@@ -9,12 +9,11 @@ is_picom="$(pgrep picom)"
 
 toggle(){
 	if [ -z $is_picom ]; then
-		$TERMINAL -e gen-hosts \
-		&& handle_picom
+		$TERMINAL -e gen-hosts
 	else
-		$TERMINAL -e gen-hosts 'clear' \
-		&& handle_picom
-	fi
+		$TERMINAL -e gen-hosts 'clear'
+	fi \
+	&& handle_picom
 }
 
 handle_picom(){
@@ -26,13 +25,22 @@ handle_picom(){
 		&& $notify -i $warning_i "Picom is dead"
 	fi
 }
-handle_brightness(){ brightness -t 10 100; }
+handle_brightness(){ brightness -t; }
 
-options(){ printf "%s\n%s\n%s\n" 'picom and brightness' 'toggle picom' 'brightness'; }
+options(){
+	while read -r l; do
+		echo $l
+	done <<- EOF
+	toggle
+	picom and brightness
+	toggle picom
+	brightness
+	EOF
+}
 query=$(options | rofi -dmenu -p 'Game-mode')
 
 case "$query" in
-	# toggle) toggle ;;
+	'toggle') toggle ;;
 	'toggle picom') handle_picom ;;
 	'picom and brightness') handle_picom && handle_brightness ;;
 	'brightness') handle_brightness ;;

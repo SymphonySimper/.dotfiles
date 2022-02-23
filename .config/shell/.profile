@@ -25,11 +25,13 @@ select_default_prog 'USE_GPU' 'prime-run' ''
 select_default_prog 'CHROME_EXECUTABLE' 'chromium' 'brave'
 
 # Paths
-export PATH="$PATH:$HOME/.local/bin"					# Scripts
-export PATH="$PATH:$HOME/.local/bin/aliases"			# Alias scripts
-export PATH="$PATH:$HOME/.local/bin/gen"				# Gen scripts
-export PATH="$PATH:$HOME/.local/bin/helper"				# Helper scripts
-export PATH="$PATH:$HOME/lifeisfun/lang/flutter/bin" 	# Flutter
+add_path(){ [ -d "$1" ] && export PATH="$PATH:$1"; }
+add_path "$HOME/.local/bin"						# Scripts
+add_path "$HOME/.local/bin/aliases"				# Alias scripts
+add_path "$HOME/.local/bin/gen"					# Gen scripts
+add_path "$HOME/.local/bin/helper"				# Helper scripts
+add_path "$HOME/.local/appimage"				# Appimages
+add_path "$HOME/lifeisfun/lang/flutter/bin" 	# Flutter
 
 # ~/ Clean-up:
 export XDG_CONFIG_HOME="$HOME"/.config
@@ -116,6 +118,9 @@ export TZ='Asia/Kolkata'
 
 # Wallpaper
 export WALLPAPER="$XDG_DATA_HOME"/mypics/bg.png
+
+# Distro
+export DISTRO="${$(grep -w ID /etc/os-release)##*=}"
 
 # Window manager name
 [ -f "$XINITRC" ] && export WM="$(tail -n 1 "$XINITRC" | cut -d ' ' -f 4)"

@@ -58,8 +58,8 @@ alias q='exit'
 alias im_light='ps_mem -p $(pgrep -d, -u $USER)'
 alias nobita='mntdev -n sdb1'
 alias ka='killall'
-alias bye='$PERM poweroff'
-alias bbak='$PERM reboot'
+alias bye='$PERM systemclt poweroff'
+alias bbak='$PERM systemctl reboot'
 alias temp='watch sensors'
 
 # Shell History
