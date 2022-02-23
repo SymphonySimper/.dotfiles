@@ -1,10 +1,19 @@
 #!/bin/sh
 
+if [ -n "$(command -v com.spotify.Client)" ]; then
+	app='com.spotify.Client'
+elif [ -n "$(command -v spotify)" ]; then
+	app='spotify'
+else
+	echo 'Spotify not installed'
+	exit 1
+fi
+
 is_spotify=$(pgrep -x spotify | wc -c)
 open_spotify(){
 	if [ $is_spotify -eq 0 ]; then
 		bspc desktop -f '^6'
-		spotify &
+		$app &
 	else
 		bspc desktop -f '^6'
 	fi
