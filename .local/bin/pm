@@ -1,3 +1,237 @@
 #!/bin/sh
 
-echo 'hi'
+if [ $# -lt 1 ]; then
+	echo "Not enough arguments"
+	exit 1
+else
+	if [ -z "$DISTRO" ]; then
+		exp_distro(){ export DISTRO="${$(grep -w $1 /etc/os-release)##*=}"; }
+		if grep -wq 'ID_LIKE' /etc/os-release; then
+			exp_distro 'ID_LIKE'
+		else
+			exp_distro 'ID'
+		fi
+	fi
+
+	if [ -z "$PERM" ]; then
+		if [ -n "$(command -v sudo)" ]; then
+			PERM='sudo'
+		elif [ -n "$(command -v doas)" ]; then
+			PERM='doas'
+		else
+			echo "Sudo | doas dosen't exist"
+			exit 1
+		fi
+	fi
+
+	[ -n "$(command -v fzf)" ] && viewer='fzf' || viewer='less'
+
+	case "$DISTRO" in
+		[Aa]rch ) pmn='pacman' ;pm="$PERM pacman" ;;
+		[Dd]ebian | [Uu]buntu ) pmn='atp' ;pm="$PERM apt" ;;
+		[Gg]entoo ) pmnt='emerge'; pm="$PERM emerge -avq" ;;
+	esac
+
+	aur(){
+		is_paru="$(command -v paru)"
+		if [ -n "$(command -v pacman)" ]; then
+			aur='paru'
+			if [ -z "$is_paru" ]; then
+				read -p "Would you like to install paru [y/N] " ans
+				case "$ans" in
+					[yY]* )
+							src="$HOME"/.local/src
+							i_loc="$src"/paru
+							[ ! -d $src ] && mkdir -p $src
+							install --needed base-devel git
+							[ ! -d "$i_loc" ] && git clone https://aur.archlinux.org/paru.git  $i_loc
+							cd $i_loc
+							makepkg -si
+							;;
+					*) exit 1 ;;
+				esac
+			fi
+			if [ -n "$is_paru" ]; then
+				case "$1" in
+					i ) shift; $aur -S $@ ;;
+					u ) $aur -Syyu ;;
+					e ) $PERM $EDITOR "$HOME"/.config/paru/paru.conf ;;
+				esac
+			fi
+		fi
+	}
+
+	flatpak_stuff(){
+		fl='flatpak'
+		is_flatpak="$(command -v $fl)"
+		if [ -z "$is_flatpak" ]; then
+			echo "Flatpak not installed"
+			read -p "Would you like to install it? [y/N] " ans
+			case $ans in
+				[Yy]* )
+					install $fl \
+						&& $fl remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+					;;
+				* ) exit 1 ;;
+			esac
+		fi
+		if [ -n "$is_flatpak" ]; then
+			case "$1" in
+				i ) shift; $fl install $@ ;;
+				r ) shift; $fl uninstall $@ ;;
+				u ) $fl update ;;
+				s ) shift; $fl search $1 ;;
+				l ) $fl list --app | $viewer ;;
+				c ) $fl list --app | wc -l ;;
+				ar ) shift; $fl remote-add --if-not-exists $@ ;;
+				dr ) shift; $fl remote-delete $1 ;;
+				rmz ) $fl uninstall --unused ;;
+			esac
+		fi
+	}
+
+	install(){
+		case "$pmn" in
+			'pacman' ) $pm -S $@ ;;
+			'emerge' ) $pm $@ ;;
+			'apt' ) $pm install $@ ;;
+		esac
+	}
+
+	update(){
+		case "$pmn" in
+			'pacman' ) $pm -Syyu && aur u;;
+			'emerge' ) $pm --sync && $pm --update --deep --with-bdeps=y @world && $pm --depclean ;;
+			'apt' ) $pm update && $pm upgrade ;;
+		esac
+		flatpak_stuff u
+	}
+
+	uninstall(){
+		case "$pmn" in
+			'pacman' ) $pm -Rns $@ ;;
+			'emerge' ) $pm -c $@ ;;
+			'apt' ) $pm remove $@ ;;
+		esac
+	}
+
+	list(){
+		case "$pmn" in
+			'pacman' ) $pm -Q | $viewer ;;
+			'emerge' ) equery list "*" | $viewer ;;
+			'apt' ) dpkg -L ufw | $viewer ;;
+		esac
+	}
+
+	count(){
+		case "$pmn" in
+			'pacman' ) $pm -Q | wc -l ;;
+			'emerge' ) equery list "*" | wc -l ;;
+			'apt' ) dpkg -L ufw | wc -l ;;
+		esac
+	}
+
+	search(){
+		case "$pmn" in
+			'pacman' ) $pm -Qs $1 ;;
+			'emerge' ) $pm --search $1 ;;
+			'apt' ) $pm search $1 ;;
+		esac
+	}
+
+	rank_servers(){
+		is_rate_mirrors="$(command -v rate-mirrors)"
+		if [ -n "$is_rate_mirrors" ]; then
+			if [ -z "$is_rate_mirrors" ]; then
+				read -p "Would you like install rate-mirrors [y/N]? " ans
+				case "$ans" in
+					[yY]* ) aur i rate-mirrors-bin ;;
+					* ) exit 1 ;;
+				esac
+			fi
+			if [ -n "$is_rate_mirrors" ]; then
+				export TMPFILE="$(mktemp)"; \
+				sudo true; \
+    			rate-mirrors --save=$TMPFILE arch --max-delay=21600 \
+    			  && sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup \
+    			  && sudo mv $TMPFILE /etc/pacman.d/mirrorlist
+			fi
+		fi
+	}
+
+	gentoo_stuff(){
+		[ -z $(command -v emerge) ] && exit 1
+		case "$1" in
+			nu ) $pm --update --deep --newuse @world ;;
+			cu ) e --changed-use --deep @world ;;
+			ct )
+				shift
+				$PERM qlop -tHv $1
+				;;
+			ar )
+				shift
+				$PERM eselect repository enable $1
+				$PERM emaint sync -r $1
+				$pm --sync
+				;;
+			dr )
+				shift
+				$PERM eselect repository remove $1
+				;;
+			um )
+				shift
+				$pm $1 --automask
+				$PERM etc-update
+				$pm $1
+				;;
+		esac
+	}
+
+	remove_zombies(){
+		case "$pmn" in
+			'pacman' ) $pm -Rns $($pm -Qtdq) ;;
+			'emerge' ) gentoo_stuff nu && $pm --depclean ;;
+			'apt' ) $pm autoremove ;;
+		esac
+	}
+
+	edit_conf(){
+		case "$pmn" in
+			'pacman' ) $PERM $EDITOR /etc/pacman.conf ;;
+			'emerge' ) $PERM $EDITOR /etc/portage/make.conf ;;
+			'apt' ) $PERM $EDITOR /etc/apt/sources.list ;;
+		esac
+	}
+
+
+	case "$1" in
+		i | install ) shift; install $@ ;;
+		r | rm ) shift; uninstall $@ ;;
+		u | update ) update ;;
+		l | list ) list ;;
+		c | count ) count ;;
+		rmz ) remove_zombies ;;
+		e | edit ) edit_conf ;;
+		s | search ) shift; search $1 ;;
+		# arch stuff
+		rs ) rank_servers ;;
+		ai ) shift; aur i $@ ;;
+		ae ) aur e ;;
+		# gentoo stuff
+		nu ) gentoo_stuff nu ;;
+		cu ) gentoo_stuff cu ;;
+		ct ) shift; gentoo_stuff $1 ;;
+		ar ) shift; gentoo_stuff $1 ;;
+		dr ) shift; gentoo_stuff $1 ;;
+		um ) shfit; gentoo_stuff $1 ;;
+		# flatpak
+		fi ) shift; flatpak_stuff i $@ ;;
+		fr ) shift; flatpak_stuff r $@ ;;
+		far ) shift; flatpak_stuff ar $@ ;;
+		fdr ) shift; flatpak_stuff dr $@ ;;
+		fl ) flatpak_stuff l ;;
+		fc ) flatpak_stuff c ;;
+		fs ) shift; flatpak_stuff s $@ ;;
+		frmz ) shift; flatpak_stuff rmz ;;
+	esac
+fi

@@ -23,20 +23,6 @@ cgamp(){
 	&& config push
 }
 
-# Package Manager
-compile_time(){ $PERM qlop -tHv "$1"; }
-add_repo(){
-	$PERM eselect repository enable "$1"
-	$PERM emaint sync -r "$1"
-	e --sync
-}
-del_repo(){ $PERM eselect repository remove "$1"; }
-unmask(){
-	e -a "$1" --autounmask
-	$PERM etc-update
-	e "$1"
-}
-
 # Format USB
 format_usb_fat32(){
 	$PERM dd if=/dev/zero of=/dev/sdb bs=4096 status=progress \

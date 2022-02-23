@@ -20,16 +20,6 @@ alias cgp='config push'
 alias cgau='config add -u'
 alias cglz='lazygit --git-dir="$HOME"/.cfg/ --work-tree="$HOME"'
 
-# Package Manager
-alias e='$PERM emerge -avq'
-alias update='e --sync && e --update --deep --with-bdeps=y @world && e --depclean'
-alias am_i_fat='equery list "*" | wc -l'
-alias erm='e -c'
-alias newuse='e --update --deep --newuse @world'
-alias rm_zombies='newuse; e --depclean'
-alias changed_use='e --changed-use --deep @world'
-alias elist='equery list "*" | less'
-
 # Program
 alias ls='ls --color=auto'
 alias l='ls'
