@@ -31,7 +31,6 @@ options(){
 	while read -r l; do
 		echo $l
 	done <<- EOF
-	toggle
 	picom and brightness
 	toggle picom
 	brightness
