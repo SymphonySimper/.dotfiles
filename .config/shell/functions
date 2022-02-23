@@ -128,9 +128,3 @@ video_to_gif(){
 
 # to find a program is running or not
 is_alive(){ ps aux | grep "$@" | grep -v 'grep'; }
-
-# Package manager
-is_there(){
-	list=$(equery list '*')
-	[ -z "$1" ] && echo "$list" | fzf || echo "$list" | grep -i "$1"
-}
