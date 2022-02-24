@@ -22,7 +22,7 @@ select_default_prog 'TERMINAL' 'urxvtc' 'alacritty' 'kitty'
 select_default_prog 'SECOND_TERMINAL' 'urxvt' 'alacritty' 'kitty'
 select_default_prog 'SWALLOW' 'devour' ''
 select_default_prog 'USE_GPU' 'prime-run' ''
-select_default_prog 'CHROME_EXECUTABLE' 'chromium' 'brave'
+select_default_prog 'CHROME_EXECUTABLE' 'chromium' 'com.github.Eloston.UngoogledChromium' 'brave'
 
 # Paths
 add_path(){ [ -d "$1" ] && export PATH="$PATH:$1"; }

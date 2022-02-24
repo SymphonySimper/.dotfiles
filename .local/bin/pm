@@ -24,18 +24,21 @@ else
 		fi
 	fi
 
-	[ -n "$(command -v fzf)" ] && viewer='fzf' || viewer='less'
-
 	case "$DISTRO" in
 		[Aa]rch ) pmn='pacman' ;pm="$PERM pacman" ;;
 		[Dd]ebian | [Uu]buntu ) pmn='atp' ;pm="$PERM apt" ;;
 		[Gg]entoo ) pmnt='emerge'; pm="$PERM emerge -avq" ;;
 	esac
 
+	aur='paru'; fl='flatpak'; viewer='fzf';
+
+
+	is_flatpak="$(command -v $fl)"
+	is_paru="$(command -v $aur)"
+	is_rate_mirrors="$(command -v rate-mirrors)"
+
 	aur(){
-		is_paru="$(command -v paru)"
 		if [ -n "$(command -v pacman)" ]; then
-			aur='paru'
 			if [ -z "$is_paru" ]; then
 				read -p "Would you like to install paru [y/N] " ans
 				case "$ans" in
@@ -62,8 +65,6 @@ else
 	}
 
 	flatpak_stuff(){
-		fl='flatpak'
-		is_flatpak="$(command -v $fl)"
 		if [ -z "$is_flatpak" ]; then
 			echo "Flatpak not installed"
 			read -p "Would you like to install it? [y/N] " ans
@@ -81,7 +82,7 @@ else
 				r ) shift; $fl uninstall $@ ;;
 				u ) $fl update ;;
 				s ) shift; $fl search $1 ;;
-				l ) $fl list --app | $viewer ;;
+				l ) $fl list --app | $viewer | tr '\t' '|' | cut -d '|' -f2 | xclip -sel c ;;
 				c ) $fl list --app | wc -l ;;
 				ar ) shift; $fl remote-add --if-not-exists $@ ;;
 				dr ) shift; $fl remote-delete $1 ;;
@@ -104,7 +105,7 @@ else
 			'emerge' ) $pm --sync && $pm --update --deep --with-bdeps=y @world && $pm --depclean ;;
 			'apt' ) $pm update && $pm upgrade ;;
 		esac
-		flatpak_stuff u
+		[ -n "$is_flatpak" ] && flatpak_stuff u
 	}
 
 	uninstall(){
@@ -117,9 +118,9 @@ else
 
 	list(){
 		case "$pmn" in
-			'pacman' ) $pm -Q | $viewer ;;
-			'emerge' ) equery list "*" | $viewer ;;
-			'apt' ) dpkg -L ufw | $viewer ;;
+			'pacman' ) pacman -Q ;;
+			'emerge' ) equery list "*" ;;
+			'apt' ) dpkg -L ufw ;;
 		esac
 	}
 
@@ -140,7 +141,6 @@ else
 	}
 
 	rank_servers(){
-		is_rate_mirrors="$(command -v rate-mirrors)"
 		if [ -n "$is_rate_mirrors" ]; then
 			if [ -z "$is_rate_mirrors" ]; then
 				read -p "Would you like install rate-mirrors [y/N]? " ans
@@ -203,12 +203,19 @@ else
 		esac
 	}
 
+	if [ -z "$(command -v $viewer)" ]; then
+		read -p "Would you like to install $viewer [Y/n]? " ans
+		case "$ans" in
+			[Nn]* ) exit 1 ;;
+			* ) install $viewer ;;
+		esac
+	fi
 
 	case "$1" in
 		i | install ) shift; install $@ ;;
 		r | rm ) shift; uninstall $@ ;;
 		u | update ) update ;;
-		l | list ) list ;;
+		l | list ) list | $viewer | cut -d ' ' -f 1 | xclip -sel c ;;
 		c | count ) count ;;
 		rmz ) remove_zombies ;;
 		e | edit ) edit_conf ;;
