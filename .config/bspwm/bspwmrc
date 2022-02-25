@@ -38,6 +38,7 @@ bspc rule -a Firefox desktop='^2'
 bspc rule -a *:Toolkit state=floating sticky=on
 bspc rule -a LibreWolf desktop='^2' follow=on
 
+bspc desktop '^4' --layout monocle
 bspc rule -a Zathura desktop='^4' state=tiled follow=on
 
 bspc rule -a mpv desktop='^5' follow=on

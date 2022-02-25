@@ -120,7 +120,7 @@ export TZ='Asia/Kolkata'
 export WALLPAPER="$XDG_DATA_HOME"/mypics/bg.png
 
 # Distro
-exp_distro(){ export DISTRO="${$(grep -w $1 /etc/os-release)##*=}"; }
+exp_distro(){ export DISTRO="$(grep -w $1 /etc/os-release | cut -d '=' -f 2)"; }
 if grep -wq 'ID_LIKE' /etc/os-release; then
 	exp_distro 'ID_LIKE'
 else
