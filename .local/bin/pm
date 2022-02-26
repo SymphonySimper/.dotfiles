@@ -58,6 +58,7 @@ else
 				case "$1" in
 					i ) shift; $aur -S $@ ;;
 					u ) $aur -Syyu ;;
+					s ) shift; $aur -Ss $1 ;;
 					e ) $PERM $EDITOR "$HOME"/.config/paru/paru.conf ;;
 				esac
 			fi
@@ -93,7 +94,7 @@ else
 
 	install(){
 		case "$pmn" in
-			'pacman' ) $pm -S $@ || $aur -S $@ ;;
+			'pacman' ) $pm -S $@ || aur i $@ ;;
 			'emerge' ) $pm $@ ;;
 			'apt' ) $pm install $@ ;;
 		esac
@@ -134,7 +135,7 @@ else
 
 	search(){
 		case "$pmn" in
-			'pacman' ) $pm -Qs $1 ;;
+			'pacman' ) $pm -Ss $1 || aur s $1 ;;
 			'emerge' ) $pm --search $1 ;;
 			'apt' ) $pm search $1 ;;
 		esac
@@ -203,6 +204,18 @@ else
 		esac
 	}
 
+	auto_install_uninstall(){
+		for p in $@; do
+			if list | grep -q "$p"; then
+				to_uninstall="$to_uninstall $p"
+			else
+				to_install="$to_install $p"
+			fi
+		done
+		[ -n "$to_install" ] && install $to_install
+		[ -n "$to_uninstall" ] && uninstall $to_uninstall
+	}
+
 	if [ -z "$(command -v $viewer)" ]; then
 		read -p "Would you like to install $viewer [Y/n]? " ans
 		case "$ans" in
@@ -210,6 +223,7 @@ else
 			* ) install $viewer ;;
 		esac
 	fi
+
 
 	case "$1" in
 		i | install ) shift; install $@ ;;
@@ -240,6 +254,6 @@ else
 		fc ) flatpak_stuff c ;;
 		fs ) shift; flatpak_stuff s $@ ;;
 		frmz ) shift; flatpak_stuff rmz ;;
-		* ) list | grep -q "$1" && uninstall "$1" || install "$1" ;;
+		* ) auto_install_uninstall $@ ;;
 	esac
 fi
