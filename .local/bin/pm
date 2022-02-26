@@ -93,7 +93,7 @@ else
 
 	install(){
 		case "$pmn" in
-			'pacman' ) $pm -S $@ ;;
+			'pacman' ) $pm -S $@ || $aur -S $@ ;;
 			'emerge' ) $pm $@ ;;
 			'apt' ) $pm install $@ ;;
 		esac
@@ -240,5 +240,6 @@ else
 		fc ) flatpak_stuff c ;;
 		fs ) shift; flatpak_stuff s $@ ;;
 		frmz ) shift; flatpak_stuff rmz ;;
+		* ) list | grep -q "$1" && uninstall "$1" || install "$1" ;;
 	esac
 fi
