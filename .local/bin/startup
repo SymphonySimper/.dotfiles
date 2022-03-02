@@ -16,6 +16,6 @@ unclutter --timeout 1 &
 
 {
 	sleep 10s
-	noisetorch -i -s $(pactl get-default-source) -t 95 &
+	noisetorch -i -s $(pactl get-default-source) -t 95
 	discord &
 } &

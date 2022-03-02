@@ -16,6 +16,7 @@ groff-ms-macros				.config/groff/ms-macros.ms
 htop						.config/htop/htoprc
 lf							.config/lf/lfrc
 mpv							.config/mpv/mpv.conf
+mpv-input					.config/mpv/input.conf
 mybinds						.config/sxhkd/mybinds
 mybspwm-binds				.config/sxhkd/mybspwm-binds
 ncspot						.config/ncspot/config.toml
