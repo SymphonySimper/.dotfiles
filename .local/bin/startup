@@ -14,8 +14,10 @@ sxhkd -c "$HOME"/.config/sxhkd/.sxhkdrc &
 unclutter --timeout 1 &
 "$HOME"/.local/bin/cron/look-away &
 
-{
-	sleep 10s
-	noisetorch -i -s $(pactl get-default-source) -t 95
-	discord &
-} &
+if [ ! "$(cat /sys/class/power_supply/BAT0/status)" = 'Discharging' ]; then
+	{
+		sleep 10s
+		noisetorch -i -s $(pactl get-default-source) -t 95
+		discord &
+	} &
+fi
