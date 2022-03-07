@@ -17,10 +17,7 @@ URxvt.print-pipe: "cat > /dev/null"
 URxvt.perl-ext-common: resize-font
 
 ! Keybinds to change font size
-URxvt.keysym.C-Up:		resize-font:increase
 URxvt.keysym.C-equal:  	resize-font:bigger
 URxvt.keysym.C-Down:   	resize-font:smaller
-URxvt.keysym.C-S-Up:   	resize-font:incglobal
-URxvt.keysym.C-S-Down: 	resize-font:decglobal
 URxvt.keysym.C-plus:   	resize-font:reset
 URxvt.keysym.C-slash:  	resize-font:show

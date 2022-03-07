@@ -23,6 +23,7 @@ ncspot						.config/ncspot/config.toml
 newsboat-config				.config/newsboat/config
 newsboat-urls				.config/newsboat/urls
 nvim						.config/nvim
+paru						.config/paru/paru.conf
 picom						.config/picom/picom.conf
 portage						.config/portage/make.conf
 rofi-config					.config/rofi/config.rasi
