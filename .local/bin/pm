@@ -93,11 +93,16 @@ else
 	}
 
 	install(){
-		case "$pmn" in
-			'pacman' ) $pm -S $@ || aur i $@ ;;
-			'emerge' ) $pm $@ ;;
-			'apt' ) $pm install $@ ;;
-		esac
+		case "$@" in
+			com.* ) flatpak_stuff i $@ ;;
+			* )
+				case "$pmn" in
+					'pacman' ) $pm -S $@ || aur i $@ ;;
+					'emerge' ) $pm $@ ;;
+					'apt' ) $pm install $@ ;;
+				esac
+				;;
+			esac
 	}
 
 	update(){
@@ -110,10 +115,15 @@ else
 	}
 
 	uninstall(){
-		case "$pmn" in
-			'pacman' ) $pm -Rns $@ ;;
-			'emerge' ) $pm -c $@ ;;
-			'apt' ) $pm remove $@ ;;
+		case "$@" in
+			com.* ) flatpak_stuff r $@ ;;
+			* )
+				case "$pmn" in
+					'pacman' ) $pm -Rns $@ ;;
+					'emerge' ) $pm -c $@ ;;
+					'apt' ) $pm remove $@ ;;
+				esac
+				;;
 		esac
 	}
 
