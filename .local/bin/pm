@@ -65,6 +65,7 @@ else
 		fi
 	}
 
+	flatpak_copy(){ $viewer < $1 | tr '\t' '|' | cut -d '|' -f $2 | tr -d '\n' | xclip -sel c; }
 	flatpak_stuff(){
 		if [ -z "$is_flatpak" ]; then
 			echo "Flatpak not installed"
@@ -82,8 +83,19 @@ else
 				i ) shift; $fl install $@ ;;
 				r ) shift; $fl uninstall $@ ;;
 				u ) $fl update ;;
-				s ) shift; $fl search $1 ;;
-				l ) $fl list --app | $viewer | tr '\t' '|' | cut -d '|' -f2 | xclip -sel c ;;
+				s ) 
+					shift
+					tempfsf=$(mktemp)
+					$fl search $1 > $tempfsf
+					flatpak_copy $tempfsf 3
+					rm $tempfsf
+					;;
+				l )
+					tempflf=$(mktemp)
+					$fl list --app >  $tempflf
+					flatpak_copy $tempflf 2
+					rm $tempflf
+					;;
 				c ) $fl list --app | wc -l ;;
 				ar ) shift; $fl remote-add --if-not-exists $@ ;;
 				dr ) shift; $fl remote-delete $1 ;;
@@ -94,7 +106,7 @@ else
 
 	install(){
 		case "$@" in
-			com.* ) flatpak_stuff i $@ ;;
+			*.* ) flatpak_stuff i $@ ;;
 			* )
 				case "$pmn" in
 					'pacman' ) $pm -S $@ || aur i $@ ;;
@@ -116,7 +128,7 @@ else
 
 	uninstall(){
 		case "$@" in
-			com.* ) flatpak_stuff r $@ ;;
+			*.* ) flatpak_stuff r $@ ;;
 			* )
 				case "$pmn" in
 					'pacman' ) $pm -Rns $@ ;;
@@ -239,7 +251,7 @@ else
 		i | install ) shift; install $@ ;;
 		r | rm ) shift; uninstall $@ ;;
 		u | update ) update ;;
-		l | list ) list | $viewer | cut -d ' ' -f 1 | xclip -sel c ;;
+		l | list ) list | $viewer | cut -d ' ' -f 1 | tr -d '\n' | xclip -sel c ;;
 		c | count ) count ;;
 		rmz ) remove_zombies ;;
 		e | edit ) edit_conf ;;

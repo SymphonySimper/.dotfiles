@@ -21,6 +21,7 @@ wiby_url='https://wiby.me/?q='
 protondb_url='https://www.protondb.com/search?q='
 gentoo_url='https://wiki.gentoo.org/index.php?title=Special%3ASearch&search='
 giphy_url='https://giphy.com/search/'
+flathub_url='https://flathub.org/apps/search/'
 
 # Primary search engine
 s_url="$duckduckgo_url"
@@ -49,6 +50,7 @@ else
 		*\;pb*) search_websites "${protondb_url}" 'pb' "$@" ;;
 		*\;a*) search_websites "${amazon_in_url}" 'a' "$@" ;;
 		*\;d*) search_websites "${duckduckgo_url}" 'd' "$@" ;;
+		*\;f*) search_websites "${flathub_url}" 'f' "$@" ;;
 		*\;g*) search_websites "${google_url}" 'g' "$@" ;;
 		*\;p*) search_websites "${pexels_url}" 'p' "$@" ;;
 		*\;w*) search_websites "${wiby_url}" 'w' "$@" ;;
