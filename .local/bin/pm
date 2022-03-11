@@ -83,7 +83,7 @@ else
 				i ) shift; $fl install $@ ;;
 				r ) shift; $fl uninstall $@ ;;
 				u ) $fl update ;;
-				s ) 
+				s )
 					shift
 					tempfsf=$(mktemp)
 					$fl search $1 > $tempfsf
@@ -141,7 +141,7 @@ else
 
 	list(){
 		case "$pmn" in
-			'pacman' ) pacman -Q ;;
+			'pacman' ) $pmn -Q ;;
 			'emerge' ) equery list "*" ;;
 			'apt' ) dpkg -L ufw ;;
 		esac
@@ -157,7 +157,7 @@ else
 
 	search(){
 		case "$pmn" in
-			'pacman' ) $pm -Ss $1 || aur s $1 ;;
+			'pacman' ) $pmn -Ss $1 || aur s $1 ;;
 			'emerge' ) $pm --search $1 ;;
 			'apt' ) $pm search $1 ;;
 		esac
