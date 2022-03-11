@@ -44,5 +44,13 @@ fi
 case $BROWSER in
 	'firefox') stuff_to_main $firefox_loc ;;
 	'librewolf') stuff_to_main $librewolf_loc ;;
-	'io.gitlab.librewolf-community') stuff_to_main $librewolf_flatapk_loc ;;
+	'io.gitlab.librewolf-community')
+		ask_qn "Would you like to change librewolf flatpak filesystem to home?"
+		if [ $ans = 'yes' ]; then
+			$PERM flatpak override io.gitlab.librewolf-community --filesystem=home \
+				&& stuff_to_main $librewolf_loc
+		else
+			stuff_to_main $librewolf_flatapk_loc
+		fi
+		;;
 esac
