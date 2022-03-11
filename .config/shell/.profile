@@ -14,7 +14,7 @@ export IMAGE_VIEWER="sxiv"
 export VIDEO_PLAYER="mpv"
 export RSS_READER="newsboat"
 
-select_default_prog 'BROWSER' 'librewolf' 'firefox' 'com.github.Eloston.UngoogledChromium' 'chromium' 'brave'
+select_default_prog 'BROWSER' 'librewolf' 'io.gitlab.librewolf-community' 'firefox' 'com.github.Eloston.UngoogledChromium' 'chromium' 'brave'
 select_default_prog 'PERM' 'doas' 'sudo'
 select_default_prog 'EDITOR' 'nvim' 'vim' 'nano'
 export VISUAL="$EDITOR"
