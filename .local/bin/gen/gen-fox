@@ -6,6 +6,7 @@ user_chrome="$cfg_fox"/chrome
 wolf_cfg="$cfg_fox"/wolf/librewolf.overrides.cfg
 
 librewolf_loc="$HOME"/.librewolf
+librewolf_flatapk_loc="$HOME"/.var/app/io.gitlab.librewolf-community/.librewolf
 firefox_loc="$HOME"/.mozilla/firefox
 
 ask_qn(){
@@ -43,4 +44,5 @@ fi
 case $BROWSER in
 	'firefox') stuff_to_main $firefox_loc ;;
 	'librewolf') stuff_to_main $librewolf_loc ;;
+	'io.gitlab.librewolf-community') stuff_to_main $librewolf_flatapk_loc ;;
 esac
