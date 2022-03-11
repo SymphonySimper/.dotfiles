@@ -14,14 +14,14 @@ export IMAGE_VIEWER="sxiv"
 export VIDEO_PLAYER="mpv"
 export RSS_READER="newsboat"
 
-select_default_prog 'BROWSER' 'librewolf' 'firefox' 'chromium'
+select_default_prog 'BROWSER' 'librewolf' 'firefox' 'com.github.Eloston.UngoogledChromium' 'chromium' 'brave'
 select_default_prog 'PERM' 'doas' 'sudo'
 select_default_prog 'EDITOR' 'nvim' 'vim' 'nano'
 export VISUAL="$EDITOR"
 select_default_prog 'TERMINAL' 'urxvtc' 'alacritty' 'kitty'
 select_default_prog 'SECOND_TERMINAL' 'urxvt' 'alacritty' 'kitty'
-select_default_prog 'SWALLOW' 'devour' ''
-select_default_prog 'USE_GPU' 'prime-run' ''
+select_default_prog 'SWALLOW' 'devour'
+select_default_prog 'USE_GPU' 'prime-run'
 select_default_prog 'CHROME_EXECUTABLE' 'chromium' 'com.github.Eloston.UngoogledChromium' 'brave'
 
 # Paths
