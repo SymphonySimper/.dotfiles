@@ -1,4 +1,5 @@
 appi                     .local/bin/appi
+automount                .local/bin/helper/automount
 blender                  .local/bin/aliases/blender
 bmark                    .local/bin/bmark
 brightness               .local/bin/brightness
