@@ -86,7 +86,13 @@ letmein(){
 hey_yo_int(){
 	is_int="$(ping -c 3 gnu.org 2> /dev/null)"
 	if [ -z "$is_int" ]; then
-		while sleep 30s; ping -c 3 gnu.org 2> /dev/null; [ $? -ne 0 ]; do true; done && sound-efx;
+		while
+			sleep 30s
+			ping -c 3 gnu.org 2> /dev/null
+			[ $? -ne 0 ]; do
+			true 
+		done \
+			&& sound-efx
 	else
 		echo "$is_int"
 	fi
