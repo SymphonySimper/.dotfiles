@@ -1,0 +1,25 @@
+#!/bin/sh
+
+l1="$HOME"/lifeisfun
+l2="$HOME"/importantnt
+
+d1='/dev/mapper/lifeisfun'
+d2='/dev/mapper/importantnt'
+
+qn(){
+	read -p "Would you like to mount ${1} to ${2}? [Y/n] " ans
+	case "$ans" in
+		[Nn]* ) echo 'Okay';;
+		* ) $PERM mount $1 $2 ;;
+	esac
+}
+mkd(){ [ ! -d $1 ] && mkdir -p $1; }
+
+lsblkop=$(mktemp)
+lsblk  -rpn | cut -d ' ' -f1,7 | grep "$d1\|$d2" > $lsblkop
+
+is_mounted(){ [ -n "$(grep $1 $lsblkop | cut -d ' ' -f 2)" ] && return 0 || return 1; }
+
+is_mounted $d1 || qn $d1 $l1
+is_mounted $d2 || qn $d2 $l2
+echo "All good"
