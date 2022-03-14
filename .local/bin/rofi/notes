@@ -5,6 +5,7 @@ printf "\000use-hot-keys\037true\n"
 loc="$HOME"/importantnt/notes
 files="$(find $loc -name '*.xopp' -type f)"
 
+[ ! -d $loc ] && mkdir $loc
 if [ $ROFI_RETV -eq 10 ]; then
 	xournalpp > /dev/null 2>&1 &
 elif [ -z "$@" ]; then
