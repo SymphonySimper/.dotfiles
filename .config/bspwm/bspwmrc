@@ -31,59 +31,99 @@ bspc config presel_feedback_color "#aaaaaa"
 bspc config urgent_border_color "#bbbbbb"
 
 # DeskTop rules
+
+## Monocle desktops
+mlp(){ while read -r l; do bspc desktop "^$l" --layout monocle; done; }
+mlp <<- EOF
+	^4	
+	^6
+	EOF
+
+## Misc
 bspc rule -a Screenkey manage=off
 bspc rule -a qemu-system-x86_64 state=fullscreen
 
-## Browser
-bspc rule -a Firefox desktop='^2' follow=on
-bspc rule -a firefox desktop='^2' follow=on
-bspc rule -a *:Toolkit state=floating sticky=on
-bspc rule -a LibreWolf desktop='^2' follow=on
-bspc rule -a Chromium-browser desktop='^2' follow=on
-bspc rule -a chromium desktop='^2' follow=on
-bspc rule -a brave desktop='^2' follow=on
+# Loop Function
+dlp(){ while read -r l; do bspc rule -a $l desktop="$1"; done; }
 
-bspc desktop '^4' --layout monocle
+## D2
+### Browser Related
+blp(){ while read -r l; do bspc rule -a $l desktop='^2' follow=on; done; }
+
+#### Firefox Popup thingy
+bspc rule -a *:Toolkit state=floating sticky=on
+
+#### Browsers
+blp <<- EOF
+	Firefox
+	firefox
+	LibreWolf
+	Chromium-browser
+	chromium
+	brave
+	EOF
+
+## D4
 bspc rule -a Zathura desktop='^4' state=tiled follow=on
 
-bspc rule -a mpv desktop='^5' follow=on
-bspc rule -a Com.github.xournalpp.xournalpp desktop='^5' follow=on
+## D6
+dlp '^5' <<- EOF
+	mpv follow=on
+	Com.github.xournalpp.xournalpp follow=on
+	EOF
 
-bspc desktop '^6' --layout monocle
-bspc rule -a Signal desktop='^6'
-bspc rule -a discord desktop='^6'
-# bspc rule -a Spotify desktop='^6'
-bspc rule -a Slack desktop='^6'
-bspc rule -a *:web.whatsapp.com desktop='^6'
-bspc rule -a Ferdi desktop='^6'
+## D6
+dlp '^6' <<- EOF
+	Signal
+	discord
+	Slack
+	*:web.whatsapp.com
+	Ferdi
+	EOF
 
-bspc rule -a *:www.figma.com desktop='^7' follow=on
-bspc rule -a Ld-linux-x86-64.so.2 desktop='^7'
+## D7
+dlp '^7' <<- EOF
+	kdeconnect.app
+	kdeconnect-settings
+	*:www.figma.com follow=on
+	Ld-linux-x86-64.so.2
+	EOF
 
-bspc rule -a Gimp-2.10 desktop='^8'
-bspc rule -a Gimp desktop='^8'
-bspc rule -a krita desktop='^8'
+## D8
+dlp '^8' <<- EOF
+	Gimp-2.10
+	Gimp
+	krita
+	EOF
 
+## D9
 bspc rule -a qBittorrent desktop='^9'
 
+## D10
 bspc rule -a obs desktop='^10'
 
 # Games related
-bspc rule -a Steam desktop='^8'
-bspc rule -a heroic desktop='^8'
+## Game launchers
+dlp '^8' <<- EOF
+	Steam
+	heroic
+	EOF
 
-bspc rule -a steam_app_0 desktop='^9'
-bspc rule -a rocketleague.exe desktop='^9'
-bspc rule -a csgo_linux64 desktop='^9'
-bspc rule -a PortalWars-Linux-Shipping desktop='^9'
-bspc rule -a steam_app_230410 desktop='^9'
-bspc rule -a steam_app_714010 desktop='^9'
-bspc rule -a JellyBrawl.x86_64 desktop='^9'
-bspc rule -a h12_linux desktop='^9'
-bspc rule -a "Crab Game.x86_64" desktop='^9'
-bspc rule -a steam_app_444090 desktop='^9'
-bspc rule -a steam_app_292030 desktop='^9'
-bspc rule -a Terraria.bin.x86_64 desktop='^9'
-bspc rule -a steam_app_261640 desktop='^9'
-bspc rule -a steam_app_49520 desktop='^9'
-bspc rule -a steam_app_1172470 desktop='^9'
+## Games
+dlp '^9' <<- EOF
+	steam_app_0
+	rocketleague.exe
+	csgo_linux64
+	PortalWars-Linux-Shipping
+	steam_app_230410
+	steam_app_714010
+	JellyBrawl.x86_64
+	h12_linux
+	"Crab Game.x86_64"
+	steam_app_444090
+	steam_app_292030
+	Terraria.bin.x86_64
+	steam_app_261640
+	steam_app_49520
+	steam_app_1172470
+	EOF
