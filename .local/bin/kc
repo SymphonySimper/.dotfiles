@@ -1,0 +1,27 @@
+#!/bin/sh
+
+die(){ [ -z "$1" ] && { echo "$2"; exit 1; }; }
+die "$(command -v kdeconnect-cli)" 'kdeconnect-cli not found'
+die "$(pgrep kdeconnectd)" 'kdeconnectd not running'
+
+pgm='kdeconnect-cli'
+
+device_id="$($pgm -a --id-only | head -n1)"
+die "$device_id" 'No available devices'
+
+pgmd="$pgm -d $device_id"
+
+case "$1" in
+	s ) shift; $pgmd --share $@ ;;
+	p ) 
+		shift
+		if [ $# -eq 0 ]; then
+			$pgmd --ping
+		else
+			$pgmd --ping-msg "$1"
+		fi
+		;;
+	# r ) $pgmd --ring ;;
+	c ) shift; $pgmd --share-text "$1" ;;
+	# ln ) $pgmd --list-notifications ;;
+esac
