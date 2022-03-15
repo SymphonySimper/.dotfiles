@@ -83,6 +83,10 @@ super + shift + i
 super + p
 	slock
 
+# Gromit-mpx
+super + F9
+	gromit-mpx
+
 # sxhkd
 super + Escape
 	rekey

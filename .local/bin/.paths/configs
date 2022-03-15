@@ -13,6 +13,7 @@ fox-vimium-options			.config/fox/extensions/vimium-options.json
 fox-wolf-cfg				.config/fox/wolf/librewolf.overrides.cfg
 fox-yt-enhancer				.config/fox/extensions/yt-enhancer.json
 groff-ms-macros				.config/groff/ms-macros.ms
+gromit-mpx					.config/gromit-mpx.cfg
 htop						.config/htop/htoprc
 lf							.config/lf/lfrc
 mpv							.config/mpv/mpv.conf
