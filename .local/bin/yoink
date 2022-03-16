@@ -1,2 +1,11 @@
 #!/bin/sh
-[ -p /dev/stdin ] && xclip -sel c /dev/stdin || xclip -sel c $@
+
+pgm='xclip -sel c'
+if [ -p /dev/stdin ]; then
+	$pgm /dev/stdin 
+else
+	case "$1" in
+		v ) shift; echo $@ | $pgm ;;
+		* ) $pgm $@ ;;
+	esac
+fi
