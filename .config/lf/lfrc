@@ -34,6 +34,8 @@ cmd touch %{{
 	touch $ans
 }}
 
+cmd yank_filename ${{ yoink v $f }}
+
 # |----------|
 # | My binds |
 # |----------|
@@ -60,3 +62,6 @@ map <enter> open_sep
 # Create file
 map t touch
 source ~/.config/lf/lf-folders
+
+# Copy Filename
+map Y yank_filename
