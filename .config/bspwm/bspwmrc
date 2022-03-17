@@ -35,8 +35,8 @@ bspc config urgent_border_color "#bbbbbb"
 ## Monocle desktops
 mlp(){ while read -r l; do bspc desktop "^$l" --layout monocle; done; }
 mlp <<- EOF
-	^4	
-	^6
+	4
+	6
 	EOF
 
 ## Misc
