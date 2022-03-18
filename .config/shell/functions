@@ -90,7 +90,7 @@ hey_yo_int(){
 			sleep 30s
 			ping -c 3 gnu.org 2> /dev/null
 			[ $? -ne 0 ]; do
-			true 
+			true
 		done \
 			&& sound-efx
 	else
@@ -134,3 +134,14 @@ video_to_gif(){
 
 # to find a program is running or not
 is_alive(){ ps aux | grep "$@" | grep -v 'grep'; }
+
+# cac
+cac(){
+	if [ -n "$(tr -d '\n' <<< $@)" ]; then
+		eq="$@"
+	else
+		printf "Enter eq: "
+		read eq
+	fi
+	[ -n "$(tr -d '\n' <<< $eq)" ] && bc -l <<< $eq || echo "Empty eq"
+}
