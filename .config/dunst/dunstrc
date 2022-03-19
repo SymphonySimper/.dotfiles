@@ -69,18 +69,18 @@
 [urgency_low]
     background = "#000"
     foreground = "#aaa"
-    timeout = 5
+    timeout = 8
     highlight = "#aaa"
 
 [urgency_normal]
     background = "#000"
     foreground = "#aaa"
-    timeout = 5
+    timeout = 10
     highlight = "#aaa"
 
 [urgency_critical]
     background = "#000"
     foreground = "#aaa"
-    timeout = 5
+    timeout = 15
     highlight = "#aaa"
 # vim: ft=cfg
