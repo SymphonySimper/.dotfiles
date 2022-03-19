@@ -22,6 +22,7 @@ protondb_url='https://www.protondb.com/search?q='
 gentoo_url='https://wiki.gentoo.org/index.php?title=Special%3ASearch&search='
 giphy_url='https://giphy.com/search/'
 flathub_url='https://flathub.org/apps/search/'
+crates_url='https://crates.io/search?q='
 
 # Primary search engine
 s_url="$duckduckgo_url"
@@ -49,6 +50,7 @@ else
 		*\;sb*) search_websites "${superbolter_url}" 'sb' "$@" ;;
 		*\;pb*) search_websites "${protondb_url}" 'pb' "$@" ;;
 		*\;a*) search_websites "${amazon_in_url}" 'a' "$@" ;;
+		*\;c*) search_websites "${crates_url}" 'c' "$@" ;;
 		*\;d*) search_websites "${duckduckgo_url}" 'd' "$@" ;;
 		*\;f*) search_websites "${flathub_url}" 'f' "$@" ;;
 		*\;g*) search_websites "${google_url}" 'g' "$@" ;;
