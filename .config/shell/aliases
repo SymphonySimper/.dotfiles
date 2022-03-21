@@ -12,6 +12,10 @@ alias gme='g merge'
 alias gb='g branch'
 alias gce='g checkout'
 alias gl='g log'
+alias grao='g remote add origin'
+alias gz='lazygit'
+alias gt='g tag'
+alias gpt='gp --tags'
 
 # Config git alias
 alias cgs='config status'
