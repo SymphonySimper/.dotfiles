@@ -57,7 +57,7 @@ return packer.startup(function(use)
 	use("dhruvasagar/vim-table-mode")
 	use("ThePrimeagen/vim-be-good")
 	use("rust-lang/rust.vim")
-	use("iamcco/markdown-preview.nvim")
+	use({"iamcco/markdown-preview.nvim", run = 'cd app && npm install'})
 
 	-- Telescope
 	use("nvim-telescope/telescope.nvim")
