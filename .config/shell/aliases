@@ -16,6 +16,7 @@ alias grao='g remote add origin'
 alias gz='lazygit'
 alias gt='g tag'
 alias gpt='gp --tags'
+alias gpom='gpu origin master'
 
 # Config git alias
 alias cgs='config status'
