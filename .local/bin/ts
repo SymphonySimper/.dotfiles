@@ -32,5 +32,5 @@ else
 	curl -s "${tl}/search/$(echo $@ | tr ' ' '+')/1/" | grep -Eo "torrent\/[0-9]{7}\/[a-zA-Z0-9?%-]*/" > $rt
 	[ $(wc -l $rt | cut -d ' ' -f1) -gt 0 ] && title=$(cat $rt | fzf) || die "No results found"
 	[ -z "$title" ] && die "No title selected" || magnet=$(curl -s ${tl}/$title | grep -Po "magnet:\?xt=urn:btih:[a-zA-Z0-9]*" | head -n 1)
-	peerflix -l -k $magnet
+	peerflix -l -k "$magnet"
 fi
