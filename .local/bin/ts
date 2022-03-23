@@ -15,21 +15,22 @@ else
 	[ -z "$(command -v fzf)" ] && die "Requries fzf"
 
 	# Searx is used to search for the url
-	su='https://search.ononoki.org/search?q=1377x' 
+	su='https://search.ononoki.org/search?q=1377x'
 	[ -n "$XDG_CACHE_HOME" ] && cf="$XDG_CACHE_HOME"/ts || cf="$HOME"/.cache/ts
 	get_tl(){ curl -s $su | grep -o 'https://www.1377x.[a-z]*/' | head -n 1 > $cf; }
-	
+
 	num=0
 	while :; do
 		[ ! -f $cf ] && get_tl
 		tl="$(cat $cf)"
-		echo $tl
 		ping -c 1 $(echo $tl | cut -d '/' -f3) > /dev/null 2>&1 && break || get_tl
 		[ $num -gt 5 ] && die "Urls dosen't seem to work!"
 		num=$((num + 1))
 	done
-	movie=$(curl -s "${tl}/search/${@}/1/" | grep -Eo "torrent\/[0-9]{7}\/[a-zA-Z0-9?%-]*/" | fzf)
-	[ -z "$movie" ] && die "No title selected"
-	magnet=$(curl -s ${tl}/$movie | grep -Po "magnet:\?xt=urn:btih:[a-zA-Z0-9]*" | head -n 1)
+
+	rt="$(mktemp)"
+	curl -s "${tl}/search/$(echo $@ | tr ' ' '+')/1/" | grep -Eo "torrent\/[0-9]{7}\/[a-zA-Z0-9?%-]*/" > $rt
+	[ $(wc -l $rt | cut -d ' ' -f1) -gt 0 ] && title=$(cat $rt | fzf) || die "No results found"
+	[ -z "$title" ] && die "No title selected" || magnet=$(curl -s ${tl}/$title | grep -Po "magnet:\?xt=urn:btih:[a-zA-Z0-9]*" | head -n 1)
 	peerflix -l -k $magnet
 fi
