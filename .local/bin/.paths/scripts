@@ -68,6 +68,7 @@ startup                  .local/bin/startup
 syl                      .local/bin/syl
 timer                    .local/bin/timer
 todo                     .local/bin/rofi/todo
+ts                       .local/bin/ts
 typin                    .local/bin/aliases/typin
 unix                     .local/bin/unix
 urxvt-tdrop              .local/bin/aliases/urxvt-tdrop
