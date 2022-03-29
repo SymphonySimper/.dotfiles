@@ -97,9 +97,9 @@ dlp '^8' <<- EOF
 	EOF
 
 ## D9
-bspc rule -a qBittorrent desktop='^9'
 
 ## D10
+bspc rule -a qBittorrent desktop='^10'
 bspc rule -a obs desktop='^10'
 
 # Games related

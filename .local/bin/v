@@ -11,6 +11,7 @@ dis="fzf"
 vg="inkscape"
 nt="xournalpp"
 td="blender"
+tr="qbittorrent"
 
 #Paths
 what_img="$HOME/dl/What"*
@@ -31,6 +32,7 @@ main() {
 		*.svg | *.eps | *.ai ) $h $vg "$1" ;;
 		*.xopp ) $h $nt "$1" ;;
 		*.blend ) $h $USE_GPU $td "$1" ;;
+		*.torrent ) $tr "$1" ;;
 		-a) ls | grep  'jpeg\|jpg\|png\|webp' | $h $iv -t - ;;
 		-w) $h $iv $what_img ;;
 		-f) $h $vf /dev/video0 ;;
