@@ -38,11 +38,11 @@ else
 	case "$1" in
 		-d )
 			shift
-			get_magnet $@ 
+			get_magnet $@
 			[ -z "$(command -v qbittorrent)" ] && die "Requires qbittorrent"
 			qbittorrent $magnet
 			;;
-		-o ) 
+		-o )
 			shift
 			get_magnet $@
 			[ -n "$(command -v xclip)" ] && echo "$manget" | xclip -sel c

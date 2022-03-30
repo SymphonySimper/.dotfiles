@@ -30,3 +30,4 @@ $TERMINAL -e automount &
 # Kde connect
 kc=/usr/lib/kdeconnectd
 [ -f $kc ] && $kc &
+[ -n "$TORRENT" ] && $TORRENT &
