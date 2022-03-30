@@ -22,6 +22,7 @@ if [ ! "$(cat /sys/class/power_supply/BAT0/status)" = 'Discharging' ]; then
 		sleep 10s
 		noisetorch -i -s $(pactl get-default-source) -t 95
 		discord &
+		[ -n "$TORRENT" ] && $TORRENT &
 	} &
 fi
 
@@ -30,4 +31,3 @@ $TERMINAL -e automount &
 # Kde connect
 kc=/usr/lib/kdeconnectd
 [ -f $kc ] && $kc &
-[ -n "$TORRENT" ] && $TORRENT &
