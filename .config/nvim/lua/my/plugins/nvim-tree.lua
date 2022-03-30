@@ -25,7 +25,7 @@ vim.g.nvim_tree_show_icons = {
 	git = 0,
 	folders = 0,
 	files = 0,
-	folder_arrows = 1,
+	folder_arrows = 0,
 	tree_width = 30,
 }
 
@@ -50,7 +50,6 @@ nvim_tree.setup({
 		"dashboard",
 		"alpha",
 	},
-	auto_close = true,
 	open_on_tab = false,
 	hijack_cursor = false,
 	update_cwd = true,
