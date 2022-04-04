@@ -4,6 +4,8 @@ if [ $# -lt 1 ]; then
 	echo "Not enough arguments"
 	exit 1
 else
+	exist(){ [ -n "$(command -v $1)" ] && return 0 || return 1; }
+
 	if [ -z "$DISTRO" ]; then
 		exp_distro(){ export DISTRO="$(grep -w $1 /etc/os-release | cut -d '=' -f 2)"; }
 		if grep -wq 'ID_LIKE' /etc/os-release; then
@@ -14,9 +16,9 @@ else
 	fi
 
 	if [ -z "$PERM" ]; then
-		if [ -n "$(command -v sudo)" ]; then
+		if exist 'sudo'; then
 			PERM='sudo'
-		elif [ -n "$(command -v doas)" ]; then
+		elif exist 'doas'; then
 			PERM='doas'
 		else
 			echo "Sudo | doas dosen't exist"
@@ -33,13 +35,16 @@ else
 	aur='paru'; fl='flatpak'; viewer='fzf';
 
 
-	is_flatpak="$(command -v $fl)"
-	is_paru="$(command -v $aur)"
-	is_rate_mirrors="$(command -v rate-mirrors)"
+	exist 'flatpak'
+	is_flatpak=$?
+	exist 'paru'
+	is_paru=$?
+	exist 'rate-mirrors'
+	is_rate_mirrors=$?
 
 	aur(){
-		if [ -n "$(command -v pacman)" ]; then
-			if [ -z "$is_paru" ]; then
+		if exist 'pacman'; then
+			if [ $is_paru -eq 1 ]; then
 				read -p "Would you like to install paru [y/N] " ans
 				case "$ans" in
 					[yY]* )
@@ -54,7 +59,7 @@ else
 					*) exit 1 ;;
 				esac
 			fi
-			if [ -n "$is_paru" ]; then
+			if [ $is_paru -eq 0 ]; then
 				case "$1" in
 					i ) shift; $aur -S $@ ;;
 					u ) $aur -Syyu ;;
@@ -67,7 +72,7 @@ else
 
 	flatpak_copy(){ $viewer < $1 | tr '\t' '|' | cut -d '|' -f $2 | tr -d '\n' | xclip -sel c; }
 	flatpak_stuff(){
-		if [ -z "$is_flatpak" ]; then
+		if [ $is_flatpak -eq 1 ]; then
 			echo "Flatpak not installed"
 			read -p "Would you like to install it? [y/N] " ans
 			case $ans in
@@ -78,7 +83,7 @@ else
 				* ) exit 1 ;;
 			esac
 		fi
-		if [ -n "$is_flatpak" ]; then
+		if [ $is_flatpak -eq 0 ]; then
 			case "$1" in
 				i ) shift; $fl install $@ ;;
 				r ) shift; $fl uninstall $@ ;;
@@ -123,7 +128,7 @@ else
 			'emerge' ) $pm --sync && $pm --update --deep --with-bdeps=y @world && $pm --depclean ;;
 			'apt' ) $pm update && $pm upgrade ;;
 		esac
-		[ -n "$is_flatpak" ] && flatpak_stuff u
+		[ $is_flatpak -eq 0 ] && flatpak_stuff u
 	}
 
 	uninstall(){
@@ -164,26 +169,24 @@ else
 	}
 
 	rank_servers(){
-		if [ -n "$is_rate_mirrors" ]; then
-			if [ -z "$is_rate_mirrors" ]; then
-				read -p "Would you like install rate-mirrors [y/N]? " ans
-				case "$ans" in
-					[yY]* ) aur i rate-mirrors-bin ;;
-					* ) exit 1 ;;
-				esac
-			fi
-			if [ -n "$is_rate_mirrors" ]; then
-				export TMPFILE="$(mktemp)"; \
-				sudo true; \
-    			rate-mirrors --save=$TMPFILE arch --max-delay=21600 \
-    			  && sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup \
-    			  && sudo mv $TMPFILE /etc/pacman.d/mirrorlist
-			fi
+		if [ $is_rate_mirrors -eq 1 ]; then
+			read -p "Would you like install rate-mirrors [y/N]? " ans
+			case "$ans" in
+				[yY]* ) aur i rate-mirrors-bin ;;
+				* ) exit 1 ;;
+			esac
+		fi
+		if [ $is_rate_mirrors -eq 0 ]; then
+			export TMPFILE="$(mktemp)"; \
+			sudo true; \
+    		rate-mirrors --save=$TMPFILE arch --max-delay=21600 \
+    		  && sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup \
+    		  && sudo mv $TMPFILE /etc/pacman.d/mirrorlist
 		fi
 	}
 
 	gentoo_stuff(){
-		[ -z $(command -v emerge) ] && exit 1
+		exist 'emerge' && exit 1
 		case "$1" in
 			nu ) $pm --update --deep --newuse @world ;;
 			cu ) e --changed-use --deep @world ;;
@@ -237,8 +240,8 @@ else
 		[ -n "$to_install" ] && install $to_install
 		[ -n "$to_uninstall" ] && uninstall $to_uninstall
 	}
-
-	if [ -z "$(command -v $viewer)" ]; then
+	
+	if ! exist $viewer; then
 		read -p "Would you like to install $viewer [Y/n]? " ans
 		case "$ans" in
 			[Nn]* ) exit 1 ;;
@@ -256,6 +259,7 @@ else
 		rmz ) remove_zombies ;;
 		e | edit ) edit_conf ;;
 		s | search ) shift; search $1 ;;
+		ex | exist ) shift; exist $1 ;;
 		# arch stuff
 		rs ) rank_servers ;;
 		ai ) shift; aur i $@ ;;
