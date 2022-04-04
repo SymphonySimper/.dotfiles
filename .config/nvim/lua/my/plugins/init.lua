@@ -16,6 +16,7 @@ local plugins = {
 	-- "devicons",
 	"autopairs",
 	-- 'rust',
+	"focus",
 }
 
 for _, v in pairs(plugins) do
