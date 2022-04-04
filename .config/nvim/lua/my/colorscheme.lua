@@ -76,7 +76,7 @@ function M.setup(colors)
 	hi.StatusLineNC = { guifg = M.colors.base01, guibg = M.colors.base00, gui = "none", guisp = nil }
 	hi.VertSplit = { guifg = M.colors.base02, guibg = M.colors.base00, gui = "none", guisp = nil }
 	hi.ColorColumn = { guifg = nil, guibg = M.colors.base01, gui = "none", guisp = nil }
-	hi.CursorColumn = { guifg = nil, guibg = M.colors.base01, gui = "none", guisp = nil }
+	hi.CursorColumn = { guifg = nil, guibg = M.colors.base00, gui = "none", guisp = nil }
 	hi.CursorLine = { guifg = nil, guibg = M.colors.base01, gui = "none", guisp = nil }
 	hi.CursorLineNr = { guifg = M.colors.base04, guibg = M.colors.base00, gui = nil, guisp = nil }
 	hi.QuickFixLine = { guifg = nil, guibg = M.colors.base01, gui = "none", guisp = nil }
