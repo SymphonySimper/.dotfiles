@@ -22,6 +22,7 @@ local options = {
 	termguicolors = true,
 	updatetime = 300,
 	nrformats = "alpha",
+	splitright = true,
 }
 
 for k, v in pairs(options) do
