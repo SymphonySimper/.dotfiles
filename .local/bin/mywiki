@@ -10,10 +10,13 @@ if [ ! -z "$@" ]; then
 		echo $r >> $repos
 	done <<- EOF
 	$VIMWIKI
-	$XDG_DATA_HOME/mywiki-ui-ux-private
 	$XDG_DATA_HOME/mywiki-html
+	$XDG_DATA_HOME/mywiki-ui-ux-private
 	EOF
 
+	for r in $(cat $repos); do
+		[ ! -d $r ] && git clone "git@github.com:SymphonySimper/${r##*/}.git" $r
+	done
 	for_repos(){
 		for r in $(cat $repos); do
 			if ! $git_c $r status | grep -q 'nothing to commit'; then
