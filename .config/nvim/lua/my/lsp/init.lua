@@ -6,7 +6,7 @@ end
 local lsp_files = {
 	"lsp-installer",
 	"null-ls",
-	"rust",
+	-- "rust",
 }
 
 for _, v in pairs(lsp_files) do

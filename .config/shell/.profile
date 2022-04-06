@@ -33,6 +33,8 @@ add_path "$HOME/.local/bin/gen"					# Gen scripts
 add_path "$HOME/.local/bin/helper"				# Helper scripts
 add_path "$HOME/.local/appimage"				# Appimages
 add_path "$HOME/lifeisfun/lang/flutter/bin" 	# Flutter
+is_present_prog ruby && export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+add_path "$GEM_HOME/bin"						# Ruby
 
 # ~/ Clean-up:
 export XDG_CONFIG_HOME="$HOME"/.config
