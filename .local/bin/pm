@@ -154,7 +154,7 @@ else
 
 	count(){
 		case "$pmn" in
-			'pacman' ) $pm -Q | wc -l ;;
+			'pacman' ) $pmn -Q | wc -l ;;
 			'emerge' ) equery list "*" | wc -l ;;
 			'apt' ) dpkg -L ufw | wc -l ;;
 		esac
@@ -240,7 +240,7 @@ else
 		[ -n "$to_install" ] && install $to_install
 		[ -n "$to_uninstall" ] && uninstall $to_uninstall
 	}
-	
+
 	if ! exist $viewer; then
 		read -p "Would you like to install $viewer [Y/n]? " ans
 		case "$ans" in
