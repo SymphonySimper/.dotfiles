@@ -33,6 +33,7 @@ exec_file(){
 		echo "#!/bin/${b}" > $2
 		chmod +x $2
 		$te $2
+		[ $(cat $2 | wc -l) -eq 1 ] && rm $2
 	fi
 }
 
