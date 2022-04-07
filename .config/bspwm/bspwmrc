@@ -37,6 +37,7 @@ mlp(){ while read -r l; do bspc desktop "^$l" --layout monocle; done; }
 mlp <<- EOF
 	4
 	6
+	7
 	EOF
 
 ## Misc
@@ -87,6 +88,7 @@ dlp '^7' <<- EOF
 	kdeconnect-settings
 	*:www.figma.com follow=on
 	Ld-linux-x86-64.so.2
+	Bottles
 	EOF
 
 ## D8
