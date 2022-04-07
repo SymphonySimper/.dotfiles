@@ -14,6 +14,7 @@ null_ls.setup({
 		-- formatting.yapf,
 		formatting.stylua,
 		formatting.clang_format,
+		formatting.rufo,
 		diagnostics.flake8,
 	},
 })
