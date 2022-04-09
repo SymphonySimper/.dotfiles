@@ -150,7 +150,10 @@ cac(){
 sens(){
 	loc="$XDG_DATA_HOME"/sens
 	case "$1" in
-		e ) v $loc ;; 
+		e ) v $loc ;;
 		* ) cat $loc ;;
 	esac
 }
+
+# killall bottles stuff
+kab(){ killall explorer.exe bottles wineserver; }
