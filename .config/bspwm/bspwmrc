@@ -71,6 +71,8 @@ bspc rule -a Zathura desktop='^4' state=tiled follow=on
 dlp '^5' <<- EOF
 	mpv follow=on
 	Com.github.xournalpp.xournalpp follow=on
+	Bottles
+	explorer.exe
 	EOF
 
 ## D6
@@ -88,7 +90,6 @@ dlp '^7' <<- EOF
 	kdeconnect-settings
 	*:www.figma.com follow=on
 	Ld-linux-x86-64.so.2
-	Bottles
 	EOF
 
 ## D8
