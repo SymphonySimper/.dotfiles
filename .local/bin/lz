@@ -46,7 +46,7 @@ create_bin_file(){
 }
 
 create_shell_file(){
-	no_filename "$2"
+	no_filename "$1"
 	if [ -f "$h/$shell/$1" ]; then
 		err "$1 already exists at $h/$shell"
 	else
