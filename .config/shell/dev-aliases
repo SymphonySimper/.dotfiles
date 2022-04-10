@@ -7,7 +7,7 @@ alias cbr='cargo build && cargo run'
 alias cbR='cb --release && cb  --target x86_64-pc-windows-gnu --release'
 
 # Java
-if cat /etc/*-release | grep -qi 'gentoo'; then
+if [ "$DISTRO" = 'gentoo' ]; then
 	alias java='/usr/lib64/openjdk-17/bin/java'
 	alias javac='/usr/lib64/openjdk-17/bin/javac'
 fi
