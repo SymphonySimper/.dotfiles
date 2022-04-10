@@ -1,0 +1,14 @@
+# Docker
+de(){ 
+	if ! systemctl status docker.service | grep -q 'active'; then
+		$PERM systemctl start docker.service
+	else
+		echo "Docker is already running"
+	fi
+}
+
+# OpenSearch
+opensearch(){
+	docker pull opensearchproject/opensearch:1.3.1
+	docker run -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" opensearchproject/opensearch:1.3.1
+}

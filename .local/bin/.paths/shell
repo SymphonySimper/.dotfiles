@@ -1,6 +1,7 @@
 aliases                  .config/shell/aliases
 colors-x                 .config/x11/xre/colors
 dev-aliases              .config/shell/dev-aliases
+dev-functions            .config/shell/dev-functions
 dpi-x                    .config/x11/xre/dpi
 functions                .config/shell/functions
 fzf-functions            .config/shell/fzf-functions
