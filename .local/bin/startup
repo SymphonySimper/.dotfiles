@@ -24,6 +24,7 @@ if [ ! "$(cat /sys/class/power_supply/BAT0/status)" = 'Discharging' ]; then
 		discord &
 		# [ -n "$TORRENT" ] && $TORRENT &
 		steam &
+		bottles &
 	} &
 fi
 
