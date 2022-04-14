@@ -36,6 +36,7 @@ bspc config urgent_border_color "#bbbbbb"
 mlp(){ while read -r l; do bspc desktop "^$l" --layout monocle; done; }
 mlp <<- EOF
 	4
+	5
 	6
 	7
 	EOF
@@ -129,4 +130,5 @@ dlp '^9' <<- EOF
 	steam_app_261640
 	steam_app_49520
 	steam_app_1172470
+	SUPERHOT.x86_64
 	EOF
