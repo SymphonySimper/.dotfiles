@@ -24,3 +24,7 @@ pipu(){
 	done < $temp_file
 	rm $temp_file
 }
+# Pyenv
+if pm ex 'pyenv'; then
+  eval "$(pyenv init -)"
+fi
