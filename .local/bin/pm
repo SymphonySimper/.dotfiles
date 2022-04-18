@@ -4,7 +4,7 @@ if [ $# -lt 1 ]; then
 	echo "Not enough arguments"
 	exit 1
 else
-	exist(){ [ -n "$(command -v $1)" ] && return 0 || return 1; }
+	exist(){ command -v "$1" > /dev/null 2>&1 && return 0 || return 1; }
 
 	if [ -z "$DISTRO" ]; then
 		exp_distro(){ export DISTRO="$(grep -w $1 /etc/os-release | cut -d '=' -f 2)"; }

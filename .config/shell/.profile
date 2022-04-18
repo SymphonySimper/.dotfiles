@@ -1,5 +1,5 @@
 # Helper functions
-is_present_prog(){ [ -z "$(command -v $1)" ] && return 1 || return 0; }
+is_present_prog(){ command -v "$1" > /dev/null 2>&1 && return 0 || return 1; }
 select_default_prog(){
 	key="$1"
 	shift
@@ -68,6 +68,9 @@ export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
 export ANDROID_SDK_ROOT="$XDG_DATA_HOME"/android
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
 export ATOM_HOME="$XDG_DATA_HOME"/atom
+# pyenv
+export PYENV_ROOT="$XDG_CONFIG_HOME"/.pyenv
+add_path "$PYENV_ROOT/bin"
 
 # My loc exports
 export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
