@@ -18,7 +18,7 @@ open_doc(){
 	esac
 }
 open_terminals(){
-	is_src=$(ls -F "$(get_path)" 2>/dev/null | grep -w '/\|src\|app\|lib' | head -n 1)
+	is_src=$(ls -F "$(get_path)" 2>/dev/null | grep '/' | grep -w '/\|src\|app\|lib' | head -n 1)
 	if [ -n "$is_src" ]; then
 		loc="$(get_path)/$is_src"
 	else
