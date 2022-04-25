@@ -16,9 +16,17 @@ opensearch(){
 
 # Pip
 # pipu to update packages installed with pip
-pipu(){
+pipus(){
 	temp_file=$(mktemp)
-	pip list --outdated 2> /dev/null | cut -d ' ' -f1 | tail -n +3 >> $temp_file
+	$PERM pip list --outdated 2> /dev/null | cut -d ' ' -f1 | tail -n +3 >> $temp_file
+	while read -r l; do
+		$PERM pip install --upgrade $l
+	done < $temp_file
+	rm $temp_file
+}
+pipuu(){
+	temp_file=$(mktemp)
+	pip list --outdated --user 2> /dev/null | cut -d ' ' -f1 | tail -n +3 >> $temp_file
 	while read -r l; do
 		pip install --upgrade $l
 	done < $temp_file
