@@ -2,6 +2,7 @@
 alias cn='cargo new'
 alias cb='cargo build'
 alias cr='cargo run'
+alias ca='cargo add'
 alias ct='cargo test -- --show-output'
 alias cbr='cargo build && cargo run'
 alias cbR='cb --release && cb  --target x86_64-pc-windows-gnu --release'
