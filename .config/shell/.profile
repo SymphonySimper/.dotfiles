@@ -22,7 +22,7 @@ select_default_prog 'TERMINAL' 'urxvtc' 'alacritty' 'kitty'
 select_default_prog 'SECOND_TERMINAL' 'urxvt' 'alacritty' 'kitty'
 select_default_prog 'SWALLOW' 'devour'
 select_default_prog 'USE_GPU' 'prime-run'
-select_default_prog 'CHROME_EXECUTABLE' 'chromium' 'brave' 'com.github.Eloston.UngoogledChromium'
+select_default_prog 'CHROME_EXECUTABLE' 'chromium' 'brave' 'com.brave.Browser' 'com.github.Eloston.UngoogledChromium'
 select_default_prog 'TORRENT' 'qbittorrent'
 
 # Paths
