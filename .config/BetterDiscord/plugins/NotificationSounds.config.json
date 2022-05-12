@@ -210,6 +210,34 @@
 				"mute": false,
 				"sound": "---",
 				"volume": 100
+			},
+			"poggermode_enabled": {
+				"category": "---",
+				"focus": false,
+				"mute": false,
+				"sound": "---",
+				"volume": 100
+			},
+			"poggermode_achievement_unlock": {
+				"category": "---",
+				"focus": false,
+				"mute": false,
+				"sound": "---",
+				"volume": 100
+			},
+			"poggermode_applause": {
+				"category": "---",
+				"focus": false,
+				"mute": false,
+				"sound": "---",
+				"volume": 100
+			},
+			"poggermode_message_send": {
+				"category": "---",
+				"focus": false,
+				"mute": false,
+				"sound": "---",
+				"volume": 100
 			}
 		},
 		"volumes": {
