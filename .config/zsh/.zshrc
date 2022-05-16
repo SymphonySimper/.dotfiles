@@ -8,7 +8,7 @@ autoload -U colors && colors
 precmd(){ precmd(){ echo ; }; }
 
 if [ -n "$SSH_CONNECTION" ]; then
-	cs="(ssh)"
+	cs="(ssh) "
 fi
 
 PROMPT="%B%F{240}${cs}%~%f
