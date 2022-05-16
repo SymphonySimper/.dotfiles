@@ -11,8 +11,8 @@ if [ -n "$SSH_CONNECTION" ]; then
 	cs="(ssh) "
 fi
 
-PROMPT="%B%F{240}${cs}%~%f
->%b "
+PROMPT="%B%F{240}%~%f
+${cs}>%b "
 
 # Turn off beep
 unsetopt BEEP
