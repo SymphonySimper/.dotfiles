@@ -6,8 +6,13 @@ autoload -U colors && colors
 
 # Prompt
 precmd(){ precmd(){ echo ; }; }
+if [ -z "$SSH_CONNECTION" ]; then
 PS1="%B%F{240}%~%f
 >%b "
+else
+PS1="%B%F{240}%(SSH)~%f
+>%b "
+fi
 
 # Turn off beep
 unsetopt BEEP
