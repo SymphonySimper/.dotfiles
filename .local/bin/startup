@@ -28,7 +28,7 @@ if [ ! "$(cat /sys/class/power_supply/BAT0/status)" = 'Discharging' ]; then
 	} &
 fi
 
-$TERMINAL -e automount &
+# $TERMINAL -e automount &
 
 # Kde connect
 kc=/usr/lib/kdeconnectd
