@@ -21,14 +21,6 @@
 -- 	},
 -- }
 
-vim.g.nvim_tree_show_icons = {
-	git = 0,
-	folders = 0,
-	files = 0,
-	folder_arrows = 0,
-	tree_width = 30,
-}
-
 local status_ok, nvim_tree = pcall(require, "nvim-tree")
 if not status_ok then
 	return
@@ -71,6 +63,20 @@ nvim_tree.setup({
 		enable = true,
 		ignore = true,
 		timeout = 500,
+	},
+	renderer = {
+		icons = {
+			symlink_arrow = ' > ',
+			show = {
+				git = false,
+				folder = false,
+				file = false,
+				folder_arrow = false,
+			},
+			glyphs = {
+				symlink = "",
+			},
+		},
 	},
 	view = {
 		width = 30,
