@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# pg - generate project
+
+solidjs(){
+	sjs="npx degit solidjs/templates"
+	eval "${sjs}/$1" "$2"
+}
+case "$1" in
+	's') solidjs 'ts' "$2" ;;
+	'sj') solidjs 'js' "$2" ;;
+esac

@@ -44,6 +44,7 @@ open-bmark               .local/bin/rofi/open-bmark
 open-flatpak             .local/bin/rofi/open-flatpak
 open-spotify             .local/bin/bspwm/open-spotify
 open-url                 .local/bin/rofi/open-url
+pg                       .local/bin/pg
 play-audio               .local/bin/rofi/play-audio
 play-bg                  .local/bin/aliases/play-bg
 play-movie               .local/bin/rofi/play-movie
