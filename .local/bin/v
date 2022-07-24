@@ -61,7 +61,7 @@ main() {
 		*.xopp ) $h $nt "$1" ;;
 		*.blend ) $h $USE_GPU $td "$1" ;;
 		*.torrent ) $tr "$1" ;;
-		*.docx | *.doc ) $h $dv "$1" ;;
+		*.docx | *.doc | *.odt ) $h $dv "$1" ;;
 		-a) ls | grep  'jpeg\|jpg\|png\|webp' | $h $iv -t - ;;
 		-w) $h $iv $what_img ;;
 		-f) $h $vf /dev/video0 ;;
