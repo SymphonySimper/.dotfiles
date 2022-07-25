@@ -47,6 +47,7 @@ bspc rule -a qemu-system-x86_64 state=fullscreen
 
 # Loop Function
 dlp(){ while read -r l; do bspc rule -a $l desktop="$1"; done; }
+glp(){ while read -r l; do bspc rule -a $l desktop="$1" follow=on; done; }
 
 ## D2
 ### Browser Related
@@ -114,7 +115,7 @@ dlp '^8' <<- EOF
 	EOF
 
 ## Games
-dlp '^9' <<- EOF
+glp '^9' <<- EOF
 	steam_app_0
 	rocketleague.exe
 	csgo_linux64
