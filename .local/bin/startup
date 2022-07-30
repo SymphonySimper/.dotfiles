@@ -8,6 +8,9 @@ picom -m 1.0 -i 1.0 -e 1.0 --vsync --backend glx --no-fading-openclose &
 xwallpaper --zoom "$WALLPAPER" &
 xsetroot -cursor_name left_ptr
 
+# disable beep (PC Speaker)
+xset -b
+
 [ "$TERMINAL" = 'urxvtc' ] && urxvtd -q &
 dunst &
 sxhkd -c "$HOME"/.config/sxhkd/.sxhkdrc &
