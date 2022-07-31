@@ -1,17 +1,11 @@
-local autosave = require("autosave")
+local autosave = require("auto-save")
 
 autosave.setup({
 	enabled = true,
-	execution_message = "AutoSave: saved at " .. vim.fn.strftime("%H:%M:%S"),
-	events = { "InsertLeave", "TextChanged" },
-	conditions = {
-		exists = true,
-		filename_is_not = { "packer.lua" },
-		-- filetype_is_not = { "vimwiki", "markdown", "groff" },
-		modifiable = true,
+	execution_message = {
+		cleaning_interval = 1000,
 	},
+	trigger_events = { "InsertLeave", "TextChanged" },
 	write_all_buffers = true,
-	on_off_commands = true,
-	clean_command_line_interval = 1000,
 	debounce_delay = 135,
 })
