@@ -1,3 +1,4 @@
+-- refer https://github.com/RRethy/nvim-base16/blob/master/lua/base16-colorscheme.lua
 -- local cs = "the-black"
 --
 -- local status_ok, _ = pcall(vim.cmd, "colorscheme "..cs)
