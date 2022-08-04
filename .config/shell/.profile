@@ -82,7 +82,8 @@ export VIMWIKI="$XDG_DATA_HOME"/mywiki
 
 # Other settinfs
 export _JAVA_AWT_WM_NONREPARENTING=1
-export MANPAGER='less -Q'
+# export MANPAGER='less -Q'
+export LESS='-NQ --use-color --color=N238'
 # export __NV_PRIME_RENDER_OFFLOAD=1
 # export __GLX_VENDOR_LIBRARY_NAME="nvidia"
 # export __VK_LAYER_NV_optimus="NVIDIA_only"
