@@ -25,6 +25,10 @@
 (load custom-file 'noerror 'nomessage)
 
 ;; Theme
+;; Transparency
+(set-frame-parameter (selected-frame) 'alpha '(80 . 50))
+(add-to-list 'default-frame-alist '(alpha . (80 . 50)))
+
 (set-face-attribute 'default nil :font "JetBrainsMono Nerd Font Mono" :height 110)
 (setq modus-themes-mode-line '(borderless))
 (setq modus-themes-bold-constructs t)
@@ -61,12 +65,12 @@
 
 (use-package general
   :config
-  (general-create-definer rune/leader-keys
+  (general-create-definer my/leader-keys
     :keymaps '(normal insert visual emacs)
     :prefix "SPC"
     :global-prefix "C-SPC")
 
-  (rune/leader-keys
+  (my/leader-keys
     "t"  '(:ignore t :which-key "toggles")
     "tt" '(counsel-load-theme :which-key "choose theme")))
 
