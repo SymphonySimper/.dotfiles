@@ -86,19 +86,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 # export __GLX_VENDOR_LIBRARY_NAME="nvidia"
 # export __VK_LAYER_NV_optimus="NVIDIA_only"
 
-# WSL
-if  echo $(uname -r) | grep -wqi 'microsoft'; then
-	wsl=true
-else
-	wsl=false
-fi
-export WSL=$wsl
-
-if $WSL; then
-	export LESS='-Q'
-else
-	export LESS='-NQ --use-color --color=N238'
-fi
+export LESS='-NQ --use-color --color=N238'
 
 # fzf
 # https://github.com/fnune/base16-fzf/blob/master/bash/base16-grayscale-dark.config
@@ -145,6 +133,14 @@ if grep -wq 'ID_LIKE' /etc/os-release; then
 else
 	exp_distro 'ID'
 fi
+
+# WSL
+if  echo $(uname -r) | grep -wqi 'microsoft'; then
+	wsl=true
+else
+	wsl=false
+fi
+export WSL=$wsl
 
 # Window manager name
 [ -f "$XINITRC" ] && export WM="$(tail -n 1 "$XINITRC" | cut -d ' ' -f 4)"
