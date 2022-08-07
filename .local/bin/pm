@@ -28,7 +28,7 @@ else
 
 	case "$DISTRO" in
 		[Aa]rch ) pmn='pacman' ;pm="$PERM pacman" ;;
-		[Dd]ebian | [Uu]buntu ) pmn='atp' ;pm="$PERM apt" ;;
+		[Dd]ebian | [Uu]buntu ) pmn='apt' ;pm="$PERM apt" ;;
 		[Gg]entoo ) pmnt='emerge'; pm="$PERM emerge -avq" ;;
 	esac
 
@@ -148,17 +148,11 @@ else
 		case "$pmn" in
 			'pacman' ) $pmn -Q ;;
 			'emerge' ) equery list "*" ;;
-			'apt' ) dpkg -L ufw ;;
+			'apt' ) dpkg-query -W | cut -f1 ;;
 		esac
 	}
 
-	count(){
-		case "$pmn" in
-			'pacman' ) $pmn -Q | wc -l ;;
-			'emerge' ) equery list "*" | wc -l ;;
-			'apt' ) dpkg -L ufw | wc -l ;;
-		esac
-	}
+	count(){ list | wc -l; }
 
 	search(){
 		case "$pmn" in
