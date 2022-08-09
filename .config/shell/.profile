@@ -8,22 +8,42 @@ select_default_prog(){
 	done
 }
 
-## Default Programs
-export READER="zathura"
-export IMAGE_VIEWER="sxiv"
-export VIDEO_PLAYER="mpv"
-export RSS_READER="newsboat"
+# WSL
+if  echo $(uname -r) | grep -wqi 'microsoft'; then
+	wsl=true
+else
+	wsl=false
+fi
+export WSL=$wsl
 
-select_default_prog 'BROWSER' 'librewolf' 'firefox' 'chromium' 'brave' 'io.gitlab.librewolf-community' 'com.github.Eloston.UngoogledChromium'
+
+## Default Programs
+if $WSL; then
+	# export READER=''
+	# export IMAGE_VIEWER='cmd.exe /c start ms-photos:'
+	export VIDEO_PLAYER='mpv.exe'
+	select_default_prog 'BROWSER' 'firefox.exe' 'chromium.exe' 'brave.exe' 'chrome.exe'
+	select_default_prog 'TERMINAL' 'kitty.exe' 'alacritty.exe'
+	select_default_prog 'SECOND_TERMINAL' 'wt.exe'
+	select_default_prog 'CHROME_EXECUTABLE' 'chromium.exe' 'brave.exe' 'MicrosoftEdge.exe'
+	select_default_prog 'TORRENT' 'qbittorrent.exe'
+else
+	export READER="zathura"
+	export IMAGE_VIEWER="sxiv"
+	export VIDEO_PLAYER="mpv"
+	select_default_prog 'BROWSER' 'librewolf' 'firefox' 'chromium' 'brave' 'io.gitlab.librewolf-community' 'com.github.Eloston.UngoogledChromium'
+	select_default_prog 'TERMINAL' 'urxvtc' 'alacritty' 'kitty'
+	select_default_prog 'SECOND_TERMINAL' 'urxvt' 'alacritty' 'kitty'
+	select_default_prog 'CHROME_EXECUTABLE' 'chromium' 'brave' 'com.brave.Browser' 'com.github.Eloston.UngoogledChromium'
+	select_default_prog 'TORRENT' 'qbittorrent'
+fi
+
+export RSS_READER="newsboat"
 select_default_prog 'PERM' 'doas' 'sudo'
 select_default_prog 'EDITOR' 'nvim' 'vim' 'nano'
 export VISUAL="$EDITOR"
-select_default_prog 'TERMINAL' 'urxvtc' 'alacritty' 'kitty'
-select_default_prog 'SECOND_TERMINAL' 'urxvt' 'alacritty' 'kitty'
 select_default_prog 'SWALLOW' 'devour'
 select_default_prog 'USE_GPU' 'prime-run'
-select_default_prog 'CHROME_EXECUTABLE' 'chromium' 'brave' 'com.brave.Browser' 'com.github.Eloston.UngoogledChromium'
-select_default_prog 'TORRENT' 'qbittorrent'
 
 # Paths
 add_path(){ [ -d "$1" ] && export PATH="$PATH:$1"; }
@@ -80,7 +100,7 @@ export VIMWIKI="$XDG_DATA_HOME"/mywiki
 
 [ -f "$XDG_DATA_HOME"/cargo/env ] && . "$XDG_DATA_HOME"/cargo/env
 
-# Other settinfs
+# Other settings
 export _JAVA_AWT_WM_NONREPARENTING=1
 # export __NV_PRIME_RENDER_OFFLOAD=1
 # export __GLX_VENDOR_LIBRARY_NAME="nvidia"
@@ -133,14 +153,6 @@ if grep -wq 'ID_LIKE' /etc/os-release; then
 else
 	exp_distro 'ID'
 fi
-
-# WSL
-if  echo $(uname -r) | grep -wqi 'microsoft'; then
-	wsl=true
-else
-	wsl=false
-fi
-export WSL=$wsl
 
 # Window manager name
 [ -f "$XINITRC" ] && export WM="$(tail -n 1 "$XINITRC" | cut -d ' ' -f 4)"
