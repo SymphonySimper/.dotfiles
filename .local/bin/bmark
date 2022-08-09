@@ -37,7 +37,7 @@ cp_bmark(){
 	is_there="$(grep -w "^$1" $bmark_bookmarks)"
 	if [ -n "$is_there" ]; then
 		echo "$(echo "$is_there" | awk '{ print $3 }')" \
-			| xclip -sel c
+			| yoink
 		echo "bmark \`$1\` is copied to clipboard"
 	else
 		err "bmark $1 not found"

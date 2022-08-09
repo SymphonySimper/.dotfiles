@@ -70,7 +70,7 @@ else
 		fi
 	}
 
-	flatpak_copy(){ $viewer < $1 | tr '\t' '|' | cut -d '|' -f $2 | tr -d '\n' | xclip -sel c; }
+	flatpak_copy(){ $viewer < $1 | tr '\t' '|' | cut -d '|' -f $2 | tr -d '\n' | yoink; }
 	flatpak_stuff(){
 		if [ $is_flatpak -eq 1 ]; then
 			echo "Flatpak not installed"
