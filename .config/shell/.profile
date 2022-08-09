@@ -146,6 +146,9 @@ export TZ='Asia/Kolkata'
 # Wallpaper
 export WALLPAPER="$XDG_DATA_HOME"/mypics/bg.png
 
+# Home Brew
+[ -d '/home/linuxbrew/.linuxbrew' ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
 # Distro
 exp_distro(){ export DISTRO="$(grep -w $1 /etc/os-release | cut -d '=' -f 2)"; }
 if grep -wq 'ID_LIKE' /etc/os-release; then
