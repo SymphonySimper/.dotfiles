@@ -1,11 +1,11 @@
 #!/bin/sh
 
-pgm='xclip -sel c'
+$WSL && pgm='clip.exe' || pgm='xclip -sel c'
 if [ -p /dev/stdin ]; then
-	$pgm /dev/stdin 
+	cat /dev/stdin | $pgm
 else
 	case "$1" in
 		v ) shift; echo $@ | $pgm ;;
-		* ) $pgm $@ ;;
+		* ) cat $@ | $pgm ;;
 	esac
 fi
