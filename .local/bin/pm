@@ -264,6 +264,7 @@ else
 		rs ) rank_servers ;;
 		ai ) shift; aur i $@ ;;
 		ae ) aur e ;;
+		as ) shift; aur s $@ ;;
 		# gentoo stuff
 		nu ) gentoo_stuff nu ;;
 		cu ) gentoo_stuff cu ;;
