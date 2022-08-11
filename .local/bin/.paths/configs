@@ -1,4 +1,5 @@
 alacritty					.config/alacritty/alacritty.yml
+awesome						.config/awesome/rc.lua
 bspwm						.config/bspwm/bspwmrc
 bspwm-hotkeys				.config/sxhkd/bspwm-hotkeys
 dunst						.config/dunst/dunstrc
