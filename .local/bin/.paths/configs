@@ -5,10 +5,10 @@ bspwm-hotkeys				.config/sxhkd/bspwm-hotkeys
 dunst						.config/dunst/dunstrc
 fox-dark-reader				.config/fox/extensions/dark-reader.json
 fox-localcdn				.config/fox/extensions/localcdn.txt
-fox-user-pref				.config/fox/my-user.js
+fox-useragent-switch		.config/fox/extensions/useragent-switch.json
 fox-userChrome				.config/fox/chrome/userChrome.css
 fox-userContent				.config/fox/chrome/userContent.css
-fox-useragent-switch		.config/fox/extensions/useragent-switch.json
+fox-user-pref				.config/fox/my-user.js
 fox-vimium-css				.config/fox/extensions/vimium.css
 fox-vimium-options			.config/fox/extensions/vimium-options.json
 fox-wolf-cfg				.config/fox/wolf/librewolf.overrides.cfg
