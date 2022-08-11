@@ -12,16 +12,6 @@ config_loc="$loc"/.sxhkdrc
 notify="dunstify -h string:x-dunst-stack-tag:sxhkd"
 warning_i="$HOME"/.local/share/icons/generla/warning.svg
 
-start_prgm(){
-	if [ -f "$config_loc" ]; then
-		pgrep "$prgm" && killall "$prgm"
-		{ "$prgm" -c "$config_loc" & } &&
-		$notify "Restarting $prgm"
-	else
-		$notify "Config file not found" "$prgm"
-	fi
-}
-
 iclr="sed '/#/d; /^[[:space:]]*$/d'"
 create_config(){
 	case "$1" in
