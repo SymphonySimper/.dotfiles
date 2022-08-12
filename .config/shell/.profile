@@ -158,7 +158,7 @@ else
 fi
 
 # Window manager name
-[ -f "$XINITRC" ] && export WM="$(tail -n 1 "$XINITRC" | cut -d ' ' -f 4)"
+[ -f "$XINITRC" ] && export WM="$(grep -v '^#' "$XINITRC" | tail -n 1 | cut -d ' ' -f 4)"
 
 # StartX
 [ "$(tty)" = "/dev/tty1" ] && exec startx "$XINITRC" > /dev/null 2>&1
