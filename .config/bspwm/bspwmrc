@@ -84,6 +84,7 @@ dlp '^6' <<- EOF
 	Slack
 	*:web.whatsapp.com
 	Ferdi
+	Ferdium
 	EOF
 
 ## D7
