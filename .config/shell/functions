@@ -42,10 +42,10 @@ lolban(){
 }
 
 # Sort Paths
-sort_paths(){
-	for f in "$HOME"/.local/bin/.paths/*; do sort $f -o $f; done
-	sort "$HOME"/.local/share/.begone -o "$HOME"/.local/share/.begone
-}
+# sort_paths(){
+# 	for f in "$HOME"/.local/bin/.paths/*; do sort $f -o $f; done
+# 	sort "$HOME"/.local/share/.begone -o "$HOME"/.local/share/.begone
+# }
 
 # Loop Video
 loop_v(){
