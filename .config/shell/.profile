@@ -52,9 +52,10 @@ add_path "$HOME/.local/bin/aliases"				# Alias scripts
 add_path "$HOME/.local/bin/gen"					# Gen scripts
 add_path "$HOME/.local/bin/helper"				# Helper scripts
 add_path "$HOME/.local/appimage"				# Appimages
-add_path "$HOME/lifeisfun/lang/flutter/bin" 	# Flutter
 is_present_prog ruby && export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
+add_path "$HOME/lifeisfun/lang/flutter/bin" 	# Flutter
 add_path "$GEM_HOME/bin"						# Ruby
+add_path "$HOME/Android/Sdk/emulator"			# Android Emulator
 
 # ~/ Clean-up:
 export XDG_CONFIG_HOME="$HOME"/.config
@@ -84,6 +85,7 @@ export RXVT_SOCKET="$XDG_RUNTIME_DIR"/urxvtd
 export GOPATH="$XDG_DATA_HOME"/go
 # export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 export ANDROID_SDK_HOME="$XDG_CONFIG_HOME"/android
+export ANDROID_HOME="$XDG_DATA_HOME"/android
 export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
 export ANDROID_SDK_ROOT="$XDG_DATA_HOME"/android
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
