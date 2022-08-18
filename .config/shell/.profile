@@ -109,6 +109,7 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 # export __VK_LAYER_NV_optimus="NVIDIA_only"
 
 export LESS='-NQ --use-color --color=N238'
+export GAMEMODERUNEXEC="prime-run"
 
 # fzf
 # https://github.com/fnune/base16-fzf/blob/master/bash/base16-grayscale-dark.config
