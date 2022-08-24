@@ -17,34 +17,6 @@ fi
 export WSL=$wsl
 
 
-## Default Programs
-if $WSL; then
-	# export READER=''
-	# export IMAGE_VIEWER='cmd.exe /c start ms-photos:'
-	export VIDEO_PLAYER='mpv.exe'
-	select_default_prog 'BROWSER' 'firefox.exe' 'chromium.exe' 'brave.exe' 'chrome.exe'
-	select_default_prog 'TERMINAL' 'kitty.exe' 'alacritty.exe'
-	select_default_prog 'SECOND_TERMINAL' 'wt.exe'
-	select_default_prog 'CHROME_EXECUTABLE' 'chromium.exe' 'brave.exe' 'MicrosoftEdge.exe'
-	select_default_prog 'TORRENT' 'qbittorrent.exe'
-else
-	export READER="zathura"
-	export IMAGE_VIEWER="sxiv"
-	export VIDEO_PLAYER="mpv"
-	select_default_prog 'BROWSER' 'librewolf' 'firefox' 'chromium' 'brave' 'io.gitlab.librewolf-community' 'com.github.Eloston.UngoogledChromium'
-	select_default_prog 'TERMINAL' 'urxvtc' 'alacritty' 'kitty'
-	select_default_prog 'SECOND_TERMINAL' 'urxvt' 'alacritty' 'kitty'
-	select_default_prog 'CHROME_EXECUTABLE' 'chromium' 'brave' 'com.brave.Browser' 'com.github.Eloston.UngoogledChromium'
-	select_default_prog 'TORRENT' 'qbittorrent'
-fi
-
-export RSS_READER="newsboat"
-select_default_prog 'PERM' 'doas' 'sudo'
-select_default_prog 'EDITOR' 'nvim' 'vim' 'nano'
-export VISUAL="$EDITOR"
-select_default_prog 'SWALLOW' 'devour'
-select_default_prog 'USE_GPU' 'prime-run'
-
 # Paths
 add_path(){ [ -d "$1" ] && export PATH="$PATH:$1"; }
 add_path "$HOME/.local/bin"						# Scripts
@@ -99,17 +71,49 @@ export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
 # export STARSHIP_CONFIG="$HOME"/.config/starship/config.toml
 export VIMWIKI="$XDG_DATA_HOME"/mywiki
 
+if $WSL; then
+	while read -r folder; do
+		add_path $folder
+	done <<- EOF
+		$(find /mnt/c/Program\ Files/ -maxdepth 1 -type d)
+		EOF
+fi
 
 [ -f "$XDG_DATA_HOME"/cargo/env ] && . "$XDG_DATA_HOME"/cargo/env
 
-# Other settings
-export _JAVA_AWT_WM_NONREPARENTING=1
-# export __NV_PRIME_RENDER_OFFLOAD=1
-# export __GLX_VENDOR_LIBRARY_NAME="nvidia"
-# export __VK_LAYER_NV_optimus="NVIDIA_only"
+## Default Programs
+if $WSL; then
+	# export READER=''
+	# export IMAGE_VIEWER='cmd.exe /c start ms-photos:'
+	export VIDEO_PLAYER='mpv.exe'
+	select_default_prog 'BROWSER' 'firefox.exe' 'chromium.exe' 'brave.exe' 'chrome.exe'
+	select_default_prog 'TERMINAL' 'kitty.exe' 'alacritty.exe'
+	select_default_prog 'SECOND_TERMINAL' 'wt.exe'
+	select_default_prog 'CHROME_EXECUTABLE' 'chromium.exe' 'brave.exe' 'MicrosoftEdge.exe'
+	select_default_prog 'TORRENT' 'qbittorrent.exe'
+else
+	export READER="zathura"
+	export IMAGE_VIEWER="sxiv"
+	export VIDEO_PLAYER="mpv"
+	select_default_prog 'BROWSER' 'librewolf' 'firefox' 'chromium' 'brave' 'io.gitlab.librewolf-community' 'com.github.Eloston.UngoogledChromium'
+	select_default_prog 'TERMINAL' 'urxvtc' 'alacritty' 'kitty'
+	select_default_prog 'SECOND_TERMINAL' 'urxvt' 'alacritty' 'kitty'
+	select_default_prog 'CHROME_EXECUTABLE' 'chromium' 'brave' 'com.brave.Browser' 'com.github.Eloston.UngoogledChromium'
+	select_default_prog 'TORRENT' 'qbittorrent'
+fi
+
+export RSS_READER="newsboat"
+select_default_prog 'PERM' 'doas' 'sudo'
+select_default_prog 'EDITOR' 'nvim' 'vim' 'nano'
+export VISUAL="$EDITOR"
+select_default_prog 'SWALLOW' 'devour'
+select_default_prog 'USE_GPU' 'prime-run'
 
 export LESS='-NQ --use-color --color=N238'
 export GAMEMODERUNEXEC="prime-run"
+
+# Other settings
+export _JAVA_AWT_WM_NONREPARENTING=1
 
 # fzf
 # https://github.com/fnune/base16-fzf/blob/master/bash/base16-grayscale-dark.config
