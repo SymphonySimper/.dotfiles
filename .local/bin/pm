@@ -237,14 +237,14 @@ else
 	win_list(){ $win list | tail -n +3 | grep -e 'msstore' -e 'winget'; }
 	windows_stuff(){
 		if [ $is_win -eq 0 ]; then
-			case $1 in	
+			case $1 in
 				i )
 					shift;
 					for w in $@; do
 						$win install $w
 					done
 					;;
-				r ) 
+				r )
 					shift;
 					for w in $@; do
 						$win uninstall $w
@@ -256,7 +256,7 @@ else
 				c ) win_list | wc -l ;;
 			esac
 		else
-			echo "$win not found"	
+			echo "$win not found"
 			exit 1
 		fi
 	}
@@ -312,7 +312,7 @@ else
 		wi ) shift; windows_stuff i $@ ;;
 		wr ) shift; windows_stuff r $@ ;;
 		wu ) windows_stuff u ;;
-		ws ) shift; windows_stuff $1 ;;
+		ws ) shift; windows_stuff s $1 ;;
 		wl ) windows_stuff l | $viewer ;;
 		wc ) windows_stuff c ;;
 		* ) auto_install_uninstall $@ ;;
