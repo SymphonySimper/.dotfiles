@@ -19,13 +19,11 @@ get_stat=$(cat /sys/class/power_supply/BAT0/status)
 get_cap=$(cat /sys/class/power_supply/BAT0/capacity)
 notify_bat(){ $notify -h string:x-dunst-stack-tag:myBattery -i "$1"  "Battery level: $get_cap%"; }
 bat(){
-	if [ $get_stat = 'Unknown' ]; then
-		notify_bat "$saver_i"
-	elif [ $get_stat = 'Charging' ]; then
-		notify_bat "$charging_i"
-	elif [ $get_stat = 'Discharging' ]; then
-		[ $get_cap -gt 20 ] && notify_bat "$bat_full_i" || notify_bat "$low_bat_i"
-	fi
+	case $get_stat in
+		'Unknown' ) notify_bat "$saver_i" ;;
+		'Charging') notify_bat "$charging_i" ;;
+		'Discharging' ) [ $get_cap -gt 20 ] && notify_bat "$bat_full_i" || notify_bat "$low_bat_i" ;;
+	esac
 }
 
 date_p="date"
