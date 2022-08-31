@@ -23,16 +23,16 @@ unclutter --timeout 1 &
 # Set deafault browser
 xdg-mime default ${BROWSER}.desktop x-scheme-handler/https x-scheme-handler/http &
 
-if [ ! "$(cat /sys/class/power_supply/BAT0/status)" = 'Discharging' ]; then
-	{
-		sleep 10s
-		noisetorch -i -s $(pactl get-default-source) -t 95
-		discord &
-		# [ -n "$TORRENT" ] && $TORRENT &
-		steam &
-		# bottles &
-	} &
-fi
+# if [ ! "$(cat /sys/class/power_supply/BAT0/status)" = 'Discharging' ]; then
+# 	{
+# 		sleep 10s
+# 		noisetorch -i -s $(pactl get-default-source) -t 95
+# 		discord &
+# 		# [ -n "$TORRENT" ] && $TORRENT &
+# 		steam &
+# 		# bottles &
+# 	} &
+# fi
 
 # $TERMINAL -e automount &
 
