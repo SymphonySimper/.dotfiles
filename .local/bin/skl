@@ -11,3 +11,5 @@ case "$layout" in
 	'colemak_dh' ) setxkbmap us && echo $qw > $file ;;
 	* ) setxkbmap us -variant $cl && echo $cl > $file ;;
 esac
+
+dunstify -h string:x-dunst-stack-tag:skl "Switched to $(cat $file) layout"
