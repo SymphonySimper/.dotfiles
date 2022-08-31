@@ -20,9 +20,9 @@ get_cap=$(cat /sys/class/power_supply/BAT0/capacity)
 notify_bat(){ $notify -h string:x-dunst-stack-tag:myBattery -i "$1"  "Battery level: $get_cap%"; }
 bat(){
 	case $get_stat in
-		'Unknown' ) notify_bat "$saver_i" ;;
 		'Charging') notify_bat "$charging_i" ;;
 		'Discharging' ) [ $get_cap -gt 20 ] && notify_bat "$bat_full_i" || notify_bat "$low_bat_i" ;;
+		* ) notify_bat "$saver_i" ;;
 	esac
 }
 
