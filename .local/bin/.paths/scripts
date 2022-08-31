@@ -63,6 +63,7 @@ screenshot               .local/bin/screenshot
 scripts                  .local/bin/.paths/scripts
 search                   .local/bin/rofi/search
 shell                    .local/bin/.paths/shell
+skl                      .local/bin/skl
 sleep-time               .local/bin/cron/sleep-time
 sound-efx                .local/bin/sound-efx
 startup                  .local/bin/startup

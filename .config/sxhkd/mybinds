@@ -87,6 +87,10 @@ super + p
 super + F9
 	gromit-mpx
 
+# Switch keyboard layout
+super + F10
+	skl
+
 # sxhkd
 super + Escape
 	rekey
