@@ -68,6 +68,7 @@ sleep-time               .local/bin/cron/sleep-time
 sound-efx                .local/bin/sound-efx
 startup                  .local/bin/startup
 syl                      .local/bin/syl
+tablet                   .local/bin/tablet
 timer                    .local/bin/timer
 todo                     .local/bin/rofi/todo
 ts                       .local/bin/ts
