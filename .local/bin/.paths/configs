@@ -31,6 +31,7 @@ portage						.config/portage/make.conf
 rofi-config					.config/rofi/config.rasi
 rofi-theme					.config/rofi/theme.rasi
 sxiv						.config/sxiv/exec/key-handler
+tmux						.config/tmux/tmux.conf
 touchcursor					.config/touchcursor/touchcursor.conf
 yt-dlp						.config/yt-dlp/config
 zathura						.config/zathura/zathurarc
