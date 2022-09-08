@@ -11,6 +11,13 @@ USERXSESSIONRC="$XDG_CACHE_HOME/X11/xsessionrc"
 ALTUSERXSESSION="$XDG_CACHE_HOME/X11/Xsession"
 ERRFILE="$XDG_CACHE_HOME/X11/xsession-errors"
 
+# This fixes firefox's slow startup when flatpak is installed
+# refer https://github.com/flatpak/flatpak/issues/4211
+# systemctl --user import-environment DISPLAY XAUTHORITY
+if command -v dbus-update-activation-environment > /dev/null 2>&1; then
+	dbus-update-activation-environment DISPLAY XAUTHORITY
+fi
+
 startup &
 exec dbus-launch --exit-with-session bspwm
 # exec dbus-launch --exit-with-session awesome
