@@ -58,7 +58,7 @@ return packer.startup(function(use)
 	use("ThePrimeagen/vim-be-good")
 	use("rust-lang/rust.vim")
 	use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install" })
-	use("beauwilliams/focus.nvim")
+	--[[ use("beauwilliams/focus.nvim") ]]
 
 	-- Telescope
 	use("nvim-telescope/telescope.nvim")

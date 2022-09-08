@@ -43,6 +43,14 @@ local leader_map = {
 	{ "s", tel .. " current_buffer_fuzzy_find" .. e },
 	{ "S", tel .. " live_grep" .. e },
 	{ "m", tel .. " diagnostics" .. e },
+	-- Resize split
+	{ ",", "10<C-w><" },
+	{ ".", "10<C-w>>" },
+	{ "/", "<C-w>|" },
+	{ "-", "10<C-w>-" },
+	{ "=", "10<C-w>+" },
+	{ "_", "<C-w>_" },
+	{ [[\]], "<C-w>=" },
 }
 
 local le = "<leader>"
