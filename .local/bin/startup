@@ -39,6 +39,3 @@ xdg-mime default ${BROWSER}.desktop x-scheme-handler/https x-scheme-handler/http
 # Kde connect
 kc=/usr/lib/kdeconnectd
 [ -f $kc ] && $kc &
-
-# Huion tablet
-tablet &
