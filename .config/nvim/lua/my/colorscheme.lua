@@ -63,7 +63,7 @@ function M.setup(colors)
 	hi.SpecialKey = { guifg = M.colors.base03, guibg = nil, gui = nil, guisp = nil }
 	hi.TooLong = { guifg = M.colors.base08, guibg = nil, gui = nil, guisp = nil }
 	hi.Underlined = { guifg = M.colors.base08, guibg = nil, gui = nil, guisp = nil }
-	hi.Visual = { guifg = nil, guibg = M.colors.base02, gui = nil, guisp = nil }
+	hi.Visual = { guifg = M.colors.base01, guibg = M.colors.base0A, gui = nil, guisp = nil }
 	hi.VisualNOS = { guifg = M.colors.base08, guibg = nil, gui = nil, guisp = nil }
 	hi.WarningMsg = { guifg = M.colors.base08, guibg = nil, gui = nil, guisp = nil }
 	hi.WildMenu = { guifg = M.colors.base08, guibg = M.colors.base0A, gui = nil, guisp = nil }
