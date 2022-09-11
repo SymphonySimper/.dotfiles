@@ -1,13 +1,12 @@
 #!/bin/sh
 
-power_wifi(){ nmcli radio wifi $1; }
-wifi(){
-	case "$1" in
-		on ) power_wifi on ;;
-		off ) power_wifi off ;;
-	esac
-}
+pgm='nmcli'
+
+wi(){ $pgm radio wifi $1; }
+# status=$(wi)
 
 case "$1" in
-	wifi | w ) shift; wifi $1 ;;
+	on ) wi on ;;
+	off ) wi off ;;
 esac
+# echo $status
