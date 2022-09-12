@@ -110,7 +110,7 @@ select_default_prog 'SWALLOW' 'devour'
 select_default_prog 'USE_GPU' 'prime-run'
 
 # export LESS='-NQ --use-color --color=N238'
-export LESS='-Q'
+export LESS='-QR'
 export GAMEMODERUNEXEC="prime-run"
 
 # Other settings
