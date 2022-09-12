@@ -72,6 +72,7 @@ bspc rule -a Zathura desktop='^4' state=tiled follow=on
 ## D6
 dlp '^5' <<- EOF
 	mpv follow=on
+	*:animixplay.to
 	Com.github.xournalpp.xournalpp follow=on
 	Bottles
 	explorer.exe
