@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 if [ $# -lt 1 ]; then
 	echo "Not enough arguments"
@@ -13,6 +13,7 @@ else
 		*suse* ) pmn='zypper'; pm="$PERM $pmn" ;;
 	esac
 
+	config_log="$HOME/.config/pm"
 	aur='paru'; fl='flatpak'; viewer='fzf';
 
 	exist 'flatpak'
@@ -30,6 +31,18 @@ else
 		is_win=$?
 	fi
 
+	gen_packages_list(){
+		case "$DISTRO" in
+			[Aa]rch ) 
+				$pmn -Qqen > "$config_log/arch/pacman-list"
+				if [ $is_paru -eq 0 ]; then
+					diff -d <($pmn -Qqen) <($pmn -Qqe) | grep '>' \
+						| cut -d' ' -f2 > "$config_log/arch/aur-list"
+				fi
+				;;
+		esac
+	}
+	
 	install(){
 		case "$@" in
 			*.* ) flatpak_stuff i $@ ;;
@@ -41,7 +54,8 @@ else
 					'zypper') $pm install $@ ;;
 				esac
 				;;
-			esac
+		esac
+		gen_packages_list
 	}
 
 	update(){
@@ -66,6 +80,7 @@ else
 				esac
 				;;
 		esac
+		gen_packages_list
 	}
 
 	list(){
@@ -140,6 +155,8 @@ else
 					s ) shift; $aur -Ss $1 ;;
 					e ) $PERM $EDITOR "$HOME"/.config/paru/paru.conf ;;
 				esac
+				diff -d <($pmn -Qqen) <($pmn -Qqe) | grep '>' \
+					| cut -d' ' -f2 > "$config_log/arch/aur-list"
 			fi
 		fi
 	}
@@ -180,6 +197,7 @@ else
 				dr ) shift; $fl remote-delete $1 ;;
 				rmz ) $fl uninstall --unused ;;
 			esac
+			$fl list --app > "$config_log/flatpak-list"
 		fi
 	}
 
@@ -317,4 +335,5 @@ else
 		wc ) windows_stuff c ;;
 		* ) auto_install_uninstall $@ ;;
 	esac
+
 fi
