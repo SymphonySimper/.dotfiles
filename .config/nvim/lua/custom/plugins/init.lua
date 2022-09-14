@@ -3,6 +3,7 @@ local overrides = require "custom.plugins.overrides"
 return {
 
   ["goolord/alpha-nvim"] = { disable = false },
+  ["folke/which-key.nvim"] = { disable = false },
 
   -- Override plugin definition options
   ["neovim/nvim-lspconfig"] = {
@@ -31,9 +32,6 @@ return {
     config = function()
       require("better_escape").setup()
     end,
-  },
-['folke/tokyonight.nvim'] = {
-
   },
   -- code formatting, linting etc
   ["jose-elias-alvarez/null-ls.nvim"] = {
