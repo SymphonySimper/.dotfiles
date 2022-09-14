@@ -9,7 +9,7 @@ local plugins = {
 	"treesitter",
 	"autosave",
 	"presence",
-	"vimwiki",
+	--[[ "vimwiki", ]]
 	"gomove",
 	"impatient",
 	"indentline",

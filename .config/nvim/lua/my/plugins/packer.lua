@@ -43,7 +43,7 @@ return packer.startup(function(use)
 	use("booperlv/nvim-gomove")
 	use("Pocco81/auto-save.nvim")
 	use("andweeb/presence.nvim")
-	use({ "vimwiki/vimwiki", branch = "dev" })
+	--[[ use({ "vimwiki/vimwiki", branch = "dev" }) ]]
 	use("lewis6991/impatient.nvim")
 	use("lukas-reineke/indent-blankline.nvim")
 	use({
