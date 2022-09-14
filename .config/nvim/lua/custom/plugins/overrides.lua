@@ -15,6 +15,10 @@ M.mason = {
     "html-lsp",
     "typescript-language-server",
     "deno",
+    "svelte-language-server",
+    "astro-language-server",
+
+    "rust-analyzer",
   },
 }
 
