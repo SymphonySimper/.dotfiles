@@ -44,9 +44,6 @@ M.nvimtree = {
         git = true,
       },
     },
-    open_file = {
-      quit_on_open = false,
-    },
   },
 }
 
