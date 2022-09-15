@@ -15,9 +15,10 @@ clock_i="$dir"/clock.svg
 warning_i="$HOME"/.local/share/icons/general/warning.svg
 full_screen_i="$HOME"/.local/share/icons/screenshot/full-screen.svg
 
-get_stat=$(cat /sys/class/power_supply/BAT0/status)
-get_cap=$(cat /sys/class/power_supply/BAT0/capacity)
-notify_bat(){ $notify -h string:x-dunst-stack-tag:myBattery -i "$1"  "Battery level: $get_cap%"; }
+get_stat=$(bat s)
+get_cap=$(bat c)
+get_conv=$(bat ms)
+notify_bat(){ $notify -h string:x-dunst-stack-tag:myBattery -i "$1"  "Battery level: $get_cap%" "$get_conv"; }
 bat(){
 	case $get_stat in
 		'Charging') notify_bat "$charging_i" ;;
