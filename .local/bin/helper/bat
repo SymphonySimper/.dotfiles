@@ -1,0 +1,18 @@
+#!/bin/sh
+
+file="/sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode"
+
+mode=$(cat $file)
+
+change_mode(){
+    echo "echo $1 > $file" | yoink
+    echo "Command copied to clipboard"
+    echo "Conservation mode from $mode to $1"
+    su
+}
+
+if [ $mode -eq 1 ]; then
+    change_mode 0
+else
+    change_mode 1
+fi
