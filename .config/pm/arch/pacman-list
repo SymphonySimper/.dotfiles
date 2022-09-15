@@ -7,7 +7,6 @@ base
 bc
 binutils
 bison
-bitwarden
 bspwm
 chromium
 cronie
@@ -23,7 +22,6 @@ firefox
 flatpak
 flex
 fzf
-gamemode
 gawk
 gcc
 gettext
@@ -35,7 +33,6 @@ gzip
 htop
 imlib2
 intel-ucode
-kitty
 lazygit
 lib32-gamemode
 libexif
@@ -74,7 +71,7 @@ qemu-base
 rofi
 rust-analyzer
 sed
-steam
+shellcheck
 stylua
 sudo
 sxhkd

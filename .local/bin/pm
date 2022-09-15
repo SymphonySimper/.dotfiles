@@ -197,7 +197,7 @@ else
 				dr ) shift; $fl remote-delete $1 ;;
 				rmz ) $fl uninstall --unused ;;
 			esac
-			$fl list --app > "$config_log/flatpak-list"
+			$fl list --app | cut -f2 > "$config_log/flatpak-list"
 		fi
 	}
 
