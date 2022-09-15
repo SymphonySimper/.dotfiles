@@ -71,6 +71,7 @@ rofi
 rust-analyzer
 sed
 shellcheck
+shfmt
 stylua
 sudo
 sxhkd
