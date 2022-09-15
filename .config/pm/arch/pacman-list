@@ -1,6 +1,7 @@
 acpi
 alacritty
 archlinux-keyring
+aria2
 autoconf
 automake
 base
@@ -91,6 +92,7 @@ xorg-xinit
 xorg-xinput
 xorg-xsetroot
 xwallpaper
+yt-dlp
 zathura
 zathura-pdf-poppler
 zram-generator
