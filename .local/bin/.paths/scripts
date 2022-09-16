@@ -23,6 +23,7 @@ gen-fox                  .local/bin/gen/gen-fox
 gen-hosts                .local/bin/gen/gen-hosts
 gen-xresources           .local/bin/gen/gen-xresources
 goals                    .local/bin/goals
+graphic                  .local/bin/graphic
 groff-ms                 .local/bin/groff-ms
 islept                   .local/bin/islept
 kc                       .local/bin/kc

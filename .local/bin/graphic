@@ -1,0 +1,11 @@
+#!/bin/sh
+
+pgm='envycontrol'
+
+change_mode(){ $PERM $pgm -s "$1"; }
+
+case "$1" in
+    i ) change_mode 'integrated' ;;
+    h ) change_mode 'hybrid' ;;
+    q ) $pgm -q ;;
+esac
