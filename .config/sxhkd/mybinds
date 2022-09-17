@@ -39,9 +39,13 @@ super + shift + {s,a}
 Print
 	screenshot -s
 
+# My bar
+super + b
+    mybar t
+
 # My info/ goals
-super + {b,shift + b,alt + shift + b}
-	{mybar t,myinfo,goals}
+super + {shift + b,alt + shift + b}
+	{myinfo,goals}
 
 # Screenkey
 XF86Calculator

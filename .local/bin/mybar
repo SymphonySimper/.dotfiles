@@ -20,8 +20,11 @@ mng_bar(){
         s ) 
             $pg > /dev/null 2>&1 &
             up_cac s
+            wm_mng s
             ;;
-        k ) killall $pg > /dev/null 2>&1 ;;
+        k ) killall $pg > /dev/null 2>&1
+            wm_mng h
+            ;;
         r ) $pgm cmd restart ;;
     esac
 }

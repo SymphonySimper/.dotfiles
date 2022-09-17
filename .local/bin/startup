@@ -15,6 +15,7 @@ xinput set-prop "$(xinput list --name-only | grep Touchpad)" "libinput Tapping E
 xset -b
 
 [ "$TERMINAL" = 'urxvtc' ] && urxvtd -q &
+mybar s &
 dunst &
 sxhkd -c "$HOME"/.config/sxhkd/.sxhkdrc &
 unclutter --timeout 1 &
