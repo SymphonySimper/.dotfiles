@@ -64,6 +64,7 @@ pipewire-alsa
 pipewire-jack
 pipewire-pulse
 pkgconf
+polybar
 progress
 ps_mem
 pulsemixer

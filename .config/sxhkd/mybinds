@@ -40,8 +40,8 @@ Print
 	screenshot -s
 
 # My info/ goals
-super + {b,shift + b}
-	{myinfo,goals}
+super + {b,shift + b,alt + shift + b}
+	{mybar t,myinfo,goals}
 
 # Screenkey
 XF86Calculator

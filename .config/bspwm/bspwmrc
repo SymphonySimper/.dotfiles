@@ -18,6 +18,9 @@ bspc config focus_follows_pointer false
 
 bspc config ignore_ewmh_focus true
 
+bspc config top_padding 32
+bspc config bottom_padding 0
+
 # Monitor settings
 bspc config remove_disabled_monitors true
 bspc config remove_unplugged_monitors true

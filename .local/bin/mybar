@@ -1,0 +1,64 @@
+#!/bin/sh
+
+pg='polybar'
+pgm='polybar-msg'
+
+cac="$XDG_CACHE_HOME/mybar"
+
+up_cac(){
+    case "$1" in
+        s* ) echo "Visible" > "$cac" ;;
+        h* ) echo "Hidden" > "$cac" ;;
+    esac
+}
+
+rm_cac(){ [ -f "$cac" ] && rm "$cac"; }
+
+mng_bar(){
+    rm_cac
+    case "$1" in
+        s ) 
+            $pg > /dev/null 2>&1 &
+            up_cac s
+            ;;
+        k ) killall $pg > /dev/null 2>&1 ;;
+        r ) $pgm cmd restart ;;
+    esac
+}
+
+
+set_bspwm_pad(){ bspc config top_padding $1; }
+wm_mng(){
+    if [ "$WM" = 'bspwm' ]; then
+        case "$1" in
+            s ) set_bspwm_pad 32 ;;
+            h ) set_bspwm_pad 0 ;;
+        esac
+    fi
+}
+toggle_visibility(){
+    if [ ! -f "$cac" ]; then
+        echo "Cache file not found!"
+        exit 1
+    fi
+
+    stat="$(cat $cac)"
+
+    case "$stat" in
+        'Visible' ) $pgm cmd hide && up_cac h ;;
+        'Hidden' ) $pgm cmd show && up_cac s ;;
+    esac
+
+    if [ "$stat" = 'Visible' ]; then
+        wm_mng h
+    else
+        wm_mng s
+    fi
+}
+
+case "$1" in
+    s ) mng_bar s ;;
+    k ) mng_bar k ;;
+    r ) mng_bar r ;;
+    t ) toggle_visibility ;;
+esac

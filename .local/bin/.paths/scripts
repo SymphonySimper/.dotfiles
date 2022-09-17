@@ -37,6 +37,7 @@ look-away                .local/bin/cron/look-away
 lz                       .local/bin/lz
 manager                  .local/bin/cron/manager
 mntdev                   .local/bin/mntdev
+mybar                    .local/bin/mybar
 myinfo                   .local/bin/myinfo
 myqemu                   .local/bin/myqemu
 mywiki                   .local/bin/mywiki
