@@ -22,10 +22,10 @@ mpv							.config/mpv/mpv.conf
 mpv-input					.config/mpv/input.conf
 mybinds						.config/sxhkd/mybinds
 mybspwm-binds				.config/sxhkd/mybspwm-binds
+mynvim						.config/mynvim/lua/my/options.lua
 ncspot						.config/ncspot/config.toml
 newsboat-config				.config/newsboat/config
 newsboat-urls				.config/newsboat/urls
-nvim						.config/nvim/lua/custom/chadrc.lua
 paru						.config/paru/paru.conf
 picom						.config/picom/picom.conf
 polybar						.config/polybar/config.ini
