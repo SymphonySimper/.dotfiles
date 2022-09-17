@@ -28,6 +28,7 @@ newsboat-urls				.config/newsboat/urls
 nvim						.config/nvim/lua/custom/chadrc.lua
 paru						.config/paru/paru.conf
 picom						.config/picom/picom.conf
+polybar						.config/polybar/config.ini
 portage						.config/portage/make.conf
 rofi-config					.config/rofi/config.rasi
 rofi-theme					.config/rofi/theme.rasi
