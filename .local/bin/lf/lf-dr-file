@@ -11,4 +11,4 @@ get_files(){
 }
 
 get_files "$1" > /dev/null 2>&1 \
-&& [ -n "$(cat $temp_file 2>/dev/null)" ] && cat $temp_file | dragon -a -I
+&& [ -n "$(cat $temp_file 2>/dev/null)" ] && cat $temp_file | dragon-drop -a -I
