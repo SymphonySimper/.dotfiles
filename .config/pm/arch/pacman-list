@@ -12,7 +12,6 @@ bspwm
 chromium
 cronie
 dash
-discord
 dkms
 dunst
 efibootmgr
@@ -72,7 +71,6 @@ qbittorrent
 rofi
 rust-analyzer
 sed
-shfmt
 stylua
 sudo
 sxhkd
