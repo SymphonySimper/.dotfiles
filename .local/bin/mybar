@@ -58,9 +58,12 @@ toggle_visibility(){
     fi
 }
 
+query(){ [ -n "$(pgrep $pg)" ] && return 0 || return 1; }
+
 case "$1" in
     s ) mng_bar s ;;
     k ) mng_bar k ;;
     r ) $pgm cmd restart ;;
     t ) toggle_visibility ;;
+	q ) query ;;
 esac
