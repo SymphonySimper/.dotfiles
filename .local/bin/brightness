@@ -25,4 +25,5 @@ case "$1" in
 	-s) shift; $app -set $1 ;;
 	-t) toggle_max ;;
 esac
-notify
+
+mybar q || notify

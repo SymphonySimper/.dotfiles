@@ -14,10 +14,12 @@ get_vol(){ $app --get-volume | awk '{print $1}'; }
 mute_noti(){ [ $get_mute -eq 0 ] && $notify -i "$mute_i" "Muted" || $notify -i "$speaker_i" "Unmuted"; }
 
 notify(){
-	case "$1" in
-		-c) $notify -i "$speaker_i" "Volume: $(get_vol)" -h int:value:$(get_vol) ;;
-		-m) mute_noti ;;
-	esac
+	if ! mybar q; then
+		case "$1" in
+			-c) $notify -i "$speaker_i" "Volume: $(get_vol)" -h int:value:$(get_vol) ;;
+			-m) mute_noti ;;
+		esac
+	fi
 }
 
 change_vol(){
