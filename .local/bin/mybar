@@ -58,7 +58,13 @@ toggle_visibility(){
     fi
 }
 
-query(){ [ -n "$(pgrep $pg)" ] && return 0 || return 1; }
+query(){ 
+	if [ -n "$(pgrep $pg)" ] && [ "$(cat $cac)" = 'Visible' ]; then
+		return 0
+	else
+		return 1
+	fi
+}
 
 case "$1" in
     s ) mng_bar s ;;
