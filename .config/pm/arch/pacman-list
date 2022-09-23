@@ -1,5 +1,6 @@
 acpi
 alacritty
+android-tools
 archlinux-keyring
 aria2
 autoconf
@@ -12,6 +13,7 @@ bspwm
 chromium
 cronie
 dash
+discord
 dkms
 dunst
 efibootmgr
@@ -68,6 +70,7 @@ progress
 ps_mem
 pulsemixer
 qbittorrent
+rnote
 rofi
 rust-analyzer
 sed
@@ -76,6 +79,7 @@ sudo
 sxhkd
 texinfo
 ueberzug
+ufw
 unclutter
 unzip
 which
