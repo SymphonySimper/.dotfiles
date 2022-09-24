@@ -64,7 +64,7 @@ main() {
 		*.docx | *.doc | *.odt ) $h $dv "$1" ;;
 		-a) ls | grep  'jpeg\|jpg\|png\|webp' | $h $iv -t - ;;
 		-w) $h $iv $what_img ;;
-		-f) $h $vf /dev/video0 ;;
+		-f) $h $vv --profile=low-latency --untimed /dev/video0 ;;
 		-d) shift; case "$1" in
 				*.pdf ) $h $pv "$1" && rm -i "$1" ;;
 				*) $h $iv $what_img && rm -I $what_img ;;
