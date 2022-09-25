@@ -28,6 +28,7 @@ groff-ms                 .local/bin/groff-ms
 islept                   .local/bin/islept
 kc                       .local/bin/kc
 kdenlive                 .local/bin/aliases/kdenlive
+key                      .local/bin/key
 lf-clear-img             .local/bin/lf/lf-clear-img
 lf-draw-img              .local/bin/lf/lf-draw-img
 lf-dr-file               .local/bin/lf/lf-dr-file

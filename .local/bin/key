@@ -1,0 +1,9 @@
+#!/bin/sh
+
+pgm='setxkbmap'
+case "$1" in
+	ce ) $pgm -option caps:escape ;;
+	# capslock becomes backsapce and when you press both the sift button
+	# it [en/dis]ables capslock
+	cb ) $pgm -option caps:backspace -option shift:both_capslock ;;
+esac
