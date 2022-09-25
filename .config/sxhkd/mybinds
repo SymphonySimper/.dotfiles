@@ -93,7 +93,7 @@ super + F9
 
 # Switch keyboard layout
 super + F10
-	skl
+	key skl
 
 # sxhkd
 super + Escape
