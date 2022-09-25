@@ -58,7 +58,7 @@ toggle_visibility(){
     fi
 }
 
-query(){ 
+query(){
 	if [ -n "$(pgrep $pg)" ] && [ "$(cat $cac)" = 'Visible' ]; then
 		return 0
 	else
@@ -67,7 +67,10 @@ query(){
 }
 
 case "$1" in
-    s ) mng_bar s ;;
+    s ) 
+		mng_bar s
+		xdo id -m -N Polybar && toggle_visibility
+		;;
     k ) mng_bar k ;;
     r ) $pgm cmd restart ;;
     t ) toggle_visibility ;;
