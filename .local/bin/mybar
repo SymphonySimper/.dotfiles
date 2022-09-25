@@ -39,13 +39,17 @@ wm_mng(){
     fi
 }
 toggle_visibility(){
-    if [ ! -f "$cac" ]; then
-        echo "Cache file not found!"
-        exit 1
-    fi
+	if [ ! $(pgrep -c $pg) -gt 0 ]; then
+		mng_bar s
+	fi
+    # if [ ! -f "$cac" ]; then
+    #     echo "Cache file not found!"
+    #     exit 1
+    # fi
 
     stat="$(cat $cac)"
 
+	xdo id -m -N Polybar
     case "$stat" in
         'Visible' ) $pgm cmd hide && up_cac h ;;
         'Hidden' ) $pgm cmd show && up_cac s ;;
@@ -67,10 +71,7 @@ query(){
 }
 
 case "$1" in
-    s ) 
-		mng_bar s
-		xdo id -m -N Polybar && toggle_visibility
-		;;
+	s ) mng_bar s ;;
     k ) mng_bar k ;;
     r ) $pgm cmd restart ;;
     t ) toggle_visibility ;;
