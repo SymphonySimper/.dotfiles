@@ -58,9 +58,6 @@ loop_v(){
 # Loop Audio
 loop_a(){ $VIDEO_PLAYER --shuffle --loop-playlist "$HOME"/importantnt/audio; }
 
-# Caps To ESC
-caps_to_esc(){ setxkbmap -option caps:escape; }
-
 # Cnvert
 cnvert(){
 	vc="ffmpeg"
