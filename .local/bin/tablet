@@ -12,5 +12,5 @@ start_huion(){ /usr/lib/huiontablet/huionCore.sh > /dev/null 2>&1 & }
 
 case "$1" in
 	kill | k ) kill_huion ;;
-	* ) kill_huion && start_huion ;;
+	s ) kill_huion && start_huion ;;
 esac
