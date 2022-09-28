@@ -30,6 +30,7 @@ paru						.config/paru/paru.conf
 picom						.config/picom/picom.conf
 polybar						.config/polybar/config.ini
 portage						.config/portage/make.conf
+qutebrowser					.config/qutebrowser/config.py
 rofi-config					.config/rofi/config.rasi
 rofi-theme					.config/rofi/theme.rasi
 sxiv						.config/sxiv/exec/key-handler
