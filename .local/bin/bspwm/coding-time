@@ -47,7 +47,16 @@ fi
 
 [ -n "$1" ] && echo "$1" >> $temp_file
 
-if [ "$1" = '.' ]; then
+printf "\000use-hot-keys\037true\n"
+if [ $ROFI_RETV -eq 10 ]; then
+	temp='/tmp'
+	for i in $(seq 2); do
+		$TERMINAL -e $chd  "$temp" > /dev/null 2>&1 &
+	done
+	sleep 0.1s
+	bspc node -f west
+	bspc node -z right +400 0
+elif [ "$1" = '.' ]; then
 	open_terminals
 else
 	choose_loc
