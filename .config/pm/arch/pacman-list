@@ -72,10 +72,13 @@ polybar
 progress
 ps_mem
 pulsemixer
+python-adblock
 qbittorrent
+qutebrowser
 rnote
 rofi
 rust-analyzer
+rxvt-unicode
 sed
 stylua
 sudo
