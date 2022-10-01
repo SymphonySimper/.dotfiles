@@ -1,10 +1,10 @@
 {
     "enabled": true,
-    "fetchNews": true,
+    "fetchNews": false,
     "theme": {
         "mode": 1,
-        "brightness": 100,
-        "contrast": 100,
+        "brightness": 80,
+        "contrast": 120,
         "grayscale": 0,
         "sepia": 0,
         "useFont": false,
@@ -12,13 +12,16 @@
         "textStroke": 0,
         "engine": "dynamicTheme",
         "stylesheet": "",
-        "darkSchemeBackgroundColor": "#111111",
-        "darkSchemeTextColor": "#bbbbbb",
+        "darkSchemeBackgroundColor": "#000",
+        "darkSchemeTextColor": "#bbb",
         "lightSchemeBackgroundColor": "#dcdad7",
         "lightSchemeTextColor": "#181a1b",
-        "scrollbarColor": "#222222",
-        "selectionColor": "#444444",
-        "styleSystemControls": true
+        "scrollbarColor": "#222",
+        "selectionColor": "#444",
+        "styleSystemControls": true,
+        "lightColorScheme": "Default",
+        "darkColorScheme": "Default",
+        "immediateModify": false
     },
     "presets": [],
     "customThemes": [],
@@ -29,11 +32,15 @@
     "applyToListedOnly": false,
     "changeBrowserTheme": false,
     "syncSettings": true,
-    "syncSitesFixes": false,
-    "automation": "",
+    "syncSitesFixes": true,
+    "automation": {
+        "enabled": false,
+        "mode": "",
+        "behavior": "OnOff"
+    },
     "time": {
-        "activation": "18:00",
-        "deactivation": "9:00"
+        "activation": "0:00",
+        "deactivation": "0:00"
     },
     "location": {
         "latitude": null,
@@ -42,5 +49,24 @@
     "previewNewDesign": true,
     "enableForPDF": true,
     "enableForProtectedPages": false,
-    "enableContextMenus": false
+    "enableContextMenus": false,
+    "detectDarkTheme": false,
+    "readNews": [
+        "v4-9-16",
+        "v4-9",
+        "attention",
+        "dr-5-announcement",
+        "2m-users",
+        "automation",
+        "product-hunt-golden-kitty-2018",
+        "time-settings",
+        "safari",
+        "500k-users",
+        "stylish",
+        "product-hunt",
+        "custom-site-settings",
+        "thanks-for-contribution",
+        "dynamic-theme"
+    ],
+    "notifyOfNews": false
 }
