@@ -5,7 +5,7 @@ ext="${1##*.}"
 
 case "$ext" in
 	cpp )
-		g++ -pedantic-errors -Wall -Weffc++ -Wextra -Wsign-conversion -o "$name" "$1" \
+		g++ -pedantic-errors -Wall -Weffc++ -Wextra -Wsign-conversion -Werror -o "$name" "$1" \
 			&& "./${name}"
 		;;
 	c )
