@@ -5,7 +5,7 @@ ext="${1##*.}"
 
 case "$ext" in
 	cpp )
-		g++ -o "$name" "$1" \
+		g++ -pedantic-errors -o "$name" "$1" \
 			&& "./${name}"
 		;;
 	c )
