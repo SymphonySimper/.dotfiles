@@ -3,10 +3,24 @@
 pgm='nmcli'
 
 wi(){ $pgm radio wifi $1; }
-# status=$(wi)
+
+status() {
+	is_enabled=$(wi)
+	if [ "$is_enabled" = 'enabled' ]; then
+		ssid="$($pgm connection show --active | tail +2 | cut -d ' ' -f1)"
+		if [ $(echo "$ssid" | wc -w ) -gt 0 ]; then
+			echo "Connected to $ssid"
+		else
+			echo "Enabled but not connected"
+		fi
+	else
+		echo "Disabled"
+	fi
+}
 
 case "$1" in
 	on ) wi on ;;
 	off ) wi off ;;
+	s ) status ;;
 esac
 # echo $status
