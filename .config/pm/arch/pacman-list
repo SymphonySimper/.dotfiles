@@ -71,9 +71,7 @@ polybar
 progress
 ps_mem
 pulsemixer
-python-adblock
 qbittorrent
-qutebrowser
 rnote
 rofi
 rust-analyzer
@@ -100,7 +98,6 @@ xorg-xinit
 xorg-xinput
 xorg-xsetroot
 xwallpaper
-yt-dlp
 zathura
 zathura-pdf-poppler
 zram-generator
