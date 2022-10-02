@@ -6,6 +6,7 @@ bmark                    .local/bin/bmark
 brightness               .local/bin/brightness
 chd                      .local/bin/helper/chd
 chtsh                    .local/bin/rofi/chtsh
+c                        .local/bin/c
 coding-time              .local/bin/bspwm/coding-time
 configs                  .local/bin/.paths/configs
 countdown                .local/bin/helper/countdown

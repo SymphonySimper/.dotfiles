@@ -1,0 +1,16 @@
+#!/bin/sh
+
+name="${1%.*}"
+ext="${1##*.}"
+
+case "$ext" in
+	cpp )
+		g++ -o "$name" "$1" \
+			&& "./${name}"
+		;;
+	c )
+		gcc -o "$name" "$1" \
+			&& "./${name}"
+		;;
+	* ) echo "Not a C/C++ file" ;;
+esac
