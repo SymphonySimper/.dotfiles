@@ -67,5 +67,6 @@ get_mode(){
 	fi
 }
 
+notify_wifi(){ $notify -h string:x-dunst-stack-tag:wifi "$(wifi s)"; }
 
-bat; notify_date; notify_time; list_todo; get_mode
+bat; notify_date; notify_time; list_todo; get_mode; notify_wifi
