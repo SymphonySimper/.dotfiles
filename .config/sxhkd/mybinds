@@ -40,11 +40,11 @@ Print
 	screenshot -s
 
 # My bar
-super + b
+super + shift + b
     mybar t
 
 # My info/ goals
-super + {shift + b,alt + shift + b}
+super + {b,alt + shift + b}
 	{myinfo,goals}
 
 # Screenkey
