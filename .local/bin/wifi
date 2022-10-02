@@ -7,8 +7,10 @@ wi(){ $pgm radio wifi $1; }
 status() {
 	is_enabled=$(wi)
 	if [ "$is_enabled" = 'enabled' ]; then
-		ssid="$($pgm connection show --active | tail +2 | cut -d ' ' -f1)"
-		if [ $(echo "$ssid" | wc -w ) -gt 0 ]; then
+		connected="$($pgm connection show --active | head -n 2 | tail +2 | cut -d '-' -f1)"
+		if [ $(echo "$connected" | wc -w ) -gt 0 ]; then
+			num=$(echo $connected | wc -w)
+			ssid="$(echo $connected | cut -d ' ' -f -$((num - 1)))"
 			echo "Connected to $ssid"
 		else
 			echo "Enabled but not connected"
