@@ -21,6 +21,7 @@ fakeroot
 file
 findutils
 firefox
+firefox-developer-edition
 flake8
 flatpak
 flex
