@@ -70,7 +70,10 @@ blp <<- EOF
 	EOF
 
 ## D4
-bspc rule -a Zathura desktop='^4' state=tiled follow=on
+dlp '^4' <<- EOF
+	Zathura state=tiled follow=on
+	firefoxdeveloperedition
+	EOF
 
 ## D6
 dlp '^5' <<- EOF
