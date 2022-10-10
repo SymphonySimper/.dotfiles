@@ -11,8 +11,8 @@ bison
 bspwm
 chromium
 cronie
-cuda
 dash
+debugedit
 discord
 dkms
 dunst
@@ -36,6 +36,7 @@ gst-plugin-pipewire
 gzip
 htop
 imlib2
+intel-media-driver
 intel-ucode
 lazygit
 lf
@@ -44,6 +45,7 @@ libexif
 libnotify
 libpulse
 libtool
+libva-intel-driver
 linux-firmware
 linux-zen
 linux-zen-headers
@@ -53,12 +55,11 @@ make
 man-db
 materia-gtk-theme
 mpv
+neofetch
 neovim
 networkmanager
 npm
 ntfs-3g
-nvidia-dkms
-nvidia-prime
 openssh
 pacman
 patch
@@ -86,6 +87,7 @@ ueberzug
 ufw
 unclutter
 unzip
+vulkan-intel
 which
 wireplumber
 wqy-zenhei
