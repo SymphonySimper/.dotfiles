@@ -33,7 +33,7 @@ set_bspwm_pad(){ bspc config top_padding $1; }
 wm_mng(){
     if [ "$WM" = 'bspwm' ]; then
         case "$1" in
-            s ) set_bspwm_pad 32 ;;
+            s ) set_bspwm_pad 26 ;;
             h ) set_bspwm_pad 0 ;;
         esac
     fi
