@@ -9,7 +9,6 @@ bc
 binutils
 bison
 bspwm
-chromium
 cronie
 dash
 debugedit
@@ -20,8 +19,6 @@ efibootmgr
 fakeroot
 file
 findutils
-firefox
-firefox-developer-edition
 flake8
 flatpak
 flex
