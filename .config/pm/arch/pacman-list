@@ -35,6 +35,7 @@ groff
 gst-plugin-pipewire
 gzip
 htop
+imagemagick
 imlib2
 intel-ucode
 lazygit
