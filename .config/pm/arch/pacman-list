@@ -32,6 +32,7 @@ groff
 gst-plugin-pipewire
 gzip
 htop
+imagemagick
 imlib2
 intel-media-driver
 intel-ucode
