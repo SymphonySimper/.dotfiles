@@ -4,9 +4,12 @@ local options = {
 	backup = false,
 	swapfile = false,
 	showmode = false,
-	laststatus = 2,
 	showcmd = false,
-	showtabline = 1,
+	-- Hide last satus
+	laststatus = 0,
+	-- Hide command bar
+	ch = 0,
+	showtabline = 2,
 	signcolumn = "yes",
 	syntax = "enable",
 	smartindent = true,
@@ -26,6 +29,8 @@ local options = {
 	nrformats = "alpha",
 	splitright = true,
 	hls = false,
+	-- spell check comments
+	spell = true,
 }
 
 for k, v in pairs(options) do
