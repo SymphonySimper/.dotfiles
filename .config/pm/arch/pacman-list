@@ -13,7 +13,6 @@ chromium
 cronie
 cuda
 dash
-discord
 dkms
 dunst
 efibootmgr
@@ -21,7 +20,6 @@ fakeroot
 file
 findutils
 firefox
-firefox-developer-edition
 flake8
 flatpak
 flex
@@ -40,7 +38,6 @@ imlib2
 intel-ucode
 lazygit
 lf
-lib32-gamemode
 libexif
 libnotify
 libpulse
@@ -53,7 +50,6 @@ maim
 make
 man-db
 materia-gtk-theme
-mpv
 neovim
 networkmanager
 npm
@@ -69,7 +65,6 @@ pipewire-alsa
 pipewire-jack
 pipewire-pulse
 pkgconf
-polybar
 progress
 ps_mem
 pulsemixer
@@ -93,7 +88,6 @@ wireplumber
 wqy-zenhei
 xclip
 xdo
-xf86-input-wacom
 xf86-video-intel
 xorg-server
 xorg-xbacklight
