@@ -81,6 +81,7 @@ dlp '^5' <<- EOF
 	*:animixplay.to
 	*:9anime.mn__user_continue-watching
 	Com.github.xournalpp.xournalpp follow=on
+	rnote
 	Bottles
 	explorer.exe
 	EOF
