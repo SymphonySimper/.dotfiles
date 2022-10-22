@@ -28,10 +28,10 @@ super + shift + p
 super + {space,s,e,r,a,shift+n}
 	rofi-{run,open,edit,todo,play,notes}
 super + shift + q
-	rofi -modi "Power Options:$HOME/.local/bin/rofi/power-options" \
+	rofi -modi "Power Options:$HOME/.local/bin/my/rofi/power-options" \
 	-show 'Power Options'
 super + i
-	rofi -modi "cht.sh:$HOME/.local/bin/rofi/chtsh" -show "cht.sh"
+	rofi -modi "cht.sh:$HOME/.local/bin/my/rofi/chtsh" -show "cht.sh"
 
 # Screenshot
 super + shift + {s,a}

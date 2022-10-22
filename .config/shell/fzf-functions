@@ -5,9 +5,9 @@ fzf_open(){
 	[ -f "$get_loc" ] && "$EDITOR" "$get_loc"
 }
 
-fec(){ fzf_open "$HOME"/.local/bin/.paths/configs; }
-fes(){ fzf_open "$HOME"/.local/bin/.paths/scripts; }
-fesh(){ fzf_open "$HOME"/.local/bin/.paths/shell; }
+fec(){ fzf_open "$HOME"/.local/bin/my/.paths/configs; }
+fes(){ fzf_open "$HOME"/.local/bin/my/.paths/scripts; }
+fesh(){ fzf_open "$HOME"/.local/bin/my/.paths/shell; }
 
 # Play video/audio
 fzf_play(){

@@ -1,7 +1,7 @@
 #!/bin/sh
 
-folders_path="$HOME"/.local/bin/.paths/folders
-path_fzf="$HOME"/.local/bin/.paths/fzf-folders
+folders_path="$HOME"/.local/bin/my/.paths/folders
+path_fzf="$HOME"/.local/bin/my/.paths/fzf-folders
 folder_alias="$HOME"/.config/shell/folders
 lf_alias="$HOME"/.config/lf/lf-folders
 fzf_folder_alias="$HOME"/.config/shell/fzf-folder-alias

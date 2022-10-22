@@ -1,5 +1,5 @@
 #!/bin/sh
-loc="$HOME"/.local/bin/rofi
+loc="$HOME"/.local/bin/my/rofi
 configs="$loc"/edit-configs
 scripts="$loc"/edit-scripts
 shell="$loc"/edit-shell

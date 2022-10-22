@@ -18,7 +18,7 @@ xset -b
 dunst &
 sxhkd -c "$HOME"/.config/sxhkd/.sxhkdrc &
 unclutter --timeout 1 &
-"$HOME"/.local/bin/cron/look-away &
+"$HOME"/.local/bin/my/cron/look-away &
 
 # Set deafault browser
 xdg-mime default ${BROWSER}.desktop x-scheme-handler/https x-scheme-handler/http &

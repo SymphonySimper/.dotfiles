@@ -19,10 +19,11 @@ export WSL=$wsl
 
 # Paths
 add_path(){ [ -d "$1" ] && export PATH="$PATH:$1"; }
-add_path "$HOME/.local/bin"						# Scripts
-add_path "$HOME/.local/bin/aliases"				# Alias scripts
-add_path "$HOME/.local/bin/gen"					# Gen scripts
-add_path "$HOME/.local/bin/helper"				# Helper scripts
+add_path "$HOME/.local/bin"							# Scripts
+add_path "$HOME/.local/bin/my"						# My Scripts
+add_path "$HOME/.local/bin/my/aliases"				# Alias scripts
+add_path "$HOME/.local/bin/my/gen"					# Gen scripts
+add_path "$HOME/.local/bin/my/helper"				# Helper scripts
 add_path "$HOME/.local/appimage"				# Appimages
 is_present_prog ruby && export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
 add_path "$HOME/lifeisfun/lang/flutter/bin" 	# Flutter
