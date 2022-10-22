@@ -16,6 +16,7 @@ dash
 dkms
 dunst
 efibootmgr
+emacs
 fakeroot
 file
 findutils
@@ -79,6 +80,7 @@ sudo
 sxhkd
 syncthing
 texinfo
+tmux
 ueberzug
 ufw
 unclutter
