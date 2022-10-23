@@ -2,7 +2,7 @@
 
 # To launch coidng time
 super + x
-	rofi -modi "Coding time:$HOME/.local/bin/bspwm/coding-time" \
+	rofi -modi "Coding time:$HOME/.local/bin/my/bspwm/coding-time" \
 	-show 'Coding time' -no-custom
 
 # To resize left side window to approx 70%
@@ -12,4 +12,4 @@ super + shift + x
 
 # Open spotify
 super + {F1,shift + F1}
-	"$HOME"/.local/bin/bspwm/{open-spotify,open-spotify kill}
+	"$HOME"/.local/bin/my/bspwm/{open-spotify,open-spotify kill}
