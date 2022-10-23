@@ -1,6 +1,6 @@
 #!/bin/sh
 
-loc="$HOME"/.local/bin/rofi
+loc="$HOME"/.local/bin/my/rofi
 video="$loc"/play-video
 audio="$loc"/play-audio
 movies="$loc"/play-movie

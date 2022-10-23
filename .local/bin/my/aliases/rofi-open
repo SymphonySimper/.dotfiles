@@ -1,6 +1,6 @@
 #!/bin/sh
 
-loc="$HOME"/.local/bin/rofi
+loc="$HOME"/.local/bin/my/rofi
 search="$loc"/search
 open_url="$loc"/open-url
 open_bmark="$loc"/open-bmark

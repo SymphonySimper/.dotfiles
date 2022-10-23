@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ebooks="$HOME"/.local/bin/rofi/ebooks
-notes="$HOME"/.local/bin/rofi/notes
+ebooks="$HOME"/.local/bin/my/rofi/ebooks
+notes="$HOME"/.local/bin/my/rofi/notes
 
 rofi -modi "ebooks:$ebooks,notes:$notes" -show ebooks
