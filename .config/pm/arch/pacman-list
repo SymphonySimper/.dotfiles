@@ -1,6 +1,7 @@
 acpi
 alacritty
 android-tools
+appmenu-gtk-module
 archlinux-keyring
 autoconf
 automake
@@ -13,9 +14,11 @@ chromium
 cronie
 cuda
 dash
+debugedit
 dkms
 dunst
 efibootmgr
+emacs
 fakeroot
 file
 findutils
@@ -38,10 +41,12 @@ imlib2
 intel-ucode
 lazygit
 lf
+libappindicator-gtk3
 libexif
 libnotify
 libpulse
 libtool
+libvips
 linux-firmware
 linux-zen
 linux-zen-headers
@@ -84,6 +89,8 @@ ueberzug
 ufw
 unclutter
 unzip
+webkit2gtk
+wget
 which
 wireplumber
 wqy-zenhei
