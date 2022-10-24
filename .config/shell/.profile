@@ -63,9 +63,21 @@ export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
 export ANDROID_SDK_ROOT="$XDG_DATA_HOME"/android
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
 export ATOM_HOME="$XDG_DATA_HOME"/atom
+
 # pyenv
 export PYENV_ROOT="$XDG_CONFIG_HOME"/.pyenv
 add_path "$PYENV_ROOT/bin"
+
+# Home Brew
+[ -d '/home/linuxbrew/.linuxbrew' ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# Nix
+nix_loc="$HOME"/.nix-profile/etc/profile.d/nix.sh
+[ -f $nix_loc ] && . $nix_loc
+
+# pnpm
+export PNPM_HOME="$XDG_DATA_HOME"/pnpm
+add_path "$PNPM_HOME"
 
 # My loc exports
 export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
@@ -154,13 +166,6 @@ export TZ='Asia/Kolkata'
 
 # Wallpaper
 export WALLPAPER="$XDG_DATA_HOME"/mypics/bg.png
-
-# Home Brew
-[ -d '/home/linuxbrew/.linuxbrew' ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
-# Nix
-nix_loc="$HOME"/.nix-profile/etc/profile.d/nix.sh
-[ -f $nix_loc ] && . $nix_loc
 
 # Distro
 exp_distro(){ export DISTRO="$(grep -w $1 /etc/os-release | cut -d '=' -f 2)"; }
