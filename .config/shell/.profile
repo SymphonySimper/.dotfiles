@@ -51,9 +51,15 @@ export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 export WGETRC="$XDG_CONFIG_HOME"/wgetrc
 export SQLITE_HISTORY=$XDG_DATA_HOME/sqlite_history
 export ICEAUTHORITY="$XDG_CACHE_HOME"/ICEauthority
+
+# Rust
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
 # export RUST_BACKTRACE='1'
+[ -f "$XDG_DATA_HOME"/cargo/env ] && . "$XDG_DATA_HOME"/cargo/env
+export RUSTC_WRAPPER='sccache'
+export SCCACHE_DIR="$HOME"/lifeisfun/.cache/sccache
+
 export RXVT_SOCKET="$XDG_RUNTIME_DIR"/urxvtd
 export GOPATH="$XDG_DATA_HOME"/go
 # export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
@@ -91,8 +97,6 @@ if $WSL; then
 		$(find /mnt/c/Program\ Files/ -maxdepth 1 -type d)
 		EOF
 fi
-
-[ -f "$XDG_DATA_HOME"/cargo/env ] && . "$XDG_DATA_HOME"/cargo/env
 
 ## Default Programs
 if $WSL; then
