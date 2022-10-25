@@ -55,6 +55,7 @@ maim
 make
 man-db
 materia-gtk-theme
+mingw-w64-gcc
 neovim
 networkmanager
 npm
