@@ -13,6 +13,7 @@ bspwm
 chromium
 cronie
 cuda
+cudnn
 dash
 debugedit
 discord
@@ -40,6 +41,7 @@ htop
 imagemagick
 imlib2
 intel-ucode
+jupyter-notebook
 lazygit
 lf
 libappindicator-gtk3
@@ -63,6 +65,7 @@ npm
 ntfs-3g
 nvidia-dkms
 nvidia-prime
+onednn
 openssh
 pacman
 patch
@@ -92,6 +95,7 @@ ueberzug
 ufw
 unclutter
 unzip
+v4l2loopback-dkms
 webkit2gtk
 wget
 which
