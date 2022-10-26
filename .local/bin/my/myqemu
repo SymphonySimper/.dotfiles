@@ -5,7 +5,7 @@ sys="qemu-system-x86_64"
 
 aud='AC97'
 dis='sdl'
-mem='4G'
+mem='6G'
 smp='4'
 fmt='raw'
 vga='virtio'
