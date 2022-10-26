@@ -76,7 +76,7 @@ progress
 ps_mem
 pulsemixer
 qbittorrent
-qemu-base
+qemu-full
 rnote
 rofi
 rust-analyzer
