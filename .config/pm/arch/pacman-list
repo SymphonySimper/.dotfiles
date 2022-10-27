@@ -7,6 +7,7 @@ autoconf
 automake
 base
 bc
+bemenu
 binutils
 bison
 bspwm
@@ -28,6 +29,7 @@ firefox
 flake8
 flatpak
 flex
+foot
 fzf
 gawk
 gcc
@@ -78,6 +80,7 @@ pkgconf
 progress
 ps_mem
 pulsemixer
+python-pycuda
 qbittorrent
 qemu-full
 rnote
@@ -87,6 +90,10 @@ rxvt-unicode
 sed
 stylua
 sudo
+sway
+swayidle
+swayimg
+swaylock
 sxhkd
 syncthing
 texinfo
@@ -96,6 +103,7 @@ ufw
 unclutter
 unzip
 v4l2loopback-dkms
+waylock
 webkit2gtk
 wget
 which
@@ -110,6 +118,7 @@ xorg-xbacklight
 xorg-xinit
 xorg-xinput
 xorg-xsetroot
+xorg-xwayland
 xwallpaper
 zathura
 zathura-pdf-poppler

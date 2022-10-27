@@ -112,6 +112,7 @@ else
 	export READER="zathura"
 	export IMAGE_VIEWER="sxiv"
 	export VIDEO_PLAYER="mpv"
+	select_default_prog 'WM' 'bspwm' 'dwm' 'sway'
 	select_default_prog 'BROWSER' 'librewolf' 'firefox' 'chromium' 'brave' 'io.gitlab.librewolf-community' 'com.github.Eloston.UngoogledChromium'
 	select_default_prog 'TERMINAL' 'urxvtc' 'alacritty' 'kitty'
 	select_default_prog 'SECOND_TERMINAL' 'urxvt' 'alacritty' 'kitty'
@@ -179,8 +180,18 @@ else
 	exp_distro 'ID'
 fi
 
-# Window manager name
-[ -f "$XINITRC" ] && export WM="$(grep -v '^#' "$XINITRC" | tail -n 1 | cut -d ' ' -f 4)"
+if ! $WSL; then
+	if [ "$WM" = "sway" ]; then
+		get_card(){ udevadm info -a -n /dev/dri/card${1} | grep boot_vga | rev | cut -c 2; }
+		val0=$(get_card 1)
+		val1=$(get_card 0)
+		if is_present_prog 'nvidia-smi' && nvidia-smi; then
+			unsp='--unsupported-gpu'
+		fi
+		[ "$(tty)" = "/dev/tty1" ] && WLR_DRM_DEVICES="/dev/dri/card${val0}:/dev/dri/card${val1}" sway $unsp
+	else
+		# start wm
+		[ "$(tty)" = "/dev/tty1" ] && exec startx "$XINITRC" > /dev/null 2>&1
+	fi
+fi
 
-# StartX
-[ "$(tty)" = "/dev/tty1" ] && exec startx "$XINITRC" > /dev/null 2>&1
