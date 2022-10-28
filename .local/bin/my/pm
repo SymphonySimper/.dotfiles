@@ -33,7 +33,7 @@ else
 
 	gen_packages_list(){
 		case "$DISTRO" in
-			[Aa]rch ) 
+			[Aa]rch )
 				$pmn -Qqen > "$config_log/arch/pacman-list"
 				if [ $is_paru -eq 0 ]; then
 					diff -d <($pmn -Qqen) <($pmn -Qqe) | grep '>' \
@@ -42,7 +42,7 @@ else
 				;;
 		esac
 	}
-	
+
 	install(){
 		case "$@" in
 			*.* ) flatpak_stuff i $@ ;;
@@ -252,6 +252,19 @@ else
 		esac
 	}
 
+	nix_stuff(){
+		nix='nix-env'
+		if [ $is_nix -eq 0 ]; then
+			case "$1" in
+				i | install ) shift; $nix -iA "nixpkgs.${1}" ;;
+				s | search ) shift; $nix -qaP "$1" ;;
+			esac
+		else
+			echo "$nix not found"
+			exit 1
+		fi
+	}
+
 	win_list(){ $win list | tail -n +3 | grep -e 'msstore' -e 'winget'; }
 	windows_stuff(){
 		if [ $is_win -eq 0 ]; then
@@ -324,7 +337,11 @@ else
 		um ) shfit; gentoo_stuff $1 ;;
 
 		# ubuntu stuff
-		du ) shift; ubuntu_stuff du;;
+		du ) ubuntu_stuff du ;;
+
+		# nix stuff
+		ni ) shift; nix_stuff i "$1" ;;
+		ns ) shift; nix_stuff s "$1" ;;
 
 		# windows stuff
 		wi ) shift; windows_stuff i $@ ;;
