@@ -14,4 +14,9 @@ if [ "$DISTRO" = 'gentoo' ]; then
 fi
 
 # Python
-alias py='python'
+if [ "$DISTRO" = 'debian' ]; then
+	alias py='python3'
+fi
+alias new_py_env='py -m venv venv'
+alias act_env='source venv/bin/activate'
+alias new_jupy_kernel='ipython kernel install --user --name=venv'
