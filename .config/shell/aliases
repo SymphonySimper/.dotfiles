@@ -56,6 +56,7 @@ alias ka='killall'
 alias bye='$PERM systemctl poweroff'
 alias bbak='$PERM systemctl reboot'
 alias temp='watch sensors'
+alias gen_ssh='ssh-keygen -t ed25519 -C "$(git config --get user.email)"'
 
 # Shell History
 alias his='$EDITOR $HISTFILE'
