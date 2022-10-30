@@ -16,6 +16,8 @@ fi
 # Python
 if [ "$DISTRO" = 'debian' ]; then
 	alias py='python3'
+else
+	alias py='python'
 fi
 alias new_py_env='py -m venv venv'
 alias act_env='source venv/bin/activate'
