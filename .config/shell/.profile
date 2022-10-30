@@ -57,7 +57,7 @@ export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
 # export RUST_BACKTRACE='1'
 [ -f "$XDG_DATA_HOME"/cargo/env ] && . "$XDG_DATA_HOME"/cargo/env
-export RUSTC_WRAPPER='sccache'
+select_default_prog 'RUSTC_WRAPPER' 'sccache'
 export SCCACHE_DIR="$HOME"/lifeisfun/.cache/sccache
 
 export RXVT_SOCKET="$XDG_RUNTIME_DIR"/urxvtd
