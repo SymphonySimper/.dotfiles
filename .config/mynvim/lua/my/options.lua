@@ -7,8 +7,8 @@ local options = {
 	showcmd = false,
 	-- Hide last satus
 	laststatus = 0,
-	-- Hide command bar
-	ch = 0,
+	-- Show command bar
+	ch = 2,
 	showtabline = 2,
 	signcolumn = "yes",
 	syntax = "enable",
