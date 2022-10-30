@@ -1,0 +1,22 @@
+#!/bin/sh
+
+pgm='systemctl'
+
+mng_wm(){
+	case "$1" in
+		refresh )
+			case "$WM" in
+				bspwm ) bspc wm -r ;;
+			esac
+			;;
+	esac
+}
+case "$1" in
+	lock ) slock > /dev/null 2>&1 & ;;
+	logout ) pkill -KILL -u "$USER" ;;
+	poweroff ) $pgm poweroff ;;
+	reboot ) $pgm reboot ;;
+	sleep ) $pgm suspend ;;
+	hibernate ) $pgm hibernate ;;
+	wm ) shift; mng_wm $@ ;;
+esac

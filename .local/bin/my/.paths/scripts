@@ -4,9 +4,9 @@ bat                      .local/bin/my/helper/bat
 blender                  .local/bin/my/aliases/blender
 bmark                    .local/bin/my/bmark
 brightness               .local/bin/my/brightness
-c                        .local/bin/my/c
 chd                      .local/bin/my/helper/chd
 chtsh                    .local/bin/my/rofi/chtsh
+c                        .local/bin/my/c
 coding-time              .local/bin/my/bspwm/coding-time
 configs                  .local/bin/my/.paths/configs
 countdown                .local/bin/my/helper/countdown
@@ -31,8 +31,8 @@ kc                       .local/bin/my/kc
 kdenlive                 .local/bin/my/aliases/kdenlive
 key                      .local/bin/my/key
 lf-clear-img             .local/bin/my/lf/lf-clear-img
-lf-dr-file               .local/bin/my/lf/lf-dr-file
 lf-draw-img              .local/bin/my/lf/lf-draw-img
+lf-dr-file               .local/bin/my/lf/lf-dr-file
 lf-p                     .local/bin/my/lf/lf-p
 lf-previewer             .local/bin/my/lf/lf-previewer
 look-away                .local/bin/my/cron/look-away
@@ -55,8 +55,8 @@ play-bg                  .local/bin/my/aliases/play-bg
 play-movie               .local/bin/my/rofi/play-movie
 play-video               .local/bin/my/rofi/play-video
 pm                       .local/bin/my/pm
+power                    .local/bin/my/power
 power-options            .local/bin/my/rofi/power-options
-r-timer                  .local/bin/my/rofi/r-timer
 rekey                    .local/bin/my/rekey
 rofi-edit                .local/bin/my/aliases/rofi-edit
 rofi-notes               .local/bin/my/aliases/rofi-notes
@@ -64,6 +64,7 @@ rofi-open                .local/bin/my/aliases/rofi-open
 rofi-play                .local/bin/my/aliases/rofi-play
 rofi-run                 .local/bin/my/aliases/rofi-run
 rofi-todo                .local/bin/my/aliases/rofi-todo
+r-timer                  .local/bin/my/rofi/r-timer
 screenshot               .local/bin/my/screenshot
 scripts                  .local/bin/my/.paths/scripts
 search                   .local/bin/my/rofi/search
