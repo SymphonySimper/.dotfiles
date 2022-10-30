@@ -1,5 +1,6 @@
 #!/bin/sh
 
+pmg='power'
 if [ -z "$@" ]; then
 	while read -r l; do
 		echo $l
@@ -8,21 +9,15 @@ if [ -z "$@" ]; then
 	getout
 	bye
 	bbak
-	$([ $WM = 'bspwm' ] && echo 'refresh')
+	refresh
 	nah
 	EOF
 else
 	case "$@" in
-		'lock') slock > /dev/null 2>&1 & ;;
-		'getout')
-			[ $WM = 'bspwm' ] && bspc quit \
-			|| pkill -KILL -u $USER
-			;;
-		'bye') $PERM systemctl poweroff ;;
-		'bbak') $PERM systemctl reboot ;;
-		'refresh')
-			bspc wm -r \
-			&& dunstify "Restarting $WM"
-			;;
+		lock) $pgm lock ;;
+		getout) $pgm logout ;;
+		bye) $pgm poweroff ;;
+		bbak) $pgm reboot ;;
+		refresh) $pgm wm refresh ;;
 	esac
 fi

@@ -7,7 +7,7 @@ config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
 
 shell=.config/shell
 
-bin=.local/bin
+bin=.local/bin/my
 bin_rofi="$bin"/rofi
 bin_aliases="$bin"/aliases
 bin_bspwm="$bin"/bspwm
