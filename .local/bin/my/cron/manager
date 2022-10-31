@@ -3,4 +3,4 @@
 . "$HOME"/.zprofile
 
 hour=$(date +%H)
-[ $hour -lt 5 ] || [ $hour -gt 22 ] && power poweroff
+[ $hour -lt 5 ] || [ $hour -gt 22 ] && $PERM systemctl poweroff
