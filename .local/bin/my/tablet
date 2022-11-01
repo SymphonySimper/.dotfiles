@@ -12,6 +12,10 @@ loc="/usr/lib/huiontablet"
 start_huion(){ "$loc/huionCore.sh" > /dev/null 2>&1 & }
 start_huion_app(){ "$loc/huiontablet.sh" > /dev/null 2>&1 & }
 
+log="$XDG_DATA_HOME"/huion
+[ ! -d $log ] && mkdir $log
+cd $log
+
 case "$1" in
 	kill | k ) kill_huion ;;
 	s ) kill_huion
