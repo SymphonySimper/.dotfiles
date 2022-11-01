@@ -23,6 +23,7 @@ findutils
 firefox
 flex
 fzf
+gamemode
 gawk
 gcc
 gettext
@@ -51,6 +52,7 @@ networkmanager
 nm-connection-editor
 ntfs-3g
 nvidia-dkms
+nvidia-prime
 openssh
 pacman
 patch
@@ -70,6 +72,7 @@ rofi
 rust-analyzer
 rxvt-unicode
 sed
+steam
 stylua
 sudo
 sxhkd
