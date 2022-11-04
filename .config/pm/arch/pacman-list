@@ -34,6 +34,7 @@ gst-plugin-pipewire
 gzip
 htop
 intel-ucode
+jupyter-notebook
 lazygit
 libnotify
 libpulse
@@ -47,6 +48,7 @@ maim
 make
 man-db
 materia-gtk-theme
+mpv
 neovim
 networkmanager
 nm-connection-editor
@@ -93,6 +95,7 @@ xorg-xinput
 xorg-xset
 xorg-xsetroot
 xwallpaper
+yt-dlp
 zathura
 zathura-pdf-poppler
 zram-generator
