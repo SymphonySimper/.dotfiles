@@ -1,6 +1,6 @@
 #!/bin/sh
 
-pmg='power'
+pgm='power'
 if [ -z "$@" ]; then
 	while read -r l; do
 		echo $l
