@@ -7,6 +7,7 @@ ansicodes                site https://ansi.gabebanks.net/
 betterdiscord            site https://betterdiscord.app/plugins
 bit                      site bit.do
 classroom                site classroom.google.com/u/2/h
+codechef                 site https://www.codechef.com/
 colemak                  site https://www.colemak.academy/
 coveryourtrack           site https://coveryourtracks.eff.org
 crates                   site https://crates.io/
@@ -17,6 +18,7 @@ docs                     site https://docs.google.com/document/u/0/
 dribble                  site https://dribbble.com/
 edumate                  site http://edumate.sairamce.edu.in/
 epicgames                site https://www.epicgames.com/store/en-US/
+exercism                 site https://exercism.org/tracks
 figma                     app https://www.figma.com/
 flipkart                 site https://www.flipkart.com/
 fontsinthewild           site https://www.fontsinthewild.com/free
@@ -37,6 +39,7 @@ jaze                     site https://login.airfiber.co.in/customer_portal
 jitsi                    site https://meet.jit.si
 lapaninja                site https://www.lapa.ninja/
 learnxinymin             site https://learnxinyminutes.com/
+leetcode                 site https://leetcode.com/
 linuxdie                 site https://linux.die.net/
 localhost:8080           site http://localhost:8080/
 manga                     app https://mangapark.net/
@@ -48,7 +51,7 @@ pling                    site https://www.pling.com/
 protondb                 site https://www.protondb.com/
 pv                       site www.primevideo.com
 reddit                   site www.reddit.com/best/
-skillrack                 app https://skillrack.com/faces/ui/profile.xhtml
+skillrack                site https://skillrack.com/faces/ui/profile.xhtml
 smashkarts                app https://smashkarts.io/
 sonyliv                  site https://www.sonyliv.com/
 spotify                  site open.spotify.com
