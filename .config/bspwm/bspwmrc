@@ -143,4 +143,5 @@ glp '^9' <<- EOF
 	steam_app_1172470
 	SUPERHOT.x86_64
 	Paint Warfare.x86_64
+	steam_app_2087030
 	EOF
