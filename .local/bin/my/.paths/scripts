@@ -42,6 +42,7 @@ mntdev                   .local/bin/my/mntdev
 mybar                    .local/bin/my/mybar
 myinfo                   .local/bin/my/myinfo
 myqemu                   .local/bin/my/myqemu
+mysteam                  .local/bin/my/aliases/mysteam
 mywiki                   .local/bin/my/mywiki
 myxrandr                .local/bin/mmy/yxrandr
 notes                    .local/bin/my/rofi/notes
