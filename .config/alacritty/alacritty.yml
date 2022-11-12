@@ -6,7 +6,7 @@ window:
 
 font:
   normal:
-    family: JetBrains Mono
+    family: JetBrainsMono Nerd Font Mono
   size: 11.0
   transparent_background_colors: true
 
