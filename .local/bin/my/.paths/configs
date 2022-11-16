@@ -3,6 +3,7 @@ awesome						.config/awesome/rc.lua
 bspwm						.config/bspwm/bspwmrc
 bspwm-hotkeys				.config/sxhkd/bspwm-hotkeys
 dunst						.config/dunst/dunstrc
+foot						.config/foot/foot.ini
 fox-dark-reader				.config/fox/extensions/dark-reader.json
 fox-localcdn				.config/fox/extensions/localcdn.txt
 fox-user-pref				.config/fox/my-user.js
