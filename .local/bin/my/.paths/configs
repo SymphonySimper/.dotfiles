@@ -23,7 +23,7 @@ mpv							.config/mpv/mpv.conf
 mpv-input					.config/mpv/input.conf
 mybinds						.config/sxhkd/mybinds
 mybspwm-binds				.config/sxhkd/mybspwm-binds
-mynvim						.config/mynvim/lua/my/options.lua
+mynvim						.config/my/nvim/lua/my/options.lua
 ncspot						.config/ncspot/config.toml
 newsboat-config				.config/newsboat/config
 newsboat-urls				.config/newsboat/urls
