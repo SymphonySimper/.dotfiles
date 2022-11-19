@@ -29,7 +29,7 @@ fm(){ fzf_play "$HOME"/importantnt/movies; }
 
 # Docs
 fdocs(){
-	loc="$HOME"/.local/share/mydocs
+	loc="$HOME"/.local/share/my/docs
 	query="$(ls -F $loc | grep -v '/' | fzf)"
 	[ -f $loc/$query ] && $EDITOR $loc/$query
 }

@@ -1,5 +1,6 @@
 com.bitwarden.desktop
-com.github.micahflee.torbrowser-launcher
-com.google.Chrome
-com.obsproject.Studio
-org.libreoffice.LibreOffice
+com.github.tchx84.Flatseal
+com.mattjakeman.ExtensionManager
+com.valvesoftware.Steam
+io.github.realmazharhussain.GdmSettings
+org.qbittorrent.qBittorrent

@@ -170,7 +170,7 @@ export LS_COLORS='rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;
 export TZ='Asia/Kolkata'
 
 # Wallpaper
-export WALLPAPER="$XDG_DATA_HOME"/mypics/bg.png
+export WALLPAPER="$XDG_DATA_HOME"/my/pics/bg.png
 
 # Distro
 exp_distro(){ export DISTRO="$(grep -w $1 /etc/os-release | cut -d '=' -f 2)"; }
