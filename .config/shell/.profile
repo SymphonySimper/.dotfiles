@@ -51,6 +51,9 @@ export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 export WGETRC="$XDG_CONFIG_HOME"/wgetrc
 export SQLITE_HISTORY=$XDG_DATA_HOME/sqlite_history
 export ICEAUTHORITY="$XDG_CACHE_HOME"/ICEauthority
+export CONDARC="$XDG_CONFIG_HOME/conda/condarc"
+export IPYTHONDIR="${XDG_CONFIG_HOME}/ipython"
+export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME"/jupyter
 
 # Rust
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
