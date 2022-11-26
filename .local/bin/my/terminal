@@ -5,4 +5,15 @@ case "$XDG_SESSION_TYPE" in
 	* ) term='footclient' ;;
 esac
 
-$term $@ > /dev/null 2>&1 &
+is_running(){ pgrep "$1" > /dev/null 2>&1 && return 0 || return 1; }
+server(){
+	case "$term" in
+		'footclient' ) is_running 'foot' || foot --server > /dev/null 2>&1 & ;;
+	esac
+}
+
+case "$1" in
+	'start-server' ) server ;;
+	* ) $term $@ > /dev/null 2>&1 & ;;
+esac
+
