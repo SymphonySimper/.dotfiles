@@ -1,0 +1,8 @@
+#!/bin/sh
+
+case "$XDG_SESSION_TYPE" in
+	'x11' ) term='alacritty' ;;
+	* ) term='footclient' ;;
+esac
+
+$term $@ > /dev/null 2>&1 &
