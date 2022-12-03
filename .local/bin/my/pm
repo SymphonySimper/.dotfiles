@@ -258,6 +258,7 @@ else
 			case "$1" in
 				i | install ) shift; $nix -iA "nixpkgs.${1}" ;;
 				s | search ) shift; $nix -qaP "$1" ;;
+				rm ) shift; $nix --uninstall "$1" ;;
 			esac
 		else
 			echo "$nix not found"
@@ -342,6 +343,7 @@ else
 		# nix stuff
 		ni ) shift; nix_stuff i "$1" ;;
 		ns ) shift; nix_stuff s "$1" ;;
+		nr ) shift; nix_stuff rm "$1" ;;
 
 		# windows stuff
 		wi ) shift; windows_stuff i $@ ;;
