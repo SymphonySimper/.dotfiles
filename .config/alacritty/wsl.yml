@@ -1,7 +1,7 @@
 window:
   padding:
-    x: 8
-    y: 8
+    x: 12
+    y: 12
   decorations: none
   opacity: 0.90
   startup_mode: Maximized
@@ -18,7 +18,7 @@ cursor:
     blinking: off
   vi_mode_style: Block
 
-live_config_reload: false
+live_config_reload: true
 
 shell:
   program: ubuntu
