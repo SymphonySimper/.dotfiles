@@ -3,7 +3,7 @@
 if $WSL; then
 	pgm='clip.exe'
 elif $IS_WAYLAND; then
-	pgm='wl-copy'
+	pgm='wl-copy -n'
 else
 	pgm='xclip -sel c'
 fi
