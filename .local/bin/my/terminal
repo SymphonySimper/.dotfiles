@@ -1,9 +1,10 @@
 #!/bin/sh
 
-case "$XDG_SESSION_TYPE" in
-	'x11' ) term='alacritty' ;;
-	* ) term='footclient' ;;
-esac
+if $IS_WAYLAND; then
+	term='footclient'
+else
+	term='alacritty'
+fi
 
 is_running(){ pgrep "$1" > /dev/null 2>&1 && return 0 || return 1; }
 server(){

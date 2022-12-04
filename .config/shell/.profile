@@ -16,6 +16,12 @@ else
 fi
 export WSL=$wsl
 
+# Wayland
+case "$XDG_SESSION_TYPE"; in
+	'wayland') wayland=true ;;
+	*) wayland=false ;;
+esac
+export IS_WAYLAND=$wayland
 
 # Paths
 add_path(){ [ -d "$1" ] && export PATH="$PATH:$1"; }

@@ -1,6 +1,13 @@
 #!/bin/sh
 
-$WSL && pgm='clip.exe' || pgm='xclip -sel c'
+if $WSL; then
+	pgm='clip.exe'
+elif $IS_WAYLAND; then
+	pgm='wl-copy'
+else
+	pgm='xclip -sel c'
+fi
+
 if [ -p /dev/stdin ]; then
 	cat /dev/stdin | $pgm
 else
