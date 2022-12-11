@@ -17,7 +17,7 @@ fi
 export WSL=$wsl
 
 # Wayland
-case "$XDG_SESSION_TYPE"; in
+case "$XDG_SESSION_TYPE" in
 	'wayland') wayland=true ;;
 	*) wayland=false ;;
 esac
@@ -35,6 +35,7 @@ is_present_prog ruby && export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
 add_path "$HOME/lifeisfun/lang/flutter/bin" 	# Flutter
 add_path "$GEM_HOME/bin"						# Ruby
 add_path "$HOME/Android/Sdk/emulator"			# Android Emulator
+add_path "$HOME/.spicetify"
 
 # ~/ Clean-up:
 export XDG_CONFIG_HOME="$HOME"/.config
