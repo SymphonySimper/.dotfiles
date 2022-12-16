@@ -1,6 +1,6 @@
 #!/bin/sh
 
-git clone --bare https://github.com/SymphonySimper/DotFiles.git $HOME/.cfg
+git clone --bare https://github.com/SymphonySimper/.dotfiles.git $HOME/.cfg
 
 config(){ /usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME $@; }
 mkdir -p .config-backup
