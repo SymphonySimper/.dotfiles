@@ -27,6 +27,7 @@ mynvim						.config/my/nvim/lua/my/options.lua
 ncspot						.config/ncspot/config.toml
 newsboat-config				.config/newsboat/config
 newsboat-urls				.config/newsboat/urls
+nvchad                      .config/nvchad/custom/init.lua
 paru						.config/paru/paru.conf
 picom						.config/picom/picom.conf
 polybar						.config/polybar/config.ini
