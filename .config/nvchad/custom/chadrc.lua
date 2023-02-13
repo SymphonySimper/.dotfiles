@@ -1,7 +1,7 @@
 local M = {}
 
 M.ui = {
-  theme = "mountain",
+  theme = "tokyonight",
   transparency = true,
 }
 M.plugins = require "custom.plugins"
