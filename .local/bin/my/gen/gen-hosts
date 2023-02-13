@@ -45,7 +45,7 @@ update_hosts_repo(){
 my_block_tempfile=$(mktemp)
 my_block_temp(){
 	while read -r line; do
-		echo "0.0.0.0\t$line" >> $my_block_tempfile
+		echo -e "0.0.0.0\t$line" >> $my_block_tempfile
 	done <<- EOF
 	$(cat $my_block | eval "$sed_1")
 	EOF
