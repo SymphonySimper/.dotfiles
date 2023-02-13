@@ -4,7 +4,7 @@ local l = "<leader>"
 
 M.general = {
   n = {
-    [l .. "f"] = { "<cmd> lua vim.lsp.buf.formatting()" .. e, "Fromatting" },
+    [l .. "f"] = { "<cmd> lua vim.lsp.buf.format{ async = true }" .. e, "Fromatting" },
   },
 }
 
