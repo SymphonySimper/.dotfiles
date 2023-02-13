@@ -154,3 +154,6 @@ sens(){
 
 # killall bottles stuff
 kab(){ killall explorer.exe bottles wineserver; }
+
+# diary
+open_diary(){ v "${HOME}/importantnt/me/diary/$(date +%d-%m-%Y).md"; }
