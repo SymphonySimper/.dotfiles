@@ -2,7 +2,7 @@ local M = {}
 
 M.ui = {
   theme = "mountain",
-  transparency = false,
+  transparency = true,
 }
 M.plugins = require "custom.plugins"
 M.mappings = require "custom.mappings"
