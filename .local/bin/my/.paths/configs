@@ -1,5 +1,5 @@
-alacritty					.config/alacritty/alacritty.yml
-awesome						.config/awesome/rc.lua
+alacritty               .config/alacritty/alacritty.yml
+awesome                 .config/awesome/rc.lua
 bspwm						.config/bspwm/bspwmrc
 bspwm-hotkeys				.config/sxhkd/bspwm-hotkeys
 dunst						.config/dunst/dunstrc
@@ -35,6 +35,7 @@ portage						.config/portage/make.conf
 qutebrowser					.config/qutebrowser/config.py
 rofi-config					.config/rofi/config.rasi
 rofi-theme					.config/rofi/theme.rasi
+starship           .config/starship/config.toml
 sxiv						.config/sxiv/exec/key-handler
 tmux						.config/tmux/tmux.conf
 touchcursor					.config/touchcursor/touchcursor.conf
