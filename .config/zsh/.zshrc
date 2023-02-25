@@ -7,22 +7,25 @@ autoload -U colors && colors
 # Prompt
 precmd(){ precmd(){ echo ; }; }
 
-if [ -n "$SSH_CONNECTION" ]; then
-	cs="(ssh) "
-fi
-
-# function to get current git branch
-get_git_branch(){
-	ref=$(git symbolic-ref --short HEAD 2> /dev/null)
-	[ $(echo $ref |wc -w) -eq 1 ] && branch="%f%b ($ref)" || branch=""
-	echo $branch
-}
-
-# Should be in single quotes to make re run on directory changes
-# setopt PROMPT_SUBST enable to run commands in PROMPT when enclosed with single quotes
-setopt PROMPT_SUBST
-PROMPT='%B%F{240}%~$(get_git_branch)%f%B
-${cs}>%b '
+# if [ -n "$SSH_CONNECTION" ]; then
+# 	cs="(ssh) "
+# fi
+#
+# # function to get current git branch
+# get_git_branch(){
+# 	ref=$(git symbolic-ref --short HEAD 2> /dev/null)
+# 	[ $(echo $ref |wc -w) -eq 1 ] && branch="%f%b ($ref)" || branch=""
+# 	echo $branch
+# }
+#
+# # Should be in single quotes to make re run on directory changes
+# # setopt PROMPT_SUBST enable to run commands in PROMPT when enclosed with single quotes
+# setopt PROMPT_SUBST
+# # PROMPT='%B%F{240}%~$(get_git_branch)%f%B
+# # ${cs}>%b '
+#
+# PROMPT='%B%~$(get_git_branch)%B
+# ${cs}>%b '
 
 # Turn off beep
 unsetopt BEEP
@@ -184,3 +187,4 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+eval "$(starship init zsh)"

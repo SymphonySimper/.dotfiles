@@ -97,7 +97,7 @@ add_path "$PNPM_HOME"
 
 # My loc exports
 export ZDOTDIR="$XDG_CONFIG_HOME"/zsh
-# export STARSHIP_CONFIG="$HOME"/.config/starship/config.toml
+export STARSHIP_CONFIG="$HOME"/.config/starship/config.toml
 export VIMWIKI="$XDG_DATA_HOME"/mywiki
 
 if $WSL; then
