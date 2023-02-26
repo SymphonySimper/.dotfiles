@@ -36,6 +36,7 @@ qutebrowser					.config/qutebrowser/config.py
 rofi-config					.config/rofi/config.rasi
 rofi-theme					.config/rofi/theme.rasi
 starship           .config/starship/config.toml
+sway              .config/sway/config
 sxiv						.config/sxiv/exec/key-handler
 tmux						.config/tmux/tmux.conf
 touchcursor					.config/touchcursor/touchcursor.conf
