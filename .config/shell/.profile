@@ -124,7 +124,7 @@ else
 	export VIDEO_PLAYER="mpv"
 	select_default_prog 'WM' 'bspwm' 'dwm' 'sway'
 	select_default_prog 'BROWSER' 'librewolf' 'firefox' 'chromium' 'brave' 'io.gitlab.librewolf-community' 'com.github.Eloston.UngoogledChromium'
-	select_default_prog 'TERMINAL' 'urxvtc' 'alacritty' 'kitty'
+	select_default_prog 'TERMINAL' 'foot' 'urxvtc' 'alacritty' 'kitty'
 	select_default_prog 'SECOND_TERMINAL' 'urxvt' 'alacritty' 'kitty'
 	select_default_prog 'CHROME_EXECUTABLE' 'chromium' 'brave' 'com.brave.Browser' 'com.github.Eloston.UngoogledChromium'
 	select_default_prog 'TORRENT' 'qbittorrent'
