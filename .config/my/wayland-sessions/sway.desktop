@@ -1,5 +1,5 @@
 [Desktop Entry]
 Name=Sway
 Comment=An i3-compatible Wayland compositor
-Exec=/home/symph/.local/bin/my/mysway
+Exec=/bin/zsh -l -c /home/symph/.local/bin/my/mysway
 Type=Application
