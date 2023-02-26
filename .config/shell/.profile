@@ -143,6 +143,7 @@ export GAMEMODERUNEXEC="prime-run"
 
 # Other settings
 export _JAVA_AWT_WM_NONREPARENTING=1
+export GTK_USE_PORTAL=0
 
 # fzf
 export FZF_DEFAULT_OPTS="--no-mouse --reverse --preview-window=border-none"

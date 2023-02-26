@@ -59,9 +59,6 @@ input "1739:52781:MSFT0001:01_06CB:CE2D_Touchpad" {
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 
-### Startup applications
-exec terminal start-server
-
 ### Key bindings
 #
 # Basics:
@@ -242,5 +239,9 @@ bar {
         inactive_workspace $border1 $bg $text
     }
 }
+
+### Startup applications
+exec terminal start-server
+exec_always dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
 
 include /etc/sway/config.d/*
