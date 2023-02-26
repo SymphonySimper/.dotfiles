@@ -43,6 +43,7 @@ mybar                    .local/bin/my/mybar
 myinfo                   .local/bin/my/myinfo
 myqemu                   .local/bin/my/myqemu
 mysteam                  .local/bin/my/aliases/mysteam
+mysway                   .local/bin/my/mysway
 mywiki                   .local/bin/my/mywiki
 myxrandr                .local/bin/mmy/yxrandr
 notes                    .local/bin/my/rofi/notes
