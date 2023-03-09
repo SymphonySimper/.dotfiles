@@ -3,7 +3,7 @@ window:
     x: 8
     y: 8
   decorations: none
-  opacity: 0.9
+  opacity: 1.0
   startup_mode: Maximized
 
 font:
@@ -85,8 +85,8 @@ live_config_reload: false
 # Catppuccin Macho
 colors:
   primary:
-    # background: "#1E1E2E" # base
-      background: "#111111" # base
+      background: "#1E1E2E" # base
+      # background: "#111111" # base
       foreground: "#CDD6F4" # text
       # Bright and dim foreground colors
       dim_foreground: "#CDD6F4" # text
