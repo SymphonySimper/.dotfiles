@@ -8,15 +8,18 @@ session_exist(){
   fi
 }
 
+column_count=$(tput cols)
+line_count=$(tput lines)
+
 create_tmp() {
   # $1 name $2 command
   tmp_dir=/tmp
   session_name="Temp $1"
   if ! session_exist "$session_name"; then
-    tmux new -d -s "$session_name"
+    tmux new -d -s "$session_name" -x "$column_count" -y "$line_count"
     # neww -d makes a new window but dosen't make it the ative window
     tmux neww -d -c "$tmp_dir" "$2 temp"
-    tmux split-window -t 1 -h -l 30%
+    tmux split-window -h -l '30%'
     tmux select-pane -t 1
     tmux setw synchronize-panes
     tmux send-keys -l -t 1 "cd $tmp_dir/temp"
