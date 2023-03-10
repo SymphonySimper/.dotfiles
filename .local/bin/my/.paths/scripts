@@ -11,6 +11,7 @@ coding-time              .local/bin/my/bspwm/coding-time
 configs                  .local/bin/my/.paths/configs
 countdown                .local/bin/my/helper/countdown
 create-script            .local/bin/my/create-script
+dev                      .local/bin/my/dev
 dfc                      .local/bin/my/dfc
 ebooks                   .local/bin/my/rofi/ebooks
 edit-configs             .local/bin/my/rofi/edit-configs
