@@ -187,4 +187,6 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-eval "$(starship init zsh)"
+if pm ex starship; then
+  eval "$(starship init zsh)"
+fi
