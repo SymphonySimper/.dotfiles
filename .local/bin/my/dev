@@ -1,42 +1,51 @@
 #!/bin/sh
 
-session_exist(){
-  if tmux ls | grep -qw "$1"; then
-    return 0
-  else
-    return 1
-  fi
+session_exist() {
+	if tmux ls | grep -qw "$1"; then
+		return 0
+	else
+		return 1
+	fi
 }
 
 column_count=$(tput cols)
 line_count=$(tput lines)
 
 create_tmp() {
-  # $1 name $2 command
-  tmp_dir=/tmp
-  session_name="Temp $1"
-  if ! session_exist "$session_name"; then
-    tmux new -d -s "$session_name" -x "$column_count" -y "$line_count"
-    # neww -d makes a new window but dosen't make it the ative window
-    tmux neww -d -c "$tmp_dir" "$2 temp"
-    tmux split-window -h -l '30%'
-    tmux select-pane -t 1
-    tmux setw synchronize-panes
-    tmux send-keys -l -t 1 "cd $tmp_dir/temp"
-    tmux send-keys -t 1 'Enter'
-    # clear screen
-    tmux send-keys -t 1 'C-l'
-    tmux setw synchronize-panes off
-  fi
-  tmux attach -t "$session_name"
+	# $1 name $2 command
+	tmp_dir=/tmp
+	session_name="Temp $1"
+	if ! session_exist "$session_name"; then
+		tmux new -d -s "$session_name" -x "$column_count" -y "$line_count"
+
+		if [ -n "$2" ]; then
+			# neww -d makes a new window but dosen't make it the ative window
+			tmux neww -d "$2 temp"
+			target_dir="$tmp_dir/temp"
+		else
+			target_dir="$tmp_dir"
+		fi
+
+		tmux split-window -h -l '30%'
+		tmux select-pane -t 1
+		tmux setw synchronize-panes
+
+		tmux send-keys -l -t 1 "cd $target_dir"
+		tmux send-keys -t 1 'Enter'
+		# clear screen
+		tmux send-keys -t 1 'C-l'
+		tmux setw synchronize-panes off
+	fi
+	tmux attach -t "$session_name"
 }
 
 case "$1" in
-  tmp)
-    shift
-    case "$1" in
-      rust) create_tmp 'Rust' 'cargo new';;
-    esac
-    ;;
-  *) echo "Not an option" ;;
+tmp)
+	shift
+	case "$1" in
+	rust) create_tmp 'Rust' 'cargo new' ;;
+	*) create_tmp "$1" ;;
+	esac
+	;;
+*) echo "Not an option" ;;
 esac
