@@ -1,3 +1,4 @@
+helix                   .config/helix/config.toml
 alacritty               .config/alacritty/alacritty.yml
 awesome                 .config/awesome/rc.lua
 bspwm						.config/bspwm/bspwmrc
