@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 session_exist() {
 	if tmux ls | grep -qw "$1"; then
@@ -20,7 +20,7 @@ create_tmp() {
 
 		if [ -n "$2" ]; then
 			# neww -d makes a new window but dosen't make it the ative window
-			tmux neww -d "$2 temp"
+			tmux neww -d -c "$tmp_dir" "$2 temp"
 			target_dir="$tmp_dir/temp"
 		else
 			target_dir="$tmp_dir"
@@ -28,8 +28,8 @@ create_tmp() {
 
 		tmux split-window -h -l '30%'
 		tmux select-pane -t 1
-		tmux setw synchronize-panes
 
+		tmux setw synchronize-panes
 		tmux send-keys -l -t 1 "cd $target_dir"
 		tmux send-keys -t 1 'Enter'
 		# clear screen
