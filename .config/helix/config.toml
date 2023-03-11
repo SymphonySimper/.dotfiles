@@ -1,7 +1,9 @@
 theme = "catppuccin_mocha"
+
 [editor]
 line-number = "relative"
 cursorline = true
+true-color = true
 color-modes = true
 
 [editor.cursor-shape]
