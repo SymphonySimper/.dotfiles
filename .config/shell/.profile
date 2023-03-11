@@ -1,15 +1,18 @@
 # Helper functions
-is_present_prog(){ command -v "$1" > /dev/null 2>&1 && return 0 || return 1; }
-select_default_prog(){
+is_present_prog() { command -v "$1" >/dev/null 2>&1 && return 0 || return 1; }
+select_default_prog() {
 	key="$1"
 	shift
 	for p in "$@"; do
-		is_present_prog "$p" && { export "$key"="$p"; break; }
+		is_present_prog "$p" && {
+			export "$key"="$p"
+			break
+		}
 	done
 }
 
 # WSL
-if  echo $(uname -r) | grep -wqi 'microsoft'; then
+if echo $(uname -r) | grep -wqi 'microsoft'; then
 	wsl=true
 else
 	wsl=false
@@ -18,23 +21,23 @@ export WSL=$wsl
 
 # Wayland
 case "$XDG_SESSION_TYPE" in
-	'wayland') wayland=true ;;
-	*) wayland=false ;;
+'wayland') wayland=true ;;
+*) wayland=false ;;
 esac
 export IS_WAYLAND=$wayland
 
 # Paths
-add_path(){ [ -d "$1" ] && export PATH="$PATH:$1"; }
-add_path "$HOME/.local/bin"							# Scripts
-add_path "$HOME/.local/bin/my"						# My Scripts
-add_path "$HOME/.local/bin/my/aliases"				# Alias scripts
-add_path "$HOME/.local/bin/my/gen"					# Gen scripts
-add_path "$HOME/.local/bin/my/helper"				# Helper scripts
-add_path "$HOME/.local/appimage"				# Appimages
+add_path() { [ -d "$1" ] && export PATH="$PATH:$1"; }
+add_path "$HOME/.local/bin"            # Scripts
+add_path "$HOME/.local/bin/my"         # My Scripts
+add_path "$HOME/.local/bin/my/aliases" # Alias scripts
+add_path "$HOME/.local/bin/my/gen"     # Gen scripts
+add_path "$HOME/.local/bin/my/helper"  # Helper scripts
+add_path "$HOME/.local/appimage"       # Appimages
 is_present_prog ruby && export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
-add_path "$HOME/lifeisfun/lang/flutter/bin" 	# Flutter
-add_path "$GEM_HOME/bin"						# Ruby
-add_path "$HOME/Android/Sdk/emulator"			# Android Emulator
+add_path "$HOME/lifeisfun/lang/flutter/bin" # Flutter
+add_path "$GEM_HOME/bin"                    # Ruby
+add_path "$HOME/Android/Sdk/emulator"       # Android Emulator
 add_path "$HOME/.spicetify"
 
 # ~/ Clean-up:
@@ -91,6 +94,9 @@ add_path "$PYENV_ROOT/bin"
 nix_loc="$HOME"/.nix-profile/etc/profile.d/nix.sh
 [ -f $nix_loc ] && . $nix_loc
 
+#npm
+add_path "$XDG_DATA_HOME"/npm/bin
+
 # pnpm
 export PNPM_HOME="$XDG_DATA_HOME"/pnpm
 add_path "$PNPM_HOME"
@@ -102,10 +108,10 @@ export VIMWIKI="$XDG_DATA_HOME"/mywiki
 
 if $WSL; then
 	while read -r folder; do
-		add_path $folder
-	done <<- EOF
+		add_path "$folder"
+	done <<-EOF
 		$(find /mnt/c/Program\ Files/ -maxdepth 1 -type d)
-		EOF
+	EOF
 fi
 
 ## Default Programs
@@ -193,7 +199,7 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
 --color=fg:-1,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
 --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
 
-export LS_COLORS='rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=01;05;37;41:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=30;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.cfg=00;32:*.conf=00;32:*.diff=00;32:*.doc=00;32:*.ini=00;32:*.log=00;32:*.patch=00;32:*.pdf=00;32:*.ps=00;32:*.tex=00;32:*.txt=00;32:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:';
+export LS_COLORS='rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=01;05;37;41:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=30;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.cfg=00;32:*.conf=00;32:*.diff=00;32:*.doc=00;32:*.ini=00;32:*.log=00;32:*.patch=00;32:*.pdf=00;32:*.ps=00;32:*.tex=00;32:*.txt=00;32:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'
 
 # Timezone
 export TZ='Asia/Kolkata'
@@ -202,7 +208,7 @@ export TZ='Asia/Kolkata'
 export WALLPAPER="$XDG_DATA_HOME"/my/pics/bg.png
 
 # Distro
-exp_distro(){ export DISTRO="$(grep -w $1 /etc/os-release | cut -d '=' -f 2)"; }
+exp_distro() { export DISTRO="$(grep -w $1 /etc/os-release | cut -d '=' -f 2)"; }
 if grep -wq 'ID_LIKE' /etc/os-release; then
 	exp_distro 'ID_LIKE'
 else
@@ -211,7 +217,7 @@ fi
 
 if ! $WSL; then
 	if [ "$WM" = "sway" ]; then
-		get_card(){ udevadm info -a -n /dev/dri/card${1} | grep boot_vga | rev | cut -c 2; }
+		get_card() { udevadm info -a -n /dev/dri/card${1} | grep boot_vga | rev | cut -c 2; }
 		val0=$(get_card 1)
 		val1=$(get_card 0)
 		if is_present_prog 'nvidia-smi' && nvidia-smi; then
@@ -220,7 +226,6 @@ if ! $WSL; then
 		[ "$(tty)" = "/dev/tty1" ] && WLR_DRM_DEVICES="/dev/dri/card${val0}:/dev/dri/card${val1}" sway $unsp
 	else
 		# start wm
-		[ "$(tty)" = "/dev/tty1" ] && exec startx "$XINITRC" > /dev/null 2>&1
+		[ "$(tty)" = "/dev/tty1" ] && exec startx "$XINITRC" >/dev/null 2>&1
 	fi
 fi
-
