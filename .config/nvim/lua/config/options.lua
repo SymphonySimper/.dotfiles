@@ -2,6 +2,14 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 --
-local opt = vim.opt
+local o = vim.opt
+local g = vim.g
 
-opt.colorcolumn = "80"
+o.colorcolumn = "80"
+
+-- Neovide
+if g.neovide then
+  o.guifont = "JetBrainsMono Nerd Font:h14"
+  g.neovide_scale_factor = 1.0
+  g.neovide_fullscreen = true
+end
