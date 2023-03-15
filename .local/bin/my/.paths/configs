@@ -1,4 +1,3 @@
-helix                   .config/helix/config.toml
 alacritty               .config/alacritty/alacritty.yml
 awesome                 .config/awesome/rc.lua
 bspwm						.config/bspwm/bspwmrc
@@ -18,6 +17,7 @@ fox-yt-enhancer				.config/fox/extensions/yt-enhancer.json
 git							.config/git/config
 groff-ms-macros				.config/groff/ms-macros.ms
 gromit-mpx					.config/gromit-mpx.cfg
+helix                   .config/helix/config.toml
 htop						.config/htop/htoprc
 lf							.config/lf/lfrc
 mpv							.config/mpv/mpv.conf
@@ -44,3 +44,4 @@ tmux						.config/tmux/tmux.conf
 touchcursor					.config/touchcursor/touchcursor.conf
 yt-dlp						.config/yt-dlp/config
 zathura						.config/zathura/zathurarc
+zellij                   .config/zellij/config.kdl
