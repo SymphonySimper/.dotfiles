@@ -9,7 +9,7 @@ window:
 font:
   normal:
     family: JetBrainsMono Nerd Font Mono
-  size: 14.0
+  size: 12.0
   transparent_background_colors: true
 
 cursor:
