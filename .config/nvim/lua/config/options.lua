@@ -6,6 +6,10 @@ local o = vim.opt
 local g = vim.g
 
 o.colorcolumn = "80"
+-- Vertical scroll
+o.scrolloff = 8
+-- Horizontal scroll
+o.sidescrolloff = 8
 
 -- Neovide
 if g.neovide then
