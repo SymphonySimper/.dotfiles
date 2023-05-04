@@ -39,6 +39,7 @@ add_path "$HOME/lifeisfun/lang/flutter/bin" # Flutter
 add_path "$GEM_HOME/bin"                    # Ruby
 add_path "$HOME/Android/Sdk/emulator"       # Android Emulator
 add_path "$HOME/.spicetify"
+add_path "/var/lib/flatpak/exports/bin" # Flatpak
 
 # ~/ Clean-up:
 export XDG_CONFIG_HOME="$HOME"/.config
