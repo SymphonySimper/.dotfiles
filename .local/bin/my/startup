@@ -1,27 +1,30 @@
 #!/bin/sh
 
 # "$HOME"/.local/bin/cron/manager &
-key ce
 
-xrdb -load "$HOME"/.config/x11/Xresources
-picom -m 1.0 -i 1.0 -e 1.0 --vsync --backend glx --no-fading-openclose &
-xwallpaper --zoom "$WALLPAPER" &
-xsetroot -cursor_name left_ptr
-
-# Enable tap to click
-xinput set-prop "$(xinput list --name-only | grep Touchpad)" "libinput Tapping Enabled" 1
-
-# disable beep (PC Speaker)
-xset -b
-
-[ "$TERMINAL" = 'urxvtc' ] && urxvtd -q &
-dunst &
-sxhkd -c "$HOME"/.config/sxhkd/.sxhkdrc &
-unclutter --timeout 1 &
-"$HOME"/.local/bin/my/cron/look-away &
-
-# Set deafault browser
-xdg-mime default ${BROWSER}.desktop x-scheme-handler/https x-scheme-handler/http &
+# if ! $IS_WAYLAND; then
+# 	key ce
+#
+# 	xrdb -load "$HOME"/.config/x11/Xresources
+# 	picom -m 1.0 -i 1.0 -e 1.0 --vsync --backend glx --no-fading-openclose &
+# 	xwallpaper --zoom "$WALLPAPER" &
+# 	xsetroot -cursor_name left_ptr
+#
+# 	# Enable tap to click
+# 	xinput set-prop "$(xinput list --name-only | grep Touchpad)" "libinput Tapping Enabled" 1
+#
+# 	# disable beep (PC Speaker)
+# 	xset -b
+#
+# 	[ "$TERMINAL" = 'urxvtc' ] && urxvtd -q &
+# 	dunst &
+# 	sxhkd -c "$HOME"/.config/sxhkd/.sxhkdrc &
+# 	unclutter --timeout 1 &
+# 	"$HOME"/.local/bin/my/cron/look-away &
+#
+# 	# Set deafault browser
+# 	xdg-mime default ${BROWSER}.desktop x-scheme-handler/https x-scheme-handler/http &
+# fi
 
 # if [ ! "$(cat /sys/class/power_supply/BAT0/status)" = 'Discharging' ]; then
 # 	{
@@ -37,5 +40,8 @@ xdg-mime default ${BROWSER}.desktop x-scheme-handler/https x-scheme-handler/http
 # $TERMINAL -e automount &
 
 # Kde connect
-kc=/usr/lib/kdeconnectd
-[ -f $kc ] && $kc &
+# kc=/usr/lib/kdeconnectd
+# [ -f $kc ] && $kc &
+
+org.telegram.desktop &
+com.spotify.Client &
