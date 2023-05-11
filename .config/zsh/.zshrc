@@ -101,7 +101,7 @@ bindkey -s '^s' 'fes\n'
 bindkey -s '^g' 'fec\n'
 bindkey -s '^h' 'fesh\n'
 bindkey -s '^v' 'fv\n'
-bindkey -s '^a' 'fa\n'
+# bindkey -s '^a' 'fa\n'
 
 # vi mode
 bindkey -v

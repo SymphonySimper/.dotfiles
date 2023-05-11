@@ -24,7 +24,7 @@ fzf_play(){
 }
 
 fv(){ fzf_play "$HOME"/importantnt/video; }
-fa(){ fzf_play "$HOME"/importantnt/audio; }
+# fa(){ fzf_play "$HOME"/importantnt/audio; }
 fm(){ fzf_play "$HOME"/importantnt/movies; }
 
 # Docs
