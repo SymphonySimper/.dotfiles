@@ -43,5 +43,5 @@
 # kc=/usr/lib/kdeconnectd
 # [ -f $kc ] && $kc &
 
-org.telegram.desktop &
+# org.telegram.desktop &
 com.spotify.Client &
