@@ -11,7 +11,7 @@ return {
       "json-lsp",
       "lua-language-server",
       "marksman",
-      "pyright",
+      "python-lsp-server",
       "rust-analyzer",
       "shellcheck",
       "shfmt",
