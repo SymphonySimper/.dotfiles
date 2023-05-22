@@ -190,3 +190,7 @@ unset __conda_setup
 if pm ex starship; then
   eval "$(starship init zsh)"
 fi
+
+if pm ex zoxide; then
+  eval "$(zoxide init zsh)"
+fi
