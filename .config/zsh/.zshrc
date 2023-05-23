@@ -194,3 +194,9 @@ fi
 if pm ex zoxide; then
   eval "$(zoxide init zsh)"
 fi
+
+zsh_autosuggestions="/usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
+if [ -f "$zsh_autosuggestions" ]; then
+  source "$zsh_autosuggestions"
+fi
