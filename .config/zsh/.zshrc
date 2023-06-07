@@ -195,7 +195,11 @@ if pm ex zoxide; then
   eval "$(zoxide init zsh)"
 fi
 
-zsh_autosuggestions="/usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+if [ "$DISTRO" = 'arch' ]; then
+  zsh_autosuggestions="/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh"
+else
+  zsh_autosuggestions="/usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+fi
 
 if [ -f "$zsh_autosuggestions" ]; then
   source "$zsh_autosuggestions"
