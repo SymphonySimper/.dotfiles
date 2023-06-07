@@ -2,17 +2,18 @@
 
 if $WSL; then
 	pgm='clip.exe'
-elif $IS_WAYLAND; then
-	pgm='wl-copy -n'
 else
-	pgm='xclip -sel c'
+	pgm='wl-copy -n'
 fi
 
 if [ -p /dev/stdin ]; then
 	cat /dev/stdin | $pgm
 else
 	case "$1" in
-		v ) shift; echo $@ | $pgm ;;
-		* ) cat $@ | $pgm ;;
+	v)
+		shift
+		echo $@ | $pgm
+		;;
+	*) cat $@ | $pgm ;;
 	esac
 fi
