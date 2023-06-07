@@ -18,6 +18,8 @@ git							.config/git/config
 groff-ms-macros				.config/groff/ms-macros.ms
 gromit-mpx					.config/gromit-mpx.cfg
 helix                   .config/helix/config.toml
+hyprland                .config/hypr/hyprland.conf
+hyprpaper               .config/hypr/hyprpaper.conf
 htop						.config/htop/htoprc
 lf							.config/lf/lfrc
 mpv							.config/mpv/mpv.conf

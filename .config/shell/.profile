@@ -46,6 +46,7 @@ export XDG_CONFIG_HOME="$HOME"/.config
 export XDG_DATA_HOME="$HOME"/.local/share
 export XDG_CACHE_HOME="$HOME"/.cache
 export XDG_STATE_HOME="$HOME"/.local/state
+export XDG_DATA_DIRS="$XDG_DATA_DIRS:/var/lib/flatpak/exports/share:/home/symph/.local/share/flatpak/exports/share"
 
 export XINITRC="$XDG_CONFIG_HOME"/x11/xinitrc
 export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
@@ -216,17 +217,19 @@ else
 	exp_distro 'ID'
 fi
 
-if ! $WSL; then
-	if [ "$WM" = "sway" ]; then
-		get_card() { udevadm info -a -n /dev/dri/card${1} | grep boot_vga | rev | cut -c 2; }
-		val0=$(get_card 1)
-		val1=$(get_card 0)
-		if is_present_prog 'nvidia-smi' && nvidia-smi; then
-			unsp='--unsupported-gpu'
-		fi
-		[ "$(tty)" = "/dev/tty1" ] && WLR_DRM_DEVICES="/dev/dri/card${val0}:/dev/dri/card${val1}" sway $unsp
-	else
-		# start wm
-		[ "$(tty)" = "/dev/tty1" ] && exec startx "$XINITRC" >/dev/null 2>&1
-	fi
-fi
+[ "$(tty)" = "/dev/tty1" ] && Hyprland >/dev/null 2>&1
+
+# if ! $WSL; then
+# 	if [ "$WM" = "sway" ]; then
+# 		get_card() { udevadm info -a -n /dev/dri/card${1} | grep boot_vga | rev | cut -c 2; }
+# 		val0=$(get_card 1)
+# 		val1=$(get_card 0)
+# 		if is_present_prog 'nvidia-smi' && nvidia-smi; then
+# 			unsp='--unsupported-gpu'
+# 		fi
+# 		[ "$(tty)" = "/dev/tty1" ] && WLR_DRM_DEVICES="/dev/dri/card${val0}:/dev/dri/card${val1}" sway $unsp
+# 	else
+# 		# start wm
+# 		[ "$(tty)" = "/dev/tty1" ] && exec startx "$XINITRC" >/dev/null 2>&1
+# 	fi
+# fi
