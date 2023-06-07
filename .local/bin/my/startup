@@ -44,4 +44,5 @@
 # [ -f $kc ] && $kc &
 
 # org.telegram.desktop &
+dunst &
 com.spotify.Client &
