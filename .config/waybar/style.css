@@ -22,34 +22,14 @@ window#waybar.hidden {
     opacity: 0.2;
 }
 
-/*
-window#waybar.empty {
-    background-color: transparent;
-}
-window#waybar.solo {
-    background-color: #FFFFFF;
-}
-*/
-
-window#waybar.termite {
-    background-color: #3F3F3F;
-}
-
-window#waybar.chromium {
-    background-color: #000000;
-    border: none;
-}
-
 button {
   border-radius: 8px;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 button:hover {
-    background: @overlay1;
-    /* box-shadow: inset 0 -3px #ffffff; */
+    background: red;
 }
-
 #workspaces button {
     margin: 0 4px;
     padding: 0 8px;
@@ -59,14 +39,10 @@ button:hover {
 }
 
 #workspaces button:hover {
-    box-shadow: inherit;
-    text-shadow: inherit;
-}
-
-#workspaces button.focused {
-  /* color: @red; */
-  background-color: @pink;
-    /* box-shadow: inset 0 -3px #ffffff; */
+  background-color: @rosewater;
+  color: @base;
+    /* box-shadow: inherit; */
+    /* text-shadow: inherit; */
 }
 
 #workspaces button.active {
@@ -103,19 +79,8 @@ button:hover {
     color: #ffffff;
 }
 
-/* #window, */
-/* #workspaces { */
-/*     margin: 0 4px; */
-/* } */
-
-/* If workspaces is the leftmost module, omit left margin */
-.modules-left > widget:first-child > #workspaces {
-    margin-left: 0;
-}
-
-/* If workspaces is the rightmost module, omit right margin */
-.modules-right > widget:last-child > #workspaces {
-    margin-right: 0;
+.modules-right {
+  background-color: pink;
 }
 
 #clock {
