@@ -1,13 +1,36 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
 add_newline = false
 palette = "catppuccin_mocha"
+format = """
+$all\
+$fill\
+${custom.time}\
+$line_break\
+$character"""
+# # A minimal left prompt
+# format = """$all\
+# [$fill](bold black)\
+# ${custom.time}\
+# $character"""
+
 
 [character]
 success_symbol='[>](bold lavender)'
 error_symbol='[x](bold red)'
 vimcmd_symbol='[v](bold peach)'
 
+[fill]
+symbol = " "
+
 [directory]
 style = "bold lavender"
+
+[custom.time]
+command = 'date +"%I:%M %p"'
+when = "true"
+format = '[($output)](overlay0)'
 
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"
