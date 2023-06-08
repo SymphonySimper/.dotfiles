@@ -18,9 +18,9 @@ git							.config/git/config
 groff-ms-macros				.config/groff/ms-macros.ms
 gromit-mpx					.config/gromit-mpx.cfg
 helix                   .config/helix/config.toml
+htop						.config/htop/htoprc
 hyprland                .config/hypr/hyprland.conf
 hyprpaper               .config/hypr/hyprpaper.conf
-htop						.config/htop/htoprc
 lf							.config/lf/lfrc
 mpv							.config/mpv/mpv.conf
 mpv-input					.config/mpv/input.conf
@@ -41,6 +41,7 @@ rofi-config					.config/rofi/config.rasi
 rofi-theme					.config/rofi/theme.rasi
 starship           .config/starship/config.toml
 sway              .config/sway/config
+swayimg                  .config/swayimg/config
 sxiv						.config/sxiv/exec/key-handler
 tmux						.config/tmux/tmux.conf
 touchcursor					.config/touchcursor/touchcursor.conf
