@@ -1,0 +1,149 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 30,
+  "_comment1": "Gaps between modules",
+  "spacing": 8,
+  "margin": "8 8",
+  "modules-left": [
+    "wlr/workspaces",
+    "hyprland/window"
+  ],
+  "modules-center": [],
+  "modules-right": [
+    "temperature",
+    "cpu",
+    "memory",
+    "battery",
+    "network",
+    "backlight",
+    "wireplumber",
+    "idle_inhibitor",
+    "clock",
+    "tray"
+  ],
+  "_comment2": "Modules configuration",
+  "wlr/workspaces": {
+    "active-only": false,
+    "disable-scroll": true,
+    "all-outputs": false,
+    "format": "{icon}",
+    "sory-by-number": true,
+    "persistent_workspaces": {
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      "5": [],
+      "6": [],
+      "7": [],
+      "8": [],
+      "9": [],
+      "10": []
+    },
+    "format-icons": {
+      "1": "௧",
+      "2": "௨",
+      "3": "௩",
+      "4": "௪",
+      "5": "௫",
+      "6": "௬",
+      "7": "௭",
+      "8": "௮",
+      "9": "௯",
+      "10": "௰",
+      "urgent": "",
+      "focused": "",
+      "default": ""
+    }
+  },
+  "hyprland/window": {
+    "max-length": 40,
+    "format": "{}",
+    "separate-outputs": true
+  },
+  "clock": {
+    "interval": 60,
+    "format": "{:%I:%M %p - %d/%m/%y}"
+  },
+  "temperature": {
+    "critical-threshold": 80,
+    "format": "{icon}  <span font-family=\"Poppins\">{temperatureC}°C</span>",
+    "format-icons": [
+      "",
+      "",
+      ""
+    ]
+  },
+  "cpu": {
+    "format": "  <span font-family=\"Poppins\">{usage}%</span>",
+    "tooltip": false
+  },
+  "memory": {
+    "format": "  <span font-family=\"Poppins\">{}%</span>"
+  },
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon}  <span font-family=\"Poppins\">{capacity}%</span>",
+    "format-charging": "  <span font-family=\"Poppins\">{capacity}%</span>",
+    "format-plugged": "  <span font-family=\"Poppins\">{capacity}%</span>",
+    "format-alt": "{icon}  <span font-family=\"Poppins\">{time}</span>",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  "network": {
+    "format-wifi": "",
+    "format-ethernet": "",
+    "format-disconnected": "",
+    "tooltip-format": "{ifname} via {gwaddr} ",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+    "tooltip-format-ethernet": "{ifname} {ipaddr}/{cidr} ",
+    "tooltip-format-disconnected": "Disconnected"
+  },
+  "backlight": {
+    "format": "{icon}  <span font-family=\"Poppins\">{percent}%</span>",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  "wireplumber": {
+    "format": "{icon}  <span font-family=\"Poppins\">{volume}%</span>",
+    "format-muted": "",
+    "scroll-step": 0.2,
+    "on-click": "alacritty -e pulsemixer",
+    "on-click-middle": "volume -s 30",
+    "on-scroll-up": "volume -u",
+    "on-scroll-down": "volume -d",
+    "format-icons": [
+      "",
+      "",
+      ""
+    ]
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "",
+      "deactivated": ""
+    }
+  },
+  "tray": {
+    "spacing": 10
+  }
+}
