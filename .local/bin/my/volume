@@ -1,41 +1,38 @@
 #!/bin/sh
 
 app="pulsemixer"
-notify="dunstify -h string:x-dunst-stack-tag:audio"
 
 #Icons
-dir="$HOME"/.local/share/icons/volume
-speaker_i="$dir"/speaker.svg
-mute_i="$dir"/mute.svg
-warning_i="$HOME"/.local/share/icons/general/warning.svg
 
 get_mute=$($app --get-mute)
-get_vol(){ $app --get-volume | awk '{print $1}'; }
-mute_noti(){ [ $get_mute -eq 0 ] && $notify -i "$mute_i" "Muted" || $notify -i "$speaker_i" "Unmuted"; }
+get_vol() { $app --get-volume | awk '{print $1}'; }
 
-notify(){
-	if ! mybar q; then
-		case "$1" in
-			-c) $notify -i "$speaker_i" "Volume: $(get_vol)" -h int:value:$(get_vol) ;;
-			-m) mute_noti ;;
-		esac
+change_vol() {
+	if [ $get_mute -eq 0 ]; then
+		$app --change-volume $1
 	fi
 }
 
-change_vol(){
-	if [ $get_mute -eq 0 ];then
-		$app --change-volume $1 && notify -c
-	else
-		$notify -i "$warning_i" "Audio is muted" "Unmute to change volume"
+set_vol() {
+	expected_volume=$1
+	if [ $get_mute -eq 0 ]; then
+		current_volume=$(get_vol)
+		volume_to_set=$((expected_volume - current_volume))
+		$app --change-volume $volume_to_set
 	fi
+
 }
 
-toggle_mute(){ $app --toggle-mute && notify -m; }
+toggle_mute() { $app --toggle-mute; }
 
 case "$1" in
-	-u) change_vol +2 ;;
-	-d) change_vol -2 ;;
-	-U) change_vol +10 ;;
-	-D) change_vol -10 ;;
-	-m) toggle_mute ;;
+-s)
+	shift
+	set_vol $1
+	;;
+-u) change_vol +2 ;;
+-d) change_vol -2 ;;
+-U) change_vol +10 ;;
+-D) change_vol -10 ;;
+-m) toggle_mute ;;
 esac
