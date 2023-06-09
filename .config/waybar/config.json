@@ -62,10 +62,6 @@
     "format": "{}",
     "separate-outputs": true
   },
-  "clock": {
-    "interval": 60,
-    "format": "{:%I:%M %p - %d/%m/%y}"
-  },
   "temperature": {
     "critical-threshold": 80,
     "format": "{icon}  <span font-family=\"Poppins\">{temperatureC}°C</span>",
@@ -77,10 +73,18 @@
   },
   "cpu": {
     "format": "  <span font-family=\"Poppins\">{usage}%</span>",
+    "states": {
+      "warning": 60,
+      "critical": 90
+    },
     "tooltip": false
   },
   "memory": {
-    "format": "  <span font-family=\"Poppins\">{}%</span>"
+    "format": "  <span font-family=\"Poppins\">{}%</span>",
+    "states": {
+      "warning": 60,
+      "critical": 90
+    }
   },
   "battery": {
     "states": {
@@ -109,7 +113,15 @@
     "tooltip-format-disconnected": "Disconnected"
   },
   "backlight": {
+    "on-click": "brightness -t",
+    "on-scroll-up": "brightness -u",
+    "on-scroll-down": "brightness -d",
     "format": "{icon}  <span font-family=\"Poppins\">{percent}%</span>",
+    "tooltip": false,
+    "states": {
+      "warning": 60,
+      "critical": 90
+    },
     "format-icons": [
       "",
       "",
@@ -126,10 +138,14 @@
     "format": "{icon}  <span font-family=\"Poppins\">{volume}%</span>",
     "format-muted": "",
     "scroll-step": 0.2,
-    "on-click": "alacritty -e pulsemixer",
+    "on-click": "volume -m",
     "on-click-middle": "volume -s 30",
     "on-scroll-up": "volume -u",
     "on-scroll-down": "volume -d",
+    "states": {
+      "warning": 50,
+      "critical": 80
+    },
     "format-icons": [
       "",
       "",
@@ -142,6 +158,10 @@
       "activated": "",
       "deactivated": ""
     }
+  },
+  "clock": {
+    "interval": 60,
+    "format": "{:%I:%M %p - %d/%m/%y}"
   },
   "tray": {
     "spacing": 10

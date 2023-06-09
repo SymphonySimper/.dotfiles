@@ -1,32 +1,21 @@
 #!/bin/sh
 
-app="xbacklight"
-lbf="$XDG_CACHE_HOME"/last-brightness
-get_b() { $app -get | cut -d '.' -f1; }
-notify() {
-	dunstify -h string:x-dunst-stack-tag:brightness \
-		-i $HOME/.local/share/icons/general/brightness.svg \
-		"Brightness: $(get_b)" -h int:value:$(get_b)
-}
+app="brightnessctl -m"
+backup_file="$XDG_CACHE_HOME/last-brightness"
 
-toggle_max() {
-	[ $(get_b) -lt 100 ] && get_b >$lbf
-
-	if [ $(get_b) -lt 100 ]; then
-		$app -set 100
+toggle_ness() {
+	if [ -f $backup_file ]; then
+		$app s $(cat $backup_file)
+		rm $backup_file
 	else
-		$app -set $(cat $lbf)
+		$app g >$backup_file
+		$app s 100%
 	fi
+
 }
-
 case "$1" in
--u) $app -inc 2 ;;
--d) $app -dec 2 ;;
--s)
-	shift
-	$app -set $1
-	;;
--t) toggle_max ;;
+-u) $app s +2% ;;
+-d) $app s 2%- ;;
+-s) $app s $2 ;;
+-t) toggle_ness ;;
 esac
-
-mybar q || notify

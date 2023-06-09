@@ -11,7 +11,6 @@
   padding: 0;
 }
 
-
 window#waybar {
   background-color: transparent;
   color: @text;
@@ -37,21 +36,20 @@ button:hover {
 }
 
 #workspaces button:hover {
-  background-color: @rosewater;
-  color: @base;
+  background-color: @base;
+  color: @text;
 }
 
 #workspaces button.active {
   color: @base;
-  background-color: @mauve;
+  background-color: @text;
 }
 
 #workspaces button.urgent {
-  background-color: @pink;
+  background-color: @red;
 }
 
-.modules-right > widget > *,
-.modules-center > widget > * {
+.modules-right > widget > * {
   background-color: @base;
   /* border-radius: 8px; */
   padding: 0 16px;
@@ -65,21 +63,48 @@ button:hover {
 }
 
 #idle_inhibitor.activated {
-  color: @base;
-  background-color: @mauve;
+  color: @red;
+  background-color: @yellow;
 }
 
 @keyframes blink {
   to {
-    background-color: #ffffff;
-    color: #000000;
+    background-color: @red;
+    color: @base;
   }
 }
 
+#network, #battery.plugged {
+  background-color: @green;
+  color: @base;
+}
+
+#cpu.warning,
+#memory.warning,
+#battery.warning,
+#backlight.warning,
+#wireplumber.warning {
+  background-color: @yellow;
+  color: @base;
+}
+
+#network.disconnected,
 #wireplumber.muted {
+  background-color: @peach;
+  color: @base;
+
+}
+
+#temperature.critical,
+#cpu.critical,
+#memory.critical,
+#network.disabled,
+#backlight.critical,
+#wireplumber.critical {
   background-color: @red;
   color: @base;
 }
+
 
 #battery.critical:not(.charging) {
   background-color: @red;
@@ -94,8 +119,9 @@ button:hover {
 #tray > .passive {
   -gtk-icon-effect: dim;
 }
+
 #tray > .needs-attention {
   -gtk-icon-effect: highlight;
-  background-color: @rosewater;
+  background-color: @red;
 }
 
