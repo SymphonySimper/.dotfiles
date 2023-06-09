@@ -46,7 +46,8 @@ button:hover {
 }
 
 #workspaces button.urgent {
-  background-color: @red;
+  color: @base;
+  background-color: @sapphire;
 }
 
 .modules-right > widget > * {
@@ -122,6 +123,6 @@ button:hover {
 
 #tray > .needs-attention {
   -gtk-icon-effect: highlight;
-  background-color: @red;
+  background-color: @sapphire;
 }
 
