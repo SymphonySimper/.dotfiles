@@ -43,6 +43,7 @@ mntdev                   .local/bin/my/mntdev
 mybar                    .local/bin/my/mybar
 myinfo                   .local/bin/my/myinfo
 myqemu                   .local/bin/my/myqemu
+myspotify                .local/bin/my/myspotify
 mysteam                  .local/bin/my/aliases/mysteam
 mysway                   .local/bin/my/mysway
 mywiki                   .local/bin/my/mywiki

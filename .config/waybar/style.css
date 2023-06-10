@@ -2,7 +2,7 @@
 
 * {
   font-family: "Poppins";
-  font-size: 12px;
+  font-size: 11px;
   min-height: 18px;
   min-width: 18px;
   border: none;
@@ -31,10 +31,15 @@ button:hover {
 }
 
 #workspaces button, #window {
+  margin-right: 1px;
   padding: 0 16px;
   color: @text;
   background-color: @base;
-  border-right: 1px solid @surface0;
+  /* border-right: 1px solid @surface0; */
+}
+
+#window {
+  margin: 0;
 }
 
 #workspaces button:hover {
@@ -62,10 +67,10 @@ button:hover {
   font-family:"Font Awesome 6 Free";
   background-color: @base;
   color: @text;
-  margin: 0;
   padding: 0 16px;
   border-radius: 0;
-  border-right: 1px solid @surface0;
+  margin-right: 1px;
+  /* border-right: 1px solid @surface0; */
 }
 
 tooltip {
@@ -97,6 +102,10 @@ tooltip label {
   margin-right: 8px;
 }
 
+#workspaces button:last-child {
+  margin: 0;
+}
+
 #idle_inhibitor.activated {
   color: @crust;
   background-color: @flamingo;
@@ -109,7 +118,9 @@ tooltip label {
   }
 }
 
-#network, #battery.plugged {
+#network,
+#battery.plugged,
+#custom-spotify.playing {
   background-color: @green;
   color: @base;
 }
@@ -119,13 +130,15 @@ tooltip label {
 #battery.warning,
 #network.linked,
 #backlight.warning,
-#wireplumber.warning {
+#wireplumber.warning,
+#custom-spotify.paused {
   background-color: @yellow;
   color: @base;
 }
 
 #network.disconnected,
-#wireplumber.muted {
+#wireplumber.muted,
+#custom-spotify.disabled {
   background-color: @peach;
   color: @base;
 
@@ -154,6 +167,7 @@ tooltip label {
 
 #tray {
   border-radius: 8px;
+  margin: 0;
 }
 
 #tray > .passive {
