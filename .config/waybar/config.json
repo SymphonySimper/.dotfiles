@@ -67,6 +67,7 @@
     "separate-outputs": true
   },
   "temperature": {
+    "hwmon-path": "/tmp/temperature",
     "critical-threshold": 80,
     "format": "{icon}  <span font-family=\"Poppins\">{temperatureC}°C</span>",
     "format-icons": [
