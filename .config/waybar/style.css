@@ -60,6 +60,7 @@ button:hover {
 
 #window {
   margin: 0;
+  background-color: transparent;
 }
 
 #window.empty {
@@ -172,7 +173,8 @@ tooltip label {
 
 #tray {
   border-radius: 8px;
-  margin: 0;
+  margin-right: 0;
+  margin-left: 8px;
 }
 
 #tray > .passive {
