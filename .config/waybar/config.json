@@ -3,7 +3,7 @@
   "position": "top",
   "height": 30,
   "_comment1": "Gaps between modules",
-  "spacing": 8,
+  "spacing": 0,
   "margin": "8 8",
   "modules-left": [
     "wlr/workspaces",
@@ -19,7 +19,8 @@
     "backlight",
     "wireplumber",
     "idle_inhibitor",
-    "clock",
+    "custom/time",
+    "custom/date",
     "tray"
   ],
   "_comment2": "Modules configuration",
@@ -58,7 +59,7 @@
     }
   },
   "hyprland/window": {
-    "max-length": 40,
+    "max-length": 100,
     "format": "{}",
     "separate-outputs": true
   },
@@ -92,7 +93,7 @@
       "critical": 15
     },
     "format": "{icon}  <span font-family=\"Poppins\">{capacity}%</span>",
-    "format-charging": "  <span font-family=\"Poppins\">{capacity}%</span>",
+    "format-charging": "  <span font-family=\"Poppins\">{capacity}%</span>",
     "format-plugged": "  <span font-family=\"Poppins\">{capacity}%</span>",
     "format-alt": "{icon}  <span font-family=\"Poppins\">{time}</span>",
     "format-icons": [
@@ -158,11 +159,23 @@
     "format-icons": {
       "activated": "",
       "deactivated": ""
-    }
+    },
+    "tooltip-format-activated": "Activated",
+    "tooltip-format-deactivated": "Deactivated"
+  },
+  "custom/time": {
+    "exec": "date '+%I:%M %p'",
+    "format": "  <span font-family=\"Poppins\">{}</span>",
+    "interval": 60
+  },
+  "custom/date": {
+    "exec": "date '+%d/%m/%y'",
+    "format": "  <span font-family=\"Poppins\">{}</span>",
+    "interval": 60
   },
   "clock": {
     "interval": 60,
-    "format": "{:%I:%M %p - %d/%m/%y}"
+    "format": "  {:%I:%M %p    %d/%m/%y}"
   },
   "tray": {
     "spacing": 10

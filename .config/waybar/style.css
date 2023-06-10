@@ -20,19 +20,21 @@ window#waybar.hidden {
   opacity: 0.2;
 }
 
+
+/* Modules Left */
 button {
-  border-radius: 8px;
+  border-radius: 0;
 }
 
 button:hover {
   background: inherit;
 }
 
-#workspaces button {
-  margin: 0 8px 0 0;
-  padding: 0 8px;
+#workspaces button, #window {
+  padding: 0 16px;
   color: @text;
   background-color: @base;
+  border-right: 1px solid @surface0;
 }
 
 #workspaces button:hover {
@@ -55,22 +57,49 @@ button:hover {
   background-color: @sapphire;
 }
 
+/* Modules Right */
 .modules-right > widget > * {
+  font-family:"Font Awesome 6 Free";
   background-color: @base;
-  /* border-radius: 8px; */
-  padding: 0 16px;
   color: @text;
+  margin: 0;
+  padding: 0 16px;
+  border-radius: 0;
+  border-right: 1px solid @surface0;
 }
 
-#idle_inhibitor,
+tooltip {
+  margin-top: 16px;
+  color: @text;
+  background-color: @surface0;
+}
+
+tooltip label {
+  font-size: 14px;
+  padding: 4px 16px;
+  color: @text;
+  background-color: @surface0;
+}
+
+#workspaces button:first-child,
+#temperature,
+#backlight,
+#custom-time {
+  border-radius: 8px 0 0 8px;
+}
+
+#workspaces button:last-child,
 #network,
-#wireplumber {
-  font-family:"Font Awesome 6 Free";
+#idle_inhibitor,
+#custom-date {
+  border: none;
+  border-radius: 0 8px 8px 0;
+  margin-right: 8px;
 }
 
 #idle_inhibitor.activated {
-  color: @red;
-  background-color: @yellow;
+  color: @crust;
+  background-color: @flamingo;
 }
 
 @keyframes blink {
@@ -121,6 +150,10 @@ button:hover {
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-direction: alternate;
+}
+
+#tray {
+  border-radius: 8px;
 }
 
 #tray > .passive {
