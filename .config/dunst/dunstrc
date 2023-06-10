@@ -1,13 +1,14 @@
 [global]
   follow = mouse
-  width = (300, 600)
+  width = (240, 560)
+  height = (240, 560)
   origin = top-right
   offset = 8x8
   progress_bar = true
   progress_bar_height = 8
   progress_bar_frame_width = 1
-  progress_bar_min_width = 160
-  progress_bar_max_width = 560
+  progress_bar_min_width = 144
+  progress_bar_max_width = 536
   progress_bar_corner_radius = 8
   indicate_hidden = yes
   transparency = 0
@@ -19,7 +20,7 @@
   gap_size = 8
   sort = yes
   font = Poppins 11
-  line_height = 14
+  line_height = 11
   markup = full
   format = "%s\n%b"
   alignment = left
@@ -34,7 +35,7 @@
   icon_theme = Adwaita
   icon_position = left
   min_icon_size = 32
-  max_icon_size = 128
+  max_icon_size = 48
   icon_path = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
   sticky_history = yes
   history_length = 20
