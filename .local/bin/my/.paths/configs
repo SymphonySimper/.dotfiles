@@ -1,5 +1,4 @@
 alacritty               .config/alacritty/alacritty.yml
-wpaperd                 .config/wpaperd/wallpaper.toml
 awesome                 .config/awesome/rc.lua
 bspwm						.config/bspwm/bspwmrc
 bspwm-hotkeys				.config/sxhkd/bspwm-hotkeys
@@ -47,6 +46,7 @@ sxiv						.config/sxiv/exec/key-handler
 tmux						.config/tmux/tmux.conf
 touchcursor					.config/touchcursor/touchcursor.conf
 waybar                  .config/waybar/config.json
+wpaperd                 .config/wpaperd/wallpaper.toml
 yt-dlp						.config/yt-dlp/config
 zathura						.config/zathura/zathurarc
 zellij                   .config/zellij/config.kdl
