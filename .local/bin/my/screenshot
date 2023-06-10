@@ -1,19 +1,10 @@
 #!/bin/sh
-dir="$HOME"/.local/share/icons/screenshot
-region_i="$dir"/screen-snip.svg
-full_screen_i="$dir"/full-screen.svg
-window_i="$dir"/window.svg
 
-loc="$HOME"/pics/screenshots/$(date +%s).png
-save(){ tee $loc; }
-cpy(){ xclip -selection clipboard -t image/png; }
-select_region(){ maim -s -u | save | cpy; }
-select_window(){ maim -u -i $(xdotool getactivewindow) | save | cpy; }
-select_screen(){ maim -m 1 -u | save | cpy; }
+loc="$HOME/Pictures/Screenshot"
+take_screenshot() { hyprshot -m $1 -o $loc; }
 
-notify(){ dunstify -i "$1" "$2" "Screenshot taken"; }
 case "$1" in
-	-r) select_region && notify "$region_i" "Selected Region" ;;
-	-w) select_window && notify "$window_i" "Selected Window" ;;
-	-s) select_screen && notify "$full_screen_i" "Selected Screen" ;;
+-r) take_screenshot region ;;
+-w) take_screenshot window ;;
+-s) take_screenshot output ;;
 esac
