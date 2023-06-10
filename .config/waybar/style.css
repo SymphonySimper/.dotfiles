@@ -38,10 +38,6 @@ button:hover {
   /* border-right: 1px solid @surface0; */
 }
 
-#window {
-  margin: 0;
-}
-
 #workspaces button:hover {
   color: @text;
   background-color: @base;
@@ -60,6 +56,14 @@ button:hover {
 #workspaces button.urgent {
   color: @base;
   background-color: @sapphire;
+}
+
+#window {
+  margin: 0;
+}
+
+#window.empty {
+  background-color: transparent;
 }
 
 /* Modules Right */
