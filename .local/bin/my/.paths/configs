@@ -1,4 +1,5 @@
 alacritty               .config/alacritty/alacritty.yml
+wpaperd                 .config/wpaperd/wallpaper.toml
 awesome                 .config/awesome/rc.lua
 bspwm						.config/bspwm/bspwmrc
 bspwm-hotkeys				.config/sxhkd/bspwm-hotkeys

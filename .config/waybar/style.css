@@ -31,13 +31,18 @@ button:hover {
 #workspaces button {
   margin: 0 8px 0 0;
   padding: 0 8px;
-  background-color: @base;
   color: @text;
+  background-color: @base;
 }
 
 #workspaces button:hover {
-  background-color: @base;
   color: @text;
+  background-color: @base;
+}
+
+#workspaces button.persistent {
+  color: @surface1;
+  background-color: @base;
 }
 
 #workspaces button.active {
