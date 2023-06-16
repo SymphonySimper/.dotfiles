@@ -40,6 +40,7 @@ add_path "$GEM_HOME/bin"                    # Ruby
 add_path "$HOME/Android/Sdk/emulator"       # Android Emulator
 add_path "$HOME/.spicetify"
 add_path "/var/lib/flatpak/exports/bin" # Flatpak
+add_path "$HOME/.config/emacs/bin"      # Doom emacs
 
 # ~/ Clean-up:
 export XDG_CONFIG_HOME="$HOME"/.config
