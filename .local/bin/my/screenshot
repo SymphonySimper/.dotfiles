@@ -1,6 +1,6 @@
 #!/bin/sh
 
-loc="$HOME/Pictures/Screenshot"
+loc="$HOME/Pictures/Screenshots"
 take_screenshot() { hyprshot -m $1 -o $loc; }
 
 case "$1" in
