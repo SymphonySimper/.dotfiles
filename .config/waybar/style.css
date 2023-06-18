@@ -112,6 +112,10 @@ tooltip label {
   margin: 0;
 }
 
+#workspaces button:only-child {
+  border-radius: 8px;
+}
+
 #idle_inhibitor.activated {
   color: @crust;
   background-color: @flamingo;
