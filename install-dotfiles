@@ -8,13 +8,13 @@ config checkout
 
 create_symlinks(){
 	# symlinks
-	ln -sv "$HOME"/.local/bin/lf/lf-p "$HOME"/.local/bin/aliases/lfp
+	# ln -sv "$HOME"/.local/bin/lf/lf-p "$HOME"/.local/bin/aliases/lfp
 	ln -sv "$HOME"/.config/shell/.profile "$HOME"/.zprofile
 }
 
 create_dirs(){
-	mkdir -vp "$HOME"/usb "$HOME"/ntfs
-	mkdir -vp "$HOME"/dl "$HOME"/pics/screenshots
+	# mkdir -vp "$HOME"/usb "$HOME"/ntfs
+	# mkdir -vp "$HOME"/dl "$HOME"/pics/screenshots
 	mkdir -vp "$HOME"/importantnt "$HOME"/lifeisfun
 	mkdir -vp "$HOME"/.local/src "$HOME"/.local/appimage
 }
@@ -34,3 +34,6 @@ fi
 
 config checkout
 config config status.showUntrackedFiles no
+
+# Tmux
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
