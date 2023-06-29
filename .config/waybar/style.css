@@ -41,6 +41,7 @@ button:hover {
 #workspaces button:hover {
   color: @text;
   background-color: @base;
+  border: none;
 }
 
 #workspaces button.persistent {
