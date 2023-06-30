@@ -1,2 +1,2 @@
 #!/bin/sh
-prime-run com.valvesoftware.Steam > /dev/null 2>&1 &
+prime-run steam >/dev/null 2>&1 &
