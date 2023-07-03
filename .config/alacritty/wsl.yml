@@ -21,7 +21,7 @@ cursor:
 live_config_reload: false
 
 shell:
-  program: openSUSE-Tumbleweed
+  program: ubuntu
 
 # colors:
 #   primary:
