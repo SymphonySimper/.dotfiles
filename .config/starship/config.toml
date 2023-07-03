@@ -3,18 +3,12 @@
 
 add_newline = false
 palette = "catppuccin_mocha"
-format = """
-$all\
-$fill\
-${custom.time}\
-$line_break\
-$character"""
-# # A minimal left prompt
-# format = """$all\
-# [$fill](bold black)\
+# format = """
+# $all\
+# $fill\
 # ${custom.time}\
+# $line_break\
 # $character"""
-
 
 [character]
 success_symbol='[>](bold lavender)'
@@ -27,10 +21,10 @@ symbol = " "
 [directory]
 style = "bold lavender"
 
-[custom.time]
-command = 'date +"%I:%M %p"'
-when = "true"
-format = '[($output)](overlay0)'
+# [custom.time]
+# command = 'date +"%I:%M %p"'
+# when = "true"
+# format = '[($output)](overlay0)'
 
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"
