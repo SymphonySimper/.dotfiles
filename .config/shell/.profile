@@ -143,6 +143,7 @@ export RSS_READER="newsboat"
 select_default_prog 'PERM' 'doas' 'sudo'
 select_default_prog 'EDITOR' 'nvim' 'vim' 'nano'
 export VISUAL="$EDITOR"
+export SYSTEM_EDITOR="$EDITOR"
 select_default_prog 'SWALLOW' 'devour'
 select_default_prog 'USE_GPU' 'prime-run'
 
