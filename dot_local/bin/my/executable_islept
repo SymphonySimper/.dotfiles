@@ -1,0 +1,12 @@
+#!/bin/bash
+
+rm_colon(){ echo $1 | sed 's|:|.|g'; }
+
+if [ -n "$1" ] && [ -n "$2" ]; then
+	start_time=$(rm_colon $1)
+	end_time=$(rm_colon $2)
+	time_slept=$( echo "($end_time + 12)- $start_time" | bc)
+	msg="You have slept from $(syl y)${1}PM$(syl R) to $(syl y)${2}AM$(syl R)"
+	msg2="Which approximately is equal to "
+	printf "%s\n%s$(syl g; syl B)%0.f hrs$(syl R)\n" "$msg" "$msg2" "$time_slept"
+fi

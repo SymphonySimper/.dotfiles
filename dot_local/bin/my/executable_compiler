@@ -1,0 +1,41 @@
+#!/bin/sh
+
+option="$1"
+shift
+
+file=$(readlink -f "$1")
+dir=${file%/*}
+ext="${file##*.}"
+filename="${file##*/}"
+jname="${filename%.*}"
+
+[ "$filename" = 'ms-macros.ms' ] && exit 0
+[ -d "$dir" ] || exit 1
+
+is_alive(){ ps aux | grep -i "$1" | grep -qv 'grep'; }
+
+open_pdf(){ is_alive "${jname}.pdf" || \
+	{ [ -f "$dir/${jname}.pdf" ] && $READER "$dir/${jname}.pdf" > /dev/null 2>&1 & }
+}
+
+groff_ms(){ groff -mspdf -U -tepR -T$1 -P-pa4 "$file"; }
+groff_ms_ps(){ groff_ms ps | ps2pdf - "$dir/$jname.pdf"; }
+groff_ms_pdf(){ groff_ms pdf > "$dir/$jname.pdf"; }
+
+final(){
+	case "$ext" in
+		ms) grep -q '^.PSPIC' "$filename" && groff_ms_ps || groff_ms_pdf ;;
+	esac
+}
+
+preview(){
+	case "$ext" in
+		ms) groff_ms_pdf ;;
+	esac
+	open_pdf
+}
+
+case "$option" in
+	-p) preview ;;
+	-f) final ;;
+esac

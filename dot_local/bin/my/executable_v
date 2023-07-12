@@ -1,0 +1,92 @@
+#!/bin/sh
+
+#Apps
+iv="$IMAGE_VIEWER"
+vv="$VIDEO_PLAYER"
+vf="ffplay"
+pv="$READER"
+te="$EDITOR"
+h="$SWALLOW"
+dis="fzf"
+vg="inkscape"
+nt="xournalpp"
+td="blender"
+tr="qbittorrent"
+dv="org.libreoffice.LibreOffice"
+
+#Paths
+what_img="$HOME/dl/What"*
+
+grep_1="grep -v '/\|.class'"
+sed_1="sed 's|[@*]||g'"
+sed_2="sed 's|\\$|\\\\$|g'"
+
+exec_file() {
+	b=''
+	case "$1" in
+	'sh') b='sh' ;;
+	# 'py' ) b='python' ;;
+	'rb') b='ruby' ;;
+	esac
+	if [ -z $b ]; then
+		$te $2
+	else
+		echo "#!/bin/${b}" >$2
+		chmod +x $2
+		$te $2
+		[ $(cat $2 | wc -l) -eq 1 ] && rm $2
+	fi
+}
+
+edit_file() {
+	if [ -f $1 ]; then
+		$te $1
+	else
+		ex=${1##*.}
+		exec_file "$ex" "$1"
+	fi
+}
+
+main() {
+	case "$1" in
+	*.jp*g | *.png | *.webp) $h $iv "$1" ;;
+	*.mkv | *.mp4 | *.webm | *.gif | *.avi | *youtu*)
+		$h $USE_GPU $vv "$1"
+		;;
+	*.mp3 | *.ogg) $vv "$1" ;;
+	*.pdf) $h $pv "$1" ;;
+	*.svg) $BROWSER "$1" ;;
+	*.img) myqemu "$1" ;;
+	*.svg | *.eps | *.ai) $h $vg "$1" ;;
+	*.xopp) $h $nt "$1" ;;
+	*.blend) $h $USE_GPU $td "$1" ;;
+	*.torrent) $tr "$1" ;;
+	*.docx | *.doc | *.odt) $h $dv "$1" ;;
+	-a) ls | grep 'jpeg\|jpg\|png\|webp' | $h $iv -t - ;;
+	-w) $h $iv $what_img ;;
+	-f) $h $vv --profile=low-latency --untimed /dev/video0 ;;
+	-d)
+		shift
+		case "$1" in
+		*.pdf) $h $pv "$1" && rm -i "$1" ;;
+		*) $h $iv $what_img && rm -I $what_img ;;
+		esac
+		;;
+	-p) ls *.pdf | $dis | xargs -rI {} $h $pv {} ;;
+	*) [ -n "$@" ] && edit_file "$1" ;;
+	esac
+}
+list_file() { ls -aF "$1" | eval $grep_1 | eval $sed_1 | $dis | eval $sed_2; }
+
+if [ -n "$1" ]; then
+	case "$1" in
+	-x)
+		shift
+		query="$(list_file $1)"
+		[ -n "$query" ] && main "${1}/${query}"
+		;;
+	*) main "$(echo $@ | eval $sed_2)" ;;
+	esac
+else
+	main "$(list_file $(pwd))"
+fi

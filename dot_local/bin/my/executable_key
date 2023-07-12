@@ -1,0 +1,28 @@
+#!/bin/sh
+
+pgm='setxkbmap'
+
+switch_keyboard_layout(){
+	file="$XDG_CACHE_HOME/sl"
+	
+	[ -f $file ] && layout=$(cat $file) || touch $file
+	
+	cl='colemak_dh'
+	qw='qwerty'
+	country='us'
+	
+	case "$layout" in
+		'colemak_dh' ) $pgm $country && echo $qw > $file ;;
+		* ) $pgm $country -variant $cl && echo $cl > $file ;;
+	esac
+	
+	dunstify -h string:x-dunst-stack-tag:skl "Switched to $(cat $file) layout"
+}
+
+case "$1" in
+	ce ) $pgm -option caps:escape ;;
+	# capslock becomes backsapce and when you press both the sift button
+	# it [en/dis]ables capslock
+	cb ) $pgm -option caps:backspace -option shift:both_capslock ;;
+	skl ) switch_keyboard_layout ;;
+esac

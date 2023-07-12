@@ -1,0 +1,14 @@
+emerge -uDNq --with-bdeps=y sys-kernel/gentoo-sources
+eselect kernel list
+eselect kernel set
+cd /usr/src/linux
+make mrproper
+cp /home/s2b/.config/kernel/*.config .config
+make olddefconfig
+make -j13 menuconfig
+make -j13 modules_prepare
+make -j13 && make -j13 modules_install && make -j13 install
+genkernel --install --kernel-config=/usr/src/linux/.config --compress-initramfs-type=lz4 --microcode-initramfs initramfs
+grub-mkconfig -o /boot/grub/grub.cfg
+emerge --ask @module-rebuild
+cp /usr/src/linux/.config /home/s2b/.config/kernel/$(uname -r).config

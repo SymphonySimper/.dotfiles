@@ -1,0 +1,7 @@
+#!/bin/sh
+loc="$HOME"/.local/bin/my/rofi
+configs="$loc"/edit-configs
+scripts="$loc"/edit-scripts
+shell="$loc"/edit-shell
+
+rofi -modi "scripts:$scripts,configs:$configs,shell:$shell" -show scripts

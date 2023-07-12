@@ -1,0 +1,46 @@
+#!/bin/sh
+
+# pgrep picom && killall picom || picom -m 1.0 -i 1.0 -e 1.0 --vsync --backend glx --no-fading-openclose &
+
+notify="dunstify -h string:x-dunst-stack-tag:gameMode"
+warning_i="$HOME"/.local/share/icons/general/warning.svg
+
+is_picom="$(pgrep picom)"
+
+toggle(){
+	if [ -z $is_picom ]; then
+		$TERMINAL -e gen-hosts
+	else
+		$TERMINAL -e gen-hosts 'clear'
+	fi \
+	&& handle_picom
+}
+
+handle_picom(){
+	if [ -z $is_picom ]; then
+		picom > /dev/null 2>&1 &
+		$notify "Picom is alive"
+	else
+		killall picom \
+		&& $notify -i $warning_i "Picom is dead"
+	fi
+}
+handle_brightness(){ brightness -t; }
+
+options(){
+	while read -r l; do
+		echo $l
+	done <<- EOF
+	picom and brightness
+	toggle picom
+	brightness
+	EOF
+}
+query=$(options | rofi -dmenu -p 'Game-mode')
+
+case "$query" in
+	'toggle') toggle ;;
+	'toggle picom') handle_picom ;;
+	'picom and brightness') handle_picom && handle_brightness ;;
+	'brightness') handle_brightness ;;
+esac

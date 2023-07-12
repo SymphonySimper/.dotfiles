@@ -1,0 +1,115 @@
+#!/bin/sh
+
+qn(){ echo "\n$(syl y)${1}$(syl R)\n"; }
+err(){ echo "\n$(syl r; syl B)${1}$(syl R)\n"; }
+
+vloc='~/importantnt/video/%(title)s.%(ext)s'
+aloc='~/importantnt/audio/%(title)s.%(ext)s'
+
+#ytdl="youtube-dl"
+ytdl="yt-dlp"
+
+qual=''
+
+# EXPERMIENTAL
+# Vformat=''
+# Aformat=''
+
+get_f(){ format="$($ytdl -F "$1")"; }
+d_f(){ echo "$format" | grep -wE "$1" | sed "s/\,.*//"; }
+get_c(){ d_f "$1" | tail -n 1 | cut -d ' ' -f 1; }
+get_va(){
+	case "$1" in
+		-a) get_c "audio" ;;
+		-v) get_c "${qual}.*video" ;;
+	esac
+}
+
+av(){
+	case "$1" in
+		-a) shift; d_f 'audio'
+			qn "Enter audio format"
+			read af; echo ;;
+		-v) shift; d_f 'video'
+			qn "Enter video format"
+			read vf; echo ;;
+	esac
+}
+
+dl_av(){ $ytdl -f "$vf+$af" "$1" -o $vloc; }
+dl(){
+	if [ -z $qual ]; then
+		$ytdl "$1" -o $vloc
+	else
+		get_f "$1"
+		af="$(get_va -a)"
+		vf="$(get_va -v)"
+		if [ -z $vf ]; then
+			err "Requested Quality for $1 not found"
+			qn "Would you like to choose quality by yourself ? [y/n/a(choose both audio and video)/q]"
+			read ANS
+			echo
+			if [ $ANS = 'q' ]; then
+				exit 1
+			elif [ $ANS = 'a' ]; then
+				av -a; av -v;
+				dl_av "$1"
+			elif [ $ANS = 'y' ]; then
+				if [ -n $af ]; then
+					echo $af
+					av -v;
+					dl_av "$1"
+				else
+					av -a; av -v;
+					dl_av "$1"
+				fi
+			else
+				$ytdl "$1" -o $vloc
+			fi
+		elif [ -n $vf ] && [ -n $af ]; then
+			dl_av "$1"
+		else
+			err "Invalid Formats"
+		fi
+	fi
+}
+
+playlist(){
+	qn "You are entering playlist mode"
+	echo "You have 5 seconds to cancel this"
+	printf "Countdown: "
+	for i in $(seq 5 | sort -r); do sleep 1s && printf "$(syl r;syl B)${i}$(syl R)  "; done
+	qn "Initiating download"
+
+	if [ -z $qual ]; then
+		dl "$1"
+	else
+		video_ids="$($ytdl --get-id "$1")"
+		for id in $video_ids; do
+			dl "$id"
+		done
+	fi
+}
+
+echo
+case "$1" in
+	-a) shift
+		get_f "$1"
+		af=$(get_c 'audio')
+		$ytdl -f "$af" "$1" -o $aloc ;;
+	-v) shift
+		get_f "$1"
+		af=$(get_c 'video')
+		av -v
+		$ytdl -f "$vf+$af" "$1" -o $vloc ;;
+	-sa) shift
+		get_f "$1"
+		av -a
+		$ytdl -f "$af" "$1" -o $aloc ;;
+	-s) shift
+		get_f "$1"
+		av -a; av -v;
+		$ytdl -f "$vf+$af" "$1" -o $vloc ;;
+	*playlist*) playlist "$1";;
+	*) dl "$1" ;;
+esac

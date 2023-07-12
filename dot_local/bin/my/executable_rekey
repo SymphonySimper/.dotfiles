@@ -1,0 +1,35 @@
+#!/bin/sh
+
+prgm="sxhkd"
+
+loc="$HOME"/.config/sxhkd
+bspwm_key="$loc"/bspwm-hotkeys
+my_bspwm_binds="$loc"/mybspwm-binds
+my_key="$loc"/mybinds
+
+config_loc="$loc"/.sxhkdrc
+
+notify="dunstify -h string:x-dunst-stack-tag:sxhkd"
+warning_i="$HOME"/.local/share/icons/generla/warning.svg
+
+iclr="sed '/#/d; /^[[:space:]]*$/d'"
+create_config(){
+	case "$1" in
+		-a) eval $iclr $bspwm_key $my_bspwm_binds $my_key > $config_loc;;
+		-m) eval $iclr $my_key > $config_loc;;
+	esac
+}
+
+if [ $WM = 'bspwm' ]; then
+		create_config -a
+else
+		create_config -m
+fi
+
+if [ -f "$config_loc" ]; then
+	pgrep "$prgm" && killall "$prgm"
+	{ "$prgm" -c "$config_loc" & } &&
+	$notify "Restarting $prgm"
+else
+	$notify "Config file not found" "$prgm"
+fi

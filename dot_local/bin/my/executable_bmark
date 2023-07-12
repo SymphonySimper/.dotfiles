@@ -1,0 +1,71 @@
+#!/bin/sh
+
+bmark_loc="$XDG_CONFIG_HOME"/bmark
+bmark_bookmarks="$bmark_loc"/bookmarks
+
+err(){ echo "$(syl r; syl B)${1}$(syl R)"; }
+succ(){ echo "$(syl g; syl B)${1}$(syl R)"; }
+
+append_bmark(){ printf "%*s %4s %s\n" -24 "$1" "$2" "$3" >> $bmark_bookmarks; }
+sort_bmark(){ sort $bmark_bookmarks -o $bmark_bookmarks; }
+add_bmark(){
+	if grep -qw "^$1" $bmark_bookmarks; then
+		err "$1 already exists"
+	else
+		read -p "Is this an app [y/N] " ans
+		case "$ans" in
+			[yY]*)
+					echo 'added as a chromium app'
+					append_bmark "$1" 'app' "$2"
+					;;
+			*) append_bmark "$1" 'site' "$2" ;;
+		esac
+		succ "$1 added to bmarks"
+		sort_bmark
+	fi
+}
+rm_bmark(){
+	if grep -qw "^$1" $bmark_bookmarks; then
+		sed "/^$1/d" -i $bmark_bookmarks
+		succ "$1 deleted"
+		sort_bmark
+	else
+		err "bmark $1 not found"
+	fi
+}
+cp_bmark(){
+	is_there="$(grep -w "^$1" $bmark_bookmarks)"
+	if [ -n "$is_there" ]; then
+		echo "$(echo "$is_there" | awk '{ print $3 }')" \
+			| yoink
+		echo "bmark \`$1\` is copied to clipboard"
+	else
+		err "bmark $1 not found"
+	fi
+}
+open_bmark(){
+	is_there="$(grep -w "^$1" $bmark_bookmarks)"
+	if [ -n "$is_there" ]; then
+		url="$(echo "$is_there" | awk '{ print $3 }')"
+		if echo "$is_there" | awk '{ print $2 }' | grep -wq 'app'; then
+			$CHROME_EXECUTABLE --app="${url}" > /dev/null 2>&1 &
+		else
+			$BROWSER "${url}" > /dev/null 2>&1 &
+		fi
+	else
+		err "bmark $1 not found"
+	fi
+}
+
+[ ! -d $bmark_loc ] && mkdir -p $bmark_loc
+[ ! -f $bmark_bookmarks ] && touch $bmark_bookmarks
+
+case "$1" in
+	add) shift; add_bmark "$1" "$2";;
+	rm) shift; rm_bmark "$1" ;;
+	edit) $EDITOR $bmark_bookmarks; sort_bmark ;;
+	cp) shift; cp_bmark "$1" ;;
+	list) cat $bmark_bookmarks ;;
+	open) shift; open_bmark "$1" ;;
+	*) err "Invalid argument" ;;
+esac

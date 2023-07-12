@@ -1,0 +1,61 @@
+#!/bin/sh
+
+[ -z "$@" ] && { echo "No arguments passed"; exit 1; }
+
+pgm='xrandr'
+gpu_names='intel\nnvidia\namd'
+
+l_providers(){ $pgm --listproviders | tr ' ' '\n' | grep 'name' | cut -d ':' -f 2; }
+
+for l in $(l_providers); do
+	case "$l" in
+		[Ii]*) igpu="$l" ;;
+		[Nn]*) dgpu="$l" ;;
+		[Aa]*) dgpu="$l" ;;
+	esac
+done
+
+gm_info(){ $pgm -q | grep -w "$1" | cut -d ' ' -f 1; }
+cpo_source(){ $pgm --setprovideroutputsource $1 $2; }
+
+cpo_source $dgpu $igpu
+primary="$(gm_info 'primary')"
+extd="$(gm_info 'connected' | grep -v "$primary")"
+
+[ -z "$extd" ] && { echo 'No external dispalys connected'; exit 1; }
+
+bspwm_rules(){
+	case "$1" in
+		'one') bspc monitor -d 1 2 3 4 5 6 7 8 9 0 ;;
+		'two')
+			bspc monitor $primary -d 1 2 3 4 5
+			bspc monitor $extd -d 6 7 8 9 0
+			;;
+	esac
+}
+
+add_display(){
+ 	# $pgm --output $extd --auto
+	pos="--right-of"
+ 	$pgm --output $primary --auto --output $extd --auto $pos $primary
+ 	[ "$WM" = 'bspwm' ] && bspwm_rules two
+}
+
+duplicate_display(){ $pgm --output $primary --auto --output $extd --auto --same-as $primary; }
+
+del_display(){
+	$pgm --output $extd --off
+	[ "$WM" = 'bspwm' ] && bspwm_rules one
+}
+
+case "$1" in
+	'add') add_display ;;
+	'duplicate') duplicate_display ;;
+	'del') del_display ;;
+esac
+
+xwallpaper --zoom "$WALLPAPER"
+
+# Ref
+# https://bbs.archlinux.org/viewtopic.php?id=222050
+# https://github.com/BrodieRobertson/scripts/blob/master/dmonitor

@@ -1,0 +1,14 @@
+#!/bin/sh
+
+loc="$HOME"/.local/share/.goals
+warning_i="$HOME"/.local/share/icons/general/warning.svg
+notify="dunstify -h string:x-dunst-stack-tag:goals"
+
+if [ -f "$loc" ]; then
+	case "$1" in
+		-e) $EDITOR $loc ;;
+		*) $notify 'GOALS' "$(cat $loc)" ;;
+	esac
+else
+	$notify -i $warning_i 'File not found' "$loc"
+fi

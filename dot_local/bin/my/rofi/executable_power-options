@@ -1,0 +1,23 @@
+#!/bin/sh
+
+pgm='power'
+if [ -z "$@" ]; then
+	while read -r l; do
+		echo $l
+	done <<- EOF
+	lock
+	getout
+	bye
+	bbak
+	refresh
+	nah
+	EOF
+else
+	case "$@" in
+		lock) $pgm lock ;;
+		getout) $pgm logout ;;
+		bye) $pgm poweroff ;;
+		bbak) $pgm reboot ;;
+		refresh) $pgm wm refresh ;;
+	esac
+fi

@@ -1,0 +1,26 @@
+#!/bin/sh
+
+timer_i="$HOME"/.local/share/icons/general/timer.svg
+
+notify(){ dunstify -h string:x-dunst-stack-tag:timer -i "$timer_i" "$1"; }
+action(){
+	echo 'snooze\nstop' | rofi -dmenu -p 'action' \
+		-mesg "$time time done" -only-match
+}
+snooze(){ sleep 5m; sound-efx & query=$(action); }
+
+time="$1"
+
+[ -n "$1" ] && { notify "Timer for $time is set" & sleep "$time"; }
+
+if [ $? -eq 0 ]; then
+	sound-efx &
+
+	query=$(action)
+	while :; do
+		case "$query" in
+			'snooze') snooze ;;
+			'stop') break ;;
+		esac
+	done
+fi

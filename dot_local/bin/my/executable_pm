@@ -1,0 +1,358 @@
+#!/usr/bin/env bash
+
+if [ $# -lt 1 ]; then
+	echo "Not enough arguments"
+	exit 1
+else
+	exist(){ command -v "$1" > /dev/null 2>&1 && return 0 || return 1; }
+
+	case "$DISTRO" in
+		[Aa]rch ) pmn='pacman'; pm="$PERM $pmn" ;;
+		[Dd]ebian | [Uu]buntu ) pmn='apt'; pm="$PERM $pmn" ;;
+		[Gg]entoo ) pmnt='emerge'; pm="$PERM $pmn -avq" ;;
+		*suse* ) pmn='zypper'; pm="$PERM $pmn" ;;
+	esac
+
+	config_log="$HOME/.config/pm"
+	aur='paru'; fl='flatpak'; viewer='fzf';
+
+	exist 'flatpak'
+	is_flatpak=$?
+	exist 'paru'
+	is_paru=$?
+	exist 'rate-mirrors'
+	is_rate_mirrors=$?
+	exist 'nix'
+	is_nix=$?
+
+	if $WSL; then
+		win='winget.exe'
+		exist $win
+		is_win=$?
+	fi
+
+	gen_packages_list(){
+		case "$DISTRO" in
+			[Aa]rch )
+				$pmn -Qqen > "$config_log/arch/pacman-list"
+				if [ $is_paru -eq 0 ]; then
+					diff -d <($pmn -Qqen) <($pmn -Qqe) | grep '>' \
+						| cut -d' ' -f2 > "$config_log/arch/aur-list"
+				fi
+				;;
+		esac
+	}
+
+	install(){
+		case "$@" in
+			*.* ) flatpak_stuff i $@ ;;
+			* )
+				case "$pmn" in
+					'pacman' ) $pm -S $@ || aur i $@ ;;
+					'emerge' ) $pm $@ ;;
+					'apt' ) $pm install $@ ;;
+					'zypper') $pm install $@ ;;
+				esac
+				;;
+		esac
+		gen_packages_list
+	}
+
+	update(){
+		case "$pmn" in
+			'pacman' ) $pm -Syyu && aur u;;
+			'emerge' ) $pm --sync && $pm --update --deep --with-bdeps=y @world && $pm --depclean ;;
+			'apt' ) $pm update && $pm upgrade ;;
+			'zypper' ) $pm update ;;
+		esac
+		[ $is_flatpak -eq 0 ] && flatpak_stuff u
+	}
+
+	uninstall(){
+		case "$@" in
+			*.* ) flatpak_stuff r $@ ;;
+			* )
+				case "$pmn" in
+					'pacman' ) $pm -Rns $@ ;;
+					'emerge' ) $pm -c $@ ;;
+					'apt' ) $pm remove $@ ;;
+					'zypper' ) $pm remove $@ ;;
+				esac
+				;;
+		esac
+		gen_packages_list
+	}
+
+	list(){
+		case "$pmn" in
+			'pacman' ) $pmn -Q ;;
+			'emerge' ) equery list "*" ;;
+			'apt' ) dpkg-query -W | cut -f1 ;;
+			'zypper' ) $pmn search -i | cut -d '|' -f2 | tail -n +6 ;;
+		esac
+	}
+
+	count(){ list | wc -l; }
+
+	search(){
+		case "$pmn" in
+			'pacman' ) $pmn -Ss $1 || aur s $1 ;;
+			'emerge' ) $pm --search $1 ;;
+			'apt' ) $pmn search $1 ;;
+			'zypper' ) $pmn search $1 ;;
+		esac
+	}
+
+	remove_zombies(){
+		case "$pmn" in
+			'pacman' ) $pm -Rns $($pm -Qtdq) ;;
+			'emerge' ) gentoo_stuff nu && $pm --depclean ;;
+			'apt' ) $pm autoremove ;;
+		esac
+	}
+
+	edit_conf(){
+		case "$pmn" in
+			'pacman' ) $PERM $EDITOR /etc/pacman.conf ;;
+			'emerge' ) $PERM $EDITOR /etc/portage/make.conf ;;
+			'apt' ) $PERM $EDITOR /etc/apt/sources.list ;;
+		esac
+	}
+
+	auto_install_uninstall(){
+		for p in $@; do
+			if list | grep -q "$p"; then
+				to_uninstall="$to_uninstall $p"
+			else
+				to_install="$to_install $p"
+			fi
+		done
+		[ -n "$to_install" ] && install $to_install
+		[ -n "$to_uninstall" ] && uninstall $to_uninstall
+	}
+
+	aur(){
+		if exist 'pacman'; then
+			if [ $is_paru -eq 1 ]; then
+				read -p "Would you like to install paru [y/N] " ans
+				case "$ans" in
+					[yY]* )
+							src="$HOME"/.local/src
+							i_loc="$src"/paru
+							[ ! -d $src ] && mkdir -p $src
+							install --needed base-devel git
+							[ ! -d "$i_loc" ] && git clone https://aur.archlinux.org/paru.git  $i_loc
+							cd $i_loc
+							makepkg -si
+							;;
+					*) exit 1 ;;
+				esac
+			fi
+			if [ $is_paru -eq 0 ]; then
+				case "$1" in
+					i ) shift; $aur -S $@ ;;
+					u ) $aur -Syyu ;;
+					s ) shift; $aur -Ss $1 ;;
+					e ) $PERM $EDITOR "$HOME"/.config/paru/paru.conf ;;
+				esac
+				diff -d <($pmn -Qqen) <($pmn -Qqe) | grep '>' \
+					| cut -d' ' -f2 > "$config_log/arch/aur-list"
+			fi
+		fi
+	}
+
+	flatpak_copy(){ $viewer < $1 | tr '\t' '|' | cut -d '|' -f $2 | tr -d '\n' | yoink; }
+	flatpak_stuff(){
+		if [ $is_flatpak -eq 1 ]; then
+			echo "Flatpak not installed"
+			read -p "Would you like to install it? [y/N] " ans
+			case $ans in
+				[Yy]* )
+					install $fl \
+						&& $fl remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+					;;
+				* ) exit 1 ;;
+			esac
+		fi
+		if [ $is_flatpak -eq 0 ]; then
+			case "$1" in
+				i ) shift; $fl install $@ ;;
+				r ) shift; $fl uninstall $@ ;;
+				u ) $fl update ;;
+				s )
+					shift
+					tempfsf=$(mktemp)
+					$fl search $1 > $tempfsf
+					flatpak_copy $tempfsf 3
+					rm $tempfsf
+					;;
+				l )
+					tempflf=$(mktemp)
+					$fl list --app >  $tempflf
+					flatpak_copy $tempflf 2
+					rm $tempflf
+					;;
+				c ) $fl list --app | wc -l ;;
+				ar ) shift; $fl remote-add --if-not-exists $@ ;;
+				dr ) shift; $fl remote-delete $1 ;;
+				rmz ) $fl uninstall --unused ;;
+			esac
+			$fl list --app | cut -f2 > "$config_log/flatpak-list"
+		fi
+	}
+
+	rank_servers(){
+		if [ $is_rate_mirrors -eq 1 ]; then
+			read -p "Would you like install rate-mirrors [y/N]? " ans
+			case "$ans" in
+				[yY]* ) aur i rate-mirrors-bin ;;
+				* ) exit 1 ;;
+			esac
+		fi
+		if [ $is_rate_mirrors -eq 0 ]; then
+			export TMPFILE="$(mktemp)"; \
+			sudo true; \
+    		rate-mirrors --save=$TMPFILE arch --max-delay=21600 \
+    		  && sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup \
+    		  && sudo mv $TMPFILE /etc/pacman.d/mirrorlist
+		fi
+	}
+
+	gentoo_stuff(){
+		exist 'emerge' && exit 1
+		case "$1" in
+			nu ) $pm --update --deep --newuse @world ;;
+			cu ) e --changed-use --deep @world ;;
+			ct )
+				shift
+				$PERM qlop -tHv $1
+				;;
+			ar )
+				shift
+				$PERM eselect repository enable $1
+				$PERM emaint sync -r $1
+				$pm --sync
+				;;
+			dr )
+				shift
+				$PERM eselect repository remove $1
+				;;
+			um )
+				shift
+				$pm $1 --automask
+				$PERM etc-update
+				$pm $1
+				;;
+		esac
+	}
+
+	ubuntu_stuff(){
+		case "$1" in
+			'du') $PERM do-release-upgrade;;
+		esac
+	}
+
+	nix_stuff(){
+		nix='nix-env'
+		if [ $is_nix -eq 0 ]; then
+			case "$1" in
+				i | install ) shift; $nix -iA "nixpkgs.${1}" ;;
+				s | search ) shift; $nix -qaP "$1" ;;
+				rm ) shift; $nix --uninstall "$1" ;;
+			esac
+		else
+			echo "$nix not found"
+			exit 1
+		fi
+	}
+
+	win_list(){ $win list | tail -n +3 | grep -e 'msstore' -e 'winget'; }
+	windows_stuff(){
+		if [ $is_win -eq 0 ]; then
+			case $1 in
+				i )
+					shift;
+					for w in $@; do
+						$win install $w
+					done
+					;;
+				r )
+					shift;
+					for w in $@; do
+						$win uninstall $w
+					done
+					;;
+				u ) $win upgrade ;;
+				s ) $win search $2 ;;
+				l ) win_list ;;
+				c ) win_list | wc -l ;;
+			esac
+		else
+			echo "$win not found"
+			exit 1
+		fi
+	}
+
+	if ! exist $viewer; then
+		read -p "Would you like to install $viewer [Y/n]? " ans
+		case "$ans" in
+			[Nn]* ) exit 1 ;;
+			* ) install $viewer ;;
+		esac
+	fi
+
+
+	case "$1" in
+		i | install ) shift; install $@ ;;
+		r | rm ) shift; uninstall $@ ;;
+		u | update ) update ;;
+		l | list ) list | $viewer | cut -d ' ' -f 1 | tr -d '\n' | yoink ;;
+		c | count ) count ;;
+		rmz ) remove_zombies ;;
+		e | edit ) edit_conf ;;
+		s | search ) shift; search $1 ;;
+		ex | exist ) shift; exist $1 ;;
+
+		# flatpak
+		fi ) shift; flatpak_stuff i $@ ;;
+		fr ) shift; flatpak_stuff r $@ ;;
+		far ) shift; flatpak_stuff ar $@ ;;
+		fdr ) shift; flatpak_stuff dr $@ ;;
+		fl ) flatpak_stuff l ;;
+		fc ) flatpak_stuff c ;;
+		fs ) shift; flatpak_stuff s $@ ;;
+		frmz ) shift; flatpak_stuff rmz ;;
+
+		# arch stuff
+		rs ) rank_servers ;;
+		ai ) shift; aur i $@ ;;
+		ae ) aur e ;;
+		as ) shift; aur s $@ ;;
+
+		# gentoo stuff
+		nu ) gentoo_stuff nu ;;
+		cu ) gentoo_stuff cu ;;
+		ct ) shift; gentoo_stuff $1 ;;
+		ar ) shift; gentoo_stuff $1 ;;
+		dr ) shift; gentoo_stuff $1 ;;
+		um ) shfit; gentoo_stuff $1 ;;
+
+		# ubuntu stuff
+		du ) ubuntu_stuff du ;;
+
+		# nix stuff
+		ni ) shift; nix_stuff i "$1" ;;
+		ns ) shift; nix_stuff s "$1" ;;
+		nr ) shift; nix_stuff rm "$1" ;;
+
+		# windows stuff
+		wi ) shift; windows_stuff i $@ ;;
+		wr ) shift; windows_stuff r $@ ;;
+		wu ) windows_stuff u ;;
+		ws ) shift; windows_stuff s $1 ;;
+		wl ) windows_stuff l | $viewer ;;
+		wc ) windows_stuff c ;;
+		* ) auto_install_uninstall $@ ;;
+	esac
+
+fi

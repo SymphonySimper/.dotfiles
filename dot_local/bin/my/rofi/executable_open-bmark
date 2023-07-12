@@ -1,0 +1,14 @@
+#!/bin/sh
+
+printf "\000use-hot-keys\037true\n"
+
+get_name(){ echo "$1" | awk '{ print $1 }'; }
+
+if [ $ROFI_RETV -eq 10 ]; then
+	bmark cp  "$(get_name "$1")" | \
+		xargs -I "{}" dunstify {} > /dev/null 2>&1 &
+elif [ -z "$@" ]; then
+	bmark list
+else
+	bmark open "$(get_name "$1")"
+fi

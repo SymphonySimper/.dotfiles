@@ -1,0 +1,8 @@
+#!/bin/sh
+
+loc="$HOME"/.local/bin/my/rofi
+video="$loc"/play-video
+audio="$loc"/play-audio
+movies="$loc"/play-movie
+
+rofi -modi "video:$video,audio:$audio,movie:$movies" -show video

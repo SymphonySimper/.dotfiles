@@ -1,0 +1,127 @@
+#!/bin/sh
+
+option="$1"
+shift
+
+file=$(readlink -f "$1")
+dir=${file%/*}
+filename="${file##*/}"
+ext="${file##*.}"
+jname="${filename%.*}"
+
+[ -d "$dir" ] || exit 1
+[ "$ext" = 'ms' ] || exit 1
+[ "$filename" = 'ms-macros.ms' ] && exit 0
+
+is_alive(){ ps aux | grep -i "$1" | grep -qv 'grep'; }
+
+open_pdf(){ is_alive "${jname}.pdf" || \
+	{ [ -f "$dir/${jname}.pdf" ] && $READER "$dir/${jname}.pdf" > /dev/null 2>&1 & }
+}
+
+groff_ms(){ groff -mspdf -U -tepR -T$1 -P-pa4 "$2"; }
+groff_ms_ps(){ groff_ms ps "$1" | ps2pdf  - "$dir/$jname.pdf"; }
+groff_ms_pdf(){ groff_ms pdf "$1" > "$dir/$jname.pdf"; }
+
+prepare_px(){
+	sed -i '/^\.TC/d' "$1"
+	pages=$(mktemp)
+	top_half=$(mktemp)
+	bottom_half=$(mktemp)
+	# sed -n '/^\.\\\"START PAGE COUNT HERE$/,$p' "$file"
+	sed '/^\.\\\"START PAGE COUNT HERE$/q' "$1" > $top_half
+	sed '1,/^\.\\\"START PAGE COUNT HERE$/d' "$1" > $bottom_half
+	grep '^\.mhead\|^\.bp$' $bottom_half \
+		| tr '"' '|' | cut -d '|' -f2 > $pages
+
+	page_count=1
+	heads_with_no=$(mktemp)
+	while read -r line; do
+		if [ "$line" = '.bp' ]; then
+			page_count=$((page_count + 1))
+		else
+			echo "$line|$page_count" >> $heads_with_no
+		fi
+	done < $pages
+
+	px=$(mktemp)
+	l_no=1
+	l_c=$(wc -l < $heads_with_no)
+	while read -r line; do
+		title=$(echo $line | cut -d '|' -f1)
+		pg_no=$(echo $line | cut -d '|' -f2)
+
+		if [ $l_no -eq 1 ]; then
+			echo ".XS 1\n$title"
+		else
+			echo ".XA $pg_no\n$title"
+		fi
+
+		l_no=$((l_no + 1 ))
+		[ $l_no -gt $l_c ] && echo ".XE\n.PX\n.bp"
+	done < $heads_with_no > $px
+
+	ps_mod_file=$(mktemp)
+	cat $top_half $px $bottom_half > $ps_mod_file
+	rm $top_half $px $bottom_half $pages $heads_with_no
+}
+
+prepare_tc(){
+	temp_file=$(mktemp)
+	top_half=$(mktemp)
+	bottom_half=$(mktemp)
+	# sed -n '/^\.\\\"START PAGE COUNT HERE$/,$p' "$file"
+	sed '/^\.\\\"TC HERE$/q' "$1" > $top_half
+	sed '1,/^\.\\\"TC HERE$/d' "$1" > $bottom_half
+
+	if_cond=$(mktemp)
+	echo ".if '\*[.T]'pdf' \X'pdf: pagename here'\n" > $if_cond
+
+	cat $top_half $if_cond $bottom_half > $temp_file
+	rm $top_half $if_cond $bottom_half
+
+	tc_mod_file=$(mktemp)
+	refer $temp_file > $tc_mod_file
+	rm $temp_file
+
+	echo ".ds LH\n.ds CF\n.if '\*[.T]'pdf' \X'pdf: switchtopage before here'\n.TC" >> $tc_mod_file
+}
+
+ps_or_pdf(){ grep -q '^.PSPIC' "$1" && groff_ms_ps "$1" || groff_ms_pdf "$1"; }
+
+is_px(){ head -n 1 "$file" | grep -q '^\.\\\"USE PX$' && return 0 || return 1; }
+is_tc(){ head -n 1 "$file" | grep -q '^\.\\\"USE TC$' && return 0 || return 1; }
+
+compile_ms(){
+	if is_px; then
+		prepare_px "$1"
+		ps_or_pdf "$ps_mod_file"
+		rm $ps_mod_file
+	elif is_tc; then
+		prepare_tc "$1"
+		ps_or_pdf "$tc_mod_file"
+		rm "$tc_mod_file"
+	else
+		ps_or_pdf "$1"
+	fi
+}
+
+preview(){
+	if is_px; then
+		prepare_px "$1"
+		groff_ms_pdf "$ps_mod_file"
+		rm $ps_mod_file
+	elif is_tc; then
+		prepare_tc "$1"
+		groff_ms_pdf "$tc_mod_file"
+		rm "$tc_mod_file"
+	else
+		groff_ms_pdf "$1"
+	fi
+	open_pdf
+}
+
+case "$option" in
+	-p) preview "$file" ;;
+	-f) compile_ms "$file" ;;
+esac

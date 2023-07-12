@@ -1,0 +1,55 @@
+#!/bin/sh
+
+die(){ echo "$1"; exit 1; }
+if [ $# -lt 0 ]; then
+	die "Requires a search term"
+else
+	get_magnet(){
+		if [ -z "$(command -v peerflix)" ]; then
+			echo "Requires peerflix"
+			read -p "Would you like to install it?[y/N] " ans
+			case $ans in
+				[Yy]* ) sudo npm install peerflix -g ;;
+				* ) die;;
+			esac
+		fi
+		[ -z "$(command -v fzf)" ] && die "Requries fzf"
+
+		# Searx is used to search for the url
+		su='https://search.ononoki.org/search?q=1377x'
+		[ -n "$XDG_CACHE_HOME" ] && cf="$XDG_CACHE_HOME"/ts || cf="$HOME"/.cache/ts
+		get_tl(){ curl -s $su | grep -o 'https://www.1377x.[a-z]*/' | head -n 1 > $cf; }
+
+		num=0
+		while :; do
+			[ ! -f $cf ] && get_tl
+			tl="$(cat $cf)"
+			ping -c 1 $(echo $tl | cut -d '/' -f3) > /dev/null 2>&1 && break || get_tl
+			[ $num -gt 5 ] && die "Urls dosen't seem to work!"
+			num=$((num + 1))
+		done
+
+		rt="$(mktemp)"
+		curl -s "${tl}/search/$(echo $@ | tr ' ' '+')/1/" | grep -Eo "torrent\/[0-9]{7}\/[a-zA-Z0-9?%-]*/" > $rt
+		[ $(wc -l $rt | cut -d ' ' -f1) -gt 0 ] || die "No results found"
+		title=$(cat $rt | fzf)
+		[ -z "$title" ] && die "No title selected" || magnet=$(curl -s ${tl}/$title | grep -Po "magnet:\?xt=urn:btih:[a-zA-Z0-9]*" | head -n 1)
+	}
+	case "$1" in
+		-d )
+			shift
+			get_magnet $@
+			[ -z "$(command -v qbittorrent)" ] && die "Requires qbittorrent"
+			qbittorrent $magnet
+			;;
+		-o )
+			shift
+			get_magnet $@
+			[ -n "$(command -v xclip)" ] && echo "$manget" | xclip -sel c
+			echo $magnet
+			;;
+		* ) get_magnet $@
+			peerflix -l -k "$magnet"
+			;;
+	esac
+fi

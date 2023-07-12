@@ -1,0 +1,2 @@
+#!/bin/sh
+prime-run steam >/dev/null 2>&1 &

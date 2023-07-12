@@ -1,0 +1,63 @@
+#!/bin/sh
+
+temp_file=/tmp/coding-time
+chd='chd'
+
+ls_prog="ls -aF"
+sed_1="sed 's/\///'"
+
+get_path(){ tr '\n' '/' < $temp_file; }
+choose_loc(){ eval $ls_prog $(get_path) | grep / | eval $sed_1; }
+
+view_doc(){ { bspc desktop -f '^4' && $READER "$1"; }> /dev/null 2>&1 & }
+is_doc(){ grep -i 'rust\|computer-network' $temp_file; }
+open_doc(){
+	case "$(is_doc)" in
+		'rust') view_doc "$HOME"/lifeisfun/rust/rust-lang.pdf ;;
+		'computer-network') view_doc "$HOME"/importantnt/ebooks/notes/sem5/cnl/cnl-manual.pdf ;;
+	esac
+}
+open_terminals(){
+	is_src=$(ls -F "$(get_path)" 2>/dev/null | grep '/' | grep -w '/\|src\|app\|lib' | head -n 1)
+	if [ -n "$is_src" ]; then
+		loc="$(get_path)/$is_src"
+	else
+		loc="$(get_path)"
+	fi
+	bspc desktop -f '^3'
+	$TERMINAL -e $chd  "$loc" > /dev/null 2>&1 &
+	sleep 0.1s
+	$TERMINAL -e $chd  "$(get_path)" > /dev/null 2>&1 &
+	$TERMINAL -e $chd  "$(get_path)" > /dev/null 2>&1 &
+	sleep 0.1s
+	bspc node -f west
+	bspc node -z right +400 0
+	# open_doc
+	rm $temp_file
+}
+
+if [ -f $temp_file ] && [ "$(tail -n 1 $temp_file)" = '..' ]; then
+	head -n -2 $temp_file > /tmp/coding-temp
+	mv /tmp/coding-temp $temp_file
+fi
+
+if [ ! -f $temp_file ]; then
+	echo "$HOME/lifeisfun" > $temp_file
+fi
+
+[ -n "$1" ] && echo "$1" >> $temp_file
+
+printf "\000use-hot-keys\037true\n"
+if [ $ROFI_RETV -eq 10 ]; then
+	temp='/tmp'
+	for i in $(seq 2); do
+		$TERMINAL -e $chd  "$temp" > /dev/null 2>&1 &
+	done
+	sleep 0.1s
+	bspc node -f west
+	bspc node -z right +400 0
+elif [ "$1" = '.' ]; then
+	open_terminals
+else
+	choose_loc
+fi

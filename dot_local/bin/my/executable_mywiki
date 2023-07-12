@@ -1,0 +1,60 @@
+#!/bin/sh
+
+err(){ echo $(syl r;syl B)$@$(syl R); }
+
+if [ ! -z "$@" ]; then
+	git_c='git -C'
+
+	repos=$(mktemp)
+	while read -r r; do
+		echo $r >> $repos
+	done <<- EOF
+	$VIMWIKI
+	$XDG_DATA_HOME/mywiki-html
+	$XDG_DATA_HOME/mywiki-ui-ux-private
+	EOF
+
+	for r in $(cat $repos); do
+		[ ! -d $r ] && git clone "git@github.com:SymphonySimper/${r##*/}.git" $r
+	done
+	for_repos(){
+		for r in $(cat $repos); do
+			if ! $git_c $r status | grep -q 'nothing to commit'; then
+				case "$1" in
+					status) $git_c $r status ;;
+					push)
+						shift
+						$git_c $r add .
+						$git_c $r commit -m "$@"
+						$git_c $r push
+						;;
+				esac
+			fi
+		done
+	}
+	repo_status=$(for_repos status)
+
+	wiki_status(){ [ -z "$repo_status" ] && echo "Nothing to commit" || for_repos status; }
+	wiki_push(){
+		[ -z "$repo_status" ] && { echo "Nothing to push"; return 1; }
+
+		IFS= read -r -p 'Give a commit message: ' msg
+		if [ -z "$msg" ]; then
+			err "No msg found!"
+		else
+			for i in $(seq $(wc -l < $repos)); do for_repos push "$msg"; done
+		fi
+	}
+
+	case "$@" in
+		status) wiki_status ;;
+		push) wiki_push ;;
+		edit)
+			wiki="$VIMWIKI"/index.wiki
+			$EDITOR $wiki
+			$EDITOR $wiki -c VimwikiAll2HTML -c q
+			;;
+	esac
+else
+	err 'Pass some arguments(status, push, edit)'
+fi

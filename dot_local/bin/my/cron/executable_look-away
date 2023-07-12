@@ -1,0 +1,32 @@
+#!/bin/sh
+
+warning_i="$HOME"/.local/share/icons/general/warning.svg
+log=/tmp/look-away
+
+notify(){ dunstify -h 'string:x-dunst-stack-tag:look-away' -i $warning_i "$1" "You have been starring at the pc for $2"; }
+echo_time(){ echo "<b><u><i>${1}</i></u></b>"; }
+save_log(){ echo_time "$1" >> /tmp/look-away; }
+
+time_stare=0
+hours=0
+
+rm $log
+while :; do
+	sleep 15m
+	time_stare=$((time_stare + 15))
+	sound-efx &
+	if [ $(echo "$time_stare % 60" | bc) -eq 0 ]; then
+		time_stare=0
+		hours=$((hours + 1))
+		notify 'Take a break!' "$(echo_time "${hours}h")"
+		save_log "${hours}h"
+	else
+		if [ $hours -ne 0 ]; then
+			notify 'Look away!'	"$(echo_time "${hours}h ${time_stare}m")"
+			save_log "${hours}h ${time_stare}m"
+		else
+			notify 'Look away!'	"$(echo_time "${time_stare}m")"
+			save_log "${time_stare}m"
+		fi
+	fi
+done

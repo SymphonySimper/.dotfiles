@@ -1,0 +1,11 @@
+#!/bin/sh
+
+temp_file=/tmp/openflat
+flatpak list --app > $temp_file
+
+if [ -z "$@" ]; then
+	cat $temp_file | awk '{ print $1 }'
+else
+	sel_app="$(grep "^$@" $temp_file | awk '{ print $2 }')"
+	flatpak run $sel_app > /dev/null 2>&1 &
+fi

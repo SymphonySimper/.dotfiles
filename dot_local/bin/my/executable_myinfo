@@ -1,0 +1,72 @@
+#!/bin/sh
+
+notify="dunstify"
+todo_loc="$XDG_DATA_HOME"/.todo
+begone_loc="$HOME"/.cache/begone
+
+#Icons
+dir="$HOME"/.local/share/icons/my-info
+bat_full_i="$dir"/battery-full.svg
+low_bat_i="$dir"/low-battery.svg
+charging_i="$dir"/charging.svg
+saver_i="$dir"/saver.svg
+date_i="$dir"/date.svg
+clock_i="$dir"/clock.svg
+warning_i="$HOME"/.local/share/icons/general/warning.svg
+full_screen_i="$HOME"/.local/share/icons/screenshot/full-screen.svg
+
+get_stat=$(bat s)
+get_cap=$(bat c)
+get_conv=$(bat ms)
+notify_bat(){ $notify -h string:x-dunst-stack-tag:myBattery -i "$1"  "Battery level: $get_cap%" "$get_conv"; }
+bat(){
+	case $get_stat in
+		'Charging') notify_bat "$charging_i" ;;
+		'Discharging' ) [ $get_cap -gt 20 ] && notify_bat "$bat_full_i" || notify_bat "$low_bat_i" ;;
+		* ) notify_bat "$saver_i" ;;
+	esac
+}
+
+date_p="date"
+get_date_txt=$($date_p "+%A %B %Y")
+get_date=$($date_p "+%d/%m/%Y")
+get_time=$($date_p "+%r")
+notify_date(){ $notify -h string:x-dunst-stack-tag:my-date -i "$date_i" "$get_date" "$get_date_txt"; }
+
+notify_time(){ $notify -h string:x-dunst-stack-tag:my-time -i "$clock_i" "$get_time" "$(uptime -p)"; }
+list_todo(){
+	if [ -n "$(cat $todo_loc)" ]; then
+		temp_file=$(mktemp)
+		while read -r line; do
+			echo "+ $line"
+		done < $todo_loc > $temp_file
+			$notify -h string:x-dunst-stack-tag:todo "TODO" "$(cat $temp_file)"
+		rm $temp_file
+	fi
+}
+get_mode(){
+	notify_mode(){
+		get_mode_noti="$notify -h string:x-dunst-stack-tag:get-mode"
+		case "$1" in
+			'on') $get_mode_noti -i $warning_i 'Work Mode' 'on' ;;
+			'off') $get_mode_noti 'Work Mode' 'off' ;;
+			'begone') $get_mode_noti -i $warning_i 'Begone Mode' 'on' ;;
+			'gaming') $get_mode_noti 'Gaming Mode' 'on' ;;
+		esac
+	}
+	if [ -f "$begone_loc" ]; then
+		case "$(cat $begone_loc | cut -d ' ' -f 2)" in
+			'all') notify_mode 'on' ;;
+			'am') notify_mode 'off' ;;
+			'begone') notify_mode 'begone' ;;
+		esac
+	elif [ -z "$(pgrep picom)" ]; then
+		notify_mode 'gaming'
+	else
+		notify_mode 'off'
+	fi
+}
+
+notify_wifi(){ $notify -h string:x-dunst-stack-tag:wifi "$(wifi s)"; }
+
+bat; notify_date; notify_time; list_todo; get_mode; notify_wifi

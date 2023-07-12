@@ -1,0 +1,19 @@
+#!/bin/sh
+
+if $WSL; then
+	pgm='clip.exe'
+else
+	pgm='wl-copy -n'
+fi
+
+if [ -p /dev/stdin ]; then
+	cat /dev/stdin | $pgm
+else
+	case "$1" in
+	v)
+		shift
+		echo $@ | $pgm
+		;;
+	*) cat $@ | $pgm ;;
+	esac
+fi

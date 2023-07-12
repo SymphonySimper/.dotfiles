@@ -1,0 +1,18 @@
+#!/bin/sh
+
+full_name="$1"
+name="${1%.*}"
+ext="${1##*.}"
+
+case "$ext" in
+	cpp )
+		g++ -pedantic-errors -Wall -Weffc++ -Wextra -Wsign-conversion -Werror -o "$name" "$1" \
+			&& "./${name}"
+		;;
+	c )
+		gcc -o "$name" "$1" \
+			&& "./${name}"
+		;;
+	rs ) rustc "$full_name" && "./${name}" ;;
+	* ) echo "File $ext not supported" ;;
+esac

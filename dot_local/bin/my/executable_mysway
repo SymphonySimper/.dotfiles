@@ -1,0 +1,4 @@
+#!/bin/sh
+
+card_num="$(udevadm info -a -n /dev/dri/card1 | grep boot_vga | rev | cut -c 2)"
+WLR_DRM_DEVICES="/dev/dri/card${card_num}" sway --unsupported-gpu
