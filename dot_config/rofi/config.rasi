@@ -1,0 +1,9 @@
+configuration {
+	fixed-num-lines: true;
+	font: "Poppins 12";
+	modi: [run];
+
+	kb-mode-next: "Alt+Tab";
+}
+
+@theme "theme.rasi"

@@ -1,0 +1,15 @@
+# My bspwm binds
+
+# To launch coidng time
+super + x
+	rofi -modi "Coding time:$HOME/.local/bin/my/bspwm/coding-time" \
+	-show 'Coding time' -no-custom
+
+# To resize left side window to approx 70%
+super + shift + x
+	bspc node -f west; \
+	bspc node -z right +400 0
+
+# Open spotify
+super + {F1,shift + F1}
+	"$HOME"/.local/bin/my/bspwm/{open-spotify,open-spotify kill}

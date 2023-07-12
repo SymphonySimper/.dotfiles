@@ -1,0 +1,25 @@
+# Rust
+alias cn='cargo new'
+alias cb='cargo build'
+alias cr='cargo run'
+alias ca='cargo add'
+alias ct='cargo test -- --show-output'
+alias cbr='cargo build && cargo run'
+alias cbR='cb --release && cb  --target x86_64-pc-windows-gnu --release'
+
+# Java
+if [ "$DISTRO" = 'gentoo' ]; then
+	alias java='/usr/lib64/openjdk-17/bin/java'
+	alias javac='/usr/lib64/openjdk-17/bin/javac'
+fi
+
+# Python
+if [ "$DISTRO" = 'debian' ]; then
+	alias py='python3'
+else
+	alias py='python'
+fi
+alias new_py_env='py -m venv venv'
+alias act_env='source venv/bin/activate'
+alias dact_env='deactivate'
+alias new_jupy_kernel='ipython kernel install --user --name=venv'

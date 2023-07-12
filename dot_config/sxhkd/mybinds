@@ -1,0 +1,100 @@
+# Open Terminal
+super + {Return,shift + Return}
+ 	{$TERMINAL,$SECOND_TERMINAL}
+
+# Open Browser/ Lf
+super + shift + f
+	$BROWSER
+
+# Volume
+super + {F2,F3,F4,shift + F2,shift + F3}
+	volume -{d,u,m,D,U}
+super + F12
+	$TERMINAL -e pulsemixer
+
+# Get work done
+super + shift + F12
+	$TERMINAL -e gen-hosts
+
+# Brightness
+super + {F5,F6}
+	brightness -{u,d}
+
+# Picom
+super + shift + p
+	game-mode
+
+# Rofi
+super + {space,s,e,r,a,shift+n}
+	rofi-{run,open,edit,todo,play,notes}
+super + shift + q
+	rofi -modi "Power Options:$HOME/.local/bin/my/rofi/power-options" \
+	-show 'Power Options'
+super + i
+	rofi -modi "cht.sh:$HOME/.local/bin/my/rofi/chtsh" -show "cht.sh"
+
+# Screenshot
+super + shift + {s,a}
+	screenshot -{r,w}
+Print
+	screenshot -s
+
+# My bar
+super + shift + b
+    mybar t
+
+# My info/ goals
+super + {b,alt + shift + b}
+	{myinfo,goals}
+
+# Screenkey
+XF86Calculator
+	typin
+
+# htop
+super + F11
+	$TERMINAL -e htop
+
+# vimwiki
+super + w
+	$TERMINAL -e mywiki edit
+
+# RSS
+super + n
+	$TERMINAL -e $RSS_READER
+
+# dunst
+super + shift + space
+	dunstctl close-all
+# super + shift + ctrl + space
+# 	dunstctl action
+
+# Play copied url
+super + shift + m
+	prime-run $VIDEO_PLAYER "$(xclip -selection clipboard -o)"
+
+# Scratchpad
+# super + F1
+# 	urxvt-tdrop 1 ncspot
+super + f
+	urxvt-tdrop 2 lfp
+
+# bmark
+super + shift + i
+	bmark open figma
+
+# Lockscren
+super + p
+	slock
+
+# Gromit-mpx
+super + F9
+	gromit-mpx
+
+# Switch keyboard layout
+super + F10
+	key skl
+
+# sxhkd
+super + Escape
+	rekey

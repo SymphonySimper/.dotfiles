@@ -1,0 +1,12 @@
+#browser vbox#appcontent tabbrowser, #content, #tabbrowser-tabpanels,
+browser[type=content-primary],browser[type=content] > html {
+    background: #000000 !important
+}
+
+#urlbar-background, #searchbar {
+    box-shadow: none !important;
+}
+
+#webrtcIndicator {
+  display: none;
+}

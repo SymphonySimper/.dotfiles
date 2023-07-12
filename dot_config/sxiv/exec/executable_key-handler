@@ -1,0 +1,9 @@
+#!/bin/sh
+while read file
+do
+	fullpath="$(pwd)/$file"
+	case "$1" in
+		"d") query=$(echo "no\nyes" | rofi -dmenu -p "Do you want to delete $file")
+			[ $query = "yes" ] && rm "$fullpath" ;;
+	esac
+done

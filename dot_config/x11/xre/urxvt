@@ -1,0 +1,23 @@
+URxvt.scrollBar: false
+! URxvt.font: xft:Anonymous Pro:size=12:autohint=true
+URxvt.font: xft:JetBrainsMono Nerd Font:size=11:autohint=true
+URxvt.letterSpace: 1
+URxvt.internalBorder: 8
+
+URxvt*depth: 32
+URxvt.background: [90]#000000
+! URxvt.fading: 20
+
+! Disable printing the terminal contents when pressing PrintScreen.
+URxvt.print-pipe: "cat > /dev/null"
+
+! URxvt*skipBuiltinGlyphs: true
+
+! URxvt.perl-ext:
+URxvt.perl-ext-common: resize-font
+
+! Keybinds to change font size
+URxvt.keysym.C-equal:  	resize-font:bigger
+URxvt.keysym.C-Down:   	resize-font:smaller
+URxvt.keysym.C-plus:   	resize-font:reset
+URxvt.keysym.C-slash:  	resize-font:show

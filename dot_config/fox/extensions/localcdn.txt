@@ -1,0 +1,25 @@
+{
+  "allowedDomainsGoogleFonts": {
+    "fonts.google.com": true
+  },
+  "blockGoogleFonts": true,
+  "blockMissing": false,
+  "disablePrefetch": true,
+  "domainsManipulateDOM": {},
+  "enableLogging": null,
+  "enforceStaging": false,
+  "updateNotification": 0,
+  "lastMappingUpdate": "2020-01-01",
+  "negateHtmlFilterList": false,
+  "selectedIcon": "Default",
+  "showIconBadge": true,
+  "stripMetadata": true,
+  "allowlistedDomains": {
+    "": true
+  },
+  "xhrTestDomain": "localcdn.org",
+  "badgeDefaultBackgroundColor": "#666666",
+  "badgeDefaultTextColor": "#FFFFFF",
+  "badgeHTMLFilterBackgroundColor": "#FF0000",
+  "badgeHTMLfilterTextColor": "#FFFFFF"
+}

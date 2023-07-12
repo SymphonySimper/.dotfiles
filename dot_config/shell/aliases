@@ -1,0 +1,82 @@
+# Git alias
+alias g='git'
+alias gc='g clone'
+alias gs='g status'
+alias gp='g push'
+alias gpu='g pull'
+alias gau='g add -u'
+alias gm='g commit'
+alias gnotrack='g config --local status.showUntrackedFiles no'
+alias gpb='g push --set-upstream origin'
+alias gme='g merge'
+alias gb='g branch'
+alias gce='g checkout'
+alias gl='g log'
+alias grao='g remote add origin'
+alias gz='lazygit'
+alias gt='g tag'
+alias gpt='gp --tags'
+alias gpom='gpu origin master'
+
+# Config git alias
+alias cgs='config status'
+alias cgm='config commit'
+alias cgp='config push'
+alias cgau='config add -u'
+alias cglz='lazygit --git-dir="$HOME"/.cfg/ --work-tree="$HOME"'
+
+# Program
+alias ls='ls --color=auto'
+alias l='ls'
+alias p='mpv'
+alias vi='$EDITOR'
+alias vs='$PERM $EDITOR'
+alias vw='mywiki edit'
+alias grep='grep --color=auto'
+alias sudo='$PERM'
+alias doas='$PERM'
+alias less='less -Q'
+alias flex='neofetch'
+alias ytf='ytfzf -t'
+alias rofi_keys='rofi -show keys'
+
+# My scripts
+alias y='yoink'
+alias vdd='v -x "$HOME"/dl'
+alias vvm='v -x "$HOME"/importantnt/virtual-machine'
+
+# Tasks
+alias rm_cache='rm -rf ~/.cache/*'
+alias rm_me='rm -rf ~/.local/share/Trash/*'
+alias rm_links='find . -xtype l -exec rm {} \+'
+alias q='exit'
+alias im_light='ps_mem -p $(pgrep -d, -u $USER)'
+alias nobita='mntdev -n sdb1'
+alias ka='killall'
+alias bye='power poweroff'
+alias bbak='power reboot'
+alias temp='watch sensors'
+alias gen_ssh='ssh-keygen -t ed25519 -C "$(git config --get user.email)"'
+
+# Shell History
+alias his='$EDITOR $HISTFILE'
+alias huh='eval "$(tac $HISTFILE | grep -v "q\|bye\|bbak\|exit\|clear" | fzf)"'
+
+# Navigate dir
+alias ..='cd ..'
+alias jj='cd ~$(dirs -v | fzf | cut -f 1)'
+alias cdp='cd /etc/portage'
+alias cdk='cd /usr/src/linux'
+
+# Stuff
+alias hex_a='less "$HOME"/.local/share/my/docs/hex-alpha'
+alias todo='$EDITOR "$HOME"/.local/share/.todo'
+alias begone='$EDITOR "$HOME"/.local/share/.begone'
+alias rb='devour $READER "$HOME"/lifeisfun/rust/rust-by-example.pdf'
+alias kd='$EDITOR "$HOME"/.local/share/my/docs/compile-kernel'
+alias hosts='$PERM $EDITOR /etc/hosts'
+
+# Clean up
+alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
+alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
+alias nvidia-settings='nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settings'

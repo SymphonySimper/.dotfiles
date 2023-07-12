@@ -1,0 +1,159 @@
+# Copy contents of a file to clipboard
+# yoink(){
+# 	[ -p /dev/stdin ] && cat | xclip -sel c \
+# 	|| xclip -sel c < $@
+# }
+ourimg(){ xclip -sel c -t image/png < "$1"; }
+
+# git
+ga(){ g add $@; }
+grm(){ g rm $@ --cached; }
+gamp(){
+	g add -u \
+	&& [ -z "$@" ] && g commit || g commit -m "$@" \
+	&& g push
+}
+
+# config git
+cga(){ config add $@; }
+cgrm(){ config rm $@ --cached; }
+cgamp(){
+	config add -u \
+	&& [ -z "$@" ] && config commit || config commit -m "$@" \
+	&& config push
+}
+
+# Format USB
+format_usb_fat32(){
+	$PERM dd if=/dev/zero of=/dev/sdb bs=4096 status=progress \
+	&& $PERM parted /dev/sdb --script -- mklabel msdos \
+	&& $PERM parted /dev/sdb --script -- mkpart primary fat32 1MiB 100% \
+	&& $PERM mkfs.vfat -F32 /dev/sdb1 \
+	&& $PERM parted /dev/sdb --script print \
+	&& dunstify -i $HOME/.local/share/icons/storage/usbMnt.svg "Usb formated"
+}
+
+# LolBan
+lolban(){
+	figlet -f "$HOME"/.local/share/fonts/3d.flf  "$1" | lolcat
+	# credits
+	# https://www.youtube.com/watch?v=QGUmMtEnIkI
+	# font https://raw.githubusercontent.com/xero/figlet-fonts/master/3d.flf
+}
+
+# Sort Paths
+# sort_paths(){
+# 	for f in "$HOME"/.local/bin/.paths/*; do sort $f -o $f; done
+# 	sort "$HOME"/.local/share/.begone -o "$HOME"/.local/share/.begone
+# }
+
+# Loop Video
+loop_v(){
+	case "$1" in
+		-a) $VIDEO_PLAYER --no-video --shuffle --loop-playlist "$HOME"/importantnt/video ;;
+		*) $SWALLOW $USE_GPU $VIDEO_PLAYER --shuffle --loop-playlist "$HOME"/importantnt/video ;;
+	esac
+}
+
+# Loop Audio
+loop_a(){ $VIDEO_PLAYER --shuffle --loop-playlist "$HOME"/importantnt/audio; }
+
+# Cnvert
+cnvert(){
+	vc="ffmpeg"
+	ic="magick"
+	cn="convert"
+
+	case "$1" in
+		*.mkv) $vc -i "$1" -codec copy "$2" ;;
+		*.webm | *.webp) $ic "$1" "$2" ;;
+		'pdf') shift; $cn "$1" "${1%\.*}.pdf" ;;
+	esac
+}
+
+# Letmein
+letmein(){
+	case "$1" in
+		-a) shift; $PERM chmod 777 "$1" ;;
+		*) chmod +x "$1" ;;
+	esac
+}
+
+# Hey yo internet
+hey_yo_int(){
+	is_int="$(ping -c 3 gnu.org 2> /dev/null)"
+	if [ -z "$is_int" ]; then
+		while
+			# sleep 30s
+			ping -c 3 gnu.org 2> /dev/null
+			[ $? -ne 0 ]; do
+			true
+		done \
+			&& sound-efx
+	else
+		echo "$is_int"
+	fi
+}
+
+# mkdir and cd
+mcd(){ mkdir -p "$1" && cd "$1"; }
+
+# cp functions
+cp_cron(){ crontab -l > "$HOME"/.config/cron/crontab; }
+
+cp_portage(){
+	loc="$HOME"/.config/portage
+	cp -v /etc/portage/make.conf "$loc"/make.conf
+	[ ! -d "$loc"/package.use ] && mkdir "$loc"/package.use
+	for f in /etc/portage/package.use/*; do
+		cp -v $f "$loc"/package.use
+	done
+}
+
+# time-table
+time_table(){
+	loc="$HOME"/.local/share/.time-table
+	case "$1" in
+		-e) $EDITOR $loc ;;
+		*) cat $loc
+	esac
+}
+
+# small video
+small_video(){ ffmpeg -i $1 -vcodec libx265 -crf 28 "$(echo $1 | cut -d '.' -f1).mp4"; }
+
+# webp to gif
+video_to_gif(){
+	ffmpeg -i $1 \
+	-vf "fps=10,scale=720:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" \
+	-loop 0 "$(echo $1 | cut -d '.' -f1).gif"
+}
+
+# to find a program is running or not
+is_alive(){ ps aux | grep "$@" | grep -v 'grep'; }
+
+# cac
+cac(){
+	if [ -n "$(tr -d '\n' <<< $@)" ]; then
+		eq="$@"
+	else
+		printf "Enter eq: "
+		read eq
+	fi
+	[ -n "$(tr -d '\n' <<< $eq)" ] && bc -l <<< $eq || echo "Empty eq"
+}
+
+# sens
+sens(){
+	loc="$XDG_DATA_HOME"/sens
+	case "$1" in
+		e ) v $loc ;;
+		* ) cat $loc ;;
+	esac
+}
+
+# killall bottles stuff
+kab(){ killall explorer.exe bottles wineserver; }
+
+# diary
+open_diary(){ v "${HOME}/importantnt/me/diary/$(date +%d-%m-%Y).md"; }

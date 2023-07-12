@@ -1,0 +1,11 @@
+[user]
+	email = SymphonySimper@users.noreply.github.com
+	name = SymphonySimper
+[init]
+	defaultBranch = master
+[core]
+	editor = nvim
+[merge]
+	tool = nvimdiff
+[push]
+	autoSetupRemote = true

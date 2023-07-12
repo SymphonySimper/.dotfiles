@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Exec=terminal start-server
+Name=My Terminal Server

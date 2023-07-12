@@ -1,0 +1,99 @@
+# Open scipts/configs/shell-file
+fzf_open(){
+	query="$(awk '{ print $1 }' "$1" | fzf)"
+	get_loc="$HOME/$(grep -w "^$query." "$1" | awk '{ print $2 }')"
+	[ -f "$get_loc" ] && "$EDITOR" "$get_loc"
+}
+
+fec(){ fzf_open "$HOME"/.local/bin/my/.paths/configs; }
+fes(){ fzf_open "$HOME"/.local/bin/my/.paths/scripts; }
+fesh(){ fzf_open "$HOME"/.local/bin/my/.paths/shell; }
+
+# Play video/audio
+fzf_play(){
+	query="$(ls -F "$1" | grep -v '/\|.part' | fzf | sed 's|\$|\\\$|g')"
+	file_loc="$1/$query"
+	if [ -n "$query" ]; then
+		if echo "$1" | grep -qi 'audio'; then
+			$VIDEO_PLAYER "$file_loc"
+		else
+			$SWALLOW $USE_GPU $VIDEO_PLAYER \
+			"$file_loc"
+		fi
+	fi
+}
+
+fv(){ fzf_play "$HOME"/importantnt/video; }
+# fa(){ fzf_play "$HOME"/importantnt/audio; }
+fm(){ fzf_play "$HOME"/importantnt/movies; }
+
+# Docs
+fdocs(){
+	loc="$HOME"/.local/share/my/docs
+	query="$(ls -F $loc | grep -v '/' | fzf)"
+	[ -f $loc/$query ] && $EDITOR $loc/$query
+}
+
+# keybinds
+is_mybind(){ cat "$XDG_CONFIG_HOME/sxhkd/.sxhkdrc" | fzf; }
+
+# j
+j(){
+	temp_file=$(mktemp)
+	ls_prog="ls -aF"
+	is_api='no'
+
+	get_path(){ cat $temp_file | tr '\n' '/'; }
+	choose_loc(){ eval $ls_prog $(get_path) | grep / | sed "s/\///" | fzf; }
+	echo_path(){ echo $1 | sed 's| |\\ |g' >> $temp_file; }
+
+	if [ -z "$1" ]; then
+		echo_path "$(pwd)"
+	else
+		case "$1" in
+			-g) echo_path "$(pwd)"; is_api='yes' ;;
+			-a)
+				shift
+				echo_path "$1"
+				is_api='yes'
+				;;
+			*) echo_path "$1" ;;
+		esac
+	fi
+	while :; do
+		loc=$(choose_loc)
+		echo_path "$loc"
+		if [ "$loc" = '.' ]; then
+			if [ "$is_api" = 'yes' ]; then
+				echo $(get_path)
+				rm $temp_file
+				break
+			else
+				cd $(get_path)
+				rm $temp_file
+				break
+			fi
+		elif [ -z "$loc" ]; then
+			cat $temp_file
+			rm $temp_file
+			break
+		fi
+	done
+}
+
+# fli
+fli(){
+	loc="$(j -a $HOME/lifeisfun)"
+	if [ $(echo "$loc" | wc -c) -gt 20 ] && [ "$WM" = 'bspwm' ]; then
+		is_src=$(ls -F "$loc" 2>/dev/null | grep -w '/\|src\|lib')
+		if [ -n "$is_src" ]; then
+			loc_src="$loc/$is_src"
+		else
+			loc_src="$loc"
+		fi
+		cd "$loc_src"
+		$TERMINAL -e chd "$loc" > /dev/null 2>&1 &
+		bspc node -f west
+		bspc node -z right +400 0
+	fi
+}

@@ -1,0 +1,67 @@
+set shell sh
+
+set previewer ~/.local/bin/lf/lf-previewer
+set cleaner ~/.local/bin/lf/lf-clear-img
+
+# |-----------------|
+# | Custom Commands |
+# |-----------------|
+
+cmd open ${{ v "$f" }}
+
+cmd open_sep %{{ $TERMINAL -e v $f }}
+
+%{{
+    w=$(tput cols)
+    if [ $w -le 80 ]; then
+        lf -remote "send $id set ratios 1:2"
+    elif [ $w -le 160 ]; then
+        lf -remote "send $id set ratios 1:2:3"
+    else
+        lf -remote "send $id set ratios 1:2:3:5"
+    fi
+}}
+
+cmd mkdir %{{
+	echo "Dir name: "
+	read ans
+	mkdir $ans
+}}
+
+cmd touch %{{
+	echo "File name: "
+	read ans
+	touch $ans
+}}
+
+cmd yank_filename ${{ yoink v $f }}
+
+# |----------|
+# | My binds |
+# |----------|
+
+## Unbind defaults
+map c
+map d
+
+## Changed defaults
+# def c
+map C clear
+# def d
+map x cut
+
+map dr ${{ ~/.local/bin/lf/lf-dr-file "$fx" }}
+
+## Basic functions
+map . :set hidden!
+map DD delete
+
+# Open files with v in seperate terminals
+map <enter> open_sep
+
+# Create file
+map t touch
+source ~/.config/lf/lf-folders
+
+# Copy Filename
+map Y yank_filename

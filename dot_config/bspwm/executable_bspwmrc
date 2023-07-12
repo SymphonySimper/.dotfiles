@@ -1,0 +1,147 @@
+#!/bin/sh
+
+# To remove the rules
+bspc rule -r '*'
+
+bspc monitor -d 1 2 3 4 5 6 7 8 9 0
+
+bspc config border_width         1
+bspc config window_gap           0
+bspc config split_ratio          0.50
+
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+bspc config single_monocle true
+
+bspc config click_to_focus true
+bspc config focus_follows_pointer false
+
+bspc config ignore_ewmh_focus true
+
+bspc config top_padding 0
+bspc config bottom_padding 0
+
+# Monitor settings
+bspc config remove_disabled_monitors true
+bspc config remove_unplugged_monitors true
+bspc config merge_overlapping_monitors true
+
+# Colors
+bspc config normal_border_color	"#000000"
+bspc config active_border_color	"#333333"
+bspc config focused_border_color "#333333"
+bspc config presel_feedback_color "#aaaaaa"
+bspc config urgent_border_color "#bbbbbb"
+
+# DeskTop rules
+
+## Monocle desktops
+mlp(){ while read -r l; do bspc desktop "^$l" --layout monocle; done; }
+mlp <<- EOF
+	4
+	5
+	6
+	7
+	EOF
+
+## Misc
+bspc rule -a Screenkey manage=off
+bspc rule -a qemu-system-x86_64 state=fullscreen
+
+# Loop Function
+dlp(){ while read -r l; do bspc rule -a $l desktop="$1"; done; }
+glp(){ while read -r l; do bspc rule -a $l desktop="$1" follow=on; done; }
+
+## D2
+### Browser Related
+blp(){ while read -r l; do bspc rule -a $l desktop='^2' follow=on; done; }
+
+#### Firefox Popup thingy
+bspc rule -a *:Toolkit state=floating sticky=on
+
+#### Browsers
+blp <<- EOF
+	Firefox
+	firefox
+	LibreWolf
+	Chromium-browser
+	chromium
+	brave
+	EOF
+
+## D4
+dlp '^4' <<- EOF
+	Zathura state=tiled follow=on
+	firefoxdeveloperedition
+	EOF
+
+## D6
+dlp '^5' <<- EOF
+	mpv follow=on
+	*:animixplay.to
+	*:9anime.mn__user_continue-watching
+	Com.github.xournalpp.xournalpp follow=on
+	rnote
+	Bottles
+	explorer.exe
+	EOF
+
+## D6
+dlp '^6' <<- EOF
+	Signal
+	discord
+	Slack
+	*:web.whatsapp.com
+	Ferdi
+	Ferdium
+	EOF
+
+## D7
+dlp '^7' <<- EOF
+	kdeconnect.app
+	kdeconnect-settings
+	*:www.figma.com follow=on
+	Ld-linux-x86-64.so.2
+	EOF
+
+## D8
+dlp '^8' <<- EOF
+	Gimp-2.10
+	Gimp
+	krita
+	EOF
+
+## D9
+
+## D10
+bspc rule -a qBittorrent desktop='^10'
+bspc rule -a obs desktop='^10'
+
+# Games related
+## Game launchers
+dlp '^8' <<- EOF
+	Steam
+	heroic
+	EOF
+
+## Games
+glp '^9' <<- EOF
+	steam_app_0
+	rocketleague.exe
+	csgo_linux64
+	PortalWars-Linux-Shipping
+	steam_app_230410
+	steam_app_714010
+	JellyBrawl.x86_64
+	h12_linux
+	"Crab Game.x86_64"
+	steam_app_444090
+	steam_app_292030
+	Terraria.bin.x86_64
+	steam_app_261640
+	steam_app_49520
+	steam_app_1172470
+	SUPERHOT.x86_64
+	Paint Warfare.x86_64
+	steam_app_2087030
+	EOF

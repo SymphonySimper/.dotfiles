@@ -1,0 +1,16 @@
+.personalize-button { display: none !important; }
+.icon.icon-settings { display: none !important; }
+@-moz-document url-prefix(about:blank) {
+    html > body:empty {
+        background-color: #000000 !important;
+    }
+}
+@-moz-document url(about:blank) {
+    html > body:empty {
+        background-color: #000000 !important;
+    }
+}
+
+/*:host, :root{
+--in-content-page-background: #000000 !important;
+}*/

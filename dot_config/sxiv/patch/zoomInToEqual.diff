@@ -1,0 +1,20 @@
+--- config.h	2021-08-12 19:53:33.944865870 +0530
++++ myconfig.h	2021-08-12 19:56:52.368208172 +0530
+@@ -76,7 +76,7 @@
+ 	{ ControlMask,  XK_Up,            g_scroll_screen,      DIR_UP },
+ 	{ ControlMask,  XK_l,             g_scroll_screen,      DIR_RIGHT },
+ 	{ ControlMask,  XK_Right,         g_scroll_screen,      DIR_RIGHT },
+-	{ 0,            XK_plus,          g_zoom,               +1 },
++	{ 0,            XK_equal,         g_zoom,               +1 },
+ 	{ 0,            XK_KP_Add,        g_zoom,               +1 },
+ 	{ 0,            XK_minus,         g_zoom,               -1 },
+ 	{ 0,            XK_KP_Subtract,   g_zoom,               -1 },
+@@ -124,7 +124,7 @@
+ 	{ 0,            XK_J,             i_scroll_to_edge,     DIR_DOWN },
+ 	{ 0,            XK_K,             i_scroll_to_edge,     DIR_UP },
+ 	{ 0,            XK_L,             i_scroll_to_edge,     DIR_RIGHT },
+-	{ 0,            XK_equal,         i_set_zoom,           100 },
++	{ 0,            XK_plus,          i_set_zoom,           100 },
+ 	{ 0,            XK_w,             i_fit_to_win,         SCALE_DOWN },
+ 	{ 0,            XK_W,             i_fit_to_win,         SCALE_FIT },
+ 	{ 0,            XK_e,             i_fit_to_win,         SCALE_WIDTH },
