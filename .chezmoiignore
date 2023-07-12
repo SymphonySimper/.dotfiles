@@ -1,1 +1,10 @@
 key.txt.age
+
+{{- if ne .chezmoi.os "windows" }}
+AppData
+{{- end }}
+
+{{ if eq .chezmoi.os "windows" }}
+importantnt
+lifeisfun
+{{ end }}
