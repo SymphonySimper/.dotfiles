@@ -97,3 +97,11 @@ fli(){
 		bspc node -z right +400 0
 	fi
 }
+
+ve(){
+    user_selection="$HOME/$(chezmoi managed --include=files | fzf)"
+    dir_name="$(dirname $user_selection)"
+    base_name="$(basename $user_selection)"
+    cd $dir_name
+    chezmoi edit $base_name
+ }
