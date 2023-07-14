@@ -18,14 +18,17 @@ fzf
 gamescope
 git
 gst-plugin-pipewire
+helix
 htop
 hyprland
 intel-ucode
 lazygit
+lf
 lib32-systemd
 libpulse
 linux
 linux-firmware
+linux-headers
 mpv
 nautilus
 neofetch
@@ -43,6 +46,7 @@ pipewire-pulse
 polkit-kde-agent
 progress
 pulsemixer
+python-pipx
 r8168
 ripgrep
 sccache
@@ -58,6 +62,7 @@ ttf-liberation
 unicode-emoji
 unzip
 v4l2loopback-dkms
+w3m
 waybar
 wget
 wireplumber
