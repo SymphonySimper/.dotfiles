@@ -132,7 +132,7 @@ else
 	export IMAGE_VIEWER="sxiv"
 	export VIDEO_PLAYER="mpv"
 	select_default_prog 'WM' 'bspwm' 'dwm' 'sway'
-	select_default_prog 'BROWSER' 'librewolf' 'firefox' 'chromium' 'brave' 'io.gitlab.librewolf-community' 'com.github.Eloston.UngoogledChromium'
+	# select_default_prog 'BROWSER' 'librewolf' 'firefox' 'chromium' 'brave' 'io.gitlab.librewolf-community' 'com.github.Eloston.UngoogledChromium'
 	select_default_prog 'TERMINAL' 'alacritty' 'foot' 'urxvtc' 'kitty'
 	select_default_prog 'SECOND_TERMINAL' 'urxvt' 'alacritty' 'kitty'
 	select_default_prog 'CHROME_EXECUTABLE' 'chromium' 'brave' 'com.brave.Browser' 'com.github.Eloston.UngoogledChromium'
