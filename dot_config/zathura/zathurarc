@@ -4,6 +4,9 @@ set page-padding 1
 set selection-clipboard clipboard
 map = zoom in
 
+# Sandbox
+set sandbox strict
+
 # Base16 Grayscale Dark
 # https://raw.githubusercontent.com/HaoZeke/base16-zathura/main/build_schemes/colors/base16-grayscale-dark.config
 
@@ -41,7 +44,7 @@ set recolor                     "true"
 set recolor-keephue             "false"
 
 set index-bg                    "#000000"
-set index-fg					"#ababab"
+set index-fg                    "#ababab"
 
 set index-active-bg             "#252525"
 set index-active-fg             "#ababab"
