@@ -204,3 +204,8 @@ fi
 if [ -f "$zsh_autosuggestions" ]; then
   source "$zsh_autosuggestions"
 fi
+
+if [ -f "/usr/share/nvm/init-nvm.sh" ]; then
+  source /usr/share/nvm/init-nvm.sh
+fi
+
