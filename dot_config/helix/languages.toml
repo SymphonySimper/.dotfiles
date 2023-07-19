@@ -1,10 +1,9 @@
 [[language]]
 name = "rust"
-
+auto-format = true
 [language.language-server]
 command = "rustup"
 args = ["run", "stable", "rust-analyzer"]
-
 [language.config]
 checkOnSave = { command = "clippy" }
 
@@ -13,3 +12,7 @@ name = "typescript"
 auto-format = true
 # pass format options according to https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration omitting the "[language].format." prefix.
 config = { format = { "semicolons" = "insert", "insertSpaceBeforeFunctionParenthesis" = true } }
+
+[[language]]
+name = "svelte"
+auto-format = true
