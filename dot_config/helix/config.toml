@@ -5,6 +5,10 @@ line-number = "relative"
 cursorline = true
 true-color = true
 color-modes = true
+auto-format = true
+auto-save = true
+bufferline = "always"
+scrolloff = 8
 
 [editor.cursor-shape]
 insert = "bar"
@@ -13,3 +17,7 @@ select = "underline"
 
 [editor.indent-guides]
 render = true
+
+[editor.lsp]
+enable = true
+display-inlay-hints = true
