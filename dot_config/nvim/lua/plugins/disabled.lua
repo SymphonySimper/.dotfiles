@@ -3,5 +3,6 @@ return {
   -- flit depends on leap
   { "ggandor/flit.nvim", enabled = false },
   { "rcarriga/nvim-notify", enabled = false },
+  { "folke/flash.nvim", enabled = false },
   -- { "folke/noice.nvim", enabled = false },
 }
