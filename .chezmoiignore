@@ -7,4 +7,5 @@ AppData
 {{ if eq .chezmoi.os "windows" }}
 importantnt
 lifeisfun
+.zprofile
 {{ end }}
