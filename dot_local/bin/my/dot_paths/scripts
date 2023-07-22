@@ -4,6 +4,7 @@ bat                      .local/bin/my/helper/bat
 blender                  .local/bin/my/aliases/blender
 bmark                    .local/bin/my/bmark
 brightness               .local/bin/my/brightness
+change-wallpaper         .local/bin/my/change-wallpaper
 chd                      .local/bin/my/helper/chd
 chtsh                    .local/bin/my/rofi/chtsh
 c                        .local/bin/my/c
