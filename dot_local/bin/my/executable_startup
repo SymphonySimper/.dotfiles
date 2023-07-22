@@ -44,5 +44,6 @@
 # [ -f $kc ] && $kc &
 
 # org.telegram.desktop &
-dunst &
-spotify-launcher &
+# dunst &
+# spotify-launcher &
+com.spotify.Client &
