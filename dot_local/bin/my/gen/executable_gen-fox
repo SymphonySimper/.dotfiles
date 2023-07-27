@@ -9,18 +9,18 @@ librewolf_loc="$HOME"/.librewolf
 librewolf_flatapk_loc="$HOME"/.var/app/io.gitlab.librewolf-community/.librewolf
 firefox_loc="$HOME"/.mozilla/firefox
 
-ask_qn(){
+ask_qn() {
 	echo
 	read -p "$(syl B)${1}$(syl R)[y/N]: " ans
 	case "$ans" in
-		[yY]* ) ans='yes' ;;
-		*) ans='no' ;;
+	[yY]*) ans='yes' ;;
+	*) ans='no' ;;
 	esac
 }
 
-get_def_user(){ default_user=$(cat $1/profiles.ini 2>/dev/null | grep 'Default' | grep -v 'Default=1' | cut -d '=' -f2); }
-create_link(){
-	if [ $1 $2 ]; then
+get_def_user() { default_user=$(cat $1/profiles.ini 2>/dev/null | grep 'Default' | grep -v 'Default=1' | cut -d '=' -f2); }
+create_link() {
+	if [ "$1" ] && [ "$2" ]; then
 		echo "$2 file already exists"
 		ask_qn "rm $2 file"
 		if [ $ans = 'yes' ]; then
@@ -31,26 +31,25 @@ create_link(){
 		ln -vs $3 $2
 	fi
 }
-stuff_to_main(){
+stuff_to_main() {
 	get_def_user $1
 	create_link -d $1/$default_user/chrome $user_chrome
 	create_link -f $1/$default_user/user.js $my_user_js
 }
 
-if [ $BROWSER = 'librewolf' ]; then
-	create_link -f $librewolf_loc/librewolf.overrides.cfg $wolf_cfg
-fi
-
 case $BROWSER in
-	'firefox') stuff_to_main $firefox_loc ;;
-	'librewolf') stuff_to_main $librewolf_loc ;;
-	'io.gitlab.librewolf-community')
-		ask_qn "Would you like to change librewolf flatpak filesystem to home?"
-		if [ $ans = 'yes' ]; then
-			$PERM flatpak override io.gitlab.librewolf-community --filesystem=home \
-				&& stuff_to_main $librewolf_loc
-		else
-			stuff_to_main $librewolf_flatapk_loc
-		fi
-		;;
+'firefox') stuff_to_main $firefox_loc ;;
+'librewolf')
+	create_link -f $librewolf_loc/librewolf.overrides.cfg $wolf_cfg
+	stuff_to_main $librewolf_loc
+	;;
+'io.gitlab.librewolf-community')
+	ask_qn "Would you like to change librewolf flatpak filesystem to home?"
+	if [ $ans = 'yes' ]; then
+		$PERM flatpak override io.gitlab.librewolf-community --filesystem=home &&
+			stuff_to_main $librewolf_loc
+	else
+		stuff_to_main $librewolf_flatapk_loc
+	fi
+	;;
 esac
