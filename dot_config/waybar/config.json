@@ -20,7 +20,6 @@
     "network",
     "backlight",
     "wireplumber",
-    "custom/spotify",
     "idle_inhibitor",
     "custom/time",
     "custom/date",
