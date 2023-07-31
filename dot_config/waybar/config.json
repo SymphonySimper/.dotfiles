@@ -4,7 +4,7 @@
   "height": 32,
   "_comment1": "Gaps between modules",
   "spacing": 0,
-  "margin": "8 8",
+  "margin": "8 8 0",
   "modules-left": [
     "wlr/workspaces"
   ],
