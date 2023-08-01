@@ -29,7 +29,7 @@
   "wlr/workspaces": {
     "active-only": false,
     "disable-scroll": true,
-    "all-outputs": true,
+    "all-outputs": false,
     "format": "{icon}",
     "sory-by-number": true,
     "on-click": "activate",
