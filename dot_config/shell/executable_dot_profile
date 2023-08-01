@@ -41,6 +41,7 @@ add_path "$HOME/Android/Sdk/emulator"       # Android Emulator
 add_path "$HOME/.spicetify"
 add_path "/var/lib/flatpak/exports/bin" # Flatpak
 add_path "$HOME/.config/emacs/bin"      # Doom emacs
+add_path "$HOME/.local/share/cargo/bin" # Cargo
 
 # ~/ Clean-up:
 export XDG_CONFIG_HOME="$HOME"/.config
