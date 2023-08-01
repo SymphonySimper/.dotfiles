@@ -32,7 +32,7 @@
     "all-outputs": false,
     "format": "{icon}",
     "sory-by-number": true,
-    "on-click": "activate",
+    "on-click": "",
     "persistent_workspaces": {
       "1": [],
       "2": [],
