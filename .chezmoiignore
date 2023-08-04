@@ -2,12 +2,12 @@ key.txt.age
 
 {{- if ne .chezmoi.os "windows" }}
 AppData
-run_once_before_decrypt-private-key.ps1
+.chezmoiscripts/run_once_before_decrypt-private-key.ps1
 {{- end }}
 
 {{ if eq .chezmoi.os "windows" }}
 importantnt
 lifeisfun
 .zprofile
-run_once_before_decrypt-private-key.sh
+.chezmoiscripts/run_once_before_decrypt-private-key.sh
 {{ end }}
