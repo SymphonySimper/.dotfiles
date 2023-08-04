@@ -1,6 +1,6 @@
 $key = "$HOME/key.txt"
 if ( Test-Path "$key" ) {
-    age --decrypt --output "$key" "{{ .chezmoi.sourceDir }}/key.txt.age"
+    & "$HOME/scoop/shims/age.exe" --decrypt --output "$key" "{{ .chezmoi.sourceDir }}/key.txt.age"
 
     # Change file permission to read
     $ACL = Get-ACL -Path "$key"
