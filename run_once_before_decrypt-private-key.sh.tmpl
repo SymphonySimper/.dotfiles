@@ -1,4 +1,6 @@
+{{- if ne .chezmoi.os "windows" }}
 #!/bin/sh
+{{- end }}
 
 if [ ! -f "$HOME/key.txt" ]; then
     age --decrypt --output "$HOME/key.txt" "{{ .chezmoi.sourceDir }}/key.txt.age"
