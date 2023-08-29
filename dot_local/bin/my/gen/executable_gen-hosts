@@ -5,24 +5,30 @@ block_source="$HOME"/.local/share/block-source
 ad_malware_block="$block_source"/ad-malware-block
 block_fgps="$block_source"/block-fgps
 cache_file="$HOME"/.cache/begone
-my_block="$HOME"/.local/share/.begone
+my_block="$HOME"/.local/share/my/.begone
 
-err(){ echo "$(syl r; syl B)${1}$(syl R)"; }
+err() { echo "$(
+	syl r
+	syl B
+)${1}$(syl R)"; }
 
 warning_i="$HOME"/.local/share/icons/general/warning.svg
-noti='dunstify -h string:x-dunst-stack-tag:genHosts'
-notify(){
+noti='notify-send -h string:x-dunst-stack-tag:genHosts'
+notify() {
 	case "$1" in
-		on) $noti -i $warning_i "Get Work Done mode is on" "Begone sites are gone" ;;
-		off) $noti "Get Work Done mode is off" "Begone? more like never gone" ;;
-		update) $noti "Updating repo" ;;
-		err) shift; $noti -i $warning_i "$1" ;;
+	on) $noti -i $warning_i "Get Work Done mode is on" "Begone sites are gone" ;;
+	off) $noti "Get Work Done mode is off" "Begone? more like never gone" ;;
+	update) $noti "Updating repo" ;;
+	err)
+		shift
+		$noti -i $warning_i "$1"
+		;;
 	esac
 }
 
-clear_block(){
+clear_block() {
 	if grep -q '^# MY BLOCK' $hosts_file && grep -q '^# MY END BLOCK' $hosts_file; then
-			$PERM sed '/^# MY BLOCK/, /^# MY END BLOCK/ { /^# MY BLOCK/! { /^# MY END BLOCK/!d; }}' -i $hosts_file
+		$PERM sed '/^# MY BLOCK/, /^# MY END BLOCK/ { /^# MY BLOCK/! { /^# MY END BLOCK/!d; }}' -i $hosts_file
 	else
 		err 'MY BLOCK is absent'
 		notify err 'MY BLOCK is absent'
@@ -30,11 +36,10 @@ clear_block(){
 	fi
 }
 
-
 sed_1="sed '/#/d; /^[[:space:]]*$/d'"
-curl_hosts(){ curl -s "$1" | sed -ne '/Start/,$ p' | eval "$sed_1"  > "$2"; }
+curl_hosts() { curl -s "$1" | sed -ne '/Start/,$ p' | eval "$sed_1" >"$2"; }
 
-update_hosts_repo(){
+update_hosts_repo() {
 	[ ! -d $block_source ] && mkdir "$block_source"
 	sound-efx &
 	notify 'update'
@@ -43,58 +48,62 @@ update_hosts_repo(){
 }
 
 my_block_tempfile=$(mktemp)
-my_block_temp(){
+my_block_temp() {
 	while read -r line; do
-		echo -e "0.0.0.0\t$line" >> $my_block_tempfile
-	done <<- EOF
-	$(cat $my_block | eval "$sed_1")
+		echo -e "0.0.0.0\t$line" >>$my_block_tempfile
+	done <<-EOF
+		$(cat $my_block | eval "$sed_1")
 	EOF
 }
 
-write_block_hosts(){ $PERM sed '/^# MY BLOCK/ r /dev/stdin' -i "$hosts_file"  < "$1"; }
+write_block_hosts() { $PERM sed '/^# MY BLOCK/ r /dev/stdin' -i "$hosts_file" <"$1"; }
 
-add_block_hosts(){
+add_block_hosts() {
 	case "$1" in
-		'all')
-			sort -o $my_block $my_block
-			temp_file=$(mktemp)
-			cat $block_fgps $my_block_tempfile > $temp_file
-			write_block_hosts "$temp_file" \
-			&& notify 'on'
-			rm $temp_file $my_block_tempfile
-			;;
-		'am') write_block_hosts $ad_malware_block \
-			&& notify 'off'
-			;;
-		'begone')
-			temp_file=$(mktemp)
-			my_block_temp
-			write_block_hosts $my_block_tempfile \
-			&& notify 'on'
-			rm $my_block_tempfile
-			;;
+	'all')
+		sort -o $my_block $my_block
+		temp_file=$(mktemp)
+		cat $block_fgps $my_block_tempfile >$temp_file
+		write_block_hosts "$temp_file" &&
+			notify 'on'
+		rm $temp_file $my_block_tempfile
+		;;
+	'am')
+		write_block_hosts $ad_malware_block &&
+			notify 'off'
+		;;
+	'begone')
+		temp_file=$(mktemp)
+		my_block_temp
+		write_block_hosts $my_block_tempfile &&
+			notify 'on'
+		rm $my_block_tempfile
+		;;
 	esac
 }
 
-add_block(){
-	clear_block \
-	&& add_block_hosts "$1" \
-	&& echo "added $1" > $cache_file
+add_block() {
+	clear_block &&
+		add_block_hosts "$1" &&
+		echo "added $1" >$cache_file
 }
 
-main(){
+main() {
 	case "$1" in
-		'clear') clear_block; rm $cache_file ;;
-		'am') add_block 'am' ;;
-		'all') add_block 'all' ;;
-		'begone') add_block 'begone' ;;
-		'edit') $EDITOR $my_block && sort -o $my_block $my_block ;;
-		'update') update_hosts_repo ;;
+	'clear')
+		clear_block
+		rm $cache_file
+		;;
+	'am') add_block 'am' ;;
+	'all') add_block 'all' ;;
+	'begone') add_block 'begone' ;;
+	'edit') $EDITOR $my_block && sort -o $my_block $my_block ;;
+	'update') update_hosts_repo ;;
 	esac
 }
 
-rofi_menu(){
-	query="$(echo "clear\nam\nall\nbegone\nedit\nupdate" | rofi -dmenu -p 'gen-hosts')"
+fzf_menu() {
+	query="$(echo -e "clear\nam\nall\nbegone\nedit\nupdate" | fzf)"
 	main "$query"
 }
 
@@ -103,7 +112,7 @@ if [ ! -f $ad_malware_block ] || [ ! -f $block_fgps ]; then
 fi
 
 if [ -z "$@" ]; then
-	rofi_menu
+	fzf_menu
 else
 	main "$@"
 fi
