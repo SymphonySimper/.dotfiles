@@ -3,17 +3,17 @@
 
 add_newline = false
 palette = "catppuccin_mocha"
-# format = """
-# $all\
-# $fill\
-# ${custom.time}\
-# $line_break\
-# $character"""
+format = """
+$all\
+$fill\
+$time\
+$line_break\
+$character"""
 
 [character]
-success_symbol='[>](bold lavender)'
-error_symbol='[x](bold red)'
-vimcmd_symbol='[v](bold peach)'
+success_symbol = '[>](bold lavender)'
+error_symbol = '[x](bold red)'
+vimcmd_symbol = '[v](bold peach)'
 
 [fill]
 symbol = " "
@@ -25,6 +25,12 @@ style = "bold lavender"
 # command = 'date +"%I:%M %p"'
 # when = "true"
 # format = '[($output)](overlay0)'
+
+[time]
+disabled = false
+format = '[($time)](overlay0)'
+time_format = '%H:%M'
+utc_time_offset = 'local'
 
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"
