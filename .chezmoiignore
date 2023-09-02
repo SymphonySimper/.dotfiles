@@ -13,7 +13,9 @@ lifeisfun
 {{ end }}
 
 
-{{ if eq .chezmoi.os "windows" or eq .chezmoi.os "darwin" }}
+{{ if eq .chezmoi.os "windows" }}
+{{  if eq .chezmoi.os "darwin" }}
 .chezmoiscripts/setup.sh
 .chezmoiscripts/custom-shortcuts.sh
+{{  end }}
 {{ end }}

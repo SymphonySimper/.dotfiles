@@ -160,3 +160,8 @@ open_diary(){ v "${HOME}/importantnt/me/diary/$(date +%d-%m-%Y).md"; }
 
 # Usage of a specific program
 am_i_heavy(){ ps -C "$1" -o %cpu,%mem,cmd; }
+
+# Backup gnome shorcuts
+backup_binds() {
+  dconf dump / | sed -n '/\[org.gnome.settings-daemon.plugins.media-keys/,/^$/p' > "$(chezmoi source-path)/dot_config/my/gnome/custom-shortcuts.conf";
+}

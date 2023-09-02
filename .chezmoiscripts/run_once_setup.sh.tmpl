@@ -1,5 +1,5 @@
-{{ if eq .chezmoi.os "linux" }}
-#!/bin/bash
+{{ if eq .chezmoi.os "linux" -}}
+#!/usr/bin/env bash
 {{  if eq .chezmoi.osRelease.id "fedora" }}
 sudo dnf install git tmux neovim fzf ripgrep zsh zsh-autosuggestions \
   alacritty age exa mpv nodejs npm ps_mem sqlite sqlite-devel tldr \
@@ -21,7 +21,7 @@ sudo dnf install code -y
 {{  end }}
 
 echo "Miniconda"
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
+wget "https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh" -O ~/miniconda.sh
 bash ./miniconda.sh -b -u -p /home/symph/.local/share/miniconda3
 rm ~/miniconda.sh
 
@@ -31,4 +31,4 @@ echo "Homebrew"
 if [ -f "/bin/zsh" ]; then
   sudo chsh -s /bin/zsh symph
 fi
-{{ end }}
+{{ end -}}

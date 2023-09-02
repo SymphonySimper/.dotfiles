@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 if [ ! -f "$HOME/key.txt" ]; then
     age --decrypt --output "$HOME/key.txt" "{{ .chezmoi.sourceDir }}/key.txt.age"
