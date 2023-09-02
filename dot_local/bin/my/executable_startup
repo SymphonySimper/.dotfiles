@@ -44,3 +44,4 @@
 # [ -f $kc ] && $kc &
 
 # dunst &
+com.spotify.Client &
