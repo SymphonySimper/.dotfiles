@@ -1,0 +1,34 @@
+{{ if eq .chezmoi.os "linux" }}
+#!/bin/bash
+{{  if eq .chezmoi.osRelease.id "fedora" }}
+sudo dnf install git tmux neovim fzf ripgrep zsh zsh-autosuggestions \
+  alacritty age exa mpv nodejs npm ps_mem sqlite sqlite-devel tldr \
+  trash-cli util-linux-user wl-clipboard zathura zoxide -y
+
+echo "Starship prompt"
+sudo dnf copr enable atim/starship -y
+suod dnf install starship -y
+
+echo "Lazygit"
+sudo dnf copr enable atim/lazygit -y
+sudo dnf install lazygit -y
+
+echo "VScode"
+sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+dnf check-update
+sudo dnf install code -y
+{{  end }}
+
+echo "Miniconda"
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
+bash ./miniconda.sh -b -u -p /home/symph/.local/share/miniconda3
+rm ~/miniconda.sh
+
+echo "Homebrew"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+if [ -f "/bin/zsh" ]; then
+  sudo chsh -s /bin/zsh symph
+fi
+{{ end }}
