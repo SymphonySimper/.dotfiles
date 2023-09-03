@@ -165,3 +165,7 @@ am_i_heavy(){ ps -C "$1" -o %cpu,%mem,cmd; }
 backup_binds() {
   dconf dump / | sed -n '/\[org.gnome.settings-daemon.plugins.media-keys/,/^$/p' > "$(chezmoi source-path)/dot_config/my/gnome/custom-shortcuts.conf";
 }
+
+backup_gnome() {
+  dconf dump / > "$(chezmoi source-path)/dot_config/my/gnome/gnome-config.conf";
+}
