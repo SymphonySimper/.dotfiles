@@ -14,8 +14,12 @@ lifeisfun
 
 
 {{ if eq .chezmoi.os "windows" }}
-{{  if eq .chezmoi.os "darwin" }}
 .chezmoiscripts/setup.sh
-.chezmoiscripts/custom-shortcuts.sh
-{{  end }}
+.chezmoiscripts/restore-gnome.sh
+{{ end }}
+
+{{ if eq .chezmoi.os "darwin" }}
+.chezmoiscripts/setup.sh
+.chezmoiscripts/setup.sh
+.chezmoiscripts/restore-gnome.sh
 {{ end }}
