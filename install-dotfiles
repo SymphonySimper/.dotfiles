@@ -1,0 +1,23 @@
+!#/usr/bin/env bash
+
+if echo $(uname -r) | grep -wqi 'microsoft'; then
+	wsl=true
+else
+	wsl=false
+fi
+
+sh -c "$(curl -fsLS get.chezmoi.io)" -- -b $HOME/.local/bin
+if $wsl; then
+  sudo apt install age wget unzip -y
+else
+  sudo dnf install age wget unzip -y
+fi
+
+chezmoi init --apply SymphonySimper
+chezmoi cd
+git remote set-url origin git@github.com:SymphonySimper/dotfiles.git
+
+cd /tmp
+wget "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
+unzip "./JetBrainsMono.zip"
+mv -v ./JetBrainsMono "$HOME"/.local/share/fonts/.
