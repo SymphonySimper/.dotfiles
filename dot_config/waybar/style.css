@@ -70,7 +70,7 @@ button:hover {
 
 /* Modules Right */
 .modules-right > widget > * {
-  font-family:"Font Awesome 6 Free";
+  font-family:"Font Awesome";
   background-color: @base;
   color: @text;
   padding: 0 16px;
