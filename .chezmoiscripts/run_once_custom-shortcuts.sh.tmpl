@@ -1,6 +1,8 @@
+{{ if eq .chezmoi.osRelease.id "fedora" }}
 #!/usr/bin/env bash
 
 file_path="{{ .chezmoi.sourceDir }}/dot_config/my/gnome/custom-shortcuts.conf"
 if [ -f "$file_path" ]; then
   dconf load / < "$file_path"
 fi
+{{ end }}
