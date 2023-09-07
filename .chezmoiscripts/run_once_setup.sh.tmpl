@@ -32,6 +32,15 @@ rm ~/miniconda.sh
 
 echo "Homebrew"
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+brew install sccache -y
+
+{{  if eq .chezmoi.osRelease.id "ubuntu" }}
+sudo apt install git tmux zsh zsh-autosuggestions nodejs npm sqlite3 libsqlite3-dev tldr \
+    wl-clipboard zoxide exa ripgrep gcc g++ -y
+
+brew install neovim fzf starship lazygit -y
+{{  end }}
 
 if [ -f "/bin/zsh" ]; then
   sudo chsh -s /bin/zsh symph
