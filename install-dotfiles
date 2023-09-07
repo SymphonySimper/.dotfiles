@@ -12,9 +12,9 @@ if $wsl; then
 else
   sudo dnf install age wget unzip -y
 fi
-
-chezmoi init --apply SymphonySimper
-chezmoi cd
+chezmoi="$HOME/.local/bin/chezmoi"
+$chezmoi init --apply SymphonySimper
+$chezmoi cd
 git remote set-url origin git@github.com:SymphonySimper/dotfiles.git
 
 cd /tmp
