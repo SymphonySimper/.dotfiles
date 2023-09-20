@@ -18,6 +18,7 @@ $chezmoi cd
 git remote set-url origin git@github.com:SymphonySimper/dotfiles.git
 
 cd /tmp
-wget "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"
-unzip "./JetBrainsMono.zip"
-mv -v ./JetBrainsMono "$HOME"/.local/share/fonts/.
+font_name='JetBrainsMono'
+wget "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/$font_name.zip"
+unzip "./$font_name.zip" -d "$font_name"
+mv -v "./$font_name" "$HOME"/.local/share/fonts/.
