@@ -1,4 +1,4 @@
-{{ if eq .chezmoi.osRelease.id "fedora" }}
+{{ if eq .chezmoi.osRelease.id "fedora" -}}
 #!/usr/bin/env bash
 
 file_path="{{ .chezmoi.sourceDir }}/dot_config/my/gnome/custom-shortcuts.conf"
