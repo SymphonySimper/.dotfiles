@@ -25,15 +25,20 @@ dnf check-update
 sudo dnf install code -y
 {{  end }}
 
-echo "Miniconda"
-wget "https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh" -O ~/miniconda.sh
-bash ./miniconda.sh -b -u -p /home/symph/.local/share/miniconda3
-rm ~/miniconda.sh
+mc_loc='/home/symph/.local/share/miniconda3'
+if [ ! -d "$mc_loc" ]; then
+  echo "Miniconda"
+  wget "https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh" -O ~/miniconda.sh
+  bash ./miniconda.sh -b -u -p "$mc_loc"
+  rm ~/miniconda.sh
+fi
 
-echo "Homebrew"
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-brew install sccache
+if [ ! -d "/home/linuxbrew/" ]; then
+  echo "Homebrew"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  brew install sccache
+fi
 
 {{  if eq .chezmoi.osRelease.id "ubuntu" }}
 sudo apt install git tmux zsh zsh-autosuggestions nodejs npm sqlite3 libsqlite3-dev tldr \

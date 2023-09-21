@@ -2,23 +2,12 @@ key.txt.age
 
 {{ if ne .chezmoi.os "windows" }}
 AppData
-.chezmoiscripts/decrypt-private-key.ps1
+.chezmoiscripts/windows/**
 {{ end }}
 
-{{ if eq .chezmoi.os "windows" }}
+{{ if ne .chezmoi.os "linux" }}
 importantnt
 lifeisfun
 .zprofile
-.chezmoiscripts/decrypt-private-key.sh
-{{ end }}
-
-
-{{ if eq .chezmoi.os "windows" }}
-.chezmoiscripts/setup.sh
-.chezmoiscripts/custom-shortcuts.sh
-{{ end }}
-
-{{ if eq .chezmoi.os "darwin" }}
-.chezmoiscripts/setup.sh
-.chezmoiscripts/custom-shortcuts.sh
+.chezmoiscripts/linux/**
 {{ end }}
