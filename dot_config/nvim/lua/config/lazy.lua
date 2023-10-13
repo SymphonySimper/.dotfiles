@@ -32,6 +32,9 @@ require("lazy").setup({
     -- Linting
     { import = "lazyvim.plugins.extras.linting.eslint" },
 
+    -- AI
+    { import = "lazyvim.plugins.extras.coding.codeium" },
+
     -- Misc
     { import = "lazyvim.plugins.extras.editor.leap" },
     { import = "lazyvim.plugins.extras.coding.yanky" },
