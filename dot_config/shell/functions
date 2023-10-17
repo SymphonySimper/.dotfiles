@@ -172,3 +172,5 @@ backup_gnome() {
    -e '/\[org\/gnome\/desktop\/interface\]/,/^$/p' \
    -e '/\[org\/gnome\/nautilus\/preferences\]/,/^$/p' > "$(chezmoi source-path)/dot_config/my/gnome/config.conf";
 }
+
+ly() { eval "$(lyne)"; }
