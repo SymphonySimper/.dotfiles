@@ -1,8 +1,5 @@
 #!/bin/sh
 
 dir=$HOME/.local/share/my/pics/wallpapers
-while :; do
-	file=$(ls $dir | sort -R | head -n1)
-	gsettings set org.gnome.desktop.background picture-uri-dark "file://$dir/$file"
-	sleep 15m
-done
+file=$(ls $dir | sort -R | head -n1)
+gsettings set org.gnome.desktop.background picture-uri-dark "file://$dir/$file"
