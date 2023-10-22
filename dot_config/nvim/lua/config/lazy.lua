@@ -19,9 +19,9 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.dap.nlua" },
 
     -- editor
-    -- { import = "lazyvim.plugins.extras.editor.aerial" },
-    { import = "lazyvim.plugins.extras.editor.symbols-outline" },
-    { import = "lazyvim.plugins.extras.editor.navic" },
+    { import = "lazyvim.plugins.extras.editor.aerial" },
+    -- { import = "lazyvim.plugins.extras.editor.symbols-outline" },
+    -- { import = "lazyvim.plugins.extras.editor.navic" },
 
     -- Lang
     { import = "lazyvim.plugins.extras.lang.typescript" },
