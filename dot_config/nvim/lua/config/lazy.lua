@@ -18,6 +18,11 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.dap.core" },
     { import = "lazyvim.plugins.extras.dap.nlua" },
 
+    -- editor
+    { import = "lazyvim.plugins.extras.editor.aerial" },
+    { import = "lazyvim.plugins.extras.editor.symbols-outline" },
+    { import = "lazyvim.plugins.extras.editor.navic" },
+
     -- Lang
     { import = "lazyvim.plugins.extras.lang.typescript" },
     { import = "lazyvim.plugins.extras.lang.python" },
@@ -31,6 +36,9 @@ require("lazy").setup({
 
     -- Linting
     { import = "lazyvim.plugins.extras.linting.eslint" },
+
+    -- lsp
+    { import = "lazyvim.plugins.extras.lsp.none-ls" },
 
     -- AI
     { import = "lazyvim.plugins.extras.coding.codeium" },
