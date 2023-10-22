@@ -19,6 +19,7 @@ return {
       "svelte-language-server",
       "tailwindcss-language-server",
       "typescript-language-server",
+      "vue-language-server",
     },
   },
 }
