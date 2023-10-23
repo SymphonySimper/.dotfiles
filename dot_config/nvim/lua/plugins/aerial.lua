@@ -2,7 +2,7 @@ return {
   "stevearc/aerial.nvim",
   opts = function(_, opts)
     opts.layout.min_width = 40
-    -- opts.filter_kind = false
+    opts.filter_kind = false
     opts.open_automatic = true
     opts.manage_folds = true
     opts.link_folds_to_tree = true
