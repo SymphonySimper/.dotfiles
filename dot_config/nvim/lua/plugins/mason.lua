@@ -3,16 +3,13 @@ return {
   opts = function(_, opts)
     vim.list_extend(opts.ensure_installed, {
       "astro-language-server",
-      "autopep8",
       "bash-language-server",
       "beautysh",
-      "flake8",
       "html-lsp",
       "json-lsp",
       "lua-language-server",
       "marksman",
       "prettier",
-      "pyright",
       "rust-analyzer",
       "shellcheck",
       "shfmt",

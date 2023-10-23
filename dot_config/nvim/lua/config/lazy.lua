@@ -33,6 +33,7 @@ require("lazy").setup({
 
     -- Formatting
     { import = "lazyvim.plugins.extras.formatting.prettier" },
+    { import = "lazyvim.plugins.extras.formatting.black" },
 
     -- Linting
     { import = "lazyvim.plugins.extras.linting.eslint" },
