@@ -22,6 +22,7 @@ return {
       "vimdoc",
       "yaml",
       "svelte",
+      "vue",
     },
     ignore_install = { "help" },
   },
