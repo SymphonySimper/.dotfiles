@@ -12,7 +12,7 @@ return {
       "lua-language-server",
       "marksman",
       "prettier",
-      "python-lsp-server",
+      "pyright",
       "rust-analyzer",
       "shellcheck",
       "shfmt",
