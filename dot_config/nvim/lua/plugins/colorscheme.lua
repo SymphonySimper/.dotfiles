@@ -18,8 +18,8 @@ return {
   },
   {
     "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "catppuccin",
-    },
+    opts = function(_, opts)
+      opts.colorscheme = "catppuccin"
+    end,
   },
 }
