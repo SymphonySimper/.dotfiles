@@ -1,6 +1,7 @@
 #!/bin/sh
 
-bold=$(syl B); reset=$(syl R)
+bold=$(syl B)
+reset=$(syl R)
 h="$HOME"
 
 config="/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME"
@@ -22,21 +23,24 @@ bin_paths="$paths"/scripts
 
 v="$EDITOR"
 
-shebang="#!/bin/sh"
+shebang="#!/usr/bin/env bash"
 
-err(){ echo "${bold}${1}${reset}"; }
+err() { echo "${bold}${1}${reset}"; }
 
-executable(){ chmod +x "$h/$1"; }
-add_path(){ printf "%*s %s\n" -24 "$1" "$2/$1" >> "$h/$3"; }
-sort_paths(){ sort "$h/$1" -o "$h/$1"; }
-no_filename(){ [ -z "$1" ] && { err "No filename given"; exit 1; }; }
+executable() { chmod +x "$h/$1"; }
+add_path() { printf "%*s %s\n" -24 "$1" "$2/$1" >>"$h/$3"; }
+sort_paths() { sort "$h/$1" -o "$h/$1"; }
+no_filename() { [ -z "$1" ] && {
+	err "No filename given"
+	exit 1
+}; }
 
-create_bin_file(){
+create_bin_file() {
 	no_filename "$2"
 	if [ -f "$h/$1/$2" ]; then
 		err "$2 already exists at $h/$1"
 	else
-		echo "$shebang" > "$h/$1/$2"
+		echo "$shebang" >"$h/$1/$2"
 		add_path "$2" "$1" "$bin_paths"
 		sort_paths "$bin_paths"
 		executable "$1/$2"
@@ -45,13 +49,13 @@ create_bin_file(){
 	fi
 }
 
-create_shell_file(){
+create_shell_file() {
 	no_filename "$1"
 	if [ -f "$h/$shell/$1" ]; then
 		err "$1 already exists at $h/$shell"
 	else
 		$v "$h/$shell/$1" &&
-		[ -f "$h/$shell/$1" ] && {
+			[ -f "$h/$shell/$1" ] && {
 			add_path "$1" "$shell" "$shell_paths"
 			sort_paths "$shell_paths"
 			$config add "$h/$shell/$1"
@@ -59,20 +63,20 @@ create_shell_file(){
 	fi
 }
 
-yeet(){
+yeet() {
 	to_rm="$h/$(grep -w "^$2." "$h/$1" | awk '{ print $2 }')"
-	rm "$to_rm" \
-	&& $config rm "$to_rm" --cached \
-	&& sed "/^$2/d" -i "$h/$1"
+	rm "$to_rm" &&
+		$config rm "$to_rm" --cached &&
+		sed "/^$2/d" -i "$h/$1"
 }
 
-delete_file(){
-	ifPresent(){ grep -wq "^$1." "$h/$2"; }
+delete_file() {
+	ifPresent() { grep -wq "^$1." "$h/$2"; }
 	msg="has been removed from"
-	if ( ifPresent "$1" "$bin_paths" ); then
-		yeet "$bin_paths" "$1" \
-	    && err "$1 $msg $h/$bin"
-	elif ( ifPresent "$1" "$shell_paths" ); then
+	if (ifPresent "$1" "$bin_paths"); then
+		yeet "$bin_paths" "$1" &&
+			err "$1 $msg $h/$bin"
+	elif (ifPresent "$1" "$shell_paths"); then
 		yeet "$shell_paths" "$1"
 		err "$1 $msg $h/$shell"
 	else
@@ -80,17 +84,17 @@ delete_file(){
 	fi
 }
 
-yank(){
+yank() {
 	to_cp="$h/$(grep -w "^$2." "$h/$1" | awk '{ print $2 }')"
 	yoink $to_cp
 }
-yank_file(){
-	ifPresent(){ grep -wq "^$1." "$h/$2"; }
+yank_file() {
+	ifPresent() { grep -wq "^$1." "$h/$2"; }
 	msg="has been copied to clipboard"
-	if ( ifPresent "$1" "$bin_paths" ); then
-		yank "$bin_paths" "$1" \
-	    && err "$1 $msg $h/$bin"
-	elif ( ifPresent "$1" "$shell_paths" ); then
+	if (ifPresent "$1" "$bin_paths"); then
+		yank "$bin_paths" "$1" &&
+			err "$1 $msg $h/$bin"
+	elif (ifPresent "$1" "$shell_paths"); then
 		yank "$shell_paths" "$1"
 		err "$1 $msg $h/$shell"
 	else
@@ -99,16 +103,46 @@ yank_file(){
 }
 
 case "$1" in
-	-a) shift; create_bin_file "$bin_aliases" "$1" ;;
-	-r) shift; create_bin_file "$bin_rofi" "$1" ;;
-	-b) shift; create_bin_file "$bin_bspwm" "$1" ;;
-	-g) shift; create_bin_file "$bin_gen" "$1" ;;
-	-l) shift; create_bin_file "$bin_lf" "$1" ;;
-	-c) shift; create_bin_file "$bin_cron" "$1" ;;
-	-h) shift; create_bin_file "$bin_helper" "$1" ;;
-	-sh) shift; create_shell_file "$1" ;;
-	-d) shift; delete_file "$1" ;;
-	-cp) shift; yank_file "$1" ;;
-	-*) err "$1 not vaild option" ;;
-	*) create_bin_file "$bin" "$1" ;;
+-a)
+	shift
+	create_bin_file "$bin_aliases" "$1"
+	;;
+-r)
+	shift
+	create_bin_file "$bin_rofi" "$1"
+	;;
+-b)
+	shift
+	create_bin_file "$bin_bspwm" "$1"
+	;;
+-g)
+	shift
+	create_bin_file "$bin_gen" "$1"
+	;;
+-l)
+	shift
+	create_bin_file "$bin_lf" "$1"
+	;;
+-c)
+	shift
+	create_bin_file "$bin_cron" "$1"
+	;;
+-h)
+	shift
+	create_bin_file "$bin_helper" "$1"
+	;;
+-sh)
+	shift
+	create_shell_file "$1"
+	;;
+-d)
+	shift
+	delete_file "$1"
+	;;
+-cp)
+	shift
+	yank_file "$1"
+	;;
+-*) err "$1 not vaild option" ;;
+*) create_bin_file "$bin" "$1" ;;
 esac
