@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+v="$EDITOR"
+diary_path_parent="$HOME/importantnt/me/"
+diary_path="$diary_path_parent/diary"
+diary_file="$diary_path/$(date +%d-%m-%Y).md"
+date="$(date '+%A %d %B %r %Z')"
+
+if [ ! -d "$diary_path" ]; then
+	mkdir -p "$diary_path_parent"
+	git clone git@github.com:SymphonySimper/diary.git "$diary_path_parent"
+fi
+
+cd "$diary_path/diary" || exit 1
+if [ ! -f "$diary_file" ]; then
+	echo "---" >"$diary_file"
+	echo "Date: $date" >>"$diary_file"
+	echo "---" >"$diary_file"
+fi
+
+$v "$diary_file"

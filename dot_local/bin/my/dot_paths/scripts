@@ -14,6 +14,7 @@ countdown                .local/bin/my/helper/countdown
 create-script            .local/bin/my/create-script
 dev                      .local/bin/my/dev
 dfc                      .local/bin/my/dfc
+diary                    .local/bin/my/diary
 ebooks                   .local/bin/my/rofi/ebooks
 edit-configs             .local/bin/my/rofi/edit-configs
 edit-scripts             .local/bin/my/rofi/edit-scripts
