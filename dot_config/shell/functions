@@ -155,9 +155,6 @@ sens(){
 # killall bottles stuff
 kab(){ killall explorer.exe bottles wineserver; }
 
-# diary
-open_diary(){ v "${HOME}/importantnt/me/diary/$(date +%d-%m-%Y).md"; }
-
 # Usage of a specific program
 am_i_heavy(){ ps -C "$1" -o %cpu,%mem,cmd; }
 
