@@ -42,7 +42,7 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lsp.none-ls" },
 
     -- AI
-    -- { import = "lazyvim.plugins.extras.coding.codeium" },
+    { import = "lazyvim.plugins.extras.coding.codeium" },
 
     -- Misc
     { import = "lazyvim.plugins.extras.editor.leap" },
