@@ -44,5 +44,5 @@
 # [ -f $kc ] && $kc &
 
 # dunst &
-com.spotify.Client &
+# com.spotify.Client &
 # net.hovancik.Stretchly &
