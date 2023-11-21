@@ -10,6 +10,8 @@ o.colorcolumn = "80"
 o.scrolloff = 8
 -- Horizontal scroll
 o.sidescrolloff = 8
+-- Turn off undofile
+o.undofile = false
 
 -- Neovide
 if g.neovide then
