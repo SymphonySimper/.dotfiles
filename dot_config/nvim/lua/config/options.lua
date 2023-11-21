@@ -17,3 +17,6 @@ if g.neovide then
   g.neovide_scale_factor = 1.0
   g.neovide_fullscreen = true
 end
+
+-- Increase lsp timeout
+vim.lsp.buf.format({ timeout_ms = 5000 })
