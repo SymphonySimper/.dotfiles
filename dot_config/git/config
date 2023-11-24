@@ -11,3 +11,5 @@
 	autoSetupRemote = true
 [mergetool]
 	keepBackup = false
+[includeIf "gitdir:~/lifeisfun/work/"]
+  path = work
