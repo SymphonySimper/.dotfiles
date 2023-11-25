@@ -16,6 +16,9 @@ error_symbol = '[x](bold red)'
 vimcmd_symbol = '[v](bold peach)'
 
 [fill]
+{{- if eq .chezmoi.osRelease.id "ubuntu" }}
+disabled = true
+{{- end }}
 symbol = " "
 
 [directory]
@@ -27,7 +30,9 @@ style = "bold lavender"
 # format = '[($output)](overlay0)'
 
 [time]
-disabled = false
+{{- if eq .chezmoi.osRelease.id "ubuntu" }}
+disabled = true
+{{- end }}
 format = '[($time)](overlay0)'
 time_format = '%H:%M'
 utc_time_offset = 'local'
