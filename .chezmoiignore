@@ -10,4 +10,5 @@ importantnt
 lifeisfun
 .zprofile
 .chezmoiscripts/linux/**
+.config/starship/
 {{ end }}
