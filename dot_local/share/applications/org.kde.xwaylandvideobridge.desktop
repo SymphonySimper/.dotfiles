@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Xwayland Video Bridge (Nightly)
+GenericName=Share screens and windows to XWayland applications
+Icon=xwaylandvideobridge
+Exec=org.kde.xwaylandvideobridge
+Categories=Qt;KDE;Utility;X-KDE-Utilities-Desktop;

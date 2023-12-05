@@ -45,6 +45,6 @@
 
 # dunst &
 com.spotify.Client &
-org.kde.xwaylandvideobridge &
+# org.kde.xwaylandvideobridge &
 com.discordapp.Discord &
 # net.hovancik.Stretchly &
