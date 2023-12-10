@@ -1,5 +1,6 @@
 #!/bin/sh
 
-dir=$HOME/.local/share/my/pics/wallpapers
-file=$(ls $dir | sort -R | head -n1)
-gsettings set org.gnome.desktop.background picture-uri-dark "file://$dir/$file"
+# dir=$HOME/.local/share/my/pics/wallpapers
+# file=$(ls $dir | sort -R | head -n1)
+# gsettings set org.gnome.desktop.background picture-uri-dark "file://$dir/$file"
+gsettings set org.gnome.desktop.background picture-uri-dark "$HOME/.local/share/my/pics/bg.png"
