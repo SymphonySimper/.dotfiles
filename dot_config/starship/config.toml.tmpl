@@ -18,6 +18,8 @@ vimcmd_symbol = '[v](bold peach)'
 [fill]
 {{- if eq .chezmoi.osRelease.id "ubuntu" }}
 disabled = true
+{{- else }}
+disabled = false
 {{- end }}
 symbol = " "
 
@@ -32,10 +34,15 @@ style = "bold lavender"
 [time]
 {{- if eq .chezmoi.osRelease.id "ubuntu" }}
 disabled = true
+{{- else }}
+disabled = false
 {{- end }}
 format = '[($time)](overlay0)'
 time_format = '%H:%M'
 utc_time_offset = 'local'
+
+[gcloud]
+disabled = true
 
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"
