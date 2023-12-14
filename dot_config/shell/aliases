@@ -19,11 +19,11 @@ alias gpt='gp --tags'
 alias gpom='gpu origin master'
 
 # Config git alias
-alias cgs='config status'
-alias cgm='config commit'
-alias cgp='config push'
-alias cgau='config add -u'
-alias cglz='lazygit --git-dir="$HOME"/.cfg/ --work-tree="$HOME"'
+# alias cgs='config status'
+# alias cgm='config commit'
+# alias cgp='config push'
+# alias cgau='config add -u'
+# alias cglz='lazygit --git-dir="$HOME"/.cfg/ --work-tree="$HOME"'
 
 # Program
 alias ls='ls --color=auto'

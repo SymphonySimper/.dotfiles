@@ -14,14 +14,14 @@ gamp(){
 	&& g push
 }
 
-# config git
-cga(){ config add $@; }
-cgrm(){ config rm $@ --cached; }
-cgamp(){
-	config add -u \
-	&& [ -z "$@" ] && config commit || config commit -m "$@" \
-	&& config push
-}
+# # config git
+# cga(){ config add $@; }
+# cgrm(){ config rm $@ --cached; }
+# cgamp(){
+# 	config add -u \
+# 	&& [ -z "$@" ] && config commit || config commit -m "$@" \
+# 	&& config push
+# }
 
 # Format USB
 format_usb_fat32(){
