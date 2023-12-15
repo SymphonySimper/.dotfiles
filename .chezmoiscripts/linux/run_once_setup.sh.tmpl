@@ -42,10 +42,23 @@ fi
 
 {{  if eq .chezmoi.osRelease.id "ubuntu" }}
 sudo apt install git tmux zsh zsh-autosuggestions nodejs npm sqlite3 libsqlite3-dev tldr \
-    wl-clipboard zoxide exa ripgrep gcc g++ -y
+    wl-clipboard zoxide exa ripgrep gcc g++ -y flatpak
 
 brew install neovim fzf starship lazygit
 {{  end }}
+
+echo "Flatpak"
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak install flathub com.spotify.Client
+flatpak install flathub com.discordapp.Discord
+flatpak install flathub com.github.tchx84.Flatseal
+flatpak install flathub com.obsproject.Studio
+flatpak install flathub org.qbittorrent.qBittorrent
+{{ if eq .chezmoi.osRelease.id "fedora" }}
+flatpak install flathub com.mattjakeman.ExtensionManager
+{{ end }}
+flatpak remote-add --if-not-exists kdeapps https://distribute.kde.org/kdeapps.flatpakrepo
+flatpak install kdeapps org.kde.xwaylandvideobridge
 
 if [ -f "/bin/zsh" ]; then
   sudo chsh -s /bin/zsh symph
