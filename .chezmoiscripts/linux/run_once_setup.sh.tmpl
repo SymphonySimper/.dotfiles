@@ -49,16 +49,14 @@ brew install neovim fzf starship lazygit
 
 echo "Flatpak"
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak install flathub com.spotify.Client
-flatpak install flathub com.discordapp.Discord
-flatpak install flathub com.github.tchx84.Flatseal
-flatpak install flathub com.obsproject.Studio
-flatpak install flathub org.qbittorrent.qBittorrent
-{{ if eq .chezmoi.osRelease.id "fedora" }}
-flatpak install flathub com.mattjakeman.ExtensionManager
-{{ end }}
 flatpak remote-add --if-not-exists kdeapps https://distribute.kde.org/kdeapps.flatpakrepo
-flatpak install kdeapps org.kde.xwaylandvideobridge
+
+flatpak install -y com.spotify.Client com.discordapp.Discord com.github.tchx84.Flatseal com.obsproject.Studio org.qbittorrent.qBittorrent
+flatpak install -y org.kde.xwaylandvideobridge
+
+{{ if eq .chezmoi.osRelease.id "fedora" }}
+flatpak install com.mattjakeman.ExtensionManager -y
+{{ end }}
 
 if [ -f "/bin/zsh" ]; then
   sudo chsh -s /bin/zsh symph
