@@ -42,23 +42,25 @@ fi
 
 {{  if eq .chezmoi.osRelease.id "ubuntu" }}
 sudo apt install git tmux zsh zsh-autosuggestions nodejs npm sqlite3 libsqlite3-dev tldr \
-    wl-clipboard zoxide exa ripgrep gcc g++ -y flatpak
+    wl-clipboard zoxide ripgrep gcc g++ -y flatpak
 
-brew install neovim fzf starship lazygit
+brew install neovim fzf starship lazygit eza
 {{  end }}
 
+{{  if ne .chezmoi.osRelease.id "ubuntu" }}
 echo "Flatpak"
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 flatpak remote-add --if-not-exists kdeapps https://distribute.kde.org/kdeapps.flatpakrepo
 
 flatpak install -y com.spotify.Client com.discordapp.Discord com.github.tchx84.Flatseal com.obsproject.Studio org.qbittorrent.qBittorrent
 flatpak install -y org.kde.xwaylandvideobridge
+{{  end }}
 
-{{ if eq .chezmoi.osRelease.id "fedora" }}
+{{  if eq .chezmoi.osRelease.id "fedora" }}
 flatpak install com.mattjakeman.ExtensionManager -y
-{{ end }}
+{{  end }}
 
 if [ -f "/bin/zsh" ]; then
   sudo chsh -s /bin/zsh symph
 fi
-{{ end -}}
+{{  end -}}
