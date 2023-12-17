@@ -42,7 +42,7 @@ fi
 
 {{  if eq .chezmoi.osRelease.id "ubuntu" }}
 sudo apt install git tmux zsh zsh-autosuggestions nodejs npm sqlite3 libsqlite3-dev tldr \
-    wl-clipboard zoxide ripgrep gcc g++ -y flatpak
+    wl-clipboard zoxide ripgrep fd-find gcc g++ -y flatpak
 
 brew install neovim fzf starship lazygit eza
 {{  end }}
