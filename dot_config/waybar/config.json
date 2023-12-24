@@ -5,13 +5,9 @@
   "_comment1": "Gaps between modules",
   "spacing": 0,
   "margin": "8 8 0",
-  "modules-left": [
-    "hyprland/workspaces"
-  ],
+  "modules-left": ["hyprland/workspaces"],
   "fixed-center": false,
-  "modules-center": [
-    "hyprland/window"
-  ],
+  "modules-center": ["hyprland/window"],
   "modules-right": [
     "temperature",
     "cpu",
@@ -33,18 +29,7 @@
     "format": "{icon}",
     "on-click": "",
     "_persistent-workspaces": {
-      "*": [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10
-      ]
+      "*": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     },
     "format-icons": {
       "1": "一",
@@ -71,11 +56,7 @@
     "hwmon-path": "/tmp/temperature",
     "critical-threshold": 80,
     "format": "{icon}  <span font-family=\"Poppins\">{temperatureC}°C</span>",
-    "format-icons": [
-      "",
-      "",
-      ""
-    ]
+    "format-icons": ["", "", ""]
   },
   "cpu": {
     "format": "  <span font-family=\"Poppins\">{usage}%</span>",
@@ -101,13 +82,7 @@
     "format-charging": "  <span font-family=\"Poppins\">{capacity}%</span>",
     "format-plugged": "  <span font-family=\"Poppins\">{capacity}%</span>",
     "format-alt": "{icon}  <span font-family=\"Poppins\">{time}</span>",
-    "format-icons": [
-      "",
-      "",
-      "",
-      "",
-      ""
-    ]
+    "format-icons": ["", "", "", "", ""]
   },
   "network": {
     "format-wifi": "",
@@ -130,17 +105,7 @@
       "warning": 60,
       "critical": 90
     },
-    "format-icons": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ]
+    "format-icons": ["", "", "", "", "", "", "", "", ""]
   },
   "wireplumber": {
     "format": "{icon}  <span font-family=\"Poppins\">{volume}%</span>",
@@ -155,11 +120,7 @@
       "warning": 50,
       "critical": 80
     },
-    "format-icons": [
-      "",
-      "",
-      ""
-    ]
+    "format-icons": ["", "", ""]
   },
   "custom/spotify": {
     "exec": "myspotify",

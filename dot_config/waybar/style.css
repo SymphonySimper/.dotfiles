@@ -20,7 +20,6 @@ window#waybar.hidden {
   opacity: 0.2;
 }
 
-
 /* Modules Left */
 button {
   border-radius: 0;
@@ -30,7 +29,8 @@ button:hover {
   background: inherit;
 }
 
-#workspaces button, #window {
+#workspaces button,
+#window {
   margin-right: 1px;
   padding: 0 16px;
   color: @text;
@@ -70,7 +70,7 @@ button:hover {
 
 /* Modules Right */
 .modules-right > widget > * {
-  font-family:"Font Awesome";
+  font-family: "Font Awesome 6 Free";
   background-color: @base;
   color: @text;
   padding: 0 16px;
@@ -152,7 +152,6 @@ tooltip label {
 #custom-spotify.disabled {
   background-color: @peach;
   color: @base;
-
 }
 
 #temperature.critical,
@@ -164,7 +163,6 @@ tooltip label {
   background-color: @red;
   color: @base;
 }
-
 
 #battery.critical:not(.charging) {
   background-color: @red;
@@ -190,4 +188,3 @@ tooltip label {
   -gtk-icon-effect: highlight;
   background-color: @sapphire;
 }
-

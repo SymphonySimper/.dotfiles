@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+git_dir="$HOME/.local/src"
+
+git_clone() {
+	if [[ ! -d "$git_dir" ]]; then
+		mkdir -p "$git_dir"
+	fi
+
+	repo_name=$(basename "$1")
+
+	git clone "$1" -c "$git_dir/$repo_name"
+}
+
+install_hyprland() {
+	case "$DISTRO" in
+	fedora)
+		sudo dnf install -y hyprland waybar
+		sudo dnf install -y wayland-devel wayland-protocols-devel pango-devel \
+			cairo-devel file-devel libglvnd-devel libglvnd-core-devel \
+			libjpeg-turbo-devel libwebp-devel gcc-c++
+		git_clone "https://github.com/hyprwm/hyprpaper"
+		cd "$git_dir/hyprpaper" || exit 1
+		make all
+		sudo cp -vi ./build/hyprpaper /usr/bin/.
+		;;
+	*)
+		echo "Not supported distro: $DISTRO"
+		;;
+	esac
+}
+
+case "$1" in
+hyprland) install_hyprland ;;
+*) echo "Invalid option: $1" ;;
+esac
