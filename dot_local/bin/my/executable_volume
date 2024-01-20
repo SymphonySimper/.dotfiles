@@ -1,21 +1,22 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-app="pulsemixer"
+app="wpctl"
 
 #Icons
+sink="@DEFAULT_AUDIO_SINK@"
 
-get_mute=$($app --get-mute)
-get_vol() { $app --get-volume | awk '{print $1}'; }
+get_mute=$($app status $sink | grep -qi muted)
+get_vol() { echo "$($app get-volume $sink | cut -d ' ' -f2) * 100" | bc | cut -d '.' -f1; }
 
 change_vol() {
-	if [ $get_mute -eq 0 ]; then
-		$app --change-volume $1
+	if [[ $get_mute -eq 0 ]]; then
+		$app set-volume $sink "$1"
 	fi
 }
 
 set_vol() {
 	expected_volume=$1
-	if [ $get_mute -eq 0 ]; then
+	if [[ $get_mute -eq 0 ]]; then
 		current_volume=$(get_vol)
 		volume_to_set=$((expected_volume - current_volume))
 		$app --change-volume $volume_to_set
@@ -23,16 +24,16 @@ set_vol() {
 
 }
 
-toggle_mute() { $app --toggle-mute; }
+toggle_mute() { $app set-mute $sink toggle; }
 
 case "$1" in
 -s)
 	shift
-	set_vol $1
+	set_vol "$1"
 	;;
--u) change_vol +2 ;;
--d) change_vol -2 ;;
--U) change_vol +10 ;;
--D) change_vol -10 ;;
+-u) change_vol 0.02+ ;;
+-d) change_vol 0.02- ;;
+-U) change_vol 0.1+ ;;
+-D) change_vol 0.1- ;;
 -m) toggle_mute ;;
 esac
