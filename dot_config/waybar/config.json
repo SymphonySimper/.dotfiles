@@ -24,10 +24,8 @@
   "_comment2": "Modules configuration",
   "hyprland/workspaces": {
     "active-only": false,
-    "disable-scroll": true,
     "all-outputs": false,
     "format": "{icon}",
-    "on-click": "",
     "_persistent-workspaces": {
       "*": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     },
@@ -41,10 +39,7 @@
       "7": "七",
       "8": "八",
       "9": "九",
-      "10": "十",
-      "urgent": "",
-      "focused": "",
-      "default": ""
+      "10": "十"
     }
   },
   "hyprland/window": {
