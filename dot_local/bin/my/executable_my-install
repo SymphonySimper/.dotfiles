@@ -26,6 +26,7 @@ install_hyprland() {
 		cd "$git_dir/hyprpaper" || exit 1
 		make all
 		sudo cp -vi ./build/hyprpaper /usr/bin/.
+		sudo cp -vi "$HOME/.config/my/wayland-sessions/hyprland.desktop" '/usr/share/wayland-sessions/hyprland.desktop'
 		;;
 	*)
 		echo "Not supported distro: $DISTRO"
