@@ -15,18 +15,33 @@ git_clone() {
 	git clone "$1" "$git_dir/$repo_name"
 }
 
+cd_here() {
+	cd "$1" || exit 1
+}
+
 install_hyprland() {
 	case "$DISTRO" in
 	fedora)
+		# Install requirements
 		sudo dnf install -y hyprland hyprlang hyprlang-devel waybar dunst brightnessctl \
-			fontawesome-6-free-fonts
+			fontawesome-6-free-fonts grimshot
 		sudo dnf install -y wayland-devel wayland-protocols-devel pango-devel \
 			cairo-devel file-devel libglvnd-devel libglvnd-core-devel \
 			libjpeg-turbo-devel libwebp-devel gcc-c++ cmake ninja-build
+
+		# Install hyprpaper
 		git_clone "https://github.com/hyprwm/hyprpaper"
-		cd "$git_dir/hyprpaper" || exit 1
+		cd_here "$git_dir/hyprpaper"
 		make all
 		sudo cp -vi ./build/hyprpaper /usr/bin/.
+
+		# Install hyprshot
+		git_clone "https://github.com/Gustash/hyprshot"
+		cd_here "$git_dir/hyprshot"
+		chmod +x "hyprshot"
+		ln -sf "$git_dir/hyprshot/hyprshot" "$HOME/.local/bin/hyprshot"
+
+		# Change wayland-sessions desktop file
 		sudo cp -vi "$HOME/.config/my/wayland-sessions/hyprland.desktop" '/usr/share/wayland-sessions/hyprland.desktop'
 		;;
 	*)
