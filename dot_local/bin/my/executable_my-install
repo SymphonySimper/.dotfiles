@@ -18,7 +18,8 @@ git_clone() {
 install_hyprland() {
 	case "$DISTRO" in
 	fedora)
-		sudo dnf install -y hyprland hyprlang hyprlang-devel waybar dunst brightnessctl
+		sudo dnf install -y hyprland hyprlang hyprlang-devel waybar dunst brightnessctl \
+			fontawesome-6-free-fonts
 		sudo dnf install -y wayland-devel wayland-protocols-devel pango-devel \
 			cairo-devel file-devel libglvnd-devel libglvnd-core-devel \
 			libjpeg-turbo-devel libwebp-devel gcc-c++ cmake ninja-build
