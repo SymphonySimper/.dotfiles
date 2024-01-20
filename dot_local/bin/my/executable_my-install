@@ -8,17 +8,20 @@ git_clone() {
 	fi
 
 	repo_name=$(basename "$1")
+	echo "REPO: $1"
+	echo "REPO NAME: $repo_name"
+	echo "REPO DIR: $git_dir/$repo_name"
 
-	git clone "$1" -c "$git_dir/$repo_name"
+	git clone "$1" "$git_dir/$repo_name"
 }
 
 install_hyprland() {
 	case "$DISTRO" in
 	fedora)
-		sudo dnf install -y hyprland waybar
+		sudo dnf install -y hyprland hyprlang hyprlang-devel waybar dunst brightnessctl
 		sudo dnf install -y wayland-devel wayland-protocols-devel pango-devel \
 			cairo-devel file-devel libglvnd-devel libglvnd-core-devel \
-			libjpeg-turbo-devel libwebp-devel gcc-c++
+			libjpeg-turbo-devel libwebp-devel gcc-c++ cmake ninja-build
 		git_clone "https://github.com/hyprwm/hyprpaper"
 		cd "$git_dir/hyprpaper" || exit 1
 		make all
