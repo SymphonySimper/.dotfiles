@@ -33,11 +33,6 @@ toggle_mute() { $app set-mute $sink toggle; }
 toggle_mic() {
 	$app set-mute $source toggle
 	pkill -SIGRTMIN+8 waybar
-	if [[ $(get_mute $source) -eq 0 ]]; then
-		notify-send -a 'Volume' "Mic muted"
-	else
-		notify-send -a 'Volume' "Mic unmuted"
-	fi
 }
 
 case "$1" in
