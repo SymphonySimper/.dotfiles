@@ -50,7 +50,21 @@ install_hyprland() {
 	esac
 }
 
+install_auto-cpufreq() {
+	case "$DISTRO" in
+	fedora)
+		git_clone https://github.com/AdnanHodzic/auto-cpufreq
+		cd_here "$git_dir/auto-cpufreq"
+		sudo ./auto-cpufreq-installer
+		;;
+	*)
+		echo "Not supported distro: $DISTRO"
+		;;
+	esac
+}
+
 case "$1" in
 hyprland) install_hyprland ;;
+auto-cpufreq) install_auto-cpufreq ;;
 *) echo "Invalid option: $1" ;;
 esac
