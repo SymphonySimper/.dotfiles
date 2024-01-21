@@ -10,20 +10,17 @@ function get_mute() {
 	$app status "$1" | grep -qi muted && echo 0 || echo 1
 }
 
-get_vol() { echo "$($app get-volume $sink | cut -d ' ' -f2) * 100" | bc | cut -d '.' -f1; }
+get_vol() { $app get-volume $sink; }
 
 change_vol() {
-	if [[ $(get_mute $sink) -eq 0 ]]; then
+	if [[ $(get_mute $sink) -ne 0 ]]; then
 		$app set-volume $sink "$1"
 	fi
 }
 
 set_vol() {
-	expected_volume=$1
-	if [[ $(get_mute $sink) -eq 0 ]]; then
-		current_volume=$(get_vol)
-		volume_to_set=$((expected_volume - current_volume))
-		$app --change-volume $volume_to_set
+	if [[ $(get_mute $sink) -ne 0 ]]; then
+		change_vol "$1"
 	fi
 
 }
