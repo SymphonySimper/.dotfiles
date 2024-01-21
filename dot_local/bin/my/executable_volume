@@ -4,19 +4,23 @@ app="wpctl"
 
 #Icons
 sink="@DEFAULT_AUDIO_SINK@"
+source='@DEFAULT_AUDIO_SOURCE@'
 
-get_mute=$($app status $sink | grep -qi muted)
+function get_mute() {
+	$app status "$1" | grep -qi muted && echo 0 || echo 1
+}
+
 get_vol() { echo "$($app get-volume $sink | cut -d ' ' -f2) * 100" | bc | cut -d '.' -f1; }
 
 change_vol() {
-	if [[ $get_mute -eq 0 ]]; then
+	if [[ $(get_mute $sink) -eq 0 ]]; then
 		$app set-volume $sink "$1"
 	fi
 }
 
 set_vol() {
 	expected_volume=$1
-	if [[ $get_mute -eq 0 ]]; then
+	if [[ $(get_mute $sink) -eq 0 ]]; then
 		current_volume=$(get_vol)
 		volume_to_set=$((expected_volume - current_volume))
 		$app --change-volume $volume_to_set
@@ -25,6 +29,16 @@ set_vol() {
 }
 
 toggle_mute() { $app set-mute $sink toggle; }
+
+toggle_mic() {
+	$app set-mute $source toggle
+	pkill -SIGRTMIN+8 waybar
+	if [[ $(get_mute $source) -eq 0 ]]; then
+		notify-send -a 'Volume' "Mic muted"
+	else
+		notify-send -a 'Volume' "Mic unmuted"
+	fi
+}
 
 case "$1" in
 -s)
@@ -36,4 +50,6 @@ case "$1" in
 -U) change_vol 0.1+ ;;
 -D) change_vol 0.1- ;;
 -m) toggle_mute ;;
+-M) toggle_mic ;;
+-gM) get_mute $source ;;
 esac

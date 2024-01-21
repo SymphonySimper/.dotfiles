@@ -16,6 +16,7 @@
     "network",
     "backlight",
     "wireplumber",
+    "custom/mic",
     "idle_inhibitor",
     "custom/time",
     "custom/date",
@@ -116,6 +117,12 @@
       "critical": 80
     },
     "format-icons": ["", "", ""]
+  },
+  "custom/mic": {
+    "exec": "$HOME/.config/waybar/scripts/mic.sh",
+    "interval": "once",
+    "return-type": "json",
+    "signal": 8
   },
   "custom/spotify": {
     "exec": "myspotify",

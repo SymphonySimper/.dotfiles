@@ -149,6 +149,7 @@ tooltip label {
 
 #network.disconnected,
 #wireplumber.muted,
+#custom-mic.off,
 #custom-spotify.disabled {
   background-color: @peach;
   color: @base;
