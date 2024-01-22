@@ -9,7 +9,7 @@ sudo dnf groupupdate sound-and-video -y
 sudo dnf install alacritty git tmux neovim fzf ripgrep zsh zsh-autosuggestions \
   alacritty age eza mpv nodejs npm ps_mem sqlite sqlite-devel tldr \
   trash-cli util-linux-user wl-clipboard zathura zoxide gcc gcc-c++ \
-  gh lld clang mold -y
+  gh lld clang mold xwaylandvideobridge -y
 
 echo "Starship prompt"
 sudo dnf copr enable atim/starship -y
@@ -51,10 +51,10 @@ brew install neovim fzf starship lazygit eza
 {{  if ne .chezmoi.osRelease.id "ubuntu" }}
 echo "Flatpak"
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak remote-add --if-not-exists kdeapps https://distribute.kde.org/kdeapps.flatpakrepo
+# flatpak remote-add --if-not-exists kdeapps https://distribute.kde.org/kdeapps.flatpakrepo
 
 flatpak install -y com.spotify.Client com.discordapp.Discord com.github.tchx84.Flatseal com.obsproject.Studio org.qbittorrent.qBittorrent
-flatpak install -y org.kde.xwaylandvideobridge
+# flatpak install -y org.kde.xwaylandvideobridge
 {{  end }}
 
 {{  if eq .chezmoi.osRelease.id "fedora" }}
