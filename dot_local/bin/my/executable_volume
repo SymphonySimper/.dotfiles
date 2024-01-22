@@ -37,10 +37,10 @@ case "$1" in
 	shift
 	set_vol "$1"
 	;;
--u) change_vol 0.02+ ;;
--d) change_vol 0.02- ;;
--U) change_vol 0.1+ ;;
--D) change_vol 0.1- ;;
+-u) change_vol "0.02+" ;;
+-d) change_vol "0.02-" ;;
+-U) change_vol "0.1+" ;;
+-D) change_vol "0.1-" ;;
 -m) toggle_mute ;;
 -M) toggle_mic ;;
 -gM) get_mute $source ;;
