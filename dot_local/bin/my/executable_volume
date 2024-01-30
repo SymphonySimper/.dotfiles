@@ -12,18 +12,9 @@ function get_mute() {
 
 get_vol() { $app get-volume $sink; }
 
-change_vol() {
-	if [[ $(get_mute $sink) -ne 0 ]]; then
-		$app set-volume $sink "$1"
-	fi
-}
+change_vol() { $app set-volume $sink "$1"; }
 
-set_vol() {
-	if [[ $(get_mute $sink) -ne 0 ]]; then
-		change_vol "$1"
-	fi
-
-}
+set_vol() { change_vol "$1"; }
 
 toggle_mute() { $app set-mute $sink toggle; }
 
