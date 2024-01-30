@@ -7,7 +7,7 @@ function create_config() {
 }
 
 if [[ -d $dir ]]; then
-	wallpaper="$(find "$dir" -type f | sort -R | head -n1)"
+	wallpaper="$(find "$dir" -not -path '*.git/*' -not -name "*.py" -type f | sort -R | head -n1)"
 	create_config "$wallpaper"
 else
 	create_config "$HOME/.local/share/my/pics/bg.png"
