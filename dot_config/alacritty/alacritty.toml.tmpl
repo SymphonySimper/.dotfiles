@@ -100,3 +100,8 @@ color = "#FAB387"
 [[colors.indexed_colors]]
 index = 17
 color = "#F5E0DC"
+
+{{- if eq .chezmoi.os "windows" }}
+[shell]
+program = "ubuntu"
+{{- end }}
