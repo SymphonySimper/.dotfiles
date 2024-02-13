@@ -19,6 +19,10 @@ cd_here() {
 	cd "$1" || exit 1
 }
 
+not_supported() {
+	echo "$DISTRO not supported"
+}
+
 install_hyprland() {
 	case "$DISTRO" in
 	fedora)
@@ -45,7 +49,7 @@ install_hyprland() {
 		sudo cp -vi "$HOME/.config/my/wayland-sessions/hyprland.desktop" '/usr/share/wayland-sessions/hyprland.desktop'
 		;;
 	*)
-		echo "Not supported distro: $DISTRO"
+		not_supported
 		;;
 	esac
 }
@@ -58,13 +62,25 @@ install_auto-cpufreq() {
 		sudo ./auto-cpufreq-installer
 		;;
 	*)
-		echo "Not supported distro: $DISTRO"
+		not_supported
 		;;
+	esac
+}
+
+install_chrome() {
+	case "$DISTRO" in
+	debian)
+		cd_here "/tmp"
+		wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+		sudo dpkg -i google-chrome-stable_current_amd64.deb
+		;;
+	*) not_supported ;;
 	esac
 }
 
 case "$1" in
 hyprland) install_hyprland ;;
 auto-cpufreq) install_auto-cpufreq ;;
+chrome) install_chrome ;;
 *) echo "Invalid option: $1" ;;
 esac
