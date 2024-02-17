@@ -15,11 +15,11 @@ require("lazy").setup({
     -- { import = "lazyvim.plugins.extras.coding.native_snippets" },
 
     -- import any extras modules here
-    { import = "lazyvim.plugins.extras.util.project" },
+    -- { import = "lazyvim.plugins.extras.util.project" },
 
     -- DAP
-    { import = "lazyvim.plugins.extras.dap.core" },
-    { import = "lazyvim.plugins.extras.dap.nlua" },
+    -- { import = "lazyvim.plugins.extras.dap.core" },
+    -- { import = "lazyvim.plugins.extras.dap.nlua" },
 
     -- editor
     { import = "lazyvim.plugins.extras.editor.aerial" },
@@ -35,8 +35,8 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.python-semshi" },
 
     { import = "lazyvim.plugins.extras.lang.rust" },
-    { import = "lazyvim.plugins.extras.lang.clangd" },
-    { import = "lazyvim.plugins.extras.lang.cmake" },
+    -- { import = "lazyvim.plugins.extras.lang.clangd" },
+    -- { import = "lazyvim.plugins.extras.lang.cmake" },
 
     { import = "lazyvim.plugins.extras.lang.yaml" },
     { import = "lazyvim.plugins.extras.lang.docker" },
@@ -57,12 +57,12 @@ require("lazy").setup({
     -- { import = "lazyvim.plugins.extras.coding.codeium" },
 
     -- test
-    { import = "lazyvim.plugins.extras.test.core" },
+    -- { import = "lazyvim.plugins.extras.test.core" },
 
     -- Misc
-    { import = "lazyvim.plugins.extras.editor.leap" },
     { import = "lazyvim.plugins.extras.coding.yanky" },
-    { import = "lazyvim.plugins.extras.vscode" },
+    -- { import = "lazyvim.plugins.extras.editor.leap" },
+    -- { import = "lazyvim.plugins.extras.vscode" },
 
     -- import/override with your plugins
     { import = "plugins" },
