@@ -6,7 +6,9 @@ return {
     on_save_enabled = true,
     on_save_pattern = {
       "*.html",
+      "*.css",
       "*.js",
+      "*.ts",
       "*.jsx",
       "*.tsx",
       "*.twig",
