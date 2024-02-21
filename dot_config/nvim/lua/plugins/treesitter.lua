@@ -21,6 +21,7 @@ return {
       "python",
       "query",
       "regex",
+      "scss",
       "svelte",
       "tsx",
       "typescript",
