@@ -30,10 +30,5 @@ return {
       "yaml",
     })
     -- opts.ignore_install = { "help" }
-    -- See: https://github.com/andymass/vim-matchup
-    opts.matchup = {
-      enable = true,
-      include_match_words = true,
-    }
   end,
 }
