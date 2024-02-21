@@ -12,6 +12,8 @@ o.scrolloff = 8
 o.sidescrolloff = 8
 -- Turn off undofile
 o.undofile = false
+-- Create folds with visual selection
+o.foldmethod = "manual"
 
 -- Neovide
 if g.neovide then
