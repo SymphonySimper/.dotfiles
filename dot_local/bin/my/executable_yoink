@@ -1,10 +1,6 @@
 #!/bin/sh
 
-if $WSL; then
-	pgm='clip.exe'
-else
-	pgm='wl-copy -n'
-fi
+pgm='wl-copy -n'
 
 if [ -p /dev/stdin ]; then
 	cat /dev/stdin | $pgm
