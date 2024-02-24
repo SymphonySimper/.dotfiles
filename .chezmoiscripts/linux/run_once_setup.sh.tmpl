@@ -42,6 +42,11 @@ if [ ! -d "/home/linuxbrew/" ]; then
 fi
 
 {{  if eq .chezmoi.osRelease.id "ubuntu" }}
+wsl_conf="$HOME/.local/share/chezmoi/dot_config/wsl/wsl.conf"
+if [ -f $wsl_conf ]; then
+  sudo cp $wsl_conf /etc/wsl.conf
+fi
+
 sudo apt install git tmux zsh zsh-autosuggestions nodejs npm sqlite3 libsqlite3-dev tldr \
     wl-clipboard zoxide ripgrep fd-find gcc g++ flatpak python3-venv unzip trash-cli -y
 
