@@ -53,6 +53,9 @@ sudo apt install git tmux zsh zsh-autosuggestions nodejs npm sqlite3 libsqlite3-
 brew install neovim fzf starship lazygit eza
 {{  end }}
 
+npm i -g pnpm
+"$HOME"/.local/share/npm/bin/pnpm i -g pnpm
+
 {{  if ne .chezmoi.osRelease.id "ubuntu" }}
 echo "Flatpak"
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
