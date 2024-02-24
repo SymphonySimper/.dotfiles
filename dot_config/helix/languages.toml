@@ -1,18 +1,42 @@
-[[language]]
-name = "rust"
-auto-format = true
-[language.language-server]
-command = "rustup"
-args = ["run", "stable", "rust-analyzer"]
-[language.config]
-checkOnSave = { command = "clippy" }
+# rust
+[language-server.rust-analyzer.config.check]
+command = "clippy"
 
-[[language]]
-name = "typescript"
-auto-format = true
-# pass format options according to https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration omitting the "[language].format." prefix.
-config = { format = { "semicolons" = "insert", "insertSpaceBeforeFunctionParenthesis" = true } }
-
+# Web (ts,js,svelte,tailwindcss)
 [[language]]
 name = "svelte"
 auto-format = true
+
+[[language]]
+name = "html"
+language-servers = ["vscode-html-language-server", "tailwindcss-ls"]
+
+[[language]]
+name = "css"
+language-servers = ["vscode-css-language-server", "tailwindcss-ls"]
+
+[[language]]
+name = "jsx"
+language-servers = ["typescript-language-server", "tailwindcss-ls"]
+
+[[language]]
+name = "tsx"
+language-servers = ["typescript-language-server", "tailwindcss-ls"]
+
+[[language]]
+name = "svelte"
+language-servers = ["svelteserver", "tailwindcss-ls"]
+
+# Python
+[[language]]
+name = "python"
+roots = ["pyproject.toml"]
+language-servers = ["pyright", "ruff"]
+
+[language-server.pyright]
+command = "pyright-langserver"
+args = ["--stdio"]
+
+[language-server.ruff]
+command = "ruff-lsp"
+config = { settings = { run = "onSave" } }
