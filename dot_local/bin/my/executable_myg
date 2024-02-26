@@ -3,6 +3,23 @@
 g='git'
 f='fzf'
 
+function is_len_not_zero() {
+	if [[ ${#1} -gt 0 ]]; then
+		return 0
+	fi
+
+	return 1
+}
+
+function worktree_select() {
+	selected=$($g worktree list | $f | cut -d ' ' -f 1)
+	if ! is_len_not_zero "$selected"; then
+		echo "No option selected"
+		exit 1
+	fi
+	printf "%s" "$selected"
+}
+
 if [ "$1" = 'cb' ]; then
 	# Clone repo
 	$g clone --bare "$2"
@@ -18,13 +35,18 @@ else
 		selected_branch_name="$($g branch | $f)"
 		branch_name_cut_f1="$(echo "$selected_branch_name" | awk '{printf $1}')"
 		branch_name_cut_f2="$(echo "$selected_branch_name" | awk '{printf $2}')"
-		if [[ "${#branch_name_cut_f2}" -gt 0 ]]; then
+		if is_len_not_zero "$branch_name_cut_f2"; then
 			branch_name="$branch_name_cut_f2"
 		else
 			branch_name="$branch_name_cut_f1"
 		fi
 		$g worktree add "$branch_name" "$branch_name"
 		;;
+	wr)
+		rm_branch="$(worktree_select)"
+		is_len_not_zero "$rm_branch" && $g worktree remove "$rm_branch"
+		;;
+	wl) $g worktree list ;;
 	cw)
 		# Git change to different worktree (just prints out the dir)
 		$g worktree list | $f | cut -d ' ' -f 1
