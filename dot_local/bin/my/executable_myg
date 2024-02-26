@@ -3,38 +3,39 @@
 g='git'
 f='fzf'
 
-if [ ! -d "$(git rev-parse --git-dir 2>/dev/null)" ]; then
-	echo "Not a git directory"
-	exit 1
-fi
-
-case "$1" in
-cb)
+if [ "$1" = 'cb' ]; then
 	# Clone repo
 	$g clone --bare "$2"
-	;;
-wa)
-	# Checout branch to worktree
-	selected_branch_name="$($g branch | $f)"
-	branch_name_cut_f1="$(echo "$selected_branch_name" | awk '{printf $1}')"
-	branch_name_cut_f2="$(echo "$selected_branch_name" | awk '{printf $2}')"
-	if [[ "${#branch_name_cut_f2}" -gt 0 ]]; then
-		branch_name="$branch_name_cut_f2"
-	else
-		branch_name="$branch_name_cut_f1"
+else
+	if [ ! -d "$(git rev-parse --git-dir 2>/dev/null)" ]; then
+		echo "Not a git directory"
+		exit 1
 	fi
-	$g worktree add "$branch_name" "$branch_name"
-	;;
-cw)
-	# Git change to different worktree (just prints out the dir)
-	$g worktree list | $f | cut -d ' ' -f 1
-	;;
-s) $g status ;;
-c) $g commit ;;
-cl) $g clean -fdxX ;;
-lz) lazygit ;;
-*)
-	echo "Invalid option"
-	exit 1
-	;;
-esac
+
+	case "$1" in
+	wa)
+		# Checout branch to worktree
+		selected_branch_name="$($g branch | $f)"
+		branch_name_cut_f1="$(echo "$selected_branch_name" | awk '{printf $1}')"
+		branch_name_cut_f2="$(echo "$selected_branch_name" | awk '{printf $2}')"
+		if [[ "${#branch_name_cut_f2}" -gt 0 ]]; then
+			branch_name="$branch_name_cut_f2"
+		else
+			branch_name="$branch_name_cut_f1"
+		fi
+		$g worktree add "$branch_name" "$branch_name"
+		;;
+	cw)
+		# Git change to different worktree (just prints out the dir)
+		$g worktree list | $f | cut -d ' ' -f 1
+		;;
+	s) $g status ;;
+	c) $g commit ;;
+	cl) $g clean -fdxX ;;
+	lz) lazygit ;;
+	*)
+		echo "Invalid option"
+		exit 1
+		;;
+	esac
+fi
