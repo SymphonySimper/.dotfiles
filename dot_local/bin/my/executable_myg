@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+g='git'
+f='fzf'
+
+if [ ! -d "$(git rev-parse --git-dir 2>/dev/null)" ]; then
+	echo "Not a git directory"
+	exit 1
+fi
+
+case "$1" in
+cb)
+	# Clone repo
+	$g clone --bare "$2"
+	;;
+wa)
+	# Checout branch to worktree
+	branch_name="$($g branch | $f | cut -d ' ' -f 2)"
+	$g worktree add "$branch_name" "$branch_name"
+	;;
+wc)
+	# Git change to different worktree (just prints out the dir)
+	"$($g worktree list | $f | cut -d ' ' -f 1)"
+	;;
+s) $g status ;;
+c) $g commit ;;
+cl) $g clean -fdxX ;;
+lz) lazygit ;;
+*)
+	echo "Invalid option"
+	exit 1
+	;;
+esac
