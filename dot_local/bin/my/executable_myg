@@ -33,14 +33,16 @@ else
 	wa)
 		# Checout branch to worktree
 		selected_branch_name="$($g branch | $f)"
-		branch_name_cut_f1="$(echo "$selected_branch_name" | awk '{printf $1}')"
-		branch_name_cut_f2="$(echo "$selected_branch_name" | awk '{printf $2}')"
-		if is_len_not_zero "$branch_name_cut_f2"; then
-			branch_name="$branch_name_cut_f2"
-		else
-			branch_name="$branch_name_cut_f1"
+		if is_len_not_zero "$selected_branch_name"; then
+			branch_name_cut_f1="$(echo "$selected_branch_name" | awk '{printf $1}')"
+			branch_name_cut_f2="$(echo "$selected_branch_name" | awk '{printf $2}')"
+			if is_len_not_zero "$branch_name_cut_f2"; then
+				branch_name="$branch_name_cut_f2"
+			else
+				branch_name="$branch_name_cut_f1"
+			fi
+			$g worktree add "$branch_name" "$branch_name"
 		fi
-		$g worktree add "$branch_name" "$branch_name"
 		;;
 	wr)
 		rm_branch="$(worktree_select)"
