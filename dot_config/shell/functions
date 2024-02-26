@@ -13,6 +13,12 @@ gamp(){
 	&& [ -z "$@" ] && g commit || g commit -m "$@" \
 	&& g push
 }
+gcw() {
+    dir="$(myg cw)"
+    if [[ "${#dir}" -gt 0 ]]; then
+      cd "$dir"
+    fi
+}
 
 # # config git
 # cga(){ config add $@; }
