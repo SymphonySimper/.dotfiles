@@ -1,28 +1,27 @@
 { config, pkgs, ... }:
-let 
-username = "symph";
-in {
+let
+  username = "symph";
+in
+{
+  imports = [
+    ./programs/default.nix
+  ];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = username;
   home.homeDirectory = "/home/${username}";
 
   # Do not change
-  home.stateVersion = "23.11"; 
+  home.stateVersion = "23.11";
 
   home.packages = with pkgs; [
     neofetch
     zsh
     neovim
-    helix
-    rustup
-    nodejs
-    nodePackages_latest.npm
-    nodePackages_latest.pnpm
   ];
 
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    EDITOR = "nvim";
   };
 
   # Let Home Manager install and manage itself.
