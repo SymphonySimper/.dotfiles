@@ -1,15 +1,12 @@
-{ config, pkgs, ... }:
-let
-  username = "symph";
-in
+{ config, pkgs, userSettings, ... }:
 {
   imports = [
     ./programs/default.nix
   ];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = username;
-  home.homeDirectory = "/home/${username}";
+  home.username = userSettings.username;
+  home.homeDirectory = "/home/${userSettings.username}";
 
   # Do not change
   home.stateVersion = "23.11";
