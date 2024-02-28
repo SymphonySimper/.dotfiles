@@ -2,6 +2,6 @@
 {
   imports = [
     ./helix.nix
-    ./nvim.nix
+    ./nvim/default.nix
   ];
 }
