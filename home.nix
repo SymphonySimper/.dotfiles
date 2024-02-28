@@ -1,7 +1,7 @@
 { config, pkgs, userSettings, ... }:
 {
   imports = [
-    ./programs/default.nix
+    ./packages/default.nix
   ];
 
   nixpkgs = {
