@@ -1,9 +1,10 @@
 { config, pkgs, ... }:
 {
   imports = [
-    ./misc.nix
+    ./cli/default.nix
     ./dev/default.nix
     ./editor/default.nix
-    ./cli/default.nix
+    ./misc.nix
+    ./shell/default.nix
   ];
 }

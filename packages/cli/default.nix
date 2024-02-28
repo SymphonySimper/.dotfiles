@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
 {
   imports = [
-    ./git.nix
     ./fzf.nix
+    ./git.nix
     ./zoxide.nix
   ];
 
