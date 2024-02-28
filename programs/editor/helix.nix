@@ -1,7 +1,7 @@
-{ config, pkgs, ... }:
+{ config, pkgs, helix-flake, ... }:
 {
   home.packages = with pkgs; [
-    helix
+    helix-flake.packages.${pkgs.system}.default
     # Lsp
     ## svelte
     nodePackages_latest.svelte-language-server

@@ -8,9 +8,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    helix-flake.url = "github:helix-editor/helix";
   };
 
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs = { nixpkgs, home-manager, helix, ... }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -28,6 +29,7 @@
 
         extraSpecialArgs = {
           inherit userSettings;
+          helix-flake = helix;
         };
       };
     };
