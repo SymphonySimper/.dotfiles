@@ -1,8 +1,15 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+let
+  aliases = import ./aliases.nix;
+in
+{
   programs.zsh = {
     enable = true;
     dotDir = ".config/zsh";
     enableAutosuggestions = true;
+    autocd = true;
+    defaultKeymap = "viins";
+    shellAliases = aliases.shellAliases;
     initExtra = ''
       # >>> conda initialize >>>
       # !! Contents within this block are managed by 'conda init' !!
