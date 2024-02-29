@@ -17,6 +17,11 @@
       pkgs = nixpkgs.legacyPackages.${system};
       userSettings = {
         username = "symph";
+        packages = {
+          include = {
+            helix = false;
+          };
+        };
       };
     in
     {

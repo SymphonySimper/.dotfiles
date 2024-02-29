@@ -1,7 +1,6 @@
-{ config, pkgs, ... }:
+{ config, pkgs, userSettings, ... }:
 {
   imports = [
-    ./helix.nix
     ./nvim/default.nix
-  ];
+  ] ++ (if userSettings.packages.include.helix then [ ./helix/default.nix ] else [ ]);
 }
