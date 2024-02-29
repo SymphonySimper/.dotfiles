@@ -18,15 +18,13 @@
   # Do not change
   home.stateVersion = "23.11";
 
-  home.packages = with pkgs; [
-    neofetch
-    zsh
-    neovim
-  ];
+  # home.packages = with pkgs; [
+  #   neofetch
+  # ];
 
-  # home.sessionVariables = {
-  #   EDITOR = "nvim";
-  # };
+  home.sessionVariables = {
+    EDITOR = "nvim";
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
