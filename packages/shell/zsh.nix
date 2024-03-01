@@ -10,14 +10,14 @@ in
     autocd = true;
     defaultKeymap = "viins";
     shellAliases = aliases.shellAliases;
-    envExtra = ''
-      export PNPM_HOME="${config.xdg.dataHome}"/pnpm
-    '';
     profileExtra = ''
       nix_loc="$HOME"/.nix-profile/etc/profile.d/nix.sh
       [ -f $nix_loc ] && . $nix_loc
+
+      . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
     '';
     initExtra = ''
+
       # >>> conda initialize >>>
       # !! Contents within this block are managed by 'conda init' !!
       __conda_setup="$('/home/symph/.local/share/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
