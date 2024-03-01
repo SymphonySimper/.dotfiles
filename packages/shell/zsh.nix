@@ -10,6 +10,9 @@ in
     autocd = true;
     defaultKeymap = "viins";
     shellAliases = aliases.shellAliases;
+    envExtra = ''
+      export PNPM_HOME="${config.xdg.dataHome}"/pnpm
+    '';
     profileExtra = ''
       nix_loc="$HOME"/.nix-profile/etc/profile.d/nix.sh
       [ -f $nix_loc ] && . $nix_loc
