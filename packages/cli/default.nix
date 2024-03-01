@@ -10,9 +10,10 @@
 
   home.packages = with pkgs; [
     eza
-    trash-cli
     lazygit
+    tlrc
     tmux
+    trash-cli
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 }
