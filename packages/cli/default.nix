@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 {
   imports = [
+    ./alacritty.nix
     ./fzf.nix
     ./git.nix
     ./tmux.nix
