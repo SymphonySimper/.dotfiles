@@ -10,7 +10,7 @@ in
   home.sessionVariables = {
     EDITOR = "nvim";
     PNPM_HOME = paths.pnpmHome;
-    CONDARCA = "${xdg.configHome}/conda/condarc";
+    CONDARCA = "${config.xdg.configHome}/conda/condarc";
     PATH = "$PATH:${joinedPath}";
   };
 }
