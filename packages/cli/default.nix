@@ -13,5 +13,6 @@
     trash-cli
     lazygit
     tmux
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 }
