@@ -10,6 +10,10 @@ in
     autocd = true;
     defaultKeymap = "viins";
     shellAliases = aliases.shellAliases;
+    profileExtra = ''
+      nix_loc="$HOME"/.nix-profile/etc/profile.d/nix.sh
+      [ -f $nix_loc ] && . $nix_loc
+    '';
     initExtra = ''
       # >>> conda initialize >>>
       # !! Contents within this block are managed by 'conda init' !!
