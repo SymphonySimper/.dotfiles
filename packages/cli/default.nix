@@ -3,6 +3,7 @@
   imports = [
     ./fzf.nix
     ./git.nix
+    ./tmux.nix
     ./zoxide.nix
   ];
 
