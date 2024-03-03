@@ -8,6 +8,7 @@
     escapeTime = 1;
     keyMode = "vi";
     mouse = true;
+    customPaneNavigationAndResize = true;
     plugins = with pkgs; [
       tmuxPlugins.sensible
       {
@@ -26,7 +27,6 @@
       # Attach to different session on exit
       set-option -g detach-on-destroy off
 
-      # set-option -ga terminal-overrides ",xterm-256color:Tc"
       setw -g monitor-activity on
       set -g visual-activity on
 
@@ -47,21 +47,9 @@
       bind | split-window -hc "#{pane_current_path}"
       bind c new-window -c "#{pane_current_path}"
 
-      # moving between panes with vim movement keys
-      bind h select-pane -L
-      bind j select-pane -D
-      bind k select-pane -U
-      bind l select-pane -R
-
       # moving between windows with vim movement keys
       bind -r C-h select-window -t :-
       bind -r C-l select-window -t :+
-
-      # resize panes with vim movement keys
-      bind -r H resize-pane -L 5
-      bind -r J resize-pane -D 6
-      bind -r K resize-pane -U 5
-      bind -r L resize-pane -R 5
 
       # Maximize pane
       bind -r m resize-pane -Z
