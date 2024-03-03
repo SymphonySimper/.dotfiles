@@ -25,5 +25,8 @@
 
     # home-manager;
     hmbs = "cd $HOME/.dotfiles && home-manager build switch --flake .";
+
+    # general
+    im_light = "ps_mem -p $(pgrep -d, -u $USER)";
   };
 }
