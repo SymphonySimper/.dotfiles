@@ -9,11 +9,19 @@
   ];
 
   home.packages = with pkgs; [
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    curl
     eza
+    gnutar
+    htop
+    killall
     lazygit
+    ps_mem
     tlrc
     tmux
     trash-cli
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    unzip
+    wget
+    zip
   ];
 }
