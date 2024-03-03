@@ -1,4 +1,4 @@
-{ config, pkgs, helix-flake, ... }:
+{ pkgs, helix-flake, ... }:
 {
   programs.helix = {
     enable = true;

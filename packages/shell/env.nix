@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 let
   paths = {
     pnpmHome = "${config.xdg.dataHome}/pnpm";

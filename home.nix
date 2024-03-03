@@ -1,4 +1,4 @@
-{ config, pkgs, userSettings, ... }:
+{ userSettings, ... }:
 {
   imports = [
     ./packages/default.nix
