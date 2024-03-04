@@ -12,6 +12,8 @@
     gP = "git push";
     gp = "git pull";
     gpo = "git pull origin";
+    gS = "git stash";
+    gSp = "git stash pop";
     gb = "git branch";
     gce = "git checkout";
     gsh = "git switch";
