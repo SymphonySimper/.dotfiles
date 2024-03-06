@@ -17,6 +17,9 @@ in
       . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
     '';
     initExtra = ''
+      # Edit line in vim with ctrl-e:
+      autoload edit-command-line; zle -N edit-command-line
+      bindkey '^e' edit-command-line
 
       # >>> conda initialize >>>
       # !! Contents within this block are managed by 'conda init' !!
