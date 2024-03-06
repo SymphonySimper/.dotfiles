@@ -6,9 +6,12 @@ in
   programs.zsh = {
     enable = true;
     dotDir = ".config/zsh";
-    enableAutosuggestions = true;
     autocd = true;
     defaultKeymap = "viins";
+    enableAutosuggestions = true;
+    syntaxHighlighting = {
+      enable = true;
+    };
     shellAliases = aliases.shellAliases;
     profileExtra = ''
       nix_loc="$HOME"/.nix-profile/etc/profile.d/nix.sh
