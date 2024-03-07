@@ -11,20 +11,8 @@ require("lazy").setup({
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
 
-    -- coding
-    -- { import = "lazyvim.plugins.extras.coding.native_snippets" },
-
-    -- import any extras modules here
-    -- { import = "lazyvim.plugins.extras.util.project" },
-
-    -- DAP
-    -- { import = "lazyvim.plugins.extras.dap.core" },
-    -- { import = "lazyvim.plugins.extras.dap.nlua" },
-
     -- editor
-    -- { import = "lazyvim.plugins.extras.editor.aerial" },
-    -- { import = "lazyvim.plugins.extras.editor.symbols-outline" },
-    -- { import = "lazyvim.plugins.extras.editor.navic" },
+    { import = "lazyvim.plugins.extras.editor.harpoon2" },
 
     -- Lang
     { import = "lazyvim.plugins.extras.lang.typescript" },
@@ -35,8 +23,6 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.python-semshi" },
 
     { import = "lazyvim.plugins.extras.lang.rust" },
-    -- { import = "lazyvim.plugins.extras.lang.clangd" },
-    -- { import = "lazyvim.plugins.extras.lang.cmake" },
 
     { import = "lazyvim.plugins.extras.lang.yaml" },
     { import = "lazyvim.plugins.extras.lang.docker" },
@@ -45,7 +31,6 @@ require("lazy").setup({
 
     -- Formatting
     { import = "lazyvim.plugins.extras.formatting.prettier" },
-    -- { import = "lazyvim.plugins.extras.formatting.black" },
 
     -- Linting
     { import = "lazyvim.plugins.extras.linting.eslint" },
@@ -53,16 +38,8 @@ require("lazy").setup({
     -- lsp
     { import = "lazyvim.plugins.extras.lsp.none-ls" },
 
-    -- AI
-    -- { import = "lazyvim.plugins.extras.coding.codeium" },
-
-    -- test
-    -- { import = "lazyvim.plugins.extras.test.core" },
-
     -- Misc
     { import = "lazyvim.plugins.extras.coding.yanky" },
-    -- { import = "lazyvim.plugins.extras.editor.leap" },
-    -- { import = "lazyvim.plugins.extras.vscode" },
 
     -- import/override with your plugins
     { import = "plugins" },
