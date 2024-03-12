@@ -17,7 +17,7 @@
     gb = "git branch";
     gce = "git checkout";
     gsh = "git switch";
-    gcln = "git clean -fdxX";
+    gcln = "git clean -fdx";
     gz = "lazygit";
     gen_ssh = "ssh-keygen -t ed25519 -C \"$(git config --get user.email)\"";
 
