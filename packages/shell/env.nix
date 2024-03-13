@@ -12,5 +12,6 @@ in
     PNPM_HOME = paths.pnpmHome;
     CONDARCA = "${config.xdg.configHome}/conda/condarc";
     PATH = "$PATH:${joinedPath}";
+    ZELLIJ_AUTO_EXIT = "true";
   };
 }
