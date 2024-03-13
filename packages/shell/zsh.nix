@@ -39,9 +39,10 @@ in
       unset __conda_setup
       # <<< conda initialize <<<
 
-      if [ -x "$(command -v tmux)" ] && [ -n "''${DISPLAY}" ] && [ -z "''${TMUX}" ]; then
-          exec tmux new >/dev/null 2>&1
-      fi
+      # Auto start tmux
+      # if [ -x "$(command -v tmux)" ] && [ -n "''${DISPLAY}" ] && [ -z "''${TMUX}" ]; then
+      #     exec tmux new >/dev/null 2>&1
+      # fi
     '';
   };
 }
