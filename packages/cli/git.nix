@@ -28,6 +28,21 @@
     };
   };
 
+  programs.lazygit = {
+    enable = true;
+    settings = {
+      git = {
+        disableForcePushing = true;
+      };
+
+      gui = {
+        showBottomLine = false;
+        showPanelJumps = false;
+        nerdFontsVersion = "3";
+      };
+    };
+  };
+
   home.packages = with pkgs; [
     gh
   ];

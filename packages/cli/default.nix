@@ -16,7 +16,6 @@
     gnutar
     htop
     killall
-    lazygit
     ps_mem
     tlrc
     tmux
