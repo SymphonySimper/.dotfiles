@@ -4,6 +4,7 @@
     ./alacritty.nix
     ./fzf.nix
     ./git.nix
+    ./man.nix
     ./tmux.nix
     ./zoxide.nix
   ];
