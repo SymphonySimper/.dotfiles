@@ -6,6 +6,7 @@
     ./git.nix
     ./man.nix
     ./tmux.nix
+    ./wezterm/default.nix
     ./zellij.nix
     ./zoxide.nix
   ];
