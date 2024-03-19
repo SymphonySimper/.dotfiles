@@ -8,10 +8,8 @@ in
     dotDir = ".config/zsh";
     autocd = true;
     defaultKeymap = "viins";
-    enableAutosuggestions = true;
-    syntaxHighlighting = {
-      enable = true;
-    };
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
     shellAliases = aliases.shellAliases;
     profileExtra = ''
       nix_loc="$HOME"/.nix-profile/etc/profile.d/nix.sh
