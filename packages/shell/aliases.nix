@@ -2,8 +2,19 @@
   shellAliases = {
     # general
     q = "exit";
+    ka = "killall";
+    ## home-manager;
+    hmbs = "cd $HOME/.dotfiles && home-manager build switch --flake .";
+    ## eza
+    eza = "eza --all --long --header --blocksize --group-directories-first";
+    ezat = "eza --total-size";
+    ls = "eza";
+    lst = "ezat";
+    ## misc
+    im_light = "ps_mem -p $(pgrep -d, -u $USER)";
 
-    # git
+    # dev
+    ## git
     g = "git";
     gc = "git clone";
     gs = "git status";
@@ -20,15 +31,20 @@
     gcln = "git clean -fdx";
     gz = "lazygit";
     gen_ssh = "ssh-keygen -t ed25519 -C \"$(git config --get user.email)\"";
-
-    # python
+    ## rust
+    rc = "cargo";
+    rcn = "cargo new";
+    rca = "cargo add";
+    rcr = "cargo run";
+    rct = "cargo test";
+    ## python
     py = "python";
-    ca = "conda activate";
-
-    # home-manager;
-    hmbs = "cd $HOME/.dotfiles && home-manager build switch --flake .";
-
-    # general
-    im_light = "ps_mem -p $(pgrep -d, -u $USER)";
+    pc = "conda";
+    pca = "conda activate";
+    ## js
+    jp = "pnpm";
+    jpi = "pnpm i";
+    jprd = "pnpm run dev --open";
+    jpf = "pnpm format";
   };
 }
