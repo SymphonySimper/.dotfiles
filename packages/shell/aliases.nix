@@ -20,14 +20,16 @@
     gs = "git status";
     ga = "git add";
     gm = "git commit";
-    gP = "git push";
     gp = "git pull";
     gpo = "git pull origin";
+    gP = "git push";
+    gPF = "git push --force-with-lease";
     gS = "git stash";
     gSp = "git stash pop";
     gb = "git branch";
     gce = "git checkout";
     gsh = "git switch";
+    gR = "git reset --hard HEAD";
     gcln = "git clean -fdx";
     gz = "lazygit";
     gen_ssh = "ssh-keygen -t ed25519 -C \"$(git config --get user.email)\"";
