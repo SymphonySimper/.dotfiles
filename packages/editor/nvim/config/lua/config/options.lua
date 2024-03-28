@@ -14,6 +14,8 @@ o.sidescrolloff = 8
 o.undofile = false
 -- Create folds with visual selection
 o.foldmethod = "manual"
+-- Hide Command line
+o.cmdheight = 0
 
 -- Neovide
 if g.neovide then
