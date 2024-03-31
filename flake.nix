@@ -8,12 +8,14 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-wsl.url = "github:nix-community/nixos-wsl";
     # helix-flake.url = "github:helix-editor/helix";
   };
 
   outputs =
     { nixpkgs
     , home-manager
+    , nixos-wsl
     , # helix,
       ...
     }:
@@ -51,6 +53,7 @@
             inherit pkgs;
             inherit userSettings;
             inherit profileSettings;
+            nixos-wsl = nixos-wsl;
           };
         };
       };

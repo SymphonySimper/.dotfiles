@@ -1,9 +1,9 @@
-{ userSettings, ... }:
+{ userSettings, nixos-wsl, ... }:
 {
   imports = [
-    ../../system/default.nix
     # include NixOS-WSL modules
-    <nixos-wsl/modules>
+    nixos-wsl.nixosModules.wsl
+    ../../system/default.nix
   ];
 
   wsl = {
