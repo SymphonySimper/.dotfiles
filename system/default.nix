@@ -1,5 +1,7 @@
 { config, lib, pkgs, userSettings, ... }:
 {
+  import = [ ./packages/default.nix ];
+
   # Enable flakse
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
