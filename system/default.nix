@@ -6,7 +6,7 @@
   system.stateVersion = "23.11"; # Do no change
 
   programs.zsh.enable = true;
-  user.defaultUserShell = pkgs.zsh;
+  users.defaultUserShell = pkgs.zsh;
 
   users.users.${userSettings.username} = {
     isNormalUser = true;
