@@ -6,6 +6,12 @@
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
+    plugins = [
+      {
+        plugin = pkgs.vimPlugins.sqlite-lua;
+        config = "let g:sqlite_clib_path = '${pkgs.sqlite.out}/lib/libsqlite3.so'";
+      }
+    ];
   };
 
   xdg.configFile."nvim" = {
@@ -14,7 +20,8 @@
   };
 
   home.packages = with pkgs; [
-    ripgrep
     fd
+    ripgrep
+    sqlite
   ];
 }
