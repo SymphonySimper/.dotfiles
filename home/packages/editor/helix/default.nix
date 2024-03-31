@@ -1,8 +1,11 @@
-{ pkgs, helix-flake, ... }:
+{ pkgs
+, # helix-flake,
+  ...
+}:
 {
   programs.helix = {
     enable = true;
-    package = helix-flake.packages.${pkgs.system}.default;
+    # package = helix-flake.packages.${pkgs.system}.default;
 
     settings = {
       theme = "catppuccin_mocha";

@@ -8,10 +8,15 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    helix-flake.url = "github:helix-editor/helix";
+    # helix-flake.url = "github:helix-editor/helix";
   };
 
-  outputs = { nixpkgs, home-manager, helix, ... }:
+  outputs =
+    { nixpkgs
+    , home-manager
+    , # helix,
+      ...
+    }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -19,7 +24,7 @@
         username = "symph";
         packages = {
           include = {
-            helix = false;
+            helix = true;
             gui = false;
           };
         };
@@ -35,7 +40,7 @@
 
         extraSpecialArgs = {
           inherit userSettings;
-          helix-flake = helix;
+          # helix-flake = helix;
         };
       };
     };
