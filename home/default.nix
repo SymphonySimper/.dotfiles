@@ -1,7 +1,10 @@
 { userSettings, ... }:
 {
   imports = [
-    ./packages/default.nix
+    ./packages/cli/default.nix
+    ./packages/dev/default.nix
+    ./packages/editor/default.nix
+    ./packages/shell/default.nix
   ];
 
   nixpkgs = {

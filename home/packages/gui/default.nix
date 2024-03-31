@@ -1,8 +1,8 @@
 { pkgs, ... }:
 {
   imports = [
-    ./hyprland.nix
     ./alacritty.nix
+    ./hyprland/default.nix
     ./wezterm/default.nix
   ];
 
