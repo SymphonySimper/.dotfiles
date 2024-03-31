@@ -21,6 +21,7 @@
     trash-cli
     unzip
     wget
+    wl-clipboard
     zip
   ];
 }
