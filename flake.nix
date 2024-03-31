@@ -18,12 +18,15 @@
       ...
     }:
     let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-      profile = "default";
+      profileSettings = {
+        name = "wsl";
+        system = "x86_64-linux";
+      };
       userSettings = {
         username = "symph";
       };
+      pkgs = nixpkgs.legacyPackages.${profileSettings.system};
+      lib = nixpkgs.lib;
     in
     {
       homeConfigurations.${userSettings.username} = home-manager.lib.homeManagerConfiguration {
@@ -31,11 +34,24 @@
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
-        modules = [ ./profiles/${profile}/home.nix ];
+        modules = [ ./profiles/${profileSettings.name}/home.nix ];
 
         extraSpecialArgs = {
           inherit userSettings;
+          inherit profileSettings;
           # helix-flake = helix;
+        };
+      };
+      nixosConfigurations = {
+        system = lib.nixosSystem {
+          system = profileSettings.system;
+          modules = [ ./profiles/${profileSettings.name}/configuration.nix ];
+          specialArgs = {
+            # pass config variables from above
+            inherit pkgs;
+            inherit userSettings;
+            inherit profileSettings;
+          };
         };
       };
     };
