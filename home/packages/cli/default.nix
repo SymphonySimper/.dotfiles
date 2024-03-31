@@ -1,18 +1,15 @@
 { pkgs, ... }:
 {
   imports = [
-    ./alacritty.nix
     ./fzf.nix
     ./git.nix
     ./man.nix
     ./tmux.nix
-    ./wezterm/default.nix
     ./zellij.nix
     ./zoxide.nix
   ];
 
   home.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     curl
     eza
     gnutar
