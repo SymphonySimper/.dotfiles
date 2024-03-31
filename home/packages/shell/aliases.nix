@@ -3,8 +3,6 @@
     # general
     q = "exit";
     ka = "killall";
-    ## home-manager;
-    hmbs = "cd $HOME/.dotfiles && home-manager build switch --flake .";
     ## eza
     eza = "eza --all --long --header --blocksize --group-directories-first";
     ezat = "eza --total-size";
@@ -14,6 +12,10 @@
     im_light = "ps_mem -p $(pgrep -d, -u $USER)";
 
     # dev
+    ## Nix;
+    snrs = "cd $HOME/.dotfiles && sudo nixos-rebuild switch --flake .#system";
+    ### home-manager;
+    hmbs = "cd $HOME/.dotfiles && home-manager build switch --flake .";
     ## git
     g = "git";
     gc = "git clone";
