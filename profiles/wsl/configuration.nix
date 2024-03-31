@@ -6,6 +6,12 @@
     <nixos-wsl/modules>
   ];
 
-  wsl.enable = true;
-  wsl.defaultUser = userSettings.username;
+  wsl = {
+    enable = true;
+    defaultUser = userSettings.username;
+    wslConf = {
+      user.default = userSettings.username;
+      interop.appendWindowsPath = false;
+    };
+  };
 }
