@@ -17,6 +17,6 @@
     isNormalUser = true;
     home = "/home/${userSettings.username}";
     description = "${userSettings.username}";
-    extraGroups = [ "wheel" "networkmanager" "docker" ];
+    extraGroups = [ "wheel" "networkmanager" ];
   };
 }
