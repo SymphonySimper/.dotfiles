@@ -10,6 +10,9 @@
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
 
+  # Required to make mamba-managed Python run without an FHS environment
+  programs.nix-ld.enable = true;
+
   users.users.${userSettings.username} = {
     isNormalUser = true;
     home = "/home/${userSettings.username}";

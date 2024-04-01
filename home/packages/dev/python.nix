@@ -10,6 +10,8 @@
       channels:
         - conda-forge
       always_yes: false
+      auto_activate_base: false
+      changeps1: false
     '';
   };
 
