@@ -12,13 +12,7 @@
     # helix-flake.url = "github:helix-editor/helix";
   };
 
-  outputs =
-    { nixpkgs
-    , home-manager
-    , nixos-wsl
-    , # helix,
-      ...
-    }:
+  outputs = { nixpkgs, home-manager, ... }@inputs:
     let
       profileSettings = {
         name = "wsl";
@@ -41,7 +35,7 @@
         extraSpecialArgs = {
           inherit userSettings;
           inherit profileSettings;
-          # helix-flake = helix;
+          inherit inputs;
         };
       };
       nixosConfigurations = {
@@ -53,7 +47,7 @@
             inherit pkgs;
             inherit userSettings;
             inherit profileSettings;
-            nixos-wsl = nixos-wsl;
+            inherit inputs;
           };
         };
       };
