@@ -21,12 +21,6 @@
         normal = {
           family = "JetBrainsMono Nerd Font";
         };
-        bold = {
-          family = "JetBrainsMono Nerd Font";
-        };
-        italic = {
-          family = "JetBrainsMono Nerd Font";
-        };
       };
 
       window = {
