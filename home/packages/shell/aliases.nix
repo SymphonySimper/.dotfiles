@@ -47,7 +47,7 @@
     pca = "micromamba activate";
     pcd = "micromamba deactivate";
     pcce = "micromamba create -n";
-    pcrm = "micromamba shell remove -n";
+    pcrm = "micromamba env remove -n";
     ## js
     jp = "pnpm";
     jpi = "pnpm i";
