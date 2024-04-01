@@ -18,6 +18,9 @@ in
       . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
     '';
     initExtra = ''
+      # Prompt
+      precmd(){ precmd(){ echo ; }; }
+
       # Edit line in vim with ctrl-e:
       autoload edit-command-line; zle -N edit-command-line
       bindkey '^e' edit-command-line
