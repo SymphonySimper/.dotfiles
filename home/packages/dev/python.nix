@@ -1,14 +1,22 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   home.packages = with pkgs; [
     python3
-    conda
+    micromamba
   ];
 
-  xdg.configFile."conda/condarc" = {
+  xdg.configFile."mamba/mambarc" = {
     text = ''
-      auto_activate_base: false
-      changeps1: false
+      channels:
+        - conda-forge
+      always_yes: false
     '';
   };
+
+  # xdg.configFile."conda/condarc" = {
+  #   text = ''
+  #     auto_activate_base: false
+  #     changeps1: false
+  #   '';
+  # };
 }

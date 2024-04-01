@@ -10,7 +10,8 @@ in
   home.sessionVariables = {
     EDITOR = "nvim";
     PNPM_HOME = paths.pnpmHome;
-    CONDARCA = "${config.xdg.configHome}/conda/condarc";
+    # CONDARCA = "${config.xdg.configHome}/conda/condarc";
+    MAMBA_ROOT_PREFIX = "${config.xdg.dataHome}/mamba";
     PATH = "$PATH:${joinedPath}";
     ZELLIJ_AUTO_EXIT = "true";
   };

@@ -43,8 +43,11 @@
     rct = "cargo test";
     ## python
     py = "python";
-    pc = "conda";
-    pca = "conda activate";
+    pc = "micromamba";
+    pca = "micromamba activate";
+    pcd = "micromamba deactivate";
+    pcce = "micromamba create -n";
+    pcrm = "micromamba shell remove -n";
     ## js
     jp = "pnpm";
     jpi = "pnpm i";
