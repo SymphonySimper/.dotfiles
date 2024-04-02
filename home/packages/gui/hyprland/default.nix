@@ -273,13 +273,13 @@
     };
 
     extraConfig = ''
-      exec-once = "$HOME"/.config/hypr/scripts/random-wallpaper.sh
-      exec-once = waybar --config ~/.config/waybar/config.json --style ~/.config/waybar/style.css
-      exec-once = dunst
+      # exec-once = "$HOME"/.config/hypr/scripts/random-wallpaper.sh
+      # exec-once = waybar --config ~/.config/waybar/config.json --style ~/.config/waybar/style.css
+      # exec-once = dunst
       # exec-once = xwaylandvideobridge
-      exec-once = startup
-      exec-once = dir="$(dirname $(grep -l coretemp /sys/class/hwmon/hwmon*/name))"; ln -sf $dir/temp1_input /tmp/temperature &
-      exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+      # exec-once = startup
+      # exec-once = dir="$(dirname $(grep -l coretemp /sys/class/hwmon/hwmon*/name))"; ln -sf $dir/temp1_input /tmp/temperature &
+      # exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 
 
       # will switch to a submap called resize
@@ -303,15 +303,11 @@
   };
 
   home.packages = with pkgs; [
+    dunst
     gnome.nautilus
     hyprpaper
     hyprshot
     waybar
     wofi
   ];
-
-  xdg.portal = {
-    enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  };
 }
