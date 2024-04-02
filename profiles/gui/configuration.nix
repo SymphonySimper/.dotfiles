@@ -10,8 +10,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  services.xserver.enable = true;
-
   networking.networkmanager.enable = true;
 
   # Enable CUPS to print documents.
