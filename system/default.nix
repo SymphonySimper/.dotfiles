@@ -2,6 +2,8 @@
 {
   imports = [ ./packages/default.nix ];
 
+  nixpkgs.config.allowUnfree = true;
+
   # Enable flakse
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

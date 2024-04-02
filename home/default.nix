@@ -7,11 +7,7 @@
     ./packages/shell/default.nix
   ];
 
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-    };
-  };
+  nixpkgs.config.allowUnfree = true;
 
   xdg.enable = true;
 
