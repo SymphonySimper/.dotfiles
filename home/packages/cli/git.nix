@@ -11,6 +11,7 @@
           user = {
             name = "Sri Senthil Balaji J";
           };
+          init.defaultBranch = "main";
         };
       }
     ];
