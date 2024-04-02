@@ -14,7 +14,7 @@ in
     MAMBA_ROOT_PREFIX = "${config.xdg.dataHome}/mamba";
     PATH = "$PATH:${joinedPath}";
     ZELLIJ_AUTO_EXIT = "true";
-    WLR_NO_HARDWARE_CURSORS = "1";
-    NIXOS_OZONE_WL = "1";
+    #  WLR_NO_HARDWARE_CURSORS = "1";
+    #  NIXOS_OZONE_WL = "1";
   };
 }
