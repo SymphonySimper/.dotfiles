@@ -13,9 +13,9 @@
 
     # dev
     ## Nix;
-    snrs = "cd $HOME/.dotfiles && sudo nixos-rebuild switch --flake .#system";
+    snrs = "cd $HOME/.dotfiles && sudo nixos-rebuild switch --flake";
     ### home-manager;
-    hmbs = "cd $HOME/.dotfiles && home-manager build switch --flake .";
+    hmbs = "cd $HOME/.dotfiles && home-manager build switch --flake";
     ## git
     g = "git";
     gc = "git clone";

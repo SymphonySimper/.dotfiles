@@ -21,16 +21,14 @@
       userSettings = {
         username = "symph";
       };
-      pkgs = nixpkgs.legacyPackages.${profileSettings.system};
       lib = nixpkgs.lib;
-    in
-    {
-      homeConfigurations.${userSettings.username} = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+
+      mkHome = { profile, system, }: home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.${system};
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
-        modules = [ ./profiles/${profileSettings.name}/home.nix ];
+        modules = [ ./profiles/${profile}/home.nix ];
 
         extraSpecialArgs = {
           inherit userSettings;
@@ -38,18 +36,38 @@
           inherit inputs;
         };
       };
-      nixosConfigurations = {
-        system = lib.nixosSystem {
-          system = profileSettings.system;
-          modules = [ ./profiles/${profileSettings.name}/configuration.nix ];
-          specialArgs = {
-            # pass config variables from above
-            inherit pkgs;
-            inherit userSettings;
-            inherit profileSettings;
-            inherit inputs;
-          };
+
+      mkSystem = { profile, system }: lib.nixosSystem {
+        system = system;
+        modules = [ ./profiles/${profile}/configuration.nix ];
+        specialArgs = {
+          # pass config variables from above
+          inherit (nixpkgs.legacyPackages.${system}) pkgs;
+          inherit userSettings;
+          inherit profileSettings;
+          inherit inputs;
         };
+      };
+
+      profiles = rec {
+        default = {
+          profile = "default";
+          system = "x86_64-linux";
+        };
+        wsl = {
+          profile = "wsl";
+          system = default.system;
+        };
+      };
+    in
+    {
+      homeConfigurations = {
+        default = mkHome profiles.default;
+        wsl = mkHome profiles.wsl;
+      };
+
+      nixosConfigurations = {
+        wsl = mkSystem profiles.wsl;
       };
     };
 }
