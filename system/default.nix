@@ -41,4 +41,6 @@
     LC_TELEPHONE = "en_IN";
     LC_TIME = "en_IN";
   };
+
+  fonts.fontconfig.enable = true;
 }

@@ -2,6 +2,7 @@
 {
   imports = [
     ../../system/default.nix
+    ../../system/packages/nvidia.nix
     ./hardware.nix
   ];
 
@@ -31,4 +32,6 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
+
+  programs.hyprland.enable = true;
 }
