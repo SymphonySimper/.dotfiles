@@ -12,6 +12,7 @@
     gnome-contacts
     gnome-maps
     gnome-music
+    gnome-shell-extensions
     gnome-weather
     simple-scan
     yelp
