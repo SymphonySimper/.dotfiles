@@ -127,9 +127,9 @@
         workspace_swipe = true;
       };
 
-      "device:epic-mouse-v1" = {
-        sensitivity = -0.5;
-      };
+      # "device:epic-mouse-v1" = {
+      #   sensitivity = -0.5;
+      # };
 
       misc = {
         disable_hyprland_logo = true;
@@ -154,11 +154,11 @@
         "workspace: 10 silent, title:^(meet.google.com is sharing your screen.)$"
 
         # xwaylandvideobridge KDE
-        "windowrulev2 = opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$"
-        "windowrulev2 = noanim,class:^(xwaylandvideobridge)$"
-        "windowrulev2 = noinitialfocus,class:^(xwaylandvideobridge)$"
-        "windowrulev2 = maxsize 1 1,class:^(xwaylandvideobridge)$"
-        "windowrulev2 = noblur,class:^(xwaylandvideobridge)$ "
+        "opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$"
+        "noanim,class:^(xwaylandvideobridge)$"
+        "noinitialfocus,class:^(xwaylandvideobridge)$"
+        "maxsize 1 1,class:^(xwaylandvideobridge)$"
+        "noblur,class:^(xwaylandvideobridge)$ "
       ];
 
       # Keybinds
@@ -170,7 +170,7 @@
         "$mainMod SHIFT, Q, exit,"
 
         # Apps
-        "$mainMod, Return, exec, terminal tmux"
+        "$mainMod, Return, exec, alacritty"
         "$mainMod SHIFT, Return, exec, terminal"
         "$mainMod CTRL SHIFT, Return, exec, terminal attach"
         "$mainMod, E, exec, nautilus"
@@ -302,5 +302,6 @@
     waybar
     hyprshot
     hyprpaper
+    wofi
   ];
 }
