@@ -20,7 +20,7 @@ in
 
   users.users.${userSettings.username} = {
     isNormalUser = true;
-    home = "/home/${userSettings.username}";
+    home = userSettings.home;
     description = "${userSettings.username}";
     extraGroups = [ "wheel" "networkmanager" ];
   };

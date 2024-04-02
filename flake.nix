@@ -18,8 +18,9 @@
         name = "wsl";
         system = "x86_64-linux";
       };
-      userSettings = {
+      userSettings = rec {
         username = "symph";
+        home = "/home/${username}";
       };
       lib = nixpkgs.lib;
 
