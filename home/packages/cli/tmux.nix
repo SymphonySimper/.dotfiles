@@ -26,7 +26,7 @@
       set-option -ga terminal-overrides ",xterm-256color:Tc"
 
       # Attach to different session on exit
-      set-option -g detach-on-destroy off
+      set-option -g detach-on-destroy on
 
       setw -g monitor-activity on
       set -g visual-activity on
