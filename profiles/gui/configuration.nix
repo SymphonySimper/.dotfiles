@@ -1,7 +1,8 @@
-{ config, pkgs, inputs, userSettings, ... }:
+{ ... }:
 {
   imports = [
     ../../system/default.nix
+    ../../system/packages/gnome.nix
     ../../system/packages/nvidia.nix
     ./hardware.nix
   ];
@@ -32,7 +33,7 @@
     #media-session.enable = true;
   };
 
-  programs.hyprland.enable = true;
+  # programs.hyprland.enable = true;
 
-  services.xserver.displayManager.lightdm.enable = false;
+  # services.xserver.displayManager.lightdm.enable = false;
 }

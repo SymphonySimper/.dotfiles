@@ -42,7 +42,7 @@
     LC_TIME = "en_IN";
   };
 
-  # fonts.fontconfig.enable = true;
+  fonts.fontconfig.enable = true;
   # fonts.packages = with pkgs; [
   #   (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   # ];

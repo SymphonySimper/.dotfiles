@@ -2,7 +2,7 @@
 {
   imports = [
     ./alacritty.nix
-    ./hyprland/default.nix
+    # ./hyprland/default.nix
     ./theme.nix
     ./wezterm/default.nix
   ];

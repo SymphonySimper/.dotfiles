@@ -16,7 +16,7 @@ in
       [ -f $nix_loc ] && . $nix_loc
 
       . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
-      [ "$(tty)" = "/dev/tty1" ] && Hyprland >/dev/null 2>&1
+      # [ "$(tty)" = "/dev/tty1" ] && Hyprland >/dev/null 2>&1
     '';
     initExtra = ''
       # Prompt
