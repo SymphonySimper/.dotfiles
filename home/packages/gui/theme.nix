@@ -3,8 +3,8 @@
   home.pointerCursor = {
     gtk.enable = true;
     # x11.enable = true;
-    package = pkgs.bibata-cursors;
-    name = "Bibata-Modern-Classic";
+    package = pkgs.gnome.adwaita-icon-theme;
+    name = "Adwaita";
     size = 16;
   };
 
