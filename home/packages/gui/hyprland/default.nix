@@ -71,6 +71,10 @@
       "monitor" = ",1920x1080@60,auto,1.0";
       env = "XCURSOR_SIZE,12";
 
+      exec-once = [
+        "${pkgs.dunst}"
+      ];
+
       input = {
         kb_layout = "us";
         kb_variant = "";
@@ -171,9 +175,9 @@
 
         # Apps
         "$mainMod, Return, exec, alacritty"
-        "$mainMod SHIFT, Return, exec, terminal"
+        "$mainMod SHIFT, Return, exec, wezterm"
         "$mainMod CTRL SHIFT, Return, exec, terminal attach"
-        "$mainMod, E, exec, nautilus"
+        "$mainMod, E, exec, bin/nautilus"
         "$mainMod, R, exec, wofi --show drun"
         "$mainMod, F, exec, firefox"
         "$mainMod, B, exec, killall -SIGUSR1 waybar" # Toggle waybar
@@ -299,9 +303,15 @@
   };
 
   home.packages = with pkgs; [
-    waybar
-    hyprshot
+    gnome.nautilus
     hyprpaper
+    hyprshot
+    waybar
     wofi
   ];
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
 }
