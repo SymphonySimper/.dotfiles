@@ -5,9 +5,28 @@
     desktopManager.gnome.enable = true;
   };
 
-  # extensions
-  environment.systemPackages = with pkgs.gnomeExtensions; [
-    caffeine
-    appindicator
+  environment.gnome.excludePackages = with pkgs.gnome; [
+    epiphany
+    geary
+    gnome-characters
+    gnome-contacts
+    gnome-maps
+    gnome-music
+    gnome-weather
+    simple-scan
+    yelp
+  ] ++ (with pkgs; [
+    gnome-connections
+    gnome-text-editor
+    gnome-tour
+    xterm
+  ]);
+
+  environment.systemPackages = with pkgs; [
+    gnome3.gnome-tweaks
+
+    # extensions
+    gnomeExtensions.caffeine
+    gnomeExtensions.appindicator
   ];
 }
