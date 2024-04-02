@@ -25,11 +25,7 @@
 
       mkHome = { profile, system, }: home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${system};
-
-        # Specify your home configuration modules here, for example,
-        # the path to your home.nix.
         modules = [ ./profiles/${profile}/home.nix ];
-
         extraSpecialArgs = {
           inherit userSettings;
           inherit profileSettings;
@@ -41,11 +37,13 @@
         system = system;
         modules = [ ./profiles/${profile}/configuration.nix ];
         specialArgs = {
-          # pass config variables from above
-          inherit (nixpkgs.legacyPackages.${system}) pkgs;
           inherit userSettings;
           inherit profileSettings;
           inherit inputs;
+          inherit (import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          }) pkgs;
         };
       };
 

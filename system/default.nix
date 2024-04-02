@@ -2,8 +2,6 @@
 {
   imports = [ ./packages/default.nix ];
 
-  nixpkgs.config.allowUnfree = true;
-
   # Enable flakse
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -44,5 +42,8 @@
     LC_TIME = "en_IN";
   };
 
-  fonts.fontconfig.enable = true;
+  # fonts.fontconfig.enable = true;
+  # fonts.packages = with pkgs; [
+  #   (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+  # ];
 }
