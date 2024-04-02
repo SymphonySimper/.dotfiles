@@ -58,16 +58,22 @@
           profile = "wsl";
           system = default.system;
         };
+        gui = {
+          profile = "gui";
+          system = default.system;
+        };
       };
     in
     {
       homeConfigurations = {
         default = mkHome profiles.default;
         wsl = mkHome profiles.wsl;
+        gui = mkHome profiles.gui;
       };
 
       nixosConfigurations = {
         wsl = mkSystem profiles.wsl;
+        gui = mkSystem profiles.gui;
       };
     };
 }
