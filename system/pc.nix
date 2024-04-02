@@ -2,6 +2,8 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelParams = [ "quiet" ];
+  boot.consoleLogLevel = 0;
 
   networking.networkmanager.enable = true;
 
