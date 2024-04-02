@@ -1,5 +1,11 @@
 { pkgs, ... }: {
 
+  fonts.fontconfig.enable = true;
+
+  home.packages = with pkgs; [
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+  ];
+
   home.pointerCursor = {
     gtk.enable = true;
     # x11.enable = true;
