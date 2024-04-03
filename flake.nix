@@ -24,8 +24,13 @@
       };
       lib = nixpkgs.lib;
 
+      mkPkgs = { system }: (import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      });
+
       mkHome = { profile, system, }: home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.${system};
+        pkgs = mkPkgs { system = system; };
         modules = [ ./profiles/${profile}/home.nix ];
         extraSpecialArgs = {
           inherit userSettings;
@@ -41,10 +46,7 @@
           inherit userSettings;
           inherit profileSettings;
           inherit inputs;
-          inherit (import nixpkgs {
-            inherit system;
-            config.allowUnfree = true;
-          }) pkgs;
+          inherit (mkPkgs { system = system; }) pkgs;
         };
       };
 
