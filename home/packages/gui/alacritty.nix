@@ -1,4 +1,8 @@
-{ ... }: {
+{ ... }:
+let
+  font = "JetBrainsMono Nerd Font";
+in
+{
   programs.alacritty = {
     enable = true;
     settings = {
@@ -19,7 +23,20 @@
       font = {
         size = 12;
         normal = {
-          family = "JetBrainsMono Nerd Font";
+          family = font;
+          style = "Regular";
+        };
+        bold = {
+          family = font;
+          style = "Bold";
+        };
+        italic = {
+          family = font;
+          style = "Italic";
+        };
+        bold_italic = {
+          family = font;
+          style = "Bold Italic";
         };
       };
 
