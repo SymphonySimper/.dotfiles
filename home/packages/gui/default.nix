@@ -8,5 +8,6 @@
     ./media.nix
     ./theme.nix
     ./wezterm/default.nix
+    ./productivity.nix
   ];
 }
