@@ -3,7 +3,7 @@
   programs.tmux = {
     enable = true;
     shell = "${pkgs.zsh}/bin/zsh";
-    terminal = "xterm-256color";
+    terminal = "tmux-256color";
     prefix = "C-a";
     shortcut = "a";
     baseIndex = 1;
