@@ -46,5 +46,6 @@
 
   home.packages = with pkgs; [
     gh
+    git-quick-stats
   ];
 }
