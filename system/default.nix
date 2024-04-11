@@ -49,4 +49,31 @@ in
     fontconfig.enable = true;
     fontDir.enable = true;
   };
+
+  systemd.tmpfiles.settings = {
+    "${userSettings.username}-fav-dirs" = {
+      "${userSettings.home}/lifeisfun" = {
+        d = {
+          group = "users";
+          user = "${userSettings.username}";
+          mode = "0755";
+        };
+      };
+      "${userSettings.home}/lifeisfun/work" = {
+        d = {
+          group = "users";
+          user = "${userSettings.username}";
+          mode = "0755";
+        };
+      };
+      "${userSettings.home}/created-by-systemd" = {
+        f = {
+          group = "users";
+          user = "${userSettings.username}";
+          mode = "0644";
+          argument = "Heyyyyyyy!";
+        };
+      };
+    };
+  };
 }
