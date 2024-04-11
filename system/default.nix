@@ -50,6 +50,9 @@ in
     fontDir.enable = true;
   };
 
+  # Clean /tmp folder on boot
+  boot.tmp.cleanOnBoot = true;
+
   systemd.tmpfiles.settings = {
     "${userSettings.username}-fav-dirs" = {
       "${userSettings.home}/lifeisfun" = {
