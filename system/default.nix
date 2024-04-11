@@ -69,14 +69,6 @@ in
           mode = "0755";
         };
       };
-      "${userSettings.home}/created-by-systemd" = {
-        f = {
-          group = "users";
-          user = "${userSettings.username}";
-          mode = "0644";
-          argument = "Heyyyyyyy!";
-        };
-      };
     };
   };
 }
