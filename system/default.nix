@@ -21,7 +21,7 @@ in
   users.users.${userSettings.username} = {
     isNormalUser = true;
     home = userSettings.home;
-    description = "${userSettings.username}";
+    description = "${userSettings.description}";
     extraGroups = [ "wheel" "networkmanager" ];
   };
 

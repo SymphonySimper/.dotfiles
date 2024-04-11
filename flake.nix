@@ -20,6 +20,7 @@
       };
       userSettings = rec {
         username = "symph";
+        description = "SymphonySimper";
         home = "/home/${username}";
       };
       lib = nixpkgs.lib;
