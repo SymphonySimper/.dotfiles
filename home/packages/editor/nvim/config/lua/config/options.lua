@@ -16,6 +16,7 @@ o.undofile = false
 o.foldmethod = "manual"
 -- Hide Command line
 o.cmdheight = 0
+o.clipboard = ""
 
 -- Neovide
 if g.neovide then
