@@ -17,7 +17,7 @@ config.window_padding = {
 
 config.disable_default_key_bindings = true
 if package.config:sub(1, 1) == "\\" then
-	config.default_prog = { "ubuntu" }
+	config.default_prog = { "wsl", "-d", "NixOS", "--cd", "~" }
 end
 
 wezterm.on("gui-startup", function(cmd)
