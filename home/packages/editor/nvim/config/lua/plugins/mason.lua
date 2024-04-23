@@ -5,6 +5,7 @@ return {
       "astro-language-server",
       "bash-language-server",
       "beautysh",
+      "css-lsp",
       "html-lsp",
       "json-lsp",
       "lua-language-server",
