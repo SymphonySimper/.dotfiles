@@ -4,7 +4,7 @@
     bun
     nodejs
     corepack
-    nodePackages_latest.npm
-    nodePackages_latest.pnpm
+    # nodePackages_latest.npm
+    # nodePackages_latest.pnpm
   ];
 }
