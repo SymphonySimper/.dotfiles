@@ -11,7 +11,6 @@
       [ -f $nix_loc ] && . $nix_loc
 
       . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
-      # [ "$(tty)" = "/dev/tty1" ] && Hyprland >/dev/null 2>&1
     '';
     initExtra = ''
       # Prompt
@@ -24,9 +23,9 @@
       eval "$(micromamba shell hook -s zsh)"
 
       # Auto start tmux
-      if [ -x "$(command -v tmux)" ] && [ -n "''${DISPLAY}" ] && [ -z "''${TMUX}" ]; then
-          exec tmux new >/dev/null 2>&1
-      fi
+      # if [ -x "$(command -v tmux)" ] && [ -n "''${DISPLAY}" ] && [ -z "''${TMUX}" ]; then
+      #     exec tmux new >/dev/null 2>&1
+      # fi
     '';
   };
 }
