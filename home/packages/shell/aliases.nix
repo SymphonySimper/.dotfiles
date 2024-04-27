@@ -1,5 +1,5 @@
-{
-  shellAliases = {
+{ ... }: {
+  home.shellAliases = {
     # general
     q = "exit";
     ka = "killall";

@@ -1,8 +1,4 @@
-{ ... }:
-let
-  aliases = import ./aliases.nix;
-in
-{
+{ ... }: {
   programs.zsh = {
     enable = true;
     dotDir = ".config/zsh";
@@ -10,7 +6,6 @@ in
     defaultKeymap = "viins";
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
-    shellAliases = aliases.shellAliases;
     profileExtra = ''
       nix_loc="$HOME"/.nix-profile/etc/profile.d/nix.sh
       [ -f $nix_loc ] && . $nix_loc
