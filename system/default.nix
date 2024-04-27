@@ -52,6 +52,7 @@ in
 
   # Clean /tmp folder on boot
   boot.tmp.cleanOnBoot = true;
+  boot.tmp.useTmpfs = true;
 
   systemd.tmpfiles.settings = {
     "${userSettings.username}-fav-dirs" = {
