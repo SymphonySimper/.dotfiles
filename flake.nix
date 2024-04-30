@@ -22,6 +22,9 @@
         username = "symph";
         description = "SymphonySimper";
         home = "/home/${username}";
+        programs = {
+          zellij = true;
+        };
       };
       lib = nixpkgs.lib;
 
@@ -30,7 +33,7 @@
         config.allowUnfree = true;
       });
 
-      mkHome = { profile, system, }: home-manager.lib.homeManagerConfiguration {
+      mkHome = { profile, system }: home-manager.lib.homeManagerConfiguration {
         pkgs = mkPkgs { system = system; };
         modules = [ ./profiles/${profile}/home.nix ];
         extraSpecialArgs = {
