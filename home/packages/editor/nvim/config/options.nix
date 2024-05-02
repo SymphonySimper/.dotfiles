@@ -25,5 +25,10 @@
     expandtab = true;
 
     splitbelow = true;
+
+    ignorecase = true;
+    smartcase = true;
+    smartindent = true;
+    termguicolors = true;
   };
 }
