@@ -9,6 +9,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-wsl.url = "github:nix-community/nixos-wsl";
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # helix-flake.url = "github:helix-editor/helix";
   };
 
@@ -35,7 +39,7 @@
 
       mkHome = { profile, system }: home-manager.lib.homeManagerConfiguration {
         pkgs = mkPkgs { system = system; };
-        modules = [ ./profiles/${profile}/home.nix ];
+        modules = [ inputs.nixvim.homeManagerModules.nixvim ./profiles/${profile}/home.nix ];
         extraSpecialArgs = {
           inherit userSettings;
           inherit profileSettings;
