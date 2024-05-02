@@ -48,6 +48,9 @@
             # [ "([a-zA-Z0-9\\-:]+)" ]
           ];
         };
+
+        # Typescript
+        tsserver.enable = true;
       };
     };
     lsp-format = { enable = true; };

@@ -1,5 +1,16 @@
 { ... }: {
   programs.nixvim.keymaps = [
+    # General
+    {
+      action = ":noh<CR>";
+      key = "<esc>";
+      mode = "n";
+      options = {
+        desc = "No highlight";
+      };
+    }
+
+    # Clipboard
     {
       action = "\"+y<CR>";
       key = "<leader>y";
@@ -16,6 +27,8 @@
         desc = "Copy to system clipboard";
       };
     }
+
+    # File
     {
       action = ":w<CR>";
       key = "<leader>w";
@@ -56,14 +69,8 @@
         desc = "Quit all";
       };
     }
-    {
-      action = ":noh<CR>";
-      key = "<esc>";
-      mode = "n";
-      options = {
-        desc = "No highlight";
-      };
-    }
+
+    # Navigation
     {
       action = "<C-w>h";
       key = "<leader>h";
@@ -94,6 +101,16 @@
       mode = "n";
       options = {
         desc = "Focus down pane";
+      };
+    }
+
+    # Plugins
+    {
+      action = "<CMD>Oil<CR>";
+      key = "<leader>e";
+      mode = "n";
+      options = {
+        desc = "Open Parent directory";
       };
     }
   ];
