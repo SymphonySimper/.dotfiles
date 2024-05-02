@@ -103,15 +103,5 @@
         desc = "Focus down pane";
       };
     }
-
-    # Plugins
-    {
-      action = "<CMD>Oil<CR>";
-      key = "<leader>e";
-      mode = "n";
-      options = {
-        desc = "Open Parent directory";
-      };
-    }
   ];
 }
