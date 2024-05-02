@@ -1,20 +1,17 @@
 { pkgs, ... }:
 {
-  programs.neovim = {
+  imports = [ ./config/default.nix ];
+
+  programs.nixvim = {
     enable = true;
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
-    vimdiffAlias = true;
-  };
 
-  xdg.configFile."nvim" = {
-    source = ./config;
-    recursive = true;
+    extraPackages = with pkgs; [
+      fd
+      gcc
+      ripgrep
+    ];
   };
-
-  home.packages = with pkgs; [
-    fd
-    ripgrep
-  ];
 }
