@@ -1,3 +1,9 @@
 { ... }: {
-  imports = [ ./keymaps.nix ./plugins/default.nix ./options.nix ./colorscheme.nix ./globals.nix ];
+  imports = [
+    ./colorscheme.nix
+    ./globals.nix
+    ./keymaps.nix
+    ./options.nix
+    ./plugins/default.nix
+  ];
 }

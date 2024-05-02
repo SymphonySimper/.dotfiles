@@ -1,3 +1,8 @@
 { ... }: {
-  imports = [ ./telescope.nix ./treesitter.nix ./lsp.nix ];
+  imports = [
+    ./cmp.nix
+    ./lsp.nix
+    ./telescope.nix
+    ./treesitter.nix
+  ];
 }
