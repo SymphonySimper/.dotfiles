@@ -4,22 +4,19 @@
     number = true;
     relativenumber = true;
 
+    # Scroll
+    scrolloff = 8; # Vertical scroll
+    sidescrolloff = 8; # Horizontal scroll
+
+    undofile = false; # Turn off undofile
+
+    foldmethod = "manual"; # Create folds with visual selection
+
+    # UI
+    cmdheight = 0; # Hide Command line
+    signcolumn = "yes";
     colorcolumn = "80";
 
-    # Scroll
-    ## Vertical scroll
-    scrolloff = 8;
-    ## Horizontal scroll
-    sidescrolloff = 8;
-
-    # Turn off undofile
-    undofile = false;
-
-    # Create folds with visual selection
-    foldmethod = "manual";
-
-    # Hide Command line
-    cmdheight = 0;
     clipboard = "";
 
     # tab settings
