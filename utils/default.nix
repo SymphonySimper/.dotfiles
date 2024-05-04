@@ -1,0 +1,3 @@
+{
+  mkKeymaps = import ./mkKeymaps.nix;
+}
