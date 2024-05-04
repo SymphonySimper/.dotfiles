@@ -23,5 +23,12 @@ let
   ];
 in
 {
-  programs.nixvim.keymaps = keymaps;
+  programs.nixvim = {
+    globals = {
+      mapleader = " ";
+      maplocalleader = "\\";
+    };
+
+    keymaps = keymaps;
+  };
 }
