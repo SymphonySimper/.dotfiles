@@ -11,9 +11,9 @@ let
     # File
     [ ":w<CR>" "<leader>w" [ "n" "v" ] "Write" ]
     [ ":wa<CR>" "<leader>wa" [ "n" "v" ] "Write all" ]
-    [ ":bd<CR>" "<leader>bd" [ "n" "v" ] "Close buffer" ]
-    [ ":q<CR>" "<leader>q" [ "n" "v" ] "Quit" ]
-    [ ":qa<CR>" "<leader>qa" [ "n" "v" ] "Quit all" ]
+    [ ":q<CR>" "<leader>bd" [ "n" "v" ] "Close buffer" ]
+    [ ":qq<CR>" "<leader>qa" [ "n" "v" ] "Quit" ]
+    [ ":qA<CR>" "<leader>qa" [ "n" "v" ] "Quit all" ]
 
     # Navigation
     [ "<C-w>h" "<leader>h" "n" "Focus left pane" ]
