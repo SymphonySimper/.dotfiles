@@ -1,107 +1,33 @@
-{ ... }: {
-  programs.nixvim.keymaps = [
-    # General
-    {
-      action = ":noh<CR>";
-      key = "<esc>";
-      mode = "n";
-      options = {
-        desc = "No highlight";
-      };
-    }
+{ ... }:
+let
+  keymaps = map
+    (keymap: {
+      action = builtins.elemAt keymap 0;
+      key = builtins.elemAt keymap 1;
+      mode = builtins.elemAt keymap 2;
+      options.desc = builtins.elemAt keymap 3;
+    }) [
+    # Genreal
+    [ ":noh<CR>" "<esc>" "n" "No highlight" ]
 
     # Clipboard
-    {
-      action = "\"+y<CR>";
-      key = "<leader>y";
-      mode = [ "n" "v" ];
-      options = {
-        desc = "Copy to system clipboard";
-      };
-    }
-    {
-      action = "\"+p<CR>";
-      key = "<leader>p";
-      mode = [ "n" "v" ];
-      options = {
-        desc = "Copy to system clipboard";
-      };
-    }
+    [ "\"+y<CR>" "<leader>y" [ "n" "v" ] "Copy to system clipboard" ]
+    [ "\"+p<CR>" "<leader>p" [ "n" "v" ] "Copy to system clipboard" ]
 
     # File
-    {
-      action = ":w<CR>";
-      key = "<leader>w";
-      mode = [ "n" "v" ];
-      options = {
-        desc = "Write";
-      };
-    }
-    {
-      action = ":wa<CR>";
-      key = "<leader>W";
-      mode = [ "n" "v" ];
-      options = {
-        desc = "Write all";
-      };
-    }
-    {
-      action = ":bd<CR>";
-      key = "<leader>bd";
-      mode = [ "n" "v" ];
-      options = {
-        desc = "Close buffer";
-      };
-    }
-    {
-      action = ":q<CR>";
-      key = "<leader>q";
-      mode = [ "n" "v" ];
-      options = {
-        desc = "Quit";
-      };
-    }
-    {
-      action = ":qa<CR>";
-      key = "<leader>Q";
-      mode = [ "n" "v" ];
-      options = {
-        desc = "Quit all";
-      };
-    }
+    [ ":w<CR>" "<leader>w" [ "n" "v" ] "Write" ]
+    [ ":wa<CR>" "<leader>wa" [ "n" "v" ] "Write all" ]
+    [ ":bd<CR>" "<leader>bd" [ "n" "v" ] "Close buffer" ]
+    [ ":q<CR>" "<leader>q" [ "n" "v" ] "Quit" ]
+    [ ":qa<CR>" "<leader>qa" [ "n" "v" ] "Quit all" ]
 
     # Navigation
-    {
-      action = "<C-w>h";
-      key = "<leader>h";
-      mode = "n";
-      options = {
-        desc = "Focus left pane";
-      };
-    }
-    {
-      action = "<C-w>l";
-      key = "<leader>l";
-      mode = "n";
-      options = {
-        desc = "Focus right pane";
-      };
-    }
-    {
-      action = "<C-w>k";
-      key = "<leader>k";
-      mode = "n";
-      options = {
-        desc = "Focus up pane";
-      };
-    }
-    {
-      action = "<C-w>j";
-      key = "<leader>j";
-      mode = "n";
-      options = {
-        desc = "Focus down pane";
-      };
-    }
+    [ "<C-w>h" "<leader>h" "n" "Focus left pane" ]
+    [ "<C-w>l" "<leader>l" "n" "Focus right pane" ]
+    [ "<C-w>k" "<leader>k" "n" "Focus up pane" ]
+    [ "<C-w>j" "<leader>j" "n" "Focus down pane" ]
   ];
+in
+{
+  programs.nixvim.keymaps = keymaps;
 }
