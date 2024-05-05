@@ -1,36 +1,34 @@
 { ... }: {
-  programs.nixvim.plugins.treesitter = {
-    enable = true;
-    indent = true;
-    nixvimInjections = true;
-    ensureInstalled = [
-      "astro"
-      "bash"
-      "c"
-      "css"
-      "devicetree"
-      "gitcommit"
-      "gitignore"
-      "html"
-      "javascript"
-      "jsdoc"
-      "json"
-      "lua"
-      "luadoc"
-      "luap"
-      "markdown"
-      "markdown_inline"
-      "python"
-      "query"
-      "regex"
-      "scss"
-      "svelte"
-      "tsx"
-      "typescript"
-      "vim"
-      "vimdoc"
-      "vue"
-      "yaml"
-    ];
+  programs.nixvim.plugins = {
+    treesitter = {
+      enable = true;
+      indent = true;
+      nixvimInjections = true;
+      ensureInstalled = [
+        "astro"
+        "bash"
+        "css"
+        "gitcommit"
+        "gitignore"
+        "html"
+        "javascript"
+        "jsdoc"
+        "json"
+        "lua"
+        "markdown"
+        "python"
+        "regex"
+        "scss"
+        "svelte"
+        "tsx"
+        "typescript"
+        "vim"
+        "vimdoc"
+        "yaml"
+      ];
+    };
+
+    ts-autotag.enable = true;
+    ts-context-commentstring.enable = true;
   };
 }
