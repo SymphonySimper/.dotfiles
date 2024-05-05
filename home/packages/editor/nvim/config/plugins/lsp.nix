@@ -35,7 +35,10 @@
         };
 
         # Svelte
-        svelte.enable = true;
+        svelte = {
+          enable = true;
+          initOptions.svelte.plugin.svelte.defaultScriptLanguage = "ts";
+        };
 
         # Tailwind
         tailwindcss = {
@@ -51,6 +54,9 @@
 
         # Typescript
         tsserver.enable = true;
+
+        # HTML
+        html.enable = true;
       };
     };
     lsp-format = { enable = true; };

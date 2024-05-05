@@ -11,10 +11,7 @@
             { name = "path"; }
             { name = "nvim_lsp"; }
             { name = "luasnip"; }
-            {
-              name = "buffer";
-              option.get_bufnrs.__raw = "vim.api.nvim_list_bufs";
-            }
+            { name = "buffer"; }
           ];
           snippet.expand = ''
             function(args)
@@ -32,11 +29,14 @@
           };
 
           performance = {
-            max_view_entries = 10;
+            max_view_entries = 4;
           };
         };
       };
 
-      cmp-async-path.enable = true;
+      cmp-path.enable = true;
+      cmp-buffer.enable = true;
+      cmp-nvim-lsp.enable = true;
+      cmp_luasnip.enable = true;
     };
 }
