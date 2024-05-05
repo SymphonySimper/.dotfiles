@@ -5,8 +5,8 @@ let
       key = builtins.elemAt keymap 1;
       mode = builtins.elemAt keymap 2;
       options.desc = builtins.elemAt keymap 3;
+      lua = if builtins.length keymap == 5 then builtins.elemAt keymap 4 else false;
     })
     keymaps;
 in
 mkKeymap
-
