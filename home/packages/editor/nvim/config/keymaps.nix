@@ -10,14 +10,14 @@ let
 
     # File
     [ ":w<CR>" "<leader>w" [ "n" "v" ] "Write" ]
-    [ ":bd<CR>" "<leader>c" [ "n" "v" ] "Close buffer" ]
+    [ ":bd<CR>" "<leader>bd" [ "n" "v" ] "Close buffer" ]
     [ ":q<CR>" "<leader>q" [ "n" "v" ] "Quit" ]
 
     # Navigation
-    [ "<C-w>h" "<leader>h" "n" "Focus left pane" ]
-    [ "<C-w>l" "<leader>l" "n" "Focus right pane" ]
-    [ "<C-w>k" "<leader>k" "n" "Focus up pane" ]
-    [ "<C-w>j" "<leader>j" "n" "Focus down pane" ]
+    [ "<C-w>h" "<C-h>" "n" "Focus left pane" ]
+    [ "<C-w>l" "<C-l>" "n" "Focus right pane" ]
+    [ "<C-w>k" "<C-k>" "n" "Focus up pane" ]
+    [ "<C-w>j" "<C-j>" "n" "Focus down pane" ]
   ];
 in
 {
