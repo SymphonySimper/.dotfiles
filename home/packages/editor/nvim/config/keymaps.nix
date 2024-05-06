@@ -10,10 +10,8 @@ let
 
     # File
     [ ":w<CR>" "<leader>w" [ "n" "v" ] "Write" ]
-    [ ":wa<CR>" "<leader>wa" [ "n" "v" ] "Write all" ]
-    [ ":bd<CR>" "<leader>q" [ "n" "v" ] "Close buffer" ]
-    [ ":q<CR>" "<leader>qq" [ "n" "v" ] "Quit" ]
-    [ ":qa<CR>" "<leader>qa" [ "n" "v" ] "Quit all" ]
+    [ ":bd<CR>" "<leader>c" [ "n" "v" ] "Close buffer" ]
+    [ ":q<CR>" "<leader>q" [ "n" "v" ] "Quit" ]
 
     # Navigation
     [ "<C-w>h" "<leader>h" "n" "Focus left pane" ]
