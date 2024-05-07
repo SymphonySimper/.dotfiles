@@ -31,7 +31,7 @@
         };
       };
       lib = nixpkgs.lib;
-      utils = import ./utils/default.nix;
+      myUtils = import ./utils/default.nix;
 
       mkPkgs = { system }: (import nixpkgs {
         inherit system;
@@ -45,7 +45,7 @@
           inherit userSettings;
           inherit profileSettings;
           inherit inputs;
-          inherit utils;
+          inherit myUtils;
         };
       };
 
@@ -56,7 +56,7 @@
           inherit userSettings;
           inherit profileSettings;
           inherit inputs;
-          inherit utils;
+          inherit myUtils;
           inherit (mkPkgs { system = system; }) pkgs;
         };
       };

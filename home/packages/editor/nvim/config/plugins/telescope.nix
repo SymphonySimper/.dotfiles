@@ -1,4 +1,4 @@
-{ utils, ... }: {
+{ myUtils, ... }: {
   programs.nixvim = {
     plugins.telescope = {
       enable = true;
@@ -31,7 +31,7 @@
       };
     };
 
-    keymaps = utils.mkKeymaps [
+    keymaps = myUtils.mkKeymaps [
       [ "function() require('telescope.builtin').find_files({ cwd = vim.fn.expand('%:p:h') }) end" "<leader>f" "n" "Find files from current file" true ]
     ];
   };

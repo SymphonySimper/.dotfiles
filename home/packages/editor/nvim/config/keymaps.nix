@@ -1,6 +1,6 @@
-{ utils, ... }:
+{ myUtils, ... }:
 let
-  keymaps = utils.mkKeymaps [
+  keymaps = myUtils.mkKeymaps [
     # Genreal
     [ ":noh<CR>" "<esc>" "n" "No highlight" ]
 

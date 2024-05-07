@@ -1,4 +1,4 @@
-{ utils, ... }: {
+{ myUtils, ... }: {
   programs.nixvim = {
     plugins.oil = {
       enable = true;
@@ -11,7 +11,7 @@
       };
     };
 
-    keymaps = utils.mkKeymaps [
+    keymaps = myUtils.mkKeymaps [
       [ "<CMD>Oil<CR>" "<leader>e" "n" "Open Parent directory" ]
     ];
   };
