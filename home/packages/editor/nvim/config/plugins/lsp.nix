@@ -57,6 +57,10 @@
 
         # HTML
         html.enable = true;
+
+        # Python
+        pyright.enable = true;
+        ruff-lsp.enable = true;
       };
     };
     lsp-format = { enable = true; };
