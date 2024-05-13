@@ -31,7 +31,7 @@
         # Nix
         nixd = {
           enable = true;
-          settings.formatting.command = "nixpkgs-fmt";
+          settings.formatting.command = [ "nixpkgs-fmt" ];
         };
 
         # Svelte
