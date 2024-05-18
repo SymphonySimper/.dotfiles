@@ -51,13 +51,13 @@
 
       mkSystem = { profile, system }: lib.nixosSystem {
         system = system;
+        pkgs = mkPkgs { system = system; };
         modules = [ ./profiles/${profile}/configuration.nix ];
         specialArgs = {
           inherit userSettings;
           inherit profileSettings;
           inherit inputs;
           inherit myUtils;
-          inherit (mkPkgs { system = system; }) pkgs;
         };
       };
 
