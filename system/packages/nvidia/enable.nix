@@ -1,4 +1,6 @@
 { config, pkgs, ... }: {
+  # refer: https://nixos.wiki/wiki/Nvidia#Installing_Nvidia_Drivers_on_NixOS
+
   # Enable OpenGL
   hardware.opengl = {
     enable = true;
