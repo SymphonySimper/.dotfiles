@@ -13,7 +13,7 @@
     foldmethod = "manual"; # Create folds with visual selection
 
     # UI
-    cmdheight = 0; # Hide Command line
+    cmdheight = 1; # Hide Command line
     signcolumn = "yes";
     colorcolumn = "80";
 
