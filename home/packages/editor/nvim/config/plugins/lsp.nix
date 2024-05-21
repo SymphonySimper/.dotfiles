@@ -20,7 +20,7 @@
         };
         extra = [
           {
-            action = "<CMD>LspRestart<Enter>";
+            action = ":LspRestart<Enter>";
             key = "<leader>lr";
             options.desc = "Restart LSP";
           }
