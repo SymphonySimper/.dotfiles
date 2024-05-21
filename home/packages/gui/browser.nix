@@ -16,6 +16,7 @@
       "mnjggcdmjocbbbhaepdhchncahnbgone" # sponsor block
       "edibdbjcniadpccecjdfdjjppcpchdlm" # i don't care about cookies
       "jpbjcnkcffbooppibceonlgknpkniiff" # global speed
+      "oocalimimngaihdkbihfgmpkcpnmlaoa" # teleparty
     ];
   };
 }
