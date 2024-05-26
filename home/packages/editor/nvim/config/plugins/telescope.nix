@@ -32,7 +32,7 @@
     };
 
     keymaps = myUtils.mkKeymaps [
-      [ "function() require('telescope.builtin').find_files({ cwd = vim.fn.expand('%:p:h') }) end" "<leader>f" "n" "Find files from current file" true ]
+      [{ __raw = "function() require('telescope.builtin').find_files({ cwd = vim.fn.expand('%:p:h') }) end"; } "<leader>f" "n" "Find files from current file"]
     ];
   };
 }
