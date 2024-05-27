@@ -4,11 +4,6 @@
       enable = true;
       keymaps = {
         silent = true;
-        diagnostic = {
-          # Navigate in diagnostics
-          "[d" = "goto_prev";
-          "]d" = "goto_next";
-        };
 
         lspBuf = {
           gd = "definition";
@@ -18,6 +13,7 @@
           K = "hover";
           "<leader>cr" = "rename";
         };
+
         extra = [
           {
             action = ":LspRestart<Enter>";
