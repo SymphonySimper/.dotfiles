@@ -1,4 +1,4 @@
-{ ... }: {
+{ myUtils, ... }: {
   programs.nixvim.plugins = {
     lsp = {
       enable = true;
@@ -12,14 +12,22 @@
           gi = "implementation";
           K = "hover";
           "<leader>cr" = "rename";
+          "<leader>ca" = "code_action";
         };
 
-        extra = [
-          {
-            action = ":LspRestart<Enter>";
-            key = "<leader>lr";
-            options.desc = "Restart LSP";
-          }
+        extra = myUtils.mkKeymaps [
+          [
+            ":LspRestart<Enter>"
+            "<leader>lr"
+            "n"
+            "Restart LSP"
+          ]
+          # [
+          #   ":lua vim.lsp.buf.code_action()<Enter>"
+          #   "<leader>ca"
+          #   "n"
+          #   "Code actions"
+          # ]
         ];
       };
 
