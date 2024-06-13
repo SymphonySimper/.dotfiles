@@ -45,7 +45,7 @@
       nodePackages_latest.typescript-language-server
       ## python
       ruff-lsp
-      nodePackages_latest.pyright
+      pyright
     ];
 
     languages = {
