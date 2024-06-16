@@ -28,6 +28,7 @@
         home = "/home/${username}";
         programs = {
           zellij = true;
+          wm = true;
         };
       };
       lib = nixpkgs.lib;
