@@ -11,6 +11,10 @@
       [ -f $nix_loc ] && . $nix_loc
 
       . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+
+      ${if userSettings.programs.wm then ''
+      [ "$(tty)" = "/dev/tty1" ] && Hyprland >/dev/null 2>&1
+      '' else ""}
     '';
     initExtra = ''
       # Prompt
