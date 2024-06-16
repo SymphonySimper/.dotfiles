@@ -92,16 +92,16 @@
       };
 
       general = {
-        gaps_in = 4;
-        gaps_out = 8;
-        border_size = 2;
+        gaps_in = 0;
+        gaps_out = 0;
+        border_size = 1;
         "col.active_border" = "$surface0";
         "col.inactive_border" = "$base";
         layout = "dwindle";
       };
 
       decoration = {
-        rounding = 8;
+        rounding = 0;
 
         blur = {
           enabled = false;
@@ -176,7 +176,6 @@
         # Apps
         "$mainMod, Return, exec, alacritty"
         "$mainMod SHIFT, Return, exec, wezterm"
-        "$mainMod CTRL SHIFT, Return, exec, terminal attach"
         "$mainMod, E, exec, bin/nautilus"
         "$mainMod, R, exec, wofi --show drun"
         "$mainMod, F, exec, firefox"
