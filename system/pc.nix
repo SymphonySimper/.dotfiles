@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -19,6 +19,7 @@
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
   };
+  environment.defaultPackages = with pkgs; [ helvum ];
 
   powerManagement.enable = true;
   services.power-profiles-daemon.enable = false;
