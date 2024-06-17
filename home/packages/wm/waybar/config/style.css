@@ -1,0 +1,191 @@
+@import "mocha.css";
+
+* {
+  font-family: "Poppins", system-ui;
+  font-size: 12px;
+  min-height: 24px;
+  min-width: 24px;
+  border: none;
+  border-radius: 8px;
+  margin: 0;
+  padding: 0;
+}
+
+window#waybar {
+  background-color: transparent;
+  color: @text;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+/* Modules Left */
+button {
+  border-radius: 0;
+}
+
+button:hover {
+  background: inherit;
+}
+
+#workspaces button,
+#window {
+  margin-right: 1px;
+  padding: 0 16px;
+  color: @text;
+  background-color: @base;
+  /* border-right: 1px solid @surface0; */
+}
+
+#workspaces button:hover {
+  color: @text;
+  background-color: @base;
+  border: none;
+}
+
+#workspaces button.persistent {
+  color: @surface1;
+  background-color: @base;
+}
+
+#workspaces button.active {
+  color: @base;
+  background-color: @text;
+}
+
+#workspaces button.urgent {
+  color: @base;
+  background-color: @sapphire;
+}
+
+#window {
+  margin: 0;
+  background-color: transparent;
+}
+
+#window.empty {
+  background-color: transparent;
+}
+
+/* Modules Right */
+.modules-right > widget > * {
+  font-family: "Font Awesome 6 Free";
+  background-color: @base;
+  color: @text;
+  padding: 0 16px;
+  border-radius: 0;
+  margin-right: 1px;
+  /* border-right: 1px solid @surface0; */
+}
+
+tooltip {
+  margin-top: 16px;
+  color: @text;
+  background-color: @surface0;
+}
+
+tooltip label {
+  font-size: 12px;
+  padding: 4px 16px;
+  color: @text;
+  background-color: @surface0;
+}
+
+#workspaces button:first-child,
+#temperature,
+#backlight,
+#custom-time {
+  border-radius: 8px 0 0 8px;
+}
+
+#workspaces button:last-child,
+#network,
+#idle_inhibitor,
+#custom-date {
+  border: none;
+  border-radius: 0 8px 8px 0;
+  margin-right: 8px;
+}
+
+#workspaces button:last-child,
+#custom-date {
+  margin: 0;
+}
+
+#workspaces button:only-child {
+  border-radius: 8px;
+}
+
+#idle_inhibitor.activated {
+  color: @crust;
+  background-color: @flamingo;
+}
+
+@keyframes blink {
+  to {
+    background-color: @red;
+    color: @base;
+  }
+}
+
+#network,
+#battery.plugged,
+#custom-spotify.playing {
+  background-color: @green;
+  color: @base;
+}
+
+#cpu.warning,
+#memory.warning,
+#battery.warning,
+#network.linked,
+#backlight.warning,
+#wireplumber.warning,
+#custom-spotify.paused {
+  background-color: @yellow;
+  color: @base;
+}
+
+#network.disconnected,
+#wireplumber.muted,
+#custom-mic.off,
+#custom-spotify.disabled {
+  background-color: @peach;
+  color: @base;
+}
+
+#temperature.critical,
+#cpu.critical,
+#memory.critical,
+#network.disabled,
+#backlight.critical,
+#wireplumber.critical {
+  background-color: @red;
+  color: @base;
+}
+
+#battery.critical:not(.charging) {
+  background-color: @red;
+  color: @maroon;
+  animation-name: blink;
+  animation-duration: 1.5s;
+  animation-timing-function: ease;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#tray {
+  border-radius: 8px;
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: @sapphire;
+}

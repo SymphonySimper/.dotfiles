@@ -1,4 +1,4 @@
-{ userSettings, ... }:
+{ ... }:
 {
   imports = [
     ./alacritty.nix
@@ -10,7 +10,5 @@
     ./productivity.nix
     ./theme.nix
     ./wezterm/default.nix
-  ] ++ (if userSettings.programs.wm then [
-    ./hyprland/default.nix
-  ] else [ ]);
+  ];
 }

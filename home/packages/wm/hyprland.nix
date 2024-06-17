@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ ... }: {
   wayland.windowManager.hyprland = {
     enable = true;
     systemd.enable = true;
@@ -72,7 +72,9 @@
       env = "XCURSOR_SIZE,12";
 
       exec-once = [
-        "${pkgs.dunst}"
+        "waybar --config ~/.config/waybar/config.json --style ~/.config/waybar/style.css"
+        "dunst"
+        "dir=\"$(dirname $(grep -l coretemp /sys/class/hwmon/hwmon*/name))\"; ln -sf $dir/temp1_input /tmp/temperature &"
       ];
 
       input = {
@@ -92,8 +94,8 @@
       };
 
       general = {
-        gaps_in = 0;
-        gaps_out = 0;
+        gaps_in = 8;
+        gaps_out = 8;
         border_size = 1;
         "col.active_border" = "$surface0";
         "col.inactive_border" = "$base";
@@ -101,7 +103,7 @@
       };
 
       decoration = {
-        rounding = 0;
+        rounding = 8;
 
         blur = {
           enabled = false;
@@ -148,6 +150,7 @@
       windowrulev2 = [
         "workspace: 1, class:^(Alacritty)$"
         "workspace: 2 silent, class:^(firefox)$"
+        "workspace: 2, class:^(Chromium-browser)$"
         "workspace: 2, class:^(Brave-browser)$"
         "workspace: 3, class:^(com.github.johnfactotum.Foliate)$"
         "workspace: 4, class:^(mpv)$"
@@ -178,7 +181,7 @@
         "$mainMod SHIFT, Return, exec, wezterm"
         "$mainMod, E, exec, bin/nautilus"
         "$mainMod, R, exec, wofi --show drun"
-        "$mainMod, F, exec, firefox"
+        "$mainMod, F, exec, chromium"
         "$mainMod, B, exec, killall -SIGUSR1 waybar" # Toggle waybar
         "$mainMod SHIFT, B, exec, killall -SIGUSR2 waybar" # Restart waybar
 
@@ -300,13 +303,4 @@
       submap = reset
     '';
   };
-
-  home.packages = with pkgs; [
-    dunst
-    gnome.nautilus
-    hyprpaper
-    hyprshot
-    waybar
-    wofi
-  ];
 }
