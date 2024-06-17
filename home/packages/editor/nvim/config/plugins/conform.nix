@@ -1,8 +1,13 @@
-{ ... }:
+{ pkgs, ... }:
 let
   web = [ [ "prettierd" "prettier" ] ];
 in
 {
+  home.packages = with pkgs; [
+    prettierd
+    nodePackages.prettier
+  ];
+
   programs.nixvim.plugins.conform-nvim = {
     enable = true;
     formatOnSave = {
