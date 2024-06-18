@@ -17,7 +17,6 @@
       "edibdbjcniadpccecjdfdjjppcpchdlm" # i don't care about cookies
       "jpbjcnkcffbooppibceonlgknpkniiff" # global speed
       "bnclejfcblondkjliiblkojdeloomadd" # mute tab
-      "oocalimimngaihdkbihfgmpkcpnmlaoa" # teleparty
       "cankofcoohmbhfpcemhmaaeennfbnmgp" # netflix 1080p
     ];
   };
