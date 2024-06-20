@@ -49,11 +49,13 @@
     ];
 
     languages = {
-      language = [{
-        name = "svelte";
-        auto-format = true;
-        language-servers = [ "svelteserver" "tailwindcss-ls" ];
-      }
+      language = [
+        {
+          name = "svelte";
+          auto-format = true;
+          language-servers = [ "svelteserver" "tailwindcss-ls" ];
+          formatter = { command = "prettier"; args = [ "--parser" "svelte" ]; };
+        }
 
         {
           name = "html";
@@ -79,7 +81,8 @@
           name = "python";
           roots = [ "pyproject.toml" ];
           language-servers = [ "pyright" "ruff" ];
-        }];
+        }
+      ];
 
       language-server = {
         rust-analyzer.config.check = {
