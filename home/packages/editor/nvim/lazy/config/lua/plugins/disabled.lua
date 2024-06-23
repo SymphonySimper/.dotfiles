@@ -1,7 +1,7 @@
 local plugins = {
   -- UI
   "akinsho/bufferline.nvim",
-  "folke/noice.nvim",
+  -- "folke/noice.nvim",
   "goolord/alpha-nvim",
   "nvimdev/dashboard-nvim",
   "rcarriga/nvim-notify",
