@@ -6,6 +6,13 @@
   boot.consoleLogLevel = 0;
 
   networking.networkmanager.enable = true;
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [
+      # 80 # 443
+      5173
+    ];
+  };
 
   # Enable sound with pipewire.
   sound.enable = false;
