@@ -14,6 +14,7 @@
     # dev
     ## Nix;
     snrs = "cd $HOME/.dotfiles && sudo nixos-rebuild switch --flake";
+    nix_cln = "sudo nix-collect-garbage -d; nix-collect-garbage -d;";
     ### home-manager;
     hmbs = "cd $HOME/.dotfiles && home-manager build switch --flake";
     ## git
