@@ -1,4 +1,5 @@
 { pkgs, ... }: {
+  # Refer: https://nixos.wiki/wiki/Steam
   programs.java.enable = true;
   programs.steam = {
     enable = true;
