@@ -19,5 +19,8 @@
       "bnclejfcblondkjliiblkojdeloomadd" # mute tab
       "cankofcoohmbhfpcemhmaaeennfbnmgp" # netflix 1080p
     ];
+    commandLineArgs = [
+      "--ozone-platform-hint=auto"
+    ];
   };
 }
