@@ -12,4 +12,6 @@
   ] else [
     ../../system/packages/gnome.nix
   ]);
+
+  services.xserver.videoDrivers = [ "amdgpu" ];
 }
