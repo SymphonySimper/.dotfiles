@@ -11,12 +11,19 @@ get_email() {
 create_ssh_key() {
   if [ ! -f "$2" ]; then
     echo "$1"
-    cd
+    cd "$3"
+
+    temp_dir="temp_ssh_git"
+    mkdir "$temp_dir"
+    cd "$temp_dir"
+    git init
 
     email="$(get_email)"
     echo "$1 Email: $email"
-
     gen_ssh "$2"
+
+    cd "$3"
+    rm -rf "$temp_dir"
   else
     echo "$1 ssh exists!"
   fi
@@ -25,5 +32,5 @@ create_ssh_key() {
 personal_ssh="$HOME/.ssh/id_ed25519"
 work_ssh="$HOME/.ssh/work_id_ed25519"
 
-create_ssh_key "Personal" "$personal_ssh"
-create_ssh_key "Work" "$work_ssh"
+create_ssh_key "Personal" "$personal_ssh" "$HOME"
+create_ssh_key "Work" "$work_ssh" "$HOME/lifeisfun/work"
