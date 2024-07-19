@@ -35,7 +35,6 @@
     gR = "git reset --hard HEAD";
     gcln = "git clean -fdx";
     gz = "lazygit";
-    gen_ssh = "ssh-keygen -t ed25519 -C \"$(git config --get user.email)\"";
     ## rust
     rc = "cargo";
     rcn = "cargo new";
