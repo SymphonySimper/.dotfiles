@@ -5,6 +5,7 @@
     ./js.nix
     ./python.nix
     ./rust.nix
+    ./ssh.nix
   ];
 
   home.packages = with pkgs; [

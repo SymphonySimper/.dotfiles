@@ -10,6 +10,7 @@
         contents = {
           user = {
             name = "Sri Senthil Balaji J";
+            email = "176003709+smollan-sri-senthil-balaji@users.noreply.github.com";
           };
           init.defaultBranch = "main";
         };
