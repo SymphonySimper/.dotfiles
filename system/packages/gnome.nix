@@ -7,24 +7,24 @@
   };
 
   environment.gnome.excludePackages = with pkgs.gnome; [
-    epiphany
-    geary
     gnome-characters
     gnome-contacts
     gnome-maps
     gnome-music
     gnome-shell-extensions
     gnome-weather
-    simple-scan
-    yelp
   ] ++ (with pkgs; [
+    epiphany
+    geary
     gnome-connections
     gnome-text-editor
     gnome-tour
+    simple-scan
+    yelp
   ]);
 
   environment.systemPackages = with pkgs; [
-    gnome3.gnome-tweaks
+    gnome-tweaks
 
     # extensions
     gnomeExtensions.caffeine
