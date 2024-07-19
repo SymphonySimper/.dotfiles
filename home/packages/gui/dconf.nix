@@ -18,6 +18,10 @@
         toolkit-accessibility = false;
       };
 
+      "org/gnome/mutter" = {
+        experimental-features= [ "scale-monitor-framebuffer" ];
+      };
+
       "org/gnome/desktop/peripherals/keyboard" = {
         numlock-state = false;
       };
