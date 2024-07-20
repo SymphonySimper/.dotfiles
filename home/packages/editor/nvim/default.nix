@@ -1,6 +1,6 @@
 { ... }: {
   imports = [
-    ./lazy/default.nix
-    # ./nixvim/default.nix
+    # ./lazy/default.nix
+    ./nixvim/default.nix
   ];
 }
