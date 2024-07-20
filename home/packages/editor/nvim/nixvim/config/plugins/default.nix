@@ -3,6 +3,7 @@
     ./cmp.nix
     ./colorizer.nix
     ./conform.nix
+    ./harpoon.nix
     ./lsp.nix
     ./mini.nix
     ./oil.nix
