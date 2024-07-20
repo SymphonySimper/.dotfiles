@@ -21,6 +21,7 @@
     gnome-tour
     simple-scan
     yelp
+    foliate
   ]);
 
   environment.systemPackages = with pkgs; [
