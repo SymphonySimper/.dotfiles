@@ -10,7 +10,6 @@
 
     extraPackages = with pkgs; [
       fd
-      gcc
       ripgrep
     ];
   };
