@@ -21,10 +21,10 @@
     gnome-tour
     simple-scan
     yelp
-    foliate
   ]);
 
   environment.systemPackages = with pkgs; [
+    foliate
     gnome-tweaks
 
     # extensions
