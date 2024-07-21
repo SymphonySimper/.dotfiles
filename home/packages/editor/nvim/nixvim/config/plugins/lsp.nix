@@ -2,6 +2,7 @@
   programs.nixvim.plugins = {
     lsp = {
       enable = true;
+      inlayHints = true;
       keymaps = {
         silent = true;
 
@@ -36,6 +37,19 @@
         nixd = {
           enable = true;
           settings.formatting.command = [ "nixpkgs-fmt" ];
+        };
+
+        # Rust
+        rust-analyzer = {
+          enable = true;
+          installCargo = false;
+          installRustc = false;
+          settings = {
+            checkOnSave = true;
+            check = {
+              command = "clippy";
+            };
+          };
         };
 
         # Svelte
