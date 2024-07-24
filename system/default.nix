@@ -18,11 +18,15 @@ in
 
   networking.hostName = "nixos"; # Define your hostname.
 
-  users.users.${userSettings.username} = {
-    isNormalUser = true;
-    home = userSettings.home;
-    description = "${userSettings.description}";
-    extraGroups = [ "wheel" "networkmanager" "uinput" ];
+  users = {
+    mutableUsers = false;
+    users.${userSettings.username} = {
+      initialHashedPassword = "$y$j9T$f1QyC98UAbDK25Kge9b.l1$rXdO5ewhU1VvOwDyvf2ZZhGX8cEb/c3JWIa7jRKhka6";
+      isNormalUser = true;
+      home = userSettings.home;
+      description = "${userSettings.description}";
+      extraGroups = [ "wheel" "networkmanager" "uinput" ];
+    };
   };
 
 
