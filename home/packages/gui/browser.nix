@@ -12,6 +12,7 @@
     extensions = [
       "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
       "nngceckbapebfimnlniiiahkandclblb" # bitwarden
+      "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
       # "mjdepdfccjgcndkmemponafgioodelna" # df youtube
       "mnjggcdmjocbbbhaepdhchncahnbgone" # sponsor block
       "edibdbjcniadpccecjdfdjjppcpchdlm" # i don't care about cookies
