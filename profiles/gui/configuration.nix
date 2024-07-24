@@ -1,9 +1,9 @@
 { userSettings, ... }:
 {
   imports = [
-    ../../system/default.nix
     # ../../system/hardware/ideapad.nix
     # ../../system/packages/nvidia/enable.nix
+    ../../system/default.nix
     ../../system/packages/steam.nix
     ../../system/pc.nix
     ./hardware.nix
