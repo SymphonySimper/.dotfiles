@@ -1,4 +1,8 @@
-{ ... }: {
+{ userSettings, ... }:
+let
+  wallpaper = "/home/${userSettings.username}/.dotfiles/assets/images/bg.png";
+in
+{
   dconf = {
     enable = true;
     settings = {
@@ -11,6 +15,15 @@
         ];
       };
 
+      "org/gnome/desktop/background" = {
+        "picture-uri" = wallpaper;
+        "picture-uri-dark" = wallpaper;
+      };
+
+      "org/gnome/desktop/screensaver" = {
+        "picture-uri" = wallpaper;
+      };
+
       "org/gnome/desktop/interface" = {
         color-scheme = "prefer-dark";
         enable-animations = true;
@@ -19,7 +32,7 @@
       };
 
       "org/gnome/mutter" = {
-        experimental-features= [ "scale-monitor-framebuffer" ];
+        experimental-features = [ "scale-monitor-framebuffer" ];
       };
 
       "org/gnome/desktop/peripherals/keyboard" = {
