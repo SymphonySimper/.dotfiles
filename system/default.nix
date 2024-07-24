@@ -21,7 +21,7 @@ in
   users = {
     mutableUsers = false;
     users.${userSettings.username} = {
-      initialHashedPassword = "$y$j9T$f1QyC98UAbDK25Kge9b.l1$rXdO5ewhU1VvOwDyvf2ZZhGX8cEb/c3JWIa7jRKhka6";
+      initialHashedPassword = "$6$zzXPOtlNAnpUTgHe$.VZIkoqeZQWtACW6JFOZBeUUT5ds7PDpfoMZQOfWNCND0ukdGVd7jA2Ko86g8tPDxfpM3D0rVkCRUfEz/hJiN0";
       isNormalUser = true;
       home = userSettings.home;
       description = "${userSettings.description}";
