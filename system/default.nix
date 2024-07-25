@@ -19,7 +19,7 @@ in
   networking.hostName = "nixos"; # Define your hostname.
 
   users = {
-    mutableUsers = false;
+    mutableUsers = true;
     users.${userSettings.username} = {
       initialHashedPassword = "$6$zzXPOtlNAnpUTgHe$.VZIkoqeZQWtACW6JFOZBeUUT5ds7PDpfoMZQOfWNCND0ukdGVd7jA2Ko86g8tPDxfpM3D0rVkCRUfEz/hJiN0";
       isNormalUser = true;
