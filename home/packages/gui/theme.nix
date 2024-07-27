@@ -21,6 +21,7 @@
 
   gtk = {
     enable = true;
+    catppuccin.enable = false;
     theme = {
       name = "Adwaita-dark";
       package = pkgs.gnome-themes-extra;
@@ -40,6 +41,9 @@
   qt = {
     enable = true;
     platformTheme.name = "adwaita";
-    style.name = "adwaita-dark";
+    style = {
+      catppuccin.enable = false;
+      name = "adwaita-dark";
+    };
   };
 }

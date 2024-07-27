@@ -27,8 +27,6 @@
     enable = true;
     flavor = "mocha";
   };
-  gtk.catppuccin.enable = false;
-  qt.style.catppuccin.enable = false;
 
   nix.gc = {
     automatic = true;
