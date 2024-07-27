@@ -207,6 +207,12 @@ in
         };
       };
 
+      seat = {
+        "*" = {
+          hide_cursor = "when-typing enable";
+        };
+      };
+
       input = {
         "type:touchpad" = {
           dwt = "enabled";
