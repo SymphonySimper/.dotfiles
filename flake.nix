@@ -32,10 +32,13 @@
         description = "SymphonySimper";
         home = "/home/${username}";
         wallpaper = "${home}/.dotfiles/assets/images/bg.png";
+        font = {
+          mono = "JetBrainsMono Nerd Font";
+        };
         programs = {
           zellij = true;
           wm = true;
-          terminal = "alacritty";
+          terminal = "foot";
           browser = "chromium";
           appLauncher = ".wofi-wrapped";
           notification = ".dunst-wrapped";
