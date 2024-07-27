@@ -1,7 +1,8 @@
-{ ... }: {
+{ lib, ... }: {
   virtualisation.docker = {
     enable = true;
-    enableOnBoot = false;
+    enableOnBoot = lib.mkForce false;
+    liveRestore = false;
 
     autoPrune = {
       enable = true;
