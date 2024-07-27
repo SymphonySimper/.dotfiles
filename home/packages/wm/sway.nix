@@ -216,6 +216,91 @@ in
         };
       };
 
+      colors = {
+        focused = {
+          # title = "$lavender";
+          background = "$base";
+          text = "$text";
+          indicator = "$rosewater";
+          border = "$lavender";
+          childBorder = "$base";
+        };
+        focusedInactive = {
+          # title = "$overlay0";
+          background = "$base";
+          text = "$text";
+          indicator = "$rosewater";
+          border = "$overlay0";
+          childBorder = "$base";
+        };
+        unfocused = {
+          # title = "$overlay0";
+          background = "$base";
+          text = "$text";
+          indicator = "$rosewater";
+          border = "$overlay0";
+          childBorder = "$base";
+        };
+        urgent = {
+          # title = "$peach";
+          background = "$base";
+          text = "$peach";
+          indicator = "$overlay0";
+          border = "$peach";
+          childBorder = "$base";
+        };
+        placeholder = {
+          # title = "$overlay0";
+          background = "$base";
+          text = "$text";
+          indicator = "$overlay0";
+          border = "$overlay0";
+          childBorder = "$base";
+        };
+        # background = {
+        #   title = "$base";
+        # };
+      };
+
+      bars = [{
+        colors = {
+          # background = { title = "$base"; };
+          # statusline = { title = "$text"; };
+          # focusedStatusline = { title = "$text"; };
+          # focusedSeparator = { title = "$base"; };
+          focusedWorkspace = {
+            # title = "$base";
+            background = "$base";
+            text = "$green";
+            border = "$base";
+          };
+          activeWorkspace = {
+            # title = "$base";
+            background = "$base";
+            text = "$blue";
+            border = "$base";
+          };
+          inactiveWorkspace = {
+            # title = "$base";
+            background = "$base";
+            text = "$surface1";
+            border = "$base";
+          };
+          urgentWorkspace = {
+            # title = "$base";
+            background = "$base";
+            text = "$surface1";
+            border = "$base";
+          };
+          bindingMode = {
+            # title = "$base";
+            background = "$base";
+            text = "$surface1";
+            border = "$base";
+          };
+        };
+      }];
+
     };
   };
 }
