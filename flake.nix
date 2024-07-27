@@ -30,9 +30,15 @@
         username = "symph";
         description = "SymphonySimper";
         home = "/home/${username}";
+        wallpaper = "${home}/.dotfiles/assets/images/bg.png";
         programs = {
           zellij = true;
-          wm = false;
+          wm = true;
+          terminal = "alacritty";
+          browser = "chromium";
+          appLauncher = ".wofi-wrapped";
+          notification = ".dunst-wrapped";
+          wallpaper = "swaybg -i ${wallpaper} -m fill";
         };
       };
       lib = nixpkgs.lib;

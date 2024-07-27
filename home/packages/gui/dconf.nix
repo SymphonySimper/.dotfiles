@@ -1,8 +1,4 @@
-{ userSettings, ... }:
-let
-  wallpaper = "/home/${userSettings.username}/.dotfiles/assets/images/bg.png";
-in
-{
+{ userSettings, ... }: {
   dconf = {
     enable = true;
     settings = {
@@ -16,12 +12,12 @@ in
       };
 
       "org/gnome/desktop/background" = {
-        "picture-uri" = wallpaper;
-        "picture-uri-dark" = wallpaper;
+        "picture-uri" = userSettings.wallpaper;
+        "picture-uri-dark" = userSettings.wallpaper;
       };
 
       "org/gnome/desktop/screensaver" = {
-        "picture-uri" = wallpaper;
+        "picture-uri" = userSettings.wallpaper;
       };
 
       "org/gnome/desktop/interface" = {

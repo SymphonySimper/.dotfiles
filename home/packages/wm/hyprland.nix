@@ -1,4 +1,4 @@
-{ ... }: {
+{ userSettings, ... }: {
   wayland.windowManager.hyprland = {
     enable = true;
     systemd.enable = true;
@@ -68,12 +68,12 @@
       "$crust" = "0xff11111b";
 
       # Settings
-      "monitor" = ",1920x1080@60,auto,1.0";
+      "monitor" = ",2880x1800@60,auto,1.6";
       env = "XCURSOR_SIZE,12";
 
       exec-once = [
+        "${userSettings.wallpaper}"
         "waybar --config ~/.config/waybar/config.json --style ~/.config/waybar/style.css"
-        "dunst"
         "dir=\"$(dirname $(grep -l coretemp /sys/class/hwmon/hwmon*/name))\"; ln -sf $dir/temp1_input /tmp/temperature &"
       ];
 
@@ -126,7 +126,7 @@
       };
 
       master = {
-        new_is_master = true;
+        new_status = "master";
       };
 
       gestures = {

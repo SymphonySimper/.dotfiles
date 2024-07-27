@@ -1,14 +1,15 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   imports = [
-    ./hyprland.nix
-    ./hyprpaper.nix
-    ./waybar/default.nix
+    # ./hyprland.nix
+    # ./river.nix
+    ./sway.nix
+    ./utils/default.nix
   ];
 
   home.packages = with pkgs; [
-    dunst
-    gnome.nautilus
-    hyprshot
-    wofi
+    nautilus
+    swaybg
+    # hyprshot
   ];
 }

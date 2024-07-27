@@ -10,11 +10,11 @@
     })
     ../../system/default.nix
     ../../system/packages/steam.nix
-    ../../system/packages/vm.nix
+    # ../../system/packages/vm.nix
     ../../system/pc.nix
     ./hardware.nix
   ] ++ (if userSettings.programs.wm then [
-    ../../system/packages/hyprland.nix
+    ../../system/packages/sway.nix
   ] else [
     ../../system/packages/gnome.nix
   ]);
