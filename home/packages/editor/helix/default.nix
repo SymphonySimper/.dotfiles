@@ -8,8 +8,6 @@
     # package = helix-flake.packages.${pkgs.system}.default;
 
     settings = {
-      theme = "catppuccin_mocha";
-
       editor = {
         line-number = "relative";
         cursorline = true;

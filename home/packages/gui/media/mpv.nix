@@ -13,8 +13,6 @@
       osd-font-size = 32;
       osd-border-size = 1.5;
       osd-font = "Poppins";
-      osd-color = "#eeeeee";
-      osd-border-color = "#111111";
 
       # Subtitles
       sub-visibility = "no";
@@ -29,8 +27,6 @@
 
       sub-font = "Poppins";
       sub-font-size = 48;
-      sub-color = "#eeeeee";
-      sub-border-color = "#111111";
       sub-border-size = 2.0;
 
       # Audio 

@@ -4,6 +4,7 @@
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    catppuccin.url = "github:catppuccin/nix";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -51,7 +52,10 @@
 
       mkHome = { profile, system }: home-manager.lib.homeManagerConfiguration {
         pkgs = mkPkgs { system = system; };
-        modules = [ inputs.nixvim.homeManagerModules.nixvim ./profiles/${profile}/home.nix ];
+        modules = [
+          ./profiles/${profile}/home.nix
+          inputs.nixvim.homeManagerModules.nixvim
+        ];
         extraSpecialArgs = {
           inherit userSettings;
           inherit profileSettings;

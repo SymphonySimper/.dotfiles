@@ -1,6 +1,7 @@
-{ userSettings, ... }:
+{ inputs, userSettings, ... }:
 {
   imports = [
+    inputs.catppuccin.homeManagerModules.catppuccin
     ./packages/cli/default.nix
     ./packages/dev/default.nix
     ./packages/editor/default.nix
@@ -21,6 +22,13 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  catppuccin = {
+    enable = true;
+    flavor = "mocha";
+  };
+  gtk.catppuccin.enable = false;
+  qt.style.catppuccin.enable = false;
 
   nix.gc = {
     automatic = true;
