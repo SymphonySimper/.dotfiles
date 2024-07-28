@@ -181,6 +181,9 @@ in
         "${keys.mod}+${commonKeys.screenshot.window.mod}+${commonKeys.screenshot.window.key}" = "exec ${commonKeys.screenshot.window.cmd}";
         "${keys.mod}+${commonKeys.screenshot.region.mod}+${commonKeys.screenshot.region.key}" = "exec ${commonKeys.screenshot.region.cmd}";
 
+        # Bar
+        "${keys.mod}+m" = "bar mode toggle";
+
         # Reload the configuration file
         "${keys.mod}+Shift+c" = "reload";
 
@@ -373,9 +376,11 @@ in
 
           extraConfig = ''
             pango_markup enabled
+            modifier ""
           '';
 
-          mode = "hide";
+          mode = "dock";
+          hiddenState = "hide";
           position = "top";
           fonts = {
             names = [
