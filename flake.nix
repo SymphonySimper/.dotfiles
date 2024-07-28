@@ -21,7 +21,8 @@
     # helix-flake.url = "github:helix-editor/helix";
   };
 
-  outputs = { nixpkgs, home-manager, ... }@inputs:
+  outputs =
+    { nixpkgs, home-manager, ... }@inputs:
     let
       profileSettings = {
         name = "wsl";
@@ -35,6 +36,7 @@
         font = {
           sans = "Poppins";
           mono = "JetBrainsMono Nerd Font";
+          glyph = "Font Awesome 6 Free";
         };
         programs = {
           zellij = true;
@@ -49,36 +51,42 @@
       lib = nixpkgs.lib;
       myUtils = import ./utils/default.nix;
 
-      mkPkgs = { system }: (import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-      });
+      mkPkgs =
+        { system }:
+        (import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        });
 
-      mkHome = { profile, system }: home-manager.lib.homeManagerConfiguration {
-        pkgs = mkPkgs { system = system; };
-        modules = [
-          ./profiles/${profile}/home.nix
-          inputs.nixvim.homeManagerModules.nixvim
-        ];
-        extraSpecialArgs = {
-          inherit userSettings;
-          inherit profileSettings;
-          inherit inputs;
-          inherit myUtils;
+      mkHome =
+        { profile, system }:
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = mkPkgs { system = system; };
+          modules = [
+            ./profiles/${profile}/home.nix
+            inputs.nixvim.homeManagerModules.nixvim
+          ];
+          extraSpecialArgs = {
+            inherit userSettings;
+            inherit profileSettings;
+            inherit inputs;
+            inherit myUtils;
+          };
         };
-      };
 
-      mkSystem = { profile, system }: lib.nixosSystem {
-        system = system;
-        pkgs = mkPkgs { system = system; };
-        modules = [ ./profiles/${profile}/configuration.nix ];
-        specialArgs = {
-          inherit userSettings;
-          inherit profileSettings;
-          inherit inputs;
-          inherit myUtils;
+      mkSystem =
+        { profile, system }:
+        lib.nixosSystem {
+          system = system;
+          pkgs = mkPkgs { system = system; };
+          modules = [ ./profiles/${profile}/configuration.nix ];
+          specialArgs = {
+            inherit userSettings;
+            inherit profileSettings;
+            inherit inputs;
+            inherit myUtils;
+          };
         };
-      };
 
       profiles = rec {
         default = {
