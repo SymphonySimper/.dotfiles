@@ -7,6 +7,7 @@ let
     up = "k";
     right = "l";
   };
+  commonKeys = (import ./keybinds.nix);
 in
 {
   wayland.windowManager.sway = {
@@ -73,9 +74,20 @@ in
         "${keys.mod}+d" = "exec ${menu} --show drun";
         "${keys.mod}+q" = "kill";
 
+        # Brightness
+        "${keys.mod}+${commonKeys.brightness.down.key}" = "exec ${commonKeys.brightness.down.cmd}";
+        "${keys.mod}+${commonKeys.brightness.up.key}" = "exec ${commonKeys.brightness.up.cmd}";
+
+        # Volume
+        "${keys.mod}+${commonKeys.volume.down.key}" = "exec ${commonKeys.volume.down.cmd}";
+        "${keys.mod}+${commonKeys.volume.up.key}" = "exec ${commonKeys.volume.up.cmd}";
+        "${keys.mod}+${commonKeys.volume.toggle.mod}+${commonKeys.volume.toggle.key}" = "exec ${commonKeys.volume.toggle.cmd}";
+
+        # Mic
+        "${keys.mod}+${commonKeys.mic.toggle.key}" = "exec ${commonKeys.mic.toggle.cmd}";
 
         # Reload the configuration file
-        "${keys.mod}+Shift+c" = " reload";
+        "${keys.mod}+Shift+c" = "reload";
 
         # Exit sway (logs you out of your Wayland session)
         "${keys.mod}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
