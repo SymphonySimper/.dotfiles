@@ -335,7 +335,7 @@ in
           background = "$base";
           text = "$text";
           indicator = "$rosewater";
-          childBorder = "$base";
+          childBorder = "$lavender";
         };
         focusedInactive = {
           border = "$overlay0";
