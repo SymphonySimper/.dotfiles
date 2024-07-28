@@ -1,8 +1,8 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home.packages = [
-    (pkgs.writeShellScriptBin
-      "volume"
-      /*bash*/
+    (pkgs.writeShellScriptBin "volume"
+      # bash
       ''
         app="${pkgs.wireplumber}/bin/wpctl"
 
@@ -11,7 +11,7 @@
         source='@DEFAULT_AUDIO_SOURCE@'
 
         function get_mute() {
-        	$app status "$1" | grep -qi muted && echo 0 || echo 1
+        	$app status "$1" | grep -qi -E "$2.*muted" && echo 0 || echo 1
         }
 
         get_vol() { $app get-volume $sink; }
@@ -20,10 +20,24 @@
 
         set_vol() { change_vol "$1"; }
 
-        toggle_mute() { $app set-mute $sink toggle; }
+        notify_toggle() {
+          if [ $(get_mute $source $1) -eq 0 ]; then
+            status="muted"
+          else
+            status="unmuted"
+          fi
+          notify "replace" "my-$1" "$2 is $status"
+        }
+
+        toggle_mute() {
+          $app set-mute $sink toggle;
+          notify_toggle "stereo" "Audio"
+        }
 
         toggle_mic() {
         	$app set-mute $source toggle
+          notify_toggle "mic" "Mic"
+
         	pkill -SIGRTMIN+8 waybar
         }
 
@@ -38,8 +52,8 @@
         -D) change_vol "0.1-" ;;
         -m) toggle_mute ;;
         -M) toggle_mic ;;
-        -gM) get_mute $source ;;
         esac
-      '')
+      ''
+    )
   ];
 }

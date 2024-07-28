@@ -1,9 +1,11 @@
-{ ... }: {
+{ ... }:
+{
   imports = [
-    ./volume.nix
-    ./wallpaper.nix
     ./brightness.nix
+    ./notify.nix
     ./screenshot.nix
     ./startup.nix
+    ./volume.nix
+    ./wallpaper.nix
   ];
 }
