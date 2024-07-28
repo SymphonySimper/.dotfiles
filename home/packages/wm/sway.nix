@@ -1,4 +1,4 @@
-{ userSettings, ... }:
+{ userSettings, pkgs, ... }:
 let
   keys = {
     mod = "Mod4";
@@ -8,6 +8,13 @@ let
     right = "l";
   };
   commonKeys = (import ./keybinds.nix);
+  swaybarCommand = (pkgs.writeShellScriptBin "my-swaybar" ''
+    while true; do
+      time_date="$(date '+%H:%M %d/%m/%Y')"
+      echo $time_date
+      sleep 1m;
+    done
+  '');
 in
 {
   wayland.windowManager.sway = {
@@ -234,7 +241,7 @@ in
         "type:touchpad" = {
           dwt = "enabled";
           tap = "enabled";
-          natural_scroll = "enabled";
+          natural_scroll = "disabled";
           middle_emulation = "enabled";
         };
       };
@@ -286,8 +293,15 @@ in
       };
 
       bars = [{
-        mode = "dock";
+        statusCommand = pkgs.lib.getExe swaybarCommand;
+
+        mode = "hide";
         position = "top";
+        fonts = {
+          names = [ userSettings.font.sans ];
+          style = "Regular";
+          size = 12.0;
+        };
         colors = {
           # background = { title = "$base"; };
           # statusline = { title = "$text"; };
@@ -325,7 +339,6 @@ in
           };
         };
       }];
-
     };
   };
 }
