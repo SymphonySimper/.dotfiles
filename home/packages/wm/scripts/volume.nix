@@ -11,7 +11,7 @@
         source='@DEFAULT_AUDIO_SOURCE@'
 
         function get_mute() {
-        	$app status $source | grep -qi -E "$2.*muted" && echo 0 || echo 1
+        	$app status $source | grep -qi -E "$1.*muted" && echo 0 || echo 1
         }
 
         get_vol() { $app get-volume $sink; }
@@ -37,8 +37,6 @@
         toggle_mic() {
         	$app set-mute $source toggle
           notify_toggle "mic" "Mic"
-
-        	pkill -SIGRTMIN+8 waybar
         }
 
         case "$1" in

@@ -81,8 +81,8 @@ let
       fi
 
       # Mic
-      min_mute=$(volume -gM)
-      if [ $audio_mute -eq 0 ]; then
+      mic_mute=$(volume -gM)
+      if [ $mic_mute -eq 0 ]; then
         mic="MUTED"
         mic_color="${customColors.green}"
       else
