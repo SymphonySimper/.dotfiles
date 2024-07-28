@@ -304,9 +304,9 @@ in
       };
 
       output = {
-        "*" = {
-          bg = "${userSettings.wallpaper} fill #000000";
-        };
+        # "*" = {
+        #   bg = "${userSettings.wallpaper} fill #000000";
+        # };
         "eDP-1" = rec {
           scale = "1.5";
           res = "2880x1800";
