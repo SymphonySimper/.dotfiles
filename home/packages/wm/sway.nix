@@ -1,5 +1,8 @@
 { userSettings, pkgs, ... }:
 let
+  commonKeys = (import ./keybinds.nix);
+  customColors = (import ../../../assets/colors.nix).mocha;
+
   keys = {
     mod = "Mod4";
     left = "h";
@@ -7,8 +10,61 @@ let
     up = "k";
     right = "l";
   };
-  commonKeys = (import ./keybinds.nix);
-  swaybarCommand = "";
+
+  swaybarCommand = pkgs.writeShellScriptBin "my-sway-bar" ''
+    function create_block() {
+      full_text="$1"
+      color="$2"
+      background="$3"
+      min_width="100%"
+      align="center"
+      separator=true
+      markup="pango"
+      echo '{'
+      echo "\"full_text\": \"$full_text\","
+      echo "\"color\": \"$color\","
+      echo "\"background\": \"$background\","
+      echo "\"min_width\": \"$min_width\","
+      echo "\"align\": \"$align\","
+      echo "\"separator\": $separator,"
+      echo "\"markup\": \"$markup\","
+      echo '},'
+    }
+
+    echo '{ "version": 1, "click_event": false }'
+    echo '['
+    while true; do
+      # Date
+      date_status=$(date "+%H:%M %d/%m/%Y")
+
+      # Battery
+      battery_status=$(cat /sys/class/power_supply/BAT0/status)
+      battery_capacity=$(cat /sys/class/power_supply/BAT0/capacity)
+      if [ $battery_capacity -gt 80 ] && [[ $battery_status == 'Charging' ]]; then
+        notify replace 'my-battery-status' "Battery is greater than 80% ($battery_capacity) unplug the charger" -u critical
+      fi
+      case "$battery_status" in
+      'Charging') battery_status_color="${customColors.green}" ;;
+      'Discharging') battery_status_color="${customColors.maroon}" ;;
+      esac
+      if [ $battery_capacity -gt 80 ]; then
+        battery_capacity_color="${customColors.maroon}"
+      elif [ $battery_capacity -gt 50 ]; then
+        battery_capacity_color="${customColors.green}"
+      elif [ $battery_capacity -gt 20 ]; then
+        battery_capacity_color="${customColors.yellow}"
+      else
+        battery_capacity_color="${customColors.red}"
+      fi
+
+
+      echo '['
+        create_block "<span foreground='$battery_status_color'>$battery_status</span> <span foreground='$battery_capacity_color'>$battery_capacity%</span>"
+        create_block "$date_status" ${customColors.text}
+      echo '],'
+      sleep 1m
+    done
+  '';
 in
 {
   wayland.windowManager.sway = {
@@ -266,7 +322,7 @@ in
 
       bars = [
         {
-          # statusCommand = pkgs.lib.getExe swaybarCommand;
+          statusCommand = pkgs.lib.getExe swaybarCommand;
 
           extraConfig = ''
             pango_markup enabled
