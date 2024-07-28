@@ -35,10 +35,7 @@ in
         smartBorders = "on";
       };
 
-      startup = [
-        { command = "brightness -r"; }
-        { command = "startup"; }
-      ];
+      startup = [ { command = "startup"; } ];
 
       defaultWorkspace = "workspace number 1";
       assigns = {
