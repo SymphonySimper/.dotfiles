@@ -30,4 +30,20 @@
       "cmd" = "volume -M";
     };
   };
+  "screenshot" = {
+    "screen" = {
+      "key" = "F11";
+      "cmd" = "screenshot -s";
+    };
+    "window" = {
+      "mod" = "Ctrl";
+      "key" = "F11";
+      "cmd" = "screenshot -s";
+    };
+    "region" = {
+      "mod" = "Shift";
+      "key" = "F11";
+      "cmd" = "screenshot -r";
+    };
+  };
 }

@@ -86,6 +86,11 @@ in
         # Mic
         "${keys.mod}+${commonKeys.mic.toggle.key}" = "exec ${commonKeys.mic.toggle.cmd}";
 
+        # Screenshot
+        "${keys.mod}+${commonKeys.screenshot.screen.key}" = "exec ${commonKeys.screenshot.screen.cmd}";
+        "${keys.mod}+${commonKeys.screenshot.window.mod}+${commonKeys.screenshot.window.key}" = "exec ${commonKeys.screenshot.window.cmd}";
+        "${keys.mod}+${commonKeys.screenshot.region.mod}+${commonKeys.screenshot.region.key}" = "exec ${commonKeys.screenshot.region.cmd}";
+
         # Reload the configuration file
         "${keys.mod}+Shift+c" = "reload";
 
