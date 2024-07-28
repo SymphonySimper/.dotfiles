@@ -12,8 +12,12 @@ let
   };
 
   swaybarCommand = pkgs.writeShellScriptBin "my-sway-bar" ''
+    function create_sepeartor() {
+      echo "<span foreground='${customColors.overlay0}'>$1</span>"
+    }
+
     function create_block() {
-      full_text="$1"
+      full_text="$(create_sepeartor '[') $1 $(create_sepeartor ']')"
       color="$2"
       background="$3"
       min_width="100%"
@@ -57,12 +61,55 @@ let
         battery_capacity_color="${customColors.red}"
       fi
 
+      # Audio
+      audio_mute=$(volume -gm)
+      audio_volume=$(volume -gV)
+      if [ $audio_mute -eq 0 ]; then
+        audio="MUTED"
+        audio_color="${customColors.red}"
+      else
+        audio="$audio_volume"
+        if [ $audio_volume -gt 80 ]; then
+          audio_color="${customColors.red}"
+        elif [ $audio_volume -gt 50 ]; then
+          audio_color="${customColors.maroon}"
+        elif [ $audio_volume -gt 20 ]; then
+          audio_color="${customColors.yellow}"
+        else
+          audio_color="${customColors.green}"
+        fi
+      fi
+
+      # Mic
+      min_mute=$(volume -gM)
+      if [ $audio_mute -eq 0 ]; then
+        mic="MUTED"
+        mic_color="${customColors.green}"
+      else
+        mic="UNMUTED"
+        mic_color="${customColors.red}"
+      fi
+
+      # Brightness
+      brightness_status=$(brightness -g)
+      if [ $brightness_status -gt 80 ]; then
+        brightness_color="${customColors.red}"
+      elif [ $brightness_status -gt 50 ]; then
+        brightness_color="${customColors.maroon}"
+      elif [ $brightness_status -gt 20 ]; then
+        brightness_color="${customColors.yellow}"
+      else
+        brightness_color="${customColors.green}"
+      fi
 
       echo '['
+        create_block "$brightness_status%" "$brightness_color"
+        create_block "$mic" "$mic_color"
+        create_block "$audio%" "$audio_color"
         create_block "<span foreground='$battery_status_color'>$battery_status</span> <span foreground='$battery_capacity_color'>$battery_capacity%</span>"
         create_block "$date_status" ${customColors.text}
       echo '],'
-      sleep 1m
+      sleep 2s
     done
   '';
 in

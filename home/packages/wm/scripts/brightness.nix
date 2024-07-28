@@ -31,6 +31,7 @@
       -u) $app s +2% ;;
       -d) $app s 2%- ;;
       -s) $app s $2 ;;
+      -g) $app i | cut -d ',' -f4 | tr -d '%' ;;
       -t) toggle_ness ;;
       -r) restore ;; # Restore brightness
       esac

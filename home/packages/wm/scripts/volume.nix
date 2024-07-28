@@ -11,7 +11,7 @@
         source='@DEFAULT_AUDIO_SOURCE@'
 
         function get_mute() {
-        	$app status "$1" | grep -qi -E "$2.*muted" && echo 0 || echo 1
+        	$app status $source | grep -qi -E "$2.*muted" && echo 0 || echo 1
         }
 
         get_vol() { $app get-volume $sink; }
@@ -21,7 +21,7 @@
         set_vol() { change_vol "$1"; }
 
         notify_toggle() {
-          if [ $(get_mute $source $1) -eq 0 ]; then
+          if [ $(get_mute $1) -eq 0 ]; then
             status="muted"
           else
             status="unmuted"
@@ -57,8 +57,10 @@
           volume=$($app get-volume $sink | cut -d ' ' -f2)
           echo $(echo "$volume * 100 / 1" | "${pkgs.bc}/bin/bc")
           ;;
+        # Get audio mute
+        -gm) get_mute "stereo" ;;
         # Get mic mute
-        -gM) get_mute $source "mic" ;;
+        -gM) get_mute "mic" ;;
         esac
       ''
     )
