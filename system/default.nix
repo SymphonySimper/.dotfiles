@@ -25,7 +25,14 @@ in
       isNormalUser = true;
       home = userSettings.home;
       description = "${userSettings.description}";
-      extraGroups = [ "wheel" "networkmanager" "uinput" "libvirtd" ];
+      extraGroups = [
+        "wheel"
+        "networkmanager"
+        "uinput"
+        "libvirtd"
+        "video"
+        "input"
+      ];
     };
   };
 

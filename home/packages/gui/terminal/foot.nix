@@ -5,8 +5,8 @@
     settings = {
       main = {
         term = "xterm-256color";
-        font = "${userSettings.font.mono}:size=11";
-        dpi-aware = "no";
+        font = "${userSettings.font.mono}:size=8";
+        dpi-aware = "yes";
         pad = "8x8";
       };
     };

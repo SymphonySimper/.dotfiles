@@ -1,7 +1,8 @@
 { config, pkgs, ... }: {
   home.packages = [
     (pkgs.writeShellScriptBin "brightness" ''
-      app="${pkgs.brightnessctl}/bin/brightnessctl -m"
+      app_bin="${pkgs.brightnessctl}/bin/brightnessctl"
+      app="$app_bin -m"
       backup_file="${config.xdg.cacheHome}/last-brightness"
 
       toggle_ness() {
@@ -19,7 +20,11 @@
       -d) $app s 2%- ;;
       -s) $app s $2 ;;
       -t) toggle_ness ;;
+      -r) $app_bin -r ;; # Restore brightness
       esac
+
+      # Save current brightness value
+      $app_bin -s
     ''
     )
   ];

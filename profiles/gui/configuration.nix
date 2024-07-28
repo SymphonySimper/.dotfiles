@@ -1,4 +1,4 @@
-{ inputs, userSettings, ... }:
+{ inputs, ... }:
 {
   imports = [
     # ../../system/hardware/ideapad.nix
@@ -13,11 +13,8 @@
     # ../../system/packages/vm.nix
     ../../system/pc.nix
     ./hardware.nix
-  ] ++ (if userSettings.programs.wm then [
-    ../../system/packages/sway.nix
-  ] else [
-    ../../system/packages/gnome.nix
-  ]);
+    ../../system/packages/wm/default.nix
+  ];
 
   services.xserver.videoDrivers = [ "amdgpu" ];
 }

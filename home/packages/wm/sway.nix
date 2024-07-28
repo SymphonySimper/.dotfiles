@@ -34,8 +34,7 @@ in
       };
 
       startup = [
-        { command = "foot -s"; }
-        # { command = userSettings.programs.notification; }
+        { command = "startup"; }
       ];
 
       defaultWorkspace = "workspace number 1";
@@ -56,7 +55,7 @@ in
           { app_id = "^thunderbird$"; }
         ];
         "6" = [
-          { app_id = "^spotify$"; }
+          { app_id = "^$"; }
         ];
         "9" = [
           { app_id = "^steam$"; }
