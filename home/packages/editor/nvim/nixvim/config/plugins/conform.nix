@@ -13,6 +13,7 @@ in
       };
       formattersByFt = {
         nix = [ "nixfmt" ];
+        sh = [ "shfmt" ];
         lua = [ "stylua" ];
         python = [ "ruff" ];
         javascript = web;
@@ -30,6 +31,7 @@ in
 
     extraPackages = with pkgs; [
       nixfmt-rfc-style
+      shfmt
       stylua
       nodePackages.prettier
       codespell

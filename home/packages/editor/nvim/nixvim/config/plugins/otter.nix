@@ -1,5 +1,6 @@
-{ ... }: {
-  programs.nixvim = {
+{ ... }:
+{
+  programs.nixvim.plugins = {
     otter = {
       enable = true;
 
@@ -8,6 +9,6 @@
         handle_leading_whitespace = true;
       };
     };
-    cmp.settings.sources = [{ name = "otter"; }];
+    cmp.settings.sources = [ { name = "otter"; } ];
   };
 }

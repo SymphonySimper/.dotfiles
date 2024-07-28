@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   imports = [
     ./cmp.nix
     ./colorizer.nix
@@ -7,6 +8,7 @@
     ./lsp.nix
     ./mini.nix
     ./oil.nix
+    ./otter.nix
     ./telescope.nix
     ./treesitter.nix
     ./trouble.nix
