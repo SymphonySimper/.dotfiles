@@ -1,4 +1,5 @@
-{ myUtils, ... }: {
+{ myUtils, ... }:
+{
   programs.nixvim.plugins = {
     lsp = {
       enable = true;
@@ -34,10 +35,13 @@
 
       servers = {
         # Nix
-        nixd = {
+        nil-ls = {
           enable = true;
-          settings.formatting.command = [ "nixpkgs-fmt" ];
+          settings.nix.flake.autoArchive = true;
         };
+
+        # bash
+        bashls.enable = true;
 
         # Rust
         rust-analyzer = {
@@ -63,9 +67,18 @@
           enable = true;
           settings.tailwindCSS.experimental.classRegex = [
             # Refer: https://github.com/paolotiu/tailwind-intellisense-regex-list
-            [ "cva\\(([^)]*)\\)" "[\"'`]([^\"'`]*).*?[\"'`]" ]
-            [ "cx\\(([^)]*)\\)" "(?:'|\"|`)([^']*)(?:'|\"|`)" ]
-            [ "cn\\(([^)]*)\\)" "[\"'`]([^\"'`]*).*?[\"'`]" ]
+            [
+              "cva\\(([^)]*)\\)"
+              "[\"'`]([^\"'`]*).*?[\"'`]"
+            ]
+            [
+              "cx\\(([^)]*)\\)"
+              "(?:'|\"|`)([^']*)(?:'|\"|`)"
+            ]
+            [
+              "cn\\(([^)]*)\\)"
+              "[\"'`]([^\"'`]*).*?[\"'`]"
+            ]
             # [ "([a-zA-Z0-9\\-:]+)" ]
           ];
         };
@@ -81,6 +94,8 @@
         ruff-lsp.enable = true;
       };
     };
-    lsp-format = { enable = true; };
+    lsp-format = {
+      enable = true;
+    };
   };
 }
