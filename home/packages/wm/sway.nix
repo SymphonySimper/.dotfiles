@@ -8,13 +8,7 @@ let
     right = "l";
   };
   commonKeys = (import ./keybinds.nix);
-  swaybarCommand = (pkgs.writeShellScriptBin "my-swaybar" ''
-    while true; do
-      time_date="$(date '+%H:%M %d/%m/%Y')"
-      echo $time_date
-      sleep 1m;
-    done
-  '');
+  swaybarCommand = "";
 in
 {
   wayland.windowManager.sway = {
@@ -42,35 +36,24 @@ in
       };
 
       startup = [
+        { command = "brightness -r"; }
         { command = "startup"; }
       ];
 
       defaultWorkspace = "workspace number 1";
       assigns = {
-        "1" = [{ app_id = "^Alacritty$"; }];
+        "1" = [ { app_id = "^Alacritty$"; } ];
         "2" = [
           { app_id = "^firefox$"; }
           { app_id = "^chromium-browser$"; }
           { app_id = "^Brave-browser$"; }
         ];
-        "3" = [
-          { app_id = "^com.github.johnfactotum.Foliate$"; }
-        ];
-        "4" = [
-          { app_id = "^mpv$"; }
-        ];
-        "5" = [
-          { app_id = "^thunderbird$"; }
-        ];
-        "6" = [
-          { app_id = "^$"; }
-        ];
-        "9" = [
-          { app_id = "^steam$"; }
-        ];
-        "0" = [
-          { title = "^meet.google.com is sharing your screen.$"; }
-        ];
+        "3" = [ { app_id = "^com.github.johnfactotum.Foliate$"; } ];
+        "4" = [ { app_id = "^mpv$"; } ];
+        "5" = [ { app_id = "^thunderbird$"; } ];
+        "6" = [ { app_id = "^$"; } ];
+        "9" = [ { app_id = "^steam$"; } ];
+        "0" = [ { title = "^meet.google.com is sharing your screen.$"; } ];
       };
 
       workspaceAutoBackAndForth = true;
@@ -192,7 +175,6 @@ in
         # If there are multiple scratchpad windows, this command cycles through them.
         "${keys.mod}+minus" = "scratchpad show";
 
-
         # Switch to resize mode
         "${keys.mod}+r" = "mode \"resize\"";
       };
@@ -248,97 +230,94 @@ in
 
       colors = {
         focused = {
-          # title = "$lavender";
+          border = "$lavender";
           background = "$base";
           text = "$text";
           indicator = "$rosewater";
-          border = "$lavender";
           childBorder = "$base";
         };
         focusedInactive = {
-          # title = "$overlay0";
+          border = "$overlay0";
           background = "$base";
           text = "$text";
           indicator = "$rosewater";
-          border = "$overlay0";
           childBorder = "$base";
         };
         unfocused = {
-          # title = "$overlay0";
+          border = "$overlay0";
           background = "$base";
           text = "$text";
           indicator = "$rosewater";
-          border = "$overlay0";
           childBorder = "$base";
         };
         urgent = {
-          # title = "$peach";
+          border = "$peach";
           background = "$base";
           text = "$peach";
           indicator = "$overlay0";
-          border = "$peach";
           childBorder = "$base";
         };
         placeholder = {
-          # title = "$overlay0";
+          border = "$overlay0";
           background = "$base";
           text = "$text";
           indicator = "$overlay0";
-          border = "$overlay0";
           childBorder = "$base";
         };
-        # background = {
-        #   title = "$base";
-        # };
+        background = "$base";
       };
 
-      bars = [{
-        statusCommand = pkgs.lib.getExe swaybarCommand;
+      bars = [
+        {
+          # statusCommand = pkgs.lib.getExe swaybarCommand;
 
-        mode = "hide";
-        position = "top";
-        fonts = {
-          names = [ userSettings.font.sans ];
-          style = "Regular";
-          size = 12.0;
-        };
-        colors = {
-          # background = { title = "$base"; };
-          # statusline = { title = "$text"; };
-          # focusedStatusline = { title = "$text"; };
-          # focusedSeparator = { title = "$base"; };
-          focusedWorkspace = {
-            # title = "$base";
-            background = "$base";
-            text = "$green";
-            border = "$base";
+          extraConfig = ''
+            pango_markup enabled
+          '';
+
+          mode = "hide";
+          position = "top";
+          fonts = {
+            names = [
+              userSettings.font.sans
+              userSettings.font.glyph
+            ];
+            style = "Regular Semi-Condensed";
+            size = 11.0;
           };
-          activeWorkspace = {
-            # title = "$base";
+          colors = {
             background = "$base";
-            text = "$blue";
-            border = "$base";
+            statusline = "$text";
+            focusedStatusline = "$text";
+            focusedSeparator = "$base";
+            focusedWorkspace = {
+              border = "$base";
+              background = "$base";
+              text = "$green";
+            };
+            activeWorkspace = {
+              border = "$base";
+              background = "$base";
+              text = "$blue";
+            };
+            inactiveWorkspace = {
+              border = "$base";
+              background = "$base";
+              text = "$surface1";
+            };
+            urgentWorkspace = {
+              border = "$base";
+              background = "$base";
+              text = "$surface1";
+            };
+            bindingMode = {
+              border = "$base";
+              background = "$base";
+              text = "$surface1";
+            };
           };
-          inactiveWorkspace = {
-            # title = "$base";
-            background = "$base";
-            text = "$surface1";
-            border = "$base";
-          };
-          urgentWorkspace = {
-            # title = "$base";
-            background = "$base";
-            text = "$surface1";
-            border = "$base";
-          };
-          bindingMode = {
-            # title = "$base";
-            background = "$base";
-            text = "$surface1";
-            border = "$base";
-          };
-        };
-      }];
+        }
+      ];
     };
   };
 }
