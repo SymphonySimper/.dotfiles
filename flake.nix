@@ -33,6 +33,7 @@
         home = "/home/${username}";
         wallpaper = "${home}/.dotfiles/assets/images/bg.png";
         font = {
+          sans = "Poppins";
           mono = "JetBrainsMono Nerd Font";
         };
         programs = {
