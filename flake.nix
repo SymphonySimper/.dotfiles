@@ -42,6 +42,7 @@
           zellij = true;
           wm = true;
           terminal = "alacritty";
+          editor = "nvim";
           browser = "chromium";
           appLauncher = ".wofi-wrapped";
           notification = ".dunst-wrapped";

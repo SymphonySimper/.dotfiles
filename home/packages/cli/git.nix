@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ userSettings, pkgs, ... }:
 {
   programs.git = {
     enable = true;
@@ -18,8 +18,8 @@
     ];
     extraConfig = {
       init.defaultBranch = "master";
-      core.editor = "nvim";
-      merge.tool = "nvimdiff";
+      core.editor = userSettings.programs.editor;
+      merge.tool = if userSettings.programs.editor == "nvim" then "nvimdiff" else "";
       push.autoSetupRemote = true;
       mergetool.keepBackup = false;
       pull.rebase = true;
