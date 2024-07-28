@@ -142,12 +142,8 @@ in
 
       defaultWorkspace = "workspace number 1";
       assigns = {
-        "1" = [ { app_id = "^Alacritty$"; } ];
-        "2" = [
-          { app_id = "^firefox$"; }
-          { app_id = "^chromium-browser$"; }
-          { app_id = "^Brave-browser$"; }
-        ];
+        "1" = [ { app_id = "^(Alacritty|footclient|foot)$"; } ];
+        "2" = [ { app_id = "^(firefox|chromium-browser|Brave-browser)$"; } ];
         "3" = [ { app_id = "^com.github.johnfactotum.Foliate$"; } ];
         "4" = [ { app_id = "^mpv$"; } ];
         "5" = [ { app_id = "^thunderbird$"; } ];
@@ -159,7 +155,9 @@ in
       workspaceAutoBackAndForth = true;
       floating.modifier = modifier;
       keybindings = {
-        "${keys.mod}+Return" = "exec footclient";
+        "${keys.mod}+Return" = "exec ${
+          if userSettings.programs.terminal == "foot" then "footclient" else userSettings.programs.terminal
+        }";
         "${keys.mod}+f" = "exec ${userSettings.programs.browser}";
         "${keys.mod}+d" = "exec ${menu} --show drun";
         "${keys.mod}+q" = "kill";

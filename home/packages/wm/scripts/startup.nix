@@ -1,9 +1,12 @@
-{ pkgs, ... }:
+{ userSettings, pkgs, ... }:
 {
   home.packages = [
     (pkgs.writeShellScriptBin "startup" ''
       spotify &
-      foot -s &
+      if [[ "${userSettings.programs.terminal}" == 'foot' ]]; then
+        foot -s &
+      fi
+
       brightness -r & # Restore Brightness
     '')
   ];

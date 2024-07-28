@@ -1,7 +1,11 @@
-{ userSettings, ... }: {
+{ userSettings, ... }:
+let
+  enable = if userSettings.programs.terminal == "foot" then true else false;
+in
+{
   programs.foot = {
-    enable = true;
-    server.enable = true;
+    inherit enable;
+    server.enable = enable;
     settings = {
       main = {
         term = "xterm-256color";

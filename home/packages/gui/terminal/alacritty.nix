@@ -1,17 +1,17 @@
-{ userSettings, ... }: {
+{ userSettings, ... }:
+{
   programs.alacritty = {
-    enable = true;
+    enable = if userSettings.programs.terminal == "alacritty" then true else false;
     settings = {
       live_config_reload = false;
-      cursor =
-        {
-          vi_mode_style = "Block";
-          style = {
+      cursor = {
+        vi_mode_style = "Block";
+        style = {
 
-            blinking = "off";
-            shape = "Block";
-          };
+          blinking = "off";
+          shape = "Block";
         };
+      };
       env = {
         TERM = "xterm-256color";
       };

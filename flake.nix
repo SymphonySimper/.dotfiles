@@ -41,7 +41,7 @@
         programs = {
           zellij = true;
           wm = true;
-          terminal = "foot";
+          terminal = "alacritty";
           browser = "chromium";
           appLauncher = ".wofi-wrapped";
           notification = ".dunst-wrapped";
