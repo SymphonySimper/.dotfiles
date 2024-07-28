@@ -52,6 +52,13 @@
         -D) change_vol "0.1-" ;;
         -m) toggle_mute ;;
         -M) toggle_mic ;;
+        -gV)
+          # Get audio volume
+          volume=$($app get-volume $sink | cut -d ' ' -f2)
+          echo $(echo "$volume * 100 / 1" | "${pkgs.bc}/bin/bc")
+          ;;
+        # Get mic mute
+        -gM) get_mute $source "mic" ;;
         esac
       ''
     )
