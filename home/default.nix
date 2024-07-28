@@ -5,6 +5,7 @@
     ./packages/cli/default.nix
     ./packages/dev/default.nix
     ./packages/editor/default.nix
+    ./packages/scripts/default.nix
     ./packages/shell/default.nix
   ];
 

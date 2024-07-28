@@ -5,11 +5,10 @@
     # ./river.nix
     ./sway.nix
     ./utils/default.nix
+    ./scripts/default.nix
   ];
 
   home.packages = with pkgs; [
     nautilus
-    swaybg
-    # hyprshot
   ];
 }

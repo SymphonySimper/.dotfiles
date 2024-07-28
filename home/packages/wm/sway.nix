@@ -33,11 +33,12 @@ in
         smartBorders = "on";
       };
 
-      # startup = [
-      #   { command = userSettings.programs.notification; }
-      # ];
+      startup = [
+        { command = "foot -s"; }
+        # { command = userSettings.programs.notification; }
+      ];
 
-      defaultWorkspace = "1";
+      defaultWorkspace = "workspace number 1";
       assigns = {
         "1" = [{ app_id = "^Alacritty$"; }];
         "2" = [
@@ -68,7 +69,7 @@ in
       workspaceAutoBackAndForth = true;
       floating.modifier = modifier;
       keybindings = {
-        "${keys.mod}+Return" = "exec ${userSettings.programs.terminal}";
+        "${keys.mod}+Return" = "exec footclient";
         "${keys.mod}+f" = "exec ${userSettings.programs.browser}";
         "${keys.mod}+d" = "exec ${menu} --show drun";
         "${keys.mod}+q" = "kill";
@@ -269,6 +270,8 @@ in
       };
 
       bars = [{
+        mode = "dock";
+        position = "top";
         colors = {
           # background = { title = "$base"; };
           # statusline = { title = "$text"; };
