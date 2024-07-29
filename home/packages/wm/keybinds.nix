@@ -46,4 +46,10 @@
       "cmd" = "screenshot -r";
     };
   };
+  "caffiene" = {
+    "toggle" = {
+      "key" = "F10";
+      "cmd" = "caffiene";
+    };
+  };
 }

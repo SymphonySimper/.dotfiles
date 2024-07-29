@@ -182,6 +182,9 @@ in
         "${keys.mod}+${commonKeys.screenshot.window.mod}+${commonKeys.screenshot.window.key}" = "exec ${commonKeys.screenshot.window.cmd}";
         "${keys.mod}+${commonKeys.screenshot.region.mod}+${commonKeys.screenshot.region.key}" = "exec ${commonKeys.screenshot.region.cmd}";
 
+        # Caffiene
+        "${keys.mod}+${commonKeys.caffiene.toggle.key}" = "exec ${commonKeys.caffiene.toggle.cmd}";
+
         # Bar
         "${keys.mod}+m" = "bar mode toggle";
 
