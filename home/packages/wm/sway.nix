@@ -374,12 +374,12 @@ in
 
           extraConfig = ''
             pango_markup enabled
-            modifier ""
+            # modifier ""
           '';
 
-          mode = "dock";
+          position = "bottom";
+          mode = "hide";
           hiddenState = "hide";
-          position = "top";
           fonts = {
             names = [
               userSettings.font.sans
