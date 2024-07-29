@@ -6,7 +6,6 @@
   ];
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
-  programs.dconf.enable = true;
 
   # Default username for all tty
   # services.getty = {

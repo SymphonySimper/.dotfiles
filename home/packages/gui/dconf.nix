@@ -1,4 +1,5 @@
-{ userSettings, ... }: {
+{ userSettings, ... }:
+{
   dconf = {
     enable = true;
     settings = {
@@ -12,17 +13,21 @@
       };
 
       "org/gnome/desktop/background" = {
-        "picture-uri" = userSettings.wallpaper;
-        "picture-uri-dark" = userSettings.wallpaper;
+        picture-uri = userSettings.wallpaper;
+        picture-uri-dark = userSettings.wallpaper;
       };
 
       "org/gnome/desktop/screensaver" = {
-        "picture-uri" = userSettings.wallpaper;
+        picture-uri = userSettings.wallpaper;
       };
 
       "org/gnome/desktop/interface" = {
         color-scheme = "prefer-dark";
+        cursor-size = 16;
+        cursor-theme = "Adwaita";
         enable-animations = true;
+        gtk-theme = "Adwaita-dark";
+        icon-theme = "Adwaita";
         show-battery-percentage = true;
         toolkit-accessibility = false;
       };
