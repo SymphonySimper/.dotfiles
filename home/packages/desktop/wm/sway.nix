@@ -156,14 +156,13 @@ in
 
       defaultWorkspace = "workspace number 1";
       assigns = {
+        "0" = [ { title = "^meet.google.com is sharing your screen.$"; } ];
         "1" = [ { app_id = "^(Alacritty|footclient|foot)$"; } ];
         "2" = [ { app_id = "^(firefox|chromium-browser|Brave-browser)$"; } ];
         "3" = [ { app_id = "^com.github.johnfactotum.Foliate$"; } ];
         "4" = [ { app_id = "^mpv$"; } ];
-        "5" = [ { app_id = "^thunderbird$"; } ];
-        "6" = [ { app_id = "^$"; } ];
-        "9" = [ { app_id = "^steam$"; } ];
-        "0" = [ { title = "^meet.google.com is sharing your screen.$"; } ];
+        "5" = [ { class = "^steam$"; } ];
+        "9" = [ { app_id = "^$"; } ];
       };
 
       workspaceAutoBackAndForth = true;
