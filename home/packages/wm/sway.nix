@@ -47,6 +47,9 @@ let
       if [ $battery_capacity -gt 80 ] && [[ $battery_status == 'Charging' ]]; then
         notify replace 'my-battery-status' "Battery is greater than 80% ($battery_capacity) unplug the charger" -u critical
       fi
+      if [ $battery_capacity -le 40 ] && [[ $battery_status == 'Discharging' ]]; then
+        notify replace 'my-battery-status' "Battery is less than 40% ($battery_capacity) plug the charger" -u critical
+      fi
       case "$battery_status" in
       'Charging') battery_status_color="${customColors.green}" ;;
       'Discharging') battery_status_color="${customColors.maroon}" ;;
