@@ -14,9 +14,16 @@
         	$app status $source | grep -qi -E "$1.*muted" && echo 0 || echo 1
         }
 
-        get_vol() { $app get-volume $sink; }
+        get_volume() {
+          volume=$($app get-volume $sink | cut -d ' ' -f2)
+          echo $(echo "$volume * 100 / 1" | "${pkgs.bc}/bin/bc")
+        }
 
-        change_vol() { $app set-volume $sink "$1"; }
+        change_vol() {
+          $app set-volume $sink "$1";
+          volume=$(get_volume)
+          notify replace "my-audio" "Volume ($volume%)" -h int:value:$volume;
+        }
 
         set_vol() { change_vol "$1"; }
 
@@ -52,8 +59,7 @@
         -M) toggle_mic ;;
         -gV)
           # Get audio volume
-          volume=$($app get-volume $sink | cut -d ' ' -f2)
-          echo $(echo "$volume * 100 / 1" | "${pkgs.bc}/bin/bc")
+          get_volume
           ;;
         # Get audio mute
         -gm) get_mute "stereo" ;;

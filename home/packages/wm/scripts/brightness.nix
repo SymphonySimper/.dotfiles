@@ -17,26 +17,38 @@
       	fi
       }
 
+      set_brightness() {
+        $app s $1;
+        save;
+      }
+
+      get_brightness() {
+        echo "$($app i | cut -d ',' -f4 | tr -d '%')"
+      }
+
       save() {
         echo $($app_bin g) > $save_file;
+        value=$(get_brightness)
+        notify replace "my-brightness" "Brightness ($value%)" -h int:value:$value
       }
 
       restore() {
         if [ -f "$save_file" ]; then
           $app s $(cat $save_file)
+          return 0;
         fi
+
+        return 1;
       }
 
       case "$1" in
-      -u) $app s +2% ;;
-      -d) $app s 2%- ;;
-      -s) $app s $2 ;;
-      -g) $app i | cut -d ',' -f4 | tr -d '%' ;;
+      -u) set_brightness +2% ;;
+      -d) set_brightness 2%- ;;
+      -s) set_brightness $2 ;;
+      -g) get_brightness ;;
       -t) toggle_ness ;;
       -r) restore ;; # Restore brightness
       esac
-
-      save
     '')
   ];
 }
