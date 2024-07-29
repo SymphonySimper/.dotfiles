@@ -38,6 +38,16 @@ let
     echo '{ "version": 1, "click_event": false }'
     echo '['
     while true; do
+      # Caffiene
+      caffiene_inactive=$(caffiene -g)
+      if [ $caffiene_inactive -eq 1 ]; then
+        caffiene_status="DISABLED"
+        caffiene_color="${customColors.overlay0}"
+      else
+        caffiene_status="ENABLED"
+        caffiene_color="${customColors.peach}"
+      fi
+
       # Date
       date_status=$(date "+%H:%M %d/%m/%Y")
 
@@ -111,6 +121,7 @@ let
         create_block "$audio%" "$audio_color"
         create_block "<span foreground='$battery_status_color'>$battery_status</span> <span foreground='$battery_capacity_color'>$battery_capacity%</span>"
         create_block "$date_status" ${customColors.text}
+        create_block "$caffiene_status" "$caffiene_color"
       echo '],'
       sleep 2s
     done
