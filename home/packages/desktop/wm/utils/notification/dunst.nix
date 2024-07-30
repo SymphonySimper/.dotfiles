@@ -1,10 +1,10 @@
 { userSettings, ... }:
 let
-  colors = (import ../../../../../assets/colors.nix).mocha;
+  colors = (import ../../../../../../assets/colors.nix).mocha;
 in
 {
   services.dunst = {
-    enable = true;
+    enable = if userSettings.programs.notification == "dunst" then true else false;
     settings = {
       global = {
         font = "${userSettings.font.sans} 12";

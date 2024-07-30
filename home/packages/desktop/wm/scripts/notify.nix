@@ -2,6 +2,8 @@
 {
   home.packages = [
     (pkgs.writeShellScriptBin "notify" ''
+      app="${pkgs.libnotify}/bin/notify-send"
+
       case "$1" in
       replace)
         shift
@@ -9,12 +11,12 @@
         shift
         msg="$1"
         shift
-        dunstify -h "string:x-dunst-stack-tag:$tag" "$msg" $@
+        $app -h "string:x-dunst-stack-tag:$tag" "$msg" $@
         ;;
       *)
         msg="$1"
         shift
-        dunstify "$msg" $@
+        $app "$msg" $@
         ;;
       esac
     '')

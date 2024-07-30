@@ -45,7 +45,7 @@
           editor = "nvim";
           browser = "chromium";
           appLauncher = ".wofi-wrapped";
-          notification = ".dunst-wrapped";
+          notification = "dunst";
           wallpaper = "swaybg -i ${wallpaper} -m fill";
         };
       };
