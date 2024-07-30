@@ -1,7 +1,7 @@
-{ ... }:
+{ myUtils, ... }:
 {
-  programs.nixvim.plugins = {
-    otter = {
+  programs.nixvim = {
+    plugins.otter = {
       enable = true;
 
       settings = {
@@ -9,6 +9,19 @@
         handle_leading_whitespace = true;
       };
     };
-    cmp.settings.sources = [ { name = "otter"; } ];
+    keymaps = myUtils.mkKeymaps [
+      [
+        { __raw = "require('otter').activate"; }
+        "<leader>oa"
+        "n"
+        "Activate otter"
+      ]
+      [
+        { __raw = "require('otter').deactivate"; }
+        "<leader>od"
+        "n"
+        "Deactivate otter"
+      ]
+    ];
   };
 }
