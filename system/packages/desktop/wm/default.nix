@@ -6,6 +6,8 @@
   ];
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  services.gnome.gnome-keyring.enable = true;
+  security.polkit.enable = true;
 
   # Default username for all tty
   # services.getty = {
