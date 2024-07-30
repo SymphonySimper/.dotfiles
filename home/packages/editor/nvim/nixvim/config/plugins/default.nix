@@ -5,6 +5,7 @@
     ./colorizer.nix
     ./conform.nix
     ./harpoon.nix
+    ./lazygit.nix
     ./lsp.nix
     ./mini.nix
     ./oil.nix
