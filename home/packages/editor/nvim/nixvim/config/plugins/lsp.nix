@@ -40,6 +40,9 @@
           settings.nix.flake.autoArchive = true;
         };
 
+        # lua
+        lua-ls.enable = true;
+
         # bash
         bashls.enable = true;
 
