@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ myUtils, pkgs, ... }:
 let
   web = [ "prettier" ];
 in
@@ -27,6 +27,13 @@ in
           "trim_whitespace"
         ];
       };
+      formatters = {
+        injected = {
+          options = {
+            ignore_errors = true;
+          };
+        };
+      };
     };
 
     extraPackages = with pkgs; [
@@ -36,6 +43,25 @@ in
       nodePackages.prettier
       codespell
       gawk # trim_whitespace
+    ];
+
+    keymaps = myUtils.mkKeymaps [
+      [
+        {
+          __raw = # lua
+            ''
+              function()
+                require("conform").format({ formatters = { "injected" }, timeout_ms = 500})
+              end
+            '';
+        }
+        "<leader>cF"
+        [
+          "n"
+          "v"
+        ]
+        "Format Injected Langs"
+      ]
     ];
   };
 }
