@@ -52,4 +52,20 @@
       "cmd" = "caffiene";
     };
   };
+  "spotify" = {
+    "toggle" = {
+      "key" = "F7";
+      "cmd" = "myspotify o";
+    };
+    "prev" = {
+      "mod" = "Ctrl";
+      "key" = "F7";
+      "cmd" = "myspotify p";
+    };
+    "next" = {
+      "mod" = "Shift";
+      "key" = "F7";
+      "cmd" = "myspotify n";
+    };
+  };
 }

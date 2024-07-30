@@ -195,6 +195,11 @@ in
         # Caffiene
         "${keys.mod}+${commonKeys.caffiene.toggle.key}" = "exec ${commonKeys.caffiene.toggle.cmd}";
 
+        # Spotify
+        "${keys.mod}+${commonKeys.spotify.toggle.key}" = "exec ${commonKeys.spotify.toggle.cmd}";
+        "${keys.mod}+${commonKeys.spotify.prev.mod}+${commonKeys.spotify.prev.key}" = "exec ${commonKeys.spotify.prev.cmd}";
+        "${keys.mod}+${commonKeys.spotify.next.mod}+${commonKeys.spotify.next.key}" = "exec ${commonKeys.spotify.next.cmd}";
+
         # Bar
         "${keys.mod}+m" = "bar mode toggle";
 
