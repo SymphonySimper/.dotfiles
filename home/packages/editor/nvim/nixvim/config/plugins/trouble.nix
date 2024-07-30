@@ -1,4 +1,5 @@
-{ ... }: {
+{ myUtils, ... }:
+{
   programs.nixvim = {
     plugins.trouble = {
       enable = true;
@@ -8,13 +9,13 @@
       };
     };
 
-    keymaps = [
-      {
-        action = "<CMD>TroubleToggle workspace_diagnostics<CR>";
-        key = "<leader>xx";
-        mode = "n";
-        options.desc = "Workspace Diagnostics (Trouble)";
-      }
+    keymaps = myUtils.mkKeymaps [
+      [
+        "<CMD>TroubleToggle workspace_diagnostics<CR>"
+        "<leader>xx"
+        "n"
+        "Workspace Diagnostics (Trouble)"
+      ]
     ];
   };
 }

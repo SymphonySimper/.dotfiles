@@ -24,12 +24,18 @@
             "n"
             "Restart LSP"
           ]
-          # [
-          #   ":lua vim.lsp.buf.code_action()<Enter>"
-          #   "<leader>ca"
-          #   "n"
-          #   "Code actions"
-          # ]
+          [
+            { __raw = "vim.lsp.buf.signature_help"; }
+            "gK"
+            "n"
+            "Signature Help"
+          ]
+          [
+            { __raw = "vim.lsp.buf.signature_help"; }
+            "<c-k>"
+            "i"
+            "Signature Help"
+          ]
         ];
       };
 
