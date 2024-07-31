@@ -1,6 +1,6 @@
 { userSettings, ... }:
 let
-  enable = if userSettings.programs.terminal == "foot" then true else false;
+  enable = userSettings.programs.terminal == "foot";
 in
 {
   programs.foot = {

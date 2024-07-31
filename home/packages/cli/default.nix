@@ -4,8 +4,6 @@
     ./fzf.nix
     ./git.nix
     ./man.nix
-    ./tmux.nix
-    ./zellij.nix
     ./zoxide.nix
   ];
 

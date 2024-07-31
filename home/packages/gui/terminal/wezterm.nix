@@ -1,7 +1,7 @@
 { userSettings, ... }:
 {
   programs.wezterm = {
-    enable = if userSettings.programs.terminal == "wezterm" then true else false;
+    enable = userSettings.programs.terminal == "wezterm";
     extraConfig = # lua
       ''
         local wezterm = require("wezterm")
@@ -9,7 +9,7 @@
         local config = wezterm.config_builder()
 
         config.color_scheme = "Catppuccin Mocha"
-        config.font = wezterm.font(${userSettings.font.mono})
+        config.font = wezterm.font("${userSettings.font.mono}")
 
         config.enable_tab_bar = false
         config.enable_scroll_bar = false
@@ -21,7 +21,7 @@
         	bottom = 8,
         }
 
-        config.disable_default_key_bindings = true
+        config.disable_default_key_bindings = false
         if package.config:sub(1, 1) == "\\" then
           config.default_prog = { "wsl", "-d", "NixOS", "--cd", "~" }
         end

@@ -1,7 +1,7 @@
 { pkgs, userSettings, ... }:
 {
   programs.tmux = {
-    enable = !userSettings.programs.zellij;
+    enable = userSettings.programs.multiplexer == "tmux";
     shell = "${pkgs.zsh}/bin/zsh";
     terminal = "tmux-256color";
     prefix = "C-a";

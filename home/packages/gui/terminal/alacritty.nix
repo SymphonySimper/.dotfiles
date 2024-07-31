@@ -1,7 +1,7 @@
 { userSettings, ... }:
 {
   programs.alacritty = {
-    enable = if userSettings.programs.terminal == "alacritty" then true else false;
+    enable = userSettings.programs.terminal == "alacritty";
     settings = {
       live_config_reload = false;
       cursor = {

@@ -39,10 +39,10 @@
           glyph = "Font Awesome 6 Free";
         };
         programs = {
-          zellij = true;
           wm = true;
-          terminal = "alacritty";
+          terminal = "wezterm";
           editor = "nvim";
+          multiplexer = "none";
           browser = "chromium";
           appLauncher = ".wofi-wrapped";
           notification = "dunst";

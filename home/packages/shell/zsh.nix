@@ -1,4 +1,5 @@
-{ userSettings, ... }: {
+{ userSettings, ... }:
+{
   programs.zsh = {
     enable = true;
     dotDir = ".config/zsh";
@@ -12,9 +13,14 @@
 
       . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
 
-      ${if userSettings.programs.wm then ''
-      [ "$(tty)" = "/dev/tty1" ] && exec .sway-wrapped
-      '' else ""}
+      ${
+        if userSettings.programs.wm then
+          ''
+            [ "$(tty)" = "/dev/tty1" ] && exec .sway-wrapped
+          ''
+        else
+          ""
+      }
     '';
     initExtra = ''
       # Prompt
@@ -26,13 +32,16 @@
 
       eval "$(micromamba shell hook -s zsh)"
 
-      ${if userSettings.programs.zellij then "" else 
-      ''
+      ${
+        if userSettings.programs.multiplexer == "tmux" then
+          ''
             # Auto start tmux
             if [ -x "$(command -v tmux)" ] && [ -n "''${DISPLAY}" ] && [ -z "''${TMUX}" ]; then
                 exec tmux new >/dev/null 2>&1
             fi
-            ''
+          ''
+        else
+          ""
       }
     '';
     enableCompletion = true;
@@ -44,7 +53,7 @@
 
       zmodload zsh/complist
       compinit
-      _comp_options+=(globdots)	
+      _comp_options+=(globdots)
     '';
   };
 }

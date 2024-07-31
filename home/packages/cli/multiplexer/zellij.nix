@@ -1,7 +1,7 @@
 { pkgs, userSettings, ... }:
 {
   programs.zellij = {
-    enable = userSettings.programs.zellij;
+    enable = userSettings.programs.multiplexer == "zellij";
     enableZshIntegration = true;
     settings = {
       theme = "catppuccin-mocha";
