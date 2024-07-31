@@ -21,7 +21,7 @@
         	bottom = 8,
         }
 
-        config.disable_default_key_bindings = false
+        config.disable_default_key_bindings = true
         if package.config:sub(1, 1) == "\\" then
           config.default_prog = { "wsl", "-d", "NixOS", "--cd", "~" }
         end

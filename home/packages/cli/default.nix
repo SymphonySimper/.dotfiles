@@ -7,6 +7,7 @@
     ./htop.nix
     ./man.nix
     ./multiplexer/default.nix
+    ./yazi.nix
     ./zoxide.nix
   ];
 
