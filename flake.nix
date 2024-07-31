@@ -40,11 +40,11 @@
         };
         programs = {
           wm = true;
-          terminal = "wezterm";
+          terminal = "alacritty";
           editor = "nvim";
-          multiplexer = "none";
+          multiplexer = "zellij";
           browser = "chromium";
-          appLauncher = ".wofi-wrapped";
+          launcher = "wofi";
           notification = "dunst";
           wallpaper = "swaybg -i ${wallpaper} -m fill";
         };

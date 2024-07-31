@@ -141,7 +141,7 @@ in
       up = keys.up;
       right = keys.right;
 
-      menu = "${userSettings.programs.appLauncher}";
+      menu = "${userSettings.programs.launcher}";
 
       window = {
         border = 1;

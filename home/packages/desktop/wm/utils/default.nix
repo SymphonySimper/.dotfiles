@@ -5,6 +5,6 @@
     # ./waybar/default.nix
     ./idle.nix
     ./notification/default.nix
-    ./wofi.nix
+    ./launcher/default.nix
   ];
 }
