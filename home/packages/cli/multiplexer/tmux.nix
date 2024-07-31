@@ -11,16 +11,7 @@
     keyMode = "vi";
     mouse = true;
     customPaneNavigationAndResize = true;
-    plugins = with pkgs; [
-      tmuxPlugins.sensible
-      {
-        plugin = tmuxPlugins.catppuccin;
-        extraConfig = ''
-          set -g @catppuccin_flavour 'mocha'
-        '';
-
-      }
-    ];
+    plugins = with pkgs; [ tmuxPlugins.sensible ];
     extraConfig = ''
       # Fix wrong color nvim
       # refer https://stackoverflow.com/a/70718222/14014098
