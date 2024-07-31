@@ -1,10 +1,10 @@
-{ ... }: {
+{ ... }:
+{
   home.shellAliases = {
     # general
     q = "exit";
     ka = "killall";
     ## eza
-    eza = "eza --all --long --header --blocksize --group-directories-first";
     ezat = "eza --total-size";
     ls = "eza";
     lst = "ezat";

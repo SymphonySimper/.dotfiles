@@ -1,21 +1,21 @@
 { pkgs, ... }:
 {
   imports = [
+    ./eza.nix
     ./fzf.nix
     ./git.nix
+    ./htop.nix
     ./man.nix
+    ./multiplexer/default.nix
     ./zoxide.nix
   ];
 
   home.packages = with pkgs; [
     curl
-    eza
     gnutar
-    htop
     killall
     ps_mem
-    tlrc
-    tmux
+    tlrc # tldr
     trash-cli
     unzip
     wget
