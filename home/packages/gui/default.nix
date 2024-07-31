@@ -1,7 +1,7 @@
 { ... }:
 {
   imports = [
-    ./browser.nix
+    ./browser/default.nix
     ./dconf.nix
     ./dev.nix
     ./media/default.nix
