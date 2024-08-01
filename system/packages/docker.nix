@@ -1,4 +1,5 @@
-{ lib, ... }: {
+{ lib, ... }:
+{
   virtualisation.docker = {
     enable = true;
     enableOnBoot = lib.mkForce false;
@@ -9,7 +10,7 @@
     };
 
     rootless = {
-      enable = false;
+      enable = true;
       setSocketVariable = true;
     };
   };
