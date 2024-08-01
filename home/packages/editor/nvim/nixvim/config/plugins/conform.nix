@@ -16,6 +16,12 @@ in
         sh = [ "shfmt" ];
         lua = [ "stylua" ];
         python = [ "ruff" ];
+        go = [
+          [
+            "goimports"
+            "gofumpt"
+          ]
+        ];
         javascript = web;
         typescript = web;
         svelte = web;
@@ -43,6 +49,7 @@ in
       nodePackages.prettier
       codespell
       gawk # trim_whitespace
+      gotools # goimports
     ];
 
     keymaps = myUtils.mkKeymaps [
