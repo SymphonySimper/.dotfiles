@@ -53,5 +53,7 @@
     jpi = "pnpm i";
     jprd = "pnpm run dev --open";
     jpf = "pnpm format";
+    ## docker
+    docker_cln = "docker system prune --volumes";
   };
 }
