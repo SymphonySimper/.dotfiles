@@ -148,6 +148,8 @@
           };
         };
 
+        # Markdown
+        marksman.enable = true;
       };
     };
     lsp-format = {
