@@ -14,8 +14,9 @@
     nautilus
   ];
 
-  services.gnome-keyring = {
-    enable = true;
+  services = {
+    gnome-keyring.enable = true;
+    ssh-agent.enable = true;
   };
 
   xdg.portal = {
