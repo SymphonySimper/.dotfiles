@@ -24,10 +24,6 @@
   outputs =
     { nixpkgs, home-manager, ... }@inputs:
     let
-      profileSettings = {
-        name = "wsl";
-        system = "x86_64-linux";
-      };
       userSettings = rec {
         username = "symph";
         description = "SymphonySimper";
@@ -59,8 +55,21 @@
           config.allowUnfree = true;
         });
 
+      mkProfileSettings =
+        { profile, system }:
+        {
+          inherit profile;
+          inherit system;
+        };
+
       mkHome =
         { profile, system }:
+        let
+          profileSettings = mkProfileSettings {
+            inherit profile;
+            inherit system;
+          };
+        in
         home-manager.lib.homeManagerConfiguration {
           pkgs = mkPkgs { system = system; };
           modules = [
@@ -77,6 +86,12 @@
 
       mkSystem =
         { profile, system }:
+        let
+          profileSettings = {
+            inherit profile;
+            inherit system;
+          };
+        in
         lib.nixosSystem {
           system = system;
           pkgs = mkPkgs { system = system; };
