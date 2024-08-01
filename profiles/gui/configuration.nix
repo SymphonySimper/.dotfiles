@@ -11,7 +11,6 @@
     })
     ../../system/default.nix
     ../../system/packages/desktop/default.nix
-    ../../system/packages/steam.nix
     ../../system/pc.nix
     ./hardware.nix
   ];
