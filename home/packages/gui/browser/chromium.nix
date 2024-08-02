@@ -34,12 +34,10 @@ in
       "nngceckbapebfimnlniiiahkandclblb" # bitwarden
       "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
       "bkkmolkhemgaeaeggcmfbghljjjoofoh" # Catppuccin mocha
-      # "mjdepdfccjgcndkmemponafgioodelna" # df youtube
-      "mnjggcdmjocbbbhaepdhchncahnbgone" # sponsor block
+      "mjdepdfccjgcndkmemponafgioodelna" # df youtube
       "edibdbjcniadpccecjdfdjjppcpchdlm" # i don't care about cookies
       "jpbjcnkcffbooppibceonlgknpkniiff" # global speed
       "bnclejfcblondkjliiblkojdeloomadd" # mute tab
-      "cankofcoohmbhfpcemhmaaeennfbnmgp" # netflix 1080p
     ];
     inherit commandLineArgs;
   };
