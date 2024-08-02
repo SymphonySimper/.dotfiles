@@ -1,6 +1,7 @@
 { myUtils, pkgs, ... }:
 let
   web = [ "prettier" ];
+  timeout = 3000;
 in
 {
   programs.nixvim = {
@@ -9,7 +10,7 @@ in
       notifyOnError = false;
       formatOnSave = {
         lspFallback = true;
-        timeoutMs = 500;
+        timeoutMs = timeout;
       };
       formattersByFt = {
         nix = [ "nixfmt" ];
@@ -58,7 +59,7 @@ in
           __raw = # lua
             ''
               function()
-                require("conform").format({ formatters = { "injected" }, timeout_ms = 500})
+                require("conform").format({ formatters = { "injected" }, timeout_ms = ${toString timeout}})
               end
             '';
         }
