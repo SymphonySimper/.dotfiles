@@ -12,6 +12,7 @@
     foliate
     loupe
     nautilus
+    pavucontrol
   ];
 
   xdg.portal = {
