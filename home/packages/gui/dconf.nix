@@ -21,11 +21,11 @@
       };
 
       "org/gnome/desktop/interface" = {
-        color-scheme = "prefer-dark";
+        color-scheme = if userSettings.theme.dark then "prefer-dark" else "prefer-light";
         cursor-size = 16;
         cursor-theme = "Adwaita";
         enable-animations = true;
-        gtk-theme = "Adwaita-dark";
+        gtk-theme = userSettings.theme.gtk;
         icon-theme = "Adwaita";
         show-battery-percentage = true;
         toolkit-accessibility = false;

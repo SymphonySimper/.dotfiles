@@ -39,7 +39,7 @@ in
 
   catppuccin = {
     enable = true;
-    flavor = "mocha";
+    flavor = userSettings.theme.flavor;
   };
 
   services = {

@@ -1,6 +1,6 @@
 { userSettings, ... }:
 let
-  colors = (import ../../../../../../assets/colors.nix).mocha;
+  colors = (import ../../../../../../assets/colors.nix { inherit userSettings; });
 in
 {
   services.dunst = {

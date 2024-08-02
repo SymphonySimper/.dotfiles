@@ -24,16 +24,26 @@ let
       '';
       target = "${userSettings.home}/.local/share/applications/${name}.desktop";
     };
+  flavor = userSettings.theme.flavor;
+  theme =
+    if flavor == "frappe" then
+      "olhelnoplefjdmncknfphenjclimckaf"
+    else if flavor == "latte" then
+      "jhjnalhegpceacdhbplhnakmkdliaddd"
+    else if flavor == "macchiato" then
+      "cmpdlhmnmjhihmcfnigoememnffkimlk"
+    else
+      "bkkmolkhemgaeaeggcmfbghljjjoofoh";
 in
 {
   programs.chromium = {
     enable = true;
     package = pkgs.chromium.override { enableWideVine = true; };
     extensions = [
+      "${theme}" # Catppuccin theme
       "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
       "nngceckbapebfimnlniiiahkandclblb" # bitwarden
       "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
-      "bkkmolkhemgaeaeggcmfbghljjjoofoh" # Catppuccin mocha
       "mjdepdfccjgcndkmemponafgioodelna" # df youtube
       "edibdbjcniadpccecjdfdjjppcpchdlm" # i don't care about cookies
       "jpbjcnkcffbooppibceonlgknpkniiff" # global speed

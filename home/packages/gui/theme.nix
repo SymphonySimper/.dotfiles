@@ -1,4 +1,14 @@
-{ pkgs, ... }:
+{
+  lib,
+  pkgs,
+  userSettings,
+  ...
+}:
+let
+  gtkExtraSettings = ''gtk-application-prefer-dark-theme=${
+    if userSettings.theme.dark then "1" else "0"
+  }'';
+in
 {
 
   fonts.fontconfig.enable = true;
@@ -24,7 +34,7 @@
     enable = true;
     catppuccin.enable = false;
     theme = {
-      name = "Adwaita-dark";
+      name = userSettings.theme.gtk;
       package = pkgs.gnome-themes-extra;
     };
 
@@ -33,17 +43,9 @@
       name = "Adwaita";
     };
 
-    gtk3.extraConfig = {
-      Settings = ''
-        gtk-application-prefer-dark-theme=1
-      '';
-    };
+    gtk3.extraConfig.settings = gtkExtraSettings;
 
-    gtk4.extraConfig = {
-      Settings = ''
-        gtk-application-prefer-dark-theme=1
-      '';
-    };
+    gtk4.extraConfig.settings = gtkExtraSettings;
 
     # font = {
     #   name = "Sans";
@@ -56,7 +58,7 @@
     platformTheme.name = "adwaita";
     style = {
       catppuccin.enable = false;
-      name = "adwaita-dark";
+      name = lib.toLower userSettings.theme.gtk;
     };
   };
 }

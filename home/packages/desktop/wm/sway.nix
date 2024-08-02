@@ -1,7 +1,7 @@
 { userSettings, pkgs, ... }:
 let
   commonKeys = (import ./keybinds.nix);
-  customColors = (import ../../../../assets/colors.nix).mocha;
+  customColors = (import ../../../../assets/colors.nix { inherit userSettings; });
 
   keys = {
     mod = "Mod4";

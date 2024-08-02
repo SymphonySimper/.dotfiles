@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   imports = [
     ./colorscheme.nix
     ./keymaps.nix

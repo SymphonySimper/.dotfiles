@@ -29,6 +29,11 @@
         description = "SymphonySimper";
         home = "/home/${username}";
         wallpaper = "${home}/.dotfiles/assets/images/bg.png";
+        theme = {
+          dark = false;
+          flavor = if theme.dark then "mocha" else "latte";
+          gtk = if theme.dark then "Adwaita-dark" else "Adwaita";
+        };
         font = {
           sans = "Poppins";
           mono = "JetBrainsMono Nerd Font";
