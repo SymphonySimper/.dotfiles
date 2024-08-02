@@ -38,6 +38,7 @@ in
       "edibdbjcniadpccecjdfdjjppcpchdlm" # i don't care about cookies
       "jpbjcnkcffbooppibceonlgknpkniiff" # global speed
       "bnclejfcblondkjliiblkojdeloomadd" # mute tab
+      "hkgfoiooedgoejojocmhlaklaeopbecg" # Picture-in-Picture
     ];
     inherit commandLineArgs;
   };
