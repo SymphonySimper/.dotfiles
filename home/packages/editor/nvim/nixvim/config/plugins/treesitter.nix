@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   programs.nixvim.plugins = {
     treesitter = {
       enable = true;
@@ -7,7 +8,7 @@
         indent.enable = true;
         highlight = {
           enable = true;
-          additional_vim_regex_highlighting = true;
+          additional_vim_regex_highlighting = false;
         };
         ensure_installed = [
           "astro"
