@@ -21,6 +21,10 @@ in
   nixpkgs.config.allowUnfree = true;
 
   xdg.enable = true;
+  xdg.configFile."nixpkgs/config.nix".text = # nix
+    ''
+      { allowUnfree = true; }
+    '';
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
