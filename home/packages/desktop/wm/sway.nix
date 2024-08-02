@@ -274,6 +274,9 @@ in
         # Toggle the current focus between tiling and floating mode
         "${keys.mod}+Shift+space" = "floating toggle";
 
+        # Make window sticky
+        "${keys.mod}+Shift+s" = "sticky toggle";
+
         # Swap focus between the tiling area and the floating area
         "${keys.mod}+space" = "focus mode_toggle";
 
