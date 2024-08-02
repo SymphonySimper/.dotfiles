@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 {
   imports = [ ./config/default.nix ];
 
@@ -7,10 +7,5 @@
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
-
-    extraPackages = with pkgs; [
-      fd
-      ripgrep
-    ];
   };
 }
