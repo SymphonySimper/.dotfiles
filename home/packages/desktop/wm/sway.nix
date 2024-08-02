@@ -327,7 +327,7 @@ in
         #   bg = "${userSettings.wallpaper} fill #000000";
         # };
         "eDP-1" = rec {
-          scale = "1.5";
+          scale = "1.7";
           res = "2880x1800";
           mode = "${res}@60Hz";
         };
