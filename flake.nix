@@ -10,6 +10,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-wsl.url = "github:nix-community/nixos-wsl";
+    neorg-overlay.url = "github:nvim-neorg/nixpkgs-neorg-overlay";
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -62,6 +63,7 @@
         (import nixpkgs {
           inherit system;
           config.allowUnfree = true;
+          overlays = [ inputs.neorg-overlay.overlays.default ];
         });
 
       mkProfileSettings =

@@ -8,6 +8,7 @@
     ./lazygit.nix
     ./lsp.nix
     ./mini.nix
+    ./neorg.nix
     ./oil.nix
     ./otter.nix
     ./telescope.nix
