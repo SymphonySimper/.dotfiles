@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   programs.nixvim.opts = {
     # Number line
     number = true;
@@ -26,6 +27,7 @@
     expandtab = true;
 
     splitbelow = true;
+    splitright = true;
 
     ignorecase = true;
     smartcase = true;
