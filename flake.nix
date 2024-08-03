@@ -29,6 +29,10 @@
         description = "SymphonySimper";
         home = "/home/${username}";
         wallpaper = "${home}/.dotfiles/assets/images/bg.png";
+        dirs = {
+          lifeisfun = "lifeisfun";
+          importantnt = "importantnt";
+        };
         theme = {
           dark = false;
           flavor = if theme.dark then "mocha" else "latte";

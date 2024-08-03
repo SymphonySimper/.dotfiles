@@ -1,12 +1,28 @@
-{ config, lib, pkgs, userSettings, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  userSettings,
+  ...
+}:
 let
   locale = "en_US.UTF-8";
+  defaultDirConfig = {
+    d = {
+      group = "users";
+      user = "${userSettings.username}";
+      mode = "0755";
+    };
+  };
 in
 {
   imports = [ ./packages/default.nix ];
 
   # Enable flakse
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   system.stateVersion = "23.11"; # Do no change
 
@@ -35,7 +51,6 @@ in
       ];
     };
   };
-
 
   networking.networkmanager.enable = true;
 
@@ -67,20 +82,9 @@ in
 
   systemd.tmpfiles.settings = {
     "${userSettings.username}-fav-dirs" = {
-      "${userSettings.home}/lifeisfun" = {
-        d = {
-          group = "users";
-          user = "${userSettings.username}";
-          mode = "0755";
-        };
-      };
-      "${userSettings.home}/lifeisfun/work" = {
-        d = {
-          group = "users";
-          user = "${userSettings.username}";
-          mode = "0755";
-        };
-      };
+      "${userSettings.home}/${userSettings.dirs.lifeisfun}" = defaultDirConfig;
+      "${userSettings.home}/${userSettings.dirs.lifeisfun}/work" = defaultDirConfig;
+      "${userSettings.home}/${userSettings.dirs.importantnt}" = defaultDirConfig;
     };
   };
 
