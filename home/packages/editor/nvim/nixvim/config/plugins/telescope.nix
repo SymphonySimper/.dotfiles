@@ -1,4 +1,59 @@
-{ myUtils, ... }: {
+{ myUtils, ... }:
+let
+  mkActionKeyMaps =
+    actionMaps:
+    map (
+      actionMap:
+      let
+        require = "require('telescope.builtin').${builtins.elemAt actionMap 0}";
+        cwd = builtins.elemAt actionMap 1;
+        key = builtins.elemAt actionMap 2;
+        desc = builtins.elemAt actionMap 3;
+      in
+      [
+        {
+          __raw =
+            if cwd == "root" then # lua
+              ''
+                function()
+                	local function is_git_repo()
+                		vim.fn.system("git rev-parse --is-inside-work-tree")
+
+                		return vim.v.shell_error == 0
+                	end
+
+                	local function get_git_root()
+                		local dot_git_path = vim.fn.finddir(".git", ".;")
+                		return vim.fn.fnamemodify(dot_git_path, ":h")
+                	end
+
+                	local opts = {}
+
+                	if is_git_repo() then
+                		opts = {
+                			cwd = get_git_root(),
+                		}
+                	end
+
+                	${require}(opts)
+                end
+              ''
+            else if cwd == "buffer" then # lua
+              "function() ${require}({ cwd = vim.fn.expand('%:p:h') }) end"
+            else
+              # lua
+              "function() ${require}() end";
+        }
+        key
+        [
+          "n"
+          "v"
+        ]
+        desc
+      ]
+    ) actionMaps;
+in
+{
   programs.nixvim = {
     plugins.telescope = {
       enable = true;
@@ -11,28 +66,50 @@
           };
         };
       };
-
-      keymaps = {
-        "<leader>F" = {
-          action = "find_files";
-          options.desc = "Telescope find_files";
-          mode = [ "n" "v" ];
-        };
-        "<leader><space>" = {
-          action = "buffers";
-          options.desc = "Telescope find buffer";
-          mode = [ "n" "v" ];
-        };
-        "<leader>sg" = {
-          action = "live_grep";
-          options.desc = "Telescope find string";
-          mode = [ "n" "v" ];
-        };
-      };
     };
 
-    keymaps = myUtils.mkKeymaps [
-      [{ __raw = "function() require('telescope.builtin').find_files({ cwd = vim.fn.expand('%:p:h') }) end"; } "<leader>f" "n" "Find files from current file"]
-    ];
+    keymaps = myUtils.mkKeymaps (mkActionKeyMaps [
+      # Find Files
+      [
+        "find_files"
+        "root"
+        "<leader>fF"
+        "Telescope find_files"
+      ]
+      [
+        "find_files"
+        ""
+        "<leader>ff"
+        "Telescope find_files"
+      ]
+      [
+        "find_files"
+        "buffer"
+        "<leader>fc"
+        "Find files from current file"
+      ]
+
+      # Buffers
+      [
+        "buffers"
+        ""
+        "<leader><space>"
+        "Telescope find buffer"
+      ]
+
+      # Live grep
+      [
+        "live_grep"
+        "root"
+        "<leader>sG"
+        "Telescope find string (Root)"
+      ]
+      [
+        "live_grep"
+        ""
+        "<leader>sg"
+        "Telescope find string"
+      ]
+    ]);
   };
 }
