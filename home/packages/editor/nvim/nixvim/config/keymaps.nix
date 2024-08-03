@@ -97,7 +97,7 @@ in
   programs.nixvim = {
     globals = {
       mapleader = " ";
-      maplocalleader = "\\";
+      maplocalleader = ",";
     };
 
     keymaps = keymaps;
