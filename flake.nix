@@ -26,9 +26,11 @@
     { nixpkgs, home-manager, ... }@inputs:
     let
       userSettings = rec {
-        username = "symph";
-        description = "SymphonySimper";
-        home = "/home/${username}";
+        name = {
+          user = "symph";
+          name = "SymphonySimper";
+        };
+        home = "/home/${name.user}";
         wallpaper = "${home}/.dotfiles/assets/images/bg.png";
         dirs = {
           lifeisfun = "lifeisfun";

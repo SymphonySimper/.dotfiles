@@ -2,7 +2,7 @@
 {
   programs.git = {
     enable = true;
-    userName = "SymphonySimper";
+    userName = userSettings.name.name;
     userEmail = "50240805+SymphonySimper@users.noreply.github.com";
     includes = [
       {

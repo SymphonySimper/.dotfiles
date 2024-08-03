@@ -10,7 +10,7 @@
 
   # Default username for all tty
   # services.getty = {
-  #   loginOptions = "-p -- ${userSettings.username}";
+  #   loginOptions = "-p -- ${userSettings.name.user}";
   #   extraArgs = [
   #     "--noclear"
   #     "--skip-login"
@@ -22,7 +22,7 @@
     overrideStrategy = "asDropin";
     serviceConfig.ExecStart = [
       ""
-      "@${pkgs.util-linux}/sbin/agetty agetty --login-program ${pkgs.shadow}/bin/login -o '-p -- ${userSettings.username}' --noclear --skip-login %I $TERM"
+      "@${pkgs.util-linux}/sbin/agetty agetty --login-program ${pkgs.shadow}/bin/login -o '-p -- ${userSettings.name.user}' --noclear --skip-login %I $TERM"
     ];
   };
 }

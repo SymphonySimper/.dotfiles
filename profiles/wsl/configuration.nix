@@ -8,9 +8,9 @@
 
   wsl = {
     enable = true;
-    defaultUser = userSettings.username;
+    defaultUser = userSettings.name.user;
     wslConf = {
-      user.default = userSettings.username;
+      user.default = userSettings.name.user;
       interop.appendWindowsPath = false;
     };
   };
