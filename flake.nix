@@ -10,6 +10,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-wsl.url = "github:nix-community/nixos-wsl";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     neorg-overlay.url = "github:nvim-neorg/nixpkgs-neorg-overlay";
     nixvim = {
       url = "github:nix-community/nixvim";
@@ -130,6 +131,10 @@
           profile = "gui";
           system = default.system;
         };
+        pi = {
+          profile = "pi";
+          system = "aarch64-linux";
+        };
       };
     in
     {
@@ -137,11 +142,13 @@
         default = mkHome profiles.default;
         wsl = mkHome profiles.wsl;
         gui = mkHome profiles.gui;
+        pi = mkHome profiles.pi;
       };
 
       nixosConfigurations = {
         wsl = mkSystem profiles.wsl;
         gui = mkSystem profiles.gui;
+        pi = mkSystem profiles.pi;
       };
     };
 }
