@@ -1,10 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  userSettings,
-  ...
-}:
+{ pkgs, userSettings, ... }:
 let
   locale = "en_US.UTF-8";
   defaultDirConfig = {
@@ -56,6 +50,7 @@ in
 
   # Set your time zone.
   time.timeZone = "Asia/Kolkata";
+  services.timesyncd.enable = true;
 
   # Select internationalisation properties.
   i18n.defaultLocale = locale;
