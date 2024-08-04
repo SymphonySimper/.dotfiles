@@ -15,6 +15,4 @@
     ../../system/pc.nix
     ./hardware.nix
   ];
-
-  services.xserver.videoDrivers = [ "amdgpu" ];
 }
