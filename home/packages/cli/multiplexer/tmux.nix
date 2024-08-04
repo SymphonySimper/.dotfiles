@@ -11,6 +11,7 @@
     keyMode = "vi";
     mouse = true;
     customPaneNavigationAndResize = true;
+    newSession = true;
     plugins = with pkgs; [ tmuxPlugins.sensible ];
     extraConfig = ''
       # Fix wrong color nvim
