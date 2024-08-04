@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ config, inputs, ... }:
 {
   imports = [
     # ../../system/hardware/ideapad.nix
@@ -15,4 +15,10 @@
     ../../system/pc.nix
     ./hardware.nix
   ];
+
+  boot.binfmt.emulatedSystems = [
+    "i686-linux"
+    "aarch64-linux"
+  ];
+  nix.settings.extra-platforms = config.boot.binfmt.emulatedSystems;
 }
