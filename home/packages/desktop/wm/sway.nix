@@ -1,6 +1,6 @@
 { userSettings, pkgs, ... }:
 let
-  commonKeys = (import ./keybinds.nix);
+  commonKeys = (import ./keybinds.nix { inherit userSettings; });
   customColors = (import ../../../../assets/colors.nix { inherit userSettings; });
 
   keys = {
@@ -168,11 +168,11 @@ in
       workspaceAutoBackAndForth = true;
       floating.modifier = modifier;
       keybindings = {
-        "${keys.mod}+Return" = "exec ${
-          if userSettings.programs.terminal == "foot" then "footclient" else userSettings.programs.terminal
-        }";
-        "${keys.mod}+f" = "exec ${userSettings.programs.browser}";
-        "${keys.mod}+d" = "exec ${menu} --show drun";
+        # Apps
+        "${keys.mod}+${commonKeys.terminal.default.key}" = "exec ${commonKeys.terminal.default.cmd}";
+        "${keys.mod}+${commonKeys.browser.default.key}" = "exec ${commonKeys.browser.default.cmd}";
+        "${keys.mod}+${commonKeys.launcher.default.key}" = "exec ${commonKeys.launcher.default.cmd}";
+
         "${keys.mod}+q" = "kill";
 
         # Brightness

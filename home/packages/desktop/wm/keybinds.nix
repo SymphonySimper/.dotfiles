@@ -1,4 +1,24 @@
+{ userSettings, ... }:
 {
+  "terminal" = {
+    "default" = {
+      "key" = "Return";
+      "cmd" =
+        if userSettings.programs.terminal == "foot" then "footclient" else userSettings.programs.terminal;
+    };
+  };
+  "browser" = {
+    "default" = {
+      "key" = "f";
+      "cmd" = userSettings.programs.browser;
+    };
+  };
+  "launcher" = {
+    "default" = {
+      "key" = "d";
+      "cmd" = "${userSettings.programs.launcher} --show drun";
+    };
+  };
   "brightness" = {
     "down" = {
       "key" = "F5";
