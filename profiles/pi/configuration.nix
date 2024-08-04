@@ -2,10 +2,12 @@
   lib,
   pkgs,
   userSettings,
+  modulesPath,
   ...
 }:
 {
   imports = [
+    (modulesPath + "/installer/sd-card/sd-image-aarch64-installer.nix")
     ../../system/default.nix
     ../../system/hardware/logitech.nix
     ../../system/pc.nix
@@ -30,14 +32,18 @@
 
   users.users.${userSettings.name.user}.extraGroups = [ "gpio" ];
 
-  services.openssh = {
-    enable = true;
-    permitRootLogin = "yes";
+  services = {
+    thermald.enable = lib.mkForce false;
+    openssh = {
+      enable = true;
+      settings.PermitRootLogin = "yes";
+    };
   };
 
   networking = {
-    hostName = "pi";
+    hostName = lib.mkForce "pi";
     useDHCP = true;
+    networkmanager.enable = lib.mkForce false;
     firewall.enable = lib.mkForce false;
     wireless = {
       enable = true;
