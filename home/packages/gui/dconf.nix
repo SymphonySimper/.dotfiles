@@ -7,6 +7,7 @@
         favorite-apps = [
           "Alacritty.desktop"
           "chromium-browser.desktop"
+          "spotify.desktop"
           "com.github.flxzt.rnote.desktop"
         ];
       };

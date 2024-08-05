@@ -130,7 +130,8 @@ tooltip label {
 }
 
 #network,
-#battery.plugged {
+#battery.plugged,
+#custom-spotify.playing {
   background-color: @green;
   color: @base;
 }
@@ -140,14 +141,16 @@ tooltip label {
 #battery.warning,
 #network.linked,
 #backlight.warning,
-#wireplumber.warning {
+#wireplumber.warning,
+#custom-spotify.paused {
   background-color: @yellow;
   color: @base;
 }
 
 #network.disconnected,
 #wireplumber.muted,
-#custom-mic.off {
+#custom-mic.off,
+#custom-spotify.disabled {
   background-color: @peach;
   color: @base;
 }

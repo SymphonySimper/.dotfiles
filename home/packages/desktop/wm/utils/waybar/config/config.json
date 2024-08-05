@@ -125,6 +125,16 @@
     "signal": 8,
     "on-click": "volume -M"
   },
+  "custom/spotify": {
+    "exec": "myspotify",
+    "format": "",
+    "return-type": "json",
+    "interval": 2,
+    "on-click": "myspotify o",
+    "on-click-middle": "myspotify q",
+    "on-scroll-up": "myspotify n",
+    "on-scroll-down": "myspotify p"
+  },
   "idle_inhibitor": {
     "format": "{icon}",
     "format-icons": {
