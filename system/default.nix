@@ -42,6 +42,7 @@ in
         "libvirtd"
         "video"
         "input"
+        "disk"
       ];
     };
   };
