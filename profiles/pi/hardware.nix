@@ -29,7 +29,7 @@
       # filter = "*rpi-4-*.dtb";
     };
     enableRedistributableFirmware = lib.mkForce false;
-    # firmware = [ pkgs.raspberrypiWirelessFirmware ];
+    firmware = [ pkgs.raspberrypiWirelessFirmware ];
   };
 
   boot = {
