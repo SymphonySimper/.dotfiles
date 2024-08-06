@@ -14,10 +14,11 @@
           "core.dirman" = {
             config = {
               workspaces = {
-                notes = "~/${userSettings.dirs.importantnt}/notes";
-                heart = "~/${userSettings.dirs.importantnt}/heart";
+                brain = "~/${userSettings.dirs.importantnt}/brain"; # General
+                heart = "~/${userSettings.dirs.importantnt}/heart"; # Personal
+                hand = "~/${userSettings.dirs.importantnt}/hand"; # Helps myself and others
               };
-              default_workspace = "notes";
+              default_workspace = "brain";
             };
           };
           "core.esupports.metagen" = {
