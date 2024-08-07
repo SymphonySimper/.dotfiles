@@ -52,7 +52,7 @@
       interfaces = [ "wlan0" ];
       networks = {
         "Doreamon" = {
-          pskRaw = "3f7e6e17a7463712eba0d438a89041c903c681772de739d2d3b8eda9aa19c2dc";
+          pskRaw = "<PASSWORD>"; # gen using wpa_passphrase <SSID> <PASSWORD>
         };
       };
     };
