@@ -5,7 +5,8 @@
   ...
 }:
 let
-  wallpapers = "${config.xdg.dataHome}/wallpapers";
+  theme = if userSettings.theme.dark then "dark" else "light";
+  wallpapers = "${config.xdg.dataHome}/wallpapers/${theme}";
 in
 {
   home.packages = [
