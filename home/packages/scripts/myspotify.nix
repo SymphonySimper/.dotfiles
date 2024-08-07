@@ -34,7 +34,7 @@
 
         open_play_pause() {
         	if ! $cmd status; then
-        		spotify-launcher 2>&1 /dev/null &
+        		spotify 2>&1 /dev/null &
         		sleep 1.5s
         	fi
         	$cmd play-pause
