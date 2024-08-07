@@ -2,27 +2,28 @@
   lib,
   pkgs,
   userSettings,
+  config,
   ...
 }:
 let
   commandLineArgs = [ "--ozone-platform-hint=auto" ];
-  mkDesktopFile =
+  mkDesktopEntry =
     {
       name,
       class,
       url,
     }:
     {
-      text = ''
-        [Desktop Entry]
-        Type=Application
-        Name=${name}
-        StartupWMClass=${class}
-        Comment=Launch ${name}
-        Exec=chromium ${lib.strings.concatStringsSep " " commandLineArgs} --class=${class} --app="${url}" %U
-        Terminal=false
-      '';
-      target = "${userSettings.home}/.local/share/applications/${name}.desktop";
+      inherit name;
+      type = "Application";
+      genericName = name;
+      comment = "Launch ${name}";
+      categories = [ "Application" ];
+      terminal = false;
+      exec = "chromium ${lib.strings.concatStringsSep " " commandLineArgs} --class=${class} --app=\"${url}\" %U";
+      settings = {
+        StartupWMClass = class;
+      };
     };
   flavor = userSettings.theme.flavor;
   theme =
@@ -54,9 +55,11 @@ in
   };
 
   # Web Apps
-  home.file."monkeytype.desktop" = mkDesktopFile {
-    name = "monkeytype";
-    class = "monkeytype";
-    url = "https://monkeytype.com/";
+  xdg.desktopEntries = {
+    monkeytype = mkDesktopEntry {
+      name = "monkeytype";
+      class = "monkeytype";
+      url = "https://monkeytype.com/";
+    };
   };
 }
