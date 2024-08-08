@@ -15,20 +15,32 @@
     pavucontrol
   ];
 
-  xdg.portal = {
-    enable = true;
-    config = {
-      common = {
-        default = [
-          "gtk"
-          "wlr"
-        ];
-        "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
+  targets.genericLinux.enable = false;
+
+  xdg = {
+    portal = {
+      enable = true;
+      config = {
+        common = {
+          default = [
+            "gtk"
+            "wlr"
+          ];
+          "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
+        };
+      };
+      extraPortals = [
+        pkgs.xdg-desktop-portal-gtk
+        pkgs.xdg-desktop-portal-wlr
+      ];
+    };
+
+    mime.enable = true;
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "image/png" = "org.gnome.Loupe.desktop";
       };
     };
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-wlr
-    ];
   };
 }
