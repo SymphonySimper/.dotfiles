@@ -24,6 +24,11 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # yazi.url = "github:sxyazi/yazi";
+    # yazi-plugins = {
+    #   url = "github:yazi-rs/plugins";
+    #   flake = false;
+    # };
     # helix-flake.url = "github:helix-editor/helix";
   };
 
@@ -53,9 +58,9 @@
         };
         programs = {
           wm = true;
-          terminal = "alacritty";
+          terminal = "wezterm";
           editor = "nvim";
-          multiplexer = "zellij";
+          multiplexer = "tmux";
           browser = "chromium";
           launcher = "wofi";
           notification = "dunst";

@@ -18,6 +18,12 @@
       # refer https://stackoverflow.com/a/70718222/14014098
       set-option -ga terminal-overrides ",xterm-256color:Tc"
 
+      # For yazi
+      set -g allow-passthrough on
+
+      set -ga update-environment TERM
+      set -ga update-environment TERM_PROGRAM
+
       # Attach to different session on exit
       set-option -g detach-on-destroy on
 
