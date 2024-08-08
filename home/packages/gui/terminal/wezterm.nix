@@ -4,11 +4,15 @@
     enable = userSettings.programs.terminal == "wezterm";
     extraConfig = # lua
       ''
+        function capitalize(str)
+            return (str:gsub("^%l", string.upper))
+        end
+
         local wezterm = require("wezterm")
         local mux = wezterm.mux
         local config = wezterm.config_builder()
 
-        config.color_scheme = "Catppuccin Mocha"
+        config.color_scheme = string.format("Catppuccin %s", capitalize("${userSettings.theme.flavor}"))
         config.font = wezterm.font("${userSettings.font.mono}")
 
         config.enable_tab_bar = false
