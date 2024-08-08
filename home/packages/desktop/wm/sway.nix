@@ -157,7 +157,7 @@ in
       defaultWorkspace = "workspace number 1";
       assigns = {
         "0" = [ { title = "^meet.google.com is sharing your screen.$"; } ];
-        "1" = [ { app_id = "^(Alacritty|footclient|foot)$"; } ];
+        "1" = [ { app_id = "^(Alacritty|footclient|foot|org.wezfurlong.wezterm)$"; } ];
         "2" = [ { app_id = "^(firefox|chromium-browser|Brave-browser)$"; } ];
         "3" = [ { app_id = "^com.github.johnfactotum.Foliate$"; } ];
         "4" = [ { app_id = "^mpv$"; } ];
