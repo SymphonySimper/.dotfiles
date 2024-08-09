@@ -19,18 +19,18 @@
         max_width = 1080;
       };
     };
-    # plugins = {
-    #   max-preview = "${inputs.yazi-plugins}/max-preview.yazi/";
-    # };
-    # keymap = {
-    #   manager.prepend_keymap = [
-    #     {
-    #       on = "T";
-    #       run = "plugin --sync max-preview";
-    #       desc = "Maximize or restore preview";
-    #     }
-    #   ];
-    # };
+    plugins = {
+      max-preview = "${inputs.yazi-plugins}/max-preview.yazi/";
+    };
+    keymap = {
+      manager.prepend_keymap = [
+        {
+          on = "T";
+          run = "plugin --sync max-preview";
+          desc = "Maximize or restore preview";
+        }
+      ];
+    };
   };
 
   home.packages = [ pkgs.ueberzugpp ];
