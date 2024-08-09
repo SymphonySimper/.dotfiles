@@ -1,4 +1,7 @@
 { userSettings, ... }:
+let
+  padding = 2;
+in
 {
   programs.alacritty = {
     enable = userSettings.programs.terminal == "alacritty";
@@ -41,9 +44,10 @@
         opacity = 1;
         startup_mode = "Maximized";
         padding = {
-          x = 8;
-          y = 8;
+          x = padding;
+          y = padding;
         };
+        dynamic_padding = true;
       };
     };
   };

@@ -1,4 +1,7 @@
 { userSettings, ... }:
+let
+  padding = "2";
+in
 {
   programs.wezterm = {
     enable = userSettings.programs.terminal == "wezterm";
@@ -19,10 +22,10 @@
         config.enable_scroll_bar = false
         config.window_decorations = "NONE"
         config.window_padding = {
-        	left = 8,
-        	right = 8,
-        	top = 8,
-        	bottom = 8,
+        	left = ${padding},
+        	right = ${padding},
+        	top = ${padding},
+        	bottom = ${padding},
         }
 
         config.disable_default_key_bindings = true
@@ -30,10 +33,10 @@
           config.default_prog = { "wsl", "-d", "NixOS", "--cd", "~" }
         end
 
-        wezterm.on("gui-startup", function(cmd)
-        	local _, _, window = mux.spawn_window(cmd or {})
-        	window:gui_window():maximize()
-        end)
+        -- wezterm.on("gui-startup", function(cmd)
+        -- 	local _, _, window = mux.spawn_window(cmd or {})
+        -- 	window:gui_window():maximize()
+        -- end)
 
         return config
       '';
