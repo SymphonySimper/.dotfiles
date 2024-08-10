@@ -2,6 +2,7 @@
   pkgs,
   config,
   userSettings,
+  profileSettings,
   ...
 }:
 {
@@ -21,7 +22,9 @@
     extraConfig = ''
       # RGB colors
       # https://github.com/tmux/tmux/wiki/FAQ#how-do-i-use-rgb-colour
-      set-option -as terminal-features ',${userSettings.programs.terminal}:RGB'
+      set-option -as terminal-features ',${
+        if profileSettings.profile == "wsl" then "xterm-256color" else userSettings.programs.terminal
+      }:RGB'
 
       # For yazi
       set -g allow-passthrough on
