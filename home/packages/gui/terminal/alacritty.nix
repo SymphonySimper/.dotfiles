@@ -1,6 +1,6 @@
 { userSettings, ... }:
 let
-  padding = 2;
+  padding = 1;
 in
 {
   programs.alacritty = {
@@ -14,9 +14,6 @@ in
           blinking = "off";
           shape = "Block";
         };
-      };
-      env = {
-        TERM = "xterm-256color";
       };
 
       font = {
