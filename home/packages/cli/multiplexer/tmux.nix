@@ -1,4 +1,9 @@
-{ pkgs, userSettings, ... }:
+{
+  pkgs,
+  config,
+  userSettings,
+  ...
+}:
 {
   programs.tmux = {
     enable = userSettings.programs.multiplexer == "tmux";
@@ -7,16 +12,16 @@
     prefix = "C-a";
     shortcut = "a";
     baseIndex = 1;
-    escapeTime = 1;
+    escapeTime = 0;
     keyMode = "vi";
     mouse = true;
     customPaneNavigationAndResize = true;
     newSession = true;
     plugins = with pkgs; [ tmuxPlugins.sensible ];
     extraConfig = ''
-      # Fix wrong color nvim
-      # refer https://stackoverflow.com/a/70718222/14014098
-      set-option -ga terminal-overrides ",xterm-256color:Tc"
+      # RGB colors
+      # https://github.com/tmux/tmux/wiki/FAQ#how-do-i-use-rgb-colour
+      set-option -as terminal-features ',${userSettings.programs.terminal}:RGB'
 
       # For yazi
       set -g allow-passthrough on
@@ -65,7 +70,7 @@
       bind -r C-n new
 
       # Reload config with prefix+r
-      bind r source-file $HOME/.config/tmux/tmux.conf
+      bind r source-file ${config.xdg.configHome}/tmux/tmux.conf
     '';
   };
 }
