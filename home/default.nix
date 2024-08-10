@@ -1,13 +1,4 @@
-{
-  inputs,
-  userSettings,
-  profileSettings,
-  ...
-}:
-let
-  enableServices =
-    if profileSettings.profile == "gui" && userSettings.programs.wm == false then false else true;
-in
+{ inputs, userSettings, ... }:
 {
   imports = [
     inputs.catppuccin.homeManagerModules.catppuccin
@@ -43,8 +34,7 @@ in
   };
 
   services = {
-    gnome-keyring.enable = enableServices;
-    ssh-agent.enable = enableServices;
+    ssh-agent.enable = true;
   };
 
   nix.gc = {

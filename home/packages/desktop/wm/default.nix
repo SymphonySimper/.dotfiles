@@ -16,6 +16,7 @@
   ];
 
   targets.genericLinux.enable = false;
+  services.gnome-keyring.enable = true;
 
   xdg = {
     portal = {
