@@ -58,7 +58,7 @@
         };
         programs = {
           wm = true;
-          terminal = "wezterm";
+          terminal = "alacritty";
           editor = "nvim";
           multiplexer = "tmux";
           browser = "chromium";
