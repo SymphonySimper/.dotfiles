@@ -35,6 +35,9 @@
       setw -g monitor-activity on
       set -g visual-activity on
 
+      # Turn off automatic renaming
+      setw -g automatic-rename off
+
       # y and p as in vim
       bind Escape copy-mode
       unbind p
