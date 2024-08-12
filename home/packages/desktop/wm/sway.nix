@@ -128,7 +128,7 @@ let
 in
 {
   wayland.windowManager.sway = {
-    enable = true;
+    enable = userSettings.desktop.name == "sway";
     checkConfig = false;
     systemd.enable = true;
     xwayland = true;

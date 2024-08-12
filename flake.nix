@@ -57,8 +57,11 @@
           mono = "JetBrainsMono Nerd Font";
           glyph = "Font Awesome 6 Free";
         };
+        desktop = {
+          name = "hyprland";
+          wm = desktop.name != "gnome";
+        };
         programs = {
-          wm = true;
           terminal = "alacritty";
           editor = "nvim";
           multiplexer = "tmux";

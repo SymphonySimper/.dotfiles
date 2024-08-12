@@ -1,4 +1,7 @@
 { userSettings, ... }:
+let
+  wmCommand = if userSettings.desktop.name == "hyprland" then "Hyprland" else "sway";
+in
 {
   programs.zsh = {
     enable = true;
@@ -14,9 +17,9 @@
       . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
 
       ${
-        if userSettings.programs.wm then
+        if userSettings.desktop.wm then
           ''
-            [ "$(tty)" = "/dev/tty1" ] && exec .sway-wrapped
+            [ "$(tty)" = "/dev/tty1" ] && exec ${wmCommand}
           ''
         else
           ""

@@ -1,13 +1,11 @@
 { userSettings, ... }:
 {
   wayland.windowManager.river = {
-    enable = true;
+    enable = userSettings.desktop.name == "river";
     systemd.enable = true;
     xwayland.enable = true;
     settings = {
-      spawn = [
-        "\"${userSettings.programs.wallpaper}\""
-      ];
+      spawn = [ "\"${userSettings.programs.wallpaper}\"" ];
       border-width = 1;
       # declare-mode = [
       #   "locked"

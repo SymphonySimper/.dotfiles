@@ -1,11 +1,11 @@
 { pkgs, ... }:
 {
   imports = [
-    # ./hyprland.nix
-    # ./river.nix
+    ./hyprland.nix
+    ./river.nix
+    ./scripts/default.nix
     ./sway.nix
     ./utils/default.nix
-    ./scripts/default.nix
   ];
 
   home.packages = with pkgs; [

@@ -1,82 +1,19 @@
 { userSettings, ... }:
+let
+  customKeybinds = (import ./keybinds.nix { inherit userSettings; });
+in
+
 {
   wayland.windowManager.hyprland = {
-    enable = true;
+    enable = userSettings.desktop.name == "hyprland";
     systemd.enable = true;
     xwayland.enable = true;
     settings = {
-      # Color
-      "$rosewaterAlpha" = "f5e0dc";
-      "$flamingoAlpha" = "f2cdcd";
-      "$pinkAlpha" = "f5c2e7";
-      "$mauveAlpha" = "cba6f7";
-      "$redAlpha" = "f38ba8";
-      "$maroonAlpha" = "eba0ac";
-      "$peachAlpha" = "fab387";
-      "$yellowAlpha" = "f9e2af";
-      "$greenAlpha" = "a6e3a1";
-      "$tealAlpha" = "94e2d5";
-      "$skyAlpha" = "89dceb";
-      "$sapphireAlpha" = "74c7ec";
-      "$blueAlpha" = "89b4fa";
-      "$lavenderAlpha" = "b4befe";
-
-      "$textAlpha" = "cdd6f4";
-      "$subtext1Alpha" = "bac2de";
-      "$subtext0Alpha" = "a6adc8";
-
-      "$overlay2Alpha" = "9399b2";
-      "$overlay1Alpha" = "7f849c";
-      "$overlay0Alpha" = "6c7086";
-
-      "$surface2Alpha" = "585b70";
-      "$surface1Alpha" = "45475a";
-      "$surface0Alpha" = "313244";
-
-      "$baseAlpha" = "1e1e2e";
-      "$mantleAlpha" = "181825";
-      "$crustAlpha" = "11111b";
-
-      "$rosewater" = "0xfff5e0dc";
-      "$flamingo" = "0xfff2cdcd";
-      "$pink" = "0xfff5c2e7";
-      "$mauve" = "0xffcba6f7";
-      "$red" = "0xfff38ba8";
-      "$maroon" = "0xffeba0ac";
-      "$peach" = "0xfffab387";
-      "$yellow" = "0xfff9e2af";
-      "$green" = "0xffa6e3a1";
-      "$teal" = "0xff94e2d5";
-      "$sky" = "0xff89dceb";
-      "$sapphire" = "0xff74c7ec";
-      "$blue" = "0xff89b4fa";
-      "$lavender" = "0xffb4befe";
-
-      "$text" = "0xffcdd6f4";
-      "$subtext1" = "0xffbac2de";
-      "$subtext0" = "0xffa6adc8";
-
-      "$overlay2" = "0xff9399b2";
-      "$overlay1" = "0xff7f849c";
-      "$overlay0" = "0xff6c7086";
-
-      "$surface2" = "0xff585b70";
-      "$surface1" = "0xff45475a";
-      "$surface0" = "0xff313244";
-
-      "$base" = "0xff1e1e2e";
-      "$mantle" = "0xff181825";
-      "$crust" = "0xff11111b";
-
       # Settings
       "monitor" = ",2880x1800@60,auto,1.6";
       env = "XCURSOR_SIZE,12";
 
-      exec-once = [
-        "${userSettings.wallpaper}"
-        "waybar --config ~/.config/waybar/config.json --style ~/.config/waybar/style.css"
-        "dir=\"$(dirname $(grep -l coretemp /sys/class/hwmon/hwmon*/name))\"; ln -sf $dir/temp1_input /tmp/temperature &"
-      ];
+      exec-once = [ "startup" ];
 
       input = {
         kb_layout = "us";
@@ -98,8 +35,8 @@
         gaps_in = 8;
         gaps_out = 8;
         border_size = 1;
-        "col.active_border" = "$surface0";
-        "col.inactive_border" = "$base";
+        # "col.active_border" = "$surface0";
+        # "col.inactive_border" = "$base";
         layout = "dwindle";
       };
 
@@ -177,13 +114,12 @@
         "$mainMod SHIFT, Q, exit,"
 
         # Apps
-        "$mainMod, Return, exec, alacritty"
-        "$mainMod SHIFT, Return, exec, wezterm"
-        "$mainMod, E, exec, bin/nautilus"
-        "$mainMod, R, exec, wofi --show drun"
-        "$mainMod, F, exec, chromium"
-        "$mainMod, B, exec, killall -SIGUSR1 waybar" # Toggle waybar
-        "$mainMod SHIFT, B, exec, killall -SIGUSR2 waybar" # Restart waybar
+        "$mainMod, ${customKeybinds.terminal.default.key}, exec, ${customKeybinds.terminal.default.cmd}"
+        "$mainMod, ${customKeybinds.browser.default.key}, exec, ${customKeybinds.browser.default.cmd}"
+        "$mainMod, ${customKeybinds.launcher.default.key}, exec, ${customKeybinds.launcher.default.cmd}"
+        # "$mainMod, E, exec, nautilus"
+        # "$mainMod, B, exec, killall -SIGUSR1 waybar" # Toggle waybar
+        # "$mainMod SHIFT, B, exec, killall -SIGUSR2 waybar" # Restart waybar
 
         # Toggle
         "$mainMod, V, togglefloating,"
@@ -193,22 +129,25 @@
         # Global binds
         # bind = $mainMod, F8, pass, ^(discord)$ # Toggle mute in discord
 
-        # Adjust brightnes
-        "$mainMod, F5, exec, brightness -u"
-        "$mainMod, F6, exec, brightness -d"
+        # Brightnes
+        "$mainMod, ${customKeybinds.brightness.down.key}, exec, ${customKeybinds.brightness.down.cmd}"
+        "$mainMod, ${customKeybinds.brightness.up.key}, exec, ${customKeybinds.brightness.up.cmd}"
 
-        # Adjust volume
-        "$mainMod, F3, exec, volume -u"
-        "$mainMod, F4, exec, volume -d"
-        "$mainMod SHIFT, F3, exec, volume -U"
-        "$mainMod SHIFT, F4, exec, volume -D"
-        "$mainMod, F2, exec, volume -m"
-        ", F8, exec, volume -M" # Toggle mic
+        # Volume
+        "$mainMod, ${customKeybinds.volume.down.key}, exec, ${customKeybinds.volume.down.cmd}"
+        "$mainMod, ${customKeybinds.volume.up.key}, exec, ${customKeybinds.volume.up.cmd}"
+        "$mainMod ${customKeybinds.volume.toggle.mod}, ${customKeybinds.volume.toggle.key}, exec, ${customKeybinds.volume.toggle.cmd}"
 
-        # Take screenshot
-        "$mainMod, PRINT, exec, screenshot -w"
-        ", PRINT, exec, screenshot -s"
-        "$mainMod SHIFT, PRINT, exec, screenshot -r"
+        # Mic
+        "$mainMod, ${customKeybinds.mic.toggle.key}, exec, ${customKeybinds.mic.toggle.cmd}"
+
+        # Screenshot
+        "$mainMod, ${customKeybinds.screenshot.screen.key}, exec, ${customKeybinds.screenshot.screen.cmd}"
+        "$mainMod ${customKeybinds.screenshot.window.mod}, ${customKeybinds.screenshot.window.key}, exec, ${customKeybinds.screenshot.window.cmd}"
+        "$mainMod ${customKeybinds.screenshot.region.mod}, ${customKeybinds.screenshot.region.key}, exec, ${customKeybinds.screenshot.region.cmd}"
+
+        # Caffiene
+        "$mainMod, ${customKeybinds.caffiene.toggle.key}, exec, ${customKeybinds.caffiene.toggle.cmd}"
 
         # Move focus with mainMod + arrow keys
         "$mainMod, l, movefocus, l"
@@ -269,15 +208,6 @@
     };
 
     extraConfig = ''
-      # exec-once = "$HOME"/.config/hypr/scripts/random-wallpaper.sh
-      # exec-once = waybar --config ~/.config/waybar/config.json --style ~/.config/waybar/style.css
-      # exec-once = dunst
-      # exec-once = xwaylandvideobridge
-      # exec-once = startup
-      # exec-once = dir="$(dirname $(grep -l coretemp /sys/class/hwmon/hwmon*/name))"; ln -sf $dir/temp1_input /tmp/temperature &
-      # exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-
-
       # will switch to a submap called resize
       bind = ALT , R, submap, resize
 
