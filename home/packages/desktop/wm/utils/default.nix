@@ -4,7 +4,8 @@
     # ./hyprpaper.nix
     # ./waybar/default.nix
     ./idle.nix
-    ./notification/default.nix
     ./launcher/default.nix
+    ./notification/default.nix
+    ./swayimg.nix
   ];
 }
