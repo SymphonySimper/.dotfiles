@@ -5,6 +5,8 @@
   ...
 }:
 let
+  borderRadius = "0"; # px value
+
   mkSpan =
     {
       prefix ? "",
@@ -257,7 +259,7 @@ in
           min-height: 24px;
           min-width: 24px;
           border: none;
-          border-radius: 0;
+          border-radius: ${borderRadius};
           margin: 0;
           padding: 0;
         }
@@ -348,7 +350,7 @@ in
         #temperature,
         #backlight,
         #custom-time {
-          border-radius: 8px 0 0 8px;
+          border-radius: ${borderRadius} 0 0 ${borderRadius};
         }
 
         #workspaces button:last-child,
@@ -356,7 +358,7 @@ in
         #idle_inhibitor,
         #custom-date {
           border: none;
-          border-radius: 0 8px 8px 0;
+          border-radius: 0 ${borderRadius} ${borderRadius} 0;
           margin-right: 8px;
         }
 
@@ -366,7 +368,7 @@ in
         }
 
         #workspaces button:only-child {
-          border-radius: 8px;
+          border-radius: ${borderRadius};
         }
 
         #idle_inhibitor.activated {
@@ -425,7 +427,7 @@ in
         }
 
         #tray {
-          border-radius: 8px;
+          border-radius: ${borderRadius};
           margin-right: 0;
           margin-left: 8px;
         }
