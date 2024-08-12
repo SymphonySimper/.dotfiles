@@ -49,6 +49,7 @@
         theme = {
           dark = false;
           flavor = if theme.dark then "mocha" else "latte";
+          color = (import ./assets/colors.nix { flavor = theme.flavor; });
           gtk = if theme.dark then "Adwaita-dark" else "Adwaita";
         };
         font = {

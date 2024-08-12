@@ -1,7 +1,4 @@
 { userSettings, ... }:
-let
-  colors = (import ../../../../../../assets/colors.nix { inherit userSettings; });
-in
 {
   services.dunst = {
     enable = if userSettings.programs.notification == "dunst" then true else false;
@@ -12,7 +9,7 @@ in
         offset = "8x8";
         frame_width = "1";
         corner_radius = "8";
-        highlight = colors.lavender;
+        highlight = userSettings.theme.color.lavender;
       };
     };
   };

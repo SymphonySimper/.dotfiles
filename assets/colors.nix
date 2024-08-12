@@ -1,7 +1,5 @@
-{ userSettings, ... }:
+{ flavor, ... }:
 let
-  flavor = userSettings.theme.flavor;
-
   colors = {
     frappe = {
       rosewater = "#f2d5cf";

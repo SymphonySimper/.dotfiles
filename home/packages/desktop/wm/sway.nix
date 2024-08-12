@@ -1,7 +1,6 @@
 { userSettings, pkgs, ... }:
 let
   commonKeys = (import ./keybinds.nix { inherit userSettings; });
-  customColors = (import ../../../../assets/colors.nix { inherit userSettings; });
 
   keys = {
     mod = "Mod4";
@@ -13,7 +12,7 @@ let
 
   swaybarCommand = pkgs.writeShellScriptBin "my-sway-bar" ''
     function create_sepeartor() {
-      echo "<span foreground='${customColors.overlay0}'>$1</span>"
+      echo "<span foreground='${userSettings.theme.color.overlay0}'>$1</span>"
     }
 
     function create_block() {
@@ -42,10 +41,10 @@ let
       caffiene_inactive=$(caffiene -g)
       if [ $caffiene_inactive -eq 1 ]; then
         caffiene_status="DISABLED"
-        caffiene_color="${customColors.overlay0}"
+        caffiene_color="${userSettings.theme.color.overlay0}"
       else
         caffiene_status="ENABLED"
-        caffiene_color="${customColors.peach}"
+        caffiene_color="${userSettings.theme.color.peach}"
       fi
 
       # Date
@@ -61,17 +60,17 @@ let
         notify replace 'my-battery-status' "Battery is less than 40% ($battery_capacity) plug the charger" -u critical
       fi
       case "$battery_status" in
-      'Charging') battery_status_color="${customColors.green}" ;;
-      'Discharging') battery_status_color="${customColors.maroon}" ;;
+      'Charging') battery_status_color="${userSettings.theme.color.green}" ;;
+      'Discharging') battery_status_color="${userSettings.theme.color.maroon}" ;;
       esac
       if [ $battery_capacity -gt 80 ]; then
-        battery_capacity_color="${customColors.maroon}"
+        battery_capacity_color="${userSettings.theme.color.maroon}"
       elif [ $battery_capacity -gt 50 ]; then
-        battery_capacity_color="${customColors.green}"
+        battery_capacity_color="${userSettings.theme.color.green}"
       elif [ $battery_capacity -gt 20 ]; then
-        battery_capacity_color="${customColors.yellow}"
+        battery_capacity_color="${userSettings.theme.color.yellow}"
       else
-        battery_capacity_color="${customColors.red}"
+        battery_capacity_color="${userSettings.theme.color.red}"
       fi
 
       # Audio
@@ -79,17 +78,17 @@ let
       audio_volume=$(volume -gV)
       if [ $audio_mute -eq 0 ]; then
         audio="MUTED"
-        audio_color="${customColors.red}"
+        audio_color="${userSettings.theme.color.red}"
       else
         audio="$audio_volume"
         if [ $audio_volume -gt 80 ]; then
-          audio_color="${customColors.red}"
+          audio_color="${userSettings.theme.color.red}"
         elif [ $audio_volume -gt 50 ]; then
-          audio_color="${customColors.maroon}"
+          audio_color="${userSettings.theme.color.maroon}"
         elif [ $audio_volume -gt 20 ]; then
-          audio_color="${customColors.yellow}"
+          audio_color="${userSettings.theme.color.yellow}"
         else
-          audio_color="${customColors.green}"
+          audio_color="${userSettings.theme.color.green}"
         fi
       fi
 
@@ -97,22 +96,22 @@ let
       mic_mute=$(volume -gM)
       if [ $mic_mute -eq 0 ]; then
         mic="MUTED"
-        mic_color="${customColors.green}"
+        mic_color="${userSettings.theme.color.green}"
       else
         mic="UNMUTED"
-        mic_color="${customColors.red}"
+        mic_color="${userSettings.theme.color.red}"
       fi
 
       # Brightness
       brightness_status=$(brightness -g)
       if [ $brightness_status -gt 80 ]; then
-        brightness_color="${customColors.red}"
+        brightness_color="${userSettings.theme.color.red}"
       elif [ $brightness_status -gt 50 ]; then
-        brightness_color="${customColors.maroon}"
+        brightness_color="${userSettings.theme.color.maroon}"
       elif [ $brightness_status -gt 20 ]; then
-        brightness_color="${customColors.yellow}"
+        brightness_color="${userSettings.theme.color.yellow}"
       else
-        brightness_color="${customColors.green}"
+        brightness_color="${userSettings.theme.color.green}"
       fi
 
       echo '['
@@ -120,7 +119,7 @@ let
         create_block "$mic" "$mic_color"
         create_block "$audio%" "$audio_color"
         create_block "<span foreground='$battery_status_color'>$battery_status</span> <span foreground='$battery_capacity_color'>$battery_capacity%</span>"
-        create_block "$date_status" ${customColors.text}
+        create_block "$date_status" ${userSettings.theme.color.text}
         create_block "$caffiene_status" "$caffiene_color"
       echo '],'
       sleep 2s
