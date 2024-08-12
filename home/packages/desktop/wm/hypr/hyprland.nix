@@ -1,6 +1,6 @@
 { userSettings, ... }:
 let
-  customKeybinds = (import ./keybinds.nix { inherit userSettings; });
+  customKeybinds = (import ../keybinds.nix { inherit userSettings; });
 in
 
 {
