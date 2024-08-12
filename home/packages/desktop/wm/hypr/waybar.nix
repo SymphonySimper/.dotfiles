@@ -8,12 +8,12 @@ let
   mkSpan =
     {
       prefix ? "",
-      name ? "",
+      name ? "{}",
       suffix ? "",
     }:
     ''${
       if prefix != "" then "${prefix} " else ""
-    }<span font-family="${userSettings.font.sans}">{${name}}${suffix}</span>'';
+    }<span font-family="${userSettings.font.sans}">${name}${suffix}</span>'';
 
   micScript = pkgs.writeShellScriptBin "mic" ''
     on=""
@@ -94,7 +94,7 @@ in
           critical-threshold = 80;
           format = mkSpan {
             prefix = "{icon}";
-            name = "temperatureC";
+            name = "{temperatureC}";
             suffix = "°C";
           };
           format-icons = [
@@ -106,7 +106,7 @@ in
         cpu = {
           format = mkSpan {
             prefix = "";
-            name = "usage";
+            name = "{usage}";
             suffix = "%";
           };
           states = {
@@ -132,22 +132,22 @@ in
           };
           format = mkSpan {
             prefix = "{icon}";
-            name = "capacity";
+            name = "{capacity}";
             suffix = "%";
           };
           format-charging = mkSpan {
             prefix = "";
-            name = "capacity";
+            name = "{capacity}";
             suffix = "%";
           };
           format-plugged = mkSpan {
             prefix = "";
-            name = "capacity";
+            name = "{capacity}";
             suffix = "%";
           };
           format-alt = mkSpan {
             prefix = "{icon}";
-            name = "time";
+            name = "{time}";
           };
 
           format-icons = [
@@ -164,7 +164,7 @@ in
           format-disconnected = "";
           format-linked = "";
           on-right-click = "alacritty -e nmtui";
-          tooltip-format = "{ifname} via {gwaddr} ";
+          tooltip-format = mkSpan { name = "{ifname} via {gwaddr} "; };
           tooltip-format-wifi = "{essid} ({signalStrength}%) ";
           tooltip-format-ethernet = "{ifname} {ipaddr}/{cidr} ";
           tooltip-format-disconnected = "Disconnected";
@@ -175,7 +175,7 @@ in
           on-scroll-down = "brightness -d";
           format = mkSpan {
             prefix = "{icon}";
-            name = "percent";
+            name = "{percent}";
             suffix = "%";
           };
           tooltip = false;
@@ -198,7 +198,7 @@ in
         wireplumber = {
           format = mkSpan {
             prefix = "{icon}";
-            name = "volume";
+            name = "{volume}";
             suffix = "%";
           };
           format-muted = "";
@@ -257,7 +257,7 @@ in
           min-height: 24px;
           min-width: 24px;
           border: none;
-          border-radius: 8px;
+          border-radius: 0;
           margin: 0;
           padding: 0;
         }
@@ -331,6 +331,7 @@ in
         }
 
         tooltip {
+          font-family: "${userSettings.font.sans}";
           margin-top: 16px;
           color: @text;
           background-color: @surface0;
