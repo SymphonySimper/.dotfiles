@@ -32,23 +32,23 @@ in
       };
 
       general = {
-        gaps_in = 8;
-        gaps_out = 8;
+        gaps_in = 0;
+        gaps_out = 0;
         border_size = 1;
-        # "col.active_border" = "$surface0";
-        # "col.inactive_border" = "$base";
+        "col.active_border" = "$mauve";
+        "col.inactive_border" = "$base";
         layout = "dwindle";
       };
 
       decoration = {
-        rounding = 8;
+        rounding = 0;
 
         blur = {
           enabled = false;
         };
 
         drop_shadow = false;
-        dim_inactive = true;
+        dim_inactive = false;
         dim_strength = 0.4;
       };
 
