@@ -42,7 +42,7 @@ in
     package = pkgs.chromium.override { enableWideVine = true; };
     extensions = [
       "${theme}" # Catppuccin theme
-      "cjpalhdlnbpafiamejdnhcphjbkeiagm" # ublock origin
+      "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
       "nngceckbapebfimnlniiiahkandclblb" # bitwarden
       "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
       "edibdbjcniadpccecjdfdjjppcpchdlm" # i don't care about cookies
