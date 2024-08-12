@@ -5,7 +5,6 @@
       brightness -r & # Restore Brightness
       wallpaper &
 
-      spotify &
       if [[ "${userSettings.programs.terminal}" == 'foot' ]]; then
         foot -s &
       fi

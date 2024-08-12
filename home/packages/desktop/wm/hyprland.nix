@@ -1,4 +1,5 @@
-{ userSettings, ... }: {
+{ userSettings, ... }:
+{
   wayland.windowManager.hyprland = {
     enable = true;
     systemd.enable = true;
@@ -156,7 +157,6 @@
         "workspace: 4, class:^(mpv)$"
         "workspace: 5 silent, class:^(thunderbird)$"
         "workspace: 6 silent, class:^(discord)$"
-        "workspace: 7 silent, title:^(Spotify)$"
         "workspace: 9 silent, class:^(steam)$"
         "workspace: 10 silent, title:^(meet.google.com is sharing your screen.)$"
 
@@ -210,24 +210,19 @@
         ", PRINT, exec, screenshot -s"
         "$mainMod SHIFT, PRINT, exec, screenshot -r"
 
-        # Control Spotify
-        ", F7, exec, myspotify o"
-        "SHIFT, F7, exec, myspotify n"
-        "CTRL, F7, exec, myspotify p"
-
         # Move focus with mainMod + arrow keys
         "$mainMod, l, movefocus, l"
         "$mainMod, h, movefocus, r"
         "$mainMod, k, movefocus, u"
         "$mainMod, j, movefocus, d"
 
-        # Swap window 
+        # Swap window
         "$mainMod SHIFT, H, swapwindow, l"
         "$mainMod SHIFT, L, swapwindow, r"
         "$mainMod SHIFT, K, swapwindow, u"
         "$mainMod SHIFT, J, swapwindow, d"
 
-        # Move window 
+        # Move window
         "$mainMod CTRL SHIFT, H, movewindow, l"
         "$mainMod CTRL SHIFT, L, movewindow, r"
         "$mainMod CTRL SHIFT, K, movewindow, u"
@@ -247,7 +242,6 @@
 
         # SUPER + ` to go between previous tabs
         "$mainMod, code:49, workspace, previous"
-
 
         # Move active window to a workspace with mainMod + SHIFT + [0-9]
         "$mainMod SHIFT, 1, movetoworkspace, 1"
@@ -297,7 +291,7 @@
       binde = , j, resizeactive, 0 10
 
       # use reset to go back to the global submap
-      bind = , escape, submap, reset 
+      bind = , escape, submap, reset
 
       # will reset the submap, meaning end the current one and return to the global one
       submap = reset
