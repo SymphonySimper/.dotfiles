@@ -5,17 +5,17 @@
   ...
 }:
 let
-  borderRadius = "0"; # px value
+  borderRadius = "8px"; # px value
 
   mkSpan =
     {
       prefix ? "",
-      name ? "{}",
+      text ? "{}",
       suffix ? "",
     }:
     ''${
       if prefix != "" then "${prefix} " else ""
-    }<span font-family="${userSettings.font.sans}">${name}${suffix}</span>'';
+    }<span font-family="${userSettings.font.sans}">${text}${suffix}</span>'';
 
   micScript = pkgs.writeShellScriptBin "mic" ''
     on=""
@@ -96,7 +96,7 @@ in
           critical-threshold = 80;
           format = mkSpan {
             prefix = "{icon}";
-            name = "{temperatureC}";
+            text = "{temperatureC}";
             suffix = "°C";
           };
           format-icons = [
@@ -108,7 +108,7 @@ in
         cpu = {
           format = mkSpan {
             prefix = "";
-            name = "{usage}";
+            text = "{usage}";
             suffix = "%";
           };
           states = {
@@ -134,22 +134,22 @@ in
           };
           format = mkSpan {
             prefix = "{icon}";
-            name = "{capacity}";
+            text = "{capacity}";
             suffix = "%";
           };
           format-charging = mkSpan {
             prefix = "";
-            name = "{capacity}";
+            text = "{capacity}";
             suffix = "%";
           };
           format-plugged = mkSpan {
             prefix = "";
-            name = "{capacity}";
+            text = "{capacity}";
             suffix = "%";
           };
           format-alt = mkSpan {
             prefix = "{icon}";
-            name = "{time}";
+            text = "{time}";
           };
 
           format-icons = [
@@ -165,11 +165,11 @@ in
           format-ethernet = "";
           format-disconnected = "";
           format-linked = "";
-          on-right-click = "alacritty -e nmtui";
-          tooltip-format = mkSpan { name = "{ifname} via {gwaddr} "; };
-          tooltip-format-wifi = "{essid} ({signalStrength}%) ";
-          tooltip-format-ethernet = "{ifname} {ipaddr}/{cidr} ";
-          tooltip-format-disconnected = "Disconnected";
+          on-right-click = "${userSettings.programs.terminal} -e nmtui";
+          tooltip-format = mkSpan { text = "{ifname} via {gwaddr} "; };
+          tooltip-format-wifi = mkSpan { text = "{essid} ({signalStrength}%) "; };
+          tooltip-format-ethernet = mkSpan { text = "{ifname} {ipaddr}/{cidr} "; };
+          tooltip-format-disconnected = mkSpan { text = "Disconnected"; };
         };
         backlight = {
           on-click = "brightness -t";
@@ -177,7 +177,7 @@ in
           on-scroll-down = "brightness -d";
           format = mkSpan {
             prefix = "{icon}";
-            name = "{percent}";
+            text = "{percent}";
             suffix = "%";
           };
           tooltip = false;
@@ -200,7 +200,7 @@ in
         wireplumber = {
           format = mkSpan {
             prefix = "{icon}";
-            name = "{volume}";
+            text = "{volume}";
             suffix = "%";
           };
           format-muted = "";
@@ -233,8 +233,8 @@ in
             activated = "";
             deactivated = "";
           };
-          tooltip-format-activated = "Activated";
-          tooltip-format-deactivated = "Deactivated";
+          tooltip-format-activated = mkSpan { text = "Activated"; };
+          tooltip-format-deactivated = mkSpan { text = "Deactivated"; };
         };
         "custom/time" = {
           exec = "date '+%I:%M %p'";
@@ -251,10 +251,11 @@ in
         };
       };
     };
+
     style = # css
       ''
         * {
-          font-family: "${userSettings.font.sans}";
+          font-family: ${userSettings.font.sans}, system-ui;
           font-size: 12px;
           min-height: 24px;
           min-width: 24px;
@@ -333,8 +334,8 @@ in
         }
 
         tooltip {
-          font-family: "${userSettings.font.sans}";
           margin-top: 16px;
+          border-radius: ${if borderRadius == "0" then "8px" else borderRadius};
           color: @text;
           background-color: @surface0;
         }
