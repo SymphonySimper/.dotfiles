@@ -1,7 +1,6 @@
 { pkgs, ... }:
 {
   imports = [
-    ./river.nix
     ./hypr/default.nix
     ./scripts/default.nix
     ./sway.nix
