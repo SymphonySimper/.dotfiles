@@ -118,8 +118,8 @@ in
         "$mainMod, ${customKeybinds.browser.default.key}, exec, ${customKeybinds.browser.default.cmd}"
         "$mainMod, ${customKeybinds.launcher.default.key}, exec, ${customKeybinds.launcher.default.cmd}"
         # "$mainMod, E, exec, nautilus"
-        # "$mainMod, B, exec, killall -SIGUSR1 waybar" # Toggle waybar
-        # "$mainMod SHIFT, B, exec, killall -SIGUSR2 waybar" # Restart waybar
+        "$mainMod, B, exec, killall -SIGUSR1 .waybar-wrapped" # Toggle waybar
+        "$mainMod SHIFT, B, exec, killall -SIGUSR2 .waybar-wrapped" # Restart waybar
 
         # Toggle
         "$mainMod, V, togglefloating,"
