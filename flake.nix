@@ -58,7 +58,7 @@
           glyph = "Font Awesome 6 Free";
         };
         desktop = {
-          name = "hyprland";
+          name = "sway";
           wm = desktop.name != "gnome";
         };
         programs = {
