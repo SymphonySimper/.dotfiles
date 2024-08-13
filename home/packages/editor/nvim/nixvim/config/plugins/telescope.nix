@@ -66,6 +66,21 @@ in
           };
         };
       };
+
+      settings = {
+        defaults = {
+          file_ignore_patterns = [
+            "^.git/"
+            "^node_modules/"
+            "^build/"
+            "^.mypy_cache/"
+            "^__pycache__/"
+            "^output/"
+            "^data/"
+            "%.ipynb"
+          ];
+        };
+      };
     };
 
     keymaps = myUtils.mkKeymaps (mkActionKeyMaps [
