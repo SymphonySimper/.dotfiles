@@ -7,6 +7,7 @@
     ./harpoon.nix
     ./lazygit.nix
     ./lsp.nix
+    ./markview.nix
     ./mini.nix
     ./neorg.nix
     ./oil.nix
