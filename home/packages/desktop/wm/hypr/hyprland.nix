@@ -87,9 +87,7 @@ in
       # Window rules
       windowrulev2 = [
         "workspace: 1, class:^(Alacritty)$"
-        "workspace: 2 silent, class:^(firefox)$"
-        "workspace: 2, class:^(Chromium-browser)$"
-        "workspace: 2, class:^(Brave-browser)$"
+        "workspace: 2 silent, class:^(firefox|chromium-browser)$"
         "workspace: 3, class:^(com.github.johnfactotum.Foliate)$"
         "workspace: 4, class:^(mpv)$"
         "workspace: 5 silent, class:^(thunderbird)$"
