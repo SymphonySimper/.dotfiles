@@ -72,4 +72,10 @@
       "cmd" = "caffiene";
     };
   };
+  "notifybar" = {
+    "default" = {
+      "key" = "b";
+      "cmd" = "notifybar";
+    };
+  };
 }

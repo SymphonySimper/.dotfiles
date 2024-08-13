@@ -90,6 +90,7 @@ in
         "workspace: 2 silent, class:^(firefox|chromium-browser)$"
         "workspace: 3, class:^(com.github.johnfactotum.Foliate)$"
         "workspace: 4, class:^(mpv)$"
+        "workspace: 4, title:^(Monkeytype)(.*)$"
         "workspace: 5 silent, class:^(thunderbird)$"
         "workspace: 6 silent, class:^(discord)$"
         "workspace: 9 silent, class:^(steam)$"
@@ -116,8 +117,9 @@ in
         "$mainMod, ${customKeybinds.browser.default.key}, exec, ${customKeybinds.browser.default.cmd}"
         "$mainMod, ${customKeybinds.launcher.default.key}, exec, ${customKeybinds.launcher.default.cmd}"
         # "$mainMod, E, exec, nautilus"
-        "$mainMod, B, exec, killall -SIGUSR1 .waybar-wrapped" # Toggle waybar
-        "$mainMod SHIFT, B, exec, killall -SIGUSR2 .waybar-wrapped" # Restart waybar
+        "$mainMod, ${customKeybinds.notifybar.default.key}, exec, ${customKeybinds.notifybar.default.cmd}"
+        # "$mainMod, B, exec, killall -SIGUSR1 .waybar-wrapped" # Toggle waybar
+        # "$mainMod SHIFT, B, exec, killall -SIGUSR2 .waybar-wrapped" # Restart waybar
 
         # Toggle
         "$mainMod, V, togglefloating,"
