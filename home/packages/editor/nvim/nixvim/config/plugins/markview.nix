@@ -4,10 +4,21 @@
     plugins.markview = {
       enable = true;
       settings = {
-        hybrid_modes = [
-          "i"
-          "r"
+        modes = [
+          "n"
+          "no"
+          "c"
         ];
+        hybrid_modes = [ "n" ];
+        callbacks = {
+          on_enable.__raw = # lua
+            ''
+              function (_, win)
+                 vim.wo[win].conceallevel = 2;
+                 vim.wo[win].concealcursor = "c";
+               end
+            '';
+        };
       };
     };
   };
