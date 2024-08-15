@@ -48,5 +48,6 @@
   home.packages = with pkgs; [
     gh
     git-quick-stats
+    git-filter-repo
   ];
 }
