@@ -120,8 +120,8 @@
           };
         in
         lib.nixosSystem {
-          system = system;
-          pkgs = mkPkgs { system = system; };
+          inherit system;
+          pkgs = mkPkgs { inherit system; };
           modules = [ ./profiles/${profile}/configuration.nix ];
           specialArgs = {
             inherit userSettings;
