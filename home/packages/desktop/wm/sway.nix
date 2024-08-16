@@ -1,4 +1,9 @@
-{ userSettings, pkgs, ... }:
+{
+  userSettings,
+  myUtils,
+  pkgs,
+  ...
+}:
 let
   commonKeys = (import ./keybinds.nix { inherit userSettings; });
 
@@ -34,6 +39,16 @@ let
       echo '},'
     }
 
+    function battery_notify() {
+     ${
+       myUtils.mkNotification {
+         tag = "my-battery-status";
+         title = "$1";
+         urgency = "critical";
+       }
+     }
+    }
+
     echo '{ "version": 1, "click_event": false }'
     echo '['
     while true; do
@@ -54,10 +69,10 @@ let
       battery_status=$(cat /sys/class/power_supply/BAT0/status)
       battery_capacity=$(cat /sys/class/power_supply/BAT0/capacity)
       if [ $battery_capacity -gt 80 ] && [[ $battery_status == 'Charging' ]]; then
-        notify replace 'my-battery-status' "Battery is greater than 80% ($battery_capacity) unplug the charger" -u critical
+        battery_notify "Battery is greater than 80% ($battery_capacity) unplug the charger"
       fi
       if [ $battery_capacity -le 40 ] && [[ $battery_status == 'Discharging' ]]; then
-        notify replace 'my-battery-status' "Battery is less than 40% ($battery_capacity) plug the charger" -u critical
+        battery_notify "Battery is less than 40% ($battery_capacity) plug the charger"
       fi
       case "$battery_status" in
       'Charging') battery_status_color="${userSettings.theme.color.green}" ;;

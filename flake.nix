@@ -72,7 +72,8 @@
         };
       };
       lib = nixpkgs.lib;
-      myUtils = import ./utils/default.nix;
+
+      mkMyUtils = { pkgs }: (import ./utils/default.nix { inherit pkgs; });
 
       mkPkgs =
         { system }:
@@ -97,7 +98,7 @@
             inherit system;
           };
         in
-        home-manager.lib.homeManagerConfiguration {
+        home-manager.lib.homeManagerConfiguration rec {
           pkgs = mkPkgs { system = system; };
           modules = [
             ./profiles/${profile}/home.nix
@@ -107,7 +108,7 @@
             inherit userSettings;
             inherit profileSettings;
             inherit inputs;
-            inherit myUtils;
+            myUtils = mkMyUtils { inherit pkgs; };
           };
         };
 
@@ -119,7 +120,7 @@
             inherit system;
           };
         in
-        lib.nixosSystem {
+        lib.nixosSystem rec {
           inherit system;
           pkgs = mkPkgs { inherit system; };
           modules = [ ./profiles/${profile}/configuration.nix ];
@@ -127,7 +128,7 @@
             inherit userSettings;
             inherit profileSettings;
             inherit inputs;
-            inherit myUtils;
+            myUtils = mkMyUtils { inherit pkgs; };
           };
         };
 

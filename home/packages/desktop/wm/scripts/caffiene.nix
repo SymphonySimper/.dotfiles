@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, myUtils, ... }:
 {
   home.packages = [
     (pkgs.writeShellScriptBin "caffiene" ''
@@ -7,7 +7,12 @@
       }
 
       noti() {
-        notify replace "my-caffiene" "Caffiene $1"
+        ${
+          myUtils.mkNotification {
+            tag = "my-caffiene";
+            title = "Caffiene $1";
+          }
+        }
       }
 
       get_status() {

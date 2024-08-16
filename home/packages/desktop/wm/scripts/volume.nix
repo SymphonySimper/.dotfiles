@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, myUtils, ... }:
 {
   home.packages = [
     (pkgs.writeShellScriptBin "volume"
@@ -22,7 +22,13 @@
         change_vol() {
           $app set-volume $sink "$1";
           volume=$(get_volume)
-          notify replace "my-audio" "Volume ($volume%)" -h int:value:$volume;
+          ${
+            myUtils.mkNotification {
+              tag = "my-audio";
+              title = "Volume ($volume%)";
+              progress = "$volume";
+            }
+          }
         }
 
         set_vol() { change_vol "$1"; }
@@ -33,7 +39,13 @@
           else
             status="unmuted"
           fi
-          notify "replace" "my-$1" "$2 is $status"
+          ${
+            myUtils.mkNotification {
+              tag = "my-$1";
+              title = "$2 is $status";
+              progress = "$volume";
+            }
+          }
         }
 
         toggle_mute() {

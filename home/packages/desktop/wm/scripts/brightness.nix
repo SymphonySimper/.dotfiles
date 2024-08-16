@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  myUtils,
+  ...
+}:
 {
   home.packages = [
     (pkgs.writeShellScriptBin "brightness" ''
@@ -29,7 +34,13 @@
       save() {
         echo $($app_bin g) > $save_file;
         value=$(get_brightness)
-        notify replace "my-brightness" "Brightness ($value%)" -h int:value:$value
+        ${
+          myUtils.mkNotification {
+            tag = "my-brightness";
+            title = "Brightness ($value%)";
+            progress = "$value";
+          }
+        }
       }
 
       restore() {
