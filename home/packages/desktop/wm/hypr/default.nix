@@ -4,8 +4,8 @@
     if userSettings.desktop.name == "hyprland" then
       [
         # ./hyprpaper.nix
+        # ./waybar.nix
         ./hyprland.nix
-        ./waybar.nix
       ]
     else
       [ ];

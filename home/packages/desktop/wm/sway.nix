@@ -210,6 +210,7 @@ in
         "${keys.mod}+${commonKeys.caffiene.toggle.key}" = "exec ${commonKeys.caffiene.toggle.cmd}";
 
         # Bar
+        "${keys.mod}+${commonKeys.notifybar.default.key}" = "exec ${commonKeys.notifybar.default.cmd}";
         "${keys.mod}+m" = "bar mode toggle";
 
         # Reload the configuration file
@@ -274,8 +275,8 @@ in
         # You can "split" the current object of your focus with
         # $mod+b or $mod+v, for horizontal and vertical splits
         # respectively.
-        "${keys.mod}+b" = "splith";
-        "${keys.mod}+v" = "splitv";
+        "${keys.mod}+Shift+b" = "splith";
+        "${keys.mod}+Shift+v" = "splitv";
 
         # Switch the current container between different layout styles
         "${keys.mod}+s" = "layout stacking";
@@ -407,7 +408,7 @@ in
 
           extraConfig = ''
             pango_markup enabled
-            # modifier ""
+            modifier ""
           '';
 
           position = "bottom";
