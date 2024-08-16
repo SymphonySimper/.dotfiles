@@ -2,7 +2,6 @@
 let
   customKeybinds = (import ../keybinds.nix { inherit userSettings; });
 in
-
 {
   wayland.windowManager.hyprland = {
     enable = userSettings.desktop.name == "hyprland";
