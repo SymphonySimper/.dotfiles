@@ -1,9 +1,4 @@
-{
-  userSettings,
-  myUtils,
-  pkgs,
-  ...
-}:
+{ userSettings, ... }:
 let
   commonKeys = (import ./keybinds.nix { inherit userSettings; });
 
@@ -14,132 +9,6 @@ let
     up = "k";
     right = "l";
   };
-
-  swaybarCommand = pkgs.writeShellScriptBin "my-sway-bar" ''
-    function create_sepeartor() {
-      echo "<span foreground='${userSettings.theme.color.overlay0}'>$1</span>"
-    }
-
-    function create_block() {
-      full_text="$(create_sepeartor '[') $1 $(create_sepeartor ']')"
-      color="$2"
-      background="$3"
-      min_width="100%"
-      align="center"
-      separator=true
-      markup="pango"
-      echo '{'
-      echo "\"full_text\": \"$full_text\","
-      echo "\"color\": \"$color\","
-      echo "\"background\": \"$background\","
-      echo "\"min_width\": \"$min_width\","
-      echo "\"align\": \"$align\","
-      echo "\"separator\": $separator,"
-      echo "\"markup\": \"$markup\","
-      echo '},'
-    }
-
-    function battery_notify() {
-     ${
-       myUtils.mkNotification {
-         tag = "my-battery-status";
-         title = "$1";
-         urgency = "critical";
-       }
-     }
-    }
-
-    echo '{ "version": 1, "click_event": false }'
-    echo '['
-    while true; do
-      # Caffiene
-      caffiene_inactive=$(caffiene -g)
-      if [ $caffiene_inactive -eq 1 ]; then
-        caffiene_status="DISABLED"
-        caffiene_color="${userSettings.theme.color.overlay0}"
-      else
-        caffiene_status="ENABLED"
-        caffiene_color="${userSettings.theme.color.peach}"
-      fi
-
-      # Date
-      date_status=$(date "+%H:%M %d/%m/%Y")
-
-      # Battery
-      battery_status=$(cat /sys/class/power_supply/BAT0/status)
-      battery_capacity=$(cat /sys/class/power_supply/BAT0/capacity)
-      if [ $battery_capacity -gt 80 ] && [[ $battery_status == 'Charging' ]]; then
-        battery_notify "Battery is greater than 80% ($battery_capacity) unplug the charger"
-      fi
-      if [ $battery_capacity -le 40 ] && [[ $battery_status == 'Discharging' ]]; then
-        battery_notify "Battery is less than 40% ($battery_capacity) plug the charger"
-      fi
-      case "$battery_status" in
-      'Charging') battery_status_color="${userSettings.theme.color.green}" ;;
-      'Discharging') battery_status_color="${userSettings.theme.color.maroon}" ;;
-      esac
-      if [ $battery_capacity -gt 80 ]; then
-        battery_capacity_color="${userSettings.theme.color.maroon}"
-      elif [ $battery_capacity -gt 50 ]; then
-        battery_capacity_color="${userSettings.theme.color.green}"
-      elif [ $battery_capacity -gt 20 ]; then
-        battery_capacity_color="${userSettings.theme.color.yellow}"
-      else
-        battery_capacity_color="${userSettings.theme.color.red}"
-      fi
-
-      # Audio
-      audio_mute=$(volume -gm)
-      audio_volume=$(volume -gV)
-      if [ $audio_mute -eq 0 ]; then
-        audio="MUTED"
-        audio_color="${userSettings.theme.color.red}"
-      else
-        audio="$audio_volume"
-        if [ $audio_volume -gt 80 ]; then
-          audio_color="${userSettings.theme.color.red}"
-        elif [ $audio_volume -gt 50 ]; then
-          audio_color="${userSettings.theme.color.maroon}"
-        elif [ $audio_volume -gt 20 ]; then
-          audio_color="${userSettings.theme.color.yellow}"
-        else
-          audio_color="${userSettings.theme.color.green}"
-        fi
-      fi
-
-      # Mic
-      mic_mute=$(volume -gM)
-      if [ $mic_mute -eq 0 ]; then
-        mic="MUTED"
-        mic_color="${userSettings.theme.color.green}"
-      else
-        mic="UNMUTED"
-        mic_color="${userSettings.theme.color.red}"
-      fi
-
-      # Brightness
-      brightness_status=$(brightness -g)
-      if [ $brightness_status -gt 80 ]; then
-        brightness_color="${userSettings.theme.color.red}"
-      elif [ $brightness_status -gt 50 ]; then
-        brightness_color="${userSettings.theme.color.maroon}"
-      elif [ $brightness_status -gt 20 ]; then
-        brightness_color="${userSettings.theme.color.yellow}"
-      else
-        brightness_color="${userSettings.theme.color.green}"
-      fi
-
-      echo '['
-        create_block "$brightness_status%" "$brightness_color"
-        create_block "$mic" "$mic_color"
-        create_block "$audio%" "$audio_color"
-        create_block "<span foreground='$battery_status_color'>$battery_status</span> <span foreground='$battery_capacity_color'>$battery_capacity%</span>"
-        create_block "$date_status" ${userSettings.theme.color.text}
-        create_block "$caffiene_status" "$caffiene_color"
-      echo '],'
-      sleep 2s
-    done
-  '';
 in
 {
   wayland.windowManager.sway = {
@@ -338,9 +207,6 @@ in
       };
 
       output = {
-        # "*" = {
-        #   bg = "${userSettings.wallpaper} fill #000000";
-        # };
         "eDP-1" = rec {
           scale = "1.7";
           res = "2880x1800";
@@ -402,59 +268,7 @@ in
         background = "$base";
       };
 
-      bars = [
-        # {
-        #   statusCommand = pkgs.lib.getExe swaybarCommand;
-        #
-        #   extraConfig = ''
-        #     pango_markup enabled
-        #     modifier ""
-        #   '';
-        #
-        #   position = "bottom";
-        #   mode = "hide";
-        #   hiddenState = "hide";
-        #   fonts = {
-        #     names = [
-        #       userSettings.font.sans
-        #       userSettings.font.glyph
-        #     ];
-        #     style = "Regular Semi-Condensed";
-        #     size = 11.0;
-        #   };
-        #   colors = {
-        #     background = "$base";
-        #     statusline = "$text";
-        #     focusedStatusline = "$text";
-        #     focusedSeparator = "$base";
-        #     focusedWorkspace = {
-        #       border = "$base";
-        #       background = "$base";
-        #       text = "$green";
-        #     };
-        #     activeWorkspace = {
-        #       border = "$base";
-        #       background = "$base";
-        #       text = "$blue";
-        #     };
-        #     inactiveWorkspace = {
-        #       border = "$base";
-        #       background = "$base";
-        #       text = "$surface1";
-        #     };
-        #     urgentWorkspace = {
-        #       border = "$base";
-        #       background = "$base";
-        #       text = "$surface1";
-        #     };
-        #     bindingMode = {
-        #       border = "$base";
-        #       background = "$base";
-        #       text = "$surface1";
-        #     };
-        #   };
-        # }
-      ];
+      bars = [ ];
     };
   };
 }
