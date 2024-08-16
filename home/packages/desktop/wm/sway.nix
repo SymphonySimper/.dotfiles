@@ -403,57 +403,57 @@ in
       };
 
       bars = [
-        {
-          statusCommand = pkgs.lib.getExe swaybarCommand;
-
-          extraConfig = ''
-            pango_markup enabled
-            modifier ""
-          '';
-
-          position = "bottom";
-          mode = "hide";
-          hiddenState = "hide";
-          fonts = {
-            names = [
-              userSettings.font.sans
-              userSettings.font.glyph
-            ];
-            style = "Regular Semi-Condensed";
-            size = 11.0;
-          };
-          colors = {
-            background = "$base";
-            statusline = "$text";
-            focusedStatusline = "$text";
-            focusedSeparator = "$base";
-            focusedWorkspace = {
-              border = "$base";
-              background = "$base";
-              text = "$green";
-            };
-            activeWorkspace = {
-              border = "$base";
-              background = "$base";
-              text = "$blue";
-            };
-            inactiveWorkspace = {
-              border = "$base";
-              background = "$base";
-              text = "$surface1";
-            };
-            urgentWorkspace = {
-              border = "$base";
-              background = "$base";
-              text = "$surface1";
-            };
-            bindingMode = {
-              border = "$base";
-              background = "$base";
-              text = "$surface1";
-            };
-          };
-        }
+        # {
+        #   statusCommand = pkgs.lib.getExe swaybarCommand;
+        #
+        #   extraConfig = ''
+        #     pango_markup enabled
+        #     modifier ""
+        #   '';
+        #
+        #   position = "bottom";
+        #   mode = "hide";
+        #   hiddenState = "hide";
+        #   fonts = {
+        #     names = [
+        #       userSettings.font.sans
+        #       userSettings.font.glyph
+        #     ];
+        #     style = "Regular Semi-Condensed";
+        #     size = 11.0;
+        #   };
+        #   colors = {
+        #     background = "$base";
+        #     statusline = "$text";
+        #     focusedStatusline = "$text";
+        #     focusedSeparator = "$base";
+        #     focusedWorkspace = {
+        #       border = "$base";
+        #       background = "$base";
+        #       text = "$green";
+        #     };
+        #     activeWorkspace = {
+        #       border = "$base";
+        #       background = "$base";
+        #       text = "$blue";
+        #     };
+        #     inactiveWorkspace = {
+        #       border = "$base";
+        #       background = "$base";
+        #       text = "$surface1";
+        #     };
+        #     urgentWorkspace = {
+        #       border = "$base";
+        #       background = "$base";
+        #       text = "$surface1";
+        #     };
+        #     bindingMode = {
+        #       border = "$base";
+        #       background = "$base";
+        #       text = "$surface1";
+        #     };
+        #   };
+        # }
       ];
     };
   };
