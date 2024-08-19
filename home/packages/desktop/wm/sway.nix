@@ -45,6 +45,7 @@ in
         "3" = [ { app_id = "^com.github.johnfactotum.Foliate$"; } ];
         "4" = [ { app_id = "^mpv$"; } ];
         "5" = [ { class = "^steam$"; } ];
+        "6" = [ { app_id = "^gamescope$"; } ];
         "9" = [ { app_id = "^$"; } ];
       };
 
