@@ -34,6 +34,7 @@ final: prev: {
         "harpoon"
         "mini"
         "lspconfig"
+        "conform"
         "lazygit"
         "colorizer"
         "markview"

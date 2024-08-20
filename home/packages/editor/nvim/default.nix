@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-    mkPlugin =
+  mkPlugin =
     { plugin, config }:
     {
       inherit plugin;
@@ -50,12 +50,17 @@ in
           nvim-harpoon
           ./config/plugins/harpoon.lua
         ]
-        [ nvim-mini
-        ./config/plugins/mini.lua
+        [
+          nvim-mini
+          ./config/plugins/mini.lua
         ]
         [
           nvim-lspconfig
           ./config/plugins/lsp.lua
+        ]
+        [
+          nvim-conform
+          ./config/plugins/conform.lua
         ]
         [
           nvim-lazygit # lua
@@ -116,6 +121,15 @@ in
       pyright
       ruff-lsp
       marksman
+
+      # conform
+      nixfmt-rfc-style
+      shfmt
+      stylua
+      nodePackages.prettier
+      codespell
+      gawk # trim_whitespace
+      gotools # goimports
     ];
   };
 }

@@ -43,6 +43,10 @@
       url = "github:neovim/nvim-lspconfig";
       flake = false;
     };
+    nvim-conform = {
+      url = "github:stevearc/conform.nvim";
+      flake = false;
+    };
     nvim-colorizer = {
       url = "github:NvChad/nvim-colorizer.lua";
       flake = false;

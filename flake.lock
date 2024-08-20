@@ -433,6 +433,22 @@
         "type": "github"
       }
     },
+    "nvim-conform": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1724171242,
+        "narHash": "sha256-Stlor2gH6zSB8DeNRDuaPqSbGGr7Qrb1zVDwpu2cBWA=",
+        "owner": "stevearc",
+        "repo": "conform.nvim",
+        "rev": "62eba813b7501b39612146cbf29cd07f1d4ac29c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "stevearc",
+        "repo": "conform.nvim",
+        "type": "github"
+      }
+    },
     "nvim-harpoon": {
       "flake": false,
       "locked": {
