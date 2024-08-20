@@ -20,6 +20,10 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # nvim-plugins = {
+    #   url = "./flakes/nvim-plugins";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -30,6 +34,12 @@
       flake = false;
     };
     # helix-flake.url = "github:helix-editor/helix";
+
+    # Neovim plugins
+    nvim-markview = {
+      url = "github:OXY2DEV/markview.nvim";
+      flake = false;
+    };
   };
 
   outputs =
@@ -76,11 +86,14 @@
       mkMyUtils = { pkgs }: (import ./utils/default.nix { inherit pkgs; });
 
       mkPkgs =
-        { system }:
+        {
+          system,
+          overlays ? [ ],
+        }:
         (import nixpkgs {
           inherit system;
           config.allowUnfree = true;
-          overlays = [ inputs.neorg-overlay.overlays.default ];
+          overlays = [ inputs.neorg-overlay.overlays.default ] ++ overlays;
         });
 
       mkProfileSettings =
@@ -99,7 +112,10 @@
           };
         in
         home-manager.lib.homeManagerConfiguration rec {
-          pkgs = mkPkgs { system = system; };
+          pkgs = mkPkgs {
+            system = system;
+            overlays = [ (import ./overlays/nvim-plugins.nix { inherit inputs; }) ];
+          };
           modules = [
             ./profiles/${profile}/home.nix
             inputs.nixvim.homeManagerModules.nixvim

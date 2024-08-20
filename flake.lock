@@ -635,6 +635,22 @@
         "type": "github"
       }
     },
+    "nvim-markview": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1724058116,
+        "narHash": "sha256-ja38h4ERYs21coaa6hw7tI8WLJnYL9Y5s5lNlwrgJ70=",
+        "owner": "OXY2DEV",
+        "repo": "markview.nvim",
+        "rev": "3adfe75139f755eace69277b7097d0376cb6068a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "OXY2DEV",
+        "repo": "markview.nvim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "catppuccin": "catppuccin",
@@ -646,6 +662,7 @@
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_5",
         "nixvim": "nixvim",
+        "nvim-markview": "nvim-markview",
         "yazi-plugins": "yazi-plugins"
       }
     },
