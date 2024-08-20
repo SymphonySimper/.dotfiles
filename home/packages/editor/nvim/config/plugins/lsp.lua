@@ -1,7 +1,7 @@
 local lspconfig = require("lspconfig")
 
 local servers = {
-	"nil_ls",
+	{ "nil_ls", { settings = { Lua = {} } } },
 	"lua_ls",
 	"bashls",
 	"rust_analyzer",

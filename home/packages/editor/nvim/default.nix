@@ -38,13 +38,16 @@ in
     plugins =
       with pkgs.vimPlugins;
       (mkPlugins [
+        # telescope
+        [
+          telescope-nvim
+          ./config/plugins/telescope.lua
+        ]
+        telescope-fzf-native-nvim
+
         [
           nvim-harpoon
           ./config/plugins/harpoon.lua
-        ]
-        [
-          nvim-colorizer # lua
-          "require 'colorizer'.setup()"
         ]
         [
           nvim-lazygit # lua
@@ -55,6 +58,10 @@ in
         [
           nvim-lspconfig
           ./config/plugins/lsp.lua
+        ]
+        [
+          nvim-colorizer # lua
+          "require 'colorizer'.setup()"
         ]
 
         # Treesitter
