@@ -7,21 +7,29 @@ let
       pluginsList,
     }:
     builtins.listToAttrs (
-      builtins.map (name: {
-        inherit name;
-        value = prev.vimUtils.buildVimPlugin {
+      builtins.map (
+        plugin:
+        let
+          name = "nvim-${plugin}";
+        in
+        {
           inherit name;
-          src = inputs."nvim-${name}";
-        };
+          value = prev.vimUtils.buildVimPlugin {
+            inherit name;
+            src = inputs.${name};
+          };
 
-      }) pluginsList
+        }
+      ) pluginsList
     );
 in
 
 final: prev: {
-  nvimPlugins = mkPlugins {
-    inherit inputs;
-    inherit prev;
-    pluginsList = [ "markview" ];
-  };
+  vimPlugins =
+    prev.vimPlugins
+    // mkPlugins {
+      inherit inputs;
+      inherit prev;
+      pluginsList = [ "markview" ];
+    };
 }

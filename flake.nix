@@ -15,11 +15,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    neorg-overlay.url = "github:nvim-neorg/nixpkgs-neorg-overlay";
-    # nvim-plugins = {
-    #   url = "./flakes/nvim-plugins";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -32,6 +27,7 @@
     # helix-flake.url = "github:helix-editor/helix";
 
     # Neovim plugins
+    neorg-overlay.url = "github:nvim-neorg/nixpkgs-neorg-overlay";
     nvim-markview = {
       url = "github:OXY2DEV/markview.nvim";
       flake = false;
