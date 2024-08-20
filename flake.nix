@@ -35,6 +35,10 @@
       url = "github:kdheepak/lazygit.nvim";
       flake = false;
     };
+    nvim-mini = {
+      url = "github:echasnovski/mini.nvim";
+      flake = false;
+    };
     nvim-lspconfig = {
       url = "github:neovim/nvim-lspconfig";
       flake = false;

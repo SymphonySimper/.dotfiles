@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  mkPlugin =
+    mkPlugin =
     { plugin, config }:
     {
       inherit plugin;
@@ -50,15 +50,18 @@ in
           nvim-harpoon
           ./config/plugins/harpoon.lua
         ]
+        [ nvim-mini
+        ./config/plugins/mini.lua
+        ]
+        [
+          nvim-lspconfig
+          ./config/plugins/lsp.lua
+        ]
         [
           nvim-lazygit # lua
           ''
             vim.keymap.set("n", "<leader>gz", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
           ''
-        ]
-        [
-          nvim-lspconfig
-          ./config/plugins/lsp.lua
         ]
         [
           nvim-colorizer # lua

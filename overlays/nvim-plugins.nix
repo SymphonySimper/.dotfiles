@@ -32,8 +32,9 @@ final: prev: {
       inherit prev;
       pluginsList = [
         "harpoon"
-        "lazygit"
+        "mini"
         "lspconfig"
+        "lazygit"
         "colorizer"
         "markview"
       ];

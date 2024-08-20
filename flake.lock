@@ -498,6 +498,22 @@
         "type": "github"
       }
     },
+    "nvim-mini": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1724149707,
+        "narHash": "sha256-VzrBQ+12NhGNmWEw4lDjuBjUoNYK3E9OO7CzWYWDPRA=",
+        "owner": "echasnovski",
+        "repo": "mini.nvim",
+        "rev": "71b5694a2df4f7e3661855eb8e2814980d2e0ac9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "echasnovski",
+        "repo": "mini.nvim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "catppuccin": "catppuccin",
@@ -513,6 +529,7 @@
         "nvim-lazygit": "nvim-lazygit",
         "nvim-lspconfig": "nvim-lspconfig",
         "nvim-markview": "nvim-markview",
+        "nvim-mini": "nvim-mini",
         "yazi-plugins": "yazi-plugins"
       }
     },
