@@ -30,6 +30,9 @@ final: prev: {
     // mkPlugins {
       inherit inputs;
       inherit prev;
-      pluginsList = [ "markview" ];
+      pluginsList = [
+        "markview"
+        "colorizer"
+      ];
     };
 }

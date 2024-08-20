@@ -417,6 +417,22 @@
         "type": "github"
       }
     },
+    "nvim-colorizer": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1721864885,
+        "narHash": "sha256-Qw7IcfM3N+7ml98ExMPBszDz9FwJPtmrVqrVDa0TJKQ=",
+        "owner": "NvChad",
+        "repo": "nvim-colorizer.lua",
+        "rev": "194ec600488f7c7229668d0e80bd197f3a2b84ff",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NvChad",
+        "repo": "nvim-colorizer.lua",
+        "type": "github"
+      }
+    },
     "nvim-markview": {
       "flake": false,
       "locked": {
@@ -443,6 +459,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_5",
+        "nvim-colorizer": "nvim-colorizer",
         "nvim-markview": "nvim-markview",
         "yazi-plugins": "yazi-plugins"
       }

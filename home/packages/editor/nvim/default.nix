@@ -1,9 +1,9 @@
 { pkgs, ... }:
 let
-  mkPlugin = plugin: file: {
+  mkPlugin = plugin: config: {
     inherit plugin;
     type = "lua";
-    config = builtins.readFile file;
+    config = if builtins.typeOf config == "path" then builtins.readFile config else config;
   };
 in
 {
@@ -22,6 +22,7 @@ in
 
     plugins = with pkgs.vimPlugins; [
       (mkPlugin harpoon2 ./config/plugins/harpoon.lua)
+      (mkPlugin nvim-colorizer "require 'colorizer'.setup()")
 
       # Treesitter
       (nvim-treesitter.withPlugins (p: [

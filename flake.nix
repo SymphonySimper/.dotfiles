@@ -32,6 +32,10 @@
       url = "github:OXY2DEV/markview.nvim";
       flake = false;
     };
+    nvim-colorizer = {
+      url = "github:NvChad/nvim-colorizer.lua";
+      flake = false;
+    };
   };
 
   outputs =
