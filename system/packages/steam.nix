@@ -11,8 +11,8 @@ let
     "-W ${builtins.toString width}"
     "-H ${builtins.toString height}"
     "-r ${builtins.toString refreshRate}" # Refresh rate
-    "--expose-wayland"
-    "--backend wayland"
+    # "--expose-wayland"
+    # "--backend wayland"
     # "-C" # hide cursor after time delay :smh
     # "--force-grab-cursor"
   ];
