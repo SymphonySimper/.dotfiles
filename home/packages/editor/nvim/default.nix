@@ -1,7 +1,10 @@
 { pkgs, ... }:
 let
-  toLua = str: "lua << EOF\n${str}\nEOF\n";
-  toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
+  mkPlugin = plugin: file: {
+    inherit plugin;
+    type = "lua";
+    config = builtins.readFile file;
+  };
 in
 {
   programs.neovim = {
@@ -18,6 +21,8 @@ in
       '';
 
     plugins = with pkgs.vimPlugins; [
+      (mkPlugin harpoon2 ./config/plugins/harpoon.lua)
+
       # Treesitter
       (nvim-treesitter.withPlugins (p: [
         # Treesitter grammars
