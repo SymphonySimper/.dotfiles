@@ -32,14 +32,12 @@ in
         p.tree-sitter-markdown
         p.tree-sitter-nix
         p.tree-sitter-python
-        p.tree-sitter-regex
 
         p.tree-sitter-html
         p.tree-sitter-css
         p.tree-sitter-scss
         p.tree-sitter-javascript
         p.tree-sitter-typescript
-        p.tree-sitter-jsdoc
         p.tree-sitter-svelte
 
         p.tree-sitter-dockerfile
