@@ -32,7 +32,7 @@ in
       )
 
       # Treesitter
-      (nvim-treesitter.withPlugins (p: [
+      (mkPlugin (nvim-treesitter.withPlugins (p: [
         # Treesitter grammars
         p.tree-sitter-bash
         p.tree-sitter-lua
@@ -57,7 +57,7 @@ in
 
         p.tree-sitter-vim
         p.tree-sitter-vimdoc
-      ]))
+      ])) ./config/plugins/treesitter.lua)
 
       # Common deps
       plenary-nvim
