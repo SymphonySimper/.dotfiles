@@ -16,10 +16,6 @@
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     neorg-overlay.url = "github:nvim-neorg/nixpkgs-neorg-overlay";
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     # nvim-plugins = {
     #   url = "./flakes/nvim-plugins";
     #   inputs.nixpkgs.follows = "nixpkgs";
@@ -116,10 +112,7 @@
             system = system;
             overlays = [ (import ./overlays/nvim-plugins.nix { inherit inputs; }) ];
           };
-          modules = [
-            ./profiles/${profile}/home.nix
-            inputs.nixvim.homeManagerModules.nixvim
-          ];
+          modules = [ ./profiles/${profile}/home.nix ];
           extraSpecialArgs = {
             inherit userSettings;
             inherit profileSettings;
