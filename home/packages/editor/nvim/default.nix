@@ -33,6 +33,7 @@ in
     extraLuaConfig = # lua
       ''
         ${builtins.readFile ./config/options.lua}
+        ${builtins.readFile ./config/keymaps.lua}
       '';
 
     plugins =
