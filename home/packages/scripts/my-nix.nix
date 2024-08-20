@@ -1,0 +1,25 @@
+{ pkgs, ... }:
+{
+  home.packages = [
+    (pkgs.writeShellScriptBin "my-nix" # bash
+      ''
+        case "$1" in
+          cpu)
+            input=$(nix flake metadata --json | ${pkgs.jq}/bin/jq -r ".locks.nodes.root.inputs | keys[]" | ${pkgs.fzf}/bin/fzf)
+            if [ ''${#input} -eq 0 ]; then
+              echo "No input."
+              exit 1
+            fi
+
+            echo "$input"
+            read -n 1 -p  "Would you like to continue? [y/N]" user_input
+            case "$user_input" in
+              y|Y) nix flake lock --update-input $input ;;
+              *) echo "Aborted."
+            esac
+          ;;
+        esac
+      ''
+    )
+  ];
+}

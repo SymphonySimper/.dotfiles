@@ -1,4 +1,7 @@
 { ... }:
 {
-  imports = [ ./unix.nix ];
+  imports = [
+    ./my-nix.nix
+    ./unix.nix
+  ];
 }
