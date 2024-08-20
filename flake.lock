@@ -450,6 +450,22 @@
         "type": "github"
       }
     },
+    "nvim-lazygit": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1723282217,
+        "narHash": "sha256-YP3L+IPPiBn7XbNm3022/mssOPSKg7H5z8y0qNsGnVc=",
+        "owner": "kdheepak",
+        "repo": "lazygit.nvim",
+        "rev": "2432b447483f42ff2e18b2d392cb2bb27e495c08",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kdheepak",
+        "repo": "lazygit.nvim",
+        "type": "github"
+      }
+    },
     "nvim-markview": {
       "flake": false,
       "locked": {
@@ -478,6 +494,7 @@
         "nixpkgs": "nixpkgs_5",
         "nvim-colorizer": "nvim-colorizer",
         "nvim-harpoon": "nvim-harpoon",
+        "nvim-lazygit": "nvim-lazygit",
         "nvim-markview": "nvim-markview",
         "yazi-plugins": "yazi-plugins"
       }

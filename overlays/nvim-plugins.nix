@@ -33,6 +33,7 @@ final: prev: {
       pluginsList = [
         "harpoon"
         "colorizer"
+        "lazygit"
         "markview"
       ];
     };

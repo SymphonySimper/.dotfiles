@@ -36,6 +36,10 @@
       url = "github:NvChad/nvim-colorizer.lua";
       flake = false;
     };
+    nvim-lazygit = {
+      url = "github:kdheepak/lazygit.nvim";
+      flake = false;
+    };
     nvim-markview = {
       url = "github:OXY2DEV/markview.nvim";
       flake = false;

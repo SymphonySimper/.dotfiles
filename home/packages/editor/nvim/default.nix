@@ -22,7 +22,14 @@ in
 
     plugins = with pkgs.vimPlugins; [
       (mkPlugin nvim-harpoon ./config/plugins/harpoon.lua)
-      (mkPlugin nvim-colorizer "require 'colorizer'.setup()")
+      (mkPlugin nvim-colorizer # lua
+        "require 'colorizer'.setup()"
+      )
+      (mkPlugin nvim-lazygit # lua
+        ''
+          vim.keymap.set("n", "<leader>gz", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
+        ''
+      )
 
       # Treesitter
       (nvim-treesitter.withPlugins (p: [
