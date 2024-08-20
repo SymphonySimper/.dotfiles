@@ -1,3 +1,7 @@
+-- leader
+vim.g.mapleader = " "
+vim.g.maplocalleader = ","
+
 -- Number line
 vim.o.number = true
 vim.o.relativenumber = true
