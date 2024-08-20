@@ -530,6 +530,22 @@
         "type": "github"
       }
     },
+    "nvim-ts-comments": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1721799917,
+        "narHash": "sha256-4dDUtPmwlwQ4/So/28dRhsuiVdY5DNq7I5MfIzPP5ok=",
+        "owner": "folke",
+        "repo": "ts-comments.nvim",
+        "rev": "98d7d4dec0af1312d38e288f800bbf6ff562b6ab",
+        "type": "github"
+      },
+      "original": {
+        "owner": "folke",
+        "repo": "ts-comments.nvim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "catppuccin": "catppuccin",
@@ -541,11 +557,13 @@
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_5",
         "nvim-colorizer": "nvim-colorizer",
+        "nvim-conform": "nvim-conform",
         "nvim-harpoon": "nvim-harpoon",
         "nvim-lazygit": "nvim-lazygit",
         "nvim-lspconfig": "nvim-lspconfig",
         "nvim-markview": "nvim-markview",
         "nvim-mini": "nvim-mini",
+        "nvim-ts-comments": "nvim-ts-comments",
         "yazi-plugins": "yazi-plugins"
       }
     },

@@ -35,6 +35,7 @@ final: prev: {
         "mini"
         "lspconfig"
         "conform"
+        "ts-comments"
         "lazygit"
         "colorizer"
         "markview"

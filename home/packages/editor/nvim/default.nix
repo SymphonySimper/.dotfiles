@@ -63,6 +63,10 @@ in
           ./config/plugins/conform.lua
         ]
         [
+          nvim-ts-comments # lua
+          "require 'ts-comments'.setup()"
+        ]
+        [
           nvim-lazygit # lua
           ''
             vim.keymap.set("n", "<leader>gz", "<cmd>LazyGit<cr>", { desc = "LazyGit" })

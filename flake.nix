@@ -47,6 +47,10 @@
       url = "github:stevearc/conform.nvim";
       flake = false;
     };
+    nvim-ts-comments = {
+      url = "github:folke/ts-comments.nvim";
+      flake = false;
+    };
     nvim-colorizer = {
       url = "github:NvChad/nvim-colorizer.lua";
       flake = false;
