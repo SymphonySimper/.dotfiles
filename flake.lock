@@ -466,6 +466,22 @@
         "type": "github"
       }
     },
+    "nvim-lspconfig": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1724156017,
+        "narHash": "sha256-9HEVoHu0tELD7ZAOvTwAJn+6DRb+VcEm3mZOC3DhtXM=",
+        "owner": "neovim",
+        "repo": "nvim-lspconfig",
+        "rev": "dddd0945c0f31a0abd843425927a1712d2db2e10",
+        "type": "github"
+      },
+      "original": {
+        "owner": "neovim",
+        "repo": "nvim-lspconfig",
+        "type": "github"
+      }
+    },
     "nvim-markview": {
       "flake": false,
       "locked": {
@@ -495,6 +511,7 @@
         "nvim-colorizer": "nvim-colorizer",
         "nvim-harpoon": "nvim-harpoon",
         "nvim-lazygit": "nvim-lazygit",
+        "nvim-lspconfig": "nvim-lspconfig",
         "nvim-markview": "nvim-markview",
         "yazi-plugins": "yazi-plugins"
       }

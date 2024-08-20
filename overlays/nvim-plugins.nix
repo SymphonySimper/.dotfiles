@@ -34,6 +34,7 @@ final: prev: {
         "harpoon"
         "colorizer"
         "lazygit"
+        "lspconfig"
         "markview"
       ];
     };

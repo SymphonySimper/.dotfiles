@@ -40,6 +40,10 @@
       url = "github:kdheepak/lazygit.nvim";
       flake = false;
     };
+    nvim-lspconfig = {
+      url = "github:neovim/nvim-lspconfig";
+      flake = false;
+    };
     nvim-markview = {
       url = "github:OXY2DEV/markview.nvim";
       flake = false;

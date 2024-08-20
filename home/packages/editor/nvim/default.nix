@@ -52,6 +52,10 @@ in
             vim.keymap.set("n", "<leader>gz", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
           ''
         ]
+        [
+          nvim-lspconfig
+          ./config/plugins/lsp.lua
+        ]
 
         # Treesitter
         [
@@ -88,5 +92,19 @@ in
         plenary-nvim
         nvim-web-devicons
       ]);
+
+    extraPackages = with pkgs; [
+      # LSP servers
+      nil # nix
+      lua-language-server
+      bash-language-server
+      svelte-language-server
+      tailwindcss-language-server
+      typescript-language-server
+      vscode-langservers-extracted
+      pyright
+      ruff-lsp
+      marksman
+    ];
   };
 }
