@@ -31,8 +31,9 @@ final: prev: {
       inherit inputs;
       inherit prev;
       pluginsList = [
-        "markview"
+        "harpoon"
         "colorizer"
+        "markview"
       ];
     };
 }

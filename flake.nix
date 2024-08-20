@@ -28,12 +28,16 @@
 
     # Neovim plugins
     neorg-overlay.url = "github:nvim-neorg/nixpkgs-neorg-overlay";
-    nvim-markview = {
-      url = "github:OXY2DEV/markview.nvim";
+    nvim-harpoon = {
+      url = "github:ThePrimeagen/harpoon/harpoon2";
       flake = false;
     };
     nvim-colorizer = {
       url = "github:NvChad/nvim-colorizer.lua";
+      flake = false;
+    };
+    nvim-markview = {
+      url = "github:OXY2DEV/markview.nvim";
       flake = false;
     };
   };

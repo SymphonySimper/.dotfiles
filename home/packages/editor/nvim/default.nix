@@ -21,7 +21,7 @@ in
       '';
 
     plugins = with pkgs.vimPlugins; [
-      (mkPlugin harpoon2 ./config/plugins/harpoon.lua)
+      (mkPlugin nvim-harpoon ./config/plugins/harpoon.lua)
       (mkPlugin nvim-colorizer "require 'colorizer'.setup()")
 
       # Treesitter
@@ -53,6 +53,10 @@ in
         p.tree-sitter-vim
         p.tree-sitter-vimdoc
       ]))
+
+      # Common deps
+      plenary-nvim
+      nvim-web-devicons
     ];
   };
 }
