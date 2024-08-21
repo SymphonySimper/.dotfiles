@@ -71,6 +71,10 @@
       url = "github:stevearc/conform.nvim";
       flake = false;
     };
+    nvim-trouble = {
+      url = "github:folke/trouble.nvim";
+      flake = false;
+    };
     nvim-ts-comments = {
       url = "github:folke/ts-comments.nvim";
       flake = false;

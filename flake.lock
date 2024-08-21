@@ -626,6 +626,22 @@
         "type": "github"
       }
     },
+    "nvim-trouble": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1721651093,
+        "narHash": "sha256-db/riM3Kq+QgGUqRxJHA4HYXJE31276hrUrDj4UhC2g=",
+        "owner": "folke",
+        "repo": "trouble.nvim",
+        "rev": "6efc446226679fda0547c0fd6a7892fd5f5b15d8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "folke",
+        "repo": "trouble.nvim",
+        "type": "github"
+      }
+    },
     "nvim-ts-comments": {
       "flake": false,
       "locked": {
@@ -665,6 +681,7 @@
         "nvim-luasnip": "nvim-luasnip",
         "nvim-markview": "nvim-markview",
         "nvim-mini": "nvim-mini",
+        "nvim-trouble": "nvim-trouble",
         "nvim-ts-comments": "nvim-ts-comments",
         "yazi-plugins": "yazi-plugins"
       }

@@ -41,6 +41,7 @@ final: prev: {
         "cmp-luasnip"
         "lspconfig"
         "conform"
+        "trouble"
         "ts-comments"
         "lazygit"
         "colorizer"

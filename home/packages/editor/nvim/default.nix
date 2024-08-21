@@ -84,6 +84,11 @@ in
           "require 'ts-comments'.setup()"
         ]
         [
+          nvim-trouble
+          ./config/plugins/trouble.lua
+        ]
+
+        [
           nvim-lazygit # lua
           ''
             vim.keymap.set("n", "<leader>gz", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
