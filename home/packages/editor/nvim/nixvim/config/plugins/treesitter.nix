@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   programs.nixvim.plugins = {
     treesitter = {
@@ -8,34 +8,37 @@
       gccPackage = null;
       nodejsPackage = null;
       treesitterPackage = null;
+      grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
+        bash
+        lua
+        markdown
+        nix
+        python
+
+        html
+        css
+        scss
+        javascript
+        typescript
+        svelte
+
+        dockerfile
+        json
+        toml
+        yaml
+
+        vim
+        vimdoc
+
+        gitcommit
+        gitignore
+      ];
       settings = {
         indent.enable = true;
         highlight = {
           enable = true;
           additional_vim_regex_highlighting = false;
         };
-        # ensure_installed = [
-        #   "astro"
-        #   "bash"
-        #   "css"
-        #   "gitcommit"
-        #   "gitignore"
-        #   "html"
-        #   "javascript"
-        #   "jsdoc"
-        #   "json"
-        #   "lua"
-        #   "markdown"
-        #   "python"
-        #   "regex"
-        #   "scss"
-        #   "svelte"
-        #   "tsx"
-        #   "typescript"
-        #   "vim"
-        #   "vimdoc"
-        #   "yaml"
-        # ];
       };
     };
 
