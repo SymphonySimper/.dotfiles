@@ -10,7 +10,6 @@
     ./markview.nix
     ./mini.nix
     ./neorg.nix
-    ./oil.nix
     ./otter.nix
     ./telescope.nix
     ./treesitter.nix
