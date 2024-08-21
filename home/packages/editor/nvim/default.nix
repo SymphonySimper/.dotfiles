@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, userSettings, ... }:
 let
   mkPlugin =
     { plugin, config }:
@@ -86,6 +86,31 @@ in
         [
           nvim-trouble
           ./config/plugins/trouble.lua
+        ]
+
+        [
+          neorg # lua
+          ''
+            require("neorg").setup({
+            	load = {
+            		["core.completion"] = { config = { engine = "nvim-cmp" } },
+            		["core.concealer"] = {},
+            		["core.defaults"] = {},
+            		["core.dirman"] = {
+            			config = {
+            				default_workspace = "brain",
+            				workspaces = {
+            					brain = "~/${userSettings.dirs.importantnt}/brain", -- General
+            					hand = "~/${userSettings.dirs.importantnt}/hand", -- Personal
+            					heart = "~/${userSettings.dirs.importantnt}/heart", -- Helps myself and others
+            				},
+            			},
+            		},
+            		["core.esupports.metagen"] = { config = { author = "${userSettings.name.name}"} },
+            		["core.journal"] = { config = { journal_folder = "journal", workspace = "heart" } },
+            	},
+            })
+          ''
         ]
 
         [
