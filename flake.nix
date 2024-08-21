@@ -39,6 +39,30 @@
       url = "github:echasnovski/mini.nvim";
       flake = false;
     };
+    nvim-cmp = {
+      url = "github:hrsh7th/nvim-cmp";
+      flake = false;
+    };
+    nvim-cmp-lsp = {
+      url = "github:hrsh7th/cmp-nvim-lsp";
+      flake = false;
+    };
+    nvim-cmp-path = {
+      url = "github:hrsh7th/cmp-path";
+      flake = false;
+    };
+    nvim-cmp-buffer = {
+      url = "github:hrsh7th/cmp-buffer";
+      flake = false;
+    };
+    nvim-luasnip = {
+      url = "github:L3MON4D3/LuaSnip";
+      flake = false;
+    };
+    nvim-cmp-luasnip = {
+      url = "github:saadparwaiz1/cmp_luasnip";
+      flake = false;
+    };
     nvim-lspconfig = {
       url = "github:neovim/nvim-lspconfig";
       flake = false;

@@ -33,6 +33,12 @@ final: prev: {
       pluginsList = [
         "harpoon"
         "mini"
+        "cmp"
+        "cmp-lsp"
+        "cmp-path"
+        "cmp-buffer"
+        "luasnip"
+        "cmp-luasnip"
         "lspconfig"
         "conform"
         "ts-comments"

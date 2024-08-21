@@ -14,17 +14,19 @@ local servers = {
 	"marksman",
 }
 
+local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+
 for _, server in pairs(servers) do
 	if type(server) == "string" then
-		lspconfig[server].setup({})
+		lspconfig[server].setup({
+			capabilities = lsp_capabilities,
+		})
 	else
-		lspconfig[server[1]].setup(server[2])
+		local config = server[2]
+		config["capabilities"] = lsp_capabilities
+		lspconfig[server[1]].setup(config)
 	end
 end
-
--- nix
-lspconfig.nil_ls.setup({})
-lspconfig.lua_ls.setup({})
 
 -- keymaps
 local keymaps = {

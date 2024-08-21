@@ -54,6 +54,23 @@ in
           nvim-mini
           ./config/plugins/mini.lua
         ]
+
+        # cmp
+        [
+          nvim-cmp
+          ./config/plugins/cmp.lua
+        ]
+        [
+          nvim-luasnip # lua
+          ''
+            require("luasnip").config.setup({})
+          ''
+        ]
+        nvim-cmp-lsp
+        nvim-cmp-path
+        nvim-cmp-buffer
+        nvim-cmp-luasnip
+
         [
           nvim-lspconfig
           ./config/plugins/lsp.lua
