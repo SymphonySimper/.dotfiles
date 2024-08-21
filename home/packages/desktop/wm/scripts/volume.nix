@@ -43,7 +43,6 @@
             myUtils.mkNotification {
               tag = "my-$1";
               title = "$2 is $status";
-              progress = "$volume";
             }
           }
         }
