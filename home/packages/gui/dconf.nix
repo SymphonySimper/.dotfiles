@@ -12,12 +12,12 @@
       };
 
       "org/gnome/desktop/background" = {
-        picture-uri = userSettings.wallpaper;
-        picture-uri-dark = userSettings.wallpaper;
+        picture-uri = userSettings.theme.wallpaper;
+        picture-uri-dark = userSettings.theme.wallpaper;
       };
 
       "org/gnome/desktop/screensaver" = {
-        picture-uri = userSettings.wallpaper;
+        picture-uri = userSettings.theme.wallpaper;
       };
 
       "org/gnome/desktop/interface" = {

@@ -47,7 +47,6 @@
           name = "SymphonySimper";
         };
         home = "/home/${name.user}";
-        wallpaper = "${home}/.dotfiles/assets/images/bg.png";
         dirs = {
           lifeisfun = "lifeisfun";
           importantnt = "importantnt";
@@ -57,6 +56,7 @@
           flavor = if theme.dark then "mocha" else "latte";
           color = (import ./assets/colors.nix { flavor = theme.flavor; });
           gtk = if theme.dark then "Adwaita-dark" else "Adwaita";
+          wallpaper = "${home}/.dotfiles/assets/images/bg.png";
         };
         font = {
           sans = "Poppins";
@@ -74,7 +74,6 @@
           browser = "chromium";
           launcher = "wofi";
           notification = "dunst";
-          wallpaper = "swaybg -i ${wallpaper} -m fill";
         };
       };
       lib = nixpkgs.lib;
