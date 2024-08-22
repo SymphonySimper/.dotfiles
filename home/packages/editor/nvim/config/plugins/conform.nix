@@ -16,13 +16,13 @@ in
         nix = [ "nixfmt" ];
         sh = [ "shfmt" ];
         lua = [ "stylua" ];
-        python = [ "ruff" ];
         go = [
           [
             "goimports"
             "gofumpt"
           ]
         ];
+        python = [ "ruff_format" ];
         javascript = web;
         typescript = web;
         svelte = web;

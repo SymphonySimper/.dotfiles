@@ -100,7 +100,7 @@
 
         # Python
         pyright.enable = true;
-        ruff-lsp.enable = true;
+        ruff.enable = true;
 
         # Go
         gopls = {
