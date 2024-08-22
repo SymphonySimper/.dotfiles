@@ -89,7 +89,7 @@
         (import nixpkgs {
           inherit system;
           config.allowUnfree = true;
-          overlays = [ inputs.neorg-overlay.overlays.default ] ++ overlays;
+          overlays = overlays;
         });
 
       mkProfileSettings =
@@ -110,7 +110,10 @@
         home-manager.lib.homeManagerConfiguration rec {
           pkgs = mkPkgs {
             system = system;
-            overlays = [ (import ./overlays/nvim-plugins.nix { inherit inputs; }) ];
+            overlays = [
+              (import ./overlays/nvim-plugins.nix { inherit inputs; })
+              inputs.neorg-overlay.overlays.default
+            ];
           };
           modules = [
             ./profiles/${profile}/home.nix
