@@ -16,12 +16,6 @@ in
         nix = [ "nixfmt" ];
         sh = [ "shfmt" ];
         lua = [ "stylua" ];
-        go = [
-          [
-            "goimports"
-            "gofumpt"
-          ]
-        ];
         python = [ "ruff_format" ];
         javascript = web;
         typescript = web;
@@ -50,7 +44,6 @@ in
       nodePackages.prettier
       codespell
       gawk # trim_whitespace
-      gotools # goimports
     ];
 
     keymaps = myUtils.mkKeymaps [
