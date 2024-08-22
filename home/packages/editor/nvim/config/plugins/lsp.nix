@@ -72,25 +72,7 @@
         };
 
         # Tailwind
-        tailwindcss = {
-          enable = true;
-          settings.tailwindCSS.experimental.classRegex = [
-            # Refer: https://github.com/paolotiu/tailwind-intellisense-regex-list
-            [
-              "cva\\(([^)]*)\\)"
-              "[\"'`]([^\"'`]*).*?[\"'`]"
-            ]
-            [
-              "cx\\(([^)]*)\\)"
-              "(?:'|\"|`)([^']*)(?:'|\"|`)"
-            ]
-            [
-              "cn\\(([^)]*)\\)"
-              "[\"'`]([^\"'`]*).*?[\"'`]"
-            ]
-            # [ "([a-zA-Z0-9\\-:]+)" ]
-          ];
-        };
+        tailwindcss.enable = true;
 
         # Typescript
         tsserver.enable = true;
