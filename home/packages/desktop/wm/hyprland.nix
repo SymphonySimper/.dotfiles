@@ -85,6 +85,7 @@ in
 
       # Window rules
       windowrulev2 = [
+        "noborder, onworkspace:w[tv1] f[-1], floating:0"
         "workspace: 1, class:^(Alacritty)$"
         "workspace: 2 silent, class:^(firefox|chromium-browser)$"
         "workspace: 3, class:^(com.github.johnfactotum.Foliate)$"
