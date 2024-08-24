@@ -17,6 +17,7 @@
   home.packages = with pkgs; [
     curl
     gnutar
+    jq
     killall
     ps_mem
     tlrc # tldr
