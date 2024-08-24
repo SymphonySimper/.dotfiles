@@ -14,6 +14,11 @@ in
 
       exec-once = [ "startup" ];
 
+      # unscale XWayland
+      xwayland = {
+        force_zero_scaling = true;
+      };
+
       input = {
         kb_layout = "us";
         kb_variant = "";
