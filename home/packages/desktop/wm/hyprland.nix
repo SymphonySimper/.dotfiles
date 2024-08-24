@@ -1,6 +1,16 @@
 { userSettings, ... }:
 let
   keybinds = (import ./keybinds.nix { inherit userSettings; });
+
+  display = {
+    scaling = 1.6;
+    cursorSize = 12 * display.scaling;
+    fps = 60;
+  };
+
+  fractionlScaling = builtins.toString display.scaling;
+  cursorSize = builtins.toString display.cursorSize;
+  fps = builtins.toString display.fps;
 in
 {
   wayland.windowManager.hyprland = {
@@ -9,8 +19,8 @@ in
     xwayland.enable = true;
     settings = {
       # Settings
-      "monitor" = ",2880x1800@60,auto,1.6";
-      env = "XCURSOR_SIZE,12";
+      "monitor" = ",highres@${fps},auto,${fractionlScaling}";
+      env = "XCURSOR_SIZE,${cursorSize}";
 
       exec-once = [ "startup" ];
 
@@ -213,7 +223,6 @@ in
 
   xdg.configFile."hypr/xdph.conf".text = ''
     screencopy {
-        max_fps = 60
-    }
+        max_fps = ${fps}
   '';
 }
