@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, userSettings, ... }:
 {
   imports = [
     ./hyprland.nix
@@ -24,14 +24,19 @@
         common = {
           default = [
             "gtk"
-            "wlr"
+            (if userSettings.desktop.name == "hyprland" then "hyprland" else "wlr")
           ];
           "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
         };
       };
       extraPortals = [
         pkgs.xdg-desktop-portal-gtk
-        pkgs.xdg-desktop-portal-wlr
+        (
+          if userSettings.desktop.name == "hyprland" then
+            pkgs.xdg-desktop-portal-hyprland
+          else
+            pkgs.xdg-desktop-portal-wlr
+        )
       ];
     };
 
