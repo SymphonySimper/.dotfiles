@@ -1,6 +1,6 @@
 { userSettings, ... }:
 let
-  commonKeys = (import ./keybinds.nix { inherit userSettings; });
+  keybinds = (import ./keybinds.nix { inherit userSettings; });
 
   keys = {
     mod = "Mod4";
@@ -51,138 +51,124 @@ in
 
       workspaceAutoBackAndForth = true;
       floating.modifier = modifier;
-      keybindings = {
-        # Apps
-        "${keys.mod}+${commonKeys.terminal.default.key}" = "exec ${commonKeys.terminal.default.cmd}";
-        "${keys.mod}+${commonKeys.browser.default.key}" = "exec ${commonKeys.browser.default.cmd}";
-        "${keys.mod}+${commonKeys.launcher.default.key}" = "exec ${commonKeys.launcher.default.cmd}";
+      keybindings =
+        (builtins.listToAttrs (
+          builtins.map (
+            keybind:
+            let
+              action = (if builtins.hasAttr "mod" keybind then "${keybind.mod}+${keybind.key}" else keybind.key);
+            in
+            {
+              name = "${keys.mod}+${action}";
+              value = "exec ${keybind.cmd}";
+            }
+          ) keybinds
+        ))
+        // {
+          "${keys.mod}+q" = "kill";
 
-        "${keys.mod}+q" = "kill";
+          "${keys.mod}+m" = "bar mode toggle";
 
-        # Brightness
-        "${keys.mod}+${commonKeys.brightness.down.key}" = "exec ${commonKeys.brightness.down.cmd}";
-        "${keys.mod}+${commonKeys.brightness.up.key}" = "exec ${commonKeys.brightness.up.cmd}";
+          # Reload the configuration file
+          "${keys.mod}+Shift+c" = "reload";
 
-        # Volume
-        "${keys.mod}+${commonKeys.volume.down.key}" = "exec ${commonKeys.volume.down.cmd}";
-        "${keys.mod}+${commonKeys.volume.up.key}" = "exec ${commonKeys.volume.up.cmd}";
-        "${keys.mod}+${commonKeys.volume.toggle.mod}+${commonKeys.volume.toggle.key}" = "exec ${commonKeys.volume.toggle.cmd}";
+          # Exit sway (logs you out of your Wayland session)
+          "${keys.mod}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
+          #
+          # Moving around:
+          #
+          # Move your focus around
+          "${keys.mod}+${keys.left}" = "focus left";
+          "${keys.mod}+${keys.down}" = "focus down";
+          "${keys.mod}+${keys.up}" = "focus up";
+          "${keys.mod}+${keys.right}" = "focus right";
+          # Or use $mod+[up|down|left|right]
+          "${keys.mod}+Left" = "focus left";
+          "${keys.mod}+Down" = "focus down";
+          "${keys.mod}+Up" = "focus up";
+          "${keys.mod}+Right" = "focus right";
 
-        # Mic
-        "${keys.mod}+${commonKeys.mic.toggle.key}" = "exec ${commonKeys.mic.toggle.cmd}";
+          # Move the focused window with the same, but add Shift
+          "${keys.mod}+Shift+${keys.left}" = "move left";
+          "${keys.mod}+Shift+${keys.down}" = "move down";
+          "${keys.mod}+Shift+${keys.up}" = "move up";
+          "${keys.mod}+Shift+${keys.right}" = "move right";
+          # Ditto, with arrow keys
+          "${keys.mod}+Shift+Left" = "move left";
+          "${keys.mod}+Shift+Down" = "move down";
+          "${keys.mod}+Shift+Up" = "move up";
+          "${keys.mod}+Shift+Right" = "move right";
+          #
+          # Workspaces:
+          #
+          # Switch to workspace
+          "${keys.mod}+1" = "workspace number 1";
+          "${keys.mod}+2" = "workspace number 2";
+          "${keys.mod}+3" = "workspace number 3";
+          "${keys.mod}+4" = "workspace number 4";
+          "${keys.mod}+5" = "workspace number 5";
+          "${keys.mod}+6" = "workspace number 6";
+          "${keys.mod}+7" = "workspace number 7";
+          "${keys.mod}+8" = "workspace number 8";
+          "${keys.mod}+9" = "workspace number 9";
+          "${keys.mod}+0" = "workspace number 10";
+          # Move focused container to workspace
+          "${keys.mod}+Shift+1" = "move container to workspace number 1";
+          "${keys.mod}+Shift+2" = "move container to workspace number 2";
+          "${keys.mod}+Shift+3" = "move container to workspace number 3";
+          "${keys.mod}+Shift+4" = "move container to workspace number 4";
+          "${keys.mod}+Shift+5" = "move container to workspace number 5";
+          "${keys.mod}+Shift+6" = "move container to workspace number 6";
+          "${keys.mod}+Shift+7" = "move container to workspace number 7";
+          "${keys.mod}+Shift+8" = "move container to workspace number 8";
+          "${keys.mod}+Shift+9" = "move container to workspace number 9";
+          "${keys.mod}+Shift+0" = "move container to workspace number 10";
+          # Note: workspaces can have any name you want, not just numbers.
+          # We just use 1-10 as the default.
+          #
+          # Layout stuff:
+          #
+          # You can "split" the current object of your focus with
+          # $mod+b or $mod+v, for horizontal and vertical splits
+          # respectively.
+          "${keys.mod}+Shift+b" = "splith";
+          "${keys.mod}+Shift+v" = "splitv";
 
-        # Screenshot
-        "${keys.mod}+${commonKeys.screenshot.screen.key}" = "exec ${commonKeys.screenshot.screen.cmd}";
-        "${keys.mod}+${commonKeys.screenshot.window.mod}+${commonKeys.screenshot.window.key}" = "exec ${commonKeys.screenshot.window.cmd}";
-        "${keys.mod}+${commonKeys.screenshot.region.mod}+${commonKeys.screenshot.region.key}" = "exec ${commonKeys.screenshot.region.cmd}";
+          # Switch the current container between different layout styles
+          "${keys.mod}+s" = "layout stacking";
+          "${keys.mod}+w" = "layout tabbed";
+          "${keys.mod}+e" = "layout toggle split";
 
-        # Caffiene
-        "${keys.mod}+${commonKeys.caffiene.toggle.key}" = "exec ${commonKeys.caffiene.toggle.cmd}";
+          # Make the current focus fullscreen
+          "${keys.mod}+Shift+f" = "fullscreen";
 
-        # Bar
-        "${keys.mod}+${commonKeys.notifybar.default.key}" = "exec ${commonKeys.notifybar.default.cmd}";
-        "${keys.mod}+m" = "bar mode toggle";
+          # Toggle the current focus between tiling and floating mode
+          "${keys.mod}+Shift+space" = "floating toggle";
 
-        # Reload the configuration file
-        "${keys.mod}+Shift+c" = "reload";
+          # Make window sticky
+          "${keys.mod}+Shift+s" = "sticky toggle";
 
-        # Exit sway (logs you out of your Wayland session)
-        "${keys.mod}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
-        #
-        # Moving around:
-        #
-        # Move your focus around
-        "${keys.mod}+${keys.left}" = "focus left";
-        "${keys.mod}+${keys.down}" = "focus down";
-        "${keys.mod}+${keys.up}" = "focus up";
-        "${keys.mod}+${keys.right}" = "focus right";
-        # Or use $mod+[up|down|left|right]
-        "${keys.mod}+Left" = "focus left";
-        "${keys.mod}+Down" = "focus down";
-        "${keys.mod}+Up" = "focus up";
-        "${keys.mod}+Right" = "focus right";
+          # Swap focus between the tiling area and the floating area
+          "${keys.mod}+space" = "focus mode_toggle";
 
-        # Move the focused window with the same, but add Shift
-        "${keys.mod}+Shift+${keys.left}" = "move left";
-        "${keys.mod}+Shift+${keys.down}" = "move down";
-        "${keys.mod}+Shift+${keys.up}" = "move up";
-        "${keys.mod}+Shift+${keys.right}" = "move right";
-        # Ditto, with arrow keys
-        "${keys.mod}+Shift+Left" = "move left";
-        "${keys.mod}+Shift+Down" = "move down";
-        "${keys.mod}+Shift+Up" = "move up";
-        "${keys.mod}+Shift+Right" = "move right";
-        #
-        # Workspaces:
-        #
-        # Switch to workspace
-        "${keys.mod}+1" = "workspace number 1";
-        "${keys.mod}+2" = "workspace number 2";
-        "${keys.mod}+3" = "workspace number 3";
-        "${keys.mod}+4" = "workspace number 4";
-        "${keys.mod}+5" = "workspace number 5";
-        "${keys.mod}+6" = "workspace number 6";
-        "${keys.mod}+7" = "workspace number 7";
-        "${keys.mod}+8" = "workspace number 8";
-        "${keys.mod}+9" = "workspace number 9";
-        "${keys.mod}+0" = "workspace number 10";
-        # Move focused container to workspace
-        "${keys.mod}+Shift+1" = "move container to workspace number 1";
-        "${keys.mod}+Shift+2" = "move container to workspace number 2";
-        "${keys.mod}+Shift+3" = "move container to workspace number 3";
-        "${keys.mod}+Shift+4" = "move container to workspace number 4";
-        "${keys.mod}+Shift+5" = "move container to workspace number 5";
-        "${keys.mod}+Shift+6" = "move container to workspace number 6";
-        "${keys.mod}+Shift+7" = "move container to workspace number 7";
-        "${keys.mod}+Shift+8" = "move container to workspace number 8";
-        "${keys.mod}+Shift+9" = "move container to workspace number 9";
-        "${keys.mod}+Shift+0" = "move container to workspace number 10";
-        # Note: workspaces can have any name you want, not just numbers.
-        # We just use 1-10 as the default.
-        #
-        # Layout stuff:
-        #
-        # You can "split" the current object of your focus with
-        # $mod+b or $mod+v, for horizontal and vertical splits
-        # respectively.
-        "${keys.mod}+Shift+b" = "splith";
-        "${keys.mod}+Shift+v" = "splitv";
+          # Move focus to the parent container
+          "${keys.mod}+a" = "focus parent";
+          #
+          # Scratchpad:
+          #
+          # Sway has a "scratchpad", which is a bag of holding for windows.
+          # You can send windows there and get them back later.
 
-        # Switch the current container between different layout styles
-        "${keys.mod}+s" = "layout stacking";
-        "${keys.mod}+w" = "layout tabbed";
-        "${keys.mod}+e" = "layout toggle split";
+          # Move the currently focused window to the scratchpad
+          "${keys.mod}+Shift+minus" = "move scratchpad";
 
-        # Make the current focus fullscreen
-        "${keys.mod}+Shift+f" = "fullscreen";
+          # Show the next scratchpad window or hide the focused scratchpad window.
+          # If there are multiple scratchpad windows, this command cycles through them.
+          "${keys.mod}+minus" = "scratchpad show";
 
-        # Toggle the current focus between tiling and floating mode
-        "${keys.mod}+Shift+space" = "floating toggle";
-
-        # Make window sticky
-        "${keys.mod}+Shift+s" = "sticky toggle";
-
-        # Swap focus between the tiling area and the floating area
-        "${keys.mod}+space" = "focus mode_toggle";
-
-        # Move focus to the parent container
-        "${keys.mod}+a" = "focus parent";
-        #
-        # Scratchpad:
-        #
-        # Sway has a "scratchpad", which is a bag of holding for windows.
-        # You can send windows there and get them back later.
-
-        # Move the currently focused window to the scratchpad
-        "${keys.mod}+Shift+minus" = "move scratchpad";
-
-        # Show the next scratchpad window or hide the focused scratchpad window.
-        # If there are multiple scratchpad windows, this command cycles through them.
-        "${keys.mod}+minus" = "scratchpad show";
-
-        # Switch to resize mode
-        "${keys.mod}+r" = "mode \"resize\"";
-      };
+          # Switch to resize mode
+          "${keys.mod}+r" = "mode \"resize\"";
+        };
       modes = {
         # Resizing containers:
         "resize" = {

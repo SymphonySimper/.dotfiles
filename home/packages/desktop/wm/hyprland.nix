@@ -1,6 +1,6 @@
 { userSettings, ... }:
 let
-  customKeybinds = (import ../keybinds.nix { inherit userSettings; });
+  keybinds = (import ./keybinds.nix { inherit userSettings; });
 in
 {
   wayland.windowManager.hyprland = {
@@ -107,96 +107,74 @@ in
       "$mainMod" = "SUPER";
 
       # Actions
-      bind = [
-        "$mainMod, q, killactive,"
-        "$mainMod SHIFT, Q, exit,"
+      bind =
+        (map (
+          keybind:
+          ''$mainMod ${
+            if builtins.hasAttr "mod" keybind then keybind.mod else ""
+          }, ${keybind.key}, exec, ${keybind.cmd}''
+        ) keybinds)
+        ++ [
+          "$mainMod, q, killactive,"
+          "$mainMod SHIFT, Q, exit,"
 
-        # Apps
-        "$mainMod, ${customKeybinds.terminal.default.key}, exec, ${customKeybinds.terminal.default.cmd}"
-        "$mainMod, ${customKeybinds.browser.default.key}, exec, ${customKeybinds.browser.default.cmd}"
-        "$mainMod, ${customKeybinds.launcher.default.key}, exec, ${customKeybinds.launcher.default.cmd}"
-        # "$mainMod, E, exec, nautilus"
-        "$mainMod, ${customKeybinds.notifybar.default.key}, exec, ${customKeybinds.notifybar.default.cmd}"
-        # "$mainMod, B, exec, killall -SIGUSR1 .waybar-wrapped" # Toggle waybar
-        # "$mainMod SHIFT, B, exec, killall -SIGUSR2 .waybar-wrapped" # Restart waybar
+          # Toggle
+          "$mainMod, V, togglefloating,"
+          "$mainMod, P, pseudo," # dwindle
+          "$mainMod SHIFT, F, fullscreen"
 
-        # Toggle
-        "$mainMod, V, togglefloating,"
-        "$mainMod, P, pseudo," # dwindle
-        "$mainMod SHIFT, F, fullscreen"
+          # Global binds
+          # bind = $mainMod, F8, pass, ^(discord)$ # Toggle mute in discord
 
-        # Global binds
-        # bind = $mainMod, F8, pass, ^(discord)$ # Toggle mute in discord
+          # Move focus with mainMod + arrow keys
+          "$mainMod, l, movefocus, l"
+          "$mainMod, h, movefocus, r"
+          "$mainMod, k, movefocus, u"
+          "$mainMod, j, movefocus, d"
 
-        # Brightnes
-        "$mainMod, ${customKeybinds.brightness.down.key}, exec, ${customKeybinds.brightness.down.cmd}"
-        "$mainMod, ${customKeybinds.brightness.up.key}, exec, ${customKeybinds.brightness.up.cmd}"
+          # Swap window
+          "$mainMod SHIFT, H, swapwindow, l"
+          "$mainMod SHIFT, L, swapwindow, r"
+          "$mainMod SHIFT, K, swapwindow, u"
+          "$mainMod SHIFT, J, swapwindow, d"
 
-        # Volume
-        "$mainMod, ${customKeybinds.volume.down.key}, exec, ${customKeybinds.volume.down.cmd}"
-        "$mainMod, ${customKeybinds.volume.up.key}, exec, ${customKeybinds.volume.up.cmd}"
-        "$mainMod ${customKeybinds.volume.toggle.mod}, ${customKeybinds.volume.toggle.key}, exec, ${customKeybinds.volume.toggle.cmd}"
+          # Move window
+          "$mainMod CTRL SHIFT, H, movewindow, l"
+          "$mainMod CTRL SHIFT, L, movewindow, r"
+          "$mainMod CTRL SHIFT, K, movewindow, u"
+          "$mainMod CTRL SHIFT, J, movewindow, d"
 
-        # Mic
-        "$mainMod, ${customKeybinds.mic.toggle.key}, exec, ${customKeybinds.mic.toggle.cmd}"
+          # Switch workspaces with mainMod + [0-9]
+          "$mainMod, 1, workspace, 1"
+          "$mainMod, 2, workspace, 2"
+          "$mainMod, 3, workspace, 3"
+          "$mainMod, 4, workspace, 4"
+          "$mainMod, 5, workspace, 5"
+          "$mainMod, 6, workspace, 6"
+          "$mainMod, 7, workspace, 7"
+          "$mainMod, 8, workspace, 8"
+          "$mainMod, 9, workspace, 9"
+          "$mainMod, 0, workspace, 10"
 
-        # Screenshot
-        "$mainMod, ${customKeybinds.screenshot.screen.key}, exec, ${customKeybinds.screenshot.screen.cmd}"
-        "$mainMod ${customKeybinds.screenshot.window.mod}, ${customKeybinds.screenshot.window.key}, exec, ${customKeybinds.screenshot.window.cmd}"
-        "$mainMod ${customKeybinds.screenshot.region.mod}, ${customKeybinds.screenshot.region.key}, exec, ${customKeybinds.screenshot.region.cmd}"
+          # SUPER + ` to go between previous tabs
+          "$mainMod, code:49, workspace, previous"
 
-        # Caffiene
-        "$mainMod, ${customKeybinds.caffiene.toggle.key}, exec, ${customKeybinds.caffiene.toggle.cmd}"
+          # Move active window to a workspace with mainMod + SHIFT + [0-9]
+          "$mainMod SHIFT, 1, movetoworkspace, 1"
+          "$mainMod SHIFT, 2, movetoworkspace, 2"
+          "$mainMod SHIFT, 3, movetoworkspace, 3"
+          "$mainMod SHIFT, 4, movetoworkspace, 4"
+          "$mainMod SHIFT, 5, movetoworkspace, 5"
+          "$mainMod SHIFT, 6, movetoworkspace, 6"
+          "$mainMod SHIFT, 7, movetoworkspace, 7"
+          "$mainMod SHIFT, 8, movetoworkspace, 8"
+          "$mainMod SHIFT, 9, movetoworkspace, 9"
+          "$mainMod SHIFT, 0, movetoworkspace, 10"
 
-        # Move focus with mainMod + arrow keys
-        "$mainMod, l, movefocus, l"
-        "$mainMod, h, movefocus, r"
-        "$mainMod, k, movefocus, u"
-        "$mainMod, j, movefocus, d"
-
-        # Swap window
-        "$mainMod SHIFT, H, swapwindow, l"
-        "$mainMod SHIFT, L, swapwindow, r"
-        "$mainMod SHIFT, K, swapwindow, u"
-        "$mainMod SHIFT, J, swapwindow, d"
-
-        # Move window
-        "$mainMod CTRL SHIFT, H, movewindow, l"
-        "$mainMod CTRL SHIFT, L, movewindow, r"
-        "$mainMod CTRL SHIFT, K, movewindow, u"
-        "$mainMod CTRL SHIFT, J, movewindow, d"
-
-        # Switch workspaces with mainMod + [0-9]
-        "$mainMod, 1, workspace, 1"
-        "$mainMod, 2, workspace, 2"
-        "$mainMod, 3, workspace, 3"
-        "$mainMod, 4, workspace, 4"
-        "$mainMod, 5, workspace, 5"
-        "$mainMod, 6, workspace, 6"
-        "$mainMod, 7, workspace, 7"
-        "$mainMod, 8, workspace, 8"
-        "$mainMod, 9, workspace, 9"
-        "$mainMod, 0, workspace, 10"
-
-        # SUPER + ` to go between previous tabs
-        "$mainMod, code:49, workspace, previous"
-
-        # Move active window to a workspace with mainMod + SHIFT + [0-9]
-        "$mainMod SHIFT, 1, movetoworkspace, 1"
-        "$mainMod SHIFT, 2, movetoworkspace, 2"
-        "$mainMod SHIFT, 3, movetoworkspace, 3"
-        "$mainMod SHIFT, 4, movetoworkspace, 4"
-        "$mainMod SHIFT, 5, movetoworkspace, 5"
-        "$mainMod SHIFT, 6, movetoworkspace, 6"
-        "$mainMod SHIFT, 7, movetoworkspace, 7"
-        "$mainMod SHIFT, 8, movetoworkspace, 8"
-        "$mainMod SHIFT, 9, movetoworkspace, 9"
-        "$mainMod SHIFT, 0, movetoworkspace, 10"
-
-        # Scroll through existing workspaces with mainMod + scroll
-        "$mainMod, mouse_down, workspace, e+1"
-        "$mainMod, mouse_up, workspace, e-1 "
-      ];
+          # Scroll through existing workspaces with mainMod + scroll
+          "$mainMod, mouse_down, workspace, e+1"
+          "$mainMod, mouse_up, workspace, e-1 "
+        ];
 
       bindm = [
         # Move/resize windows with mainMod + LMB/RMB and dragging
