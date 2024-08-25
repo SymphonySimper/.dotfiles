@@ -76,6 +76,7 @@
           notification = "dunst";
           video = "mpv";
           pdf = "zathura";
+          image = "loupe";
         };
       };
       lib = nixpkgs.lib;
