@@ -8,5 +8,6 @@
     ./productivity.nix
     ./terminal/default.nix
     ./theme.nix
+    ./zathura.nix
   ];
 }
