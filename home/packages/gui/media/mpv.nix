@@ -5,6 +5,7 @@ in
 {
   programs.mpv = {
     inherit enable;
+    catppuccin.enable = false;
     bindings = {
       "Alt+LEFT" = "script-message Cycle_Video_Rotate -90";
       "Alt+RIGHT" = "script-message Cycle_Video_Rotate 90";
@@ -41,6 +42,7 @@ in
       border = "no";
       script-opts = "ytdl_hook-ytdl_path=${pkgs.yt-dlp}/bin/yt-dlp";
 
+      background-color = "#000000";
     };
   };
 
