@@ -75,6 +75,7 @@
           launcher = "wofi";
           notification = "dunst";
           video = "mpv";
+          pdf = "zathura";
         };
       };
       lib = nixpkgs.lib;
