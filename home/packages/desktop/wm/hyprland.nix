@@ -110,6 +110,7 @@ in
         "workspace: 6 silent, class:^(discord)$"
         "workspace: 9 silent, class:^(steam)$"
         "workspace: 10 silent, title:^(meet.google.com is sharing your screen.)$"
+        "workspace: 10 silent, class:^(org.qbittorrent.qBittorrent)$"
 
         # xwaylandvideobridge KDE
         "opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$"
