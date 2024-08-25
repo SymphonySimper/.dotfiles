@@ -1,4 +1,9 @@
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  pkgs,
+  userSettings,
+  ...
+}:
 {
   programs.yazi = {
     enable = true;
@@ -23,6 +28,28 @@
           (0.0) # y
           (0.0) # w
           (0.0) # h
+        ];
+      };
+      opener = {
+        edit = [
+          {
+            run = ''${userSettings.programs.editor} "$@"'';
+            block = true;
+            for = "unix";
+          }
+        ];
+        play = [
+          {
+            run = ''${userSettings.programs.video} "$@"'';
+            orphan = true;
+            for = "unix";
+          }
+        ];
+        open = [
+          {
+            run = ''xdg-open "$@"'';
+            desc = "Open";
+          }
         ];
       };
     };
