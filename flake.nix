@@ -74,6 +74,7 @@
           browser = "chromium";
           launcher = "wofi";
           notification = "dunst";
+          video = "mpv";
         };
       };
       lib = nixpkgs.lib;

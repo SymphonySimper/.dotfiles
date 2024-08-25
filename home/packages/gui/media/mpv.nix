@@ -1,6 +1,10 @@
-{ pkgs, ... }: {
+{ pkgs, userSettings, ... }:
+let
+  enable = userSettings.programs.video == "mpv";
+in
+{
   programs.mpv = {
-    enable = true;
+    inherit enable;
     bindings = {
       "Alt+LEFT" = "script-message Cycle_Video_Rotate -90";
       "Alt+RIGHT" = "script-message Cycle_Video_Rotate 90";
@@ -29,7 +33,7 @@
       sub-font-size = 48;
       sub-border-size = 2.0;
 
-      # Audio 
+      # Audio
       audio-file-auto = "fuzzy"; # external audio doesn't has to match the file name exactly to autoload
       audio-pitch-correction = "yes"; # automatically insert scaletempo when playing with higher speed
 
@@ -40,7 +44,7 @@
     };
   };
 
-  home.packages = with pkgs; [
-    yt-dlp
-  ];
+  programs.yt-dlp = {
+    inherit enable;
+  };
 }
