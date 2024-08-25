@@ -1,10 +1,10 @@
-{ userSettings, ... }:
+{ userSettings, lib, ... }:
 let
   keybinds = (import ./keybinds.nix { inherit userSettings; });
 
   display = {
     scaling = 1.6;
-    cursorSize = 12 * display.scaling;
+    cursorSize = builtins.ceil (12 * display.scaling);
     fps = 60;
   };
 
@@ -127,7 +127,7 @@ in
         (map (
           keybind:
           ''$mainMod ${
-            if builtins.hasAttr "mod" keybind then keybind.mod else ""
+            if builtins.hasAttr "mod" keybind then lib.toUpper keybind.mod else ""
           }, ${keybind.key}, exec, ${keybind.cmd}''
         ) keybinds)
         ++ [
