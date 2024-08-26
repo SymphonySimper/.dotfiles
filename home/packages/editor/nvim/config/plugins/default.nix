@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./cmp.nix
@@ -14,4 +14,8 @@
     ./treesitter.nix
     ./trouble.nix
   ];
+
+  programs.nixvim = {
+    extraPlugins = [ pkgs.nvimPlugins.helpview ];
+  };
 }

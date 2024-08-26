@@ -36,6 +36,10 @@
       url = "github:OXY2DEV/markview.nvim";
       flake = false;
     };
+    nvim-helpview = {
+      url = "github:OXY2DEV/helpview.nvim";
+      flake = false;
+    };
   };
 
   outputs =
