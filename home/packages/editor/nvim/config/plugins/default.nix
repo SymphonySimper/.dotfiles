@@ -10,6 +10,7 @@
     ./markview.nix
     ./mini.nix
     ./neorg.nix
+    ./noice.nix
     ./telescope.nix
     ./todo-comments.nix
     ./treesitter.nix
