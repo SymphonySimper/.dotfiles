@@ -32,7 +32,7 @@ in
   programs.gamescope = {
     # enable = true;
     capSysNice = false;
-    # set launch options to gamescope -- %command%
+    # set launch options to `env LD_PRELOAD="" gamescope -- %command%`
     inherit args;
   };
 }
