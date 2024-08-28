@@ -1,48 +1,51 @@
 { pkgs, ... }:
 {
-  programs.nixvim.plugins = {
-    treesitter = {
-      enable = true;
-      nixvimInjections = true;
-      nixGrammars = true;
-      gccPackage = null;
-      nodejsPackage = null;
-      treesitterPackage = null;
-      grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
-        bash
-        lua
-        markdown
-        nix
-        python
+  programs.nixvim = {
+    plugins = {
+      treesitter = {
+        enable = true;
+        nixvimInjections = true;
+        nixGrammars = true;
+        gccPackage = null;
+        nodejsPackage = null;
+        treesitterPackage = null;
+        grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
+          bash
+          lua
+          markdown
+          nix
+          python
 
-        html
-        css
-        scss
-        javascript
-        typescript
-        svelte
+          html
+          css
+          scss
+          javascript
+          typescript
+          svelte
 
-        dockerfile
-        json
-        toml
-        yaml
+          dockerfile
+          json
+          toml
+          yaml
 
-        vim
-        vimdoc
+          vim
+          vimdoc
 
-        gitcommit
-        gitignore
-      ];
-      settings = {
-        indent.enable = true;
-        highlight = {
-          enable = true;
-          additional_vim_regex_highlighting = false;
+          gitcommit
+          gitignore
+        ];
+        settings = {
+          indent.enable = true;
+          highlight = {
+            enable = true;
+            additional_vim_regex_highlighting = false;
+          };
         };
       };
-    };
 
-    ts-autotag.enable = true;
-    ts-context-commentstring.enable = true;
+      ts-autotag.enable = true;
+    };
+    extraPlugins = [ pkgs.vimPlugins.ts-comments-nvim ];
+    extraConfigLua = "require 'ts-comments'.setup()";
   };
 }
