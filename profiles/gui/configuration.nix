@@ -9,11 +9,11 @@
       device = "/dev/nvme0n1";
       swap = "16G";
     })
-    (import ../../system/packages/steam.nix {
-      width = 1920;
-      height = 1200;
-      refreshRate = 60;
-    })
+    # (import ../../system/packages/steam.nix {
+    #   width = 1920;
+    #   height = 1200;
+    #   refreshRate = 60;
+    # })
     ../../system/default.nix
     ../../system/hardware/logitech.nix
     ../../system/packages/desktop/default.nix
