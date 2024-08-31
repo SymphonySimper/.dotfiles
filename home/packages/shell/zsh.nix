@@ -1,6 +1,20 @@
 { userSettings, ... }:
 let
   wmCommand = if userSettings.desktop.name == "hyprland" then "Hyprland" else "sway";
+
+  mkTtyLaunch =
+    {
+      condition,
+      tty,
+      command,
+    }:
+    if condition then
+      ''
+        [ "$(tty)" = "/dev/tty${builtins.toString tty}" ] && exec ${command}
+
+      ''
+    else
+      "";
 in
 {
   programs.zsh = {
@@ -16,14 +30,16 @@ in
 
       . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
 
-      ${
-        if userSettings.desktop.wm then
-          ''
-            [ "$(tty)" = "/dev/tty1" ] && exec ${wmCommand}
-          ''
-        else
-          ""
-      }
+      ${mkTtyLaunch {
+        condition = userSettings.desktop.wm;
+        tty = 1;
+        command = wmCommand;
+      }}
+      ${mkTtyLaunch {
+        condition = userSettings.desktop.steam;
+        tty = 3;
+        command = "dbus-run-session steam-gamescope";
+      }}
     '';
     initExtra = ''
       # Prompt

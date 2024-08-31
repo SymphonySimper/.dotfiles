@@ -1,6 +1,18 @@
 { lib, config, ... }:
 let
   cfg = config.my.programs.steam;
+
+  args = [
+    "-f" # fullscreen
+    "-e" # steam integration
+    "-W ${builtins.toString cfg.display.width}"
+    "-H ${builtins.toString cfg.display.height}"
+    "-r ${builtins.toString cfg.display.refreshRate}" # Refresh rate
+    # "--expose-wayland"
+    # "--backend wayland"
+    # "-C" # hide cursor after time delay :smh
+    # "--force-grab-cursor"
+  ];
 in
 {
   options.my.programs.steam = {
@@ -38,24 +50,18 @@ in
       localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
       gamescopeSession = {
         enable = true;
+        inherit args;
+        # env = {
+        #   LD_PRELOAD = "";
+        # };
       };
     };
 
     programs.gamescope = {
       # enable = true;
       capSysNice = false;
-      # set launch options to `env LD_PRELOAD="" gamescope -- %command%`
-      args = [
-        "-f" # fullscreen
-        "-e" # steam integration
-        "-W ${builtins.toString cfg.display.width}"
-        "-H ${builtins.toString cfg.display.height}"
-        "-r ${builtins.toString cfg.display.refreshRate}" # Refresh rate
-        # "--expose-wayland"
-        # "--backend wayland"
-        # "-C" # hide cursor after time delay :smh
-        # "--force-grab-cursor"
-      ];
+      # set launch options to `LD_PRELOAD="" gamescope -- %command%`
+      inherit args;
     };
   };
 }
