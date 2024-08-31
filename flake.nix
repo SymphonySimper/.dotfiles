@@ -70,6 +70,7 @@
         desktop = {
           name = "sway";
           wm = desktop.name != "gnome";
+          steam = true;
         };
         programs = {
           terminal = "alacritty";
