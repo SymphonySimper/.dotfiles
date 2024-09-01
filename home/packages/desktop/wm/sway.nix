@@ -49,6 +49,12 @@ in
         "9" = [ { app_id = "^$"; } ];
       };
 
+      focus = {
+        newWindow = "focus";
+        followMouse = "no";
+        wrapping = "yes";
+      };
+
       workspaceAutoBackAndForth = true;
       floating.modifier = modifier;
       keybindings =
