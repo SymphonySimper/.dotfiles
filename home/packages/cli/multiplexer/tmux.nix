@@ -23,7 +23,7 @@
       ''
         # RGB colors
         # https://github.com/tmux/tmux/wiki/FAQ#how-do-i-use-rgb-colour
-        set-option -as terminal-features ',${
+        set -as terminal-features ',${
           if profileSettings.profile == "wsl" then "xterm-256color" else userSettings.programs.terminal
         }:RGB'
 
@@ -36,7 +36,7 @@
         set -g status-position top
 
         # Attach to different session on exit
-        set-option -g detach-on-destroy on
+        set -g detach-on-destroy on
 
         setw -g monitor-activity on
         set -g visual-activity on
