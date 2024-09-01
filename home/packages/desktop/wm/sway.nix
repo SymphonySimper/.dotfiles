@@ -1,6 +1,7 @@
 { userSettings, ... }:
 let
   keybinds = (import ./common/keybinds.nix { inherit userSettings; });
+  windows = import ./common/windows.nix;
 
   keys = {
     mod = "Mod4";
@@ -38,16 +39,19 @@ in
       startup = [ { command = "startup"; } ];
 
       defaultWorkspace = "workspace number 1";
-      assigns = {
-        "0" = [ { title = "^meet.google.com is sharing your screen.$"; } ];
-        "1" = [ { app_id = "^(Alacritty|footclient|foot|org.wezfurlong.wezterm)$"; } ];
-        "2" = [ { app_id = "^(firefox|chromium-browser|Brave-browser)$"; } ];
-        "3" = [ { app_id = "^com.github.johnfactotum.Foliate$"; } ];
-        "4" = [ { app_id = "^mpv$"; } ];
-        "5" = [ { class = "^steam$"; } ];
-        "6" = [ { app_id = "^gamescope$"; } ];
-        "9" = [ { app_id = "^$"; } ];
-      };
+      assigns = builtins.listToAttrs (
+        builtins.map (workspaceNum: {
+          name = workspaceNum;
+          value = (
+            builtins.concatMap (
+              type:
+              (builtins.map (id: {
+                ${type} = if type == "title" then "^${id}.*" else "^${id}$";
+              }) windows.${workspaceNum}.${type})
+            ) (builtins.attrNames windows.${workspaceNum})
+          );
+        }) (builtins.attrNames windows)
+      );
 
       focus = {
         newWindow = "focus";
