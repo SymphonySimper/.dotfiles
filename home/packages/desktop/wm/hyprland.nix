@@ -1,6 +1,6 @@
 { userSettings, lib, ... }:
 let
-  keybinds = (import ./keybinds.nix { inherit userSettings; });
+  keybinds = (import ./common/keybinds.nix { inherit userSettings; });
 
   display = {
     scaling = 1.6;
