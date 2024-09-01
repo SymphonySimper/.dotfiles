@@ -30,6 +30,8 @@
 
           vim
           vimdoc
+          tmux
+          regex
 
           gitcommit
           gitignore
