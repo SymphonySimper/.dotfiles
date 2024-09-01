@@ -190,6 +190,13 @@
           run = "plugin --sync max-preview";
           desc = "Maximize or restore preview";
         }
+        {
+          on = "<C-n>";
+          run = ''
+            shell '${pkgs.ripdrag}/bin/ripdrag "$@" -x 2>/dev/null &' --confirm
+          '';
+          desc = "Drag and drop using ripdrag";
+        }
       ];
     };
   };
