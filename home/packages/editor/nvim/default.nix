@@ -8,7 +8,7 @@
     viAlias = true;
     vimAlias = true;
 
-    withNodeJs = false;
+    withNodeJs = true;
     withRuby = false;
   };
 }
