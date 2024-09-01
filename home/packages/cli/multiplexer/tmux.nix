@@ -19,64 +19,67 @@
     customPaneNavigationAndResize = true;
     newSession = true;
     plugins = with pkgs; [ tmuxPlugins.sensible ];
-    extraConfig = ''
-      # RGB colors
-      # https://github.com/tmux/tmux/wiki/FAQ#how-do-i-use-rgb-colour
-      set-option -as terminal-features ',${
-        if profileSettings.profile == "wsl" then "xterm-256color" else userSettings.programs.terminal
-      }:RGB'
+    extraConfig = # tmux
+      ''
+        # RGB colors
+        # https://github.com/tmux/tmux/wiki/FAQ#how-do-i-use-rgb-colour
+        set-option -as terminal-features ',${
+          if profileSettings.profile == "wsl" then "xterm-256color" else userSettings.programs.terminal
+        }:RGB'
 
-      # For yazi
-      set -g allow-passthrough on
+        # For yazi
+        set -g allow-passthrough on
 
-      set -ga update-environment TERM
-      set -ga update-environment TERM_PROGRAM
+        set -ga update-environment TERM
+        set -ga update-environment TERM_PROGRAM
 
-      # Attach to different session on exit
-      set-option -g detach-on-destroy on
+        set -g status-position top
 
-      setw -g monitor-activity on
-      set -g visual-activity on
+        # Attach to different session on exit
+        set-option -g detach-on-destroy on
 
-      # Turn off automatic renaming
-      setw -g automatic-rename off
+        setw -g monitor-activity on
+        set -g visual-activity on
 
-      # y and p as in vim
-      bind Escape copy-mode
-      unbind p
-      bind p paste-buffer
-      bind-key -T copy-mode-vi 'v' send -X begin-selection
-      bind-key -T copy-mode-vi 'y' send -X copy-selection
-      bind-key -T copy-mode-vi 'Space' send -X halfpage-down
-      bind-key -T copy-mode-vi 'Bspace' send -X halfpage-up
+        # Turn off automatic renaming
+        setw -g automatic-rename off
 
-      # easy-to-remember split pane commands and open panes in cwd
-      unbind '"'
-      unbind %
-      unbind "'"
-      bind - split-window -c "#{pane_current_path}"
-      bind | split-window -hc "#{pane_current_path}"
-      bind c new-window -c "#{pane_current_path}"
+        # y and p as in vim
+        bind Escape copy-mode
+        unbind p
+        bind p paste-buffer
+        bind-key -T copy-mode-vi 'v' send -X begin-selection
+        bind-key -T copy-mode-vi 'y' send -X copy-selection
+        bind-key -T copy-mode-vi 'Space' send -X halfpage-down
+        bind-key -T copy-mode-vi 'Bspace' send -X halfpage-up
 
-      # moving between windows with vim movement keys
-      bind -r C-h select-window -t :-
-      bind -r C-l select-window -t :+
+        # easy-to-remember split pane commands and open panes in cwd
+        unbind '"'
+        unbind %
+        unbind "'"
+        bind - split-window -c "#{pane_current_path}"
+        bind | split-window -hc "#{pane_current_path}"
+        bind c new-window -c "#{pane_current_path}"
 
-      # Maximize pane
-      bind -r m resize-pane -Z
+        # moving between windows with vim movement keys
+        bind -r C-h select-window -t :-
+        bind -r C-l select-window -t :+
 
-      # Open a pane with 30% width
-      bind -r '"' split-window -h -l '30%' -c "#{pane_current_path}"
-      bind -r "'" split-window -v -l '20%' -c "#{pane_current_path}"
+        # Maximize pane
+        bind -r m resize-pane -Z
 
-      # Sync pane
-      bind -r b set-window-option synchronize-panes
+        # Open a pane with 30% width
+        bind -r '"' split-window -h -l '30%' -c "#{pane_current_path}"
+        bind -r "'" split-window -v -l '20%' -c "#{pane_current_path}"
 
-      # Create new session
-      bind -r C-n new
+        # Sync pane
+        bind -r b set-window-option synchronize-panes
 
-      # Reload config with prefix+r
-      bind r source-file ${config.xdg.configHome}/tmux/tmux.conf
-    '';
+        # Create new session
+        bind -r C-n new
+
+        # Reload config with prefix+r
+        bind r source-file ${config.xdg.configHome}/tmux/tmux.conf
+      '';
   };
 }
