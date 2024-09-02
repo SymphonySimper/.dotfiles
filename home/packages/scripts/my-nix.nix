@@ -17,7 +17,11 @@
               y|Y) nix flake lock --update-input $input ;;
               *) echo "Aborted."
             esac
-          ;;
+            ;;
+          diff)
+            nix profile diff-closures --profile /nix/var/nix/profiles/system
+            nix profile diff-closures --profile ~/.local/state/nix/profiles/home-manager
+            ;;
         esac
       ''
     )
