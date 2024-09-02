@@ -50,10 +50,9 @@ in
       localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
       gamescopeSession = {
         enable = true;
-        inherit args;
-        # env = {
-        #   LD_PRELOAD = "";
-        # };
+        env = {
+          LD_PRELOAD = "";
+        };
       };
     };
 
