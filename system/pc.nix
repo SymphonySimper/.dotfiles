@@ -1,13 +1,19 @@
-{ pkgs, ... }: {
-  imports = [
-    ./packages/kanata.nix
-  ];
+{ pkgs, ... }:
+{
+  imports = [ ./packages/kanata.nix ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelParams = [ "quiet" ];
-  boot.consoleLogLevel = 0;
+  boot = {
+    loader = {
+      systemd-boot = {
+        enable = true;
+        consoleMode = "max";
+      };
+      efi.canTouchEfiVariables = true;
+    };
+    kernelParams = [ "quiet" ];
+    consoleLogLevel = 0;
+  };
 
   networking.networkmanager.enable = true;
   networking.firewall = {
