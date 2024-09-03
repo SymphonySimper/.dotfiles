@@ -58,10 +58,23 @@ in
     };
 
     programs.gamescope = {
-      # enable = true;
+      enable = true;
       capSysNice = false;
       # set launch options to `LD_PRELOAD="" gamescope -- %command%`
       inherit args;
+    };
+
+    specialisation = {
+      steam-deck = {
+        inheritParentConfig = true;
+        configuration = {
+          environment = {
+            loginShellInit = ''
+              [[ "$(tty)" = "/dev/tty1" ]] && dbus-run-session steam-gamescope
+            '';
+          };
+        };
+      };
     };
   };
 }
