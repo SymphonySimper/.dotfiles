@@ -5,6 +5,9 @@
   profileSettings,
   ...
 }:
+let
+  statusPosition = "bottom";
+in
 {
   programs.tmux = {
     enable = userSettings.programs.multiplexer == "tmux";
@@ -33,7 +36,7 @@
         set -ga update-environment TERM
         set -ga update-environment TERM_PROGRAM
 
-        set -g status-position top
+        set -g status-position ${statusPosition}
 
         # Attach to different session on exit
         set -g detach-on-destroy on
