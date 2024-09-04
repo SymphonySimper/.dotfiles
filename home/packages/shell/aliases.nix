@@ -49,11 +49,16 @@
     pcd = "micromamba deactivate";
     pcce = "micromamba create -n";
     pcrm = "micromamba env remove -n";
+    pfrd = "flask run --debug";
     ## js
     jp = "pnpm";
     jpi = "pnpm i";
-    jprd = "pnpm run dev --open";
+    jprd = "pnpm run dev";
     jpf = "pnpm format";
+    jn = "npm";
+    jni = "npm i";
+    jnrd = "npm run dev";
+    jnf = "npm run format";
     ## docker
     docker_cln = "docker system prune --volumes";
   };
