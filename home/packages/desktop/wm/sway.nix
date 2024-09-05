@@ -59,7 +59,7 @@ in
         wrapping = "yes";
       };
 
-      workspaceAutoBackAndForth = true;
+      workspaceAutoBackAndForth = false;
       floating.modifier = modifier;
       keybindings =
         (builtins.listToAttrs (
