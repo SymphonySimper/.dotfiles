@@ -42,7 +42,10 @@ in
     ];
   };
   "9" = {
-    app_id = [ "org.qbittorrent.qBittorrent" ];
+    app_id = [
+      "org.qbittorrent.qBittorrent"
+      "com.obsproject.Studio"
+    ];
   };
   "0" = {
     app_id = [ "" ];
