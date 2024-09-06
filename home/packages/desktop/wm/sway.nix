@@ -41,7 +41,7 @@ in
       defaultWorkspace = "workspace number 1";
       assigns = builtins.listToAttrs (
         builtins.map (workspaceNum: {
-          name = workspaceNum;
+          name = if workspaceNum == "0" then "10" else workspaceNum;
           value = (
             builtins.concatMap (
               type:

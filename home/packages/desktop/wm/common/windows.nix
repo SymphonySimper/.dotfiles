@@ -51,7 +51,7 @@ in
     ];
   };
   "0" = {
-    app_id = [ "" ];
+    # app_id = [ "" ];
     title = [ "meet.google.com is sharing your screen." ];
   };
 }
