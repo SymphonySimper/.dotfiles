@@ -127,7 +127,7 @@ in
       bind =
         (map (
           keybind:
-          ''$mainMod ${
+          ''${if keybind.super then "$mainMod " else ""}${
             if builtins.hasAttr "mod" keybind then lib.toUpper keybind.mod else ""
           }, ${keybind.key}, exec, ${keybind.cmd}''
         ) keybinds)

@@ -66,10 +66,11 @@ in
           builtins.map (
             keybind:
             let
+              prefix = (if keybind.super then "${keys.mod}+" else "");
               action = (if builtins.hasAttr "mod" keybind then "${keybind.mod}+${keybind.key}" else keybind.key);
             in
             {
-              name = "${keys.mod}+${action}";
+              name = "${prefix}${action}";
               value = "exec ${keybind.cmd}";
             }
           ) keybinds

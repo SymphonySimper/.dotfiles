@@ -83,16 +83,28 @@ let
       toggle = {
         key = "F7";
         cmd = "my-spotify o";
+        super = false;
       };
       prev = {
         mod = "Ctrl";
         key = "F7";
         cmd = "my-spotify p";
+        super = false;
       };
       next = {
         mod = "Shift";
         key = "F7";
         cmd = "my-spotify n";
+        super = false;
+      };
+      volumeUp = {
+        mod = "shift";
+        key = "F7";
+        cmd = "my-spotify u";
+      };
+      volumeDown = {
+        key = "F7";
+        cmd = "my-spotify d";
       };
     };
   };
@@ -109,6 +121,7 @@ in
       name = key;
       key = set.key;
       cmd = set.cmd;
+      super = (if builtins.hasAttr "super" set then set.super else true);
     }
     // (if builtins.hasAttr "mod" set then { mod = set.mod; } else { })
   ) (builtins.attrNames keybinds.${key}))
