@@ -51,7 +51,7 @@
 
         set_volume() {
           curr_volume=$(get_volume)
-          volume_inc=0.1
+          volume_inc=0.02
           case "$1" in
           inc) volume_type="+" ;;
           dec) volume_type="-" ;;
