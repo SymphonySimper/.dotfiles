@@ -79,6 +79,22 @@ let
         cmd = "notifybar";
       };
     };
+    spotify = {
+      toggle = {
+        key = "F7";
+        cmd = "my-spotify o";
+      };
+      prev = {
+        mod = "Ctrl";
+        key = "F7";
+        cmd = "my-spotify p";
+      };
+      next = {
+        mod = "Shift";
+        key = "F7";
+        cmd = "my-spotify n";
+      };
+    };
   };
 in
 (builtins.concatMap (

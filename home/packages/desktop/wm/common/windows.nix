@@ -41,6 +41,9 @@ in
       "discord"
     ];
   };
+  "8" = {
+    title = [ "Spotify" ];
+  };
   "9" = {
     app_id = [
       "org.qbittorrent.qBittorrent"
