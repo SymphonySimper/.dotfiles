@@ -45,48 +45,7 @@
   outputs =
     { nixpkgs, home-manager, ... }@inputs:
     let
-      userSettings = rec {
-        name = {
-          user = "symph";
-          name = "SymphonySimper";
-        };
-        home = "/home/${name.user}";
-        dirs = {
-          lifeisfun = "lifeisfun";
-          importantnt = "importantnt";
-        };
-        theme = {
-          dark = false;
-          flavor = if theme.dark then "mocha" else "latte";
-          color = (import ./assets/colors.nix { flavor = theme.flavor; });
-          gtk = if theme.dark then "Adwaita-dark" else "Adwaita";
-          wallpaper = "${home}/.dotfiles/assets/images/bg.png";
-        };
-        font = {
-          sans = "Poppins";
-          mono = "JetBrainsMono Nerd Font";
-          glyph = "Font Awesome 6 Free";
-        };
-        desktop = {
-          name = "sway";
-          wm = desktop.name != "gnome";
-          steam = true;
-        };
-        programs = {
-          terminal = "alacritty";
-          editor = "nvim";
-          multiplexer = "tmux";
-          browser = "chromium";
-          launcher = "wofi";
-          notification = "dunst";
-          video = "mpv";
-          pdf = "zathura";
-          image = "loupe";
-        };
-      };
       lib = nixpkgs.lib;
-
-      mkMyUtils = { pkgs }: (import ./utils/default.nix { inherit pkgs; });
 
       mkPkgs =
         {
@@ -99,58 +58,58 @@
           overlays = overlays;
         });
 
-      mkProfileSettings =
-        { profile, system }:
-        {
-          inherit profile;
-          inherit system;
-        };
+      mkLib =
+        { pkgs }:
+        pkgs.lib.extend (final: prev: { my = import ./modules/common/lib/default.nix { inherit pkgs; }; });
+
+      mkImportExists = { path }: if builtins.pathExists path then [ path ] else [ ];
+
+      mkSettingsFile =
+        { profile }:
+        let
+          path = ./profiles/${profile}/settings.nix;
+        in
+        (mkImportExists { inherit path; });
 
       mkHome =
         { profile, system }:
-        let
-          profileSettings = mkProfileSettings {
-            inherit profile;
-            inherit system;
-          };
-        in
         home-manager.lib.homeManagerConfiguration rec {
           pkgs = mkPkgs {
-            system = system;
+            inherit system;
             overlays = [
               (import ./overlays/nvim-plugins.nix { inherit inputs; })
               inputs.nvim-neorg-overlay.overlays.default
             ];
           };
-          modules = [
-            ./profiles/${profile}/home.nix
-            inputs.nixvim.homeManagerModules.nixvim
-          ];
+          lib = mkLib { inherit pkgs; };
+          modules =
+            [
+              inputs.nixvim.homeManagerModules.nixvim
+              ./modules/common/default.nix
+            ]
+            ++ (mkSettingsFile { inherit profile; })
+            ++ [
+
+              ./modules/home/default.nix
+            ]
+            ++ (mkImportExists { path = ./profiles/${profile}/home.nix; });
           extraSpecialArgs = {
-            inherit userSettings;
-            inherit profileSettings;
             inherit inputs;
-            myUtils = mkMyUtils { inherit pkgs; };
           };
         };
 
       mkSystem =
         { profile, system }:
-        let
-          profileSettings = {
-            inherit profile;
-            inherit system;
-          };
-        in
-        lib.nixosSystem rec {
+        lib.nixosSystem {
           inherit system;
-          pkgs = mkPkgs { inherit system; };
-          modules = [ ./profiles/${profile}/configuration.nix ];
+          pkgs = mkPkgs { system = system; };
+          modules = [
+            ./modules/common/default.nix
+            ./modules/system/default.nix
+            ./profiles/${profile}/configuration.nix
+          ] ++ (mkSettingsFile { inherit profile; });
           specialArgs = {
-            inherit userSettings;
-            inherit profileSettings;
             inherit inputs;
-            myUtils = mkMyUtils { inherit pkgs; };
           };
         };
 
