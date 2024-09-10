@@ -7,31 +7,33 @@ in
   programs.nixvim = {
     plugins.conform-nvim = {
       enable = true;
-      notifyOnError = false;
-      formatOnSave = {
-        lspFallback = true;
-        timeoutMs = timeout;
-      };
-      formattersByFt = {
-        nix = [ "nixfmt" ];
-        sh = [ "shfmt" ];
-        lua = [ "stylua" ];
-        python = [ "ruff_format" ];
-        javascript = web;
-        typescript = web;
-        svelte = web;
-        css = web;
-        html = web;
-        json = web;
-        "*" = [
-          "codespell"
-          "trim_whitespace"
-        ];
-      };
-      formatters = {
-        injected = {
-          options = {
-            ignore_errors = true;
+      settings = {
+        notify_on_error = false;
+        format_on_save = {
+          lsp_fallback = true;
+          timeout_ms = timeout;
+        };
+        formatters_by_ft = {
+          nix = [ "nixfmt" ];
+          sh = [ "shfmt" ];
+          lua = [ "stylua" ];
+          python = [ "ruff_format" ];
+          javascript = web;
+          typescript = web;
+          svelte = web;
+          css = web;
+          html = web;
+          json = web;
+          "*" = [
+            "codespell"
+            "trim_whitespace"
+          ];
+        };
+        formatters = {
+          injected = {
+            options = {
+              ignore_errors = true;
+            };
           };
         };
       };
