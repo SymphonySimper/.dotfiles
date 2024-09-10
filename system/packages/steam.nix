@@ -69,9 +69,10 @@ in
         inheritParentConfig = true;
         configuration = {
           environment = {
-            loginShellInit = ''
-              [[ "$(tty)" = "/dev/tty1" ]] && dbus-run-session steam-gamescope
-            '';
+            loginShellInit = lib.my.mkTTYLaunch {
+              command = "steam-gamescope";
+              dbus = true;
+            };
           };
         };
       };
