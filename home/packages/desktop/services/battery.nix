@@ -1,4 +1,4 @@
-{ pkgs, myUtils, ... }:
+{ pkgs, lib, ... }:
 let
   name = "my-battery";
   time = "5m";
@@ -14,7 +14,7 @@ in
 
           function battery_notify() {
            ${
-             myUtils.mkNotification {
+             lib.my.mkNotification {
                tag = "my-battery-status";
                title = "$1";
                urgency = "critical";

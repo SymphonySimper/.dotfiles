@@ -1,4 +1,4 @@
-{ myUtils, ... }:
+{ lib, ... }:
 {
   programs.nixvim = {
     plugins.todo-comments = {
@@ -12,7 +12,7 @@
         };
       };
     };
-    keymaps = myUtils.mkKeymaps [
+    keymaps = lib.my.mkKeymaps [
       [
         { __raw = ''function() require("todo-comments").jump_next() end''; }
         "]t"

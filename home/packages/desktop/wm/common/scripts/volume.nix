@@ -1,4 +1,4 @@
-{ pkgs, myUtils, ... }:
+{ pkgs, lib, ... }:
 {
   home.packages = [
     (pkgs.writeShellScriptBin "volume"
@@ -23,7 +23,7 @@
           $app set-volume $sink "$1";
           volume=$(get_volume)
           ${
-            myUtils.mkNotification {
+            lib.my.mkNotification {
               tag = "my-audio";
               title = "Volume ($volume%)";
               progress = "$volume";
@@ -40,7 +40,7 @@
             status="unmuted"
           fi
           ${
-            myUtils.mkNotification {
+            lib.my.mkNotification {
               tag = "my-$1";
               title = "$2 is $status";
             }

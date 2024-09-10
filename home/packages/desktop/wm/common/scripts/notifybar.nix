@@ -1,6 +1,6 @@
 {
   pkgs,
-  myUtils,
+  lib,
   userSettings,
   ...
 }:
@@ -113,7 +113,7 @@ in
         mic_color="${userSettings.theme.color.red}"
       fi
 
-      ${myUtils.mkNotification {
+      ${lib.my.mkNotification {
         tag = "notifybar";
         title = "Info";
         body = ''

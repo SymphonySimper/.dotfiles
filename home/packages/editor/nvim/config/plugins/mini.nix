@@ -1,4 +1,4 @@
-{ myUtils, ... }:
+{ lib, ... }:
 {
   programs.nixvim = {
     plugins.mini = {
@@ -28,7 +28,7 @@
       };
     };
     keymaps = (
-      myUtils.mkKeymaps [
+      lib.my.mkKeymaps [
         [
           {
             __raw = ''

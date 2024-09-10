@@ -1,4 +1,4 @@
-{ myUtils, ... }:
+{ lib, ... }:
 {
   programs.nixvim = {
     plugins.trouble = {
@@ -9,7 +9,7 @@
       };
     };
 
-    keymaps = myUtils.mkKeymaps [
+    keymaps = lib.my.mkKeymaps [
       [
         "<cmd>Trouble diagnostics toggle<cr>"
         "<leader>xx"

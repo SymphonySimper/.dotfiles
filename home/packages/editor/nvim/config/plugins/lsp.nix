@@ -1,4 +1,4 @@
-{ myUtils, ... }:
+{ lib, ... }:
 {
   programs.nixvim.plugins = {
     lsp = {
@@ -17,7 +17,7 @@
           "<leader>ca" = "code_action";
         };
 
-        extra = myUtils.mkKeymaps [
+        extra = lib.my.mkKeymaps [
           [
             ":LspRestart<Enter>"
             "<leader>lr"

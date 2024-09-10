@@ -1,6 +1,6 @@
-{ myUtils, ... }:
+{ lib, ... }:
 let
-  keymaps = myUtils.mkKeymaps [
+  keymaps = lib.my.mkKeymaps [
     # General
     [
       ":noh<CR>"

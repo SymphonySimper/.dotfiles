@@ -1,4 +1,4 @@
-{ myUtils, pkgs, ... }:
+{ lib, pkgs, ... }:
 let
   web = [ "prettier" ];
   timeout = 3000;
@@ -46,7 +46,7 @@ in
       gawk # trim_whitespace
     ];
 
-    keymaps = myUtils.mkKeymaps [
+    keymaps = lib.my.mkKeymaps [
       [
         {
           __raw = # lua

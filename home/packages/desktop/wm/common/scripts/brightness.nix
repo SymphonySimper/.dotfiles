@@ -1,7 +1,7 @@
 {
   config,
   pkgs,
-  myUtils,
+  lib,
   ...
 }:
 {
@@ -35,7 +35,7 @@
         echo $($app_bin g) > $save_file;
         value=$(get_brightness)
         ${
-          myUtils.mkNotification {
+          lib.my.mkNotification {
             tag = "my-brightness";
             title = "Brightness ($value%)";
             progress = "$value";

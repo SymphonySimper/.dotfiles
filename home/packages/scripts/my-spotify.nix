@@ -1,4 +1,4 @@
-{ pkgs, myUtils, ... }:
+{ pkgs, lib, ... }:
 {
   home.packages = [
     (pkgs.writeShellScriptBin "my-spotify" # bash
@@ -60,7 +60,7 @@
           $cmd volume $volume_to_set;
           volume_progress=$(echo "($(get_volume) * 100) / 1" | ${pkgs.bc}/bin/bc)
           ${
-            myUtils.mkNotification {
+            lib.my.mkNotification {
               tag = "my-spotify";
               title = "Spotify Volume ($volume_progress%)";
               progress = "$volume_progress";

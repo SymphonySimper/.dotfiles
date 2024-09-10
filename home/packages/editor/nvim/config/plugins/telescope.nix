@@ -1,4 +1,4 @@
-{ myUtils, ... }:
+{ lib, ... }:
 let
   mkActionKeyMaps =
     actionMaps:
@@ -83,7 +83,7 @@ in
       };
     };
 
-    keymaps = myUtils.mkKeymaps (mkActionKeyMaps [
+    keymaps = lib.my.mkKeymaps (mkActionKeyMaps [
       # Find Files
       [
         "find_files"

@@ -1,4 +1,4 @@
-{ pkgs, myUtils, ... }:
+{ pkgs, lib, ... }:
 {
   home.packages = [
     (pkgs.writeShellScriptBin "caffiene" ''
@@ -8,7 +8,7 @@
 
       noti() {
         ${
-          myUtils.mkNotification {
+          lib.my.mkNotification {
             tag = "my-caffiene";
             title = "Caffiene $1";
           }

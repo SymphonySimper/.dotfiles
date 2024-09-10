@@ -1,4 +1,4 @@
-{ myUtils, ... }:
+{ lib, ... }:
 {
   programs.nixvim = {
     plugins.lazygit = {
@@ -7,7 +7,7 @@
 
     };
 
-    keymaps = myUtils.mkKeymaps [
+    keymaps = lib.my.mkKeymaps [
       [
         "<CMD>LazyGit<CR>"
         "<leader>gz"
