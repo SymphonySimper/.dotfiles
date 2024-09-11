@@ -22,6 +22,10 @@
             nix profile diff-closures --profile /nix/var/nix/profiles/system
             nix profile diff-closures --profile ~/.local/state/nix/profiles/home-manager
             ;;
+          cln|clean)
+            sudo nix-collect-garbage -d && nix-collect-garbage -d
+            ;;
+          *) echo "Unknown option" ;;
         esac
       ''
     )
