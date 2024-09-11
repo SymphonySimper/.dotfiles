@@ -111,13 +111,14 @@
             inherit system;
           };
         in
-        home-manager.lib.homeManagerConfiguration {
+        home-manager.lib.homeManagerConfiguration rec {
           pkgs = mkPkgs {
             inherit system;
             overlays = [
               (import ./overlays/nvim-plugins.nix { inherit inputs; })
             ];
           };
+          lib = pkgs.lib;
           modules = [
             ./profiles/${profile}/home.nix
             inputs.nixvim.homeManagerModules.nixvim
@@ -140,6 +141,7 @@
         lib.nixosSystem rec {
           inherit system;
           pkgs = mkPkgs { inherit system; };
+          lib = pkgs.lib;
           modules = [ ./profiles/${profile}/configuration.nix ];
           specialArgs = {
             inherit userSettings;
