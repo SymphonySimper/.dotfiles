@@ -28,10 +28,9 @@
 
     # Neovim
     nixvim = {
-      url = "github:nix-community/nixvim/2a054b039e172d4f1cc5469dfbd5a02d21a4902f";
+      url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nvim-neorg-overlay.url = "github:nvim-neorg/nixpkgs-neorg-overlay";
     nvim-markview = {
       url = "github:OXY2DEV/markview.nvim";
       flake = false;
@@ -117,7 +116,6 @@
             inherit system;
             overlays = [
               (import ./overlays/nvim-plugins.nix { inherit inputs; })
-              inputs.nvim-neorg-overlay.overlays.default
             ];
           };
           modules = [
