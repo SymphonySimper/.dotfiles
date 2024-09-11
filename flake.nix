@@ -28,7 +28,7 @@
 
     # Neovim
     nixvim = {
-      url = "github:nix-community/nixvim";
+      url = "github:nix-community/nixvim/2a054b039e172d4f1cc5469dfbd5a02d21a4902f";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nvim-neorg-overlay.url = "github:nvim-neorg/nixpkgs-neorg-overlay";
