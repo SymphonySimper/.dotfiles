@@ -75,7 +75,7 @@
         tailwindcss.enable = true;
 
         # Typescript
-        biome.enable = true;
+        tsserver.enable = true;
 
         # HTML
         html.enable = true;

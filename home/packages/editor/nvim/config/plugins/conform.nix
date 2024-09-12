@@ -1,7 +1,6 @@
 { lib, pkgs, ... }:
 let
   prettier = [ "prettier" ];
-  biome = [ "biome" ];
   timeout = 3000;
 
   mkFormatter = package: {
@@ -23,19 +22,15 @@ in
           sh = [ "shfmt" ];
           lua = [ "stylua" ];
           python = [ "ruff_format" ];
-          javascript = biome;
-          typescript = biome;
-          json = biome;
-          jsonc = biome;
+          javascript = prettier;
+          typescript = prettier;
           svelte = prettier;
           css = prettier;
           html = prettier;
-          markdown = prettier;
+          json = prettier;
         };
         formatters = {
-          biome = mkFormatter pkgs.biome;
           nixfmt = mkFormatter pkgs.nixfmt-rfc-style;
-          prettier = mkFormatter pkgs.nodePackages.prettier;
           shfmt = mkFormatter pkgs.shfmt;
           stylua = mkFormatter pkgs.stylua;
         };
