@@ -1,4 +1,7 @@
 { userSettings, inputs, ... }:
+let
+  interop = false;
+in
 {
   imports = [
     # include NixOS-WSL modules
@@ -9,9 +12,15 @@
   wsl = {
     enable = true;
     defaultUser = userSettings.name.user;
+    interop.includePath = interop;
+    nativeSystemd = true;
+    startMenuLaunchers = false;
     wslConf = {
       user.default = userSettings.name.user;
-      interop.appendWindowsPath = false;
+      interop = {
+        enabled = interop;
+        appendWindowsPath = interop;
+      };
     };
   };
 }
