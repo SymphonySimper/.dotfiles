@@ -1,10 +1,9 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    biome
     bun
-    corepack
     nodejs
+    corepack
     # nodePackages_latest.npm
     # nodePackages_latest.pnpm
   ];
