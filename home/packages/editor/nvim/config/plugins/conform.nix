@@ -1,7 +1,11 @@
 { lib, pkgs, ... }:
 let
-  web = [ "prettier" ];
+  prettier = [ "prettier" ];
   timeout = 3000;
+
+  mkFormatter = package: {
+    command = "${lib.getExe package}";
+  };
 in
 {
   programs.nixvim = {
@@ -18,35 +22,20 @@ in
           sh = [ "shfmt" ];
           lua = [ "stylua" ];
           python = [ "ruff_format" ];
-          javascript = web;
-          typescript = web;
-          svelte = web;
-          css = web;
-          html = web;
-          json = web;
-          "*" = [
-            "codespell"
-            "trim_whitespace"
-          ];
+          javascript = prettier;
+          typescript = prettier;
+          svelte = prettier;
+          css = prettier;
+          html = prettier;
+          json = prettier;
         };
         formatters = {
-          injected = {
-            options = {
-              ignore_errors = true;
-            };
-          };
+          nixfmt = mkFormatter pkgs.nixfmt-rfc-style;
+          shfmt = mkFormatter pkgs.shfmt;
+          stylua = mkFormatter pkgs.stylua;
         };
       };
     };
-
-    extraPackages = with pkgs; [
-      nixfmt-rfc-style
-      shfmt
-      stylua
-      nodePackages.prettier
-      codespell
-      gawk # trim_whitespace
-    ];
 
     keymaps = lib.my.mkKeymaps [
       [
