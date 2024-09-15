@@ -61,8 +61,22 @@ in
         }
         // (mkExtensions [
           [
+            "{446900e4-71c2-419f-a6a7-df9c091e268b}"
+            "bitwarden-password-manager"
+            true
+          ]
+          [
             "uBlock0@raymondhill.net"
             "ublock-origin"
+          ]
+          [
+            "{d7742d87-e61d-4b78-b8a1-b469842139fa}"
+            "vimium-ff"
+            true
+          ]
+          [
+            "idcac-pub@guus.ninja"
+            "istilldontcareaboutcookies"
           ]
         ]);
     };
@@ -83,18 +97,14 @@ in
           id = 1;
         };
       };
-
-      # extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-      #   bitwarden
-      #   multi-account-containers
-      #   ublock-origin
-      #   vimium
-      #   istilldontcareaboutcookies
-      # ];
-      #
-      settings = {
-        "extensions.autoDisableScopes" = 0;
-      };
     };
   };
+
+  home.packages = [
+    (pkgs.writeShellScriptBin "my-firefox-extension" ''
+      ${pkgs.curl}/bin/curl -L -G --data-urlencode "page_size=2" \
+      --data-urlencode "q=$1" -H "Accept: application/json" 'https://addons.mozilla.org/api/v5/addons/search' \
+      | ${pkgs.jq}/bin/jq "[ .results[] | { guid: .guid, slug: .slug } ]"
+    '')
+  ];
 }
