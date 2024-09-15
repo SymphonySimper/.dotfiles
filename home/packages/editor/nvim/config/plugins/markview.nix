@@ -1,9 +1,8 @@
-{ pkgs, ... }:
+{ ... }:
 {
   programs.nixvim = {
     plugins.markview = {
       enable = true;
-      package = pkgs.nvimPlugins.markview;
       settings = {
         modes = [
           "n"

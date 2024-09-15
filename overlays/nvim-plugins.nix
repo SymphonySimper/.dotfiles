@@ -22,9 +22,8 @@ final: prev: {
   nvimPlugins = mkPlugins {
     inherit inputs;
     inherit prev;
-    pluginsList = [
-      "markview"
-      "helpview"
-    ];
+    pluginsList =
+      [
+      ];
   };
 }

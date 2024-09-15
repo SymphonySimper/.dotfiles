@@ -375,38 +375,6 @@
         "type": "github"
       }
     },
-    "nvim-helpview": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1724653959,
-        "narHash": "sha256-x5ZV/1LKrxhQWsxsJwrIfD7BogKO7H2GKzDt3PABEh8=",
-        "owner": "OXY2DEV",
-        "repo": "helpview.nvim",
-        "rev": "857aec1dab331252910da158ab6cbfbc65239c71",
-        "type": "github"
-      },
-      "original": {
-        "owner": "OXY2DEV",
-        "repo": "helpview.nvim",
-        "type": "github"
-      }
-    },
-    "nvim-markview": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1725955454,
-        "narHash": "sha256-kfHpFGC0QyqdvIZVymdWTuORH/YXW0wey01OvCKttyE=",
-        "owner": "OXY2DEV",
-        "repo": "markview.nvim",
-        "rev": "f16486e49561740f33b6773df43c9bc2c3c34c7b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "OXY2DEV",
-        "repo": "markview.nvim",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "catppuccin": "catppuccin",
@@ -416,8 +384,6 @@
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_2",
         "nixvim": "nixvim",
-        "nvim-helpview": "nvim-helpview",
-        "nvim-markview": "nvim-markview",
         "yazi-plugins": "yazi-plugins"
       }
     },

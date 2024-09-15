@@ -17,6 +17,6 @@
   ];
 
   programs.nixvim = {
-    extraPlugins = [ pkgs.nvimPlugins.helpview ];
+    extraPlugins = [ pkgs.vimPlugins.helpview-nvim ];
   };
 }

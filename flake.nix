@@ -32,14 +32,6 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nvim-markview = {
-      url = "github:OXY2DEV/markview.nvim";
-      flake = false;
-    };
-    nvim-helpview = {
-      url = "github:OXY2DEV/helpview.nvim";
-      flake = false;
-    };
   };
 
   outputs =
@@ -118,7 +110,7 @@
           pkgs = mkPkgs {
             inherit system;
             overlays = [
-              (import ./overlays/nvim-plugins.nix { inherit inputs; })
+              # (import ./overlays/nvim-plugins.nix { inherit inputs; })
             ];
           };
           lib = pkgs.lib;
