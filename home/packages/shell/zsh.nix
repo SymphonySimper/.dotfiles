@@ -1,20 +1,6 @@
-{ userSettings, ... }:
+{ lib, userSettings, ... }:
 let
   wmCommand = if userSettings.desktop.name == "hyprland" then "Hyprland" else "sway";
-
-  mkTtyLaunch =
-    {
-      condition,
-      tty,
-      command,
-    }:
-    if condition then
-      ''
-        [ "$(tty)" = "/dev/tty${builtins.toString tty}" ] && exec ${command}
-
-      ''
-    else
-      "";
 in
 {
   programs.zsh = {
@@ -30,11 +16,15 @@ in
 
       . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
 
-      ${mkTtyLaunch {
-        condition = userSettings.desktop.wm;
-        tty = 1;
-        command = wmCommand;
-      }}
+      ${
+        if userSettings.desktop.wm then
+          lib.my.mkTTYLaunch {
+            command = wmCommand;
+            dbus = true;
+          }
+        else
+          ""
+      }
     '';
     initExtra = ''
       # Prompt
