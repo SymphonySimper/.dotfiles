@@ -15,7 +15,10 @@ in
   wayland.windowManager.sway = {
     enable = userSettings.desktop.name == "sway";
     checkConfig = false;
-    systemd.enable = true;
+    systemd = {
+      enable = true;
+      variables = [ "--all" ];
+    };
     xwayland = true;
     wrapperFeatures.gtk = true;
     config = rec {
