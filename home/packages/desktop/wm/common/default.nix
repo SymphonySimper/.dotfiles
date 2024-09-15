@@ -11,6 +11,5 @@
 
   home.packages = with pkgs; [
     nautilus
-    pavucontrol
   ];
 }

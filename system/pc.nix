@@ -58,6 +58,7 @@
   };
   environment.defaultPackages = with pkgs; [
     helvum
+    pavucontrol
   ];
 
   powerManagement.enable = true;
