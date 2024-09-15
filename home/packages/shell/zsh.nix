@@ -1,7 +1,4 @@
-{ lib, userSettings, ... }:
-let
-  wmCommand = if userSettings.desktop.name == "hyprland" then "Hyprland" else "sway";
-in
+{ userSettings, ... }:
 {
   programs.zsh = {
     enable = true;
@@ -15,16 +12,6 @@ in
       [ -f $nix_loc ] && . $nix_loc
 
       . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
-
-      ${
-        if userSettings.desktop.wm then
-          lib.my.mkTTYLaunch {
-            command = wmCommand;
-            dbus = true;
-          }
-        else
-          ""
-      }
     '';
     initExtra = ''
       # Prompt

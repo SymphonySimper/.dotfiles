@@ -1,4 +1,9 @@
-{ userSettings, pkgs, ... }:
+{
+  userSettings,
+  pkgs,
+  lib,
+  ...
+}:
 {
   imports = if userSettings.desktop.name == "hyprland" then [ ./hyprland.nix ] else [ ./sway.nix ];
 
@@ -6,7 +11,14 @@
   security.pam.services.swaylock = { };
   services.udisks2.enable = true;
 
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment = {
+    sessionVariables.NIXOS_OZONE_WL = "1";
+
+    loginShellInit = lib.my.mkTTYLaunch {
+      command = if userSettings.desktop.name == "hyprland" then "Hyprland" else "sway";
+      dbus = false;
+    };
+  };
   security.polkit.enable = true;
 
   # Default username for all tty
