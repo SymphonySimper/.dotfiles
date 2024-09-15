@@ -2,28 +2,29 @@
   description = "Home Manager configuration of symph";
 
   inputs = {
-    # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    catppuccin.url = "github:catppuccin/nix";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     nixos-wsl.url = "github:nix-community/nixos-wsl";
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    catppuccin.url = "github:catppuccin/nix";
+
     # yazi.url = "github:sxyazi/yazi";
     yazi-plugins = {
       url = "github:yazi-rs/plugins";
       flake = false;
     };
+
     # helix-flake.url = "github:helix-editor/helix";
 
     # Neovim
@@ -93,7 +94,9 @@
         (import nixpkgs {
           inherit system;
           config.allowUnfree = true;
-          overlays = [ (import ./overlays/lib.nix) ] ++ overlays;
+          overlays = [
+            (import ./overlays/lib.nix)
+          ] ++ overlays;
         });
 
       mkProfileSettings =
