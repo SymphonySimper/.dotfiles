@@ -33,28 +33,8 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    wireplumber = {
-      enable = true;
-      extraConfig = {
-        alsa-soft-mixer = {
-          # refer: https://wiki.archlinux.org/title/PipeWire#No_sound_from_USB_DAC_until_30%_volume
-          "monitor.alsa.rules" = [
-            {
-              matches = [
-                {
-                  "device.name" = "~alsa_card.*";
-                }
-              ];
-              actions = {
-                update-props = {
-                  "api.alsa.soft-mixer" = true;
-                };
-              };
-            }
-          ];
-        };
-      };
-    };
+    # If you want to use JACK applications, uncomment this
+    #jack.enable = true;
   };
   environment.defaultPackages = with pkgs; [
     helvum
