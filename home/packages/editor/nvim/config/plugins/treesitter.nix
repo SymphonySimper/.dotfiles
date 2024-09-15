@@ -46,8 +46,7 @@
       };
 
       ts-autotag.enable = true;
+      ts-comments.enable = true;
     };
-    extraPlugins = [ pkgs.vimPlugins.ts-comments-nvim ];
-    extraConfigLua = "require 'ts-comments'.setup()";
   };
 }
