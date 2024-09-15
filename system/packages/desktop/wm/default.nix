@@ -1,13 +1,4 @@
 { userSettings, pkgs, ... }:
-let
-  skipUsername = {
-    overrideStrategy = "asDropin";
-    serviceConfig.ExecStart = [
-      ""
-      "@${pkgs.util-linux}/sbin/agetty agetty --login-program ${pkgs.shadow}/bin/login -o '-p -- ${userSettings.name.user}' --noclear --skip-login %I $TERM"
-    ];
-  };
-in
 {
   imports = if userSettings.desktop.name == "hyprland" then [ ./hyprland.nix ] else [ ./sway.nix ];
 
@@ -27,9 +18,14 @@ in
   #   ];
   # };
 
-  # Skip username only for tty1 and tty3
+  # Skip username for tty1
   systemd.services = {
-    "getty@tty1" = skipUsername;
-    "getty@tty3" = skipUsername;
+    "getty@tty1" = {
+      overrideStrategy = "asDropin";
+      serviceConfig.ExecStart = [
+        ""
+        "@${pkgs.util-linux}/sbin/agetty agetty --login-program ${pkgs.shadow}/bin/login -o '-p -- ${userSettings.name.user}' --noclear --skip-login %I $TERM"
+      ];
+    };
   };
 }

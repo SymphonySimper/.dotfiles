@@ -35,11 +35,6 @@ in
         tty = 1;
         command = wmCommand;
       }}
-      ${mkTtyLaunch {
-        condition = userSettings.desktop.steam;
-        tty = 3;
-        command = "dbus-run-session steam-gamescope";
-      }}
     '';
     initExtra = ''
       # Prompt
