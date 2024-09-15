@@ -30,6 +30,7 @@ in
           json = prettier;
         };
         formatters = {
+          prettier = mkFormatter pkgs.nodePackages.prettier;
           nixfmt = mkFormatter pkgs.nixfmt-rfc-style;
           shfmt = mkFormatter pkgs.shfmt;
           stylua = mkFormatter pkgs.stylua;
