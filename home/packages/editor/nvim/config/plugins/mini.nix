@@ -4,6 +4,7 @@
     plugins.mini = {
       enable = true;
       modules = {
+
         surround = {
           mappings = {
             add = "gsa";
@@ -15,18 +16,45 @@
             update_n_lines = "gsn";
           };
         };
+
         pairs = { };
+
         move = { };
+
         bracketed = { };
+
         indentscope = {
           symbol = "│";
           options = {
             try_as_border = true;
           };
         };
-        files = { };
+
+        files = {
+          mappings = {
+            close = "q";
+            go_in = "";
+            go_in_plus = "<CR>";
+            go_out = "-";
+            go_out_plus = "_";
+            mark_goto = "'";
+            mark_set = "m";
+            reset = "<BS>";
+            reveal_cwd = "@";
+            show_help = "g?";
+            synchronize = "=";
+            trim_left = "<";
+            trim_right = ">";
+          };
+          options = {
+            permanent_delete = false;
+            use_as_default_explorer = true;
+          };
+          windows.preview = true;
+        };
       };
     };
+
     keymaps = (
       lib.my.mkKeymaps [
         [
