@@ -74,7 +74,7 @@
         ## Tailwind
         tailwindcss.enable = true;
         ## Typescript
-        tsserver.enable = true;
+        ts-ls.enable = true;
         ## HTML
         html.enable = true;
 
