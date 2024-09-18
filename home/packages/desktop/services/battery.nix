@@ -1,12 +1,9 @@
 { pkgs, lib, ... }:
-let
-  name = "my-battery";
-in
-lib.my.mkSystemdTimer {
+lib.my.mkSystemdTimer rec {
   name = "my-battery";
   time = "5m";
   desc = "Battery check";
-  ExecStart = pkgs.lib.getExe (
+  ExecStart = lib.getExe (
     pkgs.writeShellScriptBin "my-battery" ''
       tmp_file='/tmp/${name}'
 
