@@ -65,19 +65,17 @@
           };
         };
 
-        # Svelte
+        # Web
+        ## Svelte
         svelte = {
           enable = true;
           initOptions.svelte.plugin.svelte.defaultScriptLanguage = "ts";
         };
-
-        # Tailwind
+        ## Tailwind
         tailwindcss.enable = true;
-
-        # Typescript
+        ## Typescript
         tsserver.enable = true;
-
-        # HTML
+        ## HTML
         html.enable = true;
 
         # Python
