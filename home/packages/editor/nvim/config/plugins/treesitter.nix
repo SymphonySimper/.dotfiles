@@ -23,6 +23,12 @@
           typescript
           svelte
 
+          go
+          gomod
+          gowork
+          gosum
+          templ
+
           dockerfile
           json
           toml

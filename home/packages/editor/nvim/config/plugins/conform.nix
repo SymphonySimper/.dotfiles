@@ -4,7 +4,7 @@ let
   timeout = 3000;
 
   mkFormatter = package: {
-    command = "${lib.getExe package}";
+    command = if builtins.typeOf package == "set" then "${lib.getExe package}" else package;
   };
 in
 {
@@ -28,12 +28,18 @@ in
           css = prettier;
           html = prettier;
           json = prettier;
+          go = [
+            "gofmt"
+            "goimports"
+          ];
+          templ = [ "gofmt" ];
         };
         formatters = {
           prettier = mkFormatter pkgs.nodePackages.prettier;
           nixfmt = mkFormatter pkgs.nixfmt-rfc-style;
           shfmt = mkFormatter pkgs.shfmt;
           stylua = mkFormatter pkgs.stylua;
+          goimports = mkFormatter "${pkgs.gotools}/bin/goimports";
         };
       };
     };

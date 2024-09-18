@@ -86,6 +86,18 @@
 
         # Markdown
         marksman.enable = true;
+
+        # GO
+        gopls = {
+          enable = true;
+          settings = {
+            gopls = {
+              completeUnimported = true;
+            };
+
+          };
+        };
+        templ.enable = true;
       };
     };
     lsp-format = {
