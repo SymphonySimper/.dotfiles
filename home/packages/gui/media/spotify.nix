@@ -1,11 +1,10 @@
-{ pkgs, ... }:
-{
-  home.packages = with pkgs; [
-    spotify
-    (pkgs.writeShellScriptBin "my-spotify" # bash
+{ pkgs, lib, ... }:
+let
+  mySpotifyScript =
+    pkgs.writeShellScriptBin "my-spotify" # bash
       ''
         cmd="${pkgs.playerctl}/bin/playerctl -p spotify"
-        icon=""
+
         open_play_pause() {
         	if ! $cmd status; then
         		spotify 2>&1 /dev/null &
@@ -51,9 +50,41 @@
         p) change_song p ;;
         u) set_volume inc ;;
         d) set_volume dec ;;
+        status)
+          current_status="$($cmd status)"
+          echo "''${current_status,,}"
+          ;;
         esac
-        # status
-      ''
-    )
+      '';
+in
+{
+  home.packages = with pkgs; [
+    spotify
+    (mySpotifyScript)
   ];
+}
+// lib.my.mkSystemdTimer rec {
+  name = "my-kill-spotify";
+  desc = "Kill spotify when inactive";
+  time = "1m";
+  ExecStart = lib.getExe (
+    pkgs.writeShellScriptBin "${name}" ''
+      app=".spotify-wrappe"
+      my_script="${lib.getExe (mySpotifyScript)}"
+
+      if ${pkgs.procps}/bin/pgrep "$app" > /dev/null; then
+        if [[ "$($my_script status)" != "playing" ]]; then
+          ${pkgs.procps}/bin/pkill "$app" > /dev/null
+          ${
+            lib.my.mkNotification {
+              title = "Bye Spotify";
+              body = "Killed Spotify due to inactivity.";
+              tag = name;
+              urgency = "normal";
+            }
+          }
+        fi
+      fi
+    ''
+  );
 }
