@@ -1,35 +1,11 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 {
-  home.packages = [
+  home.packages = with pkgs; [
+    spotify
     (pkgs.writeShellScriptBin "my-spotify" # bash
       ''
         cmd="${pkgs.playerctl}/bin/playerctl -p spotify"
         icon=""
-        # status() {
-        # 	text=$icon
-        # 	class=""
-        # 	tooltip=""
-        #
-        # 	current_status="$($cmd status)"
-        # 	case "$current_status" in
-        # 	'Playing')
-        # 		class='playing'
-        # 		song_title="$($cmd metadata title)"
-        # 		song_artist="$($cmd metadata artist)"
-        # 		tooltip="$song_title [$song_artist]"
-        # 		;;
-        # 	'Paused')
-        # 		class='paused'
-        # 		tooltip="Paused"
-        # 		;;
-        # 	*)
-        # 		class='disabled'
-        # 		tooltip="Click to open spotify"
-        # 		;;
-        # 	esac
-        #
-        # 	printf '{"text":"%s","class":"%s","tooltip":"%s"}\n' "$text" "$class" "$tooltip"
-        # }
         open_play_pause() {
         	if ! $cmd status; then
         		spotify 2>&1 /dev/null &
