@@ -8,7 +8,10 @@ let
     }:
     {
       systemd.user.services.${name} = {
-        Unit.Description = desc;
+        Unit = {
+          Description = desc;
+          After = "graphical-session.target";
+        };
         Service = {
           Type = "oneshot";
           ExecStart = ExecStart;
@@ -18,6 +21,7 @@ let
       systemd.user.timers."${name}" = {
         Unit = {
           Description = "Run ${name} every ${time}";
+          After = "graphical-session.target";
         };
         Timer = {
           OnBootSec = "${time}";
