@@ -66,24 +66,32 @@ in
 // lib.my.mkSystemdTimer rec {
   name = "my-kill-spotify";
   desc = "Kill spotify when inactive";
-  time = "1m";
+  time = "2m";
   ExecStart = lib.getExe (
     pkgs.writeShellScriptBin "${name}" ''
-      app=".spotify-wrappe"
+      app='.spotify-wrappe'
       my_script="${lib.getExe (mySpotifyScript)}"
+      temp_file="/tmp/${name}"
+      status='paused'
 
-      if ${pkgs.procps}/bin/pgrep "$app" > /dev/null; then
-        if [[ "$($my_script status)" != "playing" ]]; then
-          ${pkgs.procps}/bin/pkill "$app" > /dev/null
-          ${
-            lib.my.mkNotification {
-              title = "Bye Spotify";
-              body = "Killed Spotify due to inactivity.";
-              tag = name;
-              urgency = "normal";
-            }
+      if [ ! -f $temp_file ]; then
+        echo "init" > $temp_file
+      fi 
+        
+      prev_status="$(<$temp_file)"
+      curr_status="$($my_script status)"
+      if [[ "$curr_status" == "$status" ]] && [[ "$prev_status" == "$status" ]]; then
+        ${pkgs.procps}/bin/pkill "$app" > /dev/null
+        ${
+          lib.my.mkNotification {
+            title = "Bye Spotify";
+            body = "Killed Spotify due to inactivity.";
+            tag = name;
+            urgency = "normal";
           }
-        fi
+        }
+      else
+        echo "$curr_status" > $temp_file
       fi
     ''
   );
