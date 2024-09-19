@@ -13,7 +13,7 @@
     [
       gcc
       gnumake
-      google-cloud-sdk
+      (google-cloud-sdk.withExtraComponents [ google-cloud-sdk.components.app-engine-go ])
     ]
     ++ (if profileSettings.profile == "gui" then [ vscode-fhs ] else [ ]);
 }
