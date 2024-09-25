@@ -16,6 +16,7 @@
           nix
           python
 
+          http
           html
           css
           scss
