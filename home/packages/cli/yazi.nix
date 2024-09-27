@@ -194,9 +194,10 @@
         }
         {
           on = "<C-n>";
-          run = ''
-            shell '${pkgs.ripdrag}/bin/ripdrag "$@" -x 2>/dev/null &' --confirm
-          '';
+          run = # sh
+            ''
+              shell '${pkgs.ripdrag}/bin/ripdrag "$@" -x 2>/dev/null &' --confirm
+            '';
           desc = "Drag and drop using ripdrag";
         }
       ];
