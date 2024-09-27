@@ -181,10 +181,27 @@
           }
         ];
       };
+      plugin = {
+        prepend_fetchers = [
+          {
+            id = "git";
+            name = "*";
+            run = "git";
+          }
+          {
+            id = "git";
+            name = "*/";
+            run = "git";
+          }
+        ];
+      };
     };
+
     plugins = {
       max-preview = "${inputs.yazi-plugins}/max-preview.yazi/";
+      git = "${inputs.yazi-plugins}/git.yazi/";
     };
+
     keymap = {
       manager.prepend_keymap = [
         {
@@ -202,6 +219,11 @@
         }
       ];
     };
+
+    initLua = # lua
+      ''
+        require("git"):setup()
+      '';
   };
 
   home.packages = [ pkgs.ueberzugpp ];
