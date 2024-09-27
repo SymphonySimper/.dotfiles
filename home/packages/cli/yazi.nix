@@ -11,6 +11,7 @@
     enableBashIntegration = true;
     enableZshIntegration = true;
     shellWrapperName = "y";
+
     settings = {
       manager = {
         ratio = [
@@ -18,6 +19,7 @@
           3 # center
           4 # right
         ];
+        linemode = "size";
       };
       preview = {
         max_height = 1920;
