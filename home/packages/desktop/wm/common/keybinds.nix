@@ -107,6 +107,13 @@ let
         cmd = "my-spotify d";
       };
     };
+    power = {
+      off = {
+        mod = "Shift";
+        key = "x";
+        cmd = "poweroff";
+      };
+    };
   };
 in
 (builtins.concatMap (
