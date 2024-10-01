@@ -12,6 +12,7 @@
           { name = "nvim_lsp"; }
           { name = "luasnip"; }
           { name = "buffer"; }
+          { name = "git"; }
         ];
         snippet.expand = ''
           function(args)
@@ -38,5 +39,6 @@
     cmp-buffer.enable = true;
     cmp-nvim-lsp.enable = true;
     cmp_luasnip.enable = true;
+    cmp-git.enable = true;
   };
 }

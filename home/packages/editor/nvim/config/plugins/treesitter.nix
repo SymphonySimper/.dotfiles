@@ -42,6 +42,9 @@
 
           gitcommit
           gitignore
+          git_config
+          git_rebase
+          gitattributes
         ];
         settings = {
           indent.enable = true;
