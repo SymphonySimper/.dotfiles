@@ -17,6 +17,7 @@
     ./treesitter.nix
     ./trouble.nix
     ./yazi.nix
+    ./diffview.nix
   ];
 
   programs.nixvim = {
