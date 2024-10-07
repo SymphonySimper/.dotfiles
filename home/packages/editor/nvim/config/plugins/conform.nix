@@ -1,6 +1,7 @@
 { lib, pkgs, ... }:
 let
   prettier = [ "prettier" ];
+  biome = [ "biome" ];
   timeout = 3000;
 
   mkFormatter = package: {
@@ -27,7 +28,8 @@ in
           svelte = prettier;
           css = prettier;
           html = prettier;
-          json = prettier;
+          json = biome;
+          jsonc = biome;
           go = [
             "gofmt"
             "goimports"
@@ -40,6 +42,7 @@ in
           shfmt = mkFormatter pkgs.shfmt;
           stylua = mkFormatter pkgs.stylua;
           goimports = mkFormatter "${pkgs.gotools}/bin/goimports";
+          biome = mkFormatter pkgs.biome;
         };
       };
     };
