@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 {
   programs.nixvim = {
     plugins.rest = {
@@ -23,5 +23,13 @@
         ]
       ]
     );
+
+    extraFiles = {
+      "ftplugin/json.lua".text = # lua
+        ''
+          vim.bo.formatexpr = ""
+          vim.bo.formatprg = "${lib.getExe pkgs.jq}"
+        '';
+    };
   };
 }
