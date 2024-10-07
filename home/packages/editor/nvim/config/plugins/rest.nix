@@ -1,23 +1,27 @@
-{ ... }:
+{ lib, ... }:
 {
   programs.nixvim = {
     plugins.rest = {
       enable = true;
       enableHttpFiletypeAssociation = true;
       enableTelescope = true;
+    };
 
-      settings.keybinds = [
+    keymaps = (
+      lib.my.mkKeymaps [
         [
-          "<localleader>rr"
           "<cmd>Rest run<cr>"
+          "<leader>rr"
+          "n"
           "Run request under the cursor"
         ]
         [
-          "<localleader>rl"
           "<cmd>Rest run last<cr>"
+          "<leader>rl"
+          "n"
           "Re-run latest request"
         ]
-      ];
-    };
+      ]
+    );
   };
 }
