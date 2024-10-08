@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 {
   imports = [
     ./cmp.nix
@@ -6,6 +6,7 @@
     ./conform.nix
     ./diffview.nix
     ./harpoon.nix
+    ./helpview.nix
     ./lazygit.nix
     ./lsp.nix
     ./markview.nix
@@ -20,8 +21,4 @@
     ./trouble.nix
     ./yazi.nix
   ];
-
-  programs.nixvim = {
-    extraPlugins = [ pkgs.vimPlugins.helpview-nvim ];
-  };
 }
