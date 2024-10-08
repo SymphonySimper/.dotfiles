@@ -98,8 +98,5 @@
         templ.enable = true;
       };
     };
-    lsp-format = {
-      enable = true;
-    };
   };
 }
