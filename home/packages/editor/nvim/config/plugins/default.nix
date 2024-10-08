@@ -4,11 +4,13 @@
     ./cmp.nix
     ./colorizer.nix
     ./conform.nix
+    ./diffview.nix
     ./harpoon.nix
     ./lazygit.nix
     ./lsp.nix
     ./markview.nix
     ./mini.nix
+    ./neo-tree.nix
     ./neorg.nix
     ./noice.nix
     ./rest.nix
@@ -17,7 +19,6 @@
     ./treesitter.nix
     ./trouble.nix
     ./yazi.nix
-    ./diffview.nix
   ];
 
   programs.nixvim = {
