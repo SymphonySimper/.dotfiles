@@ -52,7 +52,7 @@
             permanent_delete = false;
             use_as_default_explorer = true;
           };
-          windows.preview = true;
+          windows.preview = false;
         };
       };
     };
