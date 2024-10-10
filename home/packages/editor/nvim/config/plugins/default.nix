@@ -11,7 +11,6 @@
     ./lsp.nix
     ./markview.nix
     ./mini.nix
-    ./neo-tree.nix
     ./neorg.nix
     ./noice.nix
     ./rest.nix
