@@ -95,6 +95,10 @@ in
           "Indian Post Insurance"
           "pli.indiapost.gov.in"
         ]
+        [
+          "MyAnimeList"
+          "myanimelist.net/animelist/SymphonySimper"
+        ]
       ];
       ExtensionSettings = mkExtensionSettings [
         [
