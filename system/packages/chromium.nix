@@ -34,7 +34,11 @@ let
         }
       ) extensions
     );
+
 in
+# NOTE:
+# vist: chrome://flags/#enable-webrtc-allow-input-volume-adjustment
+# and set it to disabled
 {
   programs.chromium = {
     enable = true;
