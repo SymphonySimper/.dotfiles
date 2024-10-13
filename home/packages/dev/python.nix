@@ -1,9 +1,21 @@
 { pkgs, ... }:
 {
-  home.packages = with pkgs; [
-    python3
-    micromamba
-  ];
+  home = {
+    packages = with pkgs; [
+      python3
+      micromamba
+    ];
+
+    shellAliases = {
+      py = "python";
+      pc = "micromamba";
+      pca = "micromamba activate";
+      pcd = "micromamba deactivate";
+      pcce = "micromamba create -n";
+      pcrm = "micromamba env remove -n";
+      pfrd = "flask run --debug";
+    };
+  };
 
   xdg.configFile."mamba/mambarc" = {
     text = ''

@@ -19,7 +19,6 @@
     gnutar
     jq
     killall
-    ps_mem
     tlrc # tldr
     trash-cli
     unzip

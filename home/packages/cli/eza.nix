@@ -14,4 +14,10 @@
     git = true;
     icons = true;
   };
+
+  home.shellAliases = {
+    ezat = "eza --total-size";
+    ls = "eza";
+    lst = "ezat";
+  };
 }
