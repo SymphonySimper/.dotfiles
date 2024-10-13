@@ -3,11 +3,8 @@
   home.packages = [
     (pkgs.writeShellScriptBin "startup" ''
       brightness -r & # Restore Brightness
-      wallpaper &
-
-      if [[ "${userSettings.programs.terminal}" == 'foot' ]]; then
-        foot -s &
-      fi
+      ${if userSettings.desktop.name != "sway" then "wallpaper &" else ""}
+      ${if userSettings.programs.terminal == "foot" then "foot -s &" else ""}
     '')
   ];
 }

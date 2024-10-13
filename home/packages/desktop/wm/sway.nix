@@ -208,6 +208,9 @@ in
       };
 
       output = {
+        "*" = {
+          bg = "${userSettings.theme.color.crust} solid_color";
+        };
         "eDP-1" = rec {
           scale = "1.7";
           res = "2880x1800";
