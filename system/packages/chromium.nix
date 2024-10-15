@@ -99,6 +99,14 @@ in
           "MyAnimeList"
           "myanimelist.net/animelist/SymphonySimper"
         ]
+        [
+          "Excalidraw"
+          "excalidraw.com"
+        ]
+        [
+          "ProtonDB"
+          "www.protondb.com"
+        ]
       ];
       ExtensionSettings = mkExtensionSettings [
         [
