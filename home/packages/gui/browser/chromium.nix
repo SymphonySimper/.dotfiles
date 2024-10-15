@@ -52,10 +52,15 @@ in
 
   # Web Apps
   xdg.desktopEntries = {
-    monkeytype = mkDesktopEntry {
+    monkeytype = mkDesktopEntry rec {
       name = "monkeytype";
-      class = "monkeytype";
+      class = name;
       url = "https://monkeytype.com/";
+    };
+    excalidraw = mkDesktopEntry rec {
+      name = "excalidraw";
+      class = name;
+      url = "https://excalidraw.com/";
     };
   };
 }
