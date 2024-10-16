@@ -35,6 +35,8 @@ in
             "goimports"
           ];
           templ = [ "gofmt" ];
+          http = [ "kulala" ];
+          rest = [ "kulala" ];
         };
         formatters = {
           prettier = mkFormatter pkgs.nodePackages.prettier;
@@ -43,6 +45,12 @@ in
           stylua = mkFormatter pkgs.stylua;
           goimports = mkFormatter "${pkgs.gotools}/bin/goimports";
           biome = mkFormatter pkgs.biome;
+          kulala = mkFormatter pkgs.kulala-fmt // {
+            args = [
+              "$FILENAME"
+            ];
+            stdin = false;
+          };
         };
       };
     };
