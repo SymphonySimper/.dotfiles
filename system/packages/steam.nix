@@ -64,17 +64,11 @@ in
       inherit args;
     };
 
-    specialisation = {
-      steam-deck = {
-        inheritParentConfig = true;
-        configuration = {
-          environment = {
-            loginShellInit = lib.my.mkTTYLaunch {
-              command = "steam-gamescope";
-              dbus = true;
-            };
-          };
-        };
+    environment = {
+      loginShellInit = lib.my.mkTTYLaunch {
+        command = "steam-gamescope";
+        dbus = true;
+        tty = 3;
       };
     };
   };
