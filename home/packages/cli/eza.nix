@@ -12,7 +12,7 @@
       "--group-directories-first"
     ];
     git = true;
-    icons = true;
+    icons = "auto";
   };
 
   home.shellAliases = {

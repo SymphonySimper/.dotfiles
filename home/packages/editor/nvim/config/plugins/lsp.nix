@@ -41,19 +41,19 @@
 
       servers = {
         # Nix
-        nil-ls = {
+        nil_ls = {
           enable = true;
           settings.nix.flake.autoArchive = true;
         };
 
         # lua
-        lua-ls.enable = true;
+        lua_ls.enable = true;
 
         # bash
         bashls.enable = true;
 
         # Rust
-        rust-analyzer = {
+        rust_analyzer = {
           enable = true;
           installCargo = false;
           installRustc = false;
@@ -74,7 +74,7 @@
         ## Tailwind
         tailwindcss.enable = true;
         ## Typescript
-        ts-ls.enable = true;
+        ts_ls.enable = true;
         ## HTML
         html.enable = true;
 
