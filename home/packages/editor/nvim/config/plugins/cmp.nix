@@ -1,23 +1,26 @@
 { ... }:
 {
   programs.nixvim.plugins = {
-    luasnip.enable = true;
+    # snippets
+    friendly-snippets.enable = true;
+    nvim-snippets = {
+      enable = true;
+      settings = {
+        create_cmp_source = true;
+        friendly_snippets = true;
+      };
+    };
 
     cmp = {
       enable = true;
       autoEnableSources = true;
       settings = {
         sources = [
-          { name = "path"; }
           { name = "nvim_lsp"; }
-          { name = "luasnip"; }
+          { name = "snippets"; }
+          { name = "path"; }
           { name = "git"; }
         ];
-        snippet.expand = ''
-          function(args)
-            require('luasnip').lsp_expand(args.body)
-          end
-        '';
         mapping = {
           "<C-n>" = "cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert })";
           "<C-p>" = "cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert })";
