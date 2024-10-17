@@ -5,7 +5,6 @@
     ./conform.nix
     ./diffview.nix
     ./harpoon.nix
-    ./helpview.nix
     ./lazygit.nix
     ./lsp.nix
     ./markview.nix
