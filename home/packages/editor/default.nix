@@ -3,5 +3,6 @@
   imports = [
     ./helix
     ./nvim
+    ./zed
   ];
 }
