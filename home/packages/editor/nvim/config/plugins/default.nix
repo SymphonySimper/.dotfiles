@@ -3,7 +3,6 @@
   imports = [
     ./cmp.nix
     ./conform.nix
-    ./diffview.nix
     ./harpoon.nix
     ./lazygit.nix
     ./lsp.nix
