@@ -2,7 +2,6 @@
 {
   imports = [
     ./cmp.nix
-    ./colorizer.nix
     ./conform.nix
     ./diffview.nix
     ./harpoon.nix
