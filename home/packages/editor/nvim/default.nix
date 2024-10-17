@@ -1,22 +1,24 @@
-{ ... }:
+{ lib, userSettings, ... }:
 {
-  imports = [ ./config/default.nix ];
+  imports = [ ./config ];
 
-  programs.nixvim = {
-    enable = true;
-    defaultEditor = true;
-    viAlias = true;
-    vimAlias = true;
+  config = lib.mkIf (userSettings.programs.editor == "nvim") {
+    programs.nixvim = {
+      enable = true;
+      defaultEditor = true;
+      viAlias = true;
+      vimAlias = true;
 
-    withNodeJs = true;
-    withRuby = false;
+      withNodeJs = true;
+      withRuby = false;
 
-    performance = {
-      byteCompileLua = {
-        enable = true;
-        nvimRuntime = true;
-        configs = true;
-        plugins = true;
+      performance = {
+        byteCompileLua = {
+          enable = true;
+          nvimRuntime = true;
+          configs = true;
+          plugins = true;
+        };
       };
     };
   };
