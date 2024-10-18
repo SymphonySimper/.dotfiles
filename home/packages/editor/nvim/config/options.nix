@@ -14,7 +14,6 @@
     foldmethod = "manual"; # Create folds with visual selection
 
     # UI
-    cmdheight = 1; # Hide Command line
     signcolumn = "yes";
     wrap = false;
 
