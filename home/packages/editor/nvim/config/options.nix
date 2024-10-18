@@ -16,7 +16,6 @@
     # UI
     cmdheight = 1; # Hide Command line
     signcolumn = "yes";
-    colorcolumn = "80";
     wrap = false;
 
     clipboard = "";
