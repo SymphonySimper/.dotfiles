@@ -1,19 +1,9 @@
 { ... }:
 {
   programs.nixvim.plugins = {
-    # snippets
-    friendly-snippets.enable = true;
-    nvim-snippets = {
-      enable = true;
-      settings = {
-        create_cmp_source = true;
-        friendly_snippets = true;
-      };
-    };
-
     # cmp
-    cmp-path.enable = true;
     cmp-nvim-lsp.enable = true;
+    cmp-path.enable = true;
     cmp-git.enable = true;
     cmp = {
       enable = true;
@@ -21,7 +11,6 @@
       settings = {
         sources = [
           { name = "nvim_lsp"; }
-          { name = "snippets"; }
           { name = "path"; }
           { name = "git"; }
         ];
