@@ -14,7 +14,6 @@
     # cmp
     cmp-path.enable = true;
     cmp-nvim-lsp.enable = true;
-    cmp_luasnip.enable = true;
     cmp-git.enable = true;
     cmp = {
       enable = true;
