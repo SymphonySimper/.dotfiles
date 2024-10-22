@@ -61,6 +61,21 @@ in
           "nix-options"
           "https://search.nixos.org/options?channel=unstable&from=0&size=50&sort=relevance&type=packages&query={searchTerms}"
         ]
+        [
+          "Google Reddit"
+          "reddit"
+          "https://www.google.com/search?q=site%3Areddit.com+{searchTerms}"
+        ]
+        [
+          "Iconify"
+          "icon"
+          "https://icon-sets.iconify.design/?query={searchTerms}"
+        ]
+        [
+          "Dribble"
+          "dribble"
+          "https://dribbble.com/search/shots/popular/web-design?q={searchTerms}"
+        ]
       ];
       ManagedBookmarks = mkBookmarks [
         [
@@ -70,6 +85,10 @@ in
         [
           "Github"
           "github.com"
+        ]
+        [
+          "Reddit"
+          "www.reddit.com"
         ]
         [
           "Gmail"
@@ -106,6 +125,14 @@ in
         [
           "ProtonDB"
           "www.protondb.com"
+        ]
+        [
+          "Google Fonts"
+          "fonts.google.com"
+        ]
+        [
+          "Gemini"
+          "gemini.google.com/app?hl=en-IN"
         ]
       ];
       ExtensionSettings = mkExtensionSettings [
