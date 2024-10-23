@@ -1,4 +1,9 @@
-{ pkgs, userSettings, ... }:
+{
+  pkgs,
+  inputs,
+  userSettings,
+  ...
+}:
 let
   locale = "en_US.UTF-8";
   defaultDirConfig = {
@@ -10,7 +15,13 @@ let
   };
 in
 {
-  imports = [ ./packages/default.nix ];
+  imports = [
+    ./packages/default.nix
+    (import ../modules/common/nix.nix {
+      inherit inputs;
+      system = true;
+    })
+  ];
 
   # Enable flakse
   nix.settings.experimental-features = [
@@ -81,16 +92,6 @@ in
       "${userSettings.home}/${userSettings.dirs.lifeisfun}" = defaultDirConfig;
       "${userSettings.home}/${userSettings.dirs.lifeisfun}/work" = defaultDirConfig;
       "${userSettings.home}/${userSettings.dirs.importantnt}" = defaultDirConfig;
-    };
-  };
-
-  # Storage optimise
-  nix = {
-    optimise.automatic = true;
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 14d";
     };
   };
 }

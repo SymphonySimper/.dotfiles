@@ -7,6 +7,10 @@
     ./packages/editor/default.nix
     ./packages/scripts/default.nix
     ./packages/shell/default.nix
+    (import ../modules/common/nix.nix {
+      inherit inputs;
+      system = false;
+    })
   ];
 
   nixpkgs.config.allowUnfree = true;
@@ -35,11 +39,5 @@
 
   services = {
     ssh-agent.enable = true;
-  };
-
-  nix.gc = {
-    automatic = true;
-    frequency = "weekly";
-    options = "--delete-older-than 14d";
   };
 }
