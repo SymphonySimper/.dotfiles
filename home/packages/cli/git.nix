@@ -13,7 +13,6 @@
               name = "Sri Senthil Balaji J";
               email = "176003709+smollan-sri-senthil-balaji@users.noreply.github.com";
             };
-            init.defaultBranch = "main";
           };
         }
       ];
@@ -21,7 +20,7 @@
         "node_modules"
       ];
       extraConfig = {
-        init.defaultBranch = "master";
+        init.defaultBranch = "main";
         core.editor = userSettings.programs.editor;
         merge.tool = if userSettings.programs.editor == "nvim" then "nvimdiff" else "";
         push.autoSetupRemote = true;
