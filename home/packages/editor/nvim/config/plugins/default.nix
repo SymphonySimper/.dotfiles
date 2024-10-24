@@ -13,7 +13,6 @@
     ./telescope.nix
     ./todo-comments.nix
     ./treesitter.nix
-    ./trouble.nix
     ./yazi.nix
   ];
 }
