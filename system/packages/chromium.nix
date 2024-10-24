@@ -1,12 +1,20 @@
-{ userSettings, ... }:
+{ lib, ... }:
 let
   mkSiteSearchSettings =
     options:
-    builtins.map (option: {
-      name = builtins.elemAt option 0;
-      shortcut = builtins.elemAt option 1;
-      url = builtins.elemAt option 2;
-    }) options;
+    builtins.map (
+      option:
+      let
+        name = builtins.elemAt option 0;
+        url = builtins.elemAt option 2;
+        viaGoogle = if lib.strings.hasPrefix "http" url then false else true;
+      in
+      {
+        name = if viaGoogle then "Google ${name}" else name;
+        shortcut = builtins.elemAt option 1;
+        url = if viaGoogle then "https://www.google.com/search?q=site%3A${url}+{searchTerms}" else url;
+      }
+    ) options;
 
   mkBookmarks =
     bookmarks:
@@ -62,11 +70,6 @@ in
           "https://search.nixos.org/options?channel=unstable&from=0&size=50&sort=relevance&type=packages&query={searchTerms}"
         ]
         [
-          "Google Reddit"
-          "reddit"
-          "https://www.google.com/search?q=site%3Areddit.com+{searchTerms}"
-        ]
-        [
           "Iconify"
           "icon"
           "https://icon-sets.iconify.design/?query={searchTerms}"
@@ -75,6 +78,17 @@ in
           "Dribble"
           "dribble"
           "https://dribbble.com/search/shots/popular/web-design?q={searchTerms}"
+        ]
+        # Search sites via Google
+        [
+          "Reddit"
+          "reddit"
+          "reddit.com"
+        ]
+        [
+          "MDN Web Docs"
+          "mdn"
+          "developer.mozilla.org"
         ]
       ];
       ManagedBookmarks = mkBookmarks [
@@ -133,6 +147,14 @@ in
         [
           "Gemini"
           "gemini.google.com/app?hl=en-IN"
+        ]
+        [
+          "Svelte"
+          "svelte.dev"
+        ]
+        [
+          "Tailwindcss"
+          "tailwindcss.com/docs/installation"
         ]
       ];
       ExtensionSettings = mkExtensionSettings [
