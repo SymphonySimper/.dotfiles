@@ -17,6 +17,9 @@
           };
         }
       ];
+      ignores = [
+        "node_modules"
+      ];
       extraConfig = {
         init.defaultBranch = "master";
         core.editor = userSettings.programs.editor;
