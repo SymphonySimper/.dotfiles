@@ -11,7 +11,6 @@
 
     nixos-wsl.url = "github:nix-community/nixos-wsl";
 
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -169,13 +168,11 @@
         default = mkHome profiles.default;
         wsl = mkHome profiles.wsl;
         gui = mkHome profiles.gui;
-        pi = mkHome profiles.pi;
       };
 
       nixosConfigurations = {
         wsl = mkSystem profiles.wsl;
         gui = mkSystem profiles.gui;
-        pi = mkSystem profiles.pi;
       };
     };
 }
