@@ -90,6 +90,11 @@ in
           "mdn"
           "developer.mozilla.org"
         ]
+        [
+          "Github"
+          "github"
+          "github.com"
+        ]
       ];
       ManagedBookmarks = mkBookmarks [
         [
