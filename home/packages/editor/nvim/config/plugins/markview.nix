@@ -9,6 +9,11 @@
           "no"
           "c"
         ];
+
+        list_items = {
+          shift_width = 2;
+        };
+
         hybrid_modes = [ "n" ];
         callbacks = {
           on_enable.__raw = # lua
