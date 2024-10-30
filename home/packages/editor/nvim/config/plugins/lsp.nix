@@ -77,6 +77,8 @@
         ts_ls.enable = true;
         ## HTML
         html.enable = true;
+        ## JSON
+        jsonls.enable = true;
 
         # Python
         pyright.enable = true;
