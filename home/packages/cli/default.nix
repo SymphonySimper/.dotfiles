@@ -8,8 +8,9 @@
     ./git.nix
     ./htop.nix
     ./man.nix
-    ./multiplexer/default.nix
+    ./multiplexer
     ./ripgrep.nix
+    ./streamlink.nix
     ./yazi.nix
     ./zoxide.nix
   ];
