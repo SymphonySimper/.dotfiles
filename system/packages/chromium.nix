@@ -161,6 +161,10 @@ in
           "Tailwindcss"
           "tailwindcss.com/docs/installation"
         ]
+        [
+          "Nix PR Tracker"
+          "https://nixpk.gs/pr-tracker.html"
+        ]
       ];
       ExtensionSettings = mkExtensionSettings [
         [
