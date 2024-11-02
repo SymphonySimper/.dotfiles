@@ -212,7 +212,7 @@ in
           bg = "${userSettings.theme.color.crust} solid_color";
         };
         "eDP-1" = rec {
-          scale = "1.7";
+          scale = "1.8";
           res = "2880x1800";
           mode = "${res}@60Hz";
         };
