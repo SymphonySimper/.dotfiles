@@ -36,6 +36,12 @@
             "i"
             "Signature Help"
           ]
+          [
+            { __raw = "vim.diagnostic.open_float"; }
+            "<leader>cd"
+            "n"
+            "Line Diagnostics"
+          ]
         ];
       };
 

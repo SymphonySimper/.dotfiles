@@ -83,14 +83,6 @@ let
       "n"
       "Focus down pane"
     ]
-
-    # Misc
-    [
-      { __raw = "vim.diagnostic.open_float"; }
-      "<leader>cd"
-      "n"
-      "Line Diagnostics"
-    ]
   ];
 in
 {
