@@ -25,11 +25,16 @@
           __raw = ''
             function ()
               local window = vim.api.nvim_get_current_win()
+              local current_buffer = vim.api.nvim_get_current_buf()
               local buffer = vim.api.nvim_create_buf(true, true)
               vim.api.nvim_open_win(buffer, true, {
                 split = "right",
                 win = window
               })
+
+              if vim.api.nvim_buf_get_name(current_buffer) == "" then
+                vim.api.nvim_buf_delete(current_buffer, {})
+              end
             end
           '';
         };
