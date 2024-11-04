@@ -47,6 +47,7 @@ let
     };
     mic = {
       toggle = {
+        super = false;
         key = "F8";
         cmd = "volume -M";
       };
