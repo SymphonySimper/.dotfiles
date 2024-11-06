@@ -6,7 +6,7 @@ in
   programs.alacritty = {
     enable = userSettings.programs.terminal == "alacritty";
     settings = {
-      live_config_reload = false;
+      general.live_config_reload = false;
       cursor = {
         vi_mode_style = "Block";
         style = {

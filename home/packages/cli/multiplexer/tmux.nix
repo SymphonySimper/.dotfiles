@@ -7,6 +7,8 @@
 }:
 let
   statusPosition = "bottom";
+  windowFormat = # tmux
+    " #{b:pane_current_path}";
 in
 {
   programs.tmux = {
@@ -22,6 +24,16 @@ in
     customPaneNavigationAndResize = true;
     newSession = true;
     plugins = with pkgs; [ tmuxPlugins.sensible ];
+    catppuccin.extraConfig = # tmux
+      ''
+        set -g @catppuccin_window_text "${windowFormat}"
+        set -g @catppuccin_window_current_text "${windowFormat}"
+
+        set -g status-left "#{E:@catppuccin_pane_current_path}"
+        set -g status-right "#{E:@catppuccin_status_application}"
+        set -g status-right "#{E:@catppuccin_status_application}"
+        set -ag status-right "#{E:@catppuccin_status_session}"
+      '';
     extraConfig = # tmux
       ''
         # RGB colors
