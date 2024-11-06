@@ -28,6 +28,8 @@ in
       ''
         set -g @catppuccin_window_text "${windowFormat}"
         set -g @catppuccin_window_current_text "${windowFormat}"
+        # remove gap between window text
+        set -g window-status-separator ""
 
         set -g status-left "#{E:@catppuccin_pane_current_path}"
         set -g status-right "#{E:@catppuccin_status_application}"
