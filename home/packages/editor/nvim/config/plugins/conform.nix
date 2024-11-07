@@ -28,6 +28,7 @@ in
           svelte = prettier;
           css = prettier;
           html = prettier;
+          markdown = prettier;
           json = biome;
           jsonc = biome;
           go = [
