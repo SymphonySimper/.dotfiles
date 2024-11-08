@@ -44,6 +44,7 @@
       }
 
       restore() {
+        sleep 0.2s
         if [ -f "$save_file" ]; then
           $app s $(cat $save_file)
           return 0;
