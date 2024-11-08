@@ -1,4 +1,7 @@
 { pkgs, ... }:
+let
+  useAutoCpufreq = false;
+in
 {
   imports = [ ./packages/kanata.nix ];
 
@@ -42,17 +45,19 @@
   ];
 
   powerManagement.enable = true;
-  services.power-profiles-daemon.enable = false;
   services.thermald.enable = true;
-  # services.auto-cpufreq.enable = true;
-  # services.auto-cpufreq.settings = {
-  #   battery = {
-  #     governor = "powersave";
-  #     turbo = "never";
-  #   };
-  #   charger = {
-  #     governor = "performance";
-  #     turbo = "auto";
-  #   };
-  # };
+  services.power-profiles-daemon.enable = !useAutoCpufreq;
+  services.auto-cpufreq = {
+    enable = useAutoCpufreq;
+    settings = {
+      battery = {
+        governor = "powersave";
+        turbo = "never";
+      };
+      charger = {
+        governor = "performance";
+        turbo = "auto";
+      };
+    };
+  };
 }
