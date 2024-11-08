@@ -23,9 +23,13 @@
       ];
     };
     kernelModules = [ "kvm-amd" ];
-    kernelParams = [ "amd_pstate=guided" ];
+    kernelParams = [
+      "amd_pstate=guided"
+    ];
     extraModulePackages = [ ];
   };
+
+  hardware.amdgpu.initrd.enable = true;
 
   # fileSystems."/" =
   #   {
