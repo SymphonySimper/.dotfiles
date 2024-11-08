@@ -6,21 +6,26 @@
   lib,
   pkgs,
   modulesPath,
-  userSettings,
   ...
 }:
 
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.initrd.availableKernelModules = [
-    "nvme"
-    "xhci_pci"
-    "usbhid"
-  ];
-  boot.initrd.kernelModules = [ "amdgpu" ];
-  boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
+  boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
+    initrd = {
+      # kernelModules = [ "amdgpu" ];
+      availableKernelModules = [
+        "nvme"
+        "xhci_pci"
+        "usbhid"
+      ];
+    };
+    kernelModules = [ "kvm-amd" ];
+    kernelParams = [ "amd_pstate=guided" ];
+    extraModulePackages = [ ];
+  };
 
   # fileSystems."/" =
   #   {
