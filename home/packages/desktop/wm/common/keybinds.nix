@@ -61,7 +61,7 @@ let
         window = {
           mod = "Ctrl";
           key = "F11";
-          cmd = "screenshot -s";
+          cmd = "screenshot -w";
         };
         region = {
           mod = "Shift";
