@@ -2,7 +2,6 @@
 # and may be overwritten by future invocations.  Please make changes
 # to /etc/nixos/configuration.nix instead.
 {
-  config,
   lib,
   pkgs,
   modulesPath,
@@ -10,9 +9,10 @@
 }:
 
 {
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
+    ../../system/hardware/cpu/amd.nix
+    ../../system/hardware/gpu/amd.nix
     ../../system/hardware/led.nix
     ../../system/hardware/logitech.nix
     ../../system/hardware/ssd.nix
@@ -21,21 +21,13 @@
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
     initrd = {
-      # kernelModules = [ "amdgpu" ];
       availableKernelModules = [
         "nvme"
         "xhci_pci"
         "usbhid"
       ];
     };
-    kernelModules = [ "kvm-amd" ];
-    kernelParams = [
-      "amd_pstate=guided"
-    ];
-    extraModulePackages = [ ];
   };
-
-  hardware.amdgpu.initrd.enable = true;
 
   # fileSystems."/" =
   #   {
@@ -67,5 +59,4 @@
   # networking.interfaces.wlp0s20f3.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
