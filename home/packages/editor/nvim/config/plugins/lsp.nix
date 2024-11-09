@@ -85,8 +85,6 @@
         html.enable = true;
         ## JSON
         jsonls.enable = true;
-        ## ESLint
-        eslint.enable = true;
 
         # Python
         pyright.enable = true;
