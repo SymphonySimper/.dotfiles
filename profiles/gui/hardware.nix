@@ -11,6 +11,12 @@
 
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+    ../../system/hardware/led.nix
+    ../../system/hardware/logitech.nix
+    ../../system/hardware/ssd.nix
+  ];
 
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;

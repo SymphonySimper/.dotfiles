@@ -10,9 +10,6 @@
       swap = "16G";
     })
     ../../system/default.nix
-    ../../system/hardware/led.nix
-    ../../system/hardware/logitech.nix
-    ../../system/hardware/ssd.nix
     ../../system/packages/desktop
     ../../system/pc.nix
     ./hardware.nix
