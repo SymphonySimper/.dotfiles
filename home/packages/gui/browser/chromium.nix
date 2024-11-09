@@ -6,24 +6,33 @@
 }:
 let
   commandLineArgs = [ "--ozone-platform-hint=auto" ];
-  mkDesktopEntry =
-    {
-      name,
-      class,
-      url,
-    }:
-    {
-      inherit name;
-      type = "Application";
-      genericName = name;
-      comment = "Launch ${name}";
-      categories = [ "Application" ];
-      terminal = false;
-      exec = "chromium ${lib.strings.concatStringsSep " " commandLineArgs} --class=${class} --app=\"${url}\" %U";
-      settings = {
-        StartupWMClass = class;
-      };
-    };
+  mkDesktopEntries =
+    entries:
+    builtins.listToAttrs (
+      builtins.map (
+        entry:
+        let
+          name = builtins.elemAt entry 0;
+          class = name;
+          url = builtins.elemAt entry 1;
+        in
+        {
+          inherit name;
+          value = {
+            inherit name;
+            type = "Application";
+            genericName = name;
+            comment = "Launch ${name}";
+            categories = [ "Application" ];
+            terminal = false;
+            exec = "chromium ${lib.strings.concatStringsSep " " commandLineArgs} --class=${class} --app=\"${url}\" %U";
+            settings = {
+              StartupWMClass = class;
+            };
+          };
+        }
+      ) entries
+    );
   flavor = userSettings.theme.flavor;
   theme =
     if flavor == "frappe" then
@@ -51,16 +60,18 @@ in
   };
 
   # Web Apps
-  xdg.desktopEntries = {
-    monkeytype = mkDesktopEntry rec {
-      name = "monkeytype";
-      class = name;
-      url = "https://monkeytype.com/";
-    };
-    excalidraw = mkDesktopEntry rec {
-      name = "excalidraw";
-      class = name;
-      url = "https://excalidraw.com/";
-    };
-  };
+  xdg.desktopEntries = mkDesktopEntries [
+    [
+      "monkeytype"
+      "https://monkeytype.com/"
+    ]
+    [
+      "excalidraw"
+      "https://excalidraw.com/"
+    ]
+    [
+      "youtubemusic"
+      "https://music.youtube.com/"
+    ]
+  ];
 }
