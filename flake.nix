@@ -70,6 +70,7 @@
           browser = "chromium";
           launcher = "wofi";
           notification = "dunst";
+          music = "yt";
           video = "mpv";
           pdf = "zathura";
           image = "loupe";

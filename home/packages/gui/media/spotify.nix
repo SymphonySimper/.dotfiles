@@ -1,4 +1,9 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  userSettings,
+  ...
+}:
 let
   mySpotifyScript =
     pkgs.writeShellScriptBin "my-spotify" # bash
@@ -58,41 +63,44 @@ let
       '';
 in
 {
-  home.packages = with pkgs; [
-    spotify
-    (mySpotifyScript)
-  ];
-}
-// lib.my.mkSystemdTimer rec {
-  name = "my-kill-spotify";
-  desc = "Kill spotify when inactive";
-  time = "2m";
-  ExecStart = lib.getExe (
-    pkgs.writeShellScriptBin "${name}" ''
-      app='.spotify-wrappe'
-      my_script="${lib.getExe (mySpotifyScript)}"
-      temp_file="/tmp/${name}"
-      status='paused'
+  config =
+    lib.mkIf (userSettings.programs.music == "spotify") {
+      home.packages = with pkgs; [
+        spotify
+        (mySpotifyScript)
+      ];
+    }
+    // lib.my.mkSystemdTimer rec {
+      name = "my-kill-spotify";
+      desc = "Kill spotify when inactive";
+      time = "2m";
+      ExecStart = lib.getExe (
+        pkgs.writeShellScriptBin "${name}" ''
+          app='.spotify-wrappe'
+          my_script="${lib.getExe (mySpotifyScript)}"
+          temp_file="/tmp/${name}"
+          status='paused'
 
-      if [ ! -f $temp_file ]; then
-        echo "init" > $temp_file
-      fi 
-        
-      prev_status="$(<$temp_file)"
-      curr_status="$($my_script status)"
-      if [[ "$curr_status" == "$status" ]] && [[ "$prev_status" == "$status" ]]; then
-        ${pkgs.procps}/bin/pkill "$app" > /dev/null
-        ${
-          lib.my.mkNotification {
-            title = "Bye Spotify";
-            body = "Killed Spotify due to inactivity.";
-            tag = name;
-            urgency = "normal";
-          }
-        }
-      else
-        echo "$curr_status" > $temp_file
-      fi
-    ''
-  );
+          if [ ! -f $temp_file ]; then
+            echo "init" > $temp_file
+          fi 
+            
+          prev_status="$(<$temp_file)"
+          curr_status="$($my_script status)"
+          if [[ "$curr_status" == "$status" ]] && [[ "$prev_status" == "$status" ]]; then
+            ${pkgs.procps}/bin/pkill "$app" > /dev/null
+            ${
+              lib.my.mkNotification {
+                title = "Bye Spotify";
+                body = "Killed Spotify due to inactivity.";
+                tag = name;
+                urgency = "normal";
+              }
+            }
+          else
+            echo "$curr_status" > $temp_file
+          fi
+        ''
+      );
+    };
 }

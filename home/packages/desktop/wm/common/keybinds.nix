@@ -1,121 +1,129 @@
 { userSettings, ... }:
 let
-  keybinds = {
-    terminal = {
-      default = {
-        key = "Return";
-        cmd =
-          if userSettings.programs.terminal == "foot" then "footclient" else userSettings.programs.terminal;
+  keybinds =
+    {
+      terminal = {
+        default = {
+          key = "Return";
+          cmd =
+            if userSettings.programs.terminal == "foot" then "footclient" else userSettings.programs.terminal;
+        };
       };
-    };
-    browser = {
-      default = {
-        key = "f";
-        cmd = userSettings.programs.browser;
+      browser = {
+        default = {
+          key = "f";
+          cmd = userSettings.programs.browser;
+        };
       };
-    };
-    launcher = {
-      default = {
-        key = "d";
-        cmd = "${userSettings.programs.launcher} --show drun";
+      launcher = {
+        default = {
+          key = "d";
+          cmd = "${userSettings.programs.launcher} --show drun";
+        };
       };
-    };
-    brightness = {
-      down = {
-        key = "F5";
-        cmd = "brightness -d";
+      brightness = {
+        down = {
+          key = "F5";
+          cmd = "brightness -d";
+        };
+        up = {
+          key = "F6";
+          cmd = "brightness -u";
+        };
       };
-      up = {
-        key = "F6";
-        cmd = "brightness -u";
+      volume = {
+        down = {
+          key = "F2";
+          cmd = "volume -d";
+        };
+        up = {
+          key = "F3";
+          cmd = "volume -u";
+        };
+        toggle = {
+          mod = "Shift";
+          key = "F2";
+          cmd = "volume -m";
+        };
       };
-    };
-    volume = {
-      down = {
-        key = "F2";
-        cmd = "volume -d";
+      mic = {
+        toggle = {
+          super = false;
+          key = "F8";
+          cmd = "volume -M";
+        };
       };
-      up = {
-        key = "F3";
-        cmd = "volume -u";
+      screenshot = {
+        screen = {
+          key = "F11";
+          cmd = "screenshot -s";
+        };
+        window = {
+          mod = "Ctrl";
+          key = "F11";
+          cmd = "screenshot -s";
+        };
+        region = {
+          mod = "Shift";
+          key = "F11";
+          cmd = "screenshot -r";
+        };
       };
-      toggle = {
-        mod = "Shift";
-        key = "F2";
-        cmd = "volume -m";
+      caffiene = {
+        toggle = {
+          key = "F10";
+          cmd = "caffiene";
+        };
       };
-    };
-    mic = {
-      toggle = {
-        super = false;
-        key = "F8";
-        cmd = "volume -M";
+      notifybar = {
+        default = {
+          key = "b";
+          cmd = "notifybar";
+        };
       };
-    };
-    screenshot = {
-      screen = {
-        key = "F11";
-        cmd = "screenshot -s";
+      power = {
+        off = {
+          mod = "Shift";
+          key = "x";
+          cmd = "poweroff";
+        };
       };
-      window = {
-        mod = "Ctrl";
-        key = "F11";
-        cmd = "screenshot -s";
-      };
-      region = {
-        mod = "Shift";
-        key = "F11";
-        cmd = "screenshot -r";
-      };
-    };
-    caffiene = {
-      toggle = {
-        key = "F10";
-        cmd = "caffiene";
-      };
-    };
-    notifybar = {
-      default = {
-        key = "b";
-        cmd = "notifybar";
-      };
-    };
-    spotify = {
-      toggle = {
-        key = "F7";
-        cmd = "my-spotify o";
-        super = false;
-      };
-      prev = {
-        mod = "Ctrl";
-        key = "F7";
-        cmd = "my-spotify p";
-        super = false;
-      };
-      next = {
-        mod = "Shift";
-        key = "F7";
-        cmd = "my-spotify n";
-        super = false;
-      };
-      volumeUp = {
-        mod = "shift";
-        key = "F7";
-        cmd = "my-spotify u";
-      };
-      volumeDown = {
-        key = "F7";
-        cmd = "my-spotify d";
-      };
-    };
-    power = {
-      off = {
-        mod = "Shift";
-        key = "x";
-        cmd = "poweroff";
-      };
-    };
-  };
+    }
+    // (
+      if userSettings.programs.music == "spotify" then
+        {
+          spotify = {
+            toggle = {
+              key = "F7";
+              cmd = "my-spotify o";
+              super = false;
+            };
+            prev = {
+              mod = "Ctrl";
+              key = "F7";
+              cmd = "my-spotify p";
+              super = false;
+            };
+            next = {
+              mod = "Shift";
+              key = "F7";
+              cmd = "my-spotify n";
+              super = false;
+            };
+            volumeUp = {
+              mod = "shift";
+              key = "F7";
+              cmd = "my-spotify u";
+            };
+            volumeDown = {
+              key = "F7";
+              cmd = "my-spotify d";
+            };
+          };
+        }
+      else
+        { }
+    );
 in
 (builtins.concatMap (
   key:

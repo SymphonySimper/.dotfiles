@@ -60,18 +60,27 @@ in
   };
 
   # Web Apps
-  xdg.desktopEntries = mkDesktopEntries [
+  xdg.desktopEntries = mkDesktopEntries (
     [
-      "monkeytype"
-      "https://monkeytype.com/"
+      [
+        "monkeytype"
+        "https://monkeytype.com/"
+      ]
+      [
+        "excalidraw"
+        "https://excalidraw.com/"
+      ]
     ]
-    [
-      "excalidraw"
-      "https://excalidraw.com/"
-    ]
-    [
-      "youtubemusic"
-      "https://music.youtube.com/"
-    ]
-  ];
+    ++ (
+      if userSettings.programs.music == "yt" then
+        [
+          [
+            "youtubemusic"
+            "https://music.youtube.com/"
+          ]
+        ]
+      else
+        [ ]
+    )
+  );
 }
