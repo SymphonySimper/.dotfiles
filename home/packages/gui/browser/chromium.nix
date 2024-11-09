@@ -5,7 +5,11 @@
   ...
 }:
 let
-  commandLineArgs = [ "--ozone-platform-hint=auto" ];
+  commandLineArgs = [
+    "--ozone-platform-hint=auto"
+    "--disable-features=WebRtcAllowInputVolumeAdjustment"
+  ];
+
   mkDesktopEntries =
     entries:
     builtins.listToAttrs (
