@@ -19,6 +19,8 @@ let
           name = builtins.elemAt entry 0;
           class = name;
           url = builtins.elemAt entry 1;
+          app = if builtins.length entry == 3 then builtins.elemAt entry 2 else true;
+          urlArg = if app then "--app=" else "";
         in
         {
           inherit name;
@@ -29,7 +31,7 @@ let
             comment = "Launch ${name}";
             categories = [ "Application" ];
             terminal = false;
-            exec = "chromium ${lib.strings.concatStringsSep " " commandLineArgs} --class=${class} --app=\"${url}\" %U";
+            exec = "chromium ${lib.strings.concatStringsSep " " commandLineArgs} --class=${class} ${urlArg}\"${url}\" %U";
             settings = {
               StartupWMClass = class;
             };
@@ -79,8 +81,9 @@ in
       if userSettings.programs.music == "yt" then
         [
           [
-            "youtubemusic"
+            "ytmusic"
             "https://music.youtube.com/"
+            false
           ]
         ]
       else
