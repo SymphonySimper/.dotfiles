@@ -1,5 +1,12 @@
-{ userSettings, ... }:
+{
+  pkgs,
+  lib,
+  userSettings,
+  ...
+}:
 let
+  mkOpenDesktopEntry =
+    file: "${lib.getExe pkgs.dex} ${userSettings.home}/.nix-profile/share/applications/${file}.desktop";
   keybinds =
     {
       terminal = {
@@ -122,7 +129,15 @@ let
           };
         }
       else
-        { }
+        {
+          ytmusic = {
+            open = {
+              key = "F7";
+              super = false;
+              cmd = (mkOpenDesktopEntry "ytmusic");
+            };
+          };
+        }
     );
 in
 (builtins.concatMap (

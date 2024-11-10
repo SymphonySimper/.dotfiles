@@ -1,6 +1,17 @@
-{ userSettings, lib, ... }:
+{
+  pkgs,
+  lib,
+  userSettings,
+  ...
+}:
 let
-  keybinds = (import ./common/keybinds.nix { inherit userSettings; });
+  keybinds = (
+    import ./common/keybinds.nix {
+      inherit pkgs;
+      inherit lib;
+      inherit userSettings;
+    }
+  );
 
   display = {
     scaling = 1.6;

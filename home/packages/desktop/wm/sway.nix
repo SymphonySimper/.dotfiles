@@ -1,6 +1,17 @@
-{ userSettings, ... }:
+{
+  pkgs,
+  lib,
+  userSettings,
+  ...
+}:
 let
-  keybinds = (import ./common/keybinds.nix { inherit userSettings; });
+  keybinds = (
+    import ./common/keybinds.nix {
+      inherit pkgs;
+      inherit lib;
+      inherit userSettings;
+    }
+  );
   windows = import ./common/windows.nix;
 
   keys = {
