@@ -121,7 +121,7 @@ in
       ]
       [
         "live_grep"
-        ""
+        "buffer"
         "<leader>sg"
         "Telescope find string"
       ]
