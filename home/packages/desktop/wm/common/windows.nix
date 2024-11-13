@@ -5,9 +5,6 @@ in
   "1" = {
     app_id = [
       "Alacritty"
-      "footclient"
-      "foot"
-      "org.wezfurlong.wezterm"
     ];
   };
   "2" = {

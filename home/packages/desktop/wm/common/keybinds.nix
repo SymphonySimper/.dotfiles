@@ -12,8 +12,7 @@ let
       terminal = {
         default = {
           key = "Return";
-          cmd =
-            if userSettings.programs.terminal == "foot" then "footclient" else userSettings.programs.terminal;
+          cmd = userSettings.programs.terminal;
         };
       };
       browser = {
