@@ -8,7 +8,7 @@
         case "$1" in
         shrink)
           shift;
-          $app -i $1 -vcodec libx265 -crf 28 "$(echo $1 | cut -d '.' -f1).mp4"
+          $app -i $1 -vcodec libx265 -crf 28 "$(echo $1 | cut -d '.' -f1)_shrunk.mp4"
           ;;
         to_gif)
           shift;
