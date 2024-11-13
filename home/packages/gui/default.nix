@@ -2,7 +2,7 @@
 {
   imports = [
     ./alacritty.nix
-    ./browser/default.nix
+    ./chromium.nix
     ./dconf.nix
     ./media/default.nix
     ./office.nix

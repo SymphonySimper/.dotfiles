@@ -9,9 +9,7 @@ in
   };
   "2" = {
     app_id = [
-      "firefox"
       "chromium-browser"
-      "Brave-browser"
     ];
   };
   "3" = {
