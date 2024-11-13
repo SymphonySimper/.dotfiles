@@ -14,7 +14,7 @@ let
   };
 in
 {
-  imports = if userSettings.desktop.name == "hyprland" then [ ./hyprland.nix ] else [ ./sway.nix ];
+  imports = [ ./sway.nix ];
 
   # Enable swaylock
   security.pam.services.swaylock = { };
@@ -24,7 +24,7 @@ in
     sessionVariables.NIXOS_OZONE_WL = "1";
 
     loginShellInit = lib.my.mkTTYLaunch {
-      command = if userSettings.desktop.name == "hyprland" then "Hyprland" else "sway";
+      command = "sway";
       dbus = false;
     };
   };
