@@ -1,4 +1,4 @@
-{ userSettings, ... }:
+{ ... }:
 {
   programs.zsh = {
     enable = true;
@@ -23,17 +23,10 @@
 
       eval "$(micromamba shell hook -s zsh)"
 
-      ${
-        if userSettings.programs.multiplexer == "tmux" then
-          ''
-            # Auto start tmux
-            if [ -x "$(command -v tmux)" ] && [ -n "''${DISPLAY}" ] && [ -z "''${TMUX}" ]; then
-                exec tmux new >/dev/null 2>&1
-            fi
-          ''
-        else
-          ""
-      }
+      # Auto start tmux
+      if [ -x "$(command -v tmux)" ] && [ -n "''${DISPLAY}" ] && [ -z "''${TMUX}" ]; then
+          exec tmux new >/dev/null 2>&1
+      fi
     '';
     enableCompletion = true;
     completionInit = ''
