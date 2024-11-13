@@ -24,8 +24,6 @@
       flake = false;
     };
 
-    # helix-flake.url = "github:helix-editor/helix";
-
     # Neovim
     nixvim = {
       url = "github:nix-community/nixvim";

@@ -4,7 +4,7 @@
     inputs.catppuccin.homeManagerModules.catppuccin
     ./packages/cli/default.nix
     ./packages/dev/default.nix
-    ./packages/editor/default.nix
+    ./packages/nvim/default.nix
     ./packages/scripts/default.nix
     ./packages/shell/default.nix
     (import ../modules/common/nix.nix {
