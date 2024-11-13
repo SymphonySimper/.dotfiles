@@ -15,13 +15,43 @@
     consoleLogLevel = 0;
   };
 
-  networking.networkmanager.enable = true;
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [
-      # 80 # 443
-      5173
-    ];
+  networking = {
+    networkmanager.enable = true;
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [
+        # 80 # 443
+        5173
+      ];
+    };
+    hosts = {
+      "0.0.0.0" = [
+        # Music
+        "music.youtube.com"
+        "open.spotify.com"
+
+        # Social Media
+        "www.facebook.com"
+        "www.fb.com"
+        "www.instagram.com"
+        "www.twitch.tv"
+        "www.twitter.com"
+        "www.youtube.com"
+
+        # OTT
+        "www.hotstar.com"
+        "www.primevideo.com"
+        "www.sonyliv.com"
+        "www.sunnxt.com"
+        "www.zee5.com"
+        ## Anime
+        "hianime.to"
+        "www.crunchyroll.com"
+
+        # Misc
+        "store.steampowered.com"
+      ];
+    };
   };
 
   # Enable sound with pipewire.
