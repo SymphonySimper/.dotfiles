@@ -26,6 +26,9 @@ in
     plugins = with pkgs; [ tmuxPlugins.sensible ];
     catppuccin.extraConfig = # tmux
       ''
+        # Remove background of status bar
+        set -g @catppuccin_status_background "none"
+
         set -g @catppuccin_window_text "${windowFormat}"
         set -g @catppuccin_window_current_text "${windowFormat}"
         # remove gap between window text
