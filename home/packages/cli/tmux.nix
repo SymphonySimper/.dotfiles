@@ -22,7 +22,7 @@ in
     keyMode = "vi";
     mouse = true;
     customPaneNavigationAndResize = true;
-    newSession = true;
+    newSession = false;
     plugins = with pkgs; [ tmuxPlugins.sensible ];
     catppuccin.extraConfig = # tmux
       ''
