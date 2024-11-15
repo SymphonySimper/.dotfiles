@@ -36,7 +36,6 @@ in
 
         set -g status-left "#{E:@catppuccin_pane_current_path}"
         set -g status-right "#{E:@catppuccin_status_application}"
-        set -g status-right "#{E:@catppuccin_status_application}"
       '';
     extraConfig = # tmux
       ''
