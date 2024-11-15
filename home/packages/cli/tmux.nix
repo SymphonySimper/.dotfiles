@@ -6,7 +6,7 @@
   ...
 }:
 let
-  statusPosition = "bottom";
+  statusPosition = "top";
   windowFormat = # tmux
     " #{b:pane_current_path}";
 in
