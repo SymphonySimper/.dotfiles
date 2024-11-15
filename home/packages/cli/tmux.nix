@@ -64,6 +64,9 @@ in
         # Turn off automatic renaming
         setw -g automatic-rename off
 
+        # renumber when window is closed
+        set -g renumber-window on
+
         # y and p as in vim
         bind Escape copy-mode
         unbind p
