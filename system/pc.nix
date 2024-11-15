@@ -36,7 +36,7 @@
         "www.instagram.com"
         "www.twitch.tv"
         "www.twitter.com"
-        # "www.youtube.com"
+        "www.youtube.com"
 
         # OTT
         "www.hotstar.com"
