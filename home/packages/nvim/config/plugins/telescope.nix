@@ -116,13 +116,13 @@ in
       [
         "live_grep"
         "root"
-        "<leader>sG"
+        "<leader>sg"
         "Telescope find string (Root)"
       ]
       [
         "live_grep"
         "buffer"
-        "<leader>sg"
+        "<leader>sG"
         "Telescope find string"
       ]
     ]);
