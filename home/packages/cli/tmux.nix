@@ -32,17 +32,15 @@ in
       ''
         # Remove background of status bar
         set -g @catppuccin_status_background "none"
-        set -g status-left-length 100
-        set -g status-right-length 100
 
+        # remove gap between window text
+        set -g window-status-separator ""
         set -g @catppuccin_window_text "${windowFormat}"
         set -g @catppuccin_window_current_text "${windowFormat}"
         set -g @catppuccin_date_time_text " %H:%M %d/%m"
-        # remove gap between window text
-        set -g window-status-separator ""
 
+        set -g status-right ""
         set -g status-left "#{E:@catppuccin_pane_current_path}"
-        set -g status-right "#{E:@catppuccin_status_application}"
         if "test -r /sys/class/power_supply/BAT*" {
           set -agF status-right "#{E:@catppuccin_status_battery}"
         }
