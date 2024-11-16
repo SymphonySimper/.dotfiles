@@ -11,6 +11,7 @@ let
     " #{b:pane_current_path}";
 in
 {
+  home.packages = [ pkgs.acpi ];
   programs.tmux = {
     enable = userSettings.programs.multiplexer == "tmux";
     shell = "${pkgs.zsh}/bin/zsh";
@@ -23,11 +24,16 @@ in
     mouse = true;
     customPaneNavigationAndResize = true;
     newSession = false;
-    plugins = with pkgs; [ tmuxPlugins.sensible ];
+    plugins = with pkgs; [
+      tmuxPlugins.sensible
+      tmuxPlugins.battery
+    ];
     catppuccin.extraConfig = # tmux
       ''
         # Remove background of status bar
         set -g @catppuccin_status_background "none"
+        set -g status-left-length 100
+        set -g status-right-length 100
 
         set -g @catppuccin_window_text "${windowFormat}"
         set -g @catppuccin_window_current_text "${windowFormat}"
@@ -37,6 +43,9 @@ in
 
         set -g status-left "#{E:@catppuccin_pane_current_path}"
         set -g status-right "#{E:@catppuccin_status_application}"
+        if "test -r /sys/class/power_supply/BAT*" {
+          set -agF status-right "#{E:@catppuccin_status_battery}"
+        }
         set -agF status-right "#{E:@catppuccin_status_date_time}"
       '';
     extraConfig = # tmux
