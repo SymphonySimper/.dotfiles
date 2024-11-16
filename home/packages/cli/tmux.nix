@@ -11,7 +11,6 @@ let
     " #{b:pane_current_path}";
 in
 {
-  home.packages = [ pkgs.acpi ];
   programs.tmux = {
     enable = userSettings.programs.multiplexer == "tmux";
     shell = "${pkgs.zsh}/bin/zsh";
@@ -26,25 +25,15 @@ in
     newSession = false;
     plugins = with pkgs; [
       tmuxPlugins.sensible
-      tmuxPlugins.battery
     ];
     catppuccin.extraConfig = # tmux
       ''
         # Remove background of status bar
         set -g @catppuccin_status_background "none"
 
-        # remove gap between window text
-        set -g window-status-separator ""
         set -g @catppuccin_window_text "${windowFormat}"
         set -g @catppuccin_window_current_text "${windowFormat}"
         set -g @catppuccin_date_time_text " %H:%M %d/%m"
-
-        set -g status-right ""
-        set -g status-left "#{E:@catppuccin_pane_current_path}"
-        if "test -r /sys/class/power_supply/BAT*" {
-          set -agF status-right "#{E:@catppuccin_status_battery}"
-        }
-        set -agF status-right "#{E:@catppuccin_status_date_time}"
       '';
     extraConfig = # tmux
       ''
@@ -60,8 +49,6 @@ in
         set -ga update-environment TERM
         set -ga update-environment TERM_PROGRAM
 
-        set -g status-position ${statusPosition}
-
         # Attach to different session on exit
         set -g detach-on-destroy on
 
@@ -71,9 +58,18 @@ in
         # Turn off automatic renaming
         setw -g automatic-rename off
 
-        # renumber when window is closed
-        set -g renumber-window on
+        # UI
+        ## window
+        set -g renumber-window on # renumber when window is closed
+        set -g window-status-separator "" # remove gap between window text
 
+        ## status
+        set -g status-position "${statusPosition}"
+        set -g status-left ""
+        set -g status-right ""
+        set -agF status-right "#{E:@catppuccin_status_date_time}"
+
+        # Keybinds
         # y and p as in vim
         bind Escape copy-mode
         unbind p
