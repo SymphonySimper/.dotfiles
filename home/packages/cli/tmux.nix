@@ -9,6 +9,9 @@ let
   statusPosition = "top";
   windowFormat = # tmux
     " #{b:pane_current_path}";
+  terminalFeatures =
+    if profileSettings.profile == "wsl" then "xterm-256color" else userSettings.programs.terminal;
+
 in
 {
   programs.tmux = {
@@ -17,15 +20,12 @@ in
     terminal = "tmux-256color";
     prefix = "C-a";
     shortcut = "a";
-    baseIndex = 1;
-    escapeTime = 0;
     keyMode = "vi";
+    escapeTime = 0;
+    baseIndex = 1;
     mouse = true;
     customPaneNavigationAndResize = true;
     newSession = false;
-    plugins = with pkgs; [
-      tmuxPlugins.sensible
-    ];
     catppuccin.extraConfig = # tmux
       ''
         # Remove background of status bar
@@ -39,9 +39,7 @@ in
       ''
         # RGB colors
         # https://github.com/tmux/tmux/wiki/FAQ#how-do-i-use-rgb-colour
-        set -as terminal-features ',${
-          if profileSettings.profile == "wsl" then "xterm-256color" else userSettings.programs.terminal
-        }:RGB'
+        set -as terminal-features ",${terminalFeatures}:RGB"
 
         # For yazi
         set -g allow-passthrough on
@@ -70,16 +68,16 @@ in
         set -agF status-right "#{E:@catppuccin_status_date_time}"
 
         # Keybinds
-        # y and p as in vim
+        ## y and p as in vim
         bind Escape copy-mode
         unbind p
         bind p paste-buffer
-        bind-key -T copy-mode-vi 'v' send -X begin-selection
-        bind-key -T copy-mode-vi 'y' send -X copy-selection
-        bind-key -T copy-mode-vi 'Space' send -X halfpage-down
-        bind-key -T copy-mode-vi 'Bspace' send -X halfpage-up
+        bind-key -T copy-mode-vi "v" send -X begin-selection
+        bind-key -T copy-mode-vi "y" send -X copy-selection
+        bind-key -T copy-mode-vi "Space" send -X halfpage-down
+        bind-key -T copy-mode-vi "Bspace" send -X halfpage-up
 
-        # easy-to-remember split pane commands and open panes in cwd
+        ## easy-to-remember split pane commands and open panes in cwd
         unbind '"'
         unbind %
         unbind "'"
@@ -87,25 +85,25 @@ in
         bind | split-window -hc "#{pane_current_path}"
         bind c new-window -c "#{pane_current_path}"
 
-        # moving between windows with vim movement keys
+        ## moving between windows with vim movement keys
         bind -r C-h select-window -t :-
         bind -r C-l select-window -t :+
 
-        # Maximize pane
+        ## Maximize pane
         bind -r m resize-pane -Z
 
-        # Open a pane with 30% width
+        ## Open a pane with 30% width
         bind -r '"' split-window -h -l '30%' -c "#{pane_current_path}"
         bind -r "'" split-window -v -l '20%' -c "#{pane_current_path}"
 
-        # Sync pane
+        ## Sync pane
         bind -r b set-window-option synchronize-panes
 
-        # Create new session
+        ## Create new session
         bind -r C-n new
 
-        # Reload config with prefix+r
-        bind r source-file ${config.xdg.configHome}/tmux/tmux.conf
+        ## Reload config with prefix+r
+        bind r source-file "${config.xdg.configHome}/tmux/tmux.conf"
       '';
   };
 }
