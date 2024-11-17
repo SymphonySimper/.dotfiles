@@ -1,6 +1,6 @@
-{ pkgs, userSettings, ... }:
+{ pkgs, my, ... }:
 let
-  enable = userSettings.programs.video == "mpv";
+  enable = my.programs.video == "mpv";
 in
 {
   programs.mpv = {

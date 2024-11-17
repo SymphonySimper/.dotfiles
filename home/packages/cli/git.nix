@@ -1,13 +1,13 @@
-{ userSettings, pkgs, ... }:
+{ my, pkgs, ... }:
 {
   programs = {
     git = {
       enable = true;
-      userName = userSettings.name.name;
+      userName = my.fullName;
       userEmail = "50240805+SymphonySimper@users.noreply.github.com";
       includes = [
         {
-          condition = "gitdir:~/${userSettings.dirs.lifeisfun}/work/";
+          condition = "gitdir:~/${my.dir.dev}/work/";
           contents = {
             user = {
               name = "Sri Senthil Balaji J";
@@ -21,8 +21,8 @@
       ];
       extraConfig = {
         init.defaultBranch = "main";
-        core.editor = userSettings.programs.editor;
-        merge.tool = if userSettings.programs.editor == "nvim" then "nvimdiff" else "";
+        core.editor = my.programs.editor;
+        merge.tool = if my.programs.editor == "nvim" then "nvimdiff" else "";
         push.autoSetupRemote = true;
         mergetool.keepBackup = false;
         pull.rebase = true;

@@ -1,4 +1,4 @@
-{ userSettings, ... }:
+{ my, ... }:
 {
   dconf = {
     enable = true;
@@ -12,20 +12,20 @@
       };
 
       "org/gnome/desktop/background" = {
-        picture-uri = userSettings.theme.wallpaper;
-        picture-uri-dark = userSettings.theme.wallpaper;
+        picture-uri = my.theme.wallpaper;
+        picture-uri-dark = my.theme.wallpaper;
       };
 
       "org/gnome/desktop/screensaver" = {
-        picture-uri = userSettings.theme.wallpaper;
+        picture-uri = my.theme.wallpaper;
       };
 
       "org/gnome/desktop/interface" = {
-        color-scheme = if userSettings.theme.dark then "prefer-dark" else "prefer-light";
+        color-scheme = if my.theme.dark then "prefer-dark" else "prefer-light";
         cursor-size = 16;
         cursor-theme = "Adwaita";
         enable-animations = true;
-        gtk-theme = userSettings.theme.gtk;
+        gtk-theme = my.theme.gtk;
         icon-theme = "Adwaita";
         show-battery-percentage = true;
         toolkit-accessibility = false;

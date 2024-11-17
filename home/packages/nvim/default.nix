@@ -1,8 +1,8 @@
-{ lib, userSettings, ... }:
+{ lib, my, ... }:
 {
   imports = [ ./config ];
 
-  config = lib.mkIf (userSettings.programs.editor == "nvim") {
+  config = lib.mkIf (my.programs.editor == "nvim") {
     programs.nixvim = {
       enable = true;
       defaultEditor = true;

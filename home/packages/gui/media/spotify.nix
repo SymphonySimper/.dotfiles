@@ -1,7 +1,7 @@
 {
   pkgs,
   lib,
-  userSettings,
+  my,
   ...
 }:
 let
@@ -64,7 +64,7 @@ let
 in
 {
   config =
-    lib.mkIf (userSettings.programs.music == "spotify") {
+    lib.mkIf (my.programs.music == "spotify") {
       home.packages = with pkgs; [
         spotify
         (mySpotifyScript)

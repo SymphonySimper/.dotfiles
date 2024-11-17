@@ -1,7 +1,7 @@
-{ userSettings, pkgs, ... }:
+{ my, pkgs, ... }:
 let
-  image = { "loupe" = "org.gnome.Loupe.desktop"; }.${userSettings.programs.image};
-  pdf = { "zathura" = "org.pwmt.zathura.desktop"; }.${userSettings.programs.pdf};
+  image = { "loupe" = "org.gnome.Loupe.desktop"; }.${my.programs.image};
+  pdf = { "zathura" = "org.pwmt.zathura.desktop"; }.${my.programs.pdf};
 in
 {
   home.packages = [ pkgs.loupe ];

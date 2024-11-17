@@ -1,7 +1,7 @@
 {
-  userSettings,
   pkgs,
   lib,
+  my,
   ...
 }:
 let
@@ -9,7 +9,7 @@ let
     overrideStrategy = "asDropin";
     serviceConfig.ExecStart = [
       ""
-      "@${pkgs.util-linux}/sbin/agetty agetty --login-program ${pkgs.shadow}/bin/login -o '-p -- ${userSettings.name.user}' --noclear --skip-login %I $TERM"
+      "@${pkgs.util-linux}/sbin/agetty agetty --login-program ${pkgs.shadow}/bin/login -o '-p -- ${my.name}' --noclear --skip-login %I $TERM"
     ];
   };
 in
@@ -32,7 +32,7 @@ in
 
   # Default username for all tty
   # services.getty = {
-  #   loginOptions = "-p -- ${userSettings.name.user}";
+  #   loginOptions = "-p -- ${my.name}";
   #   extraArgs = [
   #     "--noclear"
   #     "--skip-login"

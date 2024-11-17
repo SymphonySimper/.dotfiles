@@ -1,6 +1,6 @@
-{ userSettings, ... }:
+{ my, ... }:
 {
   programs.wofi = {
-    enable = userSettings.programs.launcher == "wofi";
+    enable = my.programs.launcher == "wofi";
   };
 }

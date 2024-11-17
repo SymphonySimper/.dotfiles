@@ -1,6 +1,6 @@
-{ userSettings, ... }:
+{ my, ... }:
 {
   imports = [
     ./services/default.nix
-  ] ++ (if userSettings.desktop.wm then [ ./wm/default.nix ] else [ ]);
+  ] ++ (if my.gui.desktop.wm then [ ./wm/default.nix ] else [ ]);
 }

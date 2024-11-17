@@ -1,12 +1,12 @@
 {
   pkgs,
   lib,
-  userSettings,
+  my,
   ...
 }:
 let
   repo = "git@github.com:SymphonySimper/log.git";
-  loc = "${userSettings.home}/${userSettings.dirs.importantnt}/log";
+  loc = "${my.dir.data}/log";
   readlink = "${pkgs.coreutils-full}/bin/readlink";
   ln = "${pkgs.coreutils-full}/bin/ln";
 in

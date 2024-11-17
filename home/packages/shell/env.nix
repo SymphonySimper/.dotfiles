@@ -1,4 +1,4 @@
-{ userSettings, config, ... }:
+{ my, config, ... }:
 let
   paths = {
     pnpmHome = "${config.xdg.dataHome}/pnpm";
@@ -8,7 +8,7 @@ in
 {
   # ENV
   home.sessionVariables = {
-    EDITOR = userSettings.programs.editor;
+    EDITOR = my.programs.editor;
     PNPM_HOME = paths.pnpmHome;
     # CONDARCA = "${config.xdg.configHome}/conda/condarc";
     MAMBA_ROOT_PREFIX = "${config.xdg.dataHome}/mamba";

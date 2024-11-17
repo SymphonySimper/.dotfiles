@@ -1,7 +1,7 @@
 {
   pkgs,
   lib,
-  userSettings,
+  my,
   ...
 }:
 let
@@ -9,7 +9,7 @@ let
     import ./common/keybinds.nix {
       inherit pkgs;
       inherit lib;
-      inherit userSettings;
+      inherit my;
     }
   );
   windows = import ./common/windows.nix;
@@ -24,7 +24,7 @@ let
 in
 {
   wayland.windowManager.sway = {
-    enable = userSettings.desktop.name == "sway";
+    enable = my.gui.desktop.type == "wm";
     checkConfig = false;
     systemd = {
       enable = true;
@@ -39,7 +39,7 @@ in
       up = keys.up;
       right = keys.right;
 
-      menu = "${userSettings.programs.launcher}";
+      menu = "${my.programs.launcher}";
 
       window = {
         border = 1;
@@ -220,7 +220,7 @@ in
 
       output = {
         "*" = {
-          bg = "${userSettings.theme.color.crust} solid_color";
+          bg = "${my.theme.color.crust} solid_color";
         };
         "eDP-1" = rec {
           scale = "1.8";

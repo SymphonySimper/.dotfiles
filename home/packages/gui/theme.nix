@@ -1,13 +1,11 @@
 {
   lib,
   pkgs,
-  userSettings,
+  my,
   ...
 }:
 let
-  gtkExtraSettings = ''gtk-application-prefer-dark-theme=${
-    if userSettings.theme.dark then "1" else "0"
-  }'';
+  gtkExtraSettings = ''gtk-application-prefer-dark-theme=${if my.theme.dark then "1" else "0"}'';
 in
 {
 
@@ -34,7 +32,7 @@ in
     enable = true;
     catppuccin.enable = false;
     theme = {
-      name = userSettings.theme.gtk;
+      name = my.theme.gtk;
       package = pkgs.gnome-themes-extra;
     };
 
@@ -58,7 +56,7 @@ in
     platformTheme.name = "adwaita";
     style = {
       catppuccin.enable = false;
-      name = lib.toLower userSettings.theme.gtk;
+      name = lib.toLower my.theme.gtk;
     };
   };
 }

@@ -1,10 +1,10 @@
-{ userSettings, ... }:
+{ my, ... }:
 let
   padding = 1;
 in
 {
   programs.alacritty = {
-    enable = userSettings.programs.terminal == "alacritty";
+    enable = my.programs.terminal == "alacritty";
     settings = {
       general.live_config_reload = false;
       cursor = {
@@ -19,19 +19,19 @@ in
       font = {
         size = 12;
         normal = {
-          family = userSettings.font.mono;
+          family = my.theme.font.mono;
           style = "Regular";
         };
         bold = {
-          family = userSettings.font.mono;
+          family = my.theme.font.mono;
           style = "Bold";
         };
         italic = {
-          family = userSettings.font.mono;
+          family = my.theme.font.mono;
           style = "Italic";
         };
         bold_italic = {
-          family = userSettings.font.mono;
+          family = my.theme.font.mono;
           style = "Bold Italic";
         };
       };

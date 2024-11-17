@@ -1,7 +1,7 @@
 {
   inputs,
   pkgs,
-  userSettings,
+  my,
   ...
 }:
 {
@@ -35,14 +35,14 @@
       opener = {
         edit = [
           {
-            run = ''${userSettings.programs.editor} "$@"'';
+            run = ''${my.programs.editor} "$@"'';
             block = true;
             for = "unix";
           }
         ];
         play = [
           {
-            run = ''${userSettings.programs.video} "$@"'';
+            run = ''${my.programs.video} "$@"'';
             orphan = true;
             for = "unix";
           }

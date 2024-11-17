@@ -34,46 +34,65 @@
   outputs =
     { nixpkgs, home-manager, ... }@inputs:
     let
-      userSettings = rec {
-        name = {
-          user = "symph";
-          name = "SymphonySimper";
+      mkGetDefault =
+        attr: key: default:
+        if builtins.hasAttr key attr then attr.${key} else default;
+      mkMy =
+        {
+          settings ? { },
+          profile ? { },
+        }:
+        let
+          passedProfile = profile;
+        in
+        rec {
+          name = "symph";
+          fullName = "SymphonySimper";
+          dir = {
+            home = "/home/${name}";
+            dev = "${dir.home}/lifeisfun";
+            data = "${dir.home}/importantnt";
+          };
+          profile = mkGetDefault passedProfile "name" "default";
+          system = mkGetDefault passedProfile "system" "x86_64-linux";
+          cli = {
+            enable = mkGetDefault cli.enable true;
+          };
+          gui = {
+            enable = mkGetDefault settings "gui.enable" false;
+            desktop = {
+              enable = mkGetDefault settings "gui.desktop.enable" false;
+              type = mkGetDefault settings "gui.desktop.type" "wm"; # wm or de
+              wm = gui.desktop.type == "wm";
+            };
+          };
+          theme = {
+            dark = mkGetDefault settings "theme.dark" false;
+            flavor = if theme.dark then "mocha" else "latte";
+            color = (import ./assets/colors.nix { flavor = theme.flavor; });
+            gtk = if theme.dark then "Adwaita-dark" else "Adwaita";
+            wallpaper = "${dir.home}/.dotfiles/assets/images/bg.png";
+
+            font = {
+              sans = "Poppins";
+              mono = "JetBrainsMono Nerd Font";
+              glyph = "Font Awesome 6 Free";
+            };
+          };
+          programs = {
+            terminal = "alacritty";
+            editor = "nvim";
+            multiplexer = "tmux";
+            browser = "chromium";
+            launcher = "wofi";
+            notification = "dunst";
+            music = "yt";
+            video = "mpv";
+            pdf = "zathura";
+            image = "loupe";
+          };
         };
-        home = "/home/${name.user}";
-        dirs = {
-          lifeisfun = "lifeisfun";
-          importantnt = "importantnt";
-        };
-        theme = {
-          dark = false;
-          flavor = if theme.dark then "mocha" else "latte";
-          color = (import ./assets/colors.nix { flavor = theme.flavor; });
-          gtk = if theme.dark then "Adwaita-dark" else "Adwaita";
-          wallpaper = "${home}/.dotfiles/assets/images/bg.png";
-        };
-        font = {
-          sans = "Poppins";
-          mono = "JetBrainsMono Nerd Font";
-          glyph = "Font Awesome 6 Free";
-        };
-        desktop = {
-          name = "sway";
-          wm = desktop.name != "gnome";
-          steam = true;
-        };
-        programs = {
-          terminal = "alacritty";
-          editor = "nvim";
-          multiplexer = "tmux";
-          browser = "chromium";
-          launcher = "wofi";
-          notification = "dunst";
-          music = "yt";
-          video = "mpv";
-          pdf = "zathura";
-          image = "loupe";
-        };
-      };
+
       lib = nixpkgs.lib;
 
       mkPkgs =
@@ -89,82 +108,76 @@
           ] ++ overlays;
         });
 
-      mkProfileSettings =
-        { profile, system }:
-        {
-          inherit profile;
-          inherit system;
-        };
-
       mkHome =
-        { profile, system }:
+        {
+          settings,
+          profile,
+        }:
         let
-          profileSettings = mkProfileSettings {
+          my = mkMy {
+            inherit settings;
             inherit profile;
-            inherit system;
           };
         in
         home-manager.lib.homeManagerConfiguration rec {
           pkgs = mkPkgs {
-            inherit system;
+            system = my.system;
             overlays = [
               # (import ./overlays/nvim-plugins.nix { inherit inputs; })
             ];
           };
           lib = pkgs.lib;
           modules = [
-            ./profiles/${profile}/home.nix
+            ./profiles/${my.profile}/home.nix
             inputs.nixvim.homeManagerModules.nixvim
           ];
           extraSpecialArgs = {
-            inherit userSettings;
-            inherit profileSettings;
+            inherit my;
             inherit inputs;
           };
         };
 
       mkSystem =
-        { profile, system }:
+        {
+          settings,
+          profile,
+        }:
         let
-          profileSettings = mkProfileSettings {
+          my = mkMy {
+            inherit settings;
             inherit profile;
-            inherit system;
           };
         in
         lib.nixosSystem rec {
-          inherit system;
-          pkgs = mkPkgs { inherit system; };
+          system = my.system;
+          pkgs = mkPkgs { system = my.system; };
           lib = pkgs.lib;
-          modules = [ ./profiles/${profile}/configuration.nix ];
+          modules = [ ./profiles/${my.profile}/configuration.nix ];
           specialArgs = {
-            inherit userSettings;
-            inherit profileSettings;
+            inherit my;
             inherit inputs;
           };
         };
 
-      profiles = rec {
-        default = {
-          profile = "default";
-          system = "x86_64-linux";
-        };
+      profiles = {
         wsl = {
-          profile = "wsl";
-          system = default.system;
+          profile.name = "wsl";
         };
         gui = {
-          profile = "gui";
-          system = default.system;
-        };
-        pi = {
-          profile = "pi";
-          system = "aarch64-linux";
+          profile.name = "gui";
+          settings = {
+            gui = {
+              enable = true;
+              desktop = {
+                enable = true;
+              };
+            };
+          };
         };
       };
     in
     {
       homeConfigurations = {
-        default = mkHome profiles.default;
         wsl = mkHome profiles.wsl;
         gui = mkHome profiles.gui;
       };

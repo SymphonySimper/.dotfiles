@@ -1,30 +1,30 @@
 {
   pkgs,
   lib,
-  userSettings,
+  my,
   ...
 }:
 let
   mkOpenDesktopEntry =
-    file: "${lib.getExe pkgs.dex} ${userSettings.home}/.nix-profile/share/applications/${file}.desktop";
+    file: "${lib.getExe pkgs.dex} ${my.dir.home}/.nix-profile/share/applications/${file}.desktop";
   keybinds =
     {
       terminal = {
         default = {
           key = "Return";
-          cmd = userSettings.programs.terminal;
+          cmd = my.programs.terminal;
         };
       };
       browser = {
         default = {
           key = "f";
-          cmd = userSettings.programs.browser;
+          cmd = my.programs.browser;
         };
       };
       launcher = {
         default = {
           key = "d";
-          cmd = "${userSettings.programs.launcher} --show drun";
+          cmd = "${my.programs.launcher} --show drun";
         };
       };
       brightness = {
@@ -96,7 +96,7 @@ let
       };
     }
     // (
-      if userSettings.programs.music == "spotify" then
+      if my.programs.music == "spotify" then
         {
           spotify = {
             toggle = {

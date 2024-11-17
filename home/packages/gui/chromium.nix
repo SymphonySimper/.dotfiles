@@ -1,7 +1,7 @@
 {
   lib,
   pkgs,
-  userSettings,
+  my,
   ...
 }:
 let
@@ -39,7 +39,7 @@ let
         }
       ) entries
     );
-  flavor = userSettings.theme.flavor;
+  flavor = my.theme.flavor;
   theme =
     if flavor == "frappe" then
       "olhelnoplefjdmncknfphenjclimckaf"
@@ -78,7 +78,7 @@ in
       ]
     ]
     ++ (
-      if userSettings.programs.music == "yt" then
+      if my.programs.music == "yt" then
         [
           [
             "ytmusic"

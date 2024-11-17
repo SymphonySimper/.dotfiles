@@ -1,11 +1,11 @@
 {
   pkgs,
   lib,
-  profileSettings,
+  my,
   ...
 }:
 {
-  config = lib.mkIf (profileSettings.profile == "gui") {
+  config = lib.mkIf my.gui.enable {
     home.packages = [
       pkgs.streamlink
     ];

@@ -1,4 +1,4 @@
-{ inputs, userSettings, ... }:
+{ inputs, my, ... }:
 {
   imports = [
     inputs.catppuccin.homeManagerModules.catppuccin
@@ -23,8 +23,8 @@
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = userSettings.name.user;
-  home.homeDirectory = userSettings.home;
+  home.username = my.name;
+  home.homeDirectory = my.dir.home;
 
   # Do not change
   home.stateVersion = "23.11";
@@ -34,7 +34,7 @@
 
   catppuccin = {
     enable = true;
-    flavor = userSettings.theme.flavor;
+    flavor = my.theme.flavor;
   };
 
   services = {

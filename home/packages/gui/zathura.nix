@@ -1,6 +1,6 @@
-{ userSettings, ... }:
+{ my, ... }:
 {
   programs.zathura = {
-    enable = userSettings.programs.pdf == "zathura";
+    enable = my.programs.pdf == "zathura";
   };
 }

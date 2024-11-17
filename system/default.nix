@@ -1,7 +1,7 @@
 {
   pkgs,
   inputs,
-  userSettings,
+  my,
   ...
 }:
 let
@@ -9,7 +9,7 @@ let
   defaultDirConfig = {
     d = {
       group = "users";
-      user = "${userSettings.name.user}";
+      user = "${my.name}";
       mode = "0755";
     };
   };
@@ -41,11 +41,11 @@ in
 
   users = {
     mutableUsers = true;
-    users.${userSettings.name.user} = {
+    users.${my.name} = {
       initialHashedPassword = "$6$zzXPOtlNAnpUTgHe$.VZIkoqeZQWtACW6JFOZBeUUT5ds7PDpfoMZQOfWNCND0ukdGVd7jA2Ko86g8tPDxfpM3D0rVkCRUfEz/hJiN0";
       isNormalUser = true;
-      home = userSettings.home;
-      description = "${userSettings.name.name}";
+      home = my.dir.home;
+      description = "${my.fullName}";
       extraGroups = [
         "wheel"
         "networkmanager"
@@ -88,10 +88,10 @@ in
   boot.tmp.useTmpfs = true;
 
   systemd.tmpfiles.settings = {
-    "${userSettings.name.user}-fav-dirs" = {
-      "${userSettings.home}/${userSettings.dirs.lifeisfun}" = defaultDirConfig;
-      "${userSettings.home}/${userSettings.dirs.lifeisfun}/work" = defaultDirConfig;
-      "${userSettings.home}/${userSettings.dirs.importantnt}" = defaultDirConfig;
+    "${my.name}-fav-dirs" = {
+      "${my.dir.dev}" = defaultDirConfig;
+      "${my.dir.dev}/work" = defaultDirConfig;
+      "${my.dir.data}" = defaultDirConfig;
     };
   };
 }

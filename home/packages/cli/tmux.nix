@@ -1,21 +1,19 @@
 {
   pkgs,
   config,
-  userSettings,
-  profileSettings,
+  my,
   ...
 }:
 let
   statusPosition = "top";
   windowFormat = # tmux
     " #{b:pane_current_path}";
-  terminalFeatures =
-    if profileSettings.profile == "wsl" then "xterm-256color" else userSettings.programs.terminal;
+  terminalFeatures = if my.profile == "wsl" then "xterm-256color" else my.programs.terminal;
 
 in
 {
   programs.tmux = {
-    enable = userSettings.programs.multiplexer == "tmux";
+    enable = my.programs.multiplexer == "tmux";
     shell = "${pkgs.zsh}/bin/zsh";
     terminal = "tmux-256color";
     prefix = "C-a";

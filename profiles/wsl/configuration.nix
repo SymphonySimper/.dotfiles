@@ -1,4 +1,4 @@
-{ userSettings, inputs, ... }:
+{ my, inputs, ... }:
 let
   interop = false;
 in
@@ -11,12 +11,12 @@ in
 
   wsl = {
     enable = true;
-    defaultUser = userSettings.name.user;
+    defaultUser = my.name;
     interop.includePath = interop;
     nativeSystemd = true;
     startMenuLaunchers = false;
     wslConf = {
-      user.default = userSettings.name.user;
+      user.default = my.name;
       interop = {
         enabled = interop;
         appendWindowsPath = interop;
