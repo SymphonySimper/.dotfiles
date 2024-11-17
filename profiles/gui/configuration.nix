@@ -1,18 +1,19 @@
-{ config, inputs, ... }:
+{
+  pkgs,
+  config,
+  inputs,
+  modulesPath,
+  ...
+}:
 {
   imports = [
-    # ../../system/hardware/ideapad.nix
-    # ../../system/packages/nvidia/enable.nix
-    # ../../system/packages/vm.nix
-    (import ../../system/hardware/disko.nix {
+    (modulesPath + "/installer/scan/not-detected.nix")
+    (import ../../modules/system/hardware/disko.nix {
       inherit inputs;
       device = "/dev/nvme0n1";
       swap = "16G";
     })
-    ../../system/default.nix
-    ../../system/packages/desktop
-    ../../system/pc.nix
-    ./hardware.nix
+    ../../modules/system
   ];
 
   boot.binfmt.emulatedSystems = [
@@ -21,9 +22,29 @@
   ];
   nix.settings.extra-platforms = config.boot.binfmt.emulatedSystems;
 
-  my.programs.steam.display = {
-    width = 1920;
-    height = 1200;
-    refreshRate = 60;
+  my = {
+    hardware = {
+      cpu.amd.enable = true;
+      gpu.amd.enable = true;
+      ssd.enable = true;
+      led.enable = true;
+      logitech.enable = true;
+    };
+    system.steam.display = {
+      width = 1920;
+      height = 1200;
+      refreshRate = 60;
+    };
+  };
+
+  boot = {
+    kernelPackages = pkgs.linuxPackages_latest;
+    initrd = {
+      availableKernelModules = [
+        "nvme"
+        "xhci_pci"
+        "usbhid"
+      ];
+    };
   };
 }

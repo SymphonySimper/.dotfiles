@@ -32,9 +32,14 @@ in
     // (
       if system then
         {
-
           # Strage optimisation
           optimise.automatic = true;
+
+          # Enable flakse
+          settings.experimental-features = [
+            "nix-command"
+            "flakes"
+          ];
         }
       else
         { }

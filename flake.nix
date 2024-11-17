@@ -34,9 +34,14 @@
   outputs =
     { nixpkgs, home-manager, ... }@inputs:
     let
+      lib = nixpkgs.lib;
+
       mkGetDefault =
         attr: key: default:
-        if builtins.hasAttr key attr then attr.${key} else default;
+        let
+          path = lib.strings.splitString "." key;
+        in
+        if lib.attrsets.hasAttrByPath path attr then lib.attrsets.getAttrFromPath path attr else default;
       mkMy =
         {
           settings ? { },
@@ -55,9 +60,6 @@
           };
           profile = mkGetDefault passedProfile "name" "default";
           system = mkGetDefault passedProfile "system" "x86_64-linux";
-          cli = {
-            enable = mkGetDefault cli.enable true;
-          };
           gui = {
             enable = mkGetDefault settings "gui.enable" false;
             desktop = {
@@ -92,8 +94,6 @@
             image = "loupe";
           };
         };
-
-      lib = nixpkgs.lib;
 
       mkPkgs =
         {

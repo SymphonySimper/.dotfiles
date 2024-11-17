@@ -6,7 +6,7 @@ in
   imports = [
     # include NixOS-WSL modules
     inputs.nixos-wsl.nixosModules.wsl
-    ../../system/default.nix
+    ../../modules/system
   ];
 
   wsl = {
