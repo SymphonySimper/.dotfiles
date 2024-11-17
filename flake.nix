@@ -110,7 +110,7 @@
 
       mkHome =
         {
-          settings,
+          settings ? { },
           profile,
         }:
         let
@@ -139,7 +139,7 @@
 
       mkSystem =
         {
-          settings,
+          settings ? { },
           profile,
         }:
         let
