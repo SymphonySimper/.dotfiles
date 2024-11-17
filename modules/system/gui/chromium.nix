@@ -173,6 +173,10 @@ in
             "Nixpkgs Manual"
             "https://ryantm.github.io/nixpkgs/functions/library/asserts/#sec-functions-library-asserts"
           ]
+          [
+            "Nix Manual"
+            "https://teu5us.github.io/nix-lib.html#nix-builtin-functions"
+          ]
         ];
         ExtensionSettings = mkExtensionSettings [
           [
