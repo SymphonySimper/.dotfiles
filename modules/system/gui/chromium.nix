@@ -106,6 +106,10 @@ in
             "web.whatsapp.com"
           ]
           [
+            "Discord"
+            "discord.com/channels/@me"
+          ]
+          [
             "Github"
             "github.com"
           ]
@@ -130,10 +134,6 @@ in
             "crunchyroll.com"
           ]
           [
-            "Discord"
-            "discord.com/channels/@me"
-          ]
-          [
             "Indian Post Insurance"
             "pli.indiapost.gov.in"
           ]
@@ -150,16 +150,21 @@ in
             "www.protondb.com"
           ]
           [
+            "Gemini"
+            "gemini.google.com/app?hl=en-IN"
+          ]
+          # Dev
+          [
             "Google Fonts"
             "fonts.google.com"
           ]
           [
-            "Gemini"
-            "gemini.google.com/app?hl=en-IN"
-          ]
-          [
             "Svelte"
             "svelte.dev"
+          ]
+          [
+            "Svelte Changelog"
+            "https://svelte-changelog.vercel.app/"
           ]
           [
             "Tailwindcss"
