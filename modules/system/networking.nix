@@ -31,6 +31,7 @@ in
           "www.instagram.com"
           "www.twitch.tv"
           "www.twitter.com"
+          "x.com"
           # "www.youtube.com"
 
           # OTT
