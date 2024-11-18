@@ -30,7 +30,7 @@ in
       enable = true;
       variables = [ "--all" ];
     };
-    xwayland = true;
+    xwayland = false;
     wrapperFeatures.gtk = true;
     config = rec {
       modifier = keys.mod;
