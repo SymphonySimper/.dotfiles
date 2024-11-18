@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   config,
   my,
   ...
@@ -9,15 +10,14 @@ let
   windowFormat = # tmux
     " #{b:pane_current_path}";
   terminalFeatures = if my.profile == "wsl" then "xterm-256color" else my.programs.terminal;
-
 in
 {
   programs = {
     zsh.initExtra = # sh
       ''
         # Auto start tmux
-        if [ -x "$(command -v tmux)" ] && [ -n "''${DISPLAY}" ] && [ -z "''${TMUX}" ]; then
-            exec tmux -f "${config.xdg.configHome}/tmux/tmux.conf" new >/dev/null 2>&1
+        if [ -z "''${TMUX}" ]; then
+            exec ${lib.getExe pkgs.tmux} -f "${config.xdg.configHome}/tmux/tmux.conf" new >/dev/null 2>&1
         fi
       '';
     tmux = {
