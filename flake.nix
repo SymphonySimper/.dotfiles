@@ -152,7 +152,7 @@
           system = my.system;
           pkgs = mkPkgs { system = my.system; };
           lib = pkgs.lib;
-          modules = [ ./profiles/${my.profile}/configuration.nix ];
+          modules = [ ./profiles/${my.profile}/system.nix ];
           specialArgs = {
             inherit my;
             inherit inputs;
