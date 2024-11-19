@@ -7,7 +7,7 @@
       userEmail = "50240805+SymphonySimper@users.noreply.github.com";
       includes = [
         {
-          condition = "gitdir:~/${my.dir.dev}/work/";
+          condition = "gitdir:${my.dir.dev}/work/";
           contents = {
             user = {
               name = "Sri Senthil Balaji J";
