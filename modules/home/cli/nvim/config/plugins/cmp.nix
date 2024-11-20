@@ -4,7 +4,6 @@
     # cmp
     cmp-nvim-lsp.enable = true;
     cmp-path.enable = true;
-    cmp-git.enable = true;
     cmp = {
       enable = true;
       autoEnableSources = true;
@@ -12,7 +11,6 @@
         sources = [
           { name = "nvim_lsp"; }
           { name = "path"; }
-          { name = "git"; }
         ];
         mapping = {
           "<C-n>" = "cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert })";
