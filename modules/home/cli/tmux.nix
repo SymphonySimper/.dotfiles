@@ -53,9 +53,6 @@ in
           set -ga update-environment TERM
           set -ga update-environment TERM_PROGRAM
 
-          # Attach to different session on exit
-          set -g detach-on-destroy on
-
           setw -g monitor-activity on
           set -g visual-activity on
 
