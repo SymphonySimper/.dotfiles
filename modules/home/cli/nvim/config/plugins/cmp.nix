@@ -8,6 +8,7 @@
       enable = true;
       autoEnableSources = true;
       settings = {
+        preselect = "cmp.PreselectMode.None";
         sources = [
           { name = "nvim_lsp"; }
           { name = "path"; }
