@@ -88,10 +88,6 @@ in
           bind | split-window -hc "#{pane_current_path}"
           bind c new-window -c "#{pane_current_path}"
 
-          ## moving between windows with vim movement keys
-          bind -r C-h select-window -t :-
-          bind -r C-l select-window -t :+
-
           ## Maximize pane
           bind -r m resize-pane -Z
 
