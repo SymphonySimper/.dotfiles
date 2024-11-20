@@ -54,7 +54,7 @@ in
           set -ga update-environment TERM_PROGRAM
 
           setw -g monitor-activity on
-          set -g visual-activity on
+          set -g visual-activity off # If enabled shows activity in window message
 
           # Turn off automatic renaming
           setw -g automatic-rename off
