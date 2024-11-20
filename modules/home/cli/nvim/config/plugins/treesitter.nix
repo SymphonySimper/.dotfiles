@@ -39,6 +39,7 @@
           vimdoc
           tmux
           regex
+          editorconfig
 
           gitcommit
           gitignore
