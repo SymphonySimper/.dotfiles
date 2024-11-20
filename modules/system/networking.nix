@@ -32,7 +32,7 @@ in
           "www.twitch.tv"
           "www.twitter.com"
           "x.com"
-          # "www.youtube.com"
+          "www.youtube.com"
 
           # OTT
           "www.hotstar.com"
