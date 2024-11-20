@@ -12,6 +12,7 @@ let
   terminalFeatures = if my.profile == "wsl" then "xterm-256color" else my.programs.terminal;
 in
 {
+  home.packages = with pkgs; [ acpi ];
   programs = {
     zsh.initExtra = # sh
       ''
@@ -40,7 +41,28 @@ in
           set -g @catppuccin_window_text "${windowFormat}"
           set -g @catppuccin_window_current_text "${windowFormat}"
           set -g @catppuccin_date_time_text " %H:%M %d/%m"
+
+          # status
+          set -g status-position "${statusPosition}"
+
+          set -g status-left ""
+          set -g status-left-length 100
+
+          set -g status-right ""
+          set -g status-right-length 100
         '';
+      plugins = with pkgs; [
+        {
+          plugin = tmuxPlugins.battery;
+          extraConfig = # tmux
+            ''
+              if "test -r /sys/class/power_supply/BAT*" {
+                set -agF status-right "#{E:@catppuccin_status_battery}"
+              }
+              set -agF status-right "#{E:@catppuccin_status_date_time}"
+            '';
+        }
+      ];
       extraConfig = # tmux
         ''
           # RGB colors
@@ -63,12 +85,6 @@ in
           ## window
           set -g renumber-window on # renumber when window is closed
           set -g window-status-separator "" # remove gap between window text
-
-          ## status
-          set -g status-position "${statusPosition}"
-          set -g status-left ""
-          set -g status-right ""
-          set -agF status-right "#{E:@catppuccin_status_date_time}"
 
           # Keybinds
           ## y and p as in vim
