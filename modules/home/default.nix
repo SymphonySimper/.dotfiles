@@ -2,14 +2,14 @@
 {
   imports = [
     inputs.catppuccin.homeManagerModules.catppuccin
-    ./cli
     ./font.nix
+
+    ../common
+    ./cli
     ./gui
-    (import ../common/nix.nix {
-      inherit inputs;
-      system = false;
-    })
   ];
+
+  my.common.system = false;
 
   xdg.enable = true;
   xdg.configFile."nixpkgs/config.nix".text = # nix
@@ -32,5 +32,4 @@
     enable = true;
     flavor = my.theme.flavor;
   };
-
 }

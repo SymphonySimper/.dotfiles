@@ -1,47 +1,56 @@
 {
+  lib,
+  config,
   inputs,
-  system ? throw "Set sytstem to true for NixOS and false for Home Manager",
   ...
 }:
 let
   frequency = "weekly";
+  system = config.my.common.system;
 in
 {
-  nix =
-    {
-      # Path for pkgs
-      nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+  options.my.common = {
+    system = lib.mkOption {
+      type = lib.types.bool;
+    };
+  };
+  config = {
+    nix =
+      {
+        # Path for pkgs
+        nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
-      # Garbage Collection
-      gc =
-        {
-          automatic = true;
-          options = "--delete-older-than 14d";
-        }
-        // (
-          if system then
-            {
-              dates = frequency;
-            }
-          else
-            {
-              inherit frequency;
-            }
-        );
-    }
-    // (
-      if system then
-        {
-          # Strage optimisation
-          optimise.automatic = true;
+        # Garbage Collection
+        gc =
+          {
+            automatic = true;
+            options = "--delete-older-than 14d";
+          }
+          // (
+            if system then
+              {
+                dates = frequency;
+              }
+            else
+              {
+                inherit frequency;
+              }
+          );
+      }
+      // (
+        if system then
+          {
+            # Strage optimisation
+            optimise.automatic = true;
 
-          # Enable flakse
-          settings.experimental-features = [
-            "nix-command"
-            "flakes"
-          ];
-        }
-      else
-        { }
-    );
+            # Enable flakse
+            settings.experimental-features = [
+              "nix-command"
+              "flakes"
+            ];
+          }
+        else
+          { }
+      );
+  };
 }

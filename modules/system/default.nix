@@ -16,23 +16,22 @@ in
 {
   imports = [
     ./boot.nix
-    ./cli
     ./font.nix
-    ./gui
-    ./hardware
     ./locale.nix
     ./networking.nix
     ./time.nix
     ./user.nix
-    (import ../common/nix.nix {
-      inherit inputs;
-      system = true;
-    })
+
+    ../common
+    ./cli
+    ./gui
+    ./hardware
   ];
 
   system.stateVersion = "23.11"; # Do no change
 
   my = {
+    common.system = true;
     boot.enable = lib.mkDefault my.gui.desktop.enable;
     networking.enable = lib.mkDefault true;
     hardware = {
