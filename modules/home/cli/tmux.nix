@@ -43,6 +43,7 @@ in
           set -g @catppuccin_date_time_text " %H:%M %d/%m"
 
           # status
+          set -g status-interval 60
           set -g status-position "${statusPosition}"
 
           set -g status-left ""
