@@ -10,7 +10,6 @@
     ./man.nix
     ./ripgrep.nix
     ./ssh.nix
-    ./streamlink.nix
     ./tmux.nix
     ./yazi.nix
     ./zoxide.nix
