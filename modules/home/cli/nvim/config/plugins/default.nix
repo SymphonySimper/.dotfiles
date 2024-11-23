@@ -13,6 +13,5 @@
     ./telescope.nix
     ./todo-comments.nix
     ./treesitter.nix
-    ./yazi.nix
   ];
 }
