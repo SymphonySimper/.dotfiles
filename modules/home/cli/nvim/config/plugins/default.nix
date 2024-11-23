@@ -5,7 +5,6 @@
     ./conform.nix
     ./gitsigns.nix
     ./harpoon.nix
-    ./lazygit.nix
     ./lsp.nix
     ./markview.nix
     ./mini.nix
