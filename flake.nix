@@ -67,6 +67,13 @@
               type = mkGetDefault settings "gui.desktop.type" "wm"; # wm or de
               wm = gui.desktop.type == "wm";
             };
+            display = {
+              name = mkGetDefault settings "gui.display.name" "eDP-1";
+              scale = mkGetDefault settings "gui.display.scale" 1;
+              width = mkGetDefault settings "gui.display.width" 1920;
+              height = mkGetDefault settings "gui.display.height" 1080;
+              refreshRate = mkGetDefault settings "gui.display.refreshRate" 60;
+            };
           };
           theme = {
             dark = mkGetDefault settings "theme.dark" false;
@@ -168,8 +175,13 @@
           settings = {
             gui = {
               enable = true;
-              desktop = {
-                enable = true;
+              desktop.enable = true;
+              display = {
+                name = "eDP-1";
+                scale = 1.8;
+                width = 2880;
+                height = 1800;
+                refreshRate = 60;
               };
             };
           };

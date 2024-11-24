@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  my,
+  config,
+  ...
+}:
 let
   cfg = config.my.programs.steam;
 
@@ -25,17 +30,17 @@ in
           width = lib.mkOption {
             type = lib.types.ints.positive;
             description = "Width of the display";
-            default = 1920;
+            default = my.gui.display.width;
           };
           height = lib.mkOption {
             type = lib.types.ints.positive;
             description = "Height of the display";
-            default = 1080;
+            default = my.gui.display.height;
           };
           refreshRate = lib.mkOption {
             type = lib.types.ints.positive;
             description = "Refresh rate fo the display";
-            default = 60;
+            default = my.gui.display.refreshRate;
           };
         };
       };
