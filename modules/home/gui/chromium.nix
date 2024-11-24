@@ -51,43 +51,45 @@ let
       "bkkmolkhemgaeaeggcmfbghljjjoofoh";
 in
 {
-  programs.chromium = {
-    enable = true;
-    package = pkgs.chromium.override { enableWideVine = true; };
-    extensions = [
-      "${theme}" # Catppuccin theme
-      # "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
-      # "nngceckbapebfimnlniiiahkandclblb" # bitwarden
-      # "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
-      # "edibdbjcniadpccecjdfdjjppcpchdlm" # i don't care about cookies
-      # "bnclejfcblondkjliiblkojdeloomadd" # mute tab
-    ];
-    inherit commandLineArgs;
-  };
+  config = lib.mkIf my.gui.enable {
+    programs.chromium = {
+      enable = true;
+      package = pkgs.chromium.override { enableWideVine = true; };
+      extensions = [
+        "${theme}" # Catppuccin theme
+        # "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
+        # "nngceckbapebfimnlniiiahkandclblb" # bitwarden
+        # "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
+        # "edibdbjcniadpccecjdfdjjppcpchdlm" # i don't care about cookies
+        # "bnclejfcblondkjliiblkojdeloomadd" # mute tab
+      ];
+      inherit commandLineArgs;
+    };
 
-  # Web Apps
-  xdg.desktopEntries = mkDesktopEntries (
-    [
+    # Web Apps
+    xdg.desktopEntries = mkDesktopEntries (
       [
-        "monkeytype"
-        "https://monkeytype.com/"
-      ]
-      [
-        "excalidraw"
-        "https://excalidraw.com/"
-      ]
-    ]
-    ++ (
-      if my.programs.music == "yt" then
         [
-          [
-            "ytmusic"
-            "https://music.youtube.com/"
-            false
-          ]
+          "monkeytype"
+          "https://monkeytype.com/"
         ]
-      else
-        [ ]
-    )
-  );
+        [
+          "excalidraw"
+          "https://excalidraw.com/"
+        ]
+      ]
+      ++ (
+        if my.programs.music == "yt" then
+          [
+            [
+              "ytmusic"
+              "https://music.youtube.com/"
+              false
+            ]
+          ]
+        else
+          [ ]
+      )
+    );
+  };
 }
