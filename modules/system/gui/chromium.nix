@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, my, ... }:
 let
   mkSiteSearchSettings =
     options:
@@ -48,10 +48,7 @@ in
 # vist: chrome://flags/#enable-webrtc-allow-input-volume-adjustment
 # and set it to disabled
 {
-  options.my.programs.chromium = {
-    enable = lib.mkEnableOption "Chromium";
-  };
-  config = lib.mkIf config.my.programs.chromium.enable {
+  config = lib.mkIf my.gui.enable {
     programs.chromium = {
       enable = true;
       extraOpts = {

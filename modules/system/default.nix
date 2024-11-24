@@ -50,10 +50,6 @@ in
       docker.enable = lib.mkDefault false;
       vm.enable = lib.mkDefault false;
       steam.enable = lib.mkDefault false;
-      chromium.enable = lib.mkDefault my.gui.enable;
-      kanata.enable = lib.mkDefault my.gui.desktop.enable;
-      wm.enable = lib.mkDefault (my.gui.desktop.enable && my.gui.desktop.wm);
-      de.enable = lib.mkDefault (my.gui.desktop.enable && !my.gui.desktop.wm);
     };
   };
 

@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  config,
   my,
   ...
 }:
@@ -15,10 +14,7 @@ let
   };
 in
 {
-  options.my.programs.wm = {
-    enable = lib.mkEnableOption "WM";
-  };
-  config = lib.mkIf config.my.programs.wm.enable {
+  config = lib.mkIf (my.gui.desktop.enable && my.gui.desktop.wm) {
     programs.sway = {
       enable = true;
       wrapperFeatures.gtk = true;

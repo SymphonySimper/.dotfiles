@@ -1,9 +1,6 @@
-{ lib, config, ... }:
+{ lib, my, ... }:
 {
-  options.my.programs.kanata = {
-    enable = lib.mkEnableOption "Kanata";
-  };
-  config = lib.mkIf config.my.programs.kanata.enable {
+  config = lib.mkIf my.gui.desktop.enable {
     services.kanata = {
       enable = true;
       keyboards = {

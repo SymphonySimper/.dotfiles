@@ -1,15 +1,11 @@
 {
   pkgs,
   lib,
-  config,
+  my,
   ...
 }:
 {
-  options.my.programs.de = {
-    enable = lib.mkEnableOption "DE";
-  };
-
-  config = lib.mkIf config.my.programs.de.enable {
+  config = lib.mkIf (my.gui.desktop.enable && !my.gui.desktop.wm) {
     services.xserver = {
       enable = true;
       displayManager.gdm.enable = true;
