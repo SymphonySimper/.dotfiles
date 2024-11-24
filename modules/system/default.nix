@@ -1,5 +1,4 @@
 {
-  inputs,
   lib,
   my,
   ...
@@ -18,7 +17,6 @@ in
     ./boot.nix
     ./font.nix
     ./locale.nix
-    ./networking.nix
     ./time.nix
     ./user.nix
 
@@ -26,6 +24,7 @@ in
     ./cli
     ./gui
     ./hardware
+    ./networking
   ];
 
   system.stateVersion = "23.11"; # Do no change
