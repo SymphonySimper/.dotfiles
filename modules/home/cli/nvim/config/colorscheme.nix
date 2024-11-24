@@ -10,6 +10,14 @@
           light = "latte";
           dark = "mocha";
         };
+        integrations = {
+          blink_cmp = true;
+          gitsigns = true;
+          harpoon = true;
+          mini.enabled = true;
+          treesitter = true;
+          telescope.enabled = true;
+        };
       };
     };
     opts = {
