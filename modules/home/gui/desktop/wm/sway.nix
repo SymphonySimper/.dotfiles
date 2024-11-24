@@ -32,15 +32,7 @@ in
     };
     xwayland = false;
     wrapperFeatures.gtk = true;
-    config = rec {
-      modifier = keys.mod;
-      left = keys.left;
-      down = keys.down;
-      up = keys.up;
-      right = keys.right;
-
-      menu = "${my.programs.launcher}";
-
+    config = {
       window = {
         border = 1;
         titlebar = false;
@@ -74,7 +66,7 @@ in
       };
 
       workspaceAutoBackAndForth = false;
-      floating.modifier = modifier;
+      floating.modifier = keys.mod;
       keybindings =
         (builtins.listToAttrs (
           builtins.map (
