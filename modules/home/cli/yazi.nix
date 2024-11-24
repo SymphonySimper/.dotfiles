@@ -22,12 +22,12 @@
         linemode = "size";
       };
       preview = {
-        max_height = 1920;
-        max_width = 1080;
-        ueberzug_scale = 1.5;
+        max_width = my.gui.display.width / 2;
+        max_height = my.gui.display.height / 2;
+        ueberzug_scale = my.gui.display.scale / 2;
         ueberzug_offset = [
-          (-28.0) # x
-          (0.0) # y
+          ((my.gui.display.scale * 10) + my.gui.display.scale) # x
+          (my.gui.display.scale) # y
           (0.0) # w
           (0.0) # h
         ];
