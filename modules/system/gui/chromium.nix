@@ -48,10 +48,10 @@ in
 # vist: chrome://flags/#enable-webrtc-allow-input-volume-adjustment
 # and set it to disabled
 {
-  options.my.system.chromium = {
+  options.my.programs.chromium = {
     enable = lib.mkEnableOption "Chromium";
   };
-  config = lib.mkIf config.my.system.chromium.enable {
+  config = lib.mkIf config.my.programs.chromium.enable {
     programs.chromium = {
       enable = true;
       extraOpts = {

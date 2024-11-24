@@ -30,7 +30,7 @@
       led.enable = true;
       logitech.enable = true;
     };
-    system.steam.display = {
+    programs.steam.display = {
       width = 1920;
       height = 1200;
       refreshRate = 60;

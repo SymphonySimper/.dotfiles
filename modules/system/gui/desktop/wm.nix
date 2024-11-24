@@ -15,10 +15,10 @@ let
   };
 in
 {
-  options.my.system.wm = {
+  options.my.programs.wm = {
     enable = lib.mkEnableOption "WM";
   };
-  config = lib.mkIf config.my.system.wm.enable {
+  config = lib.mkIf config.my.programs.wm.enable {
     programs.sway = {
       enable = true;
       wrapperFeatures.gtk = true;

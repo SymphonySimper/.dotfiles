@@ -46,7 +46,7 @@ in
         nvidia.enable = lib.mkDefault false;
       };
     };
-    system = {
+    programs = {
       docker.enable = lib.mkDefault false;
       vm.enable = lib.mkDefault false;
       steam.enable = lib.mkDefault false;

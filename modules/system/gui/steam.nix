@@ -1,6 +1,6 @@
 { lib, config, ... }:
 let
-  cfg = config.my.system.steam;
+  cfg = config.my.programs.steam;
 
   args = [
     "-f" # fullscreen
@@ -15,7 +15,7 @@ let
   ];
 in
 {
-  options.my.system.steam = {
+  options.my.programs.steam = {
     enable = lib.mkEnableOption "steam";
     display = lib.mkOption {
       description = "Display settings to be used in gamescope";

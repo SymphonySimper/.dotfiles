@@ -5,10 +5,10 @@
   ...
 }:
 {
-  options.my.system.vm = {
+  options.my.programs.vm = {
     enable = lib.mkEnableOption "VM";
   };
-  config = lib.mkIf config.my.system.vm.enable {
+  config = lib.mkIf config.my.programs.vm.enable {
     virtualisation.libvirtd.enable = true;
     programs.virt-manager.enable = true;
     services = {

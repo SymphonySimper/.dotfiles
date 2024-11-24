@@ -1,9 +1,9 @@
 { lib, config, ... }:
 {
-  options.my.system.docker = {
+  options.my.programs.docker = {
     enable = lib.mkEnableOption "Docker";
   };
-  config = lib.mkIf config.my.system.docker.enable {
+  config = lib.mkIf config.my.programs.docker.enable {
     virtualisation.docker = {
       enable = true;
       enableOnBoot = lib.mkForce false;

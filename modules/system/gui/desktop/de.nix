@@ -5,11 +5,11 @@
   ...
 }:
 {
-  options.my.system.de = {
+  options.my.programs.de = {
     enable = lib.mkEnableOption "DE";
   };
 
-  config = lib.mkIf config.my.system.de.enable {
+  config = lib.mkIf config.my.programs.de.enable {
     services.xserver = {
       enable = true;
       displayManager.gdm.enable = true;
