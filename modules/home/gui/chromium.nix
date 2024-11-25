@@ -68,6 +68,7 @@ in
 
     # Web Apps
     xdg.desktopEntries = mkDesktopEntries (
+
       [
         [
           "monkeytype"
@@ -83,18 +84,14 @@ in
           false
         ]
       ]
-      ++ (
-        if my.programs.music == "yt" then
-          [
-            [
-              "ytmusic"
-              "https://music.youtube.com/"
-              false
-            ]
-          ]
-        else
-          [ ]
-      )
+      ++ (lib.optionals (my.programs.music == "yt") [
+        [
+          "ytmusic"
+          "https://music.youtube.com/"
+          false
+        ]
+      ])
+
     );
   };
 }
