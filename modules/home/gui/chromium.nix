@@ -77,6 +77,11 @@ in
           "excalidraw"
           "https://excalidraw.com/"
         ]
+        [
+          "whatsapp"
+          "https://web.whatsapp.com/"
+          false
+        ]
       ]
       ++ (
         if my.programs.music == "yt" then
