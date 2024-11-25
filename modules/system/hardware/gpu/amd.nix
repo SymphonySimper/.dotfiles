@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
   options.my.hardware.gpu.amd = {
     enable = lib.mkEnableOption "AMD GPU";
@@ -8,7 +13,15 @@
       graphics = {
         enable = true;
         enable32Bit = true;
+        extraPackages = with pkgs; [
+          vaapiVdpau
+          libvdpau-va-gl
+          vulkan-loader
+          vulkan-validation-layers
+          vulkan-extension-layer
+        ];
       };
+
       amdgpu.initrd.enable = true;
     };
   };
