@@ -97,6 +97,10 @@ in
           bind-key -T copy-mode-vi "Space" send -X halfpage-down
           bind-key -T copy-mode-vi "Bspace" send -X halfpage-up
 
+          ## Open program in new window
+          bind -r g new-window -c "#{pane_current_path}" "${lib.getExe pkgs.lazygit}"
+          bind -r y new-window -c "#{pane_current_path}" "${lib.getExe pkgs.yazi}"
+
           ## easy-to-remember split pane commands and open panes in cwd
           unbind '"'
           unbind %
