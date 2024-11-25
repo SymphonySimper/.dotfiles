@@ -83,6 +83,11 @@ in
           "https://web.whatsapp.com/"
           false
         ]
+        [
+          "lichess"
+          "https://lichess.org/"
+          false
+        ]
       ]
       ++ (lib.optionals (my.programs.music == "yt") [
         [

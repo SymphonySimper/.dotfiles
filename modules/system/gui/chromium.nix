@@ -179,6 +179,10 @@ in
             "Nix Manual"
             "https://teu5us.github.io/nix-lib.html#nix-builtin-functions"
           ]
+          [
+            "Lichess"
+            "https://lichess.org"
+          ]
         ];
         ExtensionSettings = mkExtensionSettings [
           [
