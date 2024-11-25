@@ -36,14 +36,9 @@
     };
   };
 
-  boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
-    initrd = {
-      availableKernelModules = [
-        "nvme"
-        "xhci_pci"
-        "usbhid"
-      ];
-    };
-  };
+  boot.initrd.availableKernelModules = [
+    "nvme"
+    "xhci_pci"
+    "usbhid"
+  ];
 }
