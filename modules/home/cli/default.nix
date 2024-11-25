@@ -1,16 +1,15 @@
 { pkgs, ... }:
 {
   imports = [
-    ./btop.nix
     ./eza.nix
     ./fd.nix
     ./fzf.nix
     ./git.nix
-    ./htop.nix
     ./man.nix
     ./ripgrep.nix
     ./ssh.nix
     ./tmux.nix
+    ./top.nix
     ./yazi.nix
     ./zoxide.nix
 
