@@ -109,9 +109,6 @@ in
           bind | split-window -hc "#{pane_current_path}"
           bind c new-window -c "#{pane_current_path}"
 
-          ## Maximize pane
-          bind -r m resize-pane -Z
-
           ## Open a pane with 30% width
           bind -r '"' split-window -h -l '30%' -c "#{pane_current_path}"
           bind -r "'" split-window -v -l '20%' -c "#{pane_current_path}"
