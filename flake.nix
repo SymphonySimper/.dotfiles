@@ -104,14 +104,14 @@
 
       mkPkgs =
         {
-          system,
+          my,
           overlays ? [ ],
         }:
         (import nixpkgs {
-          inherit system;
+          system = my.system;
           config.allowUnfree = true;
           overlays = [
-            (import ./overlays/lib.nix)
+            (import ./overlays/lib.nix { inherit my; })
           ] ++ overlays;
         });
 
@@ -128,7 +128,7 @@
         in
         home-manager.lib.homeManagerConfiguration rec {
           pkgs = mkPkgs {
-            system = my.system;
+            inherit my;
             overlays = [
               # (import ./overlays/nvim-plugins.nix { inherit inputs; })
             ];
@@ -157,7 +157,7 @@
         in
         lib.nixosSystem rec {
           system = my.system;
-          pkgs = mkPkgs { system = my.system; };
+          pkgs = mkPkgs { inherit my; };
           lib = pkgs.lib;
           modules = [ ./profiles/${my.profile}/system.nix ];
           specialArgs = {
