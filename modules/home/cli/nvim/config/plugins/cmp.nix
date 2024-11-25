@@ -8,6 +8,7 @@
         nerd_font_variant = "mono";
         keymap.preset = "default";
         fuzzy.max_items = 20;
+        windows.autocomplete.selection = "manual";
       };
     };
   };
