@@ -31,7 +31,7 @@ in
         enable = true;
         variables = [ "--all" ];
       };
-      xwayland = false;
+      xwayland = true;
       wrapperFeatures.gtk = true;
       config = {
         window = {
