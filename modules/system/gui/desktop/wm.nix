@@ -5,12 +5,12 @@
   ...
 }:
 {
-  options.my.programs.wm.enable = lib.mkOption {
-    description = "WM";
+  options.my.programs.wm.enableLogin = lib.mkOption {
+    description = "WM Login";
     type = lib.types.bool;
     default = (my.gui.desktop.enable && my.gui.desktop.wm);
   };
-  config = lib.mkIf config.my.programs.wm.enable (
+  config = lib.mkIf (my.gui.desktop.enable && my.gui.desktop.wm) (
     {
       programs.sway = {
         enable = true;
@@ -25,13 +25,14 @@
       environment = {
         sessionVariables.NIXOS_OZONE_WL = "1";
 
-        loginShellInit = lib.my.mkTTYLaunch {
-          command = "sway";
-          dbus = false;
-        };
+        loginShellInit = lib.mkIf config.my.programs.wm.enableLogin (
+          lib.my.mkTTYLaunch {
+            command = "sway";
+            dbus = false;
+          }
+        );
       };
       security.polkit.enable = true;
-
     }
     // (lib.my.mkSkipUsername { tty = 1; })
   );

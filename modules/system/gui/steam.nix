@@ -51,49 +51,42 @@ in
     specialisation = {
       steam = {
         inheritParentConfig = true;
-        configuration = (
-          {
-            my = {
-              programs.wm.enable = false;
-              hardware.powerManagement.enable = false;
-            };
-            security.polkit.enable = true;
+        configuration = {
+          my = {
+            programs.wm.enableLogin = false;
+            hardware.powerManagement.enable = false;
+          };
 
-            # boot.kernelPackages = pkgs.linuxPackages_zen;
-
-            # Refer: https://nixos.wiki/wiki/Steam
-            hardware.xone.enable = true;
-            programs.steam = {
+          # Refer: https://nixos.wiki/wiki/Steam
+          programs.steam = {
+            enable = true;
+            remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+            dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+            localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+            gamescopeSession = {
               enable = true;
-              remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-              dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-              localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
-              gamescopeSession = {
-                enable = true;
-                inherit args;
-                # env = {
-                #   LD_PRELOAD = "";
-                # };
-              };
-            };
-
-            programs.gamescope = {
-              enable = true;
-              capSysNice = false;
-              # set launch options to `LD_PRELOAD="" gamescope -- %command%`
               inherit args;
+              # env = {
+              #   LD_PRELOAD = "";
+              # };
             };
+          };
 
-            environment = {
-              loginShellInit = lib.my.mkTTYLaunch {
-                command = "steam-gamescope";
-                dbus = true;
-                tty = 1;
-              };
+          programs.gamescope = {
+            enable = true;
+            capSysNice = false;
+            # set launch options to `LD_PRELOAD="" gamescope -- %command%`
+            inherit args;
+          };
+
+          environment = {
+            loginShellInit = lib.my.mkTTYLaunch {
+              command = "steam-gamescope";
+              dbus = true;
+              tty = 1;
             };
-          }
-          // (lib.my.mkSkipUsername { tty = 1; })
-        );
+          };
+        };
       };
     };
   };
