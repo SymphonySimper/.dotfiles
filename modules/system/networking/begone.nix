@@ -26,5 +26,5 @@
   "www.crunchyroll.com"
 
   # Misc
-  "store.steampowered.com"
+  # "store.steampowered.com"
 ]
