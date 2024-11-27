@@ -3,7 +3,7 @@
   programs.nixvim.plugins = {
     lsp = {
       enable = true;
-      inlayHints = true;
+      inlayHints = false;
       keymaps = {
         silent = true;
 
@@ -100,7 +100,6 @@
             gopls = {
               completeUnimported = true;
             };
-
           };
         };
         templ.enable = true;
