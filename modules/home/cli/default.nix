@@ -1,7 +1,6 @@
 { pkgs, ... }:
 {
   imports = [
-    ./eza.nix
     ./fd.nix
     ./fzf.nix
     ./git.nix
