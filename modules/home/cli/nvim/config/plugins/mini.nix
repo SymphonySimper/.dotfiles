@@ -11,11 +11,19 @@ in
         ''
           local my_mini_ai = require("mini.ai")
           local my_mini_extra = require("mini.extra")
+          local my_mini_hipatterns = require("mini.hipatterns")
         '';
       modules = {
         icons = { };
 
         extra = { };
+
+        hipatterns = {
+          highlighters = {
+            # Highlight hex color strings (`#rrggbb`) using that color
+            hex_color = mkRaw ''my_mini_hipatterns.gen_highlighter.hex_color()'';
+          };
+        };
 
         ai = {
           # refer: https://www.lazyvim.org/plugins/coding#miniai
