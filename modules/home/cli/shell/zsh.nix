@@ -1,4 +1,40 @@
-{ config, ... }:
+{ config, my, ... }:
+let
+  customPrompt =
+    # sh
+    ''
+      [[ $COLORTERM = *(24bit|truecolor)* ]] || zmodload zsh/nearcolor
+
+      grey_bracket() {
+        echo "%{%F{${my.theme.color.surface2}}%}$1%{%f%}";
+      }
+
+      bracketed_value(){
+        echo "$(grey_bracket '(')%B$1%b$(grey_bracket ')')"
+      }
+
+      if [ -n "$SSH_CONNECTION" ]; then
+        cs="$(bracketed_value '%{%F{${my.theme.color.green}}%}ssh%{%f%}') "
+      fi
+
+      # function to get current git branch
+      get_git_branch(){
+        branch_ref=$(git symbolic-ref --short HEAD 2> /dev/null)
+        ref="%{%F{${my.theme.color.pink}}%}$branch_ref%{%f%}"
+        [ $(echo $branch_ref |wc -w) -eq 1 ] && branch=" $(bracketed_value $ref)" || branch=""
+        echo $branch
+      }
+
+      # Should be in single quotes to make re run on directory changes
+      # setopt PROMPT_SUBST enable to run commands in PROMPT when enclosed with single quotes
+      setopt PROMPT_SUBST
+      # PROMPT='%B%F{240}%~$(get_git_branch)%f%B
+      # ''${cs}>%b '
+
+      PROMPT='%{%F{${my.theme.color.lavender}}%}%~%{%f%}$(get_git_branch)
+      ''${cs}%{%F{${my.theme.color.lavender}}%}%B>%b%{%f%} '
+    '';
+in
 {
   programs.zsh = {
     enable = true;
@@ -18,6 +54,8 @@
       ''
         # Prompt
         precmd(){ precmd(){ echo ; }; }
+
+        ${if !config.programs.starship.enable then customPrompt else ""}
 
         # Edit line in vim with ctrl-e:
         autoload edit-command-line; zle -N edit-command-line
