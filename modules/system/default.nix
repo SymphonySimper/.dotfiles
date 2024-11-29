@@ -38,6 +38,7 @@ in
       led.enable = lib.mkDefault false;
       logitech.enable = lib.mkDefault false;
       ssd.enable = lib.mkDefault false;
+      bluetooth.enable = lib.mkDefault false;
       audio.enable = lib.mkDefault my.gui.desktop.enable;
       powerManagement.enable = lib.mkDefault my.gui.desktop.enable;
       cpu.amd.enable = lib.mkDefault false;
