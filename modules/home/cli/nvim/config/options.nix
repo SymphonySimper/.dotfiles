@@ -45,5 +45,6 @@
 
     # misc
     termguicolors = true;
+    swapfile = false; # Turn off swapfile
   };
 }
