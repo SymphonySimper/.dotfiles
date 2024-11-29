@@ -3,8 +3,6 @@ let
   customPrompt =
     # sh
     ''
-      [[ $COLORTERM = *(24bit|truecolor)* ]] || zmodload zsh/nearcolor
-
       grey_bracket() {
         echo "%{%F{${my.theme.color.surface2}}%}$1%{%f%}";
       }
@@ -64,6 +62,8 @@ in
     enableCompletion = true;
     completionInit = # sh
       ''
+        [[ $COLORTERM = *(24bit|truecolor)* ]] || zmodload zsh/nearcolor
+
         autoload -U compinit && compinit -u
         zstyle ':completion:*' menu select
         # Auto complete with case insenstivity
