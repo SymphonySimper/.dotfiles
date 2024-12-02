@@ -14,6 +14,7 @@
           lua
           markdown
           nix
+          rust
           python
 
           http
