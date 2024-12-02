@@ -77,6 +77,7 @@ in
         [
           "excalidraw"
           "https://excalidraw.com/"
+          false
         ]
         [
           "whatsapp"
