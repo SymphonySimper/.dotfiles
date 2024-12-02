@@ -5,6 +5,7 @@
     ./colorscheme.nix
     ./commands.nix
     ./diagnostics.nix
+    ./filetype.nix
     ./keymaps.nix
     ./options.nix
 
