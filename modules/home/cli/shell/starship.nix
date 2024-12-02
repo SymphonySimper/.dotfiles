@@ -4,6 +4,8 @@
     enable = true;
     settings = {
       add_newline = false;
+      scan_timeout = 30;
+      command_timeout = 80; # default 500
       format = lib.concatStrings [
         "$all"
         "$fill"
