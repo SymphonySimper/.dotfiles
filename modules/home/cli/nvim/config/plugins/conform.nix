@@ -1,7 +1,5 @@
 { lib, pkgs, ... }:
 let
-  prettier = [ "prettier" ];
-  biome = [ "biome" ];
   timeout = 3000;
 
   mkFormatter = package: {
@@ -13,7 +11,7 @@ in
     plugins.conform-nvim = {
       enable = true;
       settings = {
-        notify_on_error = false;
+        notify_on_error = true;
         notify_no_formatters = false;
         default_format_opts = {
           lsp_format = "fallback";
@@ -24,26 +22,30 @@ in
         };
         format_on_save = null;
         format_after_save = null;
-        formatters_by_ft = {
+        formatters_by_ft = rec {
           nix = [ "nixfmt" ];
           sh = [ "shfmt" ];
           lua = [ "stylua" ];
           python = [ "ruff_format" ];
-          javascript = prettier;
-          typescript = prettier;
-          svelte = prettier;
-          css = prettier;
-          html = prettier;
-          markdown = prettier;
-          json = biome;
-          jsonc = biome;
+
+          javascript = [ "prettier" ];
+          typescript = javascript;
+          svelte = javascript;
+          css = javascript;
+          html = javascript;
+          markdown = javascript;
+
+          json = ["biome"];
+          jsonc = json;
+
           go = [
             "gofmt"
             "goimports"
           ];
           templ = [ "gofmt" ];
+
           http = [ "kulala" ];
-          rest = [ "kulala" ];
+          rest = http;
         };
         formatters = {
           injected = {
