@@ -35,7 +35,7 @@ in
           html = javascript;
           markdown = javascript;
 
-          json = ["biome"];
+          json = [ "biome" ];
           jsonc = json;
 
           go = [
@@ -44,7 +44,7 @@ in
           ];
           templ = [ "gofmt" ];
 
-          http = [ "kulala" ];
+          http = [ "kulala-fmt" ];
           rest = http;
 
           just = [ "just" ];
@@ -61,12 +61,7 @@ in
           stylua = mkFormatter pkgs.stylua;
           goimports = mkFormatter "${pkgs.gotools}/bin/goimports";
           biome = mkFormatter pkgs.biome;
-          kulala = mkFormatter pkgs.kulala-fmt // {
-            args = [
-              "$FILENAME"
-            ];
-            stdin = false;
-          };
+          kulala-fmt = mkFormatter pkgs.kulala-fmt;
           just = mkFormatter pkgs.just;
         };
       };
