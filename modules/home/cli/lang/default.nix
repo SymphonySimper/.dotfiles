@@ -3,6 +3,7 @@
   imports = [
     ./go.nix
     ./js.nix
+    ./just.nix
     ./nix.nix
     ./python.nix
     ./rust.nix

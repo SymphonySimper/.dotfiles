@@ -46,6 +46,8 @@ in
 
           http = [ "kulala" ];
           rest = http;
+
+          just = [ "just" ];
         };
         formatters = {
           injected = {
@@ -65,6 +67,7 @@ in
             ];
             stdin = false;
           };
+          just = mkFormatter pkgs.just;
         };
       };
     };

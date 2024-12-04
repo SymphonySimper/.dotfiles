@@ -16,6 +16,7 @@
           nix
           rust
           python
+          just
 
           http
           html
