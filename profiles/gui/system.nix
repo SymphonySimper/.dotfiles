@@ -31,10 +31,7 @@
     };
     programs.steam = {
       enable = true;
-      display = {
-        width = 1920;
-        height = 1200;
-      };
+      display.height = 1200;
     };
   };
 
