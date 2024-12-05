@@ -13,25 +13,21 @@
       excludePackages = [ pkgs.xterm ];
     };
 
-    environment.gnome.excludePackages =
-      with pkgs.gnome;
-      [
-        gnome-characters
-        gnome-contacts
-        gnome-maps
-        gnome-music
-        gnome-shell-extensions
-        gnome-weather
-      ]
-      ++ (with pkgs; [
-        epiphany
-        geary
-        gnome-connections
-        gnome-text-editor
-        gnome-tour
-        simple-scan
-        yelp
-      ]);
+    environment.gnome.excludePackages = with pkgs; [
+      epiphany
+      geary
+      gnome-characters
+      gnome-connections
+      gnome-contacts
+      gnome-maps
+      gnome-music
+      gnome-shell-extensions
+      gnome-text-editor
+      gnome-tour
+      gnome-weather
+      simple-scan
+      yelp
+    ];
 
     environment.systemPackages = with pkgs; [
       foliate
