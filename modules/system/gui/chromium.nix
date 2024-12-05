@@ -150,6 +150,11 @@ in
             "Gemini"
             "gemini.google.com/app?hl=en-IN"
           ]
+          [
+            "Lichess"
+            "https://lichess.org"
+          ]
+
           # Dev
           [
             "Google Fonts"
@@ -180,8 +185,8 @@ in
             "https://teu5us.github.io/nix-lib.html#nix-builtin-functions"
           ]
           [
-            "Lichess"
-            "https://lichess.org"
+            "regex101"
+            "https://regex101.com"
           ]
         ];
         ExtensionSettings = mkExtensionSettings [
