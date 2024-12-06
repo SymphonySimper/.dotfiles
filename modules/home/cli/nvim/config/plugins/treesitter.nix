@@ -16,7 +16,9 @@
           nix
           rust
           python
+
           just
+          make
 
           http
           html
