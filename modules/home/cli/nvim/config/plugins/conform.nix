@@ -11,13 +11,14 @@ in
     plugins.conform-nvim = {
       enable = true;
       settings = {
+        log_level = "error";
         notify_on_error = true;
         notify_no_formatters = false;
         default_format_opts = {
           lsp_format = "fallback";
           async = false;
           quiet = false;
-          stop_after_first = true;
+          stop_after_first = false;
           timeout_ms = timeout;
         };
         format_on_save = null;
@@ -48,6 +49,8 @@ in
           rest = http;
 
           just = [ "just" ];
+
+          "*" = [ "injected" ];
         };
         formatters = {
           injected = {
