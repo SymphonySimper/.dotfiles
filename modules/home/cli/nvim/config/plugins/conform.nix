@@ -35,6 +35,7 @@ in
           css = javascript;
           html = javascript;
           markdown = javascript;
+          yaml = javascript;
 
           json = [ "biome" ];
           jsonc = json;
@@ -50,7 +51,7 @@ in
 
           just = [ "just" ];
 
-          "*" = [ "injected" ];
+          # "*" = [ "injected" ];
         };
         formatters = {
           injected = {
