@@ -12,7 +12,6 @@
   home.packages = with pkgs; [
     gcc
     gnumake
-    watchman
     (google-cloud-sdk.withExtraComponents [ google-cloud-sdk.components.app-engine-go ])
   ];
 }
