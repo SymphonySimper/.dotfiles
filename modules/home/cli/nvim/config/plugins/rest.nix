@@ -19,6 +19,10 @@ let
 in
 {
   programs.nixvim = {
+    filetype.extension = {
+      "http" = "http";
+    };
+
     plugins.kulala = {
       enable = true;
 
