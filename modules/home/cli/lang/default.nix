@@ -12,6 +12,7 @@
   home.packages = with pkgs; [
     gcc
     gnumake
+    inotify-tools
     (google-cloud-sdk.withExtraComponents [ google-cloud-sdk.components.app-engine-go ])
   ];
 }
