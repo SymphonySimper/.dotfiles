@@ -66,68 +66,70 @@ in
       };
     };
 
-    keymaps = (
-      mkKeymaps [
-        [
-          "run"
-          "r"
-          "Run request under the cursor"
+    files."ftplugin/http.lua" = {
+      keymaps = (
+        mkKeymaps [
+          [
+            "run"
+            "r"
+            "Run request under the cursor"
+          ]
+          [
+            "replay"
+            "l"
+            "Re-run latest request"
+          ]
+          [
+            "scratchpad"
+            "S"
+            "Kulala scratchpad"
+          ]
+          [
+            "copy"
+            "Y"
+            "Copy as curl"
+          ]
+          [
+            "from_curl"
+            "P"
+            "Paste from curl"
+          ]
+          [
+            "inspect"
+            "i"
+            "Inspect current request"
+          ]
+          [
+            "jump_prev"
+            "p"
+            "Jump to prev request"
+          ]
+          [
+            "jump_next"
+            "n"
+            "Jump to next request"
+          ]
+          [
+            "close"
+            "q"
+            "Close window"
+          ]
+          [
+            "show_stats"
+            "s"
+            "Show stats"
+          ]
+          [
+            "toggle_view"
+            "t"
+            "Toggle headers/body"
+          ]
         ]
-        [
-          "replay"
-          "l"
-          "Re-run latest request"
-        ]
-        [
-          "scratchpad"
-          "S"
-          "Kulala scratchpad"
-        ]
-        [
-          "copy"
-          "Y"
-          "Copy as curl"
-        ]
-        [
-          "from_curl"
-          "P"
-          "Paste from curl"
-        ]
-        [
-          "inspect"
-          "i"
-          "Inspect current request"
-        ]
-        [
-          "jump_prev"
-          "p"
-          "Jump to prev request"
-        ]
-        [
-          "jump_next"
-          "n"
-          "Jump to next request"
-        ]
-        [
-          "close"
-          "q"
-          "Close window"
-        ]
-        [
-          "show_stats"
-          "s"
-          "Show stats"
-        ]
-        [
-          "toggle_view"
-          "t"
-          "Toggle headers/body"
-        ]
-      ]
-    );
+      );
+    };
 
-    # for rest.nvim
     # extraFiles = {
+    # for rest.nvim
     #   "ftplugin/json.lua".text = # lua
     #     ''
     #       vim.bo.formatexpr = ""
