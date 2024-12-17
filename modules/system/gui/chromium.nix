@@ -192,7 +192,10 @@ in
             "regex101"
             "https://regex101.com"
           ]
-
+          [
+            "leetcode"
+            "https://leetcode.com/"
+          ]
         ];
         ExtensionSettings = mkExtensionSettings [
           [
