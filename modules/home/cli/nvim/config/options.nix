@@ -6,7 +6,7 @@
     number = true;
     relativenumber = true;
     ## wrap
-    wrap = true;
+    wrap = false;
     linebreak = true;
     breakindent = true;
     ## scroll
