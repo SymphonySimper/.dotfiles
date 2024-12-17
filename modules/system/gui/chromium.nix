@@ -62,12 +62,12 @@ in
           ]
           [
             "Nix Packages"
-            "nix"
+            "nix-pkg"
             "https://search.nixos.org/packages?channel=unstable&from=0&size=50&sort=relevance&type=packages&query={searchTerms}"
           ]
           [
             "Nix Options"
-            "nix-options"
+            "nix-option"
             "https://search.nixos.org/options?channel=unstable&from=0&size=50&sort=relevance&type=packages&query={searchTerms}"
           ]
           [
