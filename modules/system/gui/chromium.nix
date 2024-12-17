@@ -185,9 +185,14 @@ in
             "https://teu5us.github.io/nix-lib.html#nix-builtin-functions"
           ]
           [
+            "Nix Builtins"
+            "https://nix.dev/manual/nix/latest/language/builtins.html"
+          ]
+          [
             "regex101"
             "https://regex101.com"
           ]
+
         ];
         ExtensionSettings = mkExtensionSettings [
           [
