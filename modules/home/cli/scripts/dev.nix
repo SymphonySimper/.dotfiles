@@ -1,6 +1,6 @@
 { pkgs, my, ... }:
 let
-  fzf = "${pkgs.fzf}/bin/fzf --scheme=path";
+  fzf = "${pkgs.fzf}/bin/fzf-tmux -p --scheme=path";
   tmux = "${pkgs.tmux}/bin/tmux";
   find = "${pkgs.findutils}/bin/find";
   ## coreutils
