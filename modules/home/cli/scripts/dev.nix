@@ -57,6 +57,7 @@ in
 
   if [[ $current_window_count -eq 1 ]]; then
     ${tmux} kill-window -t "$selected_dir":1
+    ${tmux} select-window -t "$selected_dir":1
   else
     switch_session "$selected_dir"
   fi
