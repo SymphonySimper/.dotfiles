@@ -72,6 +72,7 @@
       gce = "git checkout";
       gsh = "git switch";
       gR = "git reset --hard HEAD";
+      gRo = "git reset --hard origin/$(git branch --show-current)";
       gcln = "git clean -fdx";
       gz = "lazygit";
     };
