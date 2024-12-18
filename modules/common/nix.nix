@@ -2,11 +2,14 @@
   lib,
   config,
   inputs,
+  my,
   ...
 }:
 let
   frequency = "weekly";
   system = config.my.common.system;
+
+  unsafeMkIf = condition: content: if condition then content else { };
 in
 {
   options.my.common = {
@@ -15,42 +18,57 @@ in
     };
   };
   config = {
-    nix =
+    nix = lib.mkMerge [
       {
         # Path for pkgs
         nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
         # Garbage Collection
-        gc =
+        gc = lib.mkMerge [
           {
             automatic = true;
             options = "--delete-older-than 14d";
           }
-          // (
-            if system then
-              {
-                dates = frequency;
-              }
-            else
-              {
-                inherit frequency;
-              }
-          );
-      }
-      // (
-        if system then
-          {
-            # Strage optimisation
-            optimise.automatic = true;
+
+          (unsafeMkIf system {
+            dates = frequency;
+          })
+
+          (unsafeMkIf (!system) {
+            inherit frequency;
+          })
+        ];
+
+        settings = lib.mkMerge [
+          (unsafeMkIf system {
+            auto-optimise-store = true;
+
+            trusted-users = [
+              "root"
+              my.name
+            ];
+
+            substituters = [
+              "https://nix-community.cachix.org/"
+            ];
+
+            trusted-public-keys = [
+              "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+            ];
 
             # Enable flakse
-            settings.experimental-features = [
+            experimental-features = [
               "nix-command"
               "flakes"
             ];
-          }
-        else
-          { }
-      );
+          })
+        ];
+      }
+
+      (unsafeMkIf (system) {
+        # Strage optimisation
+        optimise.automatic = true;
+      })
+    ];
   };
 }
