@@ -1,4 +1,5 @@
 {
+  pkgs,
   lib,
   config,
   inputs,
@@ -20,6 +21,8 @@ in
   config = {
     nix = lib.mkMerge [
       {
+        package = pkgs.nix;
+
         # Path for pkgs
         nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
@@ -40,7 +43,9 @@ in
         ];
 
         settings = lib.mkMerge [
-          (unsafeMkIf system {
+          {
+            show-trace = true;
+
             auto-optimise-store = true;
 
             trusted-users = [
@@ -61,7 +66,7 @@ in
               "nix-command"
               "flakes"
             ];
-          })
+          }
         ];
       }
 
