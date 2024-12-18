@@ -10,7 +10,42 @@ let
   frequency = "weekly";
   system = config.my.common.system;
 
-  unsafeMkIf = condition: content: if condition then content else { };
+  caches = [
+    {
+      url = "https://cache.nixos.org";
+      key = "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=";
+      condition = (!system);
+    }
+    {
+      url = "https://nix-community.cachix.org";
+      key = "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=";
+      priority = 100;
+    }
+  ];
+
+  mkCaches =
+    type:
+    lib.mkAfter (
+      builtins.concatLists (
+        builtins.map (
+          cache:
+          let
+            condition =
+              if builtins.hasAttr "condition" cache then (builtins.getAttr "condition" cache) else true;
+            priority =
+              if builtins.hasAttr "priority" cache then
+                "?priority=${builtins.toString (builtins.getAttr "priority" cache)}"
+              else
+                "";
+
+            value = if type == "url" then "${cache.${type}}${priority}" else cache.${type};
+          in
+          lib.lists.optionals condition [ value ]
+        ) caches
+      )
+    );
+
+  mkUnsafeIf = condition: content: if condition then content else { };
 in
 {
   options.my.common = {
@@ -33,11 +68,11 @@ in
             options = "--delete-older-than 14d";
           }
 
-          (unsafeMkIf system {
+          (mkUnsafeIf system {
             dates = frequency;
           })
 
-          (unsafeMkIf (!system) {
+          (mkUnsafeIf (!system) {
             inherit frequency;
           })
         ];
@@ -53,13 +88,24 @@ in
               my.name
             ];
 
-            substituters = [
-              "https://nix-community.cachix.org/"
-            ];
+            # substituters = lib.mkBefore builtins.concatLists [
+            #   (lib.optionals (!system) [
+            #     caches.nixos.url
+            #   ])
+            #   [ caches.nix-community.url ]
+            # ];
 
-            trusted-public-keys = [
-              "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-            ];
+            substituters = mkCaches "url";
+            # trusted-public-keys = lib.mkBefore builtins.concatLists [
+            #   (lib.optionals (!system) [
+            #     caches.nixos.key
+            #   ])
+            #   [
+            #     caches.nix-community.key
+            #   ]
+            # ];
+
+            trusted-public-keys = mkCaches "key";
 
             # Enable flakse
             experimental-features = [
@@ -70,7 +116,7 @@ in
         ];
       }
 
-      (unsafeMkIf (system) {
+      (mkUnsafeIf (system) {
         # Strage optimisation
         optimise.automatic = true;
       })
