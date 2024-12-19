@@ -16,6 +16,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixpkgs-update = {
+      url = "github:nix-community/nixpkgs-update";
+    };
+
     catppuccin.url = "github:catppuccin/nix";
 
     # yazi.url = "github:sxyazi/yazi";
