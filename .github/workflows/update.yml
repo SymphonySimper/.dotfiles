@@ -1,34 +1,20 @@
 name: Nix Flake Update
 
 on:
+  workflow_dispatch:
   schedule:
     # Runs at 00:00 UTC on the 5th day of every month
     - cron: "0 0 5 * *"
-  workflow_dispatch:
 
 jobs:
-  update-flake:
+  lockfile:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Set up Nix
-        uses: cachix/install-nix-action@v30
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+      - name: Update flake.lock
+        uses: DeterminateSystems/update-flake-lock@main
         with:
-          install_url: https://nixos.org/nix/install
-          github_access_token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Run nix flake update
-        run: nix flake update
-
-      - name: Commit and push changes
-        run: |
-          git config --local user.name "github-actions[bot]"
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git add flake.lock
-          git commit -m "feat(flake): update"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          commit-msg: "feat(flake)!: update"
