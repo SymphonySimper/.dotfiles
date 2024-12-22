@@ -18,3 +18,4 @@ jobs:
         uses: DeterminateSystems/update-flake-lock@main
         with:
           commit-msg: "feat(flake)!: update"
+          pr-title: "Update flake"
