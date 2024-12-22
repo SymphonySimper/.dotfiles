@@ -12,10 +12,18 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Get current date
+        id: date
+        run: echo "DATE=$(date +'%d-%m-%Y')" >> $GITHUB_ENV
+
       - name: Update flake.lock
         uses: DeterminateSystems/update-flake-lock@main
         with:
+          base: "main"
+          branch: "feat/update-flake-${{ env.DATE }}"
           commit-msg: "feat(flake)!: update"
-          pr-title: "Update flake"
+          pr-title: "Update flake ${{ env.DATE }}"
