@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   my,
   ...
@@ -181,34 +180,10 @@
           }
         ];
       };
-      plugin = {
-        prepend_fetchers = [
-          {
-            id = "git";
-            name = "*";
-            run = "git";
-          }
-          {
-            id = "git";
-            name = "*/";
-            run = "git";
-          }
-        ];
-      };
-    };
-
-    plugins = {
-      max-preview = "${inputs.yazi-plugins}/max-preview.yazi/";
-      git = "${inputs.yazi-plugins}/git.yazi/";
     };
 
     keymap = {
       manager.prepend_keymap = [
-        {
-          on = "T";
-          run = "plugin --sync max-preview";
-          desc = "Maximize or restore preview";
-        }
         {
           on = "<C-n>";
           run = # sh
@@ -219,11 +194,6 @@
         }
       ];
     };
-
-    initLua = # lua
-      ''
-        require("git"):setup()
-      '';
   };
 
   home.packages = [ pkgs.ueberzugpp ];

@@ -453,8 +453,7 @@
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-update": "nixpkgs-update",
-        "nixvim": "nixvim",
-        "yazi-plugins": "yazi-plugins"
+        "nixvim": "nixvim"
       }
     },
     "runtimeDeps": {
@@ -557,22 +556,6 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
-        "type": "github"
-      }
-    },
-    "yazi-plugins": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1733361213,
-        "narHash": "sha256-IRv75b3SR11WfLqGvQZhmBo1BuR5zsbZxfZIKDVpt9k=",
-        "owner": "yazi-rs",
-        "repo": "plugins",
-        "rev": "540f4ea6d475c81cba8dac252932768fbd2cfd86",
-        "type": "github"
-      },
-      "original": {
-        "owner": "yazi-rs",
-        "repo": "plugins",
         "type": "github"
       }
     }

@@ -22,12 +22,6 @@
 
     catppuccin.url = "github:catppuccin/nix";
 
-    # yazi.url = "github:sxyazi/yazi";
-    yazi-plugins = {
-      url = "github:yazi-rs/plugins";
-      flake = false;
-    };
-
     # Neovim
     nixvim = {
       url = "github:nix-community/nixvim";
