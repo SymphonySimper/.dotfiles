@@ -29,6 +29,7 @@ class Git:
     def __init__(self, repo: str, location: str, remote_name: str = "origin") -> None:
         self.repo: str = repo
 
+        self.main_branch = "master"
         self.remote_name: str = remote_name
 
         self.location: str = location
@@ -39,8 +40,16 @@ class Git:
 
         if not os.path.exists(self.repo_location):
             self.clone()
+            run("git", "remote", "add", "upstream", "git@github.com:NixOS/nixpkgs.git")
+            run("git", "fetch", "upstream")
+            self.switch(self.main_branch)
+            run("git", "rebase", f"upstream/{self.main_branch}")
+            self.push("-f", self.remote_name, self.main_branch)
 
         self._cd_repo()
+
+        self.pull("")
+        self.switch(self.main_branch)
 
     def _cd_repo(self) -> None:
         os.chdir(self.repo_location)
@@ -52,8 +61,8 @@ class Git:
     def reset(self) -> None:
         run("git", "reset", "--hard", "HEAD")
 
-    def pull(self) -> None:
-        run("git", "pull")
+    def pull(self, *args: str) -> None:
+        run("git", "pull", *args)
 
     def push(self, *args: str) -> None:
         run("git", "push", *args)
@@ -101,3 +110,26 @@ class Git:
             self.delete_branch(branch)
 
         self.switch(branch, create=True)
+
+
+package = sys.argv[1]
+
+git = Git(NIXPKGS_REPO, NIXPKGS_PARENT_DIR)
+git.create_branch(f"feat/update-{package}")
+run(
+    "nix-shell",
+    "maintainers/scripts/update.nix",
+    # package to update
+    "--argstr",
+    "package",
+    package,
+    # commit after update
+    "--argstr",
+    "commit",
+    "true",
+    # skip `y` prompt
+    "--argstr",
+    "skip-prompt",
+    "true",
+)
+git.push()
