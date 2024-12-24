@@ -105,7 +105,7 @@
           name,
           settings ? { },
           profile ? { },
-          for ? "home", # system or home
+          for, # system or home
         }:
         let
           my = mkMy {
@@ -134,6 +134,7 @@
             ++ (lib.optionals (for == "home") [
               inputs.nixvim.homeManagerModules.nixvim
             ]);
+
           specialArgs = {
             inherit my;
             inherit inputs;
@@ -162,9 +163,9 @@
             profile:
             if builtins.elem for profile.for then
               rec {
-                inherit for;
                 name = profile.name;
                 value = mkProfile {
+                  inherit for;
                   inherit name;
                   settings = profile.settings;
                   profile = mkGetDefault profile "profile" { };
