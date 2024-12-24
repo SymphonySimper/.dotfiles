@@ -100,76 +100,96 @@
           };
         };
 
-      mkPkgs =
+      mkProfile =
         {
-          my,
-          overlays ? [ ],
-        }:
-        (import nixpkgs {
-          system = my.system;
-          config.allowUnfree = true;
-          overlays = [
-            (import ./overlays/lib.nix { inherit my; })
-          ] ++ overlays;
-        });
-
-      mkHome =
-        {
+          name,
           settings ? { },
-          profile,
+          profile ? { },
+          for ? "home", # system or home
         }:
         let
           my = mkMy {
             inherit settings;
-            inherit profile;
+            profile = profile // {
+              inherit name;
+            };
           };
-        in
-        home-manager.lib.homeManagerConfiguration rec {
-          pkgs = mkPkgs {
-            inherit my;
-            overlays = [
-              # (import ./overlays/nvim-plugins.nix { inherit inputs; })
-            ];
-          };
-          lib = pkgs.lib;
-          modules = [
-            ./profiles/${my.profile}/home.nix
-            inputs.nixvim.homeManagerModules.nixvim
-          ];
-          extraSpecialArgs = {
-            inherit my;
-            inherit inputs;
-          };
-        };
 
-      mkSystem =
-        {
-          settings ? { },
-          profile,
-        }:
-        let
-          my = mkMy {
-            inherit settings;
-            inherit profile;
+          pkgs = import nixpkgs {
+            system = my.system;
+            config.allowUnfree = true;
+            overlays =
+              [
+                (import ./overlays/lib.nix { inherit my; })
+              ]
+              ++ (lib.optionals (for == "home") [
+                # (import ./overlays/nvim-plugins.nix { inherit inputs; })
+              ]);
           };
-        in
-        lib.nixosSystem rec {
-          system = my.system;
-          pkgs = mkPkgs { inherit my; };
-          lib = pkgs.lib;
-          modules = [ ./profiles/${my.profile}/system.nix ];
+
+          modules =
+            [
+              ./profiles/${my.profile}/${for}.nix
+            ]
+            ++ (lib.optionals (for == "home") [
+              inputs.nixvim.homeManagerModules.nixvim
+            ]);
           specialArgs = {
             inherit my;
             inherit inputs;
           };
-        };
+        in
+        if for == "home" then
+          home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
+            inherit modules;
+            lib = pkgs.lib;
+            extraSpecialArgs = specialArgs;
+          }
+        else
+          lib.nixosSystem {
+            inherit pkgs;
+            inherit modules;
+            inherit specialArgs;
+            lib = pkgs.lib;
+            system = my.system;
+          };
 
-      profiles = {
-        wsl = {
-          profile.name = "wsl";
-        };
-        gui = {
-          profile.name = "gui";
+      mkProfiles =
+        profiles: for:
+        builtins.listToAttrs (
+          map (
+            profile:
+            if builtins.elem for profile.for then
+              rec {
+                inherit for;
+                name = profile.name;
+                value = mkProfile {
+                  inherit name;
+                  settings = profile.settings;
+                  profile = mkGetDefault profile "profile" { };
+                };
+              }
+            else
+              null
+
+          ) profiles
+        );
+
+      profiles = [
+        {
+          name = "wsl";
+          for = [
+            "system"
+            "home"
+          ];
+        }
+        {
+          name = "gui";
+          for = [
+            "system"
+            "home"
+          ];
           settings = {
             gui = {
               enable = true;
@@ -183,18 +203,11 @@
               };
             };
           };
-        };
-      };
+        }
+      ];
     in
     {
-      homeConfigurations = {
-        wsl = mkHome profiles.wsl;
-        gui = mkHome profiles.gui;
-      };
-
-      nixosConfigurations = {
-        wsl = mkSystem profiles.wsl;
-        gui = mkSystem profiles.gui;
-      };
+      homeConfigurations = mkProfiles profiles "home";
+      nixosConfigurations = mkProfiles profiles "system";
     };
 }
