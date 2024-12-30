@@ -67,6 +67,7 @@ in
       enable = true;
       capSysNice = false;
       # set launch options to `LD_PRELOAD="" gamescope -- %command%`
+      # to launch with magohud use `gamescope --mangoapp -- %command%`
       inherit args;
     };
 
@@ -80,6 +81,7 @@ in
           };
 
           environment = {
+            systemPackages = [ pkgs.mangohud ];
             loginShellInit = lib.my.mkTTYLaunch {
               command = "steam-gamescope";
               dbus = true;
