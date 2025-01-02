@@ -19,6 +19,7 @@
   ];
 
   home.packages = with pkgs; [
+    bc
     curl
     gnutar
     jq
