@@ -1,16 +1,11 @@
 { pkgs, ... }:
 {
   imports = [
-    ./fd.nix
-    ./fzf.nix
     ./git.nix
-    ./man.nix
-    ./ripgrep.nix
     ./ssh.nix
     ./tmux.nix
     ./top.nix
     ./yazi.nix
-    ./zoxide.nix
 
     ./lang
     ./nvim
@@ -22,7 +17,6 @@
     bc
     curl
     gnutar
-    jq
     killall
     tlrc # tldr
     trash-cli
@@ -31,4 +25,22 @@
     wl-clipboard
     zip
   ];
+
+  programs = {
+    man = {
+      enable = true;
+      generateCaches = true;
+    };
+    fzf = {
+      enable = true;
+      defaultOptions = [
+        "--reverse"
+      ];
+    };
+
+    fd.enable = true;
+    jq.enable = true;
+    ripgrep.enable = true;
+    zoxide.enable = true;
+  };
 }
