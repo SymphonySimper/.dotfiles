@@ -33,39 +33,10 @@
     { ... }@inputs:
     let
       myLib = import ./lib { inherit inputs; };
-      profiles = [
-        {
-          name = "wsl";
-          for = [
-            "system"
-            "home"
-          ];
-        }
-        {
-          name = "gui";
-          for = [
-            "system"
-            "home"
-          ];
-          settings = {
-            gui = {
-              enable = true;
-              desktop.enable = true;
-              display = {
-                name = "eDP-1";
-                scale = 1.8;
-                width = 2880;
-                height = 1800;
-                refreshRate = 60;
-              };
-            };
-          };
-        }
-      ];
     in
     {
-      homeConfigurations = myLib.helpers.mkProfiles profiles "home";
-      nixosConfigurations = myLib.helpers.mkProfiles profiles "system";
+      homeConfigurations = myLib.profiles.home;
+      nixosConfigurations = myLib.profiles.system;
       templates = myLib.templates;
     };
 }

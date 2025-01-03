@@ -6,6 +6,19 @@
   ...
 }:
 let
+  profileDir = ../profiles;
+
+  mkProfilePath =
+    dir: file:
+    lib.path.append profileDir (
+      lib.path.subpath.join [
+        dir
+        file
+      ]
+    );
+  mkGetProfileDirs = builtins.attrNames (
+    lib.attrsets.filterAttrs (name: value: value == "directory") (builtins.readDir profileDir)
+  );
 
   mkProfile =
     {
@@ -27,7 +40,7 @@ let
         config.allowUnfree = true;
         overlays =
           [
-            (import ../overlays/lib.nix { inherit my; })
+            (import ./overlays/lib.nix { inherit my; })
           ]
           ++ (lib.optionals (for == "home") [
             # (import ./overlays/nvim-plugins.nix { inherit inputs; })
@@ -36,7 +49,7 @@ let
 
       modules =
         [
-          ../../profiles/${my.profile}/${for}.nix
+          (profileDir + "/${my.profile}/${for}.nix")
         ]
         ++ (lib.optionals (for == "home") [
           inputs.nixvim.homeManagerModules.nixvim
@@ -63,12 +76,42 @@ let
         system = my.system;
       };
 
+  profilesWithConfig = builtins.concatMap (
+    dir:
+    let
+      name = dir;
+
+      configFile = mkProfilePath dir "config.nix";
+      systemFile = mkProfilePath dir "system.nix";
+      homeFile = mkProfilePath dir "home.nix";
+
+      config = if builtins.pathExists configFile then (import configFile) else { };
+    in
+    (builtins.map
+      (for: {
+        inherit name;
+        inherit for;
+        settings = mkGetDefault config "settings" { };
+        profile = mkGetDefault config "profile" { };
+      })
+      (
+        builtins.concatLists (
+          (lib.optional (builtins.pathExists systemFile) [ "system" ])
+          ++ (lib.optional (builtins.pathExists homeFile) [ "home" ])
+        )
+      )
+    )
+  ) mkGetProfileDirs;
+
   mkProfiles =
-    profiles: for:
+    for:
+    let
+      profiles = builtins.filter (profile: profile.for == for) profilesWithConfig;
+    in
     builtins.listToAttrs (
-      map (
+      builtins.map (
         profile:
-        if builtins.elem for profile.for then
+        if profile.for == for then
           rec {
             name = profile.name;
             value = mkProfile {
@@ -80,9 +123,10 @@ let
           }
         else
           null
-
       ) profiles
     );
-
 in
-mkProfiles
+{
+  home = mkProfiles "home";
+  system = mkProfiles "system";
+}
