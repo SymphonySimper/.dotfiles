@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./go.nix
@@ -8,8 +8,6 @@
     ./python.nix
     ./rust.nix
   ];
-
-  my.programs.nixpkgs-update.enable = lib.mkDefault false;
 
   home.packages = with pkgs; [
     gcc
