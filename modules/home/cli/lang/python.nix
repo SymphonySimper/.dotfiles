@@ -22,6 +22,13 @@
   };
 
   programs = {
+    poetry = {
+      enable = true;
+      settings.virtualenvs = {
+        create = true;
+        in-project = true;
+      };
+    };
     zsh.initExtra = # sh
       ''
         eval "$(micromamba shell hook -s zsh)"
