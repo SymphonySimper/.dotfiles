@@ -18,9 +18,19 @@
         extraPackages = [ ];
       };
 
-      # Enable swaylock
-      security.pam.services.swaylock = { };
-      services.udisks2.enable = true;
+      security = {
+        polkit.enable = true;
+        pam.services = {
+          sway.enableGnomeKeyring = true;
+          # Enable swaylock
+          swaylock = { };
+        };
+      };
+
+      services = {
+        gnome.gnome-keyring.enable = true;
+        udisks2.enable = true;
+      };
 
       environment = {
         sessionVariables.NIXOS_OZONE_WL = "1";
@@ -32,7 +42,6 @@
           }
         );
       };
-      security.polkit.enable = true;
     }
     // (lib.my.mkSkipUsername { tty = 1; })
   );

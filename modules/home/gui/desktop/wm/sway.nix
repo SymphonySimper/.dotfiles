@@ -6,13 +6,13 @@
 }:
 let
   keybinds = (
-    import ./common/keybinds.nix {
+    import ./keybinds.nix {
       inherit pkgs;
       inherit lib;
       inherit my;
     }
   );
-  windows = import ./common/windows.nix;
+  windows = import ./windows.nix;
 
   keys = {
     mod = "Mod4";
