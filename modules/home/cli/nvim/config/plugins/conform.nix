@@ -35,7 +35,9 @@ in
           css = javascript;
           html = javascript;
           markdown = javascript;
+
           yaml = javascript;
+          toml = [ "taplo" ];
 
           json = [ "biome" ];
           jsonc = json;
@@ -67,6 +69,7 @@ in
           biome = mkFormatter pkgs.biome;
           kulala-fmt = mkFormatter pkgs.kulala-fmt;
           just = mkFormatter pkgs.just;
+          taplo = mkFormatter pkgs.taplo;
         };
       };
     };

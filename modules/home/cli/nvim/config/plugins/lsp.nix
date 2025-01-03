@@ -71,6 +71,9 @@
           };
         };
 
+        # TOML
+        taplo.enable = true;
+
         # Web
         ## Svelte
         svelte = {
