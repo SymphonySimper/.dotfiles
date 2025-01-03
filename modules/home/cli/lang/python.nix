@@ -37,6 +37,17 @@
       ''
         eval "$(micromamba shell hook -s bash)"
       '';
+
+    nixvim.plugins = {
+      treesitter.grammars = [ "python" ];
+
+      conform-nvim.settings.formatters_by_ft.python = [ "ruff_format" ];
+
+      lsp.servers = {
+        pyright.enable = true;
+        ruff.enable = true;
+      };
+    };
   };
 
   xdg.configFile."mamba/mambarc" = {

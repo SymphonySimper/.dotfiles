@@ -127,5 +127,7 @@ in
           bind r source-file "${config.xdg.configHome}/tmux/tmux.conf"
         '';
     };
+
+    nixvim.plugins.treesitter.grammars = [ "tmux" ];
   };
 }

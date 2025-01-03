@@ -1,7 +1,13 @@
 { ... }:
 {
-  programs.nixvim = {
-    plugins.markview = {
+  programs.nixvim.plugins = {
+    treesitter.grammars = [ "markdown" ];
+
+    conform-nvim.settings.formatters_by_ft.markdown = [ "prettier" ];
+
+    lsp.servers.marksman.enable = true;
+
+    markview = {
       enable = true;
       settings = {
         modes = [

@@ -21,5 +21,19 @@
         pkgs.tree
       ];
     };
+
+    programs.nixvim.plugins = {
+      treesitter.grammars = [ "nix" ];
+
+      conform-nvim = {
+        formatter.nixfmt = pkgs.nixfmt-rfc-style;
+        settings.formatters_by_ft.nix = [ "nixfmt" ];
+      };
+
+      lsp.servers.nil_ls = {
+        enable = true;
+        settings.nix.flake.autoArchive = true;
+      };
+    };
   };
 }

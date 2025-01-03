@@ -47,6 +47,14 @@
         };
       };
     };
+
+    nixvim.plugins.treesitter.grammars = [
+      "gitcommit"
+      "gitignore"
+      "git_config"
+      "git_rebase"
+      "gitattributes"
+    ];
   };
 
   home = {

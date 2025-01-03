@@ -5,7 +5,6 @@
     ./conform.nix
     ./harpoon.nix
     ./lsp.nix
-    ./markview.nix
     ./mini.nix
     ./rest.nix
     ./telescope.nix
