@@ -1,4 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, my, ... }:
+let
+  flake_loc = "${my.dir.home}/.dotfiles";
+in
 # bash
 ''
   case "$1" in
@@ -22,6 +25,19 @@
       ;;
     cln|clean)
       sudo nix-collect-garbage -d && nix-collect-garbage -d
+      ;;
+    new|init)
+      if [ -z "$2" ]; then
+        echo "Template name not passed."
+        exit 1
+      fi
+
+      if [[ "$1" == "new" ]] && [ -z "$3" ]; then
+        echo "Requires directory."
+        exit 1
+      fi
+
+      nix flake "$1" --template "${flake_loc}#templates.''${2}" "$3"
       ;;
     *) echo "Unknown option" ;;
   esac

@@ -210,5 +210,12 @@
     {
       homeConfigurations = mkProfiles profiles "home";
       nixosConfigurations = mkProfiles profiles "system";
+
+      templates = {
+        devshell = {
+          path = ./templates/devshell;
+          description = "Devshell template";
+        };
+      };
     };
 }
