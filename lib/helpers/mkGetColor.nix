@@ -1,4 +1,3 @@
-{ flavor, ... }:
 let
   colors = {
     frappe = {
@@ -114,5 +113,7 @@ let
       yellow = "#f9e2af";
     };
   };
+
+  mkGetColor = flavor: colors.${flavor};
 in
-colors.${flavor}
+mkGetColor
