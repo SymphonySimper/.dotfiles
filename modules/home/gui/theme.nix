@@ -9,6 +9,11 @@ let
 in
 {
   config = lib.mkIf my.gui.enable {
+    catppuccin = {
+      gtk.enable = false;
+      kvantum.enable = false; # qt
+    };
+
     home.pointerCursor = {
       gtk.enable = true;
       # x11.enable = true;
@@ -19,7 +24,6 @@ in
 
     gtk = {
       enable = true;
-      catppuccin.enable = false;
       theme = {
         name = my.theme.gtk;
         package = pkgs.gnome-themes-extra;
@@ -43,10 +47,7 @@ in
     qt = {
       enable = true;
       platformTheme.name = "adwaita";
-      style = {
-        catppuccin.enable = false;
-        name = lib.toLower my.theme.gtk;
-      };
+      style.name = lib.toLower my.theme.gtk;
     };
   };
 }
