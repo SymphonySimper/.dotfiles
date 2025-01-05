@@ -71,6 +71,8 @@ in
       inherit args;
     };
 
+    environment.systemPackages = [ pkgs.mangohud ];
+
     specialisation = {
       steam = {
         inheritParentConfig = true;
@@ -81,7 +83,6 @@ in
           };
 
           environment = {
-            systemPackages = [ pkgs.mangohud ];
             loginShellInit = lib.my.mkTTYLaunch {
               command = "steam-gamescope";
               dbus = true;
