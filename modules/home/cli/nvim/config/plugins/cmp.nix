@@ -5,10 +5,9 @@
     blink-cmp = {
       enable = true;
       settings = {
-        nerd_font_variant = "mono";
+        appearance.nerd_font_variant = "mono";
         keymap.preset = "default";
-        fuzzy.max_items = 20;
-        windows.autocomplete.selection = "manual";
+        completion.list.max_items = 20;
       };
     };
   };

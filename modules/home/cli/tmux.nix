@@ -13,6 +13,25 @@ let
 in
 {
   home.packages = with pkgs; [ acpi ];
+  catppuccin.tmux.extraConfig = # tmux
+    ''
+      # Remove background of status bar
+      set -g @catppuccin_status_background "none"
+
+      set -g @catppuccin_window_text "${windowFormat}"
+      set -g @catppuccin_window_current_text "${windowFormat}"
+      set -g @catppuccin_date_time_text " %H:%M %d/%m"
+
+      # status
+      set -g status-interval 60
+      set -g status-position "${statusPosition}"
+
+      set -g status-left ""
+      set -g status-left-length 100
+
+      set -g status-right ""
+      set -g status-right-length 100
+    '';
   programs = {
     zsh.initExtra = # sh
       ''
@@ -33,25 +52,6 @@ in
       mouse = true;
       customPaneNavigationAndResize = true;
       newSession = false;
-      catppuccin.extraConfig = # tmux
-        ''
-          # Remove background of status bar
-          set -g @catppuccin_status_background "none"
-
-          set -g @catppuccin_window_text "${windowFormat}"
-          set -g @catppuccin_window_current_text "${windowFormat}"
-          set -g @catppuccin_date_time_text " %H:%M %d/%m"
-
-          # status
-          set -g status-interval 60
-          set -g status-position "${statusPosition}"
-
-          set -g status-left ""
-          set -g status-left-length 100
-
-          set -g status-right ""
-          set -g status-right-length 100
-        '';
       plugins = with pkgs; [
         {
           plugin = tmuxPlugins.battery;

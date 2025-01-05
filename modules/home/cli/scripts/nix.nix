@@ -15,7 +15,7 @@ in
       echo "$input"
       read -n 1 -p  "Would you like to continue? [y/N]" user_input
       case "$user_input" in
-        y|Y) nix flake lock --update-input $input ;;
+        y|Y) nix flake update $input ;;
         *) echo "Aborted."
       esac
       ;;
