@@ -1,7 +1,6 @@
-{ inputs, my, ... }:
+{ my, ... }:
 {
   imports = [
-    inputs.catppuccin.homeManagerModules.catppuccin
     ./font.nix
 
     ../common
@@ -27,9 +26,4 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-
-  catppuccin = {
-    enable = true;
-    flavor = my.theme.flavor;
-  };
 }

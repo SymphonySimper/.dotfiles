@@ -52,7 +52,11 @@ let
           (profileDir + "/${my.profile}/${for}.nix")
         ]
         ++ (lib.optionals (for == "home") [
+          inputs.catppuccin.homeManagerModules.catppuccin
           inputs.nixvim.homeManagerModules.nixvim
+        ])
+        ++ (lib.optionals (for == "system") [
+          inputs.catppuccin.nixosModules.catppuccin
         ]);
 
       specialArgs = {
