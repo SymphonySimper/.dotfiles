@@ -9,7 +9,6 @@
         offset = "8x8";
         frame_width = "1";
         corner_radius = "8";
-        highlight = my.theme.color.lavender;
       };
     };
   };

@@ -38,7 +38,12 @@ let
       };
       theme = {
         dark = mkGetDefault settings "theme.dark" false;
-        flavor = if theme.dark then "mocha" else "latte";
+        flavors = {
+          dark = "mocha";
+          light = "latte";
+        };
+        flavor = builtins.getAttr (if theme.dark then "dark" else "light") theme.flavors;
+        altFlavor = builtins.getAttr (if theme.dark then "light" else "dark") theme.flavors;
         color = mkGetColor theme.flavor;
         gtk = if theme.dark then "Adwaita-dark" else "Adwaita";
         wallpaper = "${dir.home}/.dotfiles/lib/assets/images/bg.png";
