@@ -1,10 +1,18 @@
-{ pkgs, lib, ... }:
-{
-  python = pkgs.mkShell {
-    packages = with pkgs; [ cowsay ];
-    shellHook = # sh
-      ''
-        cowsay "Happy Python!"
-      '';
-  };
-}
+{ inputs, myLib, ... }:
+let
+  eachSystem = inputs.nixpkgs.lib.genAttrs (import inputs.systems);
+in
+eachSystem (
+  system:
+  let
+    pkgs = myLib.helpers.mkPkgs {
+      inherit system;
+    };
+    lib = pkgs.lib;
+  in
+  {
+    python = import ./python.nix {
+      inherit pkgs;
+    };
+  }
+)

@@ -13,5 +13,6 @@ rec {
     inherit lib;
     mkGetDefault = helpers.mkGetDefault;
     mkMy = helpers.mkMy;
+    mkPkgs = helpers.mkPkgs;
   };
 }

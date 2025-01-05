@@ -39,6 +39,23 @@ in
 
       nix flake "$1" --template "${flake_loc}#templates.''${2}" "$3"
       ;;
+    dev)
+      shift;
+      devshell="$1"
+      shift;
+      
+      nix develop "$devshell" -c "${my.programs.shell}" $@
+      ;;
+    gdev)
+      shift;
+      
+      devshell="$1"
+      if [[ -z "$devshell" ]]; then
+        devshell="default"
+      fi
+
+      nix develop "${my.dir.home}/.dotfiles#$devshell" -c "${my.programs.shell}"
+      ;;
     *) echo "Unknown option" ;;
   esac
 ''

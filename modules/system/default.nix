@@ -1,6 +1,7 @@
 {
-  lib,
   my,
+  pkgs,
+  lib,
   ...
 }:
 let
@@ -55,7 +56,12 @@ in
   };
 
   # FHS environment
-  programs.nix-ld.enable = true;
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      stdenv.cc.cc
+    ];
+  };
 
   # Clean /tmp folder on boot
   boot.tmp.cleanOnBoot = true;

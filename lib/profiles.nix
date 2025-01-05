@@ -3,6 +3,7 @@
   lib,
   mkGetDefault,
   mkMy,
+  mkPkgs,
   ...
 }:
 let
@@ -35,9 +36,8 @@ let
         };
       };
 
-      pkgs = import inputs.nixpkgs {
+      pkgs = mkPkgs {
         system = my.system;
-        config.allowUnfree = true;
         overlays =
           [
             (import ./overlays/lib.nix { inherit my; })

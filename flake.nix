@@ -18,6 +18,8 @@
 
     catppuccin.url = "github:catppuccin/nix";
 
+    systems.url = "github:nix-systems/default";
+
     # Neovim
     nixvim = {
       url = "github:nix-community/nixvim";
@@ -34,5 +36,11 @@
       homeConfigurations = myLib.profiles.home;
       nixosConfigurations = myLib.profiles.system;
       templates = myLib.templates;
+      devShells = (
+        import ./lib/devshell {
+          inherit inputs;
+          inherit myLib;
+        }
+      );
     };
 }

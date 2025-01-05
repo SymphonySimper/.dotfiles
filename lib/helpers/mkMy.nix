@@ -55,6 +55,7 @@ let
         };
       };
       programs = {
+        shell = "zsh";
         terminal = "alacritty";
         editor = "nvim";
         multiplexer = "tmux";
