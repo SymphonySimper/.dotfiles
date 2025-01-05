@@ -41,6 +41,13 @@
         utc_time_offset = "local";
       };
 
+      python.symbol = "󰌠 ";
+
+      nix_shell = {
+        format = "via [$symbol$state]($style) ";
+        symbol = "󱄅 ";
+      };
+
       gcloud = {
         disabled = true;
       };
