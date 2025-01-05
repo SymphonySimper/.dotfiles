@@ -27,7 +27,7 @@ in
         #jack.enable = true;
       };
     };
-    environment.defaultPackages = lib.mkIf my.gui.desktop.enable (
+    environment.systemPackages = lib.mkIf my.gui.desktop.enable (
       with pkgs;
       [
         helvum

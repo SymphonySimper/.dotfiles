@@ -49,26 +49,22 @@ in
   };
   config = lib.mkIf cfg.enable {
     # Refer: https://nixos.wiki/wiki/Steam
-    programs.steam = {
-      enable = true;
-      remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-      dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-      localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
-      gamescopeSession = {
+    programs = {
+      steam = {
         enable = true;
-        # inherit args;
-        # env = {
-        #   LD_PRELOAD = "";
-        # };
+        remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+        dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+        localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+        gamescopeSession.enable = true;
       };
-    };
 
-    programs.gamescope = {
-      enable = true;
-      capSysNice = false;
-      # set launch options to `LD_PRELOAD="" gamescope -- %command%`
-      # to launch with magohud use `gamescope --mangoapp -- %command%`
-      inherit args;
+      gamescope = {
+        enable = true;
+        capSysNice = false;
+        # set launch options to `LD_PRELOAD="" gamescope -- %command%`
+        # to launch with magohud use `gamescope --mangoapp -- %command%`
+        inherit args;
+      };
     };
 
     environment.systemPackages = [ pkgs.mangohud ];
@@ -82,12 +78,10 @@ in
             hardware.powerManagement.enable = false;
           };
 
-          environment = {
-            loginShellInit = lib.my.mkTTYLaunch {
-              command = "steam-gamescope";
-              dbus = true;
-              tty = 1;
-            };
+          environment.loginShellInit = lib.my.mkTTYLaunch {
+            command = "steam-gamescope";
+            dbus = true;
+            tty = 1;
           };
         };
       };
