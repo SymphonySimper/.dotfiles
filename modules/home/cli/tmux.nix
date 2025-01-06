@@ -49,7 +49,7 @@ in
       keyMode = "vi";
       escapeTime = 0;
       baseIndex = 1;
-      mouse = true;
+      mouse = false;
       customPaneNavigationAndResize = true;
       newSession = false;
       plugins = with pkgs; [
