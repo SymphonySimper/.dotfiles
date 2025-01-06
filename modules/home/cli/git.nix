@@ -22,13 +22,25 @@
       extraConfig = {
         init.defaultBranch = "main";
         core.editor = my.programs.editor;
-        merge.tool = if my.programs.editor == "nvim" then "nvimdiff" else "";
         push.autoSetupRemote = true;
         mergetool.keepBackup = false;
         pull.rebase = true;
+        merge = {
+          tool = if my.programs.editor == "nvim" then "nvimdiff" else "";
+          conflictStyle = "zdiff3"; # delta
+        };
         rerere = {
           enabled = true;
           autoUpdate = true;
+        };
+      };
+
+      delta = {
+        enable = true;
+        options = {
+          navigate = true;
+          side-by-side = true;
+          line-numbers = true;
         };
       };
     };
