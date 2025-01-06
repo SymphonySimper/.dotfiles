@@ -57,7 +57,7 @@ in
         localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
         gamescopeSession = {
           enable = true;
-          inherit args;
+          args = builtins.filter (arg: arg != "-e") args;
         };
       };
 
