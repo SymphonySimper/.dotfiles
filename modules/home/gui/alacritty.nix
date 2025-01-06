@@ -7,15 +7,23 @@ in
     programs.alacritty = {
       enable = my.programs.terminal == "alacritty";
       settings = {
-        general.live_config_reload = false;
-        cursor = {
-          vi_mode_style = "Block";
-          style = {
-
-            blinking = "off";
-            shape = "Block";
-          };
+        general = {
+          live_config_reload = false;
+          ipc_socket = false;
         };
+
+        window = {
+          decorations = "none";
+          opacity = 1;
+          startup_mode = "Maximized";
+          padding = {
+            x = padding;
+            y = padding;
+          };
+          dynamic_padding = true;
+        };
+
+        scrolling.history = 0;
 
         font = {
           size = 12;
@@ -37,16 +45,18 @@ in
           };
         };
 
-        window = {
-          decorations = "none";
-          opacity = 1;
-          startup_mode = "Maximized";
-          padding = {
-            x = padding;
-            y = padding;
+        cursor = {
+          vi_mode_style = "Block";
+          style = {
+            blinking = "off";
+            shape = "Block";
           };
-          dynamic_padding = true;
         };
+
+        mouse.hide_when_typing = true;
+
+        # disable hints
+        hints.enabled = [ ];
       };
     };
   };
