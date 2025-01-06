@@ -13,6 +13,8 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    catppuccin.tty.enable = false;
+
     # Bootloader.
     boot = {
       kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
