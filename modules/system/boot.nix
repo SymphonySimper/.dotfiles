@@ -1,4 +1,5 @@
 {
+  my,
   lib,
   config,
   pkgs,
@@ -13,7 +14,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    catppuccin.tty.enable = false;
+    catppuccin.tty.enable = my.theme.dark;
 
     # Bootloader.
     boot = {
