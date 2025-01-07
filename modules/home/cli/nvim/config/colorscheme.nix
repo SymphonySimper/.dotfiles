@@ -5,10 +5,11 @@
     colorschemes.catppuccin = {
       enable = true;
       settings = {
+        term_colors = true;
         flavour = my.theme.flavor;
         background = {
-          light = "latte";
-          dark = "mocha";
+          light = my.theme.flavor;
+          dark = my.theme.flavor;
         };
         integrations = {
           blink_cmp = true;
