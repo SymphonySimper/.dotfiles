@@ -10,5 +10,6 @@
     ./options.nix
 
     ./plugins
+    ./snippets
   ];
 }
