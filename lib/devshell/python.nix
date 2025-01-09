@@ -1,6 +1,5 @@
 { pkgs, ... }:
 pkgs.mkShell {
-  packages = with pkgs; [ cowsay ];
   shellHook = # sh
     ''
       export LD_LIBRARY_PATH="$NIX_LD_LIBRARY_PATH"
