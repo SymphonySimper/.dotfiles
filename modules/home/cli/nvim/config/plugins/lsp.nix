@@ -106,6 +106,9 @@
           };
         };
         templ.enable = true;
+
+        # All
+        harper_ls.enable = true;
       };
     };
   };
