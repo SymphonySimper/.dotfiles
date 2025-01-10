@@ -52,10 +52,12 @@ let
           (profileDir + "/${my.profile}/${for}.nix")
         ]
         ++ (lib.optionals (for == "home") [
-          inputs.catppuccin.homeManagerModules.catppuccin
+          inputs.chaotic.homeManagerModules.default
           inputs.nixvim.homeManagerModules.nixvim
+          inputs.catppuccin.homeManagerModules.catppuccin
         ])
         ++ (lib.optionals (for == "system") [
+          inputs.chaotic.nixosModules.default
           inputs.catppuccin.nixosModules.catppuccin
         ]);
 

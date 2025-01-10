@@ -2,8 +2,11 @@
   description = "Home Manager configuration of symph";
 
   inputs = {
-    # common
+    # packages
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+
+    # common
     catppuccin.url = "github:catppuccin/nix";
     systems.url = "github:nix-systems/default";
 
@@ -13,6 +16,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-wsl.url = "github:nix-community/nixos-wsl";
+    nix-gaming.url = "github:fufexan/nix-gaming";
 
     # home
     home-manager = {

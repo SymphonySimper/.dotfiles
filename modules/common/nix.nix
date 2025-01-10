@@ -21,6 +21,11 @@ let
       key = "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=";
       priority = 100;
     }
+    {
+      url = "https://chaotic-nyx.cachix.org";
+      key = "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8=";
+      priority = 101;
+    }
   ];
 
   mkCaches =
@@ -80,34 +85,16 @@ in
         settings = lib.mkMerge [
           {
             show-trace = true;
-
             auto-optimise-store = true;
-
             trusted-users = [
               "root"
               my.name
             ];
 
-            # substituters = lib.mkBefore builtins.concatLists [
-            #   (lib.optionals (!system) [
-            #     caches.nixos.url
-            #   ])
-            #   [ caches.nix-community.url ]
-            # ];
-
             substituters = mkCaches "url";
-            # trusted-public-keys = lib.mkBefore builtins.concatLists [
-            #   (lib.optionals (!system) [
-            #     caches.nixos.key
-            #   ])
-            #   [
-            #     caches.nix-community.key
-            #   ]
-            # ];
-
             trusted-public-keys = mkCaches "key";
 
-            # Enable flakse
+            # Enable flakes
             experimental-features = [
               "nix-command"
               "flakes"
@@ -117,7 +104,7 @@ in
       }
 
       (mkUnsafeIf (system) {
-        # Strage optimisation
+        # Storage optimization
         optimise.automatic = true;
       })
     ];
