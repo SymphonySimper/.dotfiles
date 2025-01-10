@@ -2,25 +2,23 @@
   description = "Home Manager configuration of symph";
 
   inputs = {
+    # common
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    catppuccin.url = "github:catppuccin/nix";
+    systems.url = "github:nix-systems/default";
 
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixos-wsl.url = "github:nix-community/nixos-wsl";
-
+    # system
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-wsl.url = "github:nix-community/nixos-wsl";
 
-    catppuccin.url = "github:catppuccin/nix";
-
-    systems.url = "github:nix-systems/default";
-
-    # Neovim
+    # home
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
