@@ -66,7 +66,7 @@ in
 
         my = {
           programs.wm.enableLogin = false;
-          hardware.powerManagement.enable = false;
+          # hardware.powerManagement.enable = false;
         };
 
         programs = {
