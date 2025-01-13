@@ -1,113 +1,141 @@
-{ lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
+  cfg = config.my.programs.nvim.formatter;
   timeout = 3000;
-
-  mkFormatter = package: {
-    command = if builtins.typeOf package == "set" then "${lib.getExe package}" else package;
-  };
 in
 {
-  programs.nixvim = {
-    plugins.conform-nvim = {
-      enable = true;
-      settings = {
-        log_level = "error";
-        notify_on_error = true;
-        notify_no_formatters = false;
-        default_format_opts = {
-          lsp_format = "fallback";
-          async = false;
-          quiet = false;
-          stop_after_first = false;
-          timeout_ms = timeout;
-        };
-        format_on_save = null;
-        format_after_save = null;
-        formatters_by_ft = rec {
-          nix = [ "nixfmt" ];
-          sh = [ "shfmt" ];
-          lua = [ "stylua" ];
-          python = [ "ruff_format" ];
-
-          javascript = [ "prettier" ];
-          typescript = javascript;
-          svelte = javascript;
-          css = javascript;
-          html = javascript;
-          markdown = javascript;
-
-          yaml = javascript;
-          toml = [ "taplo" ];
-
-          json = [ "biome" ];
-          jsonc = json;
-
-          go = [
-            "gofmt"
-            "goimports"
-          ];
-          templ = [ "gofmt" ];
-
-          http = [ "kulala-fmt" ];
-          rest = http;
-
-          just = [ "just" ];
-
-          # "*" = [ "injected" ];
-        };
-        formatters = {
-          injected = {
+  options.my.programs.nvim.formatter = {
+    packages = lib.mkOption {
+      type = lib.types.listOf (
+        lib.types.oneOf [
+          lib.types.string
+          lib.types.package
+          (lib.types.submodule {
             options = {
-              ignore_errors = true;
+              name = lib.mkOption {
+                type = lib.types.str;
+                description = "Name of formatter as per conform.nvim";
+              };
+              package = lib.mkOption {
+                type = lib.types.oneOf [
+                  lib.types.str
+                  lib.types.package
+                ];
+                description = "Package to be used";
+              };
             };
+          })
+        ]
+      );
+      description = "Nixvim formatters for conform";
+      default = [ ];
+    };
+
+    ft = lib.mkOption {
+      type = lib.types.attrsOf (
+        lib.types.oneOf [
+          (lib.types.listOf lib.types.str)
+          lib.types.str
+        ]
+      );
+      description = "Formatter to be used for the filetype";
+      default = { };
+    };
+  };
+
+  config = {
+    programs.nixvim = {
+      plugins.conform-nvim = {
+        enable = true;
+        settings = {
+          log_level = "error";
+          notify_on_error = true;
+          notify_no_formatters = false;
+          default_format_opts = {
+            lsp_format = "fallback";
+            async = false;
+            quiet = false;
+            stop_after_first = false;
+            timeout_ms = timeout;
           };
-          prettier = mkFormatter pkgs.nodePackages.prettier;
-          nixfmt = mkFormatter pkgs.nixfmt-rfc-style;
-          shfmt = mkFormatter pkgs.shfmt;
-          stylua = mkFormatter pkgs.stylua;
-          goimports = mkFormatter "${pkgs.gotools}/bin/goimports";
-          biome = mkFormatter pkgs.biome;
-          kulala-fmt = mkFormatter pkgs.kulala-fmt;
-          just = mkFormatter pkgs.just;
-          taplo = mkFormatter pkgs.taplo;
+          format_on_save = null;
+          format_after_save = null;
+          formatters_by_ft = builtins.mapAttrs (
+            name: value: if builtins.typeOf value == "string" then [ value ] else value
+          ) cfg.ft;
+          formatters =
+            {
+              injected = {
+                options = {
+                  ignore_errors = true;
+                };
+              };
+            }
+            // (builtins.listToAttrs (
+              builtins.map (
+                formatter:
+                let
+                  isString = builtins.typeOf formatter == "string";
+                  isPackage = if isString then false else (builtins.hasAttr "out" formatter);
+                  package =
+                    if isString then
+                      pkgs.${formatter}
+                    else if isPackage then
+                      formatter
+                    else
+                      formatter.package;
+                in
+                {
+                  name =
+                    if (isString || isPackage) then
+                      (if builtins.hasAttr "packageName" package then package.packageName else package.pname)
+                    else
+                      formatter.name;
+                  value = {
+                    command = if builtins.typeOf package == "string" then package else "${lib.getExe package}";
+                  };
+                }
+              ) cfg.packages
+            ));
         };
       };
     };
 
-    keymaps = lib.my.mkKeymaps [
-      [
-        {
-          __raw = # lua
-            ''
-              function()
-                require("conform").format()
-                vim.cmd("write")
-              end
-            '';
-        }
-        "<leader>cf"
-        [
+    my.programs.nvim.keymaps = [
+      {
+        action.__raw = ''
+          function()
+            require("conform").format()
+            vim.cmd("write")
+          end
+        '';
+
+        key = "<leader>cf";
+        mode = [
           "n"
           "v"
-        ]
-        "Format and save"
-      ]
-      [
-        {
-          __raw = # lua
-            ''
-              function()
-                require("conform").format({ formatters = { "injected" }, timeout_ms = "${toString timeout}"})
-              end
-            '';
-        }
-        "<leader>cF"
-        [
+        ];
+        desc = "Format and save";
+      }
+      {
+        action.__raw = ''
+          function()
+            require("conform").format({ formatters = { "injected" }, timeout_ms = "${toString timeout}"})
+          end
+        '';
+
+        key = "<leader>cF";
+        mode = [
           "n"
           "v"
-        ]
-        "Format Injected Langs"
-      ]
+        ];
+        desc = "Format Injected Langs";
+      }
     ];
   };
 }

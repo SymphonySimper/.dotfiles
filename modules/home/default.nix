@@ -1,4 +1,9 @@
-{ my, ... }:
+{
+  my,
+  config,
+  lib,
+  ...
+}:
 {
   imports = [
     ./font.nix
@@ -8,22 +13,32 @@
     ./gui
   ];
 
-  my.common.system = false;
+  options.my.home.packages = lib.mkOption {
+    type = lib.types.listOf lib.types.package;
+    description = "Packages to be installed in home";
+    default = [ ];
+  };
 
-  xdg.enable = true;
-  xdg.configFile."nixpkgs/config.nix".text = # nix
-    ''
-      { allowUnfree = true; }
-    '';
+  config = {
+    my.common.system = false;
 
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
-  home.username = my.name;
-  home.homeDirectory = my.dir.home;
+    xdg = {
+      enable = true;
+      configFile."nixpkgs/config.nix".text = # nix
+        ''
+          { allowUnfree = true; }
+        '';
+    };
 
-  # Do not change
-  home.stateVersion = "23.11";
+    home = {
+      username = my.name;
+      homeDirectory = my.dir.home;
+      packages = config.my.home.packages;
 
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+      stateVersion = "23.11"; # Do not change
+    };
+
+    # Let Home Manager install and manage itself.
+    programs.home-manager.enable = true;
+  };
 }
