@@ -1,9 +1,10 @@
 {
-  inputs,
   my,
+  inputs,
   config,
   pkgs,
   lib,
+  chaotic-pkgs,
   ...
 }:
 let
@@ -64,11 +65,7 @@ in
           inputs.nix-gaming.nixosModules.platformOptimizations
         ];
 
-        my = {
-          programs.wm.enableLogin = false;
-          # hardware.powerManagement.enable = false;
-        };
-
+        my.programs.wm.enableLogin = false;
         programs = {
           steam = {
             platformOptimizations.enable = true;
@@ -89,7 +86,7 @@ in
         };
 
         boot = {
-          kernelPackages = pkgs.linuxPackages_cachyos;
+          kernelPackages = chaotic-pkgs.linuxPackages_cachyos;
           kernelParams = [ "preempt=full" ];
         };
         # https://github.com/sched-ext/scx/blob/main/INSTALL.md#nix

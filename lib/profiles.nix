@@ -47,23 +47,23 @@ let
           ]);
       };
 
+      chaotic-pkgs = inputs.chaotic.legacyPackages.${my.system};
       modules =
         [
           (profileDir + "/${my.profile}/${for}.nix")
         ]
         ++ (lib.optionals (for == "home") [
-          inputs.chaotic.homeManagerModules.default
           inputs.nixvim.homeManagerModules.nixvim
           inputs.catppuccin.homeManagerModules.catppuccin
         ])
         ++ (lib.optionals (for == "system") [
-          inputs.chaotic.nixosModules.default
           inputs.catppuccin.nixosModules.catppuccin
         ]);
 
       specialArgs = {
         inherit my;
         inherit inputs;
+        inherit chaotic-pkgs;
       };
     in
     if for == "home" then
