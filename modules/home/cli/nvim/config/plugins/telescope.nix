@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ ... }:
 let
   mkActionKeyMaps =
     actionMaps:
@@ -10,84 +10,82 @@ let
         key = builtins.elemAt actionMap 2;
         desc = builtins.elemAt actionMap 3;
       in
-      [
-        {
-          __raw =
-            if cwd == "root" then # lua
-              ''
-                function()
-                	local function is_git_repo()
-                		vim.fn.system("git rev-parse --is-inside-work-tree")
+      {
+        inherit key desc;
+        action.__raw =
+          if cwd == "root" then # lua
+            ''
+              function()
+              	local function is_git_repo()
+              		vim.fn.system("git rev-parse --is-inside-work-tree")
 
-                		return vim.v.shell_error == 0
-                	end
+              		return vim.v.shell_error == 0
+              	end
 
-                	local function get_git_root()
-                		local dot_git_path = vim.fn.finddir(".git", ".;")
-                		return vim.fn.fnamemodify(dot_git_path, ":h")
-                	end
+              	local function get_git_root()
+              		local dot_git_path = vim.fn.finddir(".git", ".;")
+              		return vim.fn.fnamemodify(dot_git_path, ":h")
+              	end
 
-                	local opts = {}
+              	local opts = {}
 
-                	if is_git_repo() then
-                		opts = {
-                			cwd = get_git_root(),
-                		}
-                	end
+              	if is_git_repo() then
+              		opts = {
+              			cwd = get_git_root(),
+              		}
+              	end
 
-                	${require}(opts)
-                end
-              ''
-            else if cwd == "buffer" then # lua
-              "function() ${require}({ cwd = vim.fn.expand('%:p:h') }) end"
-            else
-              # lua
-              "function() ${require}() end";
-        }
-        key
-        [
+              	${require}(opts)
+              end
+            ''
+          else if cwd == "buffer" then # lua
+            "function() ${require}({ cwd = vim.fn.expand('%:p:h') }) end"
+          else
+            # lua
+            "function() ${require}() end";
+
+        mode = [
           "n"
           "v"
-        ]
-        desc
-      ]
+        ];
+      }
     ) actionMaps;
 in
 {
-  programs.nixvim = {
-    plugins.telescope = {
-      enable = true;
+  programs.nixvim.plugins.telescope = {
+    enable = true;
 
-      extensions = {
-        fzf-native = {
-          enable = true;
-          settings = {
-            case_mode = "smart_case";
-          };
-        };
-      };
-
-      settings = {
-        defaults = {
-          layout_config = {
-            prompt_position = "top";
-          };
-          sorting_strategy = "ascending";
-          file_ignore_patterns = [
-            "^.git/"
-            "^node_modules/"
-            "^build/"
-            "^.mypy_cache/"
-            "^__pycache__/"
-            "^output/"
-            "^data/"
-            "%.ipynb"
-          ];
+    extensions = {
+      fzf-native = {
+        enable = true;
+        settings = {
+          case_mode = "smart_case";
         };
       };
     };
 
-    keymaps = lib.my.mkKeymaps (mkActionKeyMaps [
+    settings = {
+      defaults = {
+        layout_config = {
+          prompt_position = "top";
+        };
+        sorting_strategy = "ascending";
+        file_ignore_patterns = [
+          "^.git/"
+          "^node_modules/"
+          "^build/"
+          "^.mypy_cache/"
+          "^__pycache__/"
+          "^output/"
+          "^data/"
+          "%.ipynb"
+        ];
+      };
+    };
+  };
+
+  my.programs.nvim.keymaps = (
+    mkActionKeyMaps [
       # Find Files
       [
         "find_files"
@@ -129,6 +127,6 @@ in
         "<leader>sG"
         "Telescope find string"
       ]
-    ]);
-  };
+    ]
+  );
 }

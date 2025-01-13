@@ -1,7 +1,29 @@
-{ pkgs, ... }:
 {
-  programs.nixvim = {
-    plugins = {
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+let
+  mkGrammars =
+    grammars: builtins.map (grammar: pkgs.vimPlugins.nvim-treesitter.builtGrammars.${grammar}) grammars;
+in
+{
+  options.my.programs.nvim.treesitter = lib.mkOption {
+    type = lib.types.listOf lib.types.str;
+    description = "Treesitter grammars";
+    default = [ ];
+  };
+
+  config = {
+    my.programs.nvim.treesitter = [
+      "vim"
+      "vimdoc"
+      "regex"
+      "editorconfig"
+    ];
+
+    programs.nixvim.plugins = {
       treesitter = {
         enable = true;
         nixvimInjections = true;
@@ -9,48 +31,7 @@
         gccPackage = null;
         nodejsPackage = null;
         treesitterPackage = null;
-        grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
-          bash
-          lua
-          markdown
-          nix
-          rust
-          python
-
-          just
-          make
-
-          http
-          html
-          css
-          scss
-          javascript
-          typescript
-          svelte
-
-          go
-          gomod
-          gowork
-          gosum
-          templ
-
-          dockerfile
-          json
-          toml
-          yaml
-
-          vim
-          vimdoc
-          tmux
-          regex
-          editorconfig
-
-          gitcommit
-          gitignore
-          git_config
-          git_rebase
-          gitattributes
-        ];
+        grammarPackages = mkGrammars config.my.programs.nvim.treesitter;
         settings = {
           indent.enable = true;
           highlight = {

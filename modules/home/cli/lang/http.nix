@@ -7,17 +7,29 @@ let
 
   mkKeymaps =
     keymaps:
-    lib.my.mkKeymaps (
-      map (keymap: [
-        { __raw = ''require('kulala').${builtins.elemAt keymap 0}''; }
-        "<leader>r${builtins.elemAt keymap 1}"
-        "n"
-        (builtins.elemAt keymap 2)
-      ]) keymaps
-    );
-
+    map (keymap: {
+      action.__raw = ''require('kulala').${builtins.elemAt keymap 0}'';
+      key = "<leader>r${builtins.elemAt keymap 1}";
+      mode = "n";
+      options.desc = (builtins.elemAt keymap 2);
+    }) keymaps;
 in
 {
+  my.programs.nvim = {
+    treesitter = [ "http" ];
+
+    formatter = {
+      packages = [
+        "kulala-fmt"
+      ];
+
+      ft = rec {
+        http = "kulala-fmt";
+        rest = http;
+      };
+    };
+  };
+
   programs.nixvim = {
     filetype.extension = {
       "http" = "http";
@@ -27,7 +39,6 @@ in
       enable = true;
 
       settings.contenttypes = {
-
         "application/json" = {
           formatter = [
             formatter.jq
@@ -62,7 +73,6 @@ in
           ft = "html";
           pathresolver = [ ];
         };
-
       };
     };
 
@@ -127,14 +137,5 @@ in
         ]
       );
     };
-
-    # extraFiles = {
-    # for rest.nvim
-    #   "ftplugin/json.lua".text = # lua
-    #     ''
-    #       vim.bo.formatexpr = ""
-    #       vim.bo.formatprg = "${lib.getExe pkgs.jq}"
-    #     '';
-    # };
   };
 }

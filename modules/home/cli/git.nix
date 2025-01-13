@@ -1,4 +1,4 @@
-{ my, pkgs, ... }:
+{ config, my, pkgs, ... }:
 {
   programs = {
     git = {
@@ -59,34 +59,46 @@
         };
       };
     };
+
+    bat.enable = config.programs.git.delta.enable;
   };
 
-  home = {
-    packages = with pkgs; [
-      gh
-      git-quick-stats
-      git-filter-repo
-    ];
+  my = {
+    home = {
+      packages = with pkgs; [
+        gh
+        git-quick-stats
+        git-filter-repo
+      ];
 
-    shellAliases = {
-      g = "git";
-      gc = "git clone";
-      gs = "git status";
-      ga = "git add";
-      gm = "git commit";
-      gp = "git pull";
-      gpo = "git pull origin";
-      gP = "git push";
-      gPF = "git push --force-with-lease";
-      gS = "git stash";
-      gSp = "git stash pop";
-      gb = "git branch";
-      gce = "git checkout";
-      gsh = "git switch";
-      gR = "git reset --hard HEAD";
-      gRo = "git reset --hard origin/$(git branch --show-current)";
-      gcln = "git clean -fdx";
-      gz = "lazygit";
+      shell.aliases = {
+        g = "git";
+        gc = "git clone";
+        gs = "git status";
+        ga = "git add";
+        gm = "git commit";
+        gp = "git pull";
+        gpo = "git pull origin";
+        gP = "git push";
+        gPF = "git push --force-with-lease";
+        gS = "git stash";
+        gSp = "git stash pop";
+        gb = "git branch";
+        gce = "git checkout";
+        gsh = "git switch";
+        gR = "git reset --hard HEAD";
+        gRo = "git reset --hard origin/$(git branch --show-current)";
+        gcln = "git clean -fdx";
+        gz = "lazygit";
+      };
     };
+
+    programs.nvim.treesitter = [
+      "gitcommit"
+      "gitignore"
+      "git_config"
+      "git_rebase"
+      "gitattributes"
+    ];
   };
 }

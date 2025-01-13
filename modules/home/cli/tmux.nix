@@ -12,7 +12,11 @@ let
   terminalFeatures = if my.profile == "wsl" then "xterm-256color" else my.programs.terminal;
 in
 {
-  home.packages = with pkgs; [ acpi ];
+  my = {
+    home.packages = with pkgs; [ acpi ];
+    programs.nvim.treesitter = [ "tmux" ];
+  };
+
   catppuccin.tmux.extraConfig = # tmux
     ''
       # Remove background of status bar

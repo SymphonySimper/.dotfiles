@@ -1,15 +1,28 @@
 { pkgs, ... }:
 {
-  home = {
-    packages = with pkgs; [
-      python3
-    ];
+  my = {
+    home = {
+      packages = with pkgs; [
+        python3
+      ];
 
-    shellAliases = {
-      py = "python";
-      pvc = "python -m venv .venv";
-      pva = "source .venv/bin/activate";
-      pfrd = "flask run --debug";
+      shell.aliases = {
+        py = "python";
+        pvc = "python -m venv .venv";
+        pva = "source .venv/bin/activate";
+        pfrd = "flask run --debug";
+      };
+    };
+
+    programs.nvim = {
+      treesitter = [ "python" ];
+
+      lsp = {
+        pyright.enable = true;
+        ruff.enable = true;
+      };
+
+      formatter.ft.python = "ruff_format";
     };
   };
 

@@ -1,5 +1,14 @@
-{ ... }:
+{ pkgs, ... }:
 {
+  my.programs.nvim = {
+    treesitter = [ "markdown" ];
+    lsp.marksman.enable = true;
+    formatter = {
+      packages = [ pkgs.nodePackages.prettier ];
+      ft.markdown = "prettier";
+    };
+  };
+
   programs.nixvim = {
     plugins.markview = {
       enable = true;
