@@ -1,75 +1,19 @@
-{ config, lib, ... }:
-let
-  mkKeymaps =
-    keymaps:
-    map (keymap: {
-      action = keymap.action;
-      key = keymap.key;
-      mode = keymap.mode;
-      options = {
-        desc = keymap.desc;
-        silent = false;
-      };
-    }) keymaps;
-
-in
+{ ... }:
 {
-  options.my.programs.nvim.keymaps = lib.mkOption {
-    type = lib.types.listOf (
-      lib.types.submodule {
-        options = {
-          action = lib.mkOption {
-            type = lib.types.oneOf [
-              lib.types.str
-              (lib.types.submodule {
-                options.__raw = lib.mkOption {
-                  type = lib.types.lines;
-                  description = "Raw lua";
-                };
-              })
-            ];
-            description = "Command to run on keymap";
-          };
-          key = lib.mkOption {
-            type = lib.types.str;
-            description = "Keymap";
-          };
-          mode = lib.mkOption {
-            type = lib.types.oneOf [
-              (lib.types.listOf lib.types.str)
-              lib.types.str
-            ];
-            description = "Modes where keymap should work";
-            default = "n";
-          };
-          desc = lib.mkOption {
-            type = lib.types.str;
-            description = "Description of keymap";
-            default = "";
-          };
-        };
-      }
-    );
-    default = [ ];
-    description = "Nvim keymaps";
-  };
-
-  config = {
-    programs.nixvim = {
-      globals = {
-        mapleader = " ";
-        maplocalleader = ",";
-      };
-      keymaps = mkKeymaps config.my.programs.nvim.keymaps;
+  programs.nixvim = {
+    globals = {
+      mapleader = " ";
+      maplocalleader = ",";
     };
 
-    my.programs.nvim.keymaps =
+    keymaps =
       [
         # General
         {
           action = ":noh<CR>";
           key = "<esc>";
-          desc = "No highlight";
+          mode = "n";
+          options.desc = "No highlight";
         }
 
         # Clipboard
@@ -80,7 +24,7 @@ in
             "n"
             "v"
           ];
-          desc = "Copy to system clipboard";
+          options.desc = "Copy to system clipboard";
         }
         {
           action = "\"+p<CR>";
@@ -89,7 +33,7 @@ in
             "n"
             "v"
           ];
-          desc = "Copy to system clipboard";
+          options.desc = "Copy to system clipboard";
         }
 
         # File
@@ -100,7 +44,7 @@ in
             "n"
             "v"
           ];
-          desc = "Write";
+          options.desc = "Write";
         }
         {
           action = ":bd<CR>";
@@ -109,7 +53,7 @@ in
             "n"
             "v"
           ];
-          desc = "Close buffer";
+          options.desc = "Close buffer";
         }
         {
           action = ":q<CR>";
@@ -118,7 +62,7 @@ in
             "n"
             "v"
           ];
-          desc = "Quit";
+          options.desc = "Quit";
         }
 
       ]
@@ -128,7 +72,8 @@ in
         (key: {
           action = "<C-w>${key}";
           key = "<C-${key}>";
-          desc = "Focus ${key} pane";
+          mode = "n";
+          options.desc = "Focus ${key} pane";
         })
         [
           "h"

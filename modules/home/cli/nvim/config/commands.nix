@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ ... }:
 {
   programs.nixvim = {
     userCommands = {
@@ -41,13 +41,13 @@
       };
     };
 
-    keymaps = lib.my.mkKeymaps [
-      [
-        "<CMD>MySratch<CR>"
-        "<leader>fs"
-        "n"
-        "Open a sratch in vsplit"
-      ]
+    keymaps = [
+      {
+        action = "<CMD>MySratch<CR>";
+        key = "<leader>fs";
+        mode = "n";
+        options.desc = "Open a sratch in vsplit";
+      }
     ];
   };
 }

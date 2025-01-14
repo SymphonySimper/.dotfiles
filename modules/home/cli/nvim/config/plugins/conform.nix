@@ -104,38 +104,36 @@ in
             ));
         };
       };
+
+      keymaps = [
+        {
+          action.__raw = ''
+            function()
+              require("conform").format()
+              vim.cmd("write")
+            end
+          '';
+          key = "<leader>cf";
+          mode = [
+            "n"
+            "v"
+          ];
+          options.desc = "Format and save";
+        }
+        {
+          action.__raw = ''
+            function()
+              require("conform").format({ formatters = { "injected" }, timeout_ms = "${toString timeout}"})
+            end
+          '';
+          key = "<leader>cF";
+          mode = [
+            "n"
+            "v"
+          ];
+          options.desc = "Format Injected Langs";
+        }
+      ];
     };
-
-    my.programs.nvim.keymaps = [
-      {
-        action.__raw = ''
-          function()
-            require("conform").format()
-            vim.cmd("write")
-          end
-        '';
-
-        key = "<leader>cf";
-        mode = [
-          "n"
-          "v"
-        ];
-        desc = "Format and save";
-      }
-      {
-        action.__raw = ''
-          function()
-            require("conform").format({ formatters = { "injected" }, timeout_ms = "${toString timeout}"})
-          end
-        '';
-
-        key = "<leader>cF";
-        mode = [
-          "n"
-          "v"
-        ];
-        desc = "Format Injected Langs";
-      }
-    ];
   };
 }
