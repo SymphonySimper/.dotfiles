@@ -68,6 +68,7 @@ in
         my.programs.wm.enableLogin = false;
         programs = {
           steam = {
+            extest.enable = true;
             platformOptimizations.enable = true;
             gamescopeSession = {
               enable = true;
