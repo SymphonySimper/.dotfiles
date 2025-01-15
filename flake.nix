@@ -4,7 +4,6 @@
   inputs = {
     # packages
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     # common
     catppuccin.url = "github:catppuccin/nix";

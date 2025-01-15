@@ -47,7 +47,6 @@ let
           ]);
       };
 
-      chaotic-pkgs = inputs.chaotic.legacyPackages.${my.system};
       modules =
         [
           (profileDir + "/${my.profile}/${for}.nix")
@@ -63,7 +62,6 @@ let
       specialArgs = {
         inherit my;
         inherit inputs;
-        inherit chaotic-pkgs;
       };
     in
     if for == "home" then
