@@ -15,63 +15,63 @@ let
     }) keymaps;
 in
 {
-  my.programs.nvim = {
-    treesitter = [ "http" ];
-
-    formatter = {
-      packages = [
-        "kulala-fmt"
-      ];
-
-      ft = rec {
-        http = "kulala-fmt";
-        rest = http;
-      };
-    };
-  };
-
   programs.nixvim = {
     filetype.extension = {
       "http" = "http";
     };
 
-    plugins.kulala = {
-      enable = true;
+    plugins = {
+      treesitter.grammars = [ "http" ];
 
-      settings.contenttypes = {
-        "application/json" = {
-          formatter = [
-            formatter.jq
-            "."
-          ];
-          ft = "json";
-          pathresolver = {
-            __raw = "require('kulala.parser.jsonpath').parse";
+      formatter = {
+        packages = [
+          "kulala-fmt"
+        ];
+
+        ft = rec {
+          http = "kulala-fmt";
+          rest = http;
+        };
+      };
+
+      kulala = {
+        enable = true;
+
+        settings.contenttypes = {
+          "application/json" = {
+            formatter = [
+              formatter.jq
+              "."
+            ];
+            ft = "json";
+            pathresolver = {
+              __raw = "require('kulala.parser.jsonpath').parse";
+            };
           };
-        };
-        "application/xml" = {
-          formatter = [
-            formatter.xml
-            "--format"
-            "-"
-          ];
-          ft = "xml";
-          pathresolver = [
-            formatter.xml
-            "--xpath"
-            "{{path}}"
-            "-"
-          ];
-        };
-        "text/html" = {
-          formatter = [
-            formatter.xml
-            "--format"
-            "--html"
-            "-"
-          ];
-          ft = "html";
-          pathresolver = [ ];
+          "application/xml" = {
+            formatter = [
+              formatter.xml
+              "--format"
+              "-"
+            ];
+            ft = "xml";
+            pathresolver = [
+              formatter.xml
+              "--xpath"
+              "{{path}}"
+              "-"
+            ];
+          };
+          "text/html" = {
+            formatter = [
+              formatter.xml
+              "--format"
+              "--html"
+              "-"
+            ];
+            ft = "html";
+            pathresolver = [ ];
+          };
         };
       };
     };

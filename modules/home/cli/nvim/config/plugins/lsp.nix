@@ -1,15 +1,8 @@
-{ config, lib, ... }:
+{ ... }:
 {
-  options.my.programs.nvim.lsp = lib.mkOption {
-    type = lib.types.attrsOf lib.types.anything;
-    description = "Nixvim LSP servers";
-    default = { };
-  };
-
-  config.programs.nixvim.plugins.lsp = {
+  programs.nixvim.plugins.lsp = {
     enable = true;
     inlayHints = false;
-    servers = config.my.programs.nvim.lsp;
     keymaps = {
       silent = true;
 

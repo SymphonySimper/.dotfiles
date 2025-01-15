@@ -1,21 +1,19 @@
 { pkgs, ... }:
 {
-  my = {
-    home.packages = with pkgs; [
-      gnumake
-      just
+  home.packages = with pkgs; [
+    gnumake
+    just
+  ];
+
+  programs.nixvim.plugins = {
+    treesitter.grammars = [
+      "just"
+      "make"
     ];
 
-    programs.nvim = {
-      treesitter = [
-        "just"
-        "make"
-      ];
-
-      formatter = {
-        packages = [ "just" ];
-        ft.just = "just";
-      };
+    formatter = {
+      packages = [ "just" ];
+      ft.just = "just";
     };
   };
 }

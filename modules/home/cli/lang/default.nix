@@ -16,13 +16,11 @@
     ./web.nix
   ];
 
-  my = {
-    home.packages = with pkgs; [
-      gcc
-      inotify-tools
-      (google-cloud-sdk.withExtraComponents [ google-cloud-sdk.components.app-engine-go ])
-    ];
+  home.packages = with pkgs; [
+    gcc
+    inotify-tools
+    (google-cloud-sdk.withExtraComponents [ google-cloud-sdk.components.app-engine-go ])
+  ];
 
-    programs.nvim.lsp.harper_ls.enable = true; # All
-  };
+  programs.nixvim.plugins.lsp.servers.harper_ls.enable = true; # All
 }

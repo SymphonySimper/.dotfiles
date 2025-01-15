@@ -1,11 +1,12 @@
 { pkgs, ... }:
 {
-  programs.go.enable = true;
-  my = {
-    home.packages = [ pkgs.templ ];
+  home.packages = [ pkgs.templ ];
 
-    programs.nvim = {
-      treesitter = [
+  programs = {
+    go.enable = true;
+
+    nixvim.plugins = {
+      treesitter.grammars = [
         "go"
         "gomod"
         "gowork"
@@ -13,7 +14,7 @@
         "templ"
       ];
 
-      lsp = {
+      lsp.servers = {
         gopls = {
           enable = true;
           settings = {

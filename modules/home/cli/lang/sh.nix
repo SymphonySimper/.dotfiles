@@ -1,8 +1,8 @@
 { ... }:
 {
-  my.programs.nvim = {
-    treesitter = [ "bash" ];
-    lsp.bashls.enable = true;
+  programs.nixvim.plugins = {
+    treesitter.grammars = [ "bash" ];
+    lsp.servers.bashls.enable = true;
     formatter = {
       packages = [ "shfmt" ];
       ft.sh = "shfmt";

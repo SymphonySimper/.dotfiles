@@ -1,14 +1,16 @@
 { pkgs, ... }:
 {
-  my.programs.nvim = {
-    treesitter = [
+  programs.nixvim.plugins = {
+    treesitter.grammars = [
       "toml"
       "yaml"
     ];
-    lsp = {
+
+    lsp.servers = {
       taplo.enable = true; # TOML
       yamlls.enable = true;
     };
+
     formatter = {
       packages = [
         "taplo"

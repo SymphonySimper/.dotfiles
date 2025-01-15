@@ -12,10 +12,7 @@ let
   terminalFeatures = if my.profile == "wsl" then "xterm-256color" else my.programs.terminal;
 in
 {
-  my = {
-    home.packages = with pkgs; [ acpi ];
-    programs.nvim.treesitter = [ "tmux" ];
-  };
+  home.packages = with pkgs; [ acpi ];
 
   catppuccin.tmux.extraConfig = # tmux
     ''
@@ -36,6 +33,7 @@ in
       set -g status-right ""
       set -g status-right-length 100
     '';
+
   programs = {
     zsh.initExtra = # sh
       ''
@@ -44,6 +42,9 @@ in
             exec ${lib.getExe pkgs.tmux} -f "${config.xdg.configHome}/tmux/tmux.conf" new >/dev/null 2>&1
         fi
       '';
+
+    nixvim.plugins.treesitter.grammars = [ "tmux" ];
+
     tmux = {
       enable = true;
       shell = "${pkgs.zsh}/bin/zsh";
@@ -56,6 +57,7 @@ in
       mouse = false;
       customPaneNavigationAndResize = true;
       newSession = false;
+
       plugins = with pkgs; [
         {
           plugin = tmuxPlugins.battery;
@@ -68,6 +70,7 @@ in
             '';
         }
       ];
+
       extraConfig = # tmux
         ''
           # RGB colors
