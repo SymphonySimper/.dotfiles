@@ -50,13 +50,7 @@ in
     };
   };
   config = lib.mkIf cfg.enable {
-    # Refer: https://nixos.wiki/wiki/Steam
-    programs.steam = {
-      enable = true;
-      remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-      dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-      localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
-    };
+    programs.steam.enable = true;
 
     specialisation.steam = {
       inheritParentConfig = true;
@@ -68,8 +62,12 @@ in
         my.programs.wm.enableLogin = false;
         programs = {
           steam = {
+            # Refer: https://nixos.wiki/wiki/Steam
             extest.enable = true;
             platformOptimizations.enable = true;
+            dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+            localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+            remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
             gamescopeSession = {
               enable = true;
               args = builtins.filter (arg: arg != "-e") args;
@@ -86,10 +84,7 @@ in
           };
         };
 
-        boot = {
-          kernelPackages = chaotic-pkgs.linuxPackages_cachyos;
-          kernelParams = [ "preempt=full" ];
-        };
+        boot.kernelParams = [ "preempt=full" ];
         # https://github.com/sched-ext/scx/blob/main/INSTALL.md#nix
         services.scx = {
           enable = true;
