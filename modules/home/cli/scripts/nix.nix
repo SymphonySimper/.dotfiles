@@ -37,7 +37,7 @@ in
         exit 1
       fi
 
-      nix flake "$1" --template "${flake_loc}#templates.''${2}" "$3"
+      nix flake "$1" --template "${flake_loc}#templates.$2" $3
       ;;
     dev)
       shift;
