@@ -16,16 +16,11 @@ let
         }
       )
       (
-        builtins.attrNames (
-          lib.attrsets.filterAttrs (
-            name: value:
-            let
-              isNixFile = mkGetFileName name != null;
-              notDefault = name != "default.nix";
-              isFile = value == "regular";
-            in
-            isNixFile && notDefault && isFile
-          ) (builtins.readDir ./.)
+        builtins.filter (name: mkGetFileName name != null && name != "default.nix") (
+          lib.my.mkReadDir {
+            path = ./.;
+            filter = "file";
+          }
         )
       );
 

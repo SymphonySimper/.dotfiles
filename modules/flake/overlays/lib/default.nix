@@ -1,4 +1,4 @@
-{ my, ... }:
+{ my, helpers, ... }:
 let
   customLib =
     { pkgs, my, ... }:
@@ -17,10 +17,12 @@ in
 final: prev: {
   lib = prev.lib.extend (
     finalLib: prevLib: {
-      my = customLib {
-        pkgs = prev;
-        inherit my;
-      };
+      my =
+        helpers
+        // (customLib {
+          pkgs = prev;
+          inherit my;
+        });
     }
   );
 }

@@ -4,12 +4,8 @@ let
 in
 rec {
   helpers = import ./helpers { inherit inputs lib; };
-  profiles = import ./profiles {
-    inherit inputs lib;
-    mkGetDefault = helpers.mkGetDefault;
-    mkPkgs = helpers.mkPkgs;
-  };
+  profiles = import ./profiles { inherit inputs lib helpers; };
 
-  templates = import ./templates { inherit lib; };
+  templates = import ./templates { inherit helpers; };
   devShells = import ./devshell { inherit inputs helpers; };
 }

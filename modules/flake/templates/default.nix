@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ helpers, ... }:
 builtins.listToAttrs (
   builtins.map
     (dir: {
@@ -9,6 +9,9 @@ builtins.listToAttrs (
       };
     })
     (
-      builtins.attrNames (lib.attrsets.filterAttrs (_: type: type == "directory") (builtins.readDir ./.))
+      helpers.mkReadDir {
+        path = ./.;
+        filter = "dir";
+      }
     )
 )

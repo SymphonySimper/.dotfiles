@@ -1,11 +1,12 @@
 {
   inputs,
   lib,
-  mkGetDefault,
-  mkPkgs,
+  helpers,
   ...
 }:
 let
+  mkGetDefault = helpers.mkGetDefault;
+
   mkMy =
     {
       settings ? { },
@@ -83,9 +84,10 @@ let
       ]
     );
 
-  mkGetProfileDirs = builtins.attrNames (
-    lib.attrsets.filterAttrs (name: value: value == "directory") (builtins.readDir profileDir)
-  );
+  mkGetProfileDirs = helpers.mkReadDir {
+    path = profileDir;
+    filter = "dir";
+  };
 
   mkProfile =
     {
@@ -102,11 +104,11 @@ let
         };
       };
 
-      pkgs = mkPkgs {
+      pkgs = helpers.mkPkgs {
         system = my.system;
         overlays =
           [
-            (import ../overlays/lib { inherit my; })
+            (import ../overlays/lib { inherit my helpers; })
           ]
           ++ (lib.optionals (for == "home") [
             # (import ./overlays/nvim-plugins.nix { inherit inputs; })
