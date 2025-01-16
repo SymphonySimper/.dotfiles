@@ -10,6 +10,6 @@ rec {
     mkPkgs = helpers.mkPkgs;
   };
 
-  templates = import ./templates;
+  templates = import ./templates { inherit lib; };
   devShells = import ./devshell { inherit inputs helpers; };
 }
