@@ -31,17 +31,12 @@
   outputs =
     { ... }@inputs:
     let
-      myLib = import ./lib { inherit inputs; };
+      flake = import ./modules/flake { inherit inputs; };
     in
     {
-      homeConfigurations = myLib.profiles.home;
-      nixosConfigurations = myLib.profiles.system;
-      templates = myLib.templates;
-      devShells = (
-        import ./lib/devshell {
-          inherit inputs;
-          inherit myLib;
-        }
-      );
+      homeConfigurations = flake.profiles.home;
+      nixosConfigurations = flake.profiles.system;
+      templates = flake.templates;
+      devShells = flake.devShells;
     };
 }

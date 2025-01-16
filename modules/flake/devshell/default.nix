@@ -1,18 +1,16 @@
-{ inputs, myLib, ... }:
+{ inputs, helpers, ... }:
 let
   eachSystem = inputs.nixpkgs.lib.genAttrs (import inputs.systems);
 in
 eachSystem (
   system:
   let
-    pkgs = myLib.helpers.mkPkgs {
+    pkgs = helpers.mkPkgs {
       inherit system;
     };
     lib = pkgs.lib;
   in
   {
-    python = import ./python.nix {
-      inherit pkgs;
-    };
+    python = import ./python.nix { inherit pkgs; };
   }
 )
