@@ -32,8 +32,8 @@ let
           builtins.map (
             snippet:
             let
-              name = if builtins.hasAttr "name" snippet then snippet.name else snippet.prefix;
-              description = if builtins.hasAttr "description" snippet then snippet.description else name;
+              name = lib.my.mkGetDefault snippet "name" snippet.prefix;
+              description = lib.my.mkGetDefault snippet "description" name;
             in
             {
               inherit name;

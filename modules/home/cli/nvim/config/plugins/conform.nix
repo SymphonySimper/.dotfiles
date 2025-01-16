@@ -93,7 +93,7 @@ in
               {
                 name =
                   if (isString || isPackage) then
-                    (if builtins.hasAttr "packageName" package then package.packageName else package.pname)
+                    (lib.my.mkGetDefault package "packageName" package.pname)
                   else
                     formatter.name;
                 value = {

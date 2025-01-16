@@ -151,7 +151,7 @@ in
       name = key;
       key = set.key;
       cmd = set.cmd;
-      super = (if builtins.hasAttr "super" set then set.super else true);
+      super = lib.my.mkGetDefault set "super" true;
     }
     // (if builtins.hasAttr "mod" set then { mod = set.mod; } else { })
   ) (builtins.attrNames keybinds.${key}))

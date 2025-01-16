@@ -30,8 +30,7 @@ let
         builtins.map (
           cache:
           let
-            condition =
-              if builtins.hasAttr "condition" cache then (builtins.getAttr "condition" cache) else true;
+            condition = lib.my.mkGetDefault cache "condition" true;
             priority =
               if builtins.hasAttr "priority" cache then
                 "?priority=${builtins.toString (builtins.getAttr "priority" cache)}"

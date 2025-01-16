@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, mkGetDefault, ... }:
 let
   # Opposite value as the filter uses a not condition
   types = {
@@ -12,7 +12,7 @@ let
       filter ? null,
     }:
     let
-      filterValue = if builtins.hasAttr filter types then types.${filter} else null;
+      filterValue = mkGetDefault types filter null;
     in
     builtins.attrNames (
       lib.attrsets.filterAttrs (_: value: value != filterValue) (builtins.readDir path)
