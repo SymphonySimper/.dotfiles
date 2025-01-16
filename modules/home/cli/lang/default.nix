@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
+    ./direnv.nix
     ./docker.nix
     ./go.nix
     ./http.nix
