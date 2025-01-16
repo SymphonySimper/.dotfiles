@@ -1,9 +1,9 @@
 {
-  pkgs,
-  lib,
-  config,
   inputs,
   my,
+  config,
+  pkgs,
+  lib,
   ...
 }:
 let
@@ -95,6 +95,11 @@ in
             ];
           }
         ];
+
+        registry = {
+          nixpkgs.flake = inputs.nixpkgs;
+          my.flake = inputs.self;
+        };
       }
 
       (mkUnsafeIf (system) {
