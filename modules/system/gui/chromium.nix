@@ -200,9 +200,9 @@ in
         ExtensionSettings = mkExtensionSettings [
           [ "nngceckbapebfimnlniiiahkandclblb" ] # bitwarden
           "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
-          "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
-          "edibdbjcniadpccecjdfdjjppcpchdlm" # i don't care about cookies
-          [ "bnclejfcblondkjliiblkojdeloomadd" ] # mute tab
+          # "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
+          # "edibdbjcniadpccecjdfdjjppcpchdlm" # i don't care about cookies
+          # [ "bnclejfcblondkjliiblkojdeloomadd" ] # mute tab
         ];
       };
     };
