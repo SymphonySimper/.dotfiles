@@ -29,13 +29,13 @@ let
       map (
         extension:
         let
-          pin = if builtins.length extension > 1 then builtins.elemAt extension 1 else false;
+          isList = builtins.typeOf extension == "list";
         in
         {
-          name = builtins.elemAt extension 0;
+          name = if isList then builtins.elemAt extension 0 else extension;
           value = {
             "installation_mode" = "force_installed";
-            "toolbar_pin" = if pin then "force_pinned" else "default_unpinned";
+            "toolbar_pin" = if isList then "force_pinned" else "default_unpinned";
             "update_url" = "https://clients2.google.com/service/update2/crx";
           };
 
@@ -198,23 +198,11 @@ in
           ]
         ];
         ExtensionSettings = mkExtensionSettings [
-          [
-            "nngceckbapebfimnlniiiahkandclblb" # bitwarden
-            true
-          ]
-          [
-            "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
-          ]
-          [
-            "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
-          ]
-          [
-            "edibdbjcniadpccecjdfdjjppcpchdlm" # i don't care about cookies
-          ]
-          [
-            "bnclejfcblondkjliiblkojdeloomadd" # mute tab
-            true
-          ]
+          [ "nngceckbapebfimnlniiiahkandclblb" ] # bitwarden
+          "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
+          "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
+          "edibdbjcniadpccecjdfdjjppcpchdlm" # i don't care about cookies
+          [ "bnclejfcblondkjliiblkojdeloomadd" ] # mute tab
         ];
       };
     };
