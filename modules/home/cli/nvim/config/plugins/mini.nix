@@ -9,64 +9,15 @@ in
       mockDevIcons = true;
       luaConfig.pre = # lua
         ''
-          local my_mini_ai = require("mini.ai")
-          local my_mini_extra = require("mini.extra")
           local my_mini_hipatterns = require("mini.hipatterns")
         '';
       modules = {
         icons = { };
 
-        extra = { };
-
         hipatterns = {
           highlighters = {
             # Highlight hex color strings (`#rrggbb`) using that color
             hex_color = mkRaw ''my_mini_hipatterns.gen_highlighter.hex_color()'';
-          };
-        };
-
-        ai = {
-          # refer: https://www.lazyvim.org/plugins/coding#miniai
-          n_lines = 500;
-          custom_objects = {
-            # code block
-            o = mkRaw ''
-              my_mini_ai.gen_spec.treesitter({
-                a = { "@block.outer", "@conditional.outer", "@loop.outer" },
-                i = { "@block.inner", "@conditional.inner", "@loop.inner" },
-              })
-            '';
-            # function
-            f = mkRaw ''my_mini_ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" })'';
-            # class
-            c = mkRaw ''
-              my_mini_ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" })
-            '';
-            # tags
-            t = [
-              "<([%p%w]-)%f[^<%w][^<>]->.-</%1>"
-              "^<.->().*()</[^/]->$"
-            ];
-            # digits
-            d = [ "%f[%d]%d+" ];
-            # word with case
-            e = [
-              [
-                "%u[%l%d]+%f[^%l%d]"
-                "%f[%S][%l%d]+%f[^%l%d]"
-                "%f[%P][%l%d]+%f[^%l%d]"
-                "^[%l%d]+%f[^%l%d]"
-              ]
-              "^().*()$"
-            ];
-            # indent
-            i = mkRaw ''my_mini_extra.gen_ai_spec.indent()'';
-            # buffer
-            g = mkRaw ''my_mini_extra.gen_ai_spec.buffer()'';
-            # u for "Usage"
-            u = mkRaw ''my_mini_ai.gen_spec.function_call()'';
-            ## without dot in function name
-            U = mkRaw ''my_mini_ai.gen_spec.function_call({ name_pattern = "[%w_]" })'';
           };
         };
 
