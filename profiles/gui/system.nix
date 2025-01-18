@@ -29,11 +29,14 @@
       led.enable = true;
       logitech.enable = true;
     };
-    programs.steam = {
-      enable = true;
-      display = {
-        width = 1920;
-        height = 1200;
+    programs = {
+      vm.waydroid.enable = true;
+      steam = {
+        enable = true;
+        display = {
+          width = 1920;
+          height = 1200;
+        };
       };
     };
   };

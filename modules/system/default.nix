@@ -50,8 +50,11 @@ in
     };
     programs = {
       docker.enable = lib.mkDefault false;
-      vm.enable = lib.mkDefault false;
       steam.enable = lib.mkDefault false;
+      vm = {
+        enable = lib.mkDefault false;
+        waydroid.enable = lib.mkDefault false;
+      };
     };
   };
 
