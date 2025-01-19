@@ -6,6 +6,7 @@
     ./desktop/wm.nix
     ./kanata.nix
     ./steam.nix
-    ./vm.nix
+
+    ./vm
   ];
 }
