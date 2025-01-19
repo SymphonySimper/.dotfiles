@@ -36,9 +36,9 @@ in
         RUNTIME_PM_ON_AC = "auto";
         RUNTIME_PM_ON_BAT = "auto";
 
-        # WiFi
-        WIFI_PWR_ON_AC = "on";
-        WIFI_PWR_ON_BAT = "on";
+        # # WiFi
+        # WIFI_PWR_ON_AC = "on";
+        # WIFI_PWR_ON_BAT = "on";
       };
     };
     services.power-profiles-daemon.enable = false;
