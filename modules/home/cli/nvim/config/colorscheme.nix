@@ -21,8 +21,6 @@
         };
       };
     };
-    opts = {
-      background = if my.theme.dark then "dark" else "light";
-    };
+    opts.background = if my.theme.dark then "dark" else "light";
   };
 }

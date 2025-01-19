@@ -3,13 +3,11 @@
   programs.nixvim = {
     plugins.todo-comments = {
       enable = true;
-      keymaps = {
-        todoLocList = {
-          action = "TodoLocList";
-          key = "<leader>tl";
-          mode = "n";
-          options.desc = "Show Todo Location List";
-        };
+      keymaps.todoLocList = {
+        action = "TodoLocList";
+        key = "<leader>tl";
+        mode = "n";
+        options.desc = "Show Todo Location List";
       };
     };
 

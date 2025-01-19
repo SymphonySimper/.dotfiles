@@ -6,12 +6,10 @@
   config = lib.mkIf config.my.programs.docker.enable {
     virtualisation.docker = {
       enable = true;
-      enableOnBoot = lib.mkForce false;
+      enableOnBoot = lib.mkDefault false;
       liveRestore = false;
 
-      autoPrune = {
-        enable = true;
-      };
+      autoPrune.enable = true;
 
       rootless = {
         enable = true;

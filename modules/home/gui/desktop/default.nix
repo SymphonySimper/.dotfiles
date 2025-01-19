@@ -1,8 +1,6 @@
-{ my, ... }:
+{ my, lib, ... }:
 {
-  imports =
-    if my.gui.desktop.enable then
-      [ ./services ] ++ (if my.gui.desktop.wm then [ ./wm ] else [ ])
-    else
-      [ ];
+  imports = (
+    lib.optionals my.gui.desktop.enable ([ ./services ] ++ (lib.optionals my.gui.desktop.wm [ ./wm ]))
+  );
 }

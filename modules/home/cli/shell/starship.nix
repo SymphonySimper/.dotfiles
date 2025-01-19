@@ -48,9 +48,7 @@
         symbol = "󱄅 ";
       };
 
-      gcloud = {
-        disabled = true;
-      };
+      gcloud.disabled = true;
     };
   };
 }

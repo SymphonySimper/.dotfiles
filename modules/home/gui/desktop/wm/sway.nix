@@ -39,9 +39,7 @@ in
           titlebar = false;
         };
 
-        gaps = {
-          smartBorders = "on";
-        };
+        gaps.smartBorders = "on";
 
         startup = [ { command = "startup"; } ];
 
@@ -91,7 +89,8 @@ in
             "${keys.mod}+Shift+c" = "reload";
 
             # Exit sway (logs you out of your Wayland session)
-            "${keys.mod}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
+            "${keys.mod}+Shift+e" =
+              "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
             #
             # Moving around:
             #
@@ -187,28 +186,27 @@ in
             # Switch to resize mode
             "${keys.mod}+r" = "mode \"resize\"";
           };
-        modes = {
-          # Resizing containers:
-          "resize" = {
-            # left will shrink the containers width
-            # right will grow the containers width
-            # up will shrink the containers height
-            # down will grow the containers height
-            "${keys.left}" = "resize shrink width 10px";
-            "${keys.down}" = "resize grow height 10px";
-            "${keys.up}" = "resize shrink height 10px";
-            "${keys.right}" = "resize grow width 10px";
 
-            # Ditto, with arrow keys
-            "Left" = "resize shrink width 10px";
-            "Down" = "resize grow height 10px";
-            "Up" = "resize shrink height 10px";
-            "Right" = "resize grow width 10px";
+        # Resizing containers:
+        modes."resize" = {
+          # left will shrink the containers width
+          # right will grow the containers width
+          # up will shrink the containers height
+          # down will grow the containers height
+          "${keys.left}" = "resize shrink width 10px";
+          "${keys.down}" = "resize grow height 10px";
+          "${keys.up}" = "resize shrink height 10px";
+          "${keys.right}" = "resize grow width 10px";
 
-            # Return to default mode
-            "Return" = "mode \"default\"";
-            "Escape" = "mode \"default\"";
-          };
+          # Ditto, with arrow keys
+          "Left" = "resize shrink width 10px";
+          "Down" = "resize grow height 10px";
+          "Up" = "resize shrink height 10px";
+          "Right" = "resize grow width 10px";
+
+          # Return to default mode
+          "Return" = "mode \"default\"";
+          "Escape" = "mode \"default\"";
         };
 
         output = {
@@ -222,19 +220,13 @@ in
           };
         };
 
-        seat = {
-          "*" = {
-            hide_cursor = "when-typing enable";
-          };
-        };
+        seat."*".hide_cursor = "when-typing enable";
 
-        input = {
-          "type:touchpad" = {
-            dwt = "enabled";
-            tap = "enabled";
-            natural_scroll = "disabled";
-            middle_emulation = "enabled";
-          };
+        input."type:touchpad" = {
+          dwt = "enabled";
+          tap = "enabled";
+          natural_scroll = "disabled";
+          middle_emulation = "enabled";
         };
 
         colors = {

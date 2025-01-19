@@ -6,9 +6,7 @@
 }:
 {
   config = lib.mkIf my.gui.enable {
-    programs.zathura = {
-      enable = true;
-    };
+    programs.zathura.enable = true;
     home.packages = with pkgs; [ libreoffice ];
   };
 }

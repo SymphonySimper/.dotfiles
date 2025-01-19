@@ -1,8 +1,6 @@
 { ... }:
 {
-  programs.nixvim.filetype = {
-    extension = {
-      "watchmanconfig" = "json";
-    };
+  programs.nixvim.filetype.extension = {
+    "watchmanconfig" = "json";
   };
 }

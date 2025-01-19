@@ -1,6 +1,4 @@
 { my, ... }:
 {
-  programs.wofi = {
-    enable = my.programs.launcher == "wofi";
-  };
+  programs.wofi.enable = my.programs.launcher == "wofi";
 }

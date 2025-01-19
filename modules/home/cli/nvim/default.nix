@@ -12,13 +12,11 @@
       withNodeJs = true;
       withRuby = false;
 
-      performance = {
-        byteCompileLua = {
-          enable = true;
-          nvimRuntime = true;
-          configs = true;
-          plugins = true;
-        };
+      performance.byteCompileLua = {
+        enable = true;
+        nvimRuntime = true;
+        configs = true;
+        plugins = true;
       };
     };
   };

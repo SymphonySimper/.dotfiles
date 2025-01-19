@@ -14,23 +14,19 @@ in
       modules = {
         icons = { };
 
-        hipatterns = {
-          highlighters = {
-            # Highlight hex color strings (`#rrggbb`) using that color
-            hex_color = mkRaw ''my_mini_hipatterns.gen_highlighter.hex_color()'';
-          };
+        hipatterns.highlighters = {
+          # Highlight hex color strings (`#rrggbb`) using that color
+          hex_color = mkRaw ''my_mini_hipatterns.gen_highlighter.hex_color()'';
         };
 
-        surround = {
-          mappings = {
-            add = "gsa";
-            delete = "gsd";
-            find = "gsf";
-            find_left = "gsF";
-            highlight = "gsh";
-            replace = "gsr";
-            update_n_lines = "gsn";
-          };
+        surround.mappings = {
+          add = "gsa";
+          delete = "gsd";
+          find = "gsf";
+          find_left = "gsF";
+          highlight = "gsh";
+          replace = "gsr";
+          update_n_lines = "gsn";
         };
 
         pairs = { };
@@ -41,9 +37,7 @@ in
 
         indentscope = {
           symbol = "│";
-          options = {
-            try_as_border = true;
-          };
+          options.try_as_border = true;
         };
 
         files = {

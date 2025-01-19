@@ -59,29 +59,23 @@ in
       extensions = {
         fzf-native = {
           enable = true;
-          settings = {
-            case_mode = "smart_case";
-          };
+          settings.case_mode = "smart_case";
         };
       };
 
-      settings = {
-        defaults = {
-          layout_config = {
-            prompt_position = "top";
-          };
-          sorting_strategy = "ascending";
-          file_ignore_patterns = [
-            "^.git/"
-            "^node_modules/"
-            "^build/"
-            "^.mypy_cache/"
-            "^__pycache__/"
-            "^output/"
-            "^data/"
-            "%.ipynb"
-          ];
-        };
+      settings.defaults = {
+        layout_config.prompt_position = "top";
+        sorting_strategy = "ascending";
+        file_ignore_patterns = [
+          "^.git/"
+          "^node_modules/"
+          "^build/"
+          "^.mypy_cache/"
+          "^__pycache__/"
+          "^output/"
+          "^data/"
+          "%.ipynb"
+        ];
       };
     };
 

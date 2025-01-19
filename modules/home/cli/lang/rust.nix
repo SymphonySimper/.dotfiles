@@ -24,9 +24,7 @@
       installRustc = false;
       settings = {
         checkOnSave = true;
-        check = {
-          command = "clippy";
-        };
+        check.command = "clippy";
       };
     };
   };

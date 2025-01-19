@@ -1,9 +1,7 @@
 { my, pkgs, ... }:
 {
   catppuccin.swaylock.flavor = my.theme.flavors.dark;
-  programs.swaylock = {
-    enable = true;
-  };
+  programs.swaylock.enable = true;
 
   services.swayidle = {
     enable = true;
