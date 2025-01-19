@@ -15,10 +15,11 @@ let
     "-W ${builtins.toString cfg.display.width}"
     "-H ${builtins.toString cfg.display.height}"
     "-r ${builtins.toString cfg.display.refreshRate}" # Refresh rate
+    "--force-grab-cursor"
+    "--mouse-sensitivity 2" # increase mouse speed
     # "--expose-wayland"
     # "--backend wayland"
     # "-C" # hide cursor after time delay :smh
-    # "--force-grab-cursor"
   ];
 in
 {
