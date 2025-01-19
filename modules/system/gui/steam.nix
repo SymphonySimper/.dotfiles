@@ -9,17 +9,17 @@
 let
   cfg = config.my.programs.steam;
 
-  args = [
+  sessionArgs = [
+    # "--force-grab-cursor"
+    "--mouse-sensitivity 2" # increase mouse speed
+  ];
+
+  args = sessionArgs ++ [
     "-f" # full screen
     "-e" # steam integration
     "-W ${builtins.toString cfg.display.width}"
     "-H ${builtins.toString cfg.display.height}"
     "-r ${builtins.toString cfg.display.refreshRate}" # Refresh rate
-    "--force-grab-cursor"
-    "--mouse-sensitivity 2" # increase mouse speed
-    # "--expose-wayland"
-    # "--backend wayland"
-    # "-C" # hide cursor after time delay :smh
   ];
 in
 {
@@ -70,7 +70,7 @@ in
             remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
             gamescopeSession = {
               enable = true;
-              args = builtins.filter (arg: arg != "-e") args;
+              args = sessionArgs;
             };
           };
 
