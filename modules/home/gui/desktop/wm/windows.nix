@@ -32,6 +32,11 @@ in
   };
   "6" = {
     app_id = [
+      "Waydroid"
+    ];
+  };
+  "7" = {
+    app_id = [
       # "gamescope"
       "discord"
     ];
