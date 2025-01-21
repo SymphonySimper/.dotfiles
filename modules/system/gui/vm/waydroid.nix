@@ -68,12 +68,15 @@ in
       )
       (writeShellScriptBin "weston-waydroid" # sh
         ''
-          ${lib.getExe pkgs.weston} \
-            --config=${westonConfig} \
-            --shell=kiosk \
-            --width=${res.steam.width} --height=${res.steam.height} \
-            --fullscreen \
-            -- waydroid-steam
+          ${lib.getExe pkgs.weston} ${
+            builtins.toString [
+              "--config=${westonConfig}"
+              "--shell=kiosk"
+              "--width=${res.steam.width} --height=${res.steam.height}"
+              "--fullscreen"
+              "-- waydroid-steam"
+            ]
+          }
         ''
       )
       (makeDesktopItem rec {
