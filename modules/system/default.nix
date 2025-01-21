@@ -49,6 +49,7 @@ in
       };
     };
     programs = {
+      android.enable = lib.mkDefault false;
       docker.enable = lib.mkDefault false;
       steam.enable = lib.mkDefault false;
       vm = {

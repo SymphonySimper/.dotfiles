@@ -1,8 +1,9 @@
+{ ... }:
 {
-  pkgs,
-  ...
-}:
-{
-  imports = [ ./docker.nix ];
-  environment.systemPackages = with pkgs; [ git ];
+  imports = [
+    ./docker.nix
+    ./android.nix
+  ];
+
+  programs.git.enable = true;
 }

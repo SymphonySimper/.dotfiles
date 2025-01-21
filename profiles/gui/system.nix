@@ -30,6 +30,7 @@
       logitech.enable = true;
     };
     programs = {
+      android.enable = true;
       vm.waydroid.enable = true;
       steam = {
         enable = true;
