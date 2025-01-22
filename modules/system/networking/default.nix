@@ -3,9 +3,11 @@ let
   cfg = config.my.networking;
 in
 {
-  options.my.networking = {
-    enable = lib.mkEnableOption "networking";
-  };
+  imports = [
+    ./begone.nix
+  ];
+
+  options.my.networking.enable = lib.mkEnableOption "networking";
 
   config = lib.mkIf cfg.enable {
     networking = {
@@ -18,9 +20,6 @@ in
           # 80 # 443
           5173
         ];
-      };
-      hosts = {
-        "0.0.0.0" = (import ./begone.nix);
       };
     };
   };

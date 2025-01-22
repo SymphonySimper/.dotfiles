@@ -33,7 +33,10 @@ in
   my = {
     common.system = true;
     boot.enable = lib.mkDefault my.gui.desktop.enable;
-    networking.enable = lib.mkDefault true;
+    networking = {
+      enable = lib.mkDefault true;
+      begone.enable = lib.mkDefault false;
+    };
     hardware = {
       ideapad.enable = lib.mkDefault false;
       led.enable = lib.mkDefault false;
