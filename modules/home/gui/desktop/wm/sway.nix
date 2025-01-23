@@ -220,7 +220,12 @@ in
           };
         };
 
-        seat."*".hide_cursor = "when-typing enable";
+        # Do not enable!
+        # Reason:
+        # > Be aware that this setting can interfere with input handling in games
+        # > and certain types of software (Gimp, Blender etc) that rely on
+        # > simultaneous input from mouse and keyboard.
+        # seat."*".hide_cursor = "when-typing enable";
 
         input."type:touchpad" = {
           dwt = "enabled";
