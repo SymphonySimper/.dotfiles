@@ -5,15 +5,27 @@
   lib,
   ...
 }:
+let
+  groupSudo = "wheel";
+in
 {
-  options.my.user.groups = lib.mkOption {
-    type = lib.types.listOf lib.types.str;
-    description = "Adds groups to extraGroups";
-    default = [ ];
+  options.my.user = {
+    sudo.nopasswd = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      description = "Sudo commands to run without password";
+      default = [ ];
+    };
+
+    groups = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      description = "Adds groups to extraGroups";
+      default = [ ];
+    };
   };
 
   config = {
     programs.zsh.enable = true;
+
     users = {
       mutableUsers = true;
       defaultUserShell = pkgs.zsh;
@@ -24,7 +36,7 @@
         description = "${my.fullName}";
         extraGroups = lib.lists.unique (
           [
-            "wheel"
+            groupSudo
             "networkmanager"
             "uinput"
             "libvirtd"
@@ -35,6 +47,21 @@
           ++ config.my.user.groups
         );
       };
+    };
+
+    security.sudo = {
+      enable = true;
+      wheelNeedsPassword = true;
+
+      extraRules = [
+        {
+          groups = [ groupSudo ];
+          commands = builtins.map (command: {
+            inherit command;
+            options = [ "NOPASSWD" ];
+          }) config.my.user.sudo.nopasswd;
+        }
+      ];
     };
   };
 }
