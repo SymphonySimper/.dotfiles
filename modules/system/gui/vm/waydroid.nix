@@ -20,6 +20,8 @@ let
     };
   };
 
+  sudo = "/run/wrappers/bin/sudo";
+
   waydroidPkg = lib.getExe pkgs.waydroid;
   waydroidRestart = # sh
     "/run/current-system/sw/bin/systemctl restart waydroid-container.service";
@@ -32,6 +34,10 @@ let
           # sh
           ''
             ${lib.getExe pkgs.wlr-randr} --output X11-1 --custom-mode ${res.steam.width}x${res.steam.height}
+            sleep 2
+
+            ${mkWaydroidSetRes "steam"}
+            ${sudo} ${waydroidRestart}
             sleep 2
 
             ${waydroidPkg} ${builtins.toString args}
@@ -49,10 +55,8 @@ let
     ''
       # ${waydroidPkg} prop set persist.waydroid.width ""
       # ${waydroidPkg} prop set persist.waydroid.height ""
-      # ${waydroidPkg} prop set persist.waydroid.width ${res.${for}.width}
-      # ${waydroidPkg} prop set persist.waydroid.height ${res.${for}.height}
-
-      ${pkgs.sudo}/bin/sudo ${waydroidRestart}
+      ${waydroidPkg} prop set persist.waydroid.width ${res.${for}.width}
+      ${waydroidPkg} prop set persist.waydroid.height ${res.${for}.height}
     '';
 in
 {
@@ -67,10 +71,34 @@ in
     environment.systemPackages = with pkgs; [
       (writeShellScriptBin "waydroid-init" # sh
         ''
+          set -e # exit on any error
+
+          ${sudo} ${waydroidPkg} init -s GAPPS
+
+          # controller support (Allows access to all plugged in devices)
           ${waydroidPkg} prop set persist.waydroid.udev true
           ${waydroidPkg} prop set persist.waydroid.uevent true
 
+          # Disable freeform apps (Only fullscreen apps)
+          ${waydroidPkg} prop set persist.waydroid.multi_windows false
+
           ${mkWaydroidSetRes "desktop"}
+
+          ${sudo} ${waydroidRestart}
+
+          ${waydroidPkg} show-full-ui &
+          sleep 5
+
+          # refer: https://docs.waydro.id/faq/google-play-certification
+          certify_url="https://www.google.com/android/uncertified"
+
+          android_id=$(${sudo} ${waydroidPkg} shell sqlite3 /data/data/com.google.android.gsf/databases/gservices.db "select * from main where name = \"android_id\";" | ${pkgs.coreutils-full}/bin/cut -d '|' -f2)
+          "${pkgs.wl-clipboard}/bin/wl-copy" "$android_id"
+
+          echo "Android ID (copied to clipboard): $android_id"
+          echo "Enter ID in this page: $certify_url"
+
+          "${pkgs.xdg-utils}/bin/xdg-open" "$certify_url"
         ''
       )
 
