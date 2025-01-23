@@ -26,6 +26,17 @@ let
   waydroidRestart = # sh
     "/run/current-system/sw/bin/systemctl restart waydroid-container.service";
 
+  mkWaydroidSetRes =
+    {
+      w ? "",
+      h ? "",
+    }:
+    ''
+      ${waydroidPkg} prop set persist.waydroid.width ${w}
+      ${waydroidPkg} prop set persist.waydroid.height ${h}
+      ${sudo} ${waydroidRestart}
+    '';
+
   mkWaydroidCageLaunch =
     name: args:
     let
@@ -36,10 +47,6 @@ let
             ${lib.getExe pkgs.wlr-randr} --output X11-1 --custom-mode ${res.steam.width}x${res.steam.height}
             sleep 2
 
-            ${mkWaydroidSetRes "steam"}
-            ${sudo} ${waydroidRestart}
-            sleep 2
-
             ${waydroidPkg} ${builtins.toString args}
           ''
       );
@@ -48,16 +55,6 @@ let
       ''
         ${lib.getExe pkgs.cage} -- ${waydroidLaunch}
       '';
-
-  mkWaydroidSetRes =
-    for:
-    # sh
-    ''
-      # ${waydroidPkg} prop set persist.waydroid.width ""
-      # ${waydroidPkg} prop set persist.waydroid.height ""
-      ${waydroidPkg} prop set persist.waydroid.width ${res.${for}.width}
-      ${waydroidPkg} prop set persist.waydroid.height ${res.${for}.height}
-    '';
 in
 {
   options.my.programs.vm.waydroid.enable = lib.mkEnableOption "Waydroid";
@@ -82,7 +79,10 @@ in
           # Disable freeform apps (Only fullscreen apps)
           ${waydroidPkg} prop set persist.waydroid.multi_windows false
 
-          ${mkWaydroidSetRes "desktop"}
+          ${mkWaydroidSetRes {
+            w = res.desktop.width;
+            h = res.desktop.height;
+          }}
 
           ${sudo} ${waydroidRestart}
 
@@ -101,6 +101,12 @@ in
           "${pkgs.xdg-utils}/bin/xdg-open" "$certify_url"
         ''
       )
+
+      (writeShellScriptBin "waydroid-reset-res" (mkWaydroidSetRes { }))
+      (writeShellScriptBin "waydroid-set-res" (mkWaydroidSetRes {
+        w = res.desktop.width;
+        h = res.desktop.height;
+      }))
 
       (mkWaydroidCageLaunch "waydroid-cage" [ "show-full-ui" ])
       (makeDesktopItem rec {
