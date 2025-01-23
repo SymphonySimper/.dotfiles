@@ -114,18 +114,6 @@ in
         desktopName = name;
         exec = "waydroid-cage";
       })
-
-      (mkWaydroidCageLaunch "waydroid-cage-minecraft" [
-        "app"
-        "intent"
-        "android.settings.APPLICATION_DETAILS_SETTINGS"
-        "package:com.mojang.minecraftpe"
-      ])
-      (makeDesktopItem rec {
-        name = "Waydroid Cage Minecraft";
-        desktopName = name;
-        exec = "waydroid-cage-minecraft";
-      })
     ];
   };
 }
