@@ -31,9 +31,8 @@ in
     ];
   };
   "6" = {
-    app_id = [
-      "Waydroid"
-    ];
+    app_id = [ "Waydroid" ];
+    title = [ "Minecraft" ];
   };
   "7" = {
     app_id = [
