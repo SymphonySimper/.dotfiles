@@ -1,6 +1,6 @@
 { lib, my, ... }:
 let
-  padding = 1;
+  padding = 2;
 in
 {
   config = lib.mkIf my.gui.enable {
