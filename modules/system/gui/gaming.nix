@@ -75,7 +75,7 @@ in
     };
 
     environment.systemPackages = [ pkgs.mangohud ];
-    my.user.tty."2" = {
+    my.programs.tty."2" = {
       skipUsername = true;
       launch = {
         command = "steam-gamescope";

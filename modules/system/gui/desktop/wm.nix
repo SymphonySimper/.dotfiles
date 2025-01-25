@@ -29,7 +29,7 @@
 
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-    my.user.tty."1" = {
+    my.programs.tty."1" = {
       skipUsername = true;
       launch = {
         command = "sway";

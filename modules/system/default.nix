@@ -20,6 +20,7 @@ in
     ./font.nix
     ./locale.nix
     ./time.nix
+    ./tty.nix
     ./user.nix
 
     ../common
