@@ -5,37 +5,36 @@
     type = lib.types.bool;
     default = (my.gui.desktop.enable && my.gui.desktop.wm);
   };
-  config = lib.mkIf (my.gui.desktop.enable && my.gui.desktop.wm) (
-    {
-      programs.sway = {
-        enable = true;
-        wrapperFeatures.gtk = true;
-        extraPackages = [ ];
-      };
+  config = lib.mkIf (my.gui.desktop.enable && my.gui.desktop.wm) {
+    my.user.tty.skipUsername = [ 1 ];
 
-      security = {
-        polkit.enable = true;
-        pam.services = {
-          sway.enableGnomeKeyring = true;
-          # Enable swaylock
-          swaylock = { };
-        };
-      };
+    programs.sway = {
+      enable = true;
+      wrapperFeatures.gtk = true;
+      extraPackages = [ ];
+    };
 
-      services = {
-        gnome.gnome-keyring.enable = true;
-        udisks2.enable = true;
+    security = {
+      polkit.enable = true;
+      pam.services = {
+        sway.enableGnomeKeyring = true;
+        # Enable swaylock
+        swaylock = { };
       };
+    };
 
-      environment = {
-        sessionVariables.NIXOS_OZONE_WL = "1";
+    services = {
+      gnome.gnome-keyring.enable = true;
+      udisks2.enable = true;
+    };
 
-        loginShellInit = lib.my.mkTTYLaunch {
-          command = "sway";
-          dbus = false;
-        };
+    environment = {
+      sessionVariables.NIXOS_OZONE_WL = "1";
+
+      loginShellInit = lib.my.mkTTYLaunch {
+        command = "sway";
+        dbus = false;
       };
-    }
-    // (lib.my.mkSkipUsername { tty = 1; })
-  );
+    };
+  };
 }
