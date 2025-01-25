@@ -16,12 +16,6 @@
 
         . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
       '';
-
-    initExtra = # sh
-      ''
-        PROMPT_COMMAND="export PROMPT_COMMAND=echo"
-        set -o vi
-      '';
   };
 
   home.shellAliases = rec {
