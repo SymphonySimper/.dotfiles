@@ -50,8 +50,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    my.user.tty.skipUsername = [ 2 ];
-
     programs = {
       steam = {
         enable = true;
@@ -76,12 +74,12 @@ in
       };
     };
 
-    environment = {
-      systemPackages = [ pkgs.mangohud ];
-      loginShellInit = lib.my.mkTTYLaunch {
+    environment.systemPackages = [ pkgs.mangohud ];
+    my.user.tty."2" = {
+      skipUsername = true;
+      launch = {
         command = "steam-gamescope";
         dbus = true;
-        tty = 2;
       };
     };
   };

@@ -5,9 +5,8 @@
     type = lib.types.bool;
     default = (my.gui.desktop.enable && my.gui.desktop.wm);
   };
-  config = lib.mkIf (my.gui.desktop.enable && my.gui.desktop.wm) {
-    my.user.tty.skipUsername = [ 1 ];
 
+  config = lib.mkIf (my.gui.desktop.enable && my.gui.desktop.wm) {
     programs.sway = {
       enable = true;
       wrapperFeatures.gtk = true;
@@ -28,10 +27,11 @@
       udisks2.enable = true;
     };
 
-    environment = {
-      sessionVariables.NIXOS_OZONE_WL = "1";
+    environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-      loginShellInit = lib.my.mkTTYLaunch {
+    my.user.tty."1" = {
+      skipUsername = true;
+      launch = {
         command = "sway";
         dbus = false;
       };
