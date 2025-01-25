@@ -7,14 +7,14 @@
   ...
 }:
 let
-  cfg = config.my.programs.steam;
+  cfg = config.my.programs.gaming;
 
   sessionArgs = [
-    # "--force-grab-cursor"
     "--mouse-sensitivity 2" # increase mouse speed
   ];
 
   args = sessionArgs ++ [
+    "--force-grab-cursor"
     "-f" # full screen
     "-e" # steam integration
     "-W ${builtins.toString cfg.display.width}"
@@ -23,10 +23,10 @@ let
   ];
 in
 {
-  options.my.programs.steam = {
-    enable = lib.mkEnableOption "steam";
+  options.my.programs.gaming = {
+    enable = lib.mkEnableOption "Gaming";
     display = lib.mkOption {
-      description = "Display settings to be used in gamescope";
+      description = "Display settings to be used in gamescope and other games";
       default = { };
       type = lib.types.submodule {
         options = {
@@ -49,17 +49,17 @@ in
       };
     };
   };
+
   config = lib.mkIf cfg.enable {
     programs.steam.enable = true;
 
-    specialisation.steam = {
+    specialisation.gaming = {
       inheritParentConfig = true;
       configuration = {
         imports = [
           inputs.nix-gaming.nixosModules.platformOptimizations
         ];
 
-        my.programs.wm.enableLogin = false;
         programs = {
           steam = {
             # Refer: https://nixos.wiki/wiki/Steam
@@ -96,7 +96,7 @@ in
           loginShellInit = lib.my.mkTTYLaunch {
             command = "steam-gamescope";
             dbus = true;
-            tty = 1;
+            tty = 2;
           };
         };
       };

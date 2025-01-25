@@ -1,5 +1,6 @@
 {
   my,
+  config,
   pkgs,
   lib,
   ...
@@ -33,10 +34,12 @@ in
   my = {
     common.system = true;
     boot.enable = lib.mkDefault my.gui.desktop.enable;
+
     networking = {
       enable = lib.mkDefault true;
       begone.enable = lib.mkDefault false;
     };
+
     hardware = {
       ideapad.enable = lib.mkDefault false;
       led.enable = lib.mkDefault false;
@@ -51,13 +54,14 @@ in
         nvidia.enable = lib.mkDefault false;
       };
     };
+
     programs = {
       android.enable = lib.mkDefault false;
       docker.enable = lib.mkDefault false;
-      steam.enable = lib.mkDefault false;
+      gaming.enable = lib.mkDefault false;
       vm = {
         enable = lib.mkDefault false;
-        waydroid.enable = lib.mkDefault false;
+        waydroid.enable = lib.mkDefault config.my.programs.gaming.enable;
       };
     };
   };

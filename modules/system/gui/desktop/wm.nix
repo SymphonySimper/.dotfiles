@@ -1,9 +1,4 @@
-{
-  lib,
-  config,
-  my,
-  ...
-}:
+{ my, lib, ... }:
 {
   options.my.programs.wm.enableLogin = lib.mkOption {
     description = "WM Login";
@@ -35,12 +30,10 @@
       environment = {
         sessionVariables.NIXOS_OZONE_WL = "1";
 
-        loginShellInit = lib.mkIf config.my.programs.wm.enableLogin (
-          lib.my.mkTTYLaunch {
-            command = "sway";
-            dbus = false;
-          }
-        );
+        loginShellInit = lib.my.mkTTYLaunch {
+          command = "sway";
+          dbus = false;
+        };
       };
     }
     // (lib.my.mkSkipUsername { tty = 1; })

@@ -14,9 +14,9 @@ let
       height = builtins.toString (my.gui.display.height / my.gui.display.scale);
     };
 
-    steam = {
-      width = builtins.toString config.my.programs.steam.display.width;
-      height = builtins.toString config.my.programs.steam.display.height;
+    gaming = {
+      width = builtins.toString config.my.programs.gaming.display.width;
+      height = builtins.toString config.my.programs.gaming.display.height;
     };
   };
 
@@ -44,7 +44,7 @@ let
         pkgs.writeShellScriptBin "waydroid-cage-lauch"
           # sh
           ''
-            ${lib.getExe pkgs.wlr-randr} --output X11-1 --custom-mode ${res.steam.width}x${res.steam.height}
+            ${lib.getExe pkgs.wlr-randr} --output X11-1 --custom-mode ${res.gaming.width}x${res.gaming.height}
             sleep 2
 
             ${waydroidPkg} ${builtins.toString args}
