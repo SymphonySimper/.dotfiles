@@ -13,6 +13,7 @@
     enable = true;
     # package = inputs.yazi.packages.${pkgs.system}.default;
     enableBashIntegration = true;
+    enableFishIntegration = true;
     shellWrapperName = "y";
 
     settings = {

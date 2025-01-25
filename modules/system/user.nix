@@ -25,7 +25,10 @@ in
   };
 
   config = {
-    programs.bash.completion.enable = true;
+    programs = {
+      bash.completion.enable = true;
+      fish.enable = true;
+    };
 
     users = {
       mutableUsers = true;

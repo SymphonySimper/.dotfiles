@@ -13,7 +13,6 @@
     ./nix.nix
     ./python.nix
     ./rust.nix
-    ./sh.nix
     ./web.nix
   ];
 

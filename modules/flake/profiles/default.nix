@@ -59,7 +59,7 @@ let
         };
       };
       programs = {
-        shell = "bash";
+        shell = "fish"; # interactive shell (bash for rest)
         terminal = "alacritty";
         editor = "nvim";
         multiplexer = "tmux";
