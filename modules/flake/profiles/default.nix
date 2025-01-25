@@ -59,7 +59,7 @@ let
         };
       };
       programs = {
-        shell = "zsh";
+        shell = "bash";
         terminal = "alacritty";
         editor = "nvim";
         multiplexer = "tmux";

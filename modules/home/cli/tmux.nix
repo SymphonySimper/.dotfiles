@@ -35,7 +35,7 @@ in
     '';
 
   programs = {
-    zsh.initExtra = # sh
+    bash.initExtra = # sh
       ''
         # Auto start tmux
         if [ -z "''${TMUX}" ]; then
@@ -47,7 +47,6 @@ in
 
     tmux = {
       enable = true;
-      shell = "${pkgs.zsh}/bin/zsh";
       terminal = "tmux-256color";
       prefix = "C-a";
       shortcut = "a";
