@@ -15,7 +15,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-wsl.url = "github:nix-community/nixos-wsl";
-    nix-gaming.url = "github:fufexan/nix-gaming";
 
     # home
     home-manager = {

@@ -1,6 +1,5 @@
 {
   my,
-  inputs,
   config,
   pkgs,
   lib,
@@ -51,54 +50,38 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    programs.steam.enable = true;
+    my.user.tty.skipUsername = [ 2 ];
 
-    specialisation.gaming = {
-      inheritParentConfig = true;
-      configuration = {
-        imports = [
-          inputs.nix-gaming.nixosModules.platformOptimizations
-        ];
-
-        programs = {
-          steam = {
-            # Refer: https://nixos.wiki/wiki/Steam
-            extest.enable = true;
-            platformOptimizations.enable = true;
-            dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-            localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
-            remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-            gamescopeSession = {
-              enable = true;
-              args = sessionArgs;
-            };
-          };
-
-          gamemode.enable = true;
-          gamescope = {
-            enable = true;
-            capSysNice = false;
-            # Set launch options to `LD_PRELOAD="" gamescope -- %command%`
-            # to launch with mangohud use `gamescope --mangoapp -- %command%`
-            inherit args;
-          };
-        };
-
-        boot.kernelParams = [ "preempt=full" ];
-        # https://github.com/sched-ext/scx/blob/main/INSTALL.md#nix
-        services.scx = {
+    programs = {
+      steam = {
+        enable = true;
+        # Refer: https://nixos.wiki/wiki/Steam
+        extest.enable = true;
+        dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+        localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+        remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+        gamescopeSession = {
           enable = true;
-          scheduler = "scx_lavd";
+          args = sessionArgs;
         };
+      };
 
-        environment = {
-          systemPackages = [ pkgs.mangohud ];
-          loginShellInit = lib.my.mkTTYLaunch {
-            command = "steam-gamescope";
-            dbus = true;
-            tty = 2;
-          };
-        };
+      gamemode.enable = true;
+      gamescope = {
+        enable = true;
+        capSysNice = false;
+        # Set launch options to `LD_PRELOAD="" gamescope -- %command%`
+        # to launch with mangohud use `gamescope --mangoapp -- %command%`
+        inherit args;
+      };
+    };
+
+    environment = {
+      systemPackages = [ pkgs.mangohud ];
+      loginShellInit = lib.my.mkTTYLaunch {
+        command = "steam-gamescope";
+        dbus = true;
+        tty = 2;
       };
     };
   };
