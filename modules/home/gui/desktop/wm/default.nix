@@ -16,6 +16,10 @@ let
     up = "k";
     right = "l";
   };
+
+  wallpaper = pkgs.writeShellScriptBin "wallpaper" ''
+    ${pkgs.swaybg}/bin/swaybg -c "${my.theme.color.crust}" -m solid_color;
+  '';
 in
 {
   imports = [
@@ -51,7 +55,9 @@ in
     settings = {
       monitor = ",${builtins.toString my.gui.display.width}x${builtins.toString my.gui.display.height}@${builtins.toString my.gui.display.refreshRate}Hz,auto,${builtins.toString my.gui.display.scale}";
 
-      exec-once = "wallpaper";
+      exec-once = [
+        "${wallpaper}/bin/wallpaper"
+      ];
 
       env = [
         "XCURSOR_SIZE,24"
