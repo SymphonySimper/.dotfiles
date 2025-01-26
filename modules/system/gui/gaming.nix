@@ -10,6 +10,7 @@ let
 
   sessionArgs = [
     "--mouse-sensitivity 2" # increase mouse speed
+    "--adaptive-sync"
   ];
 
   args = sessionArgs ++ [
