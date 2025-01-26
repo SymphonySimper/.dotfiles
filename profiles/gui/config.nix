@@ -8,7 +8,7 @@
         scale = 1.8;
         width = 2880;
         height = 1800;
-        refreshRate = 60;
+        refreshRate = 120;
       };
     };
   };
