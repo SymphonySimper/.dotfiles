@@ -36,7 +36,7 @@ in
   };
   "7" = {
     app_id = [
-      # "gamescope"
+      "gamescope"
       "discord"
     ];
   };
