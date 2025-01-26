@@ -4,10 +4,7 @@
   lib,
   ...
 }:
-
 let
-  keybinds = (import ./keybinds.nix { inherit my pkgs lib; });
-  windows = import ./windows.nix;
 
   keys = {
     mod = "SUPER";
@@ -16,30 +13,11 @@ let
     up = "k";
     right = "l";
   };
+  keybinds = (import ./keybinds.nix { inherit my pkgs lib; });
+
+  windows = import ./windows.nix;
 in
 {
-  imports = [
-    ./scripts
-    ./utils
-    ./xdg
-  ];
-
-  services = {
-    udiskie.enable = true;
-    gnome-keyring = {
-      enable = true;
-      components = [
-        "pkcs11"
-        "secrets"
-        "ssh"
-      ];
-    };
-  };
-
-  home.packages = with pkgs; [
-    nautilus
-  ];
-
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -79,13 +57,13 @@ in
 
         shadow.enabled = false;
         blur.enabled = true;
+
       };
       animations.enabled = false;
 
       dwindle = {
         pseudotile = true;
         preserve_split = true;
-        force_split = 2;
       };
 
       misc = {
@@ -99,7 +77,7 @@ in
 
       input = {
         kb_layout = "us";
-        follow_mouse = 0;
+        follow_mouse = 1;
         sensitivity = 0;
         accel_profile = "flat";
 
