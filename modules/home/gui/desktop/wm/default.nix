@@ -53,7 +53,7 @@ in
     };
 
     settings = {
-      monitor = ",${builtins.toString my.gui.display.width}x${builtins.toString my.gui.display.height}@${builtins.toString my.gui.display.refreshRate}Hz,auto,${builtins.toString my.gui.display.scale}";
+      monitor = ",${my.gui.display.string.width}x${my.gui.display.string.height}@${my.gui.display.string.refreshRate}Hz,auto,${my.gui.display.string.scale}";
 
       exec-once = [
         "${wallpaper}/bin/wallpaper"

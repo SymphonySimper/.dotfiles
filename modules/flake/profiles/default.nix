@@ -32,12 +32,18 @@ let
           type = mkGetDefault settings "gui.desktop.type" "wm"; # wm or de
           wm = gui.desktop.type == "wm";
         };
-        display = {
+        display = rec {
           name = mkGetDefault settings "gui.display.name" "eDP-1";
           scale = mkGetDefault settings "gui.display.scale" 1;
           width = mkGetDefault settings "gui.display.width" 1920;
           height = mkGetDefault settings "gui.display.height" 1080;
           refreshRate = mkGetDefault settings "gui.display.refreshRate" 60;
+          string = {
+            scale = builtins.toString scale;
+            width = builtins.toString width;
+            height = builtins.toString height;
+            refreshRate = builtins.toString refreshRate;
+          };
         };
       };
       theme = {
