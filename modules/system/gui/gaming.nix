@@ -14,12 +14,11 @@ let
   ];
 
   args = sessionArgs ++ [
-    "--force-grab-cursor"
+    # "--force-grab-cursor"
     "-f" # full screen
     "-e" # steam integration
     "-W ${builtins.toString cfg.display.width}"
     "-H ${builtins.toString cfg.display.height}"
-    "-r ${builtins.toString cfg.display.refreshRate}" # Refresh rate
   ];
 in
 {
@@ -39,11 +38,6 @@ in
             type = lib.types.ints.positive;
             description = "Height of the display";
             default = my.gui.display.height;
-          };
-          refreshRate = lib.mkOption {
-            type = lib.types.ints.positive;
-            description = "Refresh rate fo the display";
-            default = my.gui.display.refreshRate;
           };
         };
       };
