@@ -168,6 +168,11 @@ in
         # refer: https://github.com/hyprwm/Hyprland/pull/4704#issuecomment-2304649119
         "noborder, onworkspace:w[tv1] f[-1], floating:0"
 
+        (builtins.map (value: "fullscreen, class:^(${value})$") [
+          "waydroid.com.mojang.minecraftpe"
+          "gamescope"
+        ])
+
         (builtins.attrValues (
           builtins.mapAttrs (
             workspace: values:
