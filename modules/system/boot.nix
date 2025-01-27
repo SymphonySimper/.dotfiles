@@ -20,6 +20,7 @@ in
     boot = {
       # lts: `pkgs.linuxPackages`
       # latest: `pkgs.linuxPackages_latest`
+      # for rest visit: https://github.com/NixOS/nixpkgs/blob/master/pkgs/top-level/linux-kernels.nix
       kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
       loader = {
         systemd-boot = {
