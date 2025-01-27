@@ -1,0 +1,115 @@
+[cursor]
+vi_mode_style = "Block"
+[cursor.style]
+blinking = "off"
+shape = "Block"
+
+[font]
+size = 12
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "Bold"
+
+[font.bold_italic]
+family = "JetBrainsMono Nerd Font"
+style = "Bold Italic"
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Italic"
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Regular"
+
+[general]
+ipc_socket = false
+live_config_reload = false
+
+[hints]
+enabled = []
+
+[mouse]
+hide_when_typing = true
+
+[scrolling]
+history = 0
+
+[window]
+decorations = "none"
+dynamic_padding = true
+opacity = 1
+startup_mode = "Maximized"
+
+[window.padding]
+x = 2
+y = 2
+
+[colors.primary]
+background = "#eff1f5"
+foreground = "#4c4f69"
+dim_foreground = "#8c8fa1"
+bright_foreground = "#4c4f69"
+
+[colors.cursor]
+text = "#eff1f5"
+cursor = "#dc8a78"
+
+[colors.vi_mode_cursor]
+text = "#eff1f5"
+cursor = "#7287fd"
+
+[colors.search.matches]
+foreground = "#eff1f5"
+background = "#6c6f85"
+
+[colors.search.focused_match]
+foreground = "#eff1f5"
+background = "#40a02b"
+
+[colors.footer_bar]
+foreground = "#eff1f5"
+background = "#6c6f85"
+
+[colors.hints.start]
+foreground = "#eff1f5"
+background = "#df8e1d"
+
+[colors.hints.end]
+foreground = "#eff1f5"
+background = "#6c6f85"
+
+[colors.selection]
+text = "#eff1f5"
+background = "#dc8a78"
+
+[colors.normal]
+black = "#bcc0cc"
+red = "#d20f39"
+green = "#40a02b"
+yellow = "#df8e1d"
+blue = "#1e66f5"
+magenta = "#ea76cb"
+cyan = "#179299"
+white = "#5c5f77"
+
+[colors.bright]
+black = "#acb0be"
+red = "#d20f39"
+green = "#40a02b"
+yellow = "#df8e1d"
+blue = "#1e66f5"
+magenta = "#ea76cb"
+cyan = "#179299"
+white = "#6c6f85"
+
+[[colors.indexed_colors]]
+index = 16
+color = "#fe640b"
+
+[[colors.indexed_colors]]
+index = 17
+color = "#dc8a78"
+
+[terminal.shell]
+program = "wsl -d NixOS --cd ~"
