@@ -33,7 +33,7 @@ in
     users = {
       mutableUsers = true;
       users.${my.name} = {
-        initialHashedPassword = "$6$zzXPOtlNAnpUTgHe$.VZIkoqeZQWtACW6JFOZBeUUT5ds7PDpfoMZQOfWNCND0ukdGVd7jA2Ko86g8tPDxfpM3D0rVkCRUfEz/hJiN0";
+        initialPassword = "nix-is-cool";
         isNormalUser = true;
         home = my.dir.home;
         description = "${my.fullName}";
