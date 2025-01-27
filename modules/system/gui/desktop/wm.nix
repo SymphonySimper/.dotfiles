@@ -7,16 +7,16 @@
   };
 
   config = lib.mkIf (my.gui.desktop.enable && my.gui.desktop.wm) {
-    programs.hyprland = {
+    programs.sway = {
       enable = true;
     };
 
     security = {
       polkit.enable = true;
       pam.services = {
-        hyprland.enableGnomeKeyring = true;
-        # Enable hyprlock
-        hyprlock = { };
+        sway.enableGnomeKeyring = true;
+        # Enable swaylock
+        swaylock = { };
       };
     };
 
@@ -30,7 +30,7 @@
     my.programs.tty."1" = {
       skipUsername = true;
       launch = {
-        command = "Hyprland";
+        command = "sway";
         dbus = false;
       };
     };
