@@ -20,6 +20,4 @@
     inotify-tools
     (google-cloud-sdk.withExtraComponents [ google-cloud-sdk.components.app-engine-go ])
   ];
-
-  programs.nixvim.plugins.lsp.servers.harper_ls.enable = true; # All
 }
