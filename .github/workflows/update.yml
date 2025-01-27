@@ -3,8 +3,8 @@ name: Nix Flake Update
 on:
   workflow_dispatch:
   schedule:
-    # Runs at 00:00 UTC on the 5th day of every month
-    - cron: "0 0 5 * *"
+    # Runs at 00:00 UTC on every Saturday
+    - cron: "0 0 * * 6"
 
 jobs:
   lockfile:
