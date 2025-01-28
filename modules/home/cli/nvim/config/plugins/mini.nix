@@ -1,23 +1,12 @@
-{ config, ... }:
-let
-  mkRaw = config.lib.nixvim.mkRaw;
-in
+{ ... }:
 {
   programs.nixvim = {
     plugins.mini = {
       enable = true;
       mockDevIcons = true;
-      luaConfig.pre = # lua
-        ''
-          local my_mini_hipatterns = require("mini.hipatterns")
-        '';
+
       modules = {
         icons = { };
-
-        hipatterns.highlighters = {
-          # Highlight hex color strings (`#rrggbb`) using that color
-          hex_color = mkRaw ''my_mini_hipatterns.gen_highlighter.hex_color()'';
-        };
 
         surround.mappings = {
           add = "gsa";
