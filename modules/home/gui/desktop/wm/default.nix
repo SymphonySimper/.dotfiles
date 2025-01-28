@@ -17,8 +17,9 @@ let
     right = "l";
   };
 
-  wallpaper = pkgs.writeShellScriptBin "wallpaper" ''
+  startup = pkgs.writeShellScriptBin "startup" ''
     ${pkgs.swaybg}/bin/swaybg -c "${my.theme.color.crust}" -m solid_color;
+    brightness -r & # Restore Brightness
   '';
 in
 {
@@ -56,7 +57,7 @@ in
       monitor = ",${my.gui.display.string.width}x${my.gui.display.string.height}@${my.gui.display.string.refreshRate}Hz,auto,${my.gui.display.string.scale}";
 
       exec-once = [
-        "${wallpaper}/bin/wallpaper"
+        "${startup}/bin/startup"
       ];
 
       env = [
