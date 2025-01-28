@@ -1,4 +1,4 @@
-{ my, lib, ... }:
+{ my, config, lib, ... }:
 {
   options.my.programs.wm.enableLogin = lib.mkOption {
     description = "WM Login";
@@ -9,6 +9,7 @@
   config = lib.mkIf (my.gui.desktop.enable && my.gui.desktop.wm) {
     programs.hyprland = {
       enable = true;
+      withUWSM = true;
     };
 
     security = {
@@ -30,7 +31,7 @@
     my.programs.tty."1" = {
       skipUsername = true;
       launch = {
-        command = "Hyprland";
+        command = "${lib.getExe config.programs.uwsm.package} start -S -F /run/current-system/sw/bin/Hyprland";
         dbus = false;
       };
     };
