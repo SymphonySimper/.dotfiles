@@ -42,14 +42,15 @@ in
     };
 
     hardware = {
+      audio.enable = lib.mkDefault my.gui.desktop.enable;
+      bluetooth.enable = lib.mkDefault false;
+      cpu.amd.enable = lib.mkDefault false;
+      disko.enable = lib.mkDefault false;
       ideapad.enable = lib.mkDefault false;
       led.enable = lib.mkDefault false;
       logitech.enable = lib.mkDefault false;
-      ssd.enable = lib.mkDefault false;
-      bluetooth.enable = lib.mkDefault false;
-      audio.enable = lib.mkDefault my.gui.desktop.enable;
       powerManagement.enable = lib.mkDefault my.gui.desktop.enable;
-      cpu.amd.enable = lib.mkDefault false;
+      ssd.enable = lib.mkDefault false;
       gpu = {
         amd.enable = lib.mkDefault false;
         nvidia.enable = lib.mkDefault false;

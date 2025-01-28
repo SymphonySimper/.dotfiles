@@ -1,17 +1,11 @@
 {
   config,
-  inputs,
   modulesPath,
   ...
 }:
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
-    (import ../../modules/system/hardware/disko.nix {
-      inherit inputs;
-      device = "/dev/nvme0n1";
-      swap = "16G";
-    })
     ../../modules/system
   ];
 
@@ -28,6 +22,11 @@
       ssd.enable = true;
       led.enable = true;
       logitech.enable = true;
+      disko = {
+        enable = true;
+        disk = "/dev/nvme0n1";
+        swap = "16G";
+      };
     };
 
     programs.gaming = {
