@@ -10,19 +10,15 @@ let
   windows = import ./windows.nix;
 
   keys = {
-    mod = "Mod4";
+    mod = "SUPER";
     left = "h";
     down = "j";
     up = "k";
     right = "l";
   };
 
-  # wallpaper = pkgs.writeShellScriptBin "wallpaper" ''
-  #   ${pkgs.swaybg}/bin/swaybg -c "${my.theme.color.crust}" -m solid_color;
-  # '';
-
-  startup = pkgs.writeShellScriptBin "startup" ''
-    brightness -r & # Restore Brightness
+  wallpaper = pkgs.writeShellScriptBin "wallpaper" ''
+    ${pkgs.swaybg}/bin/swaybg -c "${my.theme.color.crust}" -m solid_color;
   '';
 in
 {
@@ -48,179 +44,159 @@ in
     nautilus
   ];
 
-  wayland.windowManager.sway = {
+  wayland.windowManager.hyprland = {
     enable = true;
-    checkConfig = true;
-    xwayland = true;
-    wrapperFeatures.gtk = true;
-
+    xwayland.enable = true;
     systemd = {
       enable = true;
       variables = [ "--all" ];
     };
 
-    config = {
-      window = {
-        border = 1;
-        titlebar = false;
+    settings = {
+      monitor = ",${my.gui.display.string.width}x${my.gui.display.string.height}@${my.gui.display.string.refreshRate}Hz,auto,${my.gui.display.string.scale}";
+
+      exec-once = [
+        "${wallpaper}/bin/wallpaper"
+      ];
+
+      env = [
+        "XCURSOR_SIZE,24"
+        "HYPRCURSOR_SIZE,24"
+      ];
+
+      # Look and Feel
+      general = {
+        gaps_in = 0;
+        gaps_out = 0;
+        border_size = 1;
+        resize_on_border = false;
+        allow_tearing = false;
+        layout = "dwindle";
+
+        "col.inactive_border" = "$overlay0";
+        "col.active_border" = "$accent";
       };
-      gaps.smartBorders = "on";
 
-      startup = [ { command = "${startup}/bin/startup"; } ];
+      decoration = {
+        rounding = 0;
 
-      defaultWorkspace = "workspace number 1";
+        active_opacity = 1.0;
+        inactive_opacity = 1.0;
 
-      assigns = builtins.listToAttrs (
-        builtins.map (workspaceNum: {
-          name = if workspaceNum == "0" then "10" else workspaceNum;
-          value = (
-            builtins.concatMap (
-              type:
-              (builtins.map (id: {
-                ${type} = if type == "title" then "^${id}.*" else "^${id}$";
-              }) windows.${workspaceNum}.${type})
-            ) (builtins.attrNames windows.${workspaceNum})
-          );
-        }) (builtins.attrNames windows)
-      );
-
-      focus = {
-        newWindow = "focus";
-        followMouse = "no";
-        wrapping = "yes";
+        shadow.enabled = false;
+        blur.enabled = true;
       };
-      workspaceAutoBackAndForth = false;
+      animations.enabled = false;
 
-      floating.modifier = keys.mod;
-      keybindings =
-        (builtins.listToAttrs (
-          builtins.map (
-            keybind:
+      dwindle = {
+        pseudotile = true;
+        preserve_split = true;
+        force_split = 2;
+      };
+
+      misc = {
+        force_default_wallpaper = 0;
+        disable_splash_rendering = true;
+        disable_hyprland_logo = true;
+        focus_on_activate = false;
+        # Adaptive sync
+        vrr = 1;
+      };
+
+      input = {
+        kb_layout = "us";
+        follow_mouse = 0;
+        sensitivity = 0;
+        accel_profile = "flat";
+
+        touchpad = {
+          natural_scroll = false;
+          tap-to-click = true;
+        };
+      };
+
+      gestures = {
+        workspace_swipe = false;
+      };
+
+      bind = lib.lists.flatten [
+        "${keys.mod}, Q, killactive"
+        "${keys.mod} SHIFT, E, exit"
+        "${keys.mod}, V, togglefloating"
+        "${keys.mod} SHIFT, F, fullscreen"
+
+        "${keys.mod}, ${keys.left}, movefocus, l"
+        "${keys.mod}, ${keys.right}, movefocus, r"
+        "${keys.mod}, ${keys.up}, movefocus, u"
+        "${keys.mod}, ${keys.down}, movefocus, d"
+
+        (builtins.map (
+          keybind:
+          let
+            modKey = if keybind.super then "${keys.mod}" else "";
+            action = if builtins.hasAttr "mod" keybind then "${lib.strings.toUpper keybind.mod}" else "";
+
+            prefix = if modKey == "" && action == "" then "," else "${modKey} ${action},";
+          in
+          "${prefix} ${keybind.key}, exec, ${keybind.cmd}"
+        ) keybinds)
+
+        (builtins.concatMap
+          (
+            num:
             let
-              prefix = (if keybind.super then "${keys.mod}+" else "");
-              action = (if builtins.hasAttr "mod" keybind then "${keybind.mod}+${keybind.key}" else keybind.key);
+              workspaceNum = builtins.toString (if num == 0 then 10 else num);
+              numStr = builtins.toString num;
             in
-            {
-              name = "${prefix}${action}";
-              value = "exec ${keybind.cmd}";
-            }
-          ) keybinds
+            [
+              # Switch workspaces with mainMod + [0-9]
+              "${keys.mod}, ${numStr}, workspace, ${workspaceNum}"
+              # Move active window to a workspace with mainMod + SHIFT + [0-9]
+              "${keys.mod} SHIFT, ${numStr}, movetoworkspace, ${workspaceNum}"
+            ]
+          )
+          [
+            1
+            2
+            3
+            4
+            5
+            6
+            7
+            8
+            9
+            0
+          ]
+        )
+      ];
+
+      windowrulev2 = lib.lists.flatten [
+        # refer: https://github.com/hyprwm/Hyprland/pull/4704#issuecomment-2304649119
+        "noborder, onworkspace:w[tv1] f[-1], floating:0"
+
+        (builtins.map (value: "fullscreen, class:^(${value})$") [
+          "waydroid.com.mojang.minecraftpe"
+          "gamescope"
+        ])
+
+        (builtins.attrValues (
+          builtins.mapAttrs (
+            workspace: values:
+            builtins.attrValues (
+              builtins.mapAttrs (
+                idType: ids:
+                (builtins.map (
+                  id:
+                  let
+                    idActualType = if idType == "app_id" then "class" else idType;
+                  in
+                  "workspace ${workspace}, ${idActualType}:^(${id})$"
+                ) ids)
+              ) values
+            )
+          ) windows
         ))
-        // {
-          "${keys.mod}+q" = "kill";
-          # Exit sway (logs you out of your Wayland session)
-          "${keys.mod}+Shift+e" =
-            "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
-          #
-          # Moving around:
-          #
-          # Move your focus around
-          "${keys.mod}+${keys.left}" = "focus left";
-          "${keys.mod}+${keys.down}" = "focus down";
-          "${keys.mod}+${keys.up}" = "focus up";
-          "${keys.mod}+${keys.right}" = "focus right";
-          # Move the focused window with the same, but add Shift
-          "${keys.mod}+Shift+${keys.left}" = "move left";
-          "${keys.mod}+Shift+${keys.down}" = "move down";
-          "${keys.mod}+Shift+${keys.up}" = "move up";
-          "${keys.mod}+Shift+${keys.right}" = "move right";
-
-          #
-          # Workspaces:
-          #
-          # Switch to workspace
-          "${keys.mod}+1" = "workspace number 1";
-          "${keys.mod}+2" = "workspace number 2";
-          "${keys.mod}+3" = "workspace number 3";
-          "${keys.mod}+4" = "workspace number 4";
-          "${keys.mod}+5" = "workspace number 5";
-          "${keys.mod}+6" = "workspace number 6";
-          "${keys.mod}+7" = "workspace number 7";
-          "${keys.mod}+8" = "workspace number 8";
-          "${keys.mod}+9" = "workspace number 9";
-          "${keys.mod}+0" = "workspace number 10";
-          # Move focused container to workspace
-          "${keys.mod}+Shift+1" = "move container to workspace number 1";
-          "${keys.mod}+Shift+2" = "move container to workspace number 2";
-          "${keys.mod}+Shift+3" = "move container to workspace number 3";
-          "${keys.mod}+Shift+4" = "move container to workspace number 4";
-          "${keys.mod}+Shift+5" = "move container to workspace number 5";
-          "${keys.mod}+Shift+6" = "move container to workspace number 6";
-          "${keys.mod}+Shift+7" = "move container to workspace number 7";
-          "${keys.mod}+Shift+8" = "move container to workspace number 8";
-          "${keys.mod}+Shift+9" = "move container to workspace number 9";
-          "${keys.mod}+Shift+0" = "move container to workspace number 10";
-
-          # Make the current focus fullscreen
-          "${keys.mod}+Shift+f" = "fullscreen";
-        };
-
-      output = {
-        "*" = {
-          bg = "${my.theme.color.crust} solid_color";
-        };
-
-        "${my.gui.display.name}" = rec {
-          scale = "${builtins.toString my.gui.display.scale}";
-          res = "${builtins.toString my.gui.display.width}x${builtins.toString my.gui.display.height}";
-          mode = "${res}@${builtins.toString my.gui.display.refreshRate}Hz";
-        };
-      };
-
-      # Do not enable!
-      # Reason:
-      # > Be aware that this setting can interfere with input handling in games
-      # > and certain types of software (Gimp, Blender etc) that rely on
-      # > simultaneous input from mouse and keyboard.
-      # seat."*".hide_cursor = "when-typing enable";
-
-      input."type:touchpad" = {
-        dwt = "enabled";
-        tap = "enabled";
-        natural_scroll = "disabled";
-        middle_emulation = "enabled";
-      };
-
-      bars = [ ];
-
-      colors = {
-        focused = {
-          border = "$lavender";
-          background = "$base";
-          text = "$text";
-          indicator = "$rosewater";
-          childBorder = "$lavender";
-        };
-        focusedInactive = {
-          border = "$overlay0";
-          background = "$base";
-          text = "$text";
-          indicator = "$rosewater";
-          childBorder = "$base";
-        };
-        unfocused = {
-          border = "$overlay0";
-          background = "$base";
-          text = "$text";
-          indicator = "$rosewater";
-          childBorder = "$base";
-        };
-        urgent = {
-          border = "$peach";
-          background = "$base";
-          text = "$peach";
-          indicator = "$overlay0";
-          childBorder = "$base";
-        };
-        placeholder = {
-          border = "$overlay0";
-          background = "$base";
-          text = "$text";
-          indicator = "$overlay0";
-          childBorder = "$base";
-        };
-        background = "$base";
-      };
+      ];
     };
   };
 }
