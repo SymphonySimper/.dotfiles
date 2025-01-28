@@ -1,7 +1,8 @@
 {
-  lib,
-  pkgs,
   my,
+  config,
+  pkgs,
+  lib,
   ...
 }:
 let
@@ -31,7 +32,7 @@ let
             comment = "Launch ${name}";
             categories = [ "Application" ];
             terminal = false;
-            exec = "chromium ${lib.strings.concatStringsSep " " commandLineArgs} --class=${class} ${urlArg}\"${url}\" %U";
+            exec = "${lib.getExe config.programs.chromium.package} ${lib.strings.concatStringsSep " " commandLineArgs} --class=${class} ${urlArg}\"${url}\" %U";
             settings = {
               StartupWMClass = class;
             };
@@ -54,7 +55,7 @@ in
   config = lib.mkIf my.gui.enable {
     programs.chromium = {
       enable = true;
-      package = pkgs.chromium.override { enableWideVine = true; };
+      package = pkgs.google-chrome;
       extensions = [
         "${theme}" # Catppuccin theme
         # "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite

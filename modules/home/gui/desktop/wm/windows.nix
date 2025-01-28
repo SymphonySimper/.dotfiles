@@ -9,6 +9,7 @@ in
   };
   "2" = {
     app_id = [
+      "google-chrome"
       "chromium-browser"
     ];
   };

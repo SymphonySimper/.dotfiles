@@ -69,7 +69,7 @@ let
         terminal = "alacritty";
         editor = "nvim";
         multiplexer = "tmux";
-        browser = "chromium";
+        browser = "google-chrome-stable";
         launcher = "wofi";
         notification = "dunst";
         music = "yt";
