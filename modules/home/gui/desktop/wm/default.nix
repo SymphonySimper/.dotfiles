@@ -100,8 +100,8 @@ in
         disable_splash_rendering = true;
         disable_hyprland_logo = true;
         focus_on_activate = false;
-        # Adaptive sync
-        vrr = 1;
+        # Disable Adaptive sync
+        vrr = 0;
       };
 
       input = {

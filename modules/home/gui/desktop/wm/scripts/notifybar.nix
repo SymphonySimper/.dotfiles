@@ -51,6 +51,16 @@ in
         battery_title_style="bold"
       fi
 
+      # Refresh Rate
+      refresh_rate_status=$(my-toggle-fps get)
+      refresh_rate_title_style="${titleDefaultStyle}"
+      if [ $refresh_rate_status -eq ${my.gui.display.string.refreshRate} ]; then
+        refresh_rate_color="${my.theme.color.green}"
+      else
+        refresh_rate_color="${my.theme.color.red}"
+        refresh_rate_title_style="bold"
+      fi
+
       # Brightness
       brightness_status=$(brightness -g)
       brightness_title_style="${titleDefaultStyle}"
@@ -145,6 +155,14 @@ in
                 color = "$battery_status_color";
               }
             })";
+          }}
+          ${mkInfoLine {
+            title = "Refresh Rate";
+            titleStyle = "$refresh_rate_title_style";
+            body = mkStyledText {
+              text = "\${refresh_rate_status}Hz";
+              color = "$refresh_rate_color";
+            };
           }}
           ${mkInfoLine {
             title = "Brightness";

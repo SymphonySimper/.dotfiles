@@ -7,6 +7,7 @@
 let
   mkOpenDesktopEntry =
     file: "${lib.getExe pkgs.dex} ${my.dir.home}/.nix-profile/share/applications/${file}.desktop";
+
   keybinds =
     {
       terminal = {
@@ -79,6 +80,13 @@ let
         toggle = {
           key = "F10";
           cmd = "caffiene";
+        };
+      };
+      maxFps = {
+        toggle = {
+          mod = "Shift";
+          key = "F10";
+          cmd = "my-toggle-fps";
         };
       };
       notifybar = {
