@@ -31,6 +31,7 @@
       gRo = "git reset --hard origin/$(git branch --show-current)";
       gcln = "git clean -fdx";
       gz = "lazygit";
+      gdo = "git fetch && git diff origin";
     };
   };
 
