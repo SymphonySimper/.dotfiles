@@ -14,7 +14,7 @@ let
   ];
 
   args = sessionArgs ++ [
-    # "--force-grab-cursor"
+    "--force-grab-cursor"
     "-f" # full screen
     "-e" # steam integration
     "-W ${builtins.toString cfg.display.width}"
