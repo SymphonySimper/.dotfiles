@@ -32,7 +32,7 @@ in
       unset IFS
 
       # Network
-      network_status=$(nmcli -p -g type connection show --active | head -n1 | cut -d '-' -f3)
+      network_status=$(my-network get)
       network_title_style="${titleDefaultStyle}"
       network="''${network_status^}"
       case "$network_status" in

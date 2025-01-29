@@ -1,7 +1,7 @@
 {
+  my,
   pkgs,
   lib,
-  my,
   ...
 }:
 let
@@ -100,6 +100,13 @@ let
           mod = "Shift";
           key = "x";
           cmd = "poweroff";
+        };
+      };
+      network = {
+        reload = {
+          mod = "Shift";
+          key = "F5";
+          cmd = "my-network reload";
         };
       };
     }
