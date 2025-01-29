@@ -31,6 +31,20 @@ in
       time_date=($time_date_string)
       unset IFS
 
+      # Network
+      network_status=$(nmcli -p -g type connection show --active | head -n1 | cut -d '-' -f3)
+      network_title_style="${titleDefaultStyle}"
+      network="''${network_status^}"
+      case "$network_status" in
+        ethernet) network_color="${my.theme.color.green}" ;;
+        wireless) network_color="${my.theme.color.yellow}" ;;
+        *)
+          network="Disconnected"
+          network_title_style="bold"
+          network_color="${my.theme.color.red}"
+        ;;
+      esac
+          
       # Battery
       battery_status=$(cat /sys/class/power_supply/BAT0/status)
       battery_capacity=$(cat /sys/class/power_supply/BAT0/capacity)
@@ -140,6 +154,14 @@ in
                 bold = false;
               }
             }";
+          }}
+          ${mkInfoLine {
+            title = "Network";
+            titleStyle = "$network_title_style";
+            body = mkStyledText {
+              text = "$network";
+              color = "$network_color";
+            };
           }}
           ${mkInfoLine {
             title = "Battery";
