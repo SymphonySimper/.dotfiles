@@ -6,7 +6,7 @@
       settings = lib.mkMerge [
         {
           "org/gnome/desktop/interface" = {
-            color-scheme = if my.theme.dark then "prefer-dark" else "prefer-light";
+            color-scheme = if my.theme.dark then "prefer-dark" else "default";
             cursor-size = 16;
             cursor-theme = "Adwaita";
             enable-animations = true;
