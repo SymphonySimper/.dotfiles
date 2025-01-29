@@ -60,6 +60,7 @@
         push.autoSetupRemote = true;
         mergetool.keepBackup = false;
         pull.rebase = true;
+        rebase.autoStash = true;
         merge = {
           tool = if my.programs.editor == "nvim" then "nvimdiff" else "";
           conflictStyle = "zdiff3"; # delta
