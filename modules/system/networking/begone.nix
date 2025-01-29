@@ -19,9 +19,9 @@ in
       "open.spotify.com"
 
       # Social Media
-      "discord.com"
-      "discord.gg"
-      "discordapp.com"
+      # "discord.com"
+      # "discord.gg"
+      # "discordapp.com"
       "www.facebook.com"
       "www.fb.com"
       "www.instagram.com"
