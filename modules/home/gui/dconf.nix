@@ -28,8 +28,7 @@
           "org/gnome/shell" = {
             favorite-apps = [
               "Alacritty.desktop"
-              "chromium-browser.desktop"
-              "com.github.flxzt.rnote.desktop"
+              "google-chrome.desktop"
             ];
           };
 
