@@ -10,6 +10,10 @@ in
   options.my.networking.enable = lib.mkEnableOption "networking";
 
   config = lib.mkIf cfg.enable {
+    my.user.sudo.nopasswd = [
+      "/run/current-system/sw/bin/systemctl restart NetworkManager"
+    ];
+
     networking = {
       hostName = "nixos"; # Define your hostname.
       useDHCP = lib.mkDefault true;
