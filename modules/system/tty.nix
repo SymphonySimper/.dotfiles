@@ -19,41 +19,42 @@ let
               let
                 tty = option.name;
               in
-              [ ]
-              ++ (lib.optionals (option.value.launch.command != null) [
-                {
-                  type = "launch";
-                  name = "command";
-                  value = # sh
-                    ''[[ "$(tty)" = "/dev/tty${tty}" ]] && exec ${
-                      if (builtins.getAttr "dbus" option.value.launch) then "${pkgs.dbus}/bin/dbus-run-session" else ""
-                    } ${option.value.launch.command}'';
-                }
-              ])
+              lib.lists.flatten [
+                (lib.optionals (option.value.launch.command != null) [
+                  {
+                    type = "launch";
+                    name = "command-${option.name}";
+                    value = # sh
+                      ''[[ "$(tty)" = "/dev/tty${tty}" ]] && exec ${
+                        if (builtins.getAttr "dbus" option.value.launch) then "${pkgs.dbus}/bin/dbus-run-session" else ""
+                      } ${option.value.launch.command}'';
+                  }
+                ])
 
-              ++ (lib.optionals (lib.my.mkGetDefault option.value "skipUsername" false) [
-                {
-                  type = "service";
-                  name = "getty@tty${tty}";
-                  value = {
-                    overrideStrategy = "asDropin";
-                    serviceConfig.ExecStart = [
-                      ""
-                      "@${pkgs.util-linux}/sbin/agetty agetty --login-program ${pkgs.shadow}/bin/login -o '-p -- ${my.name}' --noclear --skip-login %I $TERM"
-                    ];
-                  };
+                (lib.optionals (lib.my.mkGetDefault option.value "skipUsername" false) [
+                  {
+                    type = "service";
+                    name = "getty@tty${tty}";
+                    value = {
+                      overrideStrategy = "asDropin";
+                      serviceConfig.ExecStart = [
+                        ""
+                        "@${pkgs.util-linux}/sbin/agetty agetty --login-program ${pkgs.shadow}/bin/login -o '-p -- ${my.name}' --noclear --skip-login %I $TERM"
+                      ];
+                    };
 
-                  # Default username for all tty
-                  # services.getty = {
-                  #   loginOptions = "-p -- ${my.name}";
-                  #   extraArgs = [
-                  #     "--noclear"
-                  #     "--skip-login"
-                  #   ];
-                  # };
+                    # Default username for all tty
+                    # services.getty = {
+                    #   loginOptions = "-p -- ${my.name}";
+                    #   extraArgs = [
+                    #     "--noclear"
+                    #     "--skip-login"
+                    #   ];
+                    # };
 
-                }
-              ])
+                  }
+                ])
+              ]
             )
             (
               lib.attrsets.mapAttrsToList (name: value: {
