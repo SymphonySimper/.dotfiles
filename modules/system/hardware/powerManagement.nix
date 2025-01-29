@@ -9,49 +9,55 @@ in
 
   config = lib.mkIf cfg.enable {
     powerManagement.enable = true;
-    services.thermald.enable = true;
-    services.tlp = {
-      enable = true;
-      # refer: https://linrunner.de/tlp/support/optimizing.html#extend-battery-runtime
-      settings = {
-        # CPU
-        CPU_ENERGY_PERF_POLICY_ON_AC = "balance_power";
-        CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
 
-        # Platform
-        PLATFORM_PROFILE_ON_AC = "balanced";
-        PLATFORM_PROFILE_ON_BAT = "low-power";
+    services = {
+      thermald.enable = true;
 
-        # Disable turbo boost
-        CPU_BOOST_ON_AC = 1;
-        CPU_BOOST_ON_BAT = 0;
-        CPU_HWP_DYN_BOOST_ON_AC = 1;
-        CPU_HWP_DYN_BOOST_ON_BAT = 0;
+      tlp = {
+        enable = true;
+        # refer: https://linrunner.de/tlp/support/optimizing.html#extend-battery-runtime
+        settings = {
+          # CPU
+          CPU_ENERGY_PERF_POLICY_ON_AC = "balance_power";
+          CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
 
-        # ABM
-        AMDGPU_ABM_LEVEL_ON_AC = 0;
-        AMDGPU_ABM_LEVEL_ON_BAT = 3;
+          # Platform
+          PLATFORM_PROFILE_ON_AC = "balanced";
+          PLATFORM_PROFILE_ON_BAT = "low-power";
 
-        # Runtime 
-        RUNTIME_PM_ON_AC = "auto";
-        RUNTIME_PM_ON_BAT = "auto";
+          # Disable turbo boost
+          CPU_BOOST_ON_AC = 1;
+          CPU_BOOST_ON_BAT = 0;
+          CPU_HWP_DYN_BOOST_ON_AC = 1;
+          CPU_HWP_DYN_BOOST_ON_BAT = 0;
 
-        # # WiFi
-        # WIFI_PWR_ON_AC = "on";
-        # WIFI_PWR_ON_BAT = "on";
-      };
-    };
-    services.power-profiles-daemon.enable = false;
-    services.auto-cpufreq = {
-      enable = false;
-      settings = {
-        battery = {
-          governor = "powersave";
-          turbo = "never";
+          # ABM
+          AMDGPU_ABM_LEVEL_ON_AC = 0;
+          AMDGPU_ABM_LEVEL_ON_BAT = 3;
+
+          # Runtime
+          RUNTIME_PM_ON_AC = "auto";
+          RUNTIME_PM_ON_BAT = "auto";
+
+          # # WiFi
+          # WIFI_PWR_ON_AC = "on";
+          # WIFI_PWR_ON_BAT = "on";
         };
-        charger = {
-          governor = "performance";
-          turbo = "auto";
+      };
+
+      power-profiles-daemon.enable = false;
+
+      auto-cpufreq = {
+        enable = false;
+        settings = {
+          battery = {
+            governor = "powersave";
+            turbo = "never";
+          };
+          charger = {
+            governor = "performance";
+            turbo = "auto";
+          };
         };
       };
     };
