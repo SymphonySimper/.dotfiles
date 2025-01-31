@@ -23,7 +23,6 @@ in
     tmux = {
       enable = true;
       terminal = "tmux-256color";
-      shell = "${lib.getExe pkgs.fish}";
       prefix = "C-a";
       shortcut = "a";
       keyMode = "vi";

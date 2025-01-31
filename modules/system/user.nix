@@ -26,7 +26,6 @@ in
   config = {
     programs = {
       bash.completion.enable = true;
-      fish.enable = true;
       command-not-found.enable = false;
     };
 

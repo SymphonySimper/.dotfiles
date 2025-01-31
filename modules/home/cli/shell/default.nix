@@ -19,30 +19,26 @@
         '';
     };
 
-    fish = {
+    readline = {
       enable = true;
-      shellInit = # fish
-        ''
-          set -U fish_greeting # disable greeting
-        '';
-      interactiveShellInit = # fish
-        ''
-          set -g fish_key_bindings fish_vi_key_bindings
-        '';
+      variables = {
+        editing-mode = "vi";
+        completion-ignore-case = true;
+        show-all-if-ambiguous = true;
+      };
+      bindings = {
+        "\\C-l" = "clear-screen";
+      };
     };
 
     nixvim.plugins = {
       treesitter.grammars = [
         "bash"
-        "fish"
       ];
       lsp.servers.bashls.enable = true;
       formatter = {
         packages = [ "shfmt" ];
-        ft = {
-          sh = "shfmt";
-          fish = "fish_indent";
-        };
+        ft.sh = "shfmt";
       };
     };
   };
