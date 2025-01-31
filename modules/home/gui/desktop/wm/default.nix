@@ -19,7 +19,7 @@ let
 
   startup = pkgs.writeShellScriptBin "startup" ''
     ${pkgs.swaybg}/bin/swaybg -c "${my.theme.color.crust}" -m solid_color;
-    brightness -r & # Restore Brightness
+    # brightness -r & # Restore Brightness
   '';
 in
 {
