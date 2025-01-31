@@ -1,4 +1,9 @@
-{ my, config, lib, ... }:
+{
+  my,
+  config,
+  lib,
+  ...
+}:
 {
   options.my.programs.wm.enableLogin = lib.mkOption {
     description = "WM Login";
