@@ -28,7 +28,8 @@ in
   imports = [
     ./scripts
     ./utils
-    ./xdg
+
+    ./xdg.nix
   ];
 
   services = {
