@@ -31,68 +31,68 @@ let
       brightness = {
         down = {
           key = "F5";
-          cmd = "brightness -d";
+          cmd = "mybrightness -d";
         };
         up = {
           key = "F6";
-          cmd = "brightness -u";
+          cmd = "mybrightness -u";
         };
       };
       volume = {
         down = {
           key = "F2";
-          cmd = "volume -d";
+          cmd = "myvolume -d";
         };
         up = {
           key = "F3";
-          cmd = "volume -u";
+          cmd = "myvolume -u";
         };
         toggle = {
           mod = "Shift";
           key = "F2";
-          cmd = "volume -m";
+          cmd = "myvolume -m";
         };
       };
       mic = {
         toggle = {
           super = false;
           key = "F8";
-          cmd = "volume -M";
+          cmd = "myvolume -M";
         };
       };
       screenshot = {
         screen = {
           key = "F11";
-          cmd = "screenshot -s";
+          cmd = "myscreenshot -s";
         };
         window = {
           mod = "Ctrl";
           key = "F11";
-          cmd = "screenshot -w";
+          cmd = "myscreenshot -w";
         };
         region = {
           mod = "Shift";
           key = "F11";
-          cmd = "screenshot -r";
+          cmd = "myscreenshot -r";
         };
       };
       caffiene = {
         toggle = {
           key = "F10";
-          cmd = "caffiene";
+          cmd = "mycaffiene";
         };
       };
       maxFps = {
         toggle = {
           mod = "Shift";
           key = "F10";
-          cmd = "my-toggle-fps";
+          cmd = "mytogglefps";
         };
       };
       notifybar = {
         default = {
           key = "b";
-          cmd = "notifybar";
+          cmd = "mynotifybar";
         };
       };
       power = {
@@ -106,7 +106,7 @@ let
         reload = {
           mod = "Shift";
           key = "F5";
-          cmd = "my-network reload";
+          cmd = "mynetwork reload";
         };
       };
     }
@@ -116,29 +116,29 @@ let
           spotify = {
             toggle = {
               key = "F7";
-              cmd = "my-spotify o";
+              cmd = "myspotify o";
               super = false;
             };
             prev = {
               mod = "Ctrl";
               key = "F7";
-              cmd = "my-spotify p";
+              cmd = "myspotify p";
               super = false;
             };
             next = {
               mod = "Shift";
               key = "F7";
-              cmd = "my-spotify n";
+              cmd = "myspotify n";
               super = false;
             };
             volumeUp = {
               mod = "shift";
               key = "F7";
-              cmd = "my-spotify u";
+              cmd = "myspotify u";
             };
             volumeDown = {
               key = "F7";
-              cmd = "my-spotify d";
+              cmd = "myspotify d";
             };
           };
         }

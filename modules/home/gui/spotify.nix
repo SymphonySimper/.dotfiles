@@ -6,7 +6,7 @@
 }:
 let
   mySpotifyScript =
-    pkgs.writeShellScriptBin "my-spotify" # bash
+    pkgs.writeShellScriptBin "myspotify" # bash
       ''
         cmd="${pkgs.playerctl}/bin/playerctl -p spotify"
 
@@ -39,13 +39,11 @@ let
           volume_to_set=$(echo "$curr_volume $volume_type $volume_inc" | ${pkgs.bc}/bin/bc -l)
           $cmd volume $volume_to_set;
           volume_progress=$(echo "($(get_volume) * 100) / 1" | ${pkgs.bc}/bin/bc)
-          ${
-            lib.my.mkNotification {
-              tag = "my-spotify";
-              title = "Spotify Volume ($volume_progress%)";
-              progress = "$volume_progress";
-            }
-          }
+          ${lib.my.mkNotification {
+            tag = "myspotify";
+            title = "Spotify Volume ($volume_progress%)";
+            progress = "$volume_progress";
+          }}
         }
 
         case "$1" in
@@ -67,7 +65,7 @@ in
     lib.mkIf (my.programs.music == "spotify" && my.gui.enable) {
       home.packages = with pkgs; [
         spotify
-        (mySpotifyScript)
+        mySpotifyScript
       ];
     }
     // lib.my.mkSystemdTimer rec {
@@ -89,14 +87,12 @@ in
           curr_status="$($my_script status)"
           if [[ "$curr_status" == "$status" ]] && [[ "$prev_status" == "$status" ]]; then
             ${pkgs.procps}/bin/pkill "$app" > /dev/null
-            ${
-              lib.my.mkNotification {
-                title = "Bye Spotify";
-                body = "Killed Spotify due to inactivity.";
-                tag = name;
-                urgency = "normal";
-              }
-            }
+            ${lib.my.mkNotification {
+              title = "Bye Spotify";
+              body = "Killed Spotify due to inactivity.";
+              tag = name;
+              urgency = "normal";
+            }}
           else
             echo "$curr_status" > $temp_file
           fi

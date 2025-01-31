@@ -1,28 +1,25 @@
 {
+  my,
   pkgs,
   lib,
-  my,
   ...
 }:
-let
-  mkImport =
-    path:
-    import path {
-      inherit pkgs;
-      inherit lib;
-      inherit my;
-    };
-
-  scripts = [
-    "dev"
-    "ffmpeg"
-    "log"
-    "nix"
-    "unix"
-  ];
-in
 {
-  home.packages = builtins.map (
-    script: pkgs.writeShellScriptBin "my-${script}" (mkImport (./. + "/${script}.nix"))
-  ) scripts;
+  home.packages =
+    builtins.map
+      (
+        script:
+        let
+          name = builtins.elemAt (builtins.match "(.*)\.nix" script) 0;
+        in
+        pkgs.writeShellScriptBin "my${name}" (import (./. + "/${script}") { inherit my pkgs lib; })
+      )
+      (
+        builtins.filter (name: name != "default.nix") (
+          lib.my.mkReadDir {
+            path = ./.;
+            filter = "file";
+          }
+        )
+      );
 }

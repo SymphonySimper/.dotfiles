@@ -1,83 +1,74 @@
 { pkgs, lib, ... }:
-{
-  home.packages = [
-    (pkgs.writeShellScriptBin "volume"
-      # bash
-      ''
-        app="${pkgs.wireplumber}/bin/wpctl"
 
-        #Icons
-        sink="@DEFAULT_AUDIO_SINK@"
-        source='@DEFAULT_AUDIO_SOURCE@'
+# sh
+''
+  app="${pkgs.wireplumber}/bin/wpctl"
 
-        function get_mute() {
-        	$app status $source | grep -qi -E "$1.*muted" && echo 0 || echo 1
-        }
+  #Icons
+  sink="@DEFAULT_AUDIO_SINK@"
+  source='@DEFAULT_AUDIO_SOURCE@'
 
-        get_volume() {
-          volume=$($app get-volume $sink | cut -d ' ' -f2)
-          echo $(echo "$volume * 100 / 1" | "${pkgs.bc}/bin/bc")
-        }
+  function get_mute() {
+  	$app status $source | grep -qi -E "$1.*muted" && echo 0 || echo 1
+  }
 
-        change_vol() {
-          $app set-volume $sink "$1";
-          volume=$(get_volume)
-          ${
-            lib.my.mkNotification {
-              tag = "my-audio";
-              title = "Volume ($volume%)";
-              progress = "$volume";
-            }
-          }
-        }
+  get_volume() {
+    volume=$($app get-volume $sink | cut -d ' ' -f2)
+    echo $(echo "$volume * 100 / 1" | "${pkgs.bc}/bin/bc")
+  }
 
-        set_vol() { change_vol "$1"; }
+  change_vol() {
+    $app set-volume $sink "$1";
+    volume=$(get_volume)
+    ${lib.my.mkNotification {
+      tag = "my-audio";
+      title = "Volume ($volume%)";
+      progress = "$volume";
+    }}
+  }
 
-        notify_toggle() {
-          if [ $(get_mute $1) -eq 0 ]; then
-            status="muted"
-          else
-            status="unmuted"
-          fi
-          ${
-            lib.my.mkNotification {
-              tag = "my-$1";
-              title = "$2 is $status";
-            }
-          }
-        }
+  set_vol() { change_vol "$1"; }
 
-        toggle_mute() {
-          $app set-mute $sink toggle;
-          notify_toggle "stereo" "Audio"
-        }
+  notify_toggle() {
+    if [ $(get_mute $1) -eq 0 ]; then
+      status="muted"
+    else
+      status="unmuted"
+    fi
+    ${lib.my.mkNotification {
+      tag = "my-$1";
+      title = "$2 is $status";
+    }}
+  }
 
-        toggle_mic() {
-        	$app set-mute $source toggle
-          notify_toggle "mic" "Mic"
-        }
+  toggle_mute() {
+    $app set-mute $sink toggle;
+    notify_toggle "stereo" "Audio"
+  }
 
-        case "$1" in
-        -s)
-        	shift
-        	set_vol "$1"
-        	;;
-        -u) change_vol "0.02+" ;;
-        -d) change_vol "0.02-" ;;
-        -U) change_vol "0.1+" ;;
-        -D) change_vol "0.1-" ;;
-        -m) toggle_mute ;;
-        -M) toggle_mic ;;
-        -gV)
-          # Get audio volume
-          get_volume
-          ;;
-        # Get audio mute
-        -gm) get_mute "stereo" ;;
-        # Get mic mute
-        -gM) get_mute "mic" ;;
-        esac
-      ''
-    )
-  ];
-}
+  toggle_mic() {
+  	$app set-mute $source toggle
+    notify_toggle "mic" "Mic"
+  }
+
+  case "$1" in
+  -s)
+  	shift
+  	set_vol "$1"
+  	;;
+  -u) change_vol "0.02+" ;;
+  -d) change_vol "0.02-" ;;
+  -U) change_vol "0.1+" ;;
+  -D) change_vol "0.1-" ;;
+  -m) toggle_mute ;;
+  -M) toggle_mic ;;
+  -gV)
+    # Get audio volume
+    get_volume
+    ;;
+  # Get audio mute
+  -gm) get_mute "stereo" ;;
+  # Get mic mute
+  -gM) get_mute "mic" ;;
+  esac
+''

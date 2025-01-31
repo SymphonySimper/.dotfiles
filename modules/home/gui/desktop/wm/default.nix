@@ -17,10 +17,12 @@ let
     right = "l";
   };
 
-  startup = pkgs.writeShellScriptBin "startup" ''
-    ${pkgs.swaybg}/bin/swaybg -c "${my.theme.color.crust}" -m solid_color;
-    # brightness -r & # Restore Brightness
-  '';
+  startup = lib.getExe (
+    pkgs.writeShellScriptBin "startup" ''
+      ${pkgs.swaybg}/bin/swaybg -c "${my.theme.color.crust}" -m solid_color;
+      # brightness -r & # Restore Brightness
+    ''
+  );
 in
 {
   imports = [
@@ -56,9 +58,7 @@ in
     settings = {
       monitor = ",${my.gui.display.string.width}x${my.gui.display.string.height}@${my.gui.display.string.refreshRate}Hz,auto,${my.gui.display.string.scale}";
 
-      exec-once = [
-        "${startup}/bin/startup"
-      ];
+      exec-once = [ startup ];
 
       env = [
         "XCURSOR_SIZE,24"

@@ -27,14 +27,14 @@
     };
   };
   home.packages = [
-    (pkgs.writeShellScriptBin "caffiene" ''
+    (pkgs.writeShellScriptBin "mycaffiene" ''
       handle_idle() {
         systemctl $1 --user hypridle;
       }
 
       noti() {
         ${lib.my.mkNotification {
-          tag = "my-caffiene";
+          tag = "mycaffiene";
           title = "Caffiene $1";
         }}
       }

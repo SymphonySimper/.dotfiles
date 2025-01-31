@@ -74,7 +74,7 @@ in
 
           ## Open dev projects
           unbind o
-          bind -r o run-shell -b my-dev
+          bind -r o run-shell -b mydev
 
           ## easy-to-remember split pane commands and open panes in cwd
           unbind '"'
