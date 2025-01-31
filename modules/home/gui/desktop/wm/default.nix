@@ -191,7 +191,7 @@ in
                   let
                     idActualType = if idType == "app_id" then "class" else idType;
                   in
-                  "workspace ${workspace}, ${idActualType}:^(${id})$"
+                  "workspace ${workspace} ${if id == "steam" then "silent" else ""}, ${idActualType}:^(${id})$"
                 ) ids)
               ) values
             )
