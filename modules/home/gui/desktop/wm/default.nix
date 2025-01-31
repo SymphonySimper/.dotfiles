@@ -48,6 +48,14 @@ in
     nautilus
   ];
 
+  # protal settings
+  xdg.configFile."hypr/xdph.conf".text = ''
+    screencopy {
+        max_fps = 60
+        allow_token_by_default = true
+    }
+  '';
+
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
