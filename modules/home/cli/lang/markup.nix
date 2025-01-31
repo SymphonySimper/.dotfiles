@@ -6,11 +6,6 @@
       "yaml"
     ];
 
-    lsp.servers = {
-      taplo.enable = true; # TOML
-      yamlls.enable = true;
-    };
-
     formatter = {
       packages = [
         "taplo"

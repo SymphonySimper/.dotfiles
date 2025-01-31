@@ -24,10 +24,12 @@ in
       nodejsPackage = null;
       treesitterPackage = null;
       grammars = [
+        # nvim
         "vim"
         "vimdoc"
         "regex"
         "editorconfig"
+        "lua"
       ];
       grammarPackages = mkGrammars config.programs.nixvim.plugins.treesitter.grammars;
       settings = {

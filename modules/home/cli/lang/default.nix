@@ -2,10 +2,8 @@
 {
   imports = [
     ./docker.nix
-    ./go.nix
     ./http.nix
     ./json.nix
-    ./lua.nix
     ./make.nix
     ./markdown.nix
     ./markup.nix

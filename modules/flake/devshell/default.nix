@@ -10,7 +10,33 @@ eachSystem (
     };
     lib = pkgs.lib;
   in
-  {
-    python = import ./python.nix { inherit pkgs; };
-  }
+  builtins.listToAttrs (
+    builtins.map
+      (
+        name:
+        let
+          content = (import (./. + "/${name}") { inherit pkgs lib; });
+
+          buildInputs = (helpers.mkGetDefault content "buildInputs" [ ]) ++ [
+            pkgs.bashInteractive
+          ];
+          packages = helpers.mkGetDefault content "packages" [ ];
+          shellHook = helpers.mkGetDefault content "shellHook" '''';
+        in
+        {
+          name = builtins.elemAt (builtins.match "(.*)\.nix" name) 0;
+          value = pkgs.mkShell {
+            inherit buildInputs packages shellHook;
+          };
+        }
+      )
+      (
+        builtins.filter (name: name != "default.nix") (
+          helpers.mkReadDir {
+            path = ./.;
+            filter = "file";
+          }
+        )
+      )
+  )
 )
