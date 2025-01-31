@@ -16,5 +16,7 @@
         setSocketVariable = true;
       };
     };
+
+    environment.shellAliases.docker_cln = "docker system prune --volumes";
   };
 }
