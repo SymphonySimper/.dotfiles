@@ -55,6 +55,8 @@ in
   };
   "0" = {
     # app_id = [ "" ];
-    title = [ "meet.google.com is sharing your screen." ];
+    title = [
+      ".*sharing your screen.*"
+    ];
   };
 }
