@@ -44,7 +44,6 @@
     confirm = true; # prompt to save changes
 
     # misc
-    termguicolors = true;
     swapfile = false; # Turn off swapfile
   };
 }
