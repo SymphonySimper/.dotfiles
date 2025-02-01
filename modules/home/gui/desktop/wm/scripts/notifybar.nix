@@ -44,8 +44,8 @@ in
   esac
       
   # Battery
-  battery_status=$(cat /sys/class/power_supply/BAT0/status)
-  battery_capacity=$(cat /sys/class/power_supply/BAT0/capacity)
+  battery_status=$(</sys/class/power_supply/BAT0/status)
+  battery_capacity=$(</sys/class/power_supply/BAT0/capacity)
   battery_title_style="${titleDefaultStyle}"
   case "$battery_status" in
   'Charging') battery_status_color="${my.theme.color.green}" ;;

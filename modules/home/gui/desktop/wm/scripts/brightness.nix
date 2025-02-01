@@ -13,7 +13,7 @@
 
   toggle_ness() {
   	if [ -f $backup_file ]; then
-  		$app s $(cat $backup_file)
+  		$app s $(<$backup_file)
   		rm $backup_file
   	else
   		$app g >$backup_file
@@ -43,7 +43,7 @@
   restore() {
     sleep 0.2s
     if [ -f "$save_file" ]; then
-      $app s $(cat $save_file)
+      $app s $(<$save_file)
       return 0;
     fi
 
