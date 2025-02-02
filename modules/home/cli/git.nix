@@ -106,5 +106,13 @@
       "git_rebase"
       "gitattributes"
     ];
+
+    helix.grammars = [
+      "gitignore"
+      "git-commit"
+      "git-config"
+      "git-rebase"
+      "gitattributes"
+    ];
   };
 }

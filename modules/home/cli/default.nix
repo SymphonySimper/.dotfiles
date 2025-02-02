@@ -6,6 +6,7 @@
     ./tmux.nix
     ./top.nix
     ./yazi.nix
+    ./helix.nix
 
     ./lang
     ./nvim

@@ -41,6 +41,11 @@
         ft.sh = "shfmt";
       };
     };
+
+    helix.lsp.bash-language-server = {
+      command = "${lib.getExe pkgs.bash-language-server}";
+      environment.SHFMT_PATH = "${lib.getExe pkgs.shfmt}";
+    };
   };
 
   home.shellAliases = rec {

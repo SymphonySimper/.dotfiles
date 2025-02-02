@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   home.packages = with pkgs; [
     gnumake
@@ -15,5 +15,19 @@
       packages = [ "just" ];
       ft.just = "just";
     };
+  };
+
+  programs.helix = {
+    grammars = [ "just" ];
+
+    language = [
+      {
+        name = "just";
+        formatter = {
+          command = "${lib.getExe pkgs.just}";
+          args = [ "--dump" ];
+        };
+      }
+    ];
   };
 }
