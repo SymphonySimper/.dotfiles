@@ -25,6 +25,7 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    helix.url = "github:helix-editor/helix";
   };
 
   outputs =

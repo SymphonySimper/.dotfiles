@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let
   mynix =
     pkgs.writeShellScriptBin "mynix"
@@ -72,5 +72,18 @@ in
       ];
       ft.nix = "nixfmt";
     };
+  };
+
+  programs.helix = {
+    grammars = [ "nix" ];
+    lsp.nil.command = "${lib.getExe pkgs.nil}";
+    language = [
+      {
+        name = "nix";
+        formatter = {
+          command = "${lib.getExe pkgs.nixfmt-rfc-style}";
+        };
+      }
+    ];
   };
 }
