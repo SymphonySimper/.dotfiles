@@ -8,17 +8,14 @@
 let
   cfg = config.my.programs.gaming;
 
-  sessionArgs = [
-    "--mouse-sensitivity 2" # increase mouse speed
+  args = [
     "--adaptive-sync"
-  ];
-
-  args = sessionArgs ++ [
-    "--force-grab-cursor"
     "-f" # full screen
     "-e" # steam integration
     "-W ${builtins.toString cfg.display.width}"
     "-H ${builtins.toString cfg.display.height}"
+    "--mouse-sensitivity 2" # increase mouse speed
+    "--force-grab-cursor"
   ];
 in
 {
@@ -53,10 +50,8 @@ in
         dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
         localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
         remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-        gamescopeSession = {
-          enable = true;
-          args = sessionArgs;
-        };
+
+        gamescopeSession.enable = false;
       };
 
       gamemode.enable = true;
@@ -70,12 +65,5 @@ in
     };
 
     environment.systemPackages = [ pkgs.mangohud ];
-    my.programs.tty."2" = {
-      skipUsername = true;
-      launch = {
-        command = "steam-gamescope";
-        dbus = true;
-      };
-    };
   };
 }
