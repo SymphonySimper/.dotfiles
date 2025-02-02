@@ -29,7 +29,7 @@
       };
     };
 
-    programs.gaming = {
+    programs.steam = {
       enable = true;
       display = {
         width = 1920;

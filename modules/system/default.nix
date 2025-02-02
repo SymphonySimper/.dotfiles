@@ -60,10 +60,10 @@ in
     programs = {
       android.enable = lib.mkDefault false;
       docker.enable = lib.mkDefault false;
-      gaming.enable = lib.mkDefault false;
+      steam.enable = lib.mkDefault false;
       vm = {
         enable = lib.mkDefault false;
-        waydroid.enable = lib.mkDefault config.my.programs.gaming.enable;
+        waydroid.enable = lib.mkDefault config.my.programs.steam.enable;
       };
     };
   };

@@ -6,7 +6,7 @@
   ...
 }:
 let
-  cfg = config.my.programs.gaming;
+  cfg = config.my.programs.steam;
 
   args = [
     "--adaptive-sync"
@@ -19,8 +19,8 @@ let
   ];
 in
 {
-  options.my.programs.gaming = {
-    enable = lib.mkEnableOption "Gaming";
+  options.my.programs.steam = {
+    enable = lib.mkEnableOption "Steam";
     display = lib.mkOption {
       description = "Display settings to be used in gamescope and other games";
       default = { };
