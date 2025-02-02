@@ -44,7 +44,7 @@ let
             width = builtins.toString width;
             height = builtins.toString height;
             refreshRate = builtins.toString refreshRate;
-            maxRefreshRate = builtins.toString  maxRefreshRate;
+            maxRefreshRate = builtins.toString maxRefreshRate;
           };
         };
       };
@@ -114,13 +114,9 @@ let
 
       pkgs = helpers.mkPkgs {
         system = my.system;
-        overlays =
-          [
-            (import ../overlays/lib { inherit my helpers; })
-          ]
-          ++ (lib.optionals (for == "home") [
-            # (import ./overlays/nvim-plugins.nix { inherit inputs; })
-          ]);
+        overlays = [
+          (import ../overlays/lib { inherit my helpers; })
+        ] ++ (lib.optionals (for == "home") [ ]);
       };
 
       modules =
@@ -128,7 +124,6 @@ let
           (profileDir + "/${my.profile}/${for}.nix")
         ]
         ++ (lib.optionals (for == "home") [
-          inputs.nixvim.homeManagerModules.nixvim
           inputs.catppuccin.homeManagerModules.catppuccin
         ])
         ++ (lib.optionals (for == "system") [

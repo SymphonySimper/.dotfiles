@@ -2,7 +2,6 @@
 {
   imports = [
     ./docker.nix
-    ./http.nix
     ./json.nix
     ./make.nix
     ./markdown.nix

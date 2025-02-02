@@ -99,14 +99,6 @@
 
     bat.enable = config.programs.git.delta.enable;
 
-    nixvim.plugins.treesitter.grammars = [
-      "gitcommit"
-      "gitignore"
-      "git_config"
-      "git_rebase"
-      "gitattributes"
-    ];
-
     helix.grammars = [
       "gitignore"
       "git-commit"

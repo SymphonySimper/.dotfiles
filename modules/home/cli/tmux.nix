@@ -18,8 +18,6 @@ in
         fi
       '';
 
-    nixvim.plugins.treesitter.grammars = [ "tmux" ];
-
     tmux = {
       enable = true;
       terminal = "tmux-256color";

@@ -9,7 +9,6 @@
     ./helix.nix
 
     ./lang
-    ./nvim
     ./scripts
     ./shell
   ];

@@ -31,17 +31,6 @@
       };
     };
 
-    nixvim.plugins = {
-      treesitter.grammars = [
-        "bash"
-      ];
-      lsp.servers.bashls.enable = true;
-      formatter = {
-        packages = [ "shfmt" ];
-        ft.sh = "shfmt";
-      };
-    };
-
     helix.lsp.bash-language-server = {
       command = "${lib.getExe pkgs.bash-language-server}";
       environment.SHFMT_PATH = "${lib.getExe pkgs.shfmt}";

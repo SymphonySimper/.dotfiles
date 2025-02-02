@@ -58,22 +58,6 @@ in
     packages = [ mynix ];
   };
 
-  programs.nixvim.plugins = {
-    treesitter.grammars = [ "nix" ];
-
-    lsp.servers.nil_ls = {
-      enable = true;
-      settings.nix.flake.autoArchive = true;
-    };
-
-    formatter = {
-      packages = [
-        "nixfmt-rfc-style"
-      ];
-      ft.nix = "nixfmt";
-    };
-  };
-
   programs.helix = {
     grammars = [ "nix" ];
     lsp.nil.command = "${lib.getExe pkgs.nil}";
