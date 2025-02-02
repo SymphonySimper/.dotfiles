@@ -69,7 +69,7 @@ let
       programs = {
         shell = "bash";
         terminal = "alacritty";
-        editor = "nvim";
+        editor = "hx";
         multiplexer = "tmux";
         browser = "google-chrome-stable";
         launcher = "wofi";

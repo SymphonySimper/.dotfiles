@@ -29,7 +29,7 @@
   config.programs.helix = {
     enable = true;
     package = inputs.helix.packages.${my.system}.default;
-    defaultEditor = false;
+    defaultEditor = true;
 
     settings = {
       editor = {
