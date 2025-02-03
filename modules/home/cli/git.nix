@@ -59,25 +59,35 @@
         };
       };
 
+      # NOTE: Aliases seems to be Case-insensitive
+      # (i.e) `p` == `P`
       aliases = {
         c = "clone";
         s = "status";
         a = "add";
         m = "commit";
+
         p = "pull";
         po = "pull origin";
-        P = "push";
-        PF = "push --force-with-lease";
-        S = "stash";
-        Sp = "stash pop";
+
+        pu = "push";
+        puf = "push --force-with-lease";
+
+        st = "stash";
+        stp = "stash pop";
+
         b = "branch";
         ce = "checkout";
         sw = "switch";
-        cln = "clean -fdx";
-        R = "reset --hard HEAD";
-        Ro = "!git reset --hard origin/$(git branch --show-current)";
-        do = "!git fetch && git diff origin";
 
+        r = "reset --hard HEAD";
+        ro = "!git reset --hard origin/$(git branch --show-current)";
+
+        # misc
+        cln = "clean -fdx";
+
+        # shell
+        do = "!git fetch && git diff origin";
         z = "!lazygit";
       };
     };
