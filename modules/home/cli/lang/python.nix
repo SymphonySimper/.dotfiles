@@ -5,11 +5,11 @@
 
     lsp = {
       pyright = {
-        command = "${lib.getExe pkgs.pyright}";
+        command = "${pkgs.pyright}/bin/pyright-langserver";
         config.python.analysis.typeCheckingMode = "basic";
       };
       ruff = {
-        command = "${lib.getExe pkgs.ruff}";
+        command = "${pkgs.ruff}/bin/ruff";
         args = [ "server" ];
       };
     };
