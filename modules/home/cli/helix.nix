@@ -59,6 +59,7 @@
 
         c = {
           c = "toggle_comments";
+          C = "toggle_block_comments";
           f = ":format";
         };
 
@@ -75,6 +76,8 @@
           D = "workspace_diagnostics_picker";
           "/" = "global_search";
         };
+
+        q = ":quit";
       };
     };
 
