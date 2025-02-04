@@ -51,9 +51,30 @@
         };
       };
 
-      keys.normal.space.c = {
-        c = "toggle_comments";
-        f = ":format";
+      keys.normal.space = {
+        b = {
+          c = ":bc";
+          w = ":w";
+        };
+
+        c = {
+          c = "toggle_comments";
+          f = ":format";
+        };
+
+        f = {
+          "'" = "last_picker";
+          f = "file_picker";
+          F = "file_picker_in_current_buffer_directory"; # prev: file_picker_in_current_directory
+          b = "buffer_picker";
+          j = "jumplist_picker";
+          g = "changed_file_picker";
+          s = "symbol_picker";
+          S = "workspace_symbol_picker";
+          d = "diagnostics_picker";
+          D = "workspace_diagnostics_picker";
+          "/" = "global_search";
+        };
       };
     };
 
