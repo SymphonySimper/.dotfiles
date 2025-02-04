@@ -82,8 +82,6 @@ in
         formatter = {
           command = prettierCmd;
           args = [
-            "--plugin"
-            "prettier-plugin-svelte"
             "--parser"
             "svelte"
           ];
