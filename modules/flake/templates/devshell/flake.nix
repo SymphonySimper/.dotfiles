@@ -20,11 +20,29 @@
           ...
         }:
         {
-          # TODO: Update packages and shellHook
           devShells.default = pkgs.mkShell {
-            packages = with pkgs; [ cowsay ];
+            # Uncomment if LD_LIBRARY_PATH is required
+            # LD_LIBRARY_PATH = lib.makeLibraryPath (
+            #   with pkgs;
+            #   [
+            #     stdenv.cc.cc
+            #   ]
+            # );
+
+            buildInputs = [
+              pkgs.bashInteractive # do not remove
+            ];
+
+            # TODO: Update packages and shellHook
+            packages = with pkgs; [
+              # replace with packages that you need in env
+              cowsay
+            ];
+
             shellHook = # sh
-              ''cowsay "Hello from Nix!"'';
+              ''
+                echo "Hello from Nix!"
+              '';
           };
         };
     };
