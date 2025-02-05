@@ -5,11 +5,13 @@
     corepack
   ];
 
+  env = {
+    PNPM_HOME = "$XDG_DATA_HOME/pnpm";
+    PATH = "$PATH:$PNPM_HOME";
+  };
+
   shellHook = # sh
     ''
-      export PNPM_HOME="$XDG_DATA_HOME/pnpm"
-      export PATH="$PATH:$PNPM_HOME"
-
       alias jp="pnpm"
       alias jpi="pnpm i"
       alias jprd="pnpm run dev"

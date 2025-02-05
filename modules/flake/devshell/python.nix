@@ -1,18 +1,25 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   packages = with pkgs; [
     python3
     poetry
   ];
 
+  env = {
+    LD_LIBRARY_PATH = lib.makeLibraryPath (
+      with pkgs;
+      [
+        stdenv.cc.cc
+      ]
+    );
+
+    # Poetry settings
+    POETRY_VIRTUALENVS_CREATE = true;
+    POETRY_VIRTUALENVS_IN_PROJECT = true;
+  };
+
   shellHook = # sh
     ''
-      export LD_LIBRARY_PATH="$NIX_LD_LIBRARY_PATH"
-
-      # Poetry settings
-      export POETRY_VIRTUALENVS_CREATE="true"
-      export POETRY_VIRTUALENVS_IN_PROJECT="true"
-
       for dir in "venv" ".venv"; do
         if [ -d "$dir" ]; then
           venv_dir="$dir"

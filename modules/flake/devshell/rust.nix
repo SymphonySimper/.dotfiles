@@ -1,13 +1,16 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   packages = with pkgs; [
     rustup
     sccache
   ];
 
+  env = {
+    RUST_BACKTRACE = "1";
+  };
+
   shellHook = # sh
     ''
-      export RUST_BACKTRACE="1"
-
       alias rc="cargo"
       alias rcn="cargo new"
       alias rca="cargo add"

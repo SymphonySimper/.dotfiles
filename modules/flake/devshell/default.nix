@@ -22,12 +22,16 @@ eachSystem (
           ];
           packages = helpers.mkGetDefault content "packages" [ ];
           shellHook = helpers.mkGetDefault content "shellHook" '''';
+          env = helpers.mkGetDefault content "env" { };
         in
         {
           name = builtins.elemAt (builtins.match "(.*)\.nix" name) 0;
-          value = pkgs.mkShell {
-            inherit buildInputs packages shellHook;
-          };
+          value = pkgs.mkShell (
+            {
+              inherit buildInputs packages shellHook;
+            }
+            // env
+          );
         }
       )
       (
