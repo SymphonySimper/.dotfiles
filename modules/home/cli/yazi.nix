@@ -1,6 +1,7 @@
 {
-  pkgs,
   my,
+  inputs,
+  pkgs,
   ...
 }:
 {
@@ -186,8 +187,16 @@
       };
     };
 
+    plugins = {
+      mount = "${inputs.yazi-plugins}/mount.yazi";
+    };
+
     keymap = {
       manager.prepend_keymap = [
+        {
+          on = "M";
+          run = "plugin mount";
+        }
         {
           on = "<C-n>";
           run = # sh
@@ -199,5 +208,4 @@
       ];
     };
   };
-
 }
