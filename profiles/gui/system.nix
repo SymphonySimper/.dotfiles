@@ -36,7 +36,7 @@
         height = 1200;
       };
     };
-    networking.begone.enable = true;
+    # networking.begone.enable = true;
   };
 
   boot.initrd.availableKernelModules = [
