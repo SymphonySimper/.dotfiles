@@ -45,6 +45,8 @@
           select = normal;
         };
 
+        end-of-line-diagnostics = "hint";
+        inline-diagnostics.cursor-line = "warning";
         lsp = {
           enable = true;
           display-inlay-hints = false;
