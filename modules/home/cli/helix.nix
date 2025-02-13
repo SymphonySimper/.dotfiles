@@ -59,12 +59,17 @@
             c = ":bc";
             w = ":w";
             r = ":reload";
+            R = ":reload-all";
           };
 
           c = {
             c = "toggle_comments";
             C = "toggle_block_comments";
             f = ":format";
+            a = "code_action";
+            r = "rename_symbol";
+            l = ":lsp-restart";
+            h = "select_references_to_symbol_under_cursor";
           };
 
           f = {
