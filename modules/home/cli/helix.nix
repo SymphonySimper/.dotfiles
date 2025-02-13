@@ -38,6 +38,7 @@
         bufferline = "never";
         auto-pairs = true;
         true-color = my.profile == "wsl";
+        indent-guides.render = false;
 
         cursor-shape = rec {
           normal = "block";
