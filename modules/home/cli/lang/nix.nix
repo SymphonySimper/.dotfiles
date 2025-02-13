@@ -42,6 +42,7 @@ let
             
             nix develop "$devshell" 
             ;;
+          update) nix flake update --commit-lock-file ;;
           *) echo "Unknown option" ;;
         esac
       '';
@@ -51,7 +52,6 @@ in
     shellAliases = {
       snrs = "cd $HOME/.dotfiles && sudo nixos-rebuild switch --flake";
       hmbs = "cd $HOME/.dotfiles && home-manager build switch --flake";
-      nix_flake_update = "nix flake update --commit-lock-file";
       ncln = "${mynix}/bin/mynix cln";
     };
 
