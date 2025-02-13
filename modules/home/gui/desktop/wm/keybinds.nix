@@ -106,7 +106,7 @@ let
         reload = {
           mod = "Shift";
           key = "F5";
-          cmd = "mynetwork reload";
+          cmd = "myreload";
         };
       };
     }
