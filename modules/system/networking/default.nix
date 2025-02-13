@@ -1,6 +1,6 @@
 {
+  my,
   config,
-  pkgs,
   lib,
   ...
 }:
@@ -20,7 +20,7 @@ in
     ];
 
     networking = {
-      hostName = "nixos"; # Define your hostname.
+      hostName = lib.mkDefault my.profile;
       useDHCP = lib.mkDefault true;
       networkmanager.enable = true;
       firewall = {
