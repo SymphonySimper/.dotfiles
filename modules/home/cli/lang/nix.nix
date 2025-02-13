@@ -52,7 +52,6 @@ in
     shellAliases = {
       snrs = "cd $HOME/.dotfiles && sudo nixos-rebuild switch --flake";
       hmbs = "cd $HOME/.dotfiles && home-manager build switch --flake";
-      ncln = "${mynix}/bin/mynix cln";
     };
 
     packages = [ mynix ];
