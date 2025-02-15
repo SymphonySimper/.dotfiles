@@ -5,19 +5,23 @@
   ...
 }:
 let
-  hyprctl = "${pkgs.hyprland}/bin/hyprctl";
+  ctl = "${pkgs.sway}/bin/swaymsg";
   jq = "${pkgs.jq}/bin/jq";
 
   mkMonitor =
     refreshRate: vrr: # sh
     ''
-      ${hyprctl} keyword monitor '${my.gui.display.name}, ${my.gui.display.string.width}x${my.gui.display.string.height}@${refreshRate}Hz, auto, ${my.gui.display.string.scale}, vrr, ${if vrr then "1" else "0"}'
+      ${ctl} output ${my.gui.display.name} mode ${my.gui.display.string.width}x${my.gui.display.string.height}@${refreshRate}Hz
+      sleep 1s
+      ${ctl} output ${my.gui.display.name} adaptive_sync ${if vrr then "on" else "off"}
     '';
 in
 # sh
 ''
   function get_rr() {
-      ${hyprctl} monitors -j | ${jq} '.[0].refreshRate' | cut -d '.' -f1
+      rr=$(${ctl} -t get_outputs --raw | ${jq} '.[0].current_mode.refresh')
+      echo "$rr">> /tmp/toggle.log
+      echo "$((rr/1000))"
   }
 
   function toggle() {

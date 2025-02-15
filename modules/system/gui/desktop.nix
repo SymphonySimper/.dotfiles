@@ -7,17 +7,14 @@
 }:
 {
   config = lib.mkIf my.gui.desktop.enable {
-    programs.hyprland = {
-      enable = true;
-      withUWSM = true;
-    };
+    programs.sway.enable = true;
 
     security = {
       polkit.enable = true;
       pam.services = {
-        hyprland.enableGnomeKeyring = true;
-        # Enable hyprlock
-        hyprlock = { };
+        sway.enableGnomeKeyring = true;
+        # Enable swaylock
+        swaylock = { };
       };
     };
 
@@ -42,7 +39,7 @@
     my.programs.tty."1" = {
       skipUsername = true;
       launch = {
-        command = "${lib.getExe config.programs.uwsm.package} start -S -F /run/current-system/sw/bin/Hyprland";
+        command = "sway";
         dbus = false;
       };
     };
