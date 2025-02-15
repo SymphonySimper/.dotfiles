@@ -149,33 +149,19 @@ in
             "${prefix} ${keybind.key}, exec, ${keybind.cmd}"
           ) keybinds)
 
-          (builtins.concatMap
-            (
-              num:
-              let
-                workspaceNum = builtins.toString (if num == 0 then 10 else num);
-                numStr = builtins.toString num;
-              in
-              [
-                # Switch workspaces with mainMod + [0-9]
-                "${keys.mod}, ${numStr}, workspace, ${workspaceNum}"
-                # Move active window to a workspace with mainMod + SHIFT + [0-9]
-                "${keys.mod} SHIFT, ${numStr}, movetoworkspace, ${workspaceNum}"
-              ]
-            )
+          (builtins.concatMap (
+            num:
+            let
+              workspaceNum = builtins.toString (if num == 0 then 10 else num);
+              numStr = builtins.toString num;
+            in
             [
-              1
-              2
-              3
-              4
-              5
-              6
-              7
-              8
-              9
-              0
+              # Switch workspaces with mainMod + [0-9]
+              "${keys.mod}, ${numStr}, workspace, ${workspaceNum}"
+              # Move active window to a workspace with mainMod + SHIFT + [0-9]
+              "${keys.mod} SHIFT, ${numStr}, movetoworkspace, ${workspaceNum}"
             ]
-          )
+          ) (lib.lists.range 0 9))
         ];
 
         windowrulev2 = lib.lists.flatten [
