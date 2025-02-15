@@ -35,7 +35,7 @@
     programs = {
       vm.waydroid.enable = true;
       steam = {
-        enable = true;
+        enable = false;
         display = {
           width = 1920;
           height = 1200;
