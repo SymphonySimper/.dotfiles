@@ -9,10 +9,13 @@
     ../../modules/system
   ];
 
-  boot.binfmt.emulatedSystems = [
-    "i686-linux"
-    "aarch64-linux"
-  ];
+  boot = {
+    kernelParams = [ "amdgpu.dcdebugmask=0x10" ];
+    binfmt.emulatedSystems = [
+      "i686-linux"
+      "aarch64-linux"
+    ];
+  };
   nix.settings.extra-platforms = config.boot.binfmt.emulatedSystems;
 
   my = {
