@@ -65,55 +65,60 @@ in
       waydroidRestart
     ];
 
-    environment.systemPackages = with pkgs; [
-      (writeShellScriptBin "waydroid-init" # sh
-        ''
-          set -e # exit on any error
+    environment.systemPackages =
+      with pkgs;
+      (
+        [
+          (writeShellScriptBin "waydroid-init" # sh
+            ''
+              set -e # exit on any error
 
-          ${sudo} ${waydroidPkg} init -s GAPPS
+              ${sudo} ${waydroidPkg} init -s GAPPS
 
-          # controller support (Allows access to all plugged in devices)
-          ${waydroidPkg} prop set persist.waydroid.udev true
-          ${waydroidPkg} prop set persist.waydroid.uevent true
+              # controller support (Allows access to all plugged in devices)
+              ${waydroidPkg} prop set persist.waydroid.udev true
+              ${waydroidPkg} prop set persist.waydroid.uevent true
 
-          # Disable freeform apps (Only fullscreen apps)
-          ${waydroidPkg} prop set persist.waydroid.multi_windows false
+              # Disable freeform apps (Only fullscreen apps)
+              ${waydroidPkg} prop set persist.waydroid.multi_windows false
 
-          ${mkWaydroidSetRes {
+              ${mkWaydroidSetRes {
+                w = res.desktop.width;
+                h = res.desktop.height;
+              }}
+
+              ${sudo} ${waydroidRestart}
+
+              ${waydroidPkg} show-full-ui &
+              sleep 5
+
+              # refer: https://docs.waydro.id/faq/google-play-certification
+              certify_url="https://www.google.com/android/uncertified"
+
+              android_id=$(${sudo} ${waydroidPkg} shell sqlite3 /data/data/com.google.android.gsf/databases/gservices.db "select * from main where name = \"android_id\";" | ${pkgs.coreutils-full}/bin/cut -d '|' -f2)
+              "${pkgs.wl-clipboard}/bin/wl-copy" "$android_id"
+
+              echo "Android ID (copied to clipboard): $android_id"
+              echo "Enter ID in this page: $certify_url"
+
+              "${pkgs.xdg-utils}/bin/xdg-open" "$certify_url"
+            ''
+          )
+
+          (writeShellScriptBin "waydroid-reset-res" (mkWaydroidSetRes { }))
+          (writeShellScriptBin "waydroid-set-res" (mkWaydroidSetRes {
             w = res.desktop.width;
             h = res.desktop.height;
-          }}
-
-          ${sudo} ${waydroidRestart}
-
-          ${waydroidPkg} show-full-ui &
-          sleep 5
-
-          # refer: https://docs.waydro.id/faq/google-play-certification
-          certify_url="https://www.google.com/android/uncertified"
-
-          android_id=$(${sudo} ${waydroidPkg} shell sqlite3 /data/data/com.google.android.gsf/databases/gservices.db "select * from main where name = \"android_id\";" | ${pkgs.coreutils-full}/bin/cut -d '|' -f2)
-          "${pkgs.wl-clipboard}/bin/wl-copy" "$android_id"
-
-          echo "Android ID (copied to clipboard): $android_id"
-          echo "Enter ID in this page: $certify_url"
-
-          "${pkgs.xdg-utils}/bin/xdg-open" "$certify_url"
-        ''
-      )
-
-      (writeShellScriptBin "waydroid-reset-res" (mkWaydroidSetRes { }))
-      (writeShellScriptBin "waydroid-set-res" (mkWaydroidSetRes {
-        w = res.desktop.width;
-        h = res.desktop.height;
-      }))
-
-      (mkWaydroidCageLaunch "waydroid-cage" [ "show-full-ui" ])
-      (makeDesktopItem rec {
-        name = "Waydroid Cage";
-        desktopName = name;
-        exec = "waydroid-cage";
-      })
-    ];
+          }))
+        ]
+        ++ (lib.optional config.programs.steam.gamescopeSession.enable [
+          (mkWaydroidCageLaunch "waydroid-cage" [ "show-full-ui" ])
+          (makeDesktopItem rec {
+            name = "Waydroid Cage";
+            desktopName = name;
+            exec = "waydroid-cage";
+          })
+        ])
+      );
   };
 }

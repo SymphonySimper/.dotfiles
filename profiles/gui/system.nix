@@ -32,11 +32,14 @@
       };
     };
 
-    programs.steam = {
-      enable = true;
-      display = {
-        width = 1920;
-        height = 1200;
+    programs = {
+      vm.waydroid.enable = true;
+      steam = {
+        enable = true;
+        display = {
+          width = 1920;
+          height = 1200;
+        };
       };
     };
     # networking.begone.enable = true;

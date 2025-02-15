@@ -1,6 +1,5 @@
 {
   my,
-  config,
   pkgs,
   lib,
   ...
@@ -63,7 +62,7 @@ in
       steam.enable = lib.mkDefault false;
       vm = {
         enable = lib.mkDefault false;
-        waydroid.enable = lib.mkDefault config.my.programs.steam.enable;
+        waydroid.enable = lib.mkDefault false;
       };
     };
   };
