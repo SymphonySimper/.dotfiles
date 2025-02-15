@@ -25,9 +25,16 @@ let
                     type = "launch";
                     name = "command-${option.name}";
                     value = # sh
-                      ''[[ "$(tty)" = "/dev/tty${tty}" ]] && exec ${
-                        if (builtins.getAttr "dbus" option.value.launch) then "${pkgs.dbus}/bin/dbus-run-session" else ""
-                      } ${option.value.launch.command}'';
+                      ''
+                        if [[ "$(tty)" = "/dev/tty${tty}" ]]; then
+                           ${
+                             if (builtins.getAttr "dbus" option.value.launch) then
+                               "exec ${pkgs.dbus}/bin/dbus-run-session ${option.value.launch.command}"
+                             else
+                               option.value.launch.command
+                           }
+                        fi
+                      '';
                   }
                 ])
 
@@ -74,7 +81,12 @@ in
             type = lib.types.submodule {
               options = {
                 command = lib.mkOption {
-                  type = lib.types.nullOr lib.types.str;
+                  type = lib.types.nullOr (
+                    lib.types.oneOf [
+                      lib.types.str
+                      lib.types.lines
+                    ]
+                  );
                   description = "Command to run after login";
                   default = null;
                 };
