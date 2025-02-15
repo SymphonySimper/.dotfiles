@@ -27,11 +27,7 @@ let
       system = mkGetDefault passedProfile "system" "x86_64-linux";
       gui = {
         enable = mkGetDefault settings "gui.enable" false;
-        desktop = {
-          enable = mkGetDefault settings "gui.desktop.enable" false;
-          type = mkGetDefault settings "gui.desktop.type" "wm"; # wm or de
-          wm = gui.desktop.type == "wm";
-        };
+        desktop.enable = mkGetDefault settings "gui.desktop.enable" false;
         display = rec {
           name = mkGetDefault settings "gui.display.name" "eDP-1";
           scale = mkGetDefault settings "gui.display.scale" 1;

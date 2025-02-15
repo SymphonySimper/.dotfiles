@@ -6,13 +6,7 @@
   ...
 }:
 {
-  options.my.programs.wm.enableLogin = lib.mkOption {
-    description = "WM Login";
-    type = lib.types.bool;
-    default = (my.gui.desktop.enable && my.gui.desktop.wm);
-  };
-
-  config = lib.mkIf (my.gui.desktop.enable && my.gui.desktop.wm) {
+  config = lib.mkIf my.gui.desktop.enable {
     programs.hyprland = {
       enable = true;
       withUWSM = true;

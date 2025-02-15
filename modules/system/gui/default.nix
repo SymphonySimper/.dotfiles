@@ -2,8 +2,7 @@
 {
   imports = [
     ./chromium.nix
-    ./desktop/de.nix
-    ./desktop/wm.nix
+    ./desktop.nix
     ./kanata.nix
     ./steam.nix
 
