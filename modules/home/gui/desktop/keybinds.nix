@@ -25,7 +25,7 @@ let
       launcher = {
         default = {
           key = "d";
-          cmd = "${my.programs.launcher} --show drun";
+          cmd = "uwsm app -- $(${my.programs.launcher} --show drun --define=drun-print_desktop_file=true)";
         };
       };
       brightness = {

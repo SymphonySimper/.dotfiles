@@ -65,7 +65,7 @@ in
       settings = {
         monitor = ",${my.gui.display.string.width}x${my.gui.display.string.height}@${my.gui.display.string.refreshRate}Hz,auto,${my.gui.display.string.scale}";
 
-        exec-once = [ startup ];
+        exec-once = builtins.map (cmd: "uwsm app -- ${cmd}") [ startup ];
 
         env = [
           "XCURSOR_SIZE,24"
@@ -129,7 +129,7 @@ in
 
         bind = lib.lists.flatten [
           "${keys.mod}, Q, killactive"
-          "${keys.mod} SHIFT, E, exit"
+          "${keys.mod} SHIFT, E, exec, uwsm stop"
           "${keys.mod}, V, togglefloating"
           "${keys.mod} SHIFT, F, fullscreen"
 
@@ -146,7 +146,7 @@ in
 
               prefix = if modKey == "" && action == "" then "," else "${modKey} ${action},";
             in
-            "${prefix} ${keybind.key}, exec, ${keybind.cmd}"
+            "${prefix} ${keybind.key}, exec, uwsm app -- ${keybind.cmd}"
           ) keybinds)
 
           (builtins.concatMap (
