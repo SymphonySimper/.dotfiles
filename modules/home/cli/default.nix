@@ -2,11 +2,12 @@
 {
   imports = [
     ./git.nix
+    ./helix.nix
     ./ssh.nix
     ./tmux.nix
     ./top.nix
     ./yazi.nix
-    ./helix.nix
+    ./zoxide.nix
 
     ./lang
     ./scripts
@@ -31,6 +32,7 @@
       enable = true;
       generateCaches = true;
     };
+
     fzf = {
       enable = true;
       defaultOptions = [
@@ -40,6 +42,5 @@
 
     fd.enable = true;
     ripgrep.enable = true;
-    zoxide.enable = true;
   };
 }
