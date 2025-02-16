@@ -1,12 +1,17 @@
-{ pkgs, my, ... }:
+{
+  my,
+  pkgs,
+  lib,
+  ...
+}:
 let
-  fzf = "${pkgs.fzf}/bin/fzf-tmux -p --scheme=path";
-  tmux = "${pkgs.tmux}/bin/tmux";
-  find = "${pkgs.findutils}/bin/find";
+  fzf = "${lib.getExe' pkgs.fzf "fzf-tmux"} -p --scheme=path";
+  tmux = lib.getExe pkgs.tmux;
+  find = lib.getExe' pkgs.findutils "find";
   ## coreutils
-  basename = "${pkgs.coreutils-full}/bin/basename";
-  dirname = "${pkgs.coreutils-full}/bin/dirname";
-  wc = "${pkgs.coreutils-full}/bin/wc -l";
+  basename = lib.getExe' pkgs.coreutils-full "basename";
+  dirname = lib.getExe' pkgs.coreutils-full "dirname";
+  wc = "${lib.getExe' pkgs.coreutils-full "wc"} -l";
 in
 # sh
 ''

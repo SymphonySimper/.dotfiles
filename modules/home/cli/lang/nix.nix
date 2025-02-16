@@ -6,7 +6,7 @@ let
       ''
         case "$1" in
           cpu)
-            input=$(nix flake metadata --json | ${pkgs.jq}/bin/jq -r ".locks.nodes.root.inputs | keys[]" | ${pkgs.fzf}/bin/fzf)
+            input=$(nix flake metadata --json | ${lib.getExe pkgs.jq} -r ".locks.nodes.root.inputs | keys[]" | ${lib.getExe' pkgs.fzf "fzf"})
             if [ ''${#input} -eq 0 ]; then
               echo "No input."
               exit 1

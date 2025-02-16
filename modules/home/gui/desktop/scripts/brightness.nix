@@ -6,7 +6,7 @@
 }:
 # sh
 ''
-  app_bin="${pkgs.brightnessctl}/bin/brightnessctl"
+  app_bin="${lib.getExe pkgs.brightnessctl}"
   app="$app_bin -m"
   backup_file="${config.xdg.cacheHome}/last-brightness"
   save_file="${config.xdg.dataHome}/.my-brightness"

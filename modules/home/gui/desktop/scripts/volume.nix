@@ -2,7 +2,7 @@
 
 # sh
 ''
-  app="${pkgs.wireplumber}/bin/wpctl"
+  app="${lib.getExe' pkgs.wireplumber "wpctl"}"
 
   #Icons
   sink="@DEFAULT_AUDIO_SINK@"
@@ -14,7 +14,7 @@
 
   get_volume() {
     volume=$($app get-volume $sink | cut -d ' ' -f2)
-    echo $(echo "$volume * 100 / 1" | "${pkgs.bc}/bin/bc")
+    echo $(echo "$volume * 100 / 1" | "${lib.getExe' pkgs.bc "bc"}")
   }
 
   change_vol() {

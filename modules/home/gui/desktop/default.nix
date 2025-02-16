@@ -18,7 +18,7 @@ let
 
   startup = lib.getExe (
     pkgs.writeShellScriptBin "startup" ''
-      ${pkgs.swaybg}/bin/swaybg -c "${my.theme.color.crust}" -m solid_color;
+      ${lib.getExe' pkgs.swaybg "swaybg"} -c "${my.theme.color.crust}" -m solid_color;
       # brightness -r & # Restore Brightness
     ''
   );

@@ -2,6 +2,7 @@
   my,
   inputs,
   pkgs,
+  lib,
   ...
 }:
 {
@@ -201,7 +202,7 @@
           on = "<C-n>";
           run = # sh
             ''
-              shell '${pkgs.ripdrag}/bin/ripdrag "$@" -x 2>/dev/null &' --confirm
+              shell '${lib.getExe pkgs.ripdrag} "$@" -x 2>/dev/null &' --confirm
             '';
           desc = "Drag and drop using ripdrag";
         }

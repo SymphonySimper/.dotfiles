@@ -5,8 +5,8 @@
   ...
 }:
 let
-  hyprctl = "${pkgs.hyprland}/bin/hyprctl";
-  jq = "${pkgs.jq}/bin/jq";
+  hyprctl = lib.getExe' pkgs.hyprland "hyprctl";
+  jq = lib.getExe pkgs.jq;
 
   mkMonitor =
     refreshRate: vrr: # sh

@@ -2,8 +2,11 @@
 let
   customLib =
     { pkgs, my, ... }:
+    let
+      lib = pkgs.lib;
+    in
     {
-      mkNotification = (import ./mkNotification.nix { inherit pkgs; });
+      mkNotification = (import ./mkNotification.nix { inherit pkgs lib; });
       mkSystemdTimer = import ./mkSystemdTimer.nix;
     };
 in

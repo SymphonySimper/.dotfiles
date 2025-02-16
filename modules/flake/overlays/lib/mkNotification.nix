@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib,... }:
 let
   mkNotification =
     {
@@ -10,7 +10,7 @@ let
       extraArgs ? "",
     }:
     let
-      cmd = "${pkgs.libnotify}/bin/notify-send";
+      cmd = "${lib.getExe' pkgs.libnotify "notify-send"}";
       replaceArg = if builtins.stringLength tag > 0 then "-h string:x-dunst-stack-tag:${tag}" else "";
       progressBarArg = if builtins.stringLength progress > 0 then "-h int:value:${progress}" else "";
     in

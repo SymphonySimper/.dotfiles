@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 # bash
 ''
-  app="${pkgs.ffmpeg}/bin/ffmpeg"
+  app= "${lib.getExe' pkgs.ffmpeg "ffmpeg"}"
 
   function get_filename() {
     echo $1 | cut -d '.' -f1

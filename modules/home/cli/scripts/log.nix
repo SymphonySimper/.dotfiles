@@ -7,8 +7,8 @@
 let
   repo = "git@github.com:SymphonySimper/log.git";
   loc = "${my.dir.data}/log";
-  readlink = "${pkgs.coreutils-full}/bin/readlink";
-  ln = "${pkgs.coreutils-full}/bin/ln";
+  readlink = lib.getExe' pkgs.coreutils-full "readlink";
+  ln = lib.getExe' pkgs.coreutils-full "ln";
 in
 # bash
 ''

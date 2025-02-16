@@ -1,14 +1,14 @@
 {
+  my,
   pkgs,
   lib,
-  my,
   ...
 }:
 let
   mySpotifyScript =
     pkgs.writeShellScriptBin "myspotify" # bash
       ''
-        cmd="${pkgs.playerctl}/bin/playerctl -p spotify"
+        cmd="${lib.getExe' pkgs.playerctl "playerctl"} -p spotify"
 
         open_play_pause() {
         	if ! $cmd status; then
@@ -36,9 +36,9 @@ let
           inc) volume_type="+" ;;
           dec) volume_type="-" ;;
           esac
-          volume_to_set=$(echo "$curr_volume $volume_type $volume_inc" | ${pkgs.bc}/bin/bc -l)
+          volume_to_set=$(echo "$curr_volume $volume_type $volume_inc" | ${lib.getExe' pkgs.bc "bc"} -l)
           $cmd volume $volume_to_set;
-          volume_progress=$(echo "($(get_volume) * 100) / 1" | ${pkgs.bc}/bin/bc)
+          volume_progress=$(echo "($(get_volume) * 100) / 1" | ${lib.getExe' pkgs.bc "bc"})
           ${lib.my.mkNotification {
             tag = "myspotify";
             title = "Spotify Volume ($volume_progress%)";
@@ -86,7 +86,7 @@ in
           prev_status="$(<$temp_file)"
           curr_status="$($my_script status)"
           if [[ "$curr_status" == "$status" ]] && [[ "$prev_status" == "$status" ]]; then
-            ${pkgs.procps}/bin/pkill "$app" > /dev/null
+            ${lib.getExe' pkgs.procps "pkill"} "$app" > /dev/null
             ${lib.my.mkNotification {
               title = "Bye Spotify";
               body = "Killed Spotify due to inactivity.";

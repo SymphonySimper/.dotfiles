@@ -18,10 +18,10 @@ in
         command = "${lib.getExe pkgs.tailwindcss-language-server}";
         args = [ "--stdio" ];
       };
-      typescript-language-server.command = "${lib.getExe pkgs.typescript-language-server}";
+      typescript-language-server.command = lib.getExe pkgs.typescript-language-server;
 
-      vscode-html-language-server.command = "${pkgs.vscode-langservers-extracted}/bin/vscode-html-language-server";
-      vscode-css-language-server.command = "${pkgs.vscode-langservers-extracted}/bin/vscode-css-language-server";
+      vscode-html-language-server.command = lib.getExe' pkgs.vscode-langservers-extracted "vscode-html-language-server";
+      vscode-css-language-server.command = lib.getExe' pkgs.vscode-langservers-extracted "vscode-css-language-server";
     };
 
     language = [

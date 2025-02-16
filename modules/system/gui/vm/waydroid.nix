@@ -95,13 +95,13 @@ in
               # refer: https://docs.waydro.id/faq/google-play-certification
               certify_url="https://www.google.com/android/uncertified"
 
-              android_id=$(${sudo} ${waydroidPkg} shell sqlite3 /data/data/com.google.android.gsf/databases/gservices.db "select * from main where name = \"android_id\";" | ${pkgs.coreutils-full}/bin/cut -d '|' -f2)
-              "${pkgs.wl-clipboard}/bin/wl-copy" "$android_id"
+              android_id=$(${sudo} ${waydroidPkg} shell sqlite3 /data/data/com.google.android.gsf/databases/gservices.db "select * from main where name = \"android_id\";" | ${lib.getExe' pkgs.coreutils-full "cut"} -d '|' -f2)
+              "${lib.getExe' pkgs.wl-clipboard "wl-copy"}" "$android_id"
 
               echo "Android ID (copied to clipboard): $android_id"
               echo "Enter ID in this page: $certify_url"
 
-              "${pkgs.xdg-utils}/bin/xdg-open" "$certify_url"
+              "${lib.getExe' pkgs.xdg-utils "xdg-open"}" "$certify_url"
             ''
           )
 

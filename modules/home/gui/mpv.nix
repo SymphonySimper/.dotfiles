@@ -42,7 +42,7 @@
 
         # Border
         border = "no";
-        script-opts = "ytdl_hook-ytdl_path=${pkgs.yt-dlp}/bin/yt-dlp";
+        script-opts = "ytdl_hook-ytdl_path=${lib.getExe pkgs.yt-dlp}";
 
         background-color = "#000000";
       };
