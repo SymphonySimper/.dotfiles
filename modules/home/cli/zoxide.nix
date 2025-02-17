@@ -7,7 +7,7 @@
     };
 
     bash.initExtra =
-      lib.mkAfter # sh
+      lib.mkOrder 2000 # sh
         ''
           eval "$(${lib.getExe pkgs.zoxide} init bash)"    
         '';
