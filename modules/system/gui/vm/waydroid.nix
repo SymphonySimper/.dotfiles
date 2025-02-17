@@ -69,6 +69,8 @@ in
       with pkgs;
       (
         [
+          wl-clipboard
+          python3Packages.pyclip
           (writeShellScriptBin "waydroid-init" # sh
             ''
               set -e # exit on any error
