@@ -13,7 +13,6 @@ in
     enable = true;
     defaultUser = my.name;
     interop.includePath = interop;
-    nativeSystemd = true;
     startMenuLaunchers = false;
     wslConf = {
       user.default = my.name;
