@@ -19,6 +19,7 @@
   nix.settings.extra-platforms = config.boot.binfmt.emulatedSystems;
 
   my = {
+    networking.begone.enable = true;
     hardware = {
       cpu.amd.enable = true;
       gpu.amd.enable = true;
@@ -42,7 +43,6 @@
         };
       };
     };
-    # networking.begone.enable = true;
   };
 
   boot.initrd.availableKernelModules = [
