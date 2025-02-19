@@ -3,7 +3,7 @@
   programs.helix = {
     grammars = [ "markdown" ];
 
-    lsp.marksman.command = "${lib.getExe pkgs.marksman}";
+    lsp.markdown-oxide.command = "${lib.getExe pkgs.markdown-oxide}";
     language = [
       {
         name = "markdown";
