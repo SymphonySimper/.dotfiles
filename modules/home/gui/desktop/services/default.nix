@@ -1,4 +1,7 @@
 { ... }:
 {
-  imports = [ ./battery.nix ];
+  imports = [
+    ./battery.nix
+    ./rest.nix
+  ];
 }
