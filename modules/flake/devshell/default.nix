@@ -35,12 +35,11 @@ eachSystem (
         }
       )
       (
-        builtins.filter (name: name != "default.nix") (
-          helpers.mkReadDir {
-            path = ./.;
-            filter = "file";
-          }
-        )
+        helpers.mkReadDir {
+          path = ./.;
+          type = "nix";
+          ignoreDefault = true;
+        }
       )
   )
 )

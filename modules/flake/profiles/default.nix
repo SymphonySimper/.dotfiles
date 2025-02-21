@@ -90,7 +90,7 @@ let
 
   mkGetProfileDirs = helpers.mkReadDir {
     path = profileDir;
-    filter = "dir";
+    type = "dir";
   };
 
   mkProfile =

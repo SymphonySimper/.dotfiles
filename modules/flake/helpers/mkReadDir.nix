@@ -1,21 +1,51 @@
 { lib, mkGetDefault, ... }:
 let
   # Opposite value as the filter uses a not condition
-  types = {
-    "dir" = "regular";
-    "file" = "directory";
+  types = rec {
+    dir = "directory";
+    file = "regular";
+    nix = file;
   };
+
+  mkCheckTrue = v: v == true;
 
   mkReadDir =
     {
       path,
-      filter ? null,
+      asPath ? false,
+      type ? null,
+      suffix ? "",
+      ignore ? [ ],
+      ignoreDefault ? false,
     }:
     let
-      filterValue = mkGetDefault types filter null;
+      onlyNix = type == "nix";
+      typeFilter = mkGetDefault types type null;
+      finalIgnore =
+        ignore
+        ++ (lib.optionals (onlyNix && ignoreDefault) [
+          "default.nix"
+        ]);
+
+      files = builtins.attrNames (
+        lib.attrsets.filterAttrs (
+          name: value:
+          builtins.all mkCheckTrue (
+            [
+              # checks for file type <regular|director>
+              (builtins.any mkCheckTrue [
+                (typeFilter == null)
+                (value == typeFilter)
+              ])
+
+              (lib.hasSuffix suffix name)
+              (!(builtins.elem name finalIgnore))
+            ]
+            ++ (lib.optionals onlyNix [ (lib.hasSuffix "nix" name) ])
+          )
+        ) (builtins.readDir path)
+      );
     in
-    builtins.attrNames (
-      lib.attrsets.filterAttrs (_: value: value != filterValue) (builtins.readDir path)
-    );
+    if asPath then (builtins.map (file: path + "/${file}") files) else files;
 in
 mkReadDir

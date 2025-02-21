@@ -25,11 +25,10 @@
         )
       )
       (
-        builtins.filter (name: name != "default.nix") (
-          lib.my.mkReadDir {
-            path = ./.;
-            filter = "file";
-          }
-        )
+        lib.my.mkReadDir {
+          path = ./.;
+          type = "nix";
+          ignoreDefault = true;
+        }
       );
 }

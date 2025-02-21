@@ -15,11 +15,10 @@
         pkgs.writeShellScriptBin "my${name}" (import (./. + "/${script}") { inherit my pkgs lib; })
       )
       (
-        builtins.filter (name: name != "default.nix") (
-          lib.my.mkReadDir {
-            path = ./.;
-            filter = "file";
-          }
-        )
+        lib.my.mkReadDir {
+          path = ./.;
+          type = "nix";
+          ignoreDefault = true;
+        }
       );
 }

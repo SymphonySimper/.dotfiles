@@ -11,7 +11,7 @@ builtins.listToAttrs (
     (
       helpers.mkReadDir {
         path = ./.;
-        filter = "dir";
+        type = "dir";
       }
     )
 )
