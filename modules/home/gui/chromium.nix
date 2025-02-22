@@ -13,7 +13,6 @@ let
 
   browsers = {
     chromium = lib.getExe config.programs.chromium.package;
-    opera = lib.getExe' (pkgs.opera.override { proprietaryCodecs = true; }) "opera";
   };
 
   mkDesktopEntries =
@@ -91,11 +90,6 @@ in
       {
         name = "lichess";
         url = "https://lichess.org/";
-      }
-      {
-        name = "netflix";
-        url = "https://www.netflix.com/browse/my-list";
-        exe = browsers.opera;
       }
     ]
     ++ (lib.optionals (my.programs.music == "yt") [
