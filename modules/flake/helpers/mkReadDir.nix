@@ -13,7 +13,7 @@ let
     {
       path,
       asPath ? false,
-      type ? null,
+      type ? "",
       suffix ? "",
       ignore ? [ ],
       ignoreDefault ? false,
@@ -23,7 +23,7 @@ let
       typeFilter = mkGetDefault types type null;
       finalIgnore =
         ignore
-        ++ (lib.optionals (onlyNix && ignoreDefault) [
+        ++ (lib.optionals ignoreDefault [
           "default.nix"
         ]);
 
