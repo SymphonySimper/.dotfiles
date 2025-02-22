@@ -62,7 +62,7 @@ let
 in
 {
   config =
-    lib.mkIf (my.programs.music == "spotify" && my.gui.enable) {
+    lib.mkIf (my.programs.music == "spotify") {
       home.packages = with pkgs; [
         spotify
         mySpotifyScript

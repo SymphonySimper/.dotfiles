@@ -52,53 +52,51 @@ let
       "bkkmolkhemgaeaeggcmfbghljjjoofoh";
 in
 {
-  config = lib.mkIf my.gui.enable {
-    programs.chromium = {
-      enable = true;
-      package = pkgs.google-chrome;
-      extensions = [
-        "${theme}" # Catppuccin theme
-        # "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
-        # "nngceckbapebfimnlniiiahkandclblb" # bitwarden
-        # "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
-        # "edibdbjcniadpccecjdfdjjppcpchdlm" # i don't care about cookies
-        # "bnclejfcblondkjliiblkojdeloomadd" # mute tab
-      ];
-      inherit commandLineArgs;
-    };
-
-    # Web Apps
-    xdg.desktopEntries = mkDesktopEntries (
-
-      [
-        [
-          "monkeytype"
-          "https://monkeytype.com/"
-        ]
-        [
-          "excalidraw"
-          "https://excalidraw.com/"
-          false
-        ]
-        [
-          "whatsapp"
-          "https://web.whatsapp.com/"
-          false
-        ]
-        [
-          "lichess"
-          "https://lichess.org/"
-          false
-        ]
-      ]
-      ++ (lib.optionals (my.programs.music == "yt") [
-        [
-          "ytmusic"
-          "https://music.youtube.com/"
-          false
-        ]
-      ])
-
-    );
+  programs.chromium = {
+    enable = true;
+    package = pkgs.google-chrome;
+    extensions = [
+      "${theme}" # Catppuccin theme
+      # "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
+      # "nngceckbapebfimnlniiiahkandclblb" # bitwarden
+      # "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
+      # "edibdbjcniadpccecjdfdjjppcpchdlm" # i don't care about cookies
+      # "bnclejfcblondkjliiblkojdeloomadd" # mute tab
+    ];
+    inherit commandLineArgs;
   };
+
+  # Web Apps
+  xdg.desktopEntries = mkDesktopEntries (
+
+    [
+      [
+        "monkeytype"
+        "https://monkeytype.com/"
+      ]
+      [
+        "excalidraw"
+        "https://excalidraw.com/"
+        false
+      ]
+      [
+        "whatsapp"
+        "https://web.whatsapp.com/"
+        false
+      ]
+      [
+        "lichess"
+        "https://lichess.org/"
+        false
+      ]
+    ]
+    ++ (lib.optionals (my.programs.music == "yt") [
+      [
+        "ytmusic"
+        "https://music.youtube.com/"
+        false
+      ]
+    ])
+
+  );
 }
