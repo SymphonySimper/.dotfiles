@@ -11,6 +11,11 @@ let
     "--disable-features=WebRtcAllowInputVolumeAdjustment"
   ];
 
+  browsers = {
+    chromium = lib.getExe config.programs.chromium.package;
+    opera = lib.getExe' (pkgs.opera.override { proprietaryCodecs = true; }) "opera";
+  };
+
   mkDesktopEntries =
     entries:
     builtins.listToAttrs (
@@ -22,6 +27,7 @@ let
           url = entry.url;
           app = lib.my.mkGetDefault entry "app" false;
           urlArg = if app then "--app=" else "";
+          exe = lib.my.mkGetDefault entry "exe" browsers.chromium;
         in
         {
           inherit name;
@@ -32,7 +38,7 @@ let
             comment = "Launch ${name}";
             categories = [ "Application" ];
             terminal = false;
-            exec = "${lib.getExe config.programs.chromium.package} ${lib.strings.concatStringsSep " " commandLineArgs} --class=${class} ${urlArg}\"${url}\" %U";
+            exec = "${exe} ${lib.strings.concatStringsSep " " commandLineArgs} --class=${class} ${urlArg}\"${url}\" %U";
             settings = {
               StartupWMClass = class;
             };
@@ -85,6 +91,11 @@ in
       {
         name = "lichess";
         url = "https://lichess.org/";
+      }
+      {
+        name = "netflix";
+        url = "https://www.netflix.com/browse/my-list";
+        exe = browsers.opera;
       }
     ]
     ++ (lib.optionals (my.programs.music == "yt") [
