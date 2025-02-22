@@ -17,10 +17,10 @@ let
       builtins.map (
         entry:
         let
-          name = builtins.elemAt entry 0;
+          name = entry.name;
           class = name;
-          url = builtins.elemAt entry 1;
-          app = if builtins.length entry == 3 then builtins.elemAt entry 2 else true;
+          url = entry.url;
+          app = lib.my.mkGetDefault entry "app" false;
           urlArg = if app then "--app=" else "";
         in
         {
@@ -68,35 +68,30 @@ in
 
   # Web Apps
   xdg.desktopEntries = mkDesktopEntries (
-
     [
-      [
-        "monkeytype"
-        "https://monkeytype.com/"
-      ]
-      [
-        "excalidraw"
-        "https://excalidraw.com/"
-        false
-      ]
-      [
-        "whatsapp"
-        "https://web.whatsapp.com/"
-        false
-      ]
-      [
-        "lichess"
-        "https://lichess.org/"
-        false
-      ]
+      {
+        name = "monkeytype";
+        url = "https://monkeytype.com/";
+        app = true;
+      }
+      {
+        name = "excalidraw";
+        url = "https://excalidraw.com/";
+      }
+      {
+        name = "whatsapp";
+        url = "https://web.whatsapp.com/";
+      }
+      {
+        name = "lichess";
+        url = "https://lichess.org/";
+      }
     ]
     ++ (lib.optionals (my.programs.music == "yt") [
-      [
-        "ytmusic"
-        "https://music.youtube.com/"
-        false
-      ]
+      {
+        name = "ytmusic";
+        url = "https://music.youtube.com/";
+      }
     ])
-
   );
 }
