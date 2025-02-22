@@ -24,6 +24,10 @@ in
       "mpv"
       (mkChromiumAppId "monkeytype.com")
     ];
+
+    title = [
+      ".*Opera"
+    ];
   };
   "5" = {
     class = [
