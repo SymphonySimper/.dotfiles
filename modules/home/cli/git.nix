@@ -83,6 +83,9 @@
         r = "reset --hard HEAD";
         ro = "!git reset --hard origin/$(git branch --show-current)";
 
+        f = "fetch";
+        fpa = "fetch --prune --all";
+
         # misc
         cln = "clean -fdx";
 
