@@ -42,6 +42,48 @@
       )
     ];
 
+    xdg.configFile."helix/ignore".text = # git-ignore
+      ''
+        # general
+        .DS_Store
+        /build
+        **/*:Zone.Identifier
+
+        ## binary
+        **/*.exe
+        **/*.zip
+        **/*.parquet
+        ### media
+        **/*.png
+        **/*.jp[e]?g
+        **/*.web[pm]
+        ### doc
+        **/*.pdf
+        **/*.epub
+        **/*.odt
+        **/*.doc[x]?
+        **/*.calc
+        **/*.xls[x]?
+
+        # js
+        node_modules
+        vite.config.js.timestamp-*
+        vite.config.ts.timestamp-*
+        ## svelte
+        .svelte-kit
+
+        # py
+        .venv
+        venv
+        **/__pycache__/
+
+        # DO NOT IGNORE
+        !.github/
+        !.gitignore
+        !.gitattributes
+        !.env*
+      '';
+
     programs.helix = {
       enable = true;
       package = inputs.helix.packages.${my.system}.default;
