@@ -38,7 +38,7 @@ in
       "www.zee5.com"
       ## Anime
       "hianime.to"
-      "www.crunchyroll.com"
+      # "www.crunchyroll.com"
 
       # Misc
       # "store.steampowered.com"
