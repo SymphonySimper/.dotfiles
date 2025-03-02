@@ -52,6 +52,7 @@ in
     shellAliases = {
       snrs = "cd $HOME/.dotfiles && sudo nixos-rebuild switch --flake .#$(hostname)";
       hmbs = "cd $HOME/.dotfiles && home-manager build switch --flake .#$(hostname)";
+      nd = "nix develop";
     };
 
     packages = [ mynix ];
