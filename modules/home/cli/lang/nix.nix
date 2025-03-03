@@ -60,7 +60,12 @@ in
 
   programs.helix = {
     grammars = [ "nix" ];
-    lsp.nil.command = "${lib.getExe pkgs.nil}";
+
+    lsp.nil = {
+      command = "${lib.getExe pkgs.nil}";
+      config.nil.nix.flake.autoArchive = true;
+    };
+
     language = [
       {
         name = "nix";
