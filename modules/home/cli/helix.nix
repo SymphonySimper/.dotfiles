@@ -130,6 +130,7 @@
               r = "rename_symbol";
               l = ":lsp-restart";
               h = "select_references_to_symbol_under_cursor";
+              b = ":sh ${lib.getExe pkgs.git} -C $(dirname $(realpath %{buffer_name})) blame -L %{cursor_line},%{cursor_line} $(realpath %{buffer_name})";
             };
 
             f = {
@@ -144,6 +145,7 @@
               d = "diagnostics_picker";
               D = "workspace_diagnostics_picker";
               "/" = "global_search";
+              y = ":sh ${lib.getExe pkgs.tmux} new-window ${lib.getExe' pkgs.yazi "yazi"} $(realpath %{buffer_name}) ";
             };
 
             q = ":quit";
