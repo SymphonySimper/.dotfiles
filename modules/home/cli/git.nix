@@ -59,6 +59,8 @@
         };
       };
 
+      lfs.enable = true;
+
       # NOTE: Aliases seems to be Case-insensitive
       # (i.e) `p` == `P`
       aliases = {
