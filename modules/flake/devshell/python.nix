@@ -1,7 +1,7 @@
 { pkgs, lib, ... }:
 {
   packages = with pkgs; [
-    python3
+    python3Full
     poetry
   ];
 
