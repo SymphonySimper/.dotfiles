@@ -121,6 +121,7 @@ let
         ]
         ++ (lib.optionals (for == "home") [
           inputs.catppuccin.homeManagerModules.catppuccin
+          inputs.nix-index-database.hmModules.nix-index
         ])
         ++ (lib.optionals (for == "system") [
           inputs.catppuccin.nixosModules.catppuccin
