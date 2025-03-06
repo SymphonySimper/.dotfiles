@@ -58,21 +58,28 @@ in
     packages = [ mynix ];
   };
 
-  programs.helix = {
-    grammars = [ "nix" ];
-
-    lsp.nil = {
-      command = "${lib.getExe pkgs.nil}";
-      config.nil.nix.flake.autoArchive = true;
+  programs = {
+    nix-index = {
+      enable = true;
+      enableBashIntegration = true;
     };
 
-    language = [
-      {
-        name = "nix";
-        formatter = {
-          command = "${lib.getExe pkgs.nixfmt-rfc-style}";
-        };
-      }
-    ];
+    helix = {
+      grammars = [ "nix" ];
+
+      lsp.nil = {
+        command = "${lib.getExe pkgs.nil}";
+        config.nil.nix.flake.autoArchive = true;
+      };
+
+      language = [
+        {
+          name = "nix";
+          formatter = {
+            command = "${lib.getExe pkgs.nixfmt-rfc-style}";
+          };
+        }
+      ];
+    };
   };
 }
