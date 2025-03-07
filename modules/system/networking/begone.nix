@@ -15,8 +15,8 @@ in
   config = lib.mkIf cfg.enable {
     my.networking.begone.sites = [
       # Music
-      "music.youtube.com"
-      "open.spotify.com"
+      # "music.youtube.com"
+      # "open.spotify.com"
 
       # Social Media
       # "discord.com"
