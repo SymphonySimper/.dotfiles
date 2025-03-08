@@ -2,8 +2,7 @@
 {
   packages = with pkgs; [
     python3Full
-    python3Packages.pip
-    poetry
+    uv
   ];
 
   env = {
@@ -14,28 +13,21 @@
         zlib
       ]
     );
-
-    # Poetry settings
-    POETRY_VIRTUALENVS_CREATE = true;
-    POETRY_VIRTUALENVS_IN_PROJECT = true;
   };
 
   shellHook = # sh
     ''
-      for dir in "venv" ".venv"; do
-        if [ -d "$dir" ]; then
-          venv_dir="$dir"
-          break;
-        fi
-      done
+      # init uv
+      eval "$(${lib.getExe' pkgs.uv "uv"} generate-shell-completion bash)"
+      eval "$(${lib.getExe' pkgs.uv "uvx"} --generate-shell-completion bash)"
 
-      if [ -n "$venv_dir" ]; then
+      venv_dir=".venv"
+      if [ -d "$venv_dir" ]; then
         source "./$venv_dir/bin/activate"
       fi
 
       alias py="python"
-      alias pvc="python -m venv .venv"
-      alias pva="source .venv/bin/activate"
-      alias pfrd="flask run --debug"
+      alias pvc="uv venv $venv_dir"
+      alias pva="source $venv_dir/bin/activate"
     '';
 }
