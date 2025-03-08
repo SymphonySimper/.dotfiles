@@ -61,7 +61,7 @@ in
   programs = {
     nix-index = {
       enable = true;
-      enableBashIntegration = true;
+      enableBashIntegration = false;
     };
     nix-index-database.comma.enable = true;
 
