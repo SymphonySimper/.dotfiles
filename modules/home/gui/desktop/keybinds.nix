@@ -28,6 +28,12 @@ let
           cmd = "uwsm app -- $(${my.programs.launcher} --show drun --define=drun-print_desktop_file=true)";
         };
       };
+      files = {
+        default = {
+          key = "e";
+          cmd = "uwsm app -- ${lib.getExe pkgs.nautilus}";
+        };
+      };
       brightness = {
         down = {
           key = "F5";
