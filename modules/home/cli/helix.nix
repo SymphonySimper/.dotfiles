@@ -110,6 +110,7 @@
           lsp = {
             enable = true;
             display-inlay-hints = false;
+            auto-signature-help = false;
           };
         };
 
