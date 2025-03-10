@@ -70,7 +70,7 @@ let
         browser = "google-chrome-stable";
         launcher = "wofi";
         notification = "dunst";
-        music = "spotify"; # spotify or yt
+        music = "yt"; # spotify or yt
         video = "mpv";
         pdf = "zathura";
         image = "loupe";
