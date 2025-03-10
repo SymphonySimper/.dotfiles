@@ -62,19 +62,7 @@ let
           glyph = "Font Awesome 6 Free";
         };
       };
-      programs = {
-        shell = "bash";
-        terminal = "alacritty";
-        editor = "hx";
-        multiplexer = "tmux";
-        browser = "google-chrome-stable";
-        launcher = "wofi";
-        notification = "dunst";
-        music = "yt"; # spotify or yt
-        video = "mpv";
-        pdf = "zathura";
-        image = "loupe";
-      };
+      programs = (import ./programs.nix);
     };
 
   profileDir = ../../../profiles;
