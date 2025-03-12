@@ -19,7 +19,7 @@
   nix.settings.extra-platforms = config.boot.binfmt.emulatedSystems;
 
   my = {
-    networking.begone.enable = false;
+    networking.begone.enable = true;
     hardware = {
       cpu.amd.enable = true;
       gpu.amd.enable = true;
