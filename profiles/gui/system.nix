@@ -19,7 +19,7 @@
   nix.settings.extra-platforms = config.boot.binfmt.emulatedSystems;
 
   my = {
-    networking.begone.enable = true;
+    networking.begone.enable = false;
     hardware = {
       cpu.amd.enable = true;
       gpu.amd.enable = true;
@@ -36,7 +36,7 @@
     programs = {
       vm.waydroid.enable = true;
       steam = {
-        enable = false;
+        enable = true;
         display = {
           width = 1920;
           height = 1200;
