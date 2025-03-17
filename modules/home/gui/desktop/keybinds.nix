@@ -107,6 +107,32 @@ let
       cmd = "mytogglefps";
     };
 
+    dunst = {
+      close = {
+        super = false;
+        key = "F9";
+        cmd = "mydunst close";
+      };
+
+      action = {
+        super = false;
+        mod = "Shift";
+        key = "F9";
+        cmd = "mydunst action";
+      };
+
+      toggle = {
+        key = "F9";
+        cmd = "mydunst toggle";
+      };
+
+      history = {
+        mod = "Shift";
+        key = "F9";
+        cmd = "mydunst history";
+      };
+    };
+
     screenshot = {
       screen = {
         key = "F11";
