@@ -34,10 +34,18 @@ let
       cmd = my.programs.browser;
     };
 
-    power.off = {
-      mod = "Shift";
-      key = "x";
-      cmd = "poweroff";
+    power = {
+      off = {
+        mod = "Shift";
+        key = "x";
+        cmd = "poweroff";
+      };
+
+      reboot = {
+        mod = "Ctrl";
+        key = "x";
+        cmd = "reboot";
+      };
     };
 
     volume = {
