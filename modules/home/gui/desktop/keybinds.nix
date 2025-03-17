@@ -8,157 +8,120 @@ let
   mkOpenDesktopEntry =
     file: "${lib.getExe pkgs.dex} ${my.dir.home}/.nix-profile/share/applications/${file}.desktop";
 
-  keybinds =
-    {
-      terminal = {
-        default = {
-          key = "Return";
-          cmd = my.programs.terminal;
-        };
+  keybinds = {
+    terminal = {
+      default = {
+        key = "Return";
+        cmd = my.programs.terminal;
       };
-      browser = {
-        default = {
-          key = "f";
-          cmd = my.programs.browser;
-        };
+    };
+    browser = {
+      default = {
+        key = "f";
+        cmd = my.programs.browser;
       };
-      launcher = {
-        default = {
-          key = "d";
-          cmd = "uwsm app -- $(${my.programs.launcher} --show drun --define=drun-print_desktop_file=true)";
-        };
+    };
+    launcher = {
+      default = {
+        key = "d";
+        cmd = "uwsm app -- $(${my.programs.launcher} --show drun --define=drun-print_desktop_file=true)";
       };
-      files = {
-        default = {
-          key = "e";
-          cmd = "uwsm app -- ${lib.getExe pkgs.nautilus}";
-        };
+    };
+    files = {
+      default = {
+        key = "e";
+        cmd = "uwsm app -- ${lib.getExe pkgs.nautilus}";
       };
-      brightness = {
-        down = {
-          key = "F5";
-          cmd = "mybrightness -d";
-        };
-        up = {
-          key = "F6";
-          cmd = "mybrightness -u";
-        };
+    };
+    brightness = {
+      down = {
+        key = "F5";
+        cmd = "mybrightness -d";
       };
-      volume = {
-        down = {
-          key = "F2";
-          cmd = "myvolume -d";
-        };
-        up = {
-          key = "F3";
-          cmd = "myvolume -u";
-        };
-        toggle = {
-          mod = "Shift";
-          key = "F2";
-          cmd = "myvolume -m";
-        };
+      up = {
+        key = "F6";
+        cmd = "mybrightness -u";
       };
-      mic = {
-        toggle = {
-          super = false;
-          key = "F8";
-          cmd = "myvolume -M";
-        };
+    };
+    volume = {
+      down = {
+        key = "F2";
+        cmd = "myvolume -d";
       };
-      screenshot = {
-        screen = {
-          key = "F11";
-          cmd = "myscreenshot -s";
-        };
-        window = {
-          mod = "Ctrl";
-          key = "F11";
-          cmd = "myscreenshot -w";
-        };
-        region = {
-          mod = "Shift";
-          key = "F11";
-          cmd = "myscreenshot -r";
-        };
+      up = {
+        key = "F3";
+        cmd = "myvolume -u";
       };
-      caffiene = {
-        toggle = {
-          key = "F10";
-          cmd = "mycaffiene";
-        };
+      toggle = {
+        mod = "Shift";
+        key = "F2";
+        cmd = "myvolume -m";
       };
-      maxFps = {
-        toggle = {
-          mod = "Shift";
-          key = "F10";
-          cmd = "mytogglefps";
-        };
+    };
+    mic = {
+      toggle = {
+        super = false;
+        key = "F8";
+        cmd = "myvolume -M";
       };
-      notifybar = {
-        default = {
-          key = "b";
-          cmd = "mynotifybar";
-        };
+    };
+    screenshot = {
+      screen = {
+        key = "F11";
+        cmd = "myscreenshot -s";
       };
-      power = {
-        off = {
-          mod = "Shift";
-          key = "x";
-          cmd = "poweroff";
-        };
+      window = {
+        mod = "Ctrl";
+        key = "F11";
+        cmd = "myscreenshot -w";
       };
-      network = {
-        reload = {
-          mod = "Shift";
-          key = "F5";
-          cmd = "myreload";
-        };
+      region = {
+        mod = "Shift";
+        key = "F11";
+        cmd = "myscreenshot -r";
       };
-    }
-    // (
-      if my.programs.music == "spotify" then
-        {
-          spotify = {
-            toggle = {
-              key = "F7";
-              cmd = "myspotify o";
-              super = false;
-            };
-            prev = {
-              mod = "Ctrl";
-              key = "F7";
-              cmd = "myspotify p";
-              super = false;
-            };
-            next = {
-              mod = "Shift";
-              key = "F7";
-              cmd = "myspotify n";
-              super = false;
-            };
-            volumeUp = {
-              mod = "shift";
-              key = "F7";
-              cmd = "myspotify u";
-            };
-            volumeDown = {
-              key = "F7";
-              cmd = "myspotify d";
-            };
-          };
-        }
-      else
-        {
-          ytmusic = {
-            open = {
-              key = "F7";
-              super = false;
-              cmd = (mkOpenDesktopEntry "ytmusic");
-            };
-          };
-        }
-    );
+    };
+    caffiene = {
+      toggle = {
+        key = "F10";
+        cmd = "mycaffiene";
+      };
+    };
+    maxFps = {
+      toggle = {
+        mod = "Shift";
+        key = "F10";
+        cmd = "mytogglefps";
+      };
+    };
+    notifybar = {
+      default = {
+        key = "b";
+        cmd = "mynotifybar";
+      };
+    };
+    power = {
+      off = {
+        mod = "Shift";
+        key = "x";
+        cmd = "poweroff";
+      };
+    };
+    network = {
+      reload = {
+        mod = "Shift";
+        key = "F5";
+        cmd = "myreload";
+      };
+    };
+    music = {
+      open = {
+        key = "F7";
+        super = false;
+        cmd = (mkOpenDesktopEntry "ytmusic");
+      };
+    };
+  };
 in
 (builtins.concatMap (
   key:

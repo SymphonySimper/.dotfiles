@@ -46,7 +46,6 @@ in
     ];
   };
   "8" = {
-    title = [ "Spotify.*" ];
     app_id = [
       (mkChromiumAppId "music.youtube.com")
     ];

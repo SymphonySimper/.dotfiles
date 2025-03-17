@@ -6,7 +6,7 @@
   browser = "google-chrome-stable";
   launcher = "wofi";
   notification = "dunst";
-  music = "yt"; # spotify or yt
+  music = "yt";
   video = "mpv";
   pdf = "zathura";
   image = "loupe";
