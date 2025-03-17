@@ -15,10 +15,10 @@ let
         cmd = my.programs.terminal;
       };
     };
-    browser = {
+    notifybar = {
       default = {
-        key = "f";
-        cmd = my.programs.browser;
+        key = "b";
+        cmd = "mynotifybar";
       };
     };
     launcher = {
@@ -33,14 +33,17 @@ let
         cmd = "uwsm app -- ${lib.getExe pkgs.nautilus}";
       };
     };
-    brightness = {
-      down = {
-        key = "F5";
-        cmd = "mybrightness -d";
+    browser = {
+      default = {
+        key = "f";
+        cmd = my.programs.browser;
       };
-      up = {
-        key = "F6";
-        cmd = "mybrightness -u";
+    };
+    power = {
+      off = {
+        mod = "Shift";
+        key = "x";
+        cmd = "poweroff";
       };
     };
     volume = {
@@ -58,11 +61,48 @@ let
         cmd = "myvolume -m";
       };
     };
+    network = {
+      reload = {
+        mod = "Shift";
+        key = "F5";
+        cmd = "myreload";
+      };
+    };
+    brightness = {
+      down = {
+        key = "F5";
+        cmd = "mybrightness -d";
+      };
+      up = {
+        key = "F6";
+        cmd = "mybrightness -u";
+      };
+    };
+    music = {
+      open = {
+        key = "F7";
+        super = false;
+        cmd = (mkOpenDesktopEntry "ytmusic");
+      };
+    };
     mic = {
       toggle = {
         super = false;
         key = "F8";
         cmd = "myvolume -M";
+      };
+    };
+    caffiene = {
+      toggle = {
+        key = "F10";
+        cmd = "mycaffiene";
+      };
+    };
+    maxFps = {
+      toggle = {
+        mod = "Shift";
+        key = "F10";
+        cmd = "mytogglefps";
       };
     };
     screenshot = {
@@ -79,46 +119,6 @@ let
         mod = "Shift";
         key = "F11";
         cmd = "myscreenshot -r";
-      };
-    };
-    caffiene = {
-      toggle = {
-        key = "F10";
-        cmd = "mycaffiene";
-      };
-    };
-    maxFps = {
-      toggle = {
-        mod = "Shift";
-        key = "F10";
-        cmd = "mytogglefps";
-      };
-    };
-    notifybar = {
-      default = {
-        key = "b";
-        cmd = "mynotifybar";
-      };
-    };
-    power = {
-      off = {
-        mod = "Shift";
-        key = "x";
-        cmd = "poweroff";
-      };
-    };
-    network = {
-      reload = {
-        mod = "Shift";
-        key = "F5";
-        cmd = "myreload";
-      };
-    };
-    music = {
-      open = {
-        key = "F7";
-        super = false;
-        cmd = (mkOpenDesktopEntry "ytmusic");
       };
     };
   };
