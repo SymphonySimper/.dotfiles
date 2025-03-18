@@ -64,7 +64,7 @@ in
   fi
 
   # Refresh Rate
-  refresh_rate_status=$(mytogglefps get)
+  refresh_rate_status=$(mychangefps get)
   refresh_rate_title_style="${titleDefaultStyle}"
   if [ $refresh_rate_status -eq ${my.gui.display.string.refreshRate} ]; then
     refresh_rate_color="${my.theme.color.green}"

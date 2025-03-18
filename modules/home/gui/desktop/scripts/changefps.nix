@@ -20,20 +20,35 @@ in
       ${hyprctl} monitors -j | ${jq} '.[0].refreshRate' | cut -d '.' -f1
   }
 
-  function toggle() {
-    rr_set=${my.gui.display.string.maxRefreshRate}
-    if [[ $(get_rr) -eq ${my.gui.display.string.maxRefreshRate} ]]; then
-      ${mkMonitor my.gui.display.string.refreshRate false}
-      rr_set=${my.gui.display.string.refreshRate}
-    else
-      ${mkMonitor my.gui.display.string.maxRefreshRate true}
-    fi
+  function notify() {
+      ${lib.my.mkNotification {
+        tag = "mychangefps";
+        title = "RefreshRate is set to \${1}Hz";
+      }}
+  }
 
-    ${lib.my.mkNotification { title = "RefreshRate is set to \${rr_set}Hz"; }}
+  function min() {
+      ${mkMonitor my.gui.display.string.refreshRate false}
+      notify "${my.gui.display.string.refreshRate}"
+  }
+
+  function max() {
+      ${mkMonitor my.gui.display.string.maxRefreshRate true}
+      notify "${my.gui.display.string.maxRefreshRate}"
+  }
+
+  function toggle() {
+    if [[ $(get_rr) -eq ${my.gui.display.string.maxRefreshRate} ]]; then
+      min
+    else
+      max
+    fi
   }
 
   case "$1" in
     get) get_rr ;;
-    *) toggle ;;
+    min) min ;;
+    max) max ;;
+    toggle) toggle ;;
   esac
 ''

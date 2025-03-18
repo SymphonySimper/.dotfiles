@@ -104,7 +104,7 @@ let
     fps.toggle = {
       mod = "Shift";
       key = "F10";
-      cmd = "mytogglefps";
+      cmd = "mychangefps toggle";
     };
 
     dunst = {
