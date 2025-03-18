@@ -13,8 +13,8 @@ let
     "-f" # full screen
     "--mouse-sensitivity 2" # increase mouse speed
     "--force-grab-cursor"
-    "-W ${my.gui.display.string.desktop.width}"
-    "-H ${my.gui.display.string.desktop.height}"
+    "-W ${builtins.toString cfg.display.width}"
+    "-H ${builtins.toString cfg.display.height}"
   ];
 in
 {
@@ -26,14 +26,14 @@ in
       type = lib.types.submodule {
         options = {
           width = lib.mkOption {
-            type = lib.types.ints.positive;
+            type = lib.types.numbers.positive;
             description = "Width of the display";
-            default = my.gui.display.width;
+            default = my.gui.display.desktop.width;
           };
           height = lib.mkOption {
-            type = lib.types.ints.positive;
+            type = lib.types.numbers.positive;
             description = "Height of the display";
-            default = my.gui.display.height;
+            default = my.gui.display.desktop.height;
           };
         };
       };
