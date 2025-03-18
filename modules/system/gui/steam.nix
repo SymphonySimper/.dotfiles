@@ -9,12 +9,12 @@ let
   cfg = config.my.programs.steam;
 
   args = [
-    (lib.getExe' pkgs.gamemode "gamemoderun")
-    (lib.getExe' config.programs.gamescope.package "gamescope")
     "--adaptive-sync"
     "-f" # full screen
     "--mouse-sensitivity 2" # increase mouse speed
     "--force-grab-cursor"
+    "-W ${my.gui.display.string.desktop.width}"
+    "-H ${my.gui.display.string.desktop.height}"
   ];
 in
 {
@@ -54,46 +54,22 @@ in
         gamescopeSession.enable = false;
       };
 
+      # `gamemoderun %command%`
       gamemode.enable = true;
+
+      # `gamescope -- %command%`
+      # for mangohud `gamescope --mangoapp -- %command%`
+      # for LD_PRELOAD `LD_PRELOAD="" gamescope -- %command%`
       gamescope = {
         enable = true;
         capSysNice = false;
-        args = [ ];
+        inherit args;
       };
     };
 
     environment.systemPackages = with pkgs; [
+      # `mangohud %command%`
       mangohud
-
-      # Set launch options to mysteamrun %command%`
-      (writeShellScriptBin "mysteamrun" # sh
-        ''
-          additional_args=()
-          width="${my.gui.display.string.desktop.width}"
-          height="${my.gui.display.string.desktop.height}"
-          for arg in "$@"; do
-            case "$1" in
-              no-ld)
-                shift
-                export LD_PRELOAD=""
-              ;;
-              mango)
-                shift
-                additional_args+=('--mangoapp')
-              ;;
-              display)
-                shift
-                width="${builtins.toString cfg.display.width}"
-                height="${builtins.toString cfg.display.height}"
-              ;;
-            esac
-          done
-          additional_args+=("-W $width")
-          additional_args+=("-H $height")
-
-          ${builtins.concatStringsSep " " args} "''${additional_args[@]}" -- "$@"
-        ''
-      )
     ];
   };
 }
