@@ -40,6 +40,9 @@ in
     title = [ "Minecraft" ];
   };
   "7" = {
+    class = [
+      "steam_app_.*"
+    ];
     app_id = [
       "gamescope"
       "discord"
