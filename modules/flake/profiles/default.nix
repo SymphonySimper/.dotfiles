@@ -18,16 +18,20 @@ let
     rec {
       name = "symph";
       fullName = "SymphonySimper";
+
       dir = {
         home = "/home/${name}";
         dev = "${dir.home}/lifeisfun";
         data = "${dir.home}/importantnt";
       };
+
       profile = mkGetDefault passedProfile "name" "default";
       system = mkGetDefault passedProfile "system" "x86_64-linux";
+
       gui = {
         enable = mkGetDefault settings "gui.enable" false;
         desktop.enable = mkGetDefault settings "gui.desktop.enable" false;
+
         display = rec {
           name = mkGetDefault settings "gui.display.name" "eDP-1";
           scale = mkGetDefault settings "gui.display.scale" 1;
@@ -35,16 +39,19 @@ let
           height = mkGetDefault settings "gui.display.height" 1080;
           refreshRate = mkGetDefault settings "gui.display.refreshRate" 60;
           maxRefreshRate = mkGetDefault settings "gui.display.maxRefreshRate" refreshRate;
+
           desktop = {
             width = width / scale;
             height = height / scale;
           };
+
           string = {
             scale = builtins.toString scale;
             width = builtins.toString width;
             height = builtins.toString height;
             refreshRate = builtins.toString refreshRate;
             maxRefreshRate = builtins.toString maxRefreshRate;
+
             desktop = {
               width = builtins.toString desktop.width;
               height = builtins.toString desktop.height;
@@ -52,12 +59,15 @@ let
           };
         };
       };
+
       theme = {
         dark = mkGetDefault settings "theme.dark" false;
+
         flavors = {
           dark = "mocha";
           light = "latte";
         };
+
         flavor = builtins.getAttr (if theme.dark then "dark" else "light") theme.flavors;
         altFlavor = builtins.getAttr (if theme.dark then "light" else "dark") theme.flavors;
         color = (import ./colors.nix { flavor = theme.flavor; });
@@ -70,6 +80,7 @@ let
           glyph = "Font Awesome 6 Free";
         };
       };
+
       programs = (import ./programs.nix);
     };
 
