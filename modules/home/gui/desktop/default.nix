@@ -182,10 +182,9 @@ in
                   (builtins.map (
                     id:
                     let
-                      idActualType = if idType == "app_id" then "class" else idType;
                       workspaceActual = if workspace == "0" then "10" else workspace;
                     in
-                    "workspace ${workspaceActual} ${if id == "steam" then "silent" else ""}, ${idActualType}:^(${id})$"
+                    "workspace ${workspaceActual} ${if id == "steam" then "silent" else ""}, ${idType}:^(${id})$"
                   ) ids)
                 ) values
               )

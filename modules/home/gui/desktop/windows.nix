@@ -3,24 +3,24 @@ let
 in
 {
   "1" = {
-    app_id = [
+    class = [
       "Alacritty"
     ];
   };
   "2" = {
-    app_id = [
+    class = [
       "google-chrome"
       "chromium-browser"
     ];
   };
   "3" = {
-    app_id = [
+    class = [
       "com.github.johnfactotum.Foliate"
       "org.pwmt.zathura"
     ];
   };
   "4" = {
-    app_id = [
+    class = [
       "mpv"
       (mkChromiumAppId "monkeytype.com")
     ];
@@ -36,31 +36,30 @@ in
     ];
   };
   "6" = {
-    app_id = [ "Waydroid" ];
+    class = [ "Waydroid" ];
     title = [ "Minecraft" ];
   };
   "7" = {
     class = [
-      "steam_app_.*"
-    ];
-    app_id = [
-      "gamescope"
       "discord"
+
+      # steam
+      "steam_app_.*"
+      "gamescope"
     ];
   };
   "8" = {
-    app_id = [
+    class = [
       (mkChromiumAppId "music.youtube.com")
     ];
   };
   "9" = {
-    app_id = [
+    class = [
       "org.qbittorrent.qBittorrent"
       "com.obsproject.Studio"
     ];
   };
   "0" = {
-    # app_id = [ "" ];
     title = [
       ".*sharing your screen.*"
     ];
