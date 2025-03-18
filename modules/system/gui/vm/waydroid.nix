@@ -10,8 +10,8 @@ let
 
   res = {
     desktop = {
-      width = builtins.toString (my.gui.display.width / my.gui.display.scale);
-      height = builtins.toString (my.gui.display.height / my.gui.display.scale);
+      width = my.gui.display.string.desktop.width;
+      height = my.gui.display.string.desktop.height;
     };
 
     steam = {
