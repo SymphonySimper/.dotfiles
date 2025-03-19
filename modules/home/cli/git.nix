@@ -83,7 +83,8 @@
         ce = "checkout";
         sw = "switch";
 
-        r = "reset --hard HEAD";
+        r = "reset";
+        rh = "reset --hard HEAD";
         ro = "!git reset --hard origin/$(git branch --show-current)";
 
         f = "fetch";
