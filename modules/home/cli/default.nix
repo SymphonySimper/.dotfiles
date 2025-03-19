@@ -2,13 +2,13 @@
 {
   imports = [
     ./git.nix
-    ./helix.nix
     ./ssh.nix
     ./tmux.nix
     ./top.nix
     ./yazi.nix
     ./zoxide.nix
 
+    ./helix
     ./lang
     ./scripts
     ./shell
