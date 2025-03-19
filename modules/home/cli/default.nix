@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
+    ./direnv.nix
     ./git.nix
     ./nix.nix
     ./ssh.nix
@@ -31,11 +32,6 @@
     man = {
       enable = true;
       generateCaches = true;
-    };
-
-    direnv = {
-      enable = true;
-      nix-direnv.enable = true;
     };
 
     fzf = {
