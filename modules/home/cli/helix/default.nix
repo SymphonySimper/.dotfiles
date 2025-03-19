@@ -33,6 +33,7 @@ in
     ./ignore.nix
     ./keymap.nix
     ./settings.nix
+    ./languages.nix
   ];
 
   config = {
