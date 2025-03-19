@@ -26,6 +26,7 @@
         ];
         linemode = "size";
       };
+
       preview = {
         max_width = my.gui.display.width / 2;
         max_height = my.gui.display.height / 2;
@@ -37,6 +38,7 @@
           (0.0) # h
         ];
       };
+
       opener = {
         edit = [
           {
@@ -45,6 +47,7 @@
             for = "unix";
           }
         ];
+
         play = [
           {
             run = ''${my.programs.video} "$@"'';
@@ -52,6 +55,7 @@
             for = "unix";
           }
         ];
+
         open = [
           {
             run = ''xdg-open "$@"'';
@@ -59,133 +63,144 @@
           }
         ];
       };
-      open = {
-        rules = [
-          {
-            name = "*/";
-            use = [
-              "open"
-              "edit"
-              "reveal"
-            ];
-          }
 
-          {
-            mime = "text/*";
-            use = [
-              "edit"
-              "reveal"
-            ];
-          }
-          {
-            mime = "image/*";
-            use = [
-              "open"
-              "reveal"
-            ];
-          }
-          {
-            mime = "video/*";
-            use = [
-              "play"
-              "reveal"
-            ];
-          }
-          {
-            mime = "audio/*";
-            use = [
-              "play"
-              "reveal"
-            ];
-          }
-          {
-            mime = "inode/x-empty";
-            use = [
-              "edit"
-              "reveal"
-            ];
-          }
+      open.rules = [
+        {
+          name = "*/";
+          use = [
+            "open"
+            "edit"
+            "reveal"
+          ];
+        }
 
-          {
-            mime = "application/json";
-            use = [
-              "edit"
-              "reveal"
-            ];
-          }
-          {
-            mime = "*/javascript";
-            use = [
-              "edit"
-              "reveal"
-            ];
-          }
+        {
+          mime = "text/*";
+          use = [
+            "edit"
+            "reveal"
+          ];
+        }
 
-          {
-            mime = "application/zip";
-            use = [
-              "extract"
-              "reveal"
-              "archive"
-            ];
-          }
-          {
-            mime = "application/gzip";
-            use = [
-              "extract"
-              "reveal"
-              "archive"
-            ];
-          }
-          {
-            mime = "application/x-tar";
-            use = [
-              "extract"
-              "reveal"
-              "archive"
-            ];
-          }
-          {
-            mime = "application/x-bzip";
-            use = [
-              "extract"
-              "reveal"
-              "archive"
-            ];
-          }
-          {
-            mime = "application/x-bzip2";
-            use = [
-              "extract"
-              "reveal"
-              "archive"
-            ];
-          }
-          {
-            mime = "application/x-7z-compressed";
-            use = [
-              "extract"
-              "reveal"
-              "archive"
-            ];
-          }
-          {
-            mime = "application/x-rar";
-            use = [
-              "extract"
-              "reveal"
-              "archive"
-            ];
-          }
-          {
-            name = "*";
-            use = [
-              "open"
-              "reveal"
-            ];
-          }
-        ];
-      };
+        {
+          mime = "image/*";
+          use = [
+            "open"
+            "reveal"
+          ];
+        }
+
+        {
+          mime = "video/*";
+          use = [
+            "play"
+            "reveal"
+          ];
+        }
+
+        {
+          mime = "audio/*";
+          use = [
+            "play"
+            "reveal"
+          ];
+        }
+
+        {
+          mime = "inode/x-empty";
+          use = [
+            "edit"
+            "reveal"
+          ];
+        }
+
+        {
+          mime = "application/json";
+          use = [
+            "edit"
+            "reveal"
+          ];
+        }
+
+        {
+          mime = "*/javascript";
+          use = [
+            "edit"
+            "reveal"
+          ];
+        }
+
+        {
+          mime = "application/zip";
+          use = [
+            "extract"
+            "reveal"
+            "archive"
+          ];
+        }
+
+        {
+          mime = "application/gzip";
+          use = [
+            "extract"
+            "reveal"
+            "archive"
+          ];
+        }
+
+        {
+          mime = "application/x-tar";
+          use = [
+            "extract"
+            "reveal"
+            "archive"
+          ];
+        }
+
+        {
+          mime = "application/x-bzip";
+          use = [
+            "extract"
+            "reveal"
+            "archive"
+          ];
+        }
+
+        {
+          mime = "application/x-bzip2";
+          use = [
+            "extract"
+            "reveal"
+            "archive"
+          ];
+        }
+
+        {
+          mime = "application/x-7z-compressed";
+          use = [
+            "extract"
+            "reveal"
+            "archive"
+          ];
+        }
+
+        {
+          mime = "application/x-rar";
+          use = [
+            "extract"
+            "reveal"
+            "archive"
+          ];
+        }
+
+        {
+          name = "*";
+          use = [
+            "open"
+            "reveal"
+          ];
+        }
+      ];
     };
 
     plugins = {
@@ -198,6 +213,7 @@
           on = "M";
           run = "plugin mount";
         }
+
         {
           on = "<C-n>";
           run = # sh
