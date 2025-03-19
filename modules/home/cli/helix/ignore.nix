@@ -1,12 +1,11 @@
 { ... }:
 let
   ignore = [
-
     # general
     ".DS_Store"
     "build"
 
-    ## binary
+    # binary
     "**/*.exe"
     "**/*.zip"
     "**/*.parquet"
@@ -22,25 +21,10 @@ let
     "**/*.calc"
     "**/*.xls[x]?"
     "**/*:Zone.Identifier"
-
-    # js
-    "node_modules"
-    "vite.config.js.timestamp-*"
-    "vite.config.ts.timestamp-*"
-    ## svelte
-    ".svelte-kit"
-
-    # py
-    ".venv"
-    "venv"
-    "**/__pycache__/"
   ];
 
   do_not_ignore = [
-    # DO NOT IGNORE
     "!.github/"
-    "!.gitignore"
-    "!.gitattributes"
     "!.env*"
   ];
 in

@@ -79,6 +79,12 @@ in
           ];
         };
       };
+
+      ignore = [
+        ".venv"
+        "venv"
+        "**/__pycache__/"
+      ];
     }
 
     {
@@ -88,13 +94,15 @@ in
     }
 
     {
-      # Web
+      # Tailwindcss
       lsp.tailwindcss-ls = {
         command = "${lib.getExe pkgs.tailwindcss-language-server}";
         args = [ "--stdio" ];
       };
+    }
 
-      ## HTML
+    {
+      # HTML
       lsp.vscode-html-language-server.command = lib.getExe' pkgs.vscode-langservers-extracted "vscode-html-language-server";
       language.html = {
         language-servers = [
@@ -104,7 +112,7 @@ in
         formatter = mkPrettier "html";
       };
 
-      ## CSS
+      # CSS
       lsp.vscode-css-language-server.command = lib.getExe' pkgs.vscode-langservers-extracted "vscode-css-language-server";
       language.css = {
         language-servers = [
@@ -113,12 +121,22 @@ in
         ];
         formatter = mkPrettier "css";
       };
+    }
 
+    {
       # JS / TS
       lsp.typescript-language-server.command = lib.getExe pkgs.typescript-language-server;
       language.javascript.formatter = mkPrettier "typescript";
       language.typescript.formatter = mkPrettier "typescript";
 
+      ignore = [
+        "node_modules"
+        "vite.config.js.timestamp-*"
+        "vite.config.ts.timestamp-*"
+      ];
+    }
+
+    {
       # Svelte
       lsp.svelteserver.command = "${lib.getExe pkgs.svelte-language-server}";
       language.svelte = {
@@ -128,6 +146,8 @@ in
         ];
         formatter = mkPrettier "svelte";
       };
+
+      ignore = [ ".svelte-kit" ];
     }
   ];
 }

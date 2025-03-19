@@ -116,5 +116,11 @@
     };
 
     bat.enable = config.programs.git.delta.enable;
+
+    helix.ignore = [
+      # do not ignore
+      "!.gitignore"
+      "!.gitattributes"
+    ];
   };
 }
