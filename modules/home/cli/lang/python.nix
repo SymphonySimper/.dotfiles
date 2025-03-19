@@ -1,8 +1,6 @@
 { pkgs, lib, ... }:
 {
   programs.helix = {
-    grammars = [ "python" ];
-
     lsp = {
       pyright = {
         command = lib.getExe' pkgs.pyright "pyright-langserver";

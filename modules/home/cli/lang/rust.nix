@@ -1,7 +1,4 @@
 { ... }:
 {
-  programs.helix = {
-    grammars = [ "rust" ];
-    lsp.rust-analyzer.config.check = "clippy";
-  };
+  programs.helix.lsp.rust-analyzer.config.check = "clippy";
 }

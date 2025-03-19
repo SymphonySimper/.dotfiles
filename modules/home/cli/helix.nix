@@ -8,12 +8,6 @@
 }:
 {
   options.programs.helix = {
-    grammars = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      description = "Treesitter grammars to install";
-      default = [ ];
-    };
-
     lsp = lib.mkOption {
       type = lib.types.attrsOf lib.types.anything;
       description = "Alias for languages.langauge-server";
@@ -155,7 +149,6 @@
       };
 
       languages = {
-        use-grammars.only = config.programs.helix.grammars;
         language-server = config.programs.helix.lsp;
         language = config.programs.helix.language;
       };

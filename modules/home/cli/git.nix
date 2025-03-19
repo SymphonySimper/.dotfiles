@@ -115,13 +115,5 @@
     };
 
     bat.enable = config.programs.git.delta.enable;
-
-    helix.grammars = [
-      "gitignore"
-      "git-commit"
-      "git-config"
-      "git-rebase"
-      "gitattributes"
-    ];
   };
 }

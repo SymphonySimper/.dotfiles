@@ -4,14 +4,6 @@ let
 in
 {
   programs.helix = {
-    grammars = [
-      "html"
-      "css"
-      "javascript"
-      "typescript"
-      "svelte"
-    ];
-
     lsp = {
       svelteserver.command = "${lib.getExe pkgs.svelte-language-server}";
       tailwindcss-ls = {

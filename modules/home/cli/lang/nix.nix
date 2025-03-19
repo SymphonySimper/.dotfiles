@@ -66,8 +66,6 @@ in
     nix-index-database.comma.enable = true;
 
     helix = {
-      grammars = [ "nix" ];
-
       lsp.nil = {
         command = "${lib.getExe pkgs.nil}";
         config.nil.nix.flake.autoArchive = true;

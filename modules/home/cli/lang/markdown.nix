@@ -1,8 +1,6 @@
 { pkgs, lib, ... }:
 {
   programs.helix = {
-    grammars = [ "markdown" ];
-
     lsp.markdown-oxide.command = "${lib.getExe pkgs.markdown-oxide}";
     language = [
       {

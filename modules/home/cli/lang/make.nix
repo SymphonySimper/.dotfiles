@@ -5,17 +5,13 @@
     just
   ];
 
-  programs.helix = {
-    grammars = [ "just" ];
-
-    language = [
-      {
-        name = "just";
-        formatter = {
-          command = "${lib.getExe pkgs.just}";
-          args = [ "--dump" ];
-        };
-      }
-    ];
-  };
+  programs.helix.language = [
+    {
+      name = "just";
+      formatter = {
+        command = "${lib.getExe pkgs.just}";
+        args = [ "--dump" ];
+      };
+    }
+  ];
 }
