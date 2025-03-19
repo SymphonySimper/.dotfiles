@@ -22,20 +22,6 @@
   };
 
   config = {
-    home.packages = [
-      (pkgs.writeShellScriptBin "myhelix" # sh
-        ''
-          case "$1" in
-            gb)
-              rm -rf ~/.config/helix/runtime/grammars
-              hx -g fetch
-              hx -g build
-            ;;
-          esac
-        ''
-      )
-    ];
-
     xdg.configFile."helix/ignore".text = # git-ignore
       ''
         # general
