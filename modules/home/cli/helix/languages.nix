@@ -1,29 +1,26 @@
 { pkgs, lib, ... }:
 let
   mkPrettier = name: {
-      command = "${lib.getExe pkgs.nodePackages.prettier}";
-      args = [
-        "--parser"
-        name
-      ];
+    command = "${lib.getExe pkgs.nodePackages.prettier}";
+    args = [
+      "--parser"
+      name
+    ];
   };
 in
 {
   programs.helix = lib.mkMerge [
     {
-      # Rust
-      lsp.rust-analyzer.config.check = "clippy";
+      # Just
+      language.just.formatter = {
+        command = "${lib.getExe pkgs.just}";
+        args = [ "--dump" ];
+      };
     }
 
     {
       # Docker
       lsp.docker-langserver.command = "${lib.getExe pkgs.dockerfile-language-server-nodejs}";
-    }
-
-    {
-      # JSON
-      language.json.formatter = mkPrettier "json";
-      language.jsonc.formatter = mkPrettier "jsonc";
     }
 
     {
@@ -39,6 +36,17 @@ in
           ];
         };
       };
+    }
+
+    {
+      # JSON
+      language.json.formatter = mkPrettier "json";
+      language.jsonc.formatter = mkPrettier "jsonc";
+    }
+
+    {
+      # Rust
+      lsp.rust-analyzer.config.check = "clippy";
     }
 
     {

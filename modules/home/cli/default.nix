@@ -2,7 +2,6 @@
 {
   imports = [
     ./git.nix
-    ./just.nix
     ./nix.nix
     ./ssh.nix
     ./tmux.nix
