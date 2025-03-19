@@ -33,14 +33,16 @@
   };
 
   outputs =
-    { ... }@inputs:
+    { self, ... }@inputs:
     let
       flake = import ./modules/flake { inherit inputs; };
     in
     {
       homeConfigurations = flake.profiles.home;
       nixosConfigurations = flake.profiles.system;
-      templates = flake.templates;
       devShells = flake.devShells;
+
+      templates = flake.templates;
+      defaultTemplate = self.templates.default;
     };
 }
