@@ -23,9 +23,9 @@ in
     };
 
     language = lib.mkOption {
-      type = lib.types.listOf (lib.types.attrsOf lib.types.anything);
+      type = lib.types.attrsOf lib.types.anything;
       description = "Alias for languages.langauge";
-      default = [ ];
+      default = { };
     };
   };
 
@@ -46,7 +46,7 @@ in
 
       languages = {
         language-server = cfg.lsp;
-        language = cfg.language;
+        language = lib.attrsets.mapAttrsToList (name: value: { inherit name; } // value) (cfg.language);
       };
     };
   };

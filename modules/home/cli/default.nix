@@ -2,6 +2,8 @@
 {
   imports = [
     ./git.nix
+    ./just.nix
+    ./nix.nix
     ./ssh.nix
     ./tmux.nix
     ./top.nix
@@ -9,7 +11,6 @@
     ./zoxide.nix
 
     ./helix
-    ./lang
     ./scripts
     ./shell
   ];
@@ -41,6 +42,7 @@
     };
 
     fd.enable = true;
+    jq.enable = true;
     ripgrep.enable = true;
   };
 }
