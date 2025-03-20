@@ -71,32 +71,32 @@ in
     inherit commandLineArgs;
   };
 
-  # Web Apps
-  xdg.desktopEntries = mkDesktopEntries (
-    [
-      {
-        name = "monkeytype";
-        url = "https://monkeytype.com/";
-        app = true;
-      }
-      {
-        name = "excalidraw";
-        url = "https://excalidraw.com/";
-      }
-      {
-        name = "whatsapp";
-        url = "https://web.whatsapp.com/";
-      }
-      {
-        name = "lichess";
-        url = "https://lichess.org/";
-      }
-    ]
-    ++ (lib.optionals (my.programs.music == "yt") [
-      {
-        name = "ytmusic";
-        url = "https://music.youtube.com/";
-      }
-    ])
-  );
+  # # Web Apps
+  # xdg.desktopEntries = mkDesktopEntries (
+  #   [
+  #     {
+  #       name = "monkeytype";
+  #       url = "https://monkeytype.com/";
+  #       app = true;
+  #     }
+  #     {
+  #       name = "excalidraw";
+  #       url = "https://excalidraw.com/";
+  #     }
+  #     {
+  #       name = "whatsapp";
+  #       url = "https://web.whatsapp.com/";
+  #     }
+  #     {
+  #       name = "lichess";
+  #       url = "https://lichess.org/";
+  #     }
+  #   ]
+  #   ++ (lib.optionals (my.programs.music == "yt") [
+  #     {
+  #       name = "ytmusic";
+  #       url = "https://music.youtube.com/";
+  #     }
+  #   ])
+  # );
 }
