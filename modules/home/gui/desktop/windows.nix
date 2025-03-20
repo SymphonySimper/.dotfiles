@@ -7,6 +7,9 @@ in
   ];
 
   "2".class = [
+    "firefox"
+  ];
+
     "google-chrome"
     "chromium-browser"
   ];

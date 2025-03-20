@@ -3,7 +3,7 @@
   terminal = "alacritty";
   editor = "hx";
   multiplexer = "tmux";
-  browser = "google-chrome-stable";
+  browser = "firefox";
   launcher = "wofi";
   notification = "dunst";
   music = "yt";
