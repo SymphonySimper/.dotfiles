@@ -1,7 +1,25 @@
-{ my, pkgs, ... }:
+{ pkgs, lib, ... }:
 let
-  image = { "loupe" = "org.gnome.Loupe.desktop"; }.${my.programs.image};
-  pdf = { "zathura" = "org.pwmt.zathura.desktop"; }.${my.programs.pdf};
+  defaultApplications = {
+    "org.gnome.Loupe" = [
+      "image/jpeg"
+      "image/png"
+    ];
+
+    "org.pwmt.zathura" = [
+      "application/pdf"
+    ];
+
+    firefox = [
+      "application/xhtml+xml"
+      "text/html"
+      "text/xml"
+      "x-scheme-handler/ftp"
+      "x-scheme-handler/http"
+      "x-scheme-handler/https"
+    ];
+
+  };
 in
 {
   home.packages = [ pkgs.loupe ];
@@ -10,11 +28,17 @@ in
     mime.enable = true;
     mimeApps = {
       enable = true;
-      defaultApplications = {
-        "image/png" = image;
-        "image/jpeg" = image;
-        "application/pdf" = pdf;
-      };
+      defaultApplications = builtins.listToAttrs (
+        lib.lists.flatten (
+          lib.attrsets.mapAttrsToList (
+            name: value:
+            (builtins.map (v: {
+              name = v;
+              value = "${name}.desktop";
+            }) value)
+          ) defaultApplications
+        )
+      );
     };
   };
 }
