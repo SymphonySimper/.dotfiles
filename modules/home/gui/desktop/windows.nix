@@ -1,6 +1,3 @@
-let
-  mkChromiumAppId = url: "chrome-${url}__-Default";
-in
 {
   "1".class = [
     "Alacritty"
@@ -10,25 +7,16 @@ in
     "firefox"
   ];
 
+  "3".class = [
     "google-chrome"
     "chromium-browser"
   ];
 
-  "3".class = [
+  "4".class = [
+    "mpv"
     "com.github.johnfactotum.Foliate"
     "org.pwmt.zathura"
   ];
-
-  "4" = {
-    class = [
-      "mpv"
-      (mkChromiumAppId "monkeytype.com")
-    ];
-
-    title = [
-      ".*Opera"
-    ];
-  };
 
   "5".class = [
     "steam"
@@ -48,9 +36,7 @@ in
     "gamescope"
   ];
 
-  "8".class = [
-    (mkChromiumAppId "music.youtube.com")
-  ];
+  "8".class = [ ];
 
   "9".class = [
     "org.qbittorrent.qBittorrent"
