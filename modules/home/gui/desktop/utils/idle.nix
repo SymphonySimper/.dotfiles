@@ -26,6 +26,7 @@
       ];
     };
   };
+
   home.packages = [
     (pkgs.writeShellScriptBin "mycaffiene" ''
       handle_idle() {
@@ -59,7 +60,6 @@
     '')
   ];
 
-  catppuccin.hyprlock.flavor = my.theme.flavors.dark;
   programs.hyprlock = {
     enable = true;
     settings = {
@@ -68,7 +68,12 @@
         hide_cursor = true;
       };
 
-      background.color =  "$base";
+      background.color = "$base";
     };
+  };
+
+  catppuccin.hyprlock = {
+    flavor = my.theme.flavors.dark;
+    useDefaultConfig = false;
   };
 }
