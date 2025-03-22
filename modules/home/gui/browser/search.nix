@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ lib, ... }:
 let
   engines = [
     {
@@ -48,18 +48,19 @@ let
 in
 {
   force = true;
-  default = "Google";
-  privateDefault = "Google";
+
+  default = "google";
+  privateDefault = "google";
 
   engines =
     {
       # hide from url bar
-      Google.metaData.hideOneOffButton = true;
-      DuckDuckGo.metaData.hideOneOffButton = true;
+      google.metaData.hideOneOffButton = true;
+      ddg.metaData.hideOneOffButton = true;
 
       # disable
-      Bing.metaData.hidden = true;
-      "Wikipedia (en)".metaData.hidden = true;
+      bing.metaData.hidden = true;
+      wikipedia.metaData.hidden = true;
     }
     // (builtins.listToAttrs (
       builtins.map (
@@ -68,8 +69,11 @@ in
           viaGoogle = if lib.strings.hasPrefix "http" engine.url then false else true;
         in
         {
-          name = if viaGoogle then "Google ${engine.name}" else engine.name;
+          name = builtins.concatStringsSep "-" (
+            lib.strings.splitString " " (lib.strings.toLower engine.name)
+          );
           value = {
+            name = if viaGoogle then "Google ${engine.name}" else engine.name;
             urls = [
               {
                 template =

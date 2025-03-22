@@ -51,10 +51,13 @@ in
         settings = import ./settings.nix { inherit lib; };
         search = import ./search.nix { inherit pkgs lib; };
 
-        bookmarks = builtins.mapAttrs (name: value: {
-          inherit name;
-          bookmarks = builtins.map mkGetSiteNameAndURL value;
-        }) sites;
+        bookmarks = {
+          force = true;
+          settings = builtins.mapAttrs (name: value: {
+            inherit name;
+            bookmarks = builtins.map mkGetSiteNameAndURL value;
+          }) sites;
+        };
       };
     };
   };
