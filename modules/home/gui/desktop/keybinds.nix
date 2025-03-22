@@ -87,7 +87,7 @@ let
     music.default = {
       key = "F7";
       super = false;
-      cmd = (mkOpenDesktopEntry "ytmusic");
+      cmd = (mkOpenDesktopEntry "YouTube Music");
     };
 
     mic.toggle = {
