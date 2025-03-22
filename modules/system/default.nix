@@ -39,32 +39,6 @@ in
       enable = lib.mkDefault true;
       begone.enable = lib.mkDefault false;
     };
-
-    hardware = {
-      audio.enable = lib.mkDefault my.gui.desktop.enable;
-      bluetooth.enable = lib.mkDefault false;
-      cpu.amd.enable = lib.mkDefault false;
-      disko.enable = lib.mkDefault false;
-      ideapad.enable = lib.mkDefault false;
-      led.enable = lib.mkDefault false;
-      logitech.enable = lib.mkDefault false;
-      powerManagement.enable = lib.mkDefault my.gui.desktop.enable;
-      ssd.enable = lib.mkDefault false;
-      gpu = {
-        amd.enable = lib.mkDefault false;
-        nvidia.enable = lib.mkDefault false;
-      };
-    };
-
-    programs = {
-      android.enable = lib.mkDefault false;
-      docker.enable = lib.mkDefault false;
-      steam.enable = lib.mkDefault false;
-      vm = {
-        enable = lib.mkDefault false;
-        waydroid.enable = lib.mkDefault false;
-      };
-    };
   };
 
   # FHS environment
