@@ -1,4 +1,5 @@
 {
+  my,
   pkgs,
   lib,
   ...
@@ -19,10 +20,10 @@
       osc = "no";
       osd-font-size = 32;
       osd-border-size = 1.5;
-      osd-font = "Poppins";
+      osd-font = my.theme.font.sans;
 
       # Subtitles
-      sub-visibility = "no";
+      sub-visibility = "yes";
       sub-auto = "fuzzy"; # external subs don't have to match the file name exactly to autoload
       sub-file-paths-append = [
         "ass" # search for external subs in these relative subdirectories
@@ -32,7 +33,7 @@
         "subtitles"
       ];
 
-      sub-font = "Poppins";
+      sub-font = my.theme.font.sans;
       sub-font-size = 48;
       sub-border-size = 2.0;
 
