@@ -15,15 +15,6 @@ in
 {
   imports = [
     ./chromium.nix
-
-    (import ./firefox {
-      inherit
-        pkgs
-        lib
-        sites
-        mkGetSiteNameAndURL
-        ;
-    })
   ];
 
   xdg.desktopEntries = builtins.listToAttrs (
