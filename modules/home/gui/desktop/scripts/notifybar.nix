@@ -1,7 +1,7 @@
 {
+  my,
   pkgs,
   lib,
-  my,
   ...
 }:
 let
@@ -46,6 +46,7 @@ in
   # Battery
   battery_status=$(</sys/class/power_supply/BAT0/status)
   battery_capacity=$(</sys/class/power_supply/BAT0/capacity)
+  battery_remaining_time=$(${lib.getExe pkgs.acpi} -r | ${lib.getExe' pkgs.coreutils "cut"} -d ' ' -f5)
   battery_title_style="${titleDefaultStyle}"
   case "$battery_status" in
   'Charging') battery_status_color="${my.theme.color.green}" ;;
@@ -171,7 +172,7 @@ in
           }
         } (${
           mkStyledText {
-            text = "$battery_status";
+            text = "$battery_remaining_time"; # $battery_status
             color = "$battery_status_color";
           }
         })";
