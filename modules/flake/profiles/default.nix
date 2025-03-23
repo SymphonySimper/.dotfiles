@@ -27,6 +27,7 @@ let
 
       profile = mkGetDefault passedProfile "name" "default";
       system = mkGetDefault passedProfile "system" "x86_64-linux";
+      nixos = mkGetDefault passedProfile "nixos" false;
 
       gui = {
         enable = mkGetDefault settings "gui.enable" false;
@@ -171,7 +172,9 @@ let
         inherit name;
         inherit for;
         settings = mkGetDefault config "settings" { };
-        profile = mkGetDefault config "profile" { };
+        profile = (mkGetDefault config "profile" { }) // {
+          nixos = builtins.pathExists systemFile;
+        };
       })
       (
         builtins.concatLists (
