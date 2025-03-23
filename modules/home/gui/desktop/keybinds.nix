@@ -2,6 +2,7 @@
   my,
   pkgs,
   lib,
+  uwsm,
   ...
 }:
 let
@@ -21,12 +22,12 @@ let
 
     launcher.default = {
       key = "d";
-      cmd = "uwsm app -- $(tofi-drun)";
+      cmd = "${uwsm} $(tofi-drun)";
     };
 
     files.default = {
       key = "e";
-      cmd = "uwsm app -- ${lib.getExe pkgs.nautilus}";
+      cmd = "${uwsm} ${lib.getExe pkgs.nautilus}";
     };
 
     browser.default = {

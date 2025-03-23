@@ -5,7 +5,8 @@
   ...
 }:
 let
-  keybinds = (import ./keybinds.nix { inherit my pkgs lib; });
+  uwsm = "uwsm-app --";
+  keybinds = (import ./keybinds.nix { inherit my pkgs lib uwsm; });
   windows = import ./windows.nix;
 
   keys = {
@@ -65,7 +66,7 @@ in
       settings = {
         monitor = ",${my.gui.display.string.width}x${my.gui.display.string.height}@${my.gui.display.string.refreshRate}Hz,auto,${my.gui.display.string.scale}";
 
-        exec-once = builtins.map (cmd: "uwsm app -- ${cmd}") [ startup ];
+        exec-once = builtins.map (cmd: "${uwsm} ${cmd}") [ startup ];
 
         env = [
           "XCURSOR_SIZE,24"
@@ -146,7 +147,7 @@ in
 
               prefix = if modKey == "" && action == "" then "," else "${modKey} ${action},";
             in
-            "${prefix} ${keybind.key}, exec, uwsm app -- ${keybind.cmd}"
+            "${prefix} ${keybind.key}, exec, ${uwsm} ${keybind.cmd}"
           ) keybinds)
 
           (builtins.concatMap (
