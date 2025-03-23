@@ -3,12 +3,10 @@
     [
       "WhatsApp"
       "web.whatsapp.com"
-      true
     ]
     [
       "Discord"
       "discord.com/channels/@me"
-      true
     ]
     [
       "Reddit"
@@ -20,12 +18,10 @@
     [
       "Gmail"
       "mail.google.com/mail/u/0/#inbox"
-      true
     ]
     [
       "Gmail 1"
       "mail.google.com/mail/u/1/#inbox"
-      true
     ]
   ];
 
@@ -37,7 +33,6 @@
     [
       "YouTube Music"
       "music.youtube.com"
-      true
     ]
   ];
 
@@ -45,7 +40,6 @@
     [
       "Crunchyroll"
       "crunchyroll.com"
-      true
     ]
     [
       "MyAnimeList"
@@ -57,12 +51,10 @@
     [
       "Excalidraw"
       "excalidraw.com"
-      true
     ]
     [
       "Monkeytype"
       "monkeytype.com"
-      true
     ]
     [
       "ProtonDB"
@@ -88,7 +80,6 @@
     [
       "Github"
       "github.com"
-      true
     ]
     [
       "Google Fonts"

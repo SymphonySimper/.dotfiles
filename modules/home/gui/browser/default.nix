@@ -1,16 +1,6 @@
 { pkgs, lib, ... }:
 let
   sites = import ./bookmarks.nix;
-
-  mkGetSiteNameAndURL =
-    site:
-    let
-      _url = builtins.elemAt site 1;
-    in
-    {
-      name = builtins.elemAt site 0;
-      url = if lib.strings.hasPrefix "http" _url then _url else "https://${_url}";
-    };
 in
 {
   imports = [
@@ -18,39 +8,37 @@ in
   ];
 
   xdg.desktopEntries = builtins.listToAttrs (
-    builtins.map
-      (
-        entry:
-        let
-          site = mkGetSiteNameAndURL entry;
-          execScript = lib.getExe (
-            pkgs.writeShellScriptBin site.name # sh
-              ''
-                ${lib.getExe' pkgs.xdg-utils "xdg-open"} ${site.url}                
-              ''
-          );
-        in
-        {
-          name = site.name;
-          type = "entry";
-          value = {
-            name = site.name;
-            type = "Application";
-            genericName = site.name;
-            comment = "Launch ${site.name}";
-            categories = [ "Application" ];
-            terminal = false;
-            exec = execScript;
-            settings = {
-              StartupWMClass = site.name;
-            };
+    builtins.map (
+      entry:
+      let
+        name = builtins.elemAt entry 0;
+        _url = builtins.elemAt entry 1;
+        url = if lib.strings.hasPrefix "http" _url then _url else "https://${_url}";
+
+        scriptName = builtins.concatStringsSep "-" (lib.strings.splitString " " (lib.strings.toLower name));
+        execScript = lib.getExe (
+          pkgs.writeShellScriptBin scriptName # sh
+            ''
+              ${lib.getExe' pkgs.xdg-utils "xdg-open"} ${url}                
+            ''
+        );
+      in
+      {
+        inherit name;
+        type = "entry";
+        value = {
+          inherit name;
+          type = "Application";
+          genericName = name;
+          comment = "Launch ${name}";
+          categories = [ "Application" ];
+          terminal = false;
+          exec = execScript;
+          settings = {
+            StartupWMClass = name;
           };
-        }
-      )
-      (
-        builtins.filter (site: (builtins.length site == 3) && (builtins.elemAt site 2)) (
-          builtins.concatLists (builtins.attrValues sites)
-        )
-      )
+        };
+      }
+    ) (builtins.concatLists (builtins.attrValues sites))
   );
 }
