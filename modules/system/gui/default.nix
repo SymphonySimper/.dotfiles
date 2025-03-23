@@ -1,6 +1,7 @@
 { lib, ... }:
 {
   imports = [
+    ./browser.nix
     ./desktop.nix
     ./kanata.nix
     ./steam.nix
