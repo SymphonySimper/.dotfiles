@@ -38,13 +38,13 @@ let
       off = {
         mod = "Shift";
         key = "x";
-        cmd = "poweroff";
+        cmd = "mypower off";
       };
 
       reboot = {
         mod = "Ctrl";
         key = "x";
-        cmd = "reboot";
+        cmd = "mypower reboot";
       };
     };
 
