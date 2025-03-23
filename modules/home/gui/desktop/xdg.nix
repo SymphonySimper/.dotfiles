@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{pkgs, lib, ... }:
 let
   defaultApplications = {
     "org.gnome.Loupe" = [
@@ -10,7 +10,7 @@ let
       "application/pdf"
     ];
 
-    firefox = [
+    "google-chrome" = [
       "application/xhtml+xml"
       "text/html"
       "text/xml"

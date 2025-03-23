@@ -4,13 +4,11 @@
   ];
 
   "2".class = [
-    "firefox"
-  ];
-
-  "3".class = [
     "google-chrome"
     "chromium-browser"
   ];
+
+  "3".class = [ ];
 
   "4".class = [
     "mpv"
