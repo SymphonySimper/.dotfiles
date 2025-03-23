@@ -4,7 +4,7 @@
   editor = "hx";
   multiplexer = "tmux";
   browser = "firefox";
-  launcher = "wofi";
+  launcher = "tofi";
   notification = "dunst";
   music = "yt";
   video = "mpv";

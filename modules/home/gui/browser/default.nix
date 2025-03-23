@@ -32,6 +32,12 @@ in
         entry:
         let
           site = mkGetSiteNameAndURL entry;
+          execScript = lib.getExe (
+            pkgs.writeShellScriptBin site.name # sh
+              ''
+                ${lib.getExe' pkgs.xdg-utils "xdg-open"} ${site.url}                
+              ''
+          );
         in
         {
           name = site.name;
@@ -43,7 +49,7 @@ in
             comment = "Launch ${site.name}";
             categories = [ "Application" ];
             terminal = false;
-            exec = "${lib.getExe' pkgs.xdg-utils "xdg-open"} \"${site.url}\" %U";
+            exec = execScript;
             settings = {
               StartupWMClass = site.name;
             };

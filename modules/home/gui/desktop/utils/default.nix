@@ -3,6 +3,6 @@
   imports = [
     ./dunst.nix
     ./idle.nix
-    ./wofi.nix
+    ./launcher.nix
   ];
 }

@@ -21,7 +21,7 @@ let
 
     launcher.default = {
       key = "d";
-      cmd = "uwsm app -- $(${my.programs.launcher} --show drun --define=drun-print_desktop_file=true)";
+      cmd = "uwsm app -- $(tofi-drun)";
     };
 
     files.default = {
