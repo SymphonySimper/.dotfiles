@@ -9,6 +9,17 @@ let
   mkOpenDesktopEntry =
     file: "${lib.getExe pkgs.dex} ${my.dir.home}/.nix-profile/share/applications/${file}.desktop";
 
+  launcher = lib.getExe (
+    pkgs.writeShellScriptBin "mylauncher" # sh
+      ''
+        cmd=$(tofi-drun)
+        if [[ -n "$cmd" ]]; then
+          ${uwsm} $cmd
+        fi
+          
+      ''
+  );
+
   keybinds = {
     terminal.default = {
       key = "Return";
@@ -22,7 +33,7 @@ let
 
     launcher.default = {
       key = "d";
-      cmd = "${uwsm} $(tofi-drun)";
+      cmd = launcher;
     };
 
     files.default = {
