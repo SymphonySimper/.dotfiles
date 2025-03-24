@@ -18,10 +18,13 @@ let
 
   mkBookmarks =
     bookmarks:
-    builtins.map (bookmark: {
-      name = builtins.elemAt bookmark 0;
-      url = builtins.elemAt bookmark 1;
-    }) bookmarks;
+    builtins.map (book: {
+      name = book.name;
+      children = builtins.map (v: {
+        name = builtins.elemAt v 0;
+        url = builtins.elemAt v 1;
+      }) book.value;
+    }) (lib.attrsets.attrsToList bookmarks);
 
   mkExtensionSettings =
     extensions:
@@ -66,6 +69,11 @@ in
             "no"
             "https://search.nixos.org/options?channel=unstable&from=0&size=50&sort=relevance&type=packages&query={searchTerms}"
           ]
+          [
+            "Nix Noogle"
+            "ng"
+            "https://noogle.dev/q?term={searchTerms}"
+          ]
 
           # Search sites via Google
           [
@@ -75,12 +83,33 @@ in
           ]
         ];
 
-        ManagedBookmarks = mkBookmarks [
-          [
-            "Chrome Enterprise Policies"
-            "chromeenterprise.google/policies"
-          ]
-        ];
+        ManagedBookmarks = mkBookmarks {
+          Nix = [
+            [
+              "Noogle"
+              "noogle.dev"
+            ]
+            [
+              "Nix Builtins"
+              "nix.dev/manual/nix/latest/language/builtins.html"
+            ]
+            [
+              "Nix PR Tracker"
+              "nixpk.gs/pr-tracker.html"
+            ]
+            [
+              "Nix Wiki"
+              "https://wiki.nixos.org/wiki/NixOS_Wiki"
+            ]
+          ];
+
+          Misc = [
+            [
+              "Chrome Enterprise policy list"
+              "chromeenterprise.google/policies"
+            ]
+          ];
+        };
 
         ExtensionSettings = mkExtensionSettings [
           "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
