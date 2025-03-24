@@ -11,7 +11,7 @@ let
   args = [
     "--adaptive-sync"
     "-f" # full screen
-    "--mouse-sensitivity 2" # increase mouse speed
+    "--mouse-sensitivity 1" # increase mouse speed
     "--force-grab-cursor"
     "-W ${builtins.toString cfg.display.width}"
     "-H ${builtins.toString cfg.display.height}"
