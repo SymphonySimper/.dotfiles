@@ -6,9 +6,6 @@
   ...
 }:
 let
-  mkOpenDesktopEntry =
-    file: "${lib.getExe pkgs.dex} ${my.dir.home}/.nix-profile/share/applications/${file}.desktop";
-
   launcher = lib.getExe (
     pkgs.writeShellScriptBin "mylauncher" # sh
       ''
@@ -94,12 +91,6 @@ let
         key = "F6";
         cmd = "mybrightness -u";
       };
-    };
-
-    music.default = {
-      key = "F7";
-      super = false;
-      cmd = (mkOpenDesktopEntry "YouTube Music");
     };
 
     mic.toggle = {
