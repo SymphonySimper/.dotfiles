@@ -26,6 +26,74 @@ let
       "VulkanFromANGLE"
     ];
   };
+
+  bookmarks = {
+    "Social Media" = [
+      [
+        "WhatsApp"
+        "web.whatsapp.com"
+      ]
+      [
+        "Discord"
+        "discord.com/channels/@me"
+      ]
+      [
+        "Reddit"
+        "www.reddit.com"
+      ]
+    ];
+
+    Email = [
+      [
+        "Gmail"
+        "mail.google.com/mail/u/0/#inbox"
+      ]
+      [
+        "Gmail 1"
+        "mail.google.com/mail/u/1/#inbox"
+      ]
+    ];
+
+    Entertainment = [
+      [
+        "YouTube"
+        "youtube.com"
+      ]
+      [
+        "YouTube Music"
+        "music.youtube.com"
+      ]
+    ];
+
+    Anime = [
+      [
+        "Crunchyroll"
+        "crunchyroll.com"
+      ]
+      [
+        "MyAnimeList"
+        "myanimelist.net/animelist/SymphonySimper"
+      ]
+    ];
+
+    Utility = [
+      [
+        "Excalidraw"
+        "excalidraw.com"
+      ]
+      [
+        "Monkeytype"
+        "monkeytype.com"
+      ]
+    ];
+
+    Dev = [
+      [
+        "Github"
+        "github.com"
+      ]
+    ];
+  };
 in
 {
   programs.chromium = {
@@ -52,4 +120,39 @@ in
       "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
     ];
   };
+
+  xdg.desktopEntries = builtins.listToAttrs (
+    builtins.map (
+      entry:
+      let
+        name = builtins.elemAt entry 0;
+        _url = builtins.elemAt entry 1;
+        url = if lib.strings.hasPrefix "http" _url then _url else "https://${_url}";
+
+        scriptName = builtins.concatStringsSep "-" (lib.strings.splitString " " (lib.strings.toLower name));
+        execScript = lib.getExe (
+          pkgs.writeShellScriptBin scriptName # sh
+            ''
+              ${lib.getExe' pkgs.xdg-utils "xdg-open"} ${url}                
+            ''
+        );
+      in
+      {
+        inherit name;
+        type = "entry";
+        value = {
+          inherit name;
+          type = "Application";
+          genericName = name;
+          comment = "Launch ${name}";
+          categories = [ "Application" ];
+          terminal = false;
+          exec = execScript;
+          settings = {
+            StartupWMClass = name;
+          };
+        };
+      }
+    ) (builtins.concatLists (builtins.attrValues bookmarks))
+  );
 }
