@@ -5,13 +5,6 @@
   ...
 }:
 let
-  theme = {
-    frappe = "olhelnoplefjdmncknfphenjclimckaf";
-    latte = "jhjnalhegpceacdhbplhnakmkdliaddd";
-    macchiato = "cmpdlhmnmjhihmcfnigoememnffkimlk";
-    mocha = "bkkmolkhemgaeaeggcmfbghljjjoofoh";
-  };
-
   features = {
     disable = [ "WebRtcAllowInputVolumeAdjustment" ];
     enable = [
@@ -25,6 +18,46 @@ let
       "DefaultANGLEVulkan"
       "VulkanFromANGLE"
     ];
+  };
+
+  mkCommandLineArgs =
+    {
+      ozone ? false,
+    }:
+    builtins.concatLists [
+      (lib.optionals ozone [
+        "--ozone-platform-hint=auto"
+      ])
+
+      (builtins.map (feature: "--${feature.name}-features=${builtins.concatStringsSep "," feature.value}")
+        (
+          builtins.filter (f: (builtins.length f.value) > 0) (
+            lib.attrsets.mapAttrsToList (name: value: { inherit name value; }) features
+          )
+        )
+      )
+    ];
+
+  browsers = {
+    # refer: https://www.reddit.com/r/NixOS/comments/1cl2kvr/opera_hardware_acceleration_not_working/
+    opera = builtins.concatStringsSep " " (
+      [
+        "LD_LIBRARY_PATH=\"${lib.makeLibraryPath [ pkgs.libGL ]}\""
+        (lib.getExe' (pkgs.opera.override { proprietaryCodecs = true; }) "opera")
+      ]
+      ++ (mkCommandLineArgs {
+        ozone = true;
+      })
+    );
+
+    default = lib.getExe' pkgs.xdg-utils "xdg-open";
+  };
+
+  theme = {
+    frappe = "olhelnoplefjdmncknfphenjclimckaf";
+    latte = "jhjnalhegpceacdhbplhnakmkdliaddd";
+    macchiato = "cmpdlhmnmjhihmcfnigoememnffkimlk";
+    mocha = "bkkmolkhemgaeaeggcmfbghljjjoofoh";
   };
 
   bookmarks = {
@@ -63,6 +96,11 @@ let
         "YouTube Music"
         "music.youtube.com"
       ]
+      [
+        "Netflix"
+        "www.netflix.com/browse/my-list"
+        browsers.opera
+      ]
     ];
 
     Anime = [
@@ -100,18 +138,7 @@ in
     enable = true;
     package = pkgs.google-chrome;
 
-    commandLineArgs =
-      [
-        # "--ozone-platform-hint=auto"
-      ]
-      ++ (builtins.map
-        (feature: "--${feature.name}-features=${builtins.concatStringsSep "," feature.value}")
-        (
-          builtins.filter (f: (builtins.length f.value) > 0) (
-            lib.attrsets.mapAttrsToList (name: value: { inherit name value; }) features
-          )
-        )
-      );
+    commandLineArgs = mkCommandLineArgs { };
 
     extensions = [
       theme.${my.theme.flavor} # Catppuccin theme
@@ -129,11 +156,13 @@ in
         _url = builtins.elemAt entry 1;
         url = if lib.strings.hasPrefix "http" _url then _url else "https://${_url}";
 
+        cmd = if builtins.length entry == 2 then browsers.default else builtins.elemAt entry 2;
+
         scriptName = builtins.concatStringsSep "-" (lib.strings.splitString " " (lib.strings.toLower name));
         execScript = lib.getExe (
           pkgs.writeShellScriptBin scriptName # sh
             ''
-              ${lib.getExe' pkgs.xdg-utils "xdg-open"} ${url}                
+              ${cmd} ${url}                
             ''
         );
       in

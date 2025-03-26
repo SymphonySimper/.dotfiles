@@ -10,11 +10,17 @@
 
   "3".class = [ ];
 
-  "4".class = [
-    "mpv"
-    "com.github.johnfactotum.Foliate"
-    "org.pwmt.zathura"
-  ];
+  "4" = {
+    class = [
+      "mpv"
+      "com.github.johnfactotum.Foliate"
+      "org.pwmt.zathura"
+    ];
+
+    title = [
+      ".*Opera"
+    ];
+  };
 
   "5".class = [
     "steam"
