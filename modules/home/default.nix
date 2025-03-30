@@ -1,11 +1,6 @@
-{
-  my,
-  ...
-}:
+{ my, pkgs, ... }:
 {
   imports = [
-    ./font.nix
-
     ../common
     ./cli
     ./gui
@@ -30,4 +25,14 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  fonts.fontconfig.enable = true;
+  home.packages = with pkgs; [
+    (google-fonts.override { fonts = [ "Poppins" ]; })
+    font-awesome
+    nerd-fonts.jetbrains-mono
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-emoji
+  ];
 }
