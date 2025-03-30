@@ -10,7 +10,7 @@
     ./yazi.nix
     ./zoxide.nix
 
-    ./helix
+    ./editor
     ./scripts
     ./shell
   ];
