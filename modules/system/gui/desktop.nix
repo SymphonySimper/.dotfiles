@@ -1,35 +1,29 @@
 {
   my,
-  config,
   pkgs,
   lib,
   ...
 }:
 {
   config = lib.mkIf my.gui.desktop.enable {
-    programs.hyprland = {
+    services.xserver = {
       enable = true;
-      withUWSM = true;
-    };
+      excludePackages = [ pkgs.xterm ];
+      desktopManager.gnome.enable = true;
 
-    security = {
-      polkit.enable = true;
-      pam.services = {
-        hyprland.enableGnomeKeyring = true;
-        # Enable hyprlock
-        hyprlock = { };
+      displayManager.gdm = {
+        enable = true;
+        wayland = true;
       };
-    };
-
-    services = {
-      gnome.gnome-keyring.enable = true;
-      udisks2.enable = true;
     };
 
     environment = {
       sessionVariables.NIXOS_OZONE_WL = "1";
-      systemPackages = [
-        (pkgs.writeShellScriptBin "myreload" # sh
+
+      systemPackages = with pkgs; [
+        foliate
+
+        (writeShellScriptBin "myreload" # sh
           ''
             sudo systemctl restart kanata-keyboard.service        
             sudo systemctl restart NetworkManager
@@ -37,23 +31,23 @@
           ''
         )
       ];
-    };
 
-    my.programs.tty."1" = {
-      skipUsername = true;
-      launch =
-        let
-          uwsm = "${lib.getExe config.programs.uwsm.package}";
-        in
-        {
-          command = # sh
-            ''
-              if ${uwsm} check may-start; then
-                  exec ${uwsm} start /run/current-system/sw/bin/Hyprland
-              fi
-            '';
-          dbus = false;
-        };
+      gnome.excludePackages = with pkgs; [
+        epiphany
+        geary
+        gnome-characters
+        gnome-connections
+        gnome-console
+        gnome-contacts
+        gnome-maps
+        gnome-music
+        gnome-shell-extensions
+        gnome-text-editor
+        gnome-tour
+        gnome-weather
+        simple-scan
+        yelp
+      ];
     };
   };
 }

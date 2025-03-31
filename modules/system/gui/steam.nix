@@ -1,5 +1,4 @@
 {
-  my,
   config,
   pkgs,
   lib,
@@ -8,13 +7,17 @@
 let
   cfg = config.my.programs.steam;
 
-  args = [
-    "--adaptive-sync"
-    "-f" # full screen
-    "--mouse-sensitivity 1" # increase mouse speed
-    "--force-grab-cursor"
-    "-W ${builtins.toString cfg.display.width}"
-    "-H ${builtins.toString cfg.display.height}"
+  args = builtins.concatLists [
+    [
+      "-f" # full screen
+      "--mouse-sensitivity 1" # increase mouse speed
+      "--force-grab-cursor"
+    ]
+    (lib.optionals cfg.display.vrr [ "--adaptive-sync" ])
+    (lib.optionals (cfg.display.width != null) [
+      "-W ${builtins.toString cfg.display.width}"
+    ])
+    (lib.optionals (cfg.display.height != null) [ "-H ${builtins.toString cfg.display.height}" ])
   ];
 in
 {
@@ -25,15 +28,18 @@ in
       default = { };
       type = lib.types.submodule {
         options = {
+          vrr = lib.mkEnableOption "Adaptive Sync";
+
           width = lib.mkOption {
-            type = lib.types.numbers.positive;
+            type = lib.types.nullOr lib.types.numbers.positive;
             description = "Width of the display";
-            default = my.gui.display.width;
+            default = null;
           };
+
           height = lib.mkOption {
-            type = lib.types.numbers.positive;
+            type = lib.types.nullOr lib.types.numbers.positive;
             description = "Height of the display";
-            default = my.gui.display.height;
+            default = null;
           };
         };
       };

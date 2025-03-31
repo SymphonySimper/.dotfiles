@@ -1,10 +1,24 @@
-{ my, ... }:
+{ my, config, ... }:
 let
   padding = 2;
+  desktopFile = "Alacritty.desktop";
 in
 {
+  my.desktop = {
+    autostart = [
+      "${config.programs.alacritty.package}/share/applications/${desktopFile}"
+    ];
+
+    automove = [
+      [
+        desktopFile
+        1
+      ]
+    ];
+  };
+
   programs.alacritty = {
-    enable = my.programs.terminal == "alacritty";
+    enable = true;
     settings = {
       general = {
         live_config_reload = false;

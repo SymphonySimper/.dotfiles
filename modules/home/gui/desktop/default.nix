@@ -1,198 +1,271 @@
 {
   my,
+  config,
   pkgs,
   lib,
   ...
 }:
 let
-  uwsm = "uwsm-app --";
-  keybinds = (import ./keybinds.nix { inherit my pkgs lib uwsm; });
-  windows = import ./windows.nix;
+  cfg = config.my.desktop;
+  workspaces = 5;
+  workspacesList = builtins.genList (w: builtins.toString (w + 1)) workspaces;
 
-  keys = {
-    mod = "SUPER";
-    left = "h";
-    down = "j";
-    up = "k";
-    right = "l";
-  };
+  keybinds = [
+    {
+      key = "<Shift><Super>F5";
+      cmd = "myreload";
+    }
+  ];
 
-  startup = lib.getExe (
-    pkgs.writeShellScriptBin "startup" ''
-      ${lib.getExe' pkgs.swaybg "swaybg"} -c "${my.theme.color.crust}" -m solid_color;
-      # brightness -r & # Restore Brightness
-    ''
+  customKeybinds = builtins.listToAttrs (
+    lib.lists.imap0 (i: bind: {
+      name = "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom${builtins.toString i}";
+      value = {
+        name = if builtins.hasAttr "name" bind then bind.name else bind.cmd;
+        binding = bind.key;
+        command = bind.cmd;
+      };
+    }) keybinds
   );
 in
 {
   imports = lib.optionals my.gui.desktop.enable [
-    ./scripts
     ./services
-    ./utils
-
-    ./xdg.nix
   ];
 
+  options.my.desktop = {
+    autostart = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      description = "Desktop entries to autostart on startup";
+      default = [ ];
+    };
+
+    automove = lib.mkOption {
+      type = lib.types.listOf (
+        lib.types.listOf (
+          lib.types.oneOf [
+            lib.types.int
+            lib.types.str
+          ]
+        )
+      );
+      description = "Auto move window to set workspace";
+      default = [ ];
+    };
+
+    appfolder = lib.mkOption {
+      description = "Create app folder";
+      default = { };
+      type = lib.types.attrsOf (
+        lib.types.submodule {
+          options = {
+            apps = lib.mkOption {
+              type = lib.types.listOf lib.types.str;
+              default = [ ];
+              description = "Desktop Entries to be included in folder";
+            };
+            categories = lib.mkOption {
+              type = lib.types.listOf lib.types.str;
+              default = [ ];
+              description = "Categories to be included in folder";
+            };
+          };
+        }
+      );
+    };
+
+    mime = lib.mkOption {
+      description = "Mimeapps";
+      type = lib.types.attrsOf (lib.types.listOf lib.types.str);
+      default = { };
+    };
+  };
+
   config = lib.mkIf my.gui.desktop.enable {
-    services.gnome-keyring = {
-      enable = true;
-      components = [
-        "pkcs11"
-        "secrets"
-        "ssh"
+    my.desktop = {
+      automove = [
+        [
+          "Waydroid.desktop"
+          5
+        ]
+      ];
+
+      appfolder = {
+        CLI.categories = [ "ConsoleOnly" ];
+        Games.categories = [ "Game" ];
+        Office.categories = [ "Office" ];
+        Utilities.categories = [ "X-GNOME-Utilities" ];
+        Waydroid.categories = [ "X-WayDroid-App" ];
+      };
+
+      mime."org.gnome.Loupe" = [
+        "image/jpeg"
+        "image/png"
       ];
     };
 
-    home.packages = with pkgs; [
-      nautilus
-    ];
-
-    # protal settings
-    xdg.configFile."hypr/xdph.conf".text = ''
-      screencopy {
-          max_fps = 60
-          allow_token_by_default = true
-      }
-    '';
-
-    wayland.windowManager.hyprland = {
+    programs.gnome-shell = {
       enable = true;
-      xwayland.enable = true;
-      systemd = {
-        enable = false;
-        variables = [ "--all" ];
+      extensions = [
+        { package = pkgs.gnomeExtensions.caffeine; }
+        { package = pkgs.gnomeExtensions.auto-move-windows; }
+      ];
+    };
+
+    xdg = {
+      mime.enable = true;
+      mimeApps = {
+        enable = true;
+        defaultApplications = builtins.listToAttrs (
+          lib.lists.flatten (
+            lib.attrsets.mapAttrsToList (
+              name: value:
+              (builtins.map (v: {
+                name = v;
+                value = "${name}.desktop";
+              }) value)
+            ) cfg.mime
+          )
+        );
       };
+    };
 
-      settings = {
-        monitor = ",${my.gui.display.string.width}x${my.gui.display.string.height}@${my.gui.display.string.refreshRate}Hz,auto,${my.gui.display.string.scale}";
+    dconf = {
+      enable = true;
 
-        exec-once = builtins.map (cmd: "${uwsm} ${cmd}") [ startup ];
+      settings = lib.mkMerge [
+        {
+          # shell
+          "org/gnome/shell".app-picker-layout = [ ]; # resets app order
 
-        env = [
-          "XCURSOR_SIZE,24"
-          "HYPRCURSOR_SIZE,24"
-        ];
-
-        # Look and Feel
-        general = {
-          gaps_in = 0;
-          gaps_out = 0;
-          border_size = 1;
-          resize_on_border = false;
-          allow_tearing = false;
-          layout = "dwindle";
-
-          "col.inactive_border" = "$overlay0";
-          "col.active_border" = "$accent";
-        };
-
-        decoration = {
-          rounding = 0;
-
-          active_opacity = 1.0;
-          inactive_opacity = 1.0;
-
-          shadow.enabled = false;
-          blur.enabled = true;
-        };
-        animations.enabled = false;
-
-        dwindle = {
-          pseudotile = true;
-          preserve_split = true;
-          force_split = 2;
-        };
-
-        misc = {
-          force_default_wallpaper = 0;
-          disable_splash_rendering = true;
-          disable_hyprland_logo = true;
-          focus_on_activate = false;
-          # Disable Adaptive sync
-          vrr = 0;
-        };
-
-        input = {
-          kb_layout = "us";
-          follow_mouse = 0;
-          sensitivity = 0;
-          accel_profile = "flat";
-
-          touchpad = {
-            natural_scroll = false;
-            tap-to-click = true;
+          "org/gnome/desktop/interface" = {
+            color-scheme = if my.theme.dark then "prefer-dark" else "default";
+            cursor-size = 16;
+            cursor-theme = "Adwaita";
+            enable-animations = true;
+            gtk-theme = my.theme.gtk;
+            icon-theme = "Adwaita";
+            show-battery-percentage = true;
+            toolkit-accessibility = false;
           };
-        };
 
-        gestures = {
-          workspace_swipe = false;
-        };
+          "org/gnome/settings-daemon/plugins/color" = {
+            night-light-enabled = true;
+            night-light-schedule-automatic = false;
+            night-light-temperature = lib.hm.gvariant.mkUint32 3700;
+          };
 
-        bind = lib.lists.flatten [
-          "${keys.mod}, Q, killactive"
-          "${keys.mod} SHIFT, E, exec, uwsm stop"
-          "${keys.mod}, V, togglefloating"
-          "${keys.mod} SHIFT, F, fullscreen"
+          "org/gnome/mutter".experimental-features = [
+            "scale-monitor-framebuffer" # fractional scaling
+            "variable-refresh-rate"
+          ];
 
-          "${keys.mod}, ${keys.left}, movefocus, l"
-          "${keys.mod}, ${keys.right}, movefocus, r"
-          "${keys.mod}, ${keys.up}, movefocus, u"
-          "${keys.mod}, ${keys.down}, movefocus, d"
+          ## mouse
+          "org/gnome/desktop/peripherals/mouse".accel-profile = "flat";
+          "org/gnome/desktop/peripherals/touchpad" = {
+            natural-scroll = false;
+            two-finger-scrolling-enabled = true;
+          };
 
-          (builtins.map (
-            keybind:
-            let
-              modKey = if keybind.super then "${keys.mod}" else "";
-              action = if builtins.hasAttr "mod" keybind then "${lib.strings.toUpper keybind.mod}" else "";
+          # applications
+          "org/gnome/nautilus/preferences" = {
+            click-policy = "single";
+            default-folder-viewer = "list-view";
+            migrated-gtk-settings = true;
+            search-filter-time-type = "last_modified";
+            search-view = "list-view";
+          };
 
-              prefix = if modKey == "" && action == "" then "," else "${modKey} ${action},";
-            in
-            "${prefix} ${keybind.key}, exec, ${uwsm} ${keybind.cmd}"
-          ) keybinds)
+          # extensions
+          "org/gnome/shell/extensions/caffeine" = {
+            indicator-position-max = 1;
+            show-indicator = "only-active";
+          };
 
-          (builtins.concatMap (
-            num:
-            let
-              workspaceNum = builtins.toString (if num == 0 then 10 else num);
-              numStr = builtins.toString num;
-            in
-            [
-              # Switch workspaces with mainMod + [0-9]
-              "${keys.mod}, ${numStr}, workspace, ${workspaceNum}"
-              # Move active window to a workspace with mainMod + SHIFT + [0-9]
-              "${keys.mod} SHIFT, ${numStr}, movetoworkspace, ${workspaceNum}"
-            ]
-          ) (lib.lists.range 0 9))
-        ];
+          "org/gnome/shell/extensions/auto-move-windows".application-list = builtins.map (
+            entry: "${builtins.elemAt entry 0}:${builtins.toString (builtins.elemAt entry 1)}"
+          ) cfg.automove;
+        }
 
-        windowrulev2 = lib.lists.flatten [
-          # refer: https://github.com/hyprwm/Hyprland/pull/4704#issuecomment-2304649119
-          "noborder, onworkspace:w[tv1] f[-1], floating:0"
+        (lib.mkMerge [
+          # App folders
+          (builtins.listToAttrs (
+            builtins.map (folder: {
+              name = "org/gnome/desktop/app-folders/folders/${folder.name}";
+              value = lib.mkMerge [
+                { name = folder.name; }
 
-          (builtins.map (value: "fullscreen, class:^(${value})$") [
-            "waydroid.com.mojang.minecraftpe"
-            "gamescope"
-          ])
+                (lib.mkIf (builtins.length folder.value.apps > 0) {
+                  apps = folder.value.apps;
+                })
 
-          (builtins.attrValues (
-            builtins.mapAttrs (
-              workspace: values:
-              builtins.attrValues (
-                builtins.mapAttrs (
-                  idType: ids:
-                  (builtins.map (
-                    id:
-                    let
-                      workspaceActual = if workspace == "0" then "10" else workspace;
-                    in
-                    "workspace ${workspaceActual} ${if id == "steam" then "silent" else ""}, ${idType}:^(${id})$"
-                  ) ids)
-                ) values
-              )
-            ) windows
+                (lib.mkIf (builtins.length folder.value.categories > 0) {
+                  categories = folder.value.categories;
+                })
+              ];
+            }) (lib.attrsets.attrsToList cfg.appfolder)
           ))
-        ];
-      };
+
+          { "org/gnome/desktop/app-folders".folder-children = builtins.attrNames cfg.appfolder; }
+        ])
+
+        {
+          # workspace
+          "org/gnome/mutter".dynamic-workspaces = false;
+          "org/gnome/desktop/wm/preferences".num-workspaces = workspaces;
+          "org/gnome/shell/app-switcher".current-workspace-only = true;
+
+          "org/gnome/desktop/wm/keybindings" = builtins.listToAttrs (
+            builtins.concatMap (w: [
+              {
+                name = "move-to-workspace-${w}";
+                value = [ "<Shift><Super>${w}" ];
+              }
+              {
+                name = "switch-to-workspace-${w}";
+                value = [ "<Super>${w}" ];
+              }
+            ]) workspacesList
+          );
+
+          "org/gnome/shell/keybindings" = builtins.listToAttrs (
+            builtins.map (w: {
+              name = "switch-to-application-${w}";
+              value = [ ];
+            }) workspacesList
+          );
+        }
+
+        (lib.mkMerge [
+          # keybinds
+          {
+            "org/gnome/desktop/wm/keybindings".close = [ "<Super>q" ]; # close app
+
+            "org/gnome/shell/keybindings" = {
+              screenshot = [ "<Super>F11" ];
+              screenshot-window = [ "<Shift><Control>F11" ];
+              show-screenshot-ui = [ "<Shift><Super>F11" ];
+            };
+
+            "org/gnome/settings-daemon/plugins/media-keys" = {
+              home = [ "<Super>e" ];
+              mic-mute = [ "F8" ];
+              play = [ "F7" ];
+              volume-down = [ "<Super>F2" ];
+              volume-mute = [ "<Shift><Super>F2" ];
+              volume-up = [ "<Super>F3" ];
+              custom-keybindings = builtins.map (name: "/${name}/") (builtins.attrNames customKeybinds);
+            };
+          }
+
+          customKeybinds
+        ])
+      ];
+    };
+
+    xdg.autostart = lib.mkIf (builtins.length cfg.autostart > 0) {
+      enable = true;
+      entries = cfg.autostart;
     };
   };
 }
