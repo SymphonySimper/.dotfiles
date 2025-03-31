@@ -46,7 +46,7 @@ let
         altFlavor = builtins.getAttr (if theme.dark then "light" else "dark") theme.flavors;
         color = (import ./colors.nix { flavor = theme.flavor; });
         gtk = if theme.dark then "Adwaita-dark" else "Adwaita";
-        wallpaper = "${dir.home}/.dotfiles/modules/flake/assets/images/bg.png";
+        wallpaper = "${dir.home}/.dotfiles/modules/flake/assets/images/wallpaper.png";
 
         font = {
           sans = "Poppins";
