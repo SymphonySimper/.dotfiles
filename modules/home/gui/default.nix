@@ -14,10 +14,10 @@
   );
 
   config = lib.mkIf my.gui.enable {
-    programs = {
-      zathura.enable = true;
-      obs-studio.enable = true;
-    };
+    programs.zathura.enable = true;
+    my.desktop.mime."org.pwmt.zathura" = [
+      "application/pdf"
+    ];
 
     home.packages = with pkgs; [
       libreoffice

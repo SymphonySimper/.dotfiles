@@ -7,12 +7,21 @@
 {
   catppuccin.mpv.enable = false;
 
+  my.desktop.automove = [
+    [
+      "mpv.desktop"
+      4
+    ]
+  ];
+
   programs.mpv = {
     enable = true;
+
     bindings = {
       "Alt+LEFT" = "script-message Cycle_Video_Rotate -90";
       "Alt+RIGHT" = "script-message Cycle_Video_Rotate 90";
     };
+
     config = {
       fullscreen = "yes";
 

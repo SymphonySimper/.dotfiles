@@ -1,5 +1,6 @@
 {
   my,
+  config,
   pkgs,
   lib,
   ...
@@ -60,6 +61,7 @@ let
     mocha = "bkkmolkhemgaeaeggcmfbghljjjoofoh";
   };
 
+  category = "X-MY-Bookmarks";
   bookmarks = {
     "Social Media" = [
       [
@@ -132,8 +134,34 @@ let
       ]
     ];
   };
+
+  desktopFile = "google-chrome.desktop";
 in
 {
+  my.desktop = {
+    appfolder.Bookmarks.categories = [ category ];
+
+    autostart = [
+      "${config.programs.chromium.package}/share/applications/${desktopFile}"
+    ];
+
+    automove = [
+      [
+        desktopFile
+        2
+      ]
+    ];
+
+    mime."google-chrome" = [
+      "application/xhtml+xml"
+      "text/html"
+      "text/xml"
+      "x-scheme-handler/ftp"
+      "x-scheme-handler/http"
+      "x-scheme-handler/https"
+    ];
+  };
+
   programs.chromium = {
     enable = true;
     package = pkgs.google-chrome;
@@ -174,7 +202,7 @@ in
           type = "Application";
           genericName = name;
           comment = "Launch ${name}";
-          categories = [ "Application" ];
+          categories = [ category ];
           terminal = false;
           exec = execScript;
           settings = {

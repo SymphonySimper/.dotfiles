@@ -1,5 +1,4 @@
 {
-  my,
   config,
   pkgs,
   lib,
@@ -13,17 +12,6 @@ let
   waydroidPkg = lib.getExe pkgs.waydroid;
   waydroidRestart = # sh
     "/run/current-system/sw/bin/systemctl restart waydroid-container.service";
-
-  mkWaydroidSetRes =
-    {
-      w ? my.gui.display.string.desktop.width,
-      h ? my.gui.display.string.desktop.height,
-    }:
-    ''
-      ${waydroidPkg} prop set persist.waydroid.width ${w}
-      ${waydroidPkg} prop set persist.waydroid.height ${h}
-      ${sudo} ${waydroidRestart}
-    '';
 in
 {
   options.my.programs.vm.waydroid.enable = lib.mkEnableOption "Waydroid";
@@ -51,8 +39,6 @@ in
           # Disable freeform apps (Only fullscreen apps)
           ${waydroidPkg} prop set persist.waydroid.multi_windows false
 
-          ${mkWaydroidSetRes { }}
-
           ${sudo} ${waydroidRestart}
 
           ${waydroidPkg} show-full-ui &
@@ -70,12 +56,6 @@ in
           "${lib.getExe' pkgs.xdg-utils "xdg-open"}" "$certify_url"
         ''
       )
-
-      (writeShellScriptBin "waydroid-reset-res" (mkWaydroidSetRes {
-        w = "";
-        h = "";
-      }))
-      (writeShellScriptBin "waydroid-set-res" (mkWaydroidSetRes { }))
     ];
   };
 }
