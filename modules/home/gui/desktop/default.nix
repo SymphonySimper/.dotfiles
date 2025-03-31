@@ -112,6 +112,9 @@ in
       ];
     };
 
+    # avatar
+    home.file.".face".source = ../../../flake/assets/images/avatar.png; # it has to be a png
+
     xdg = {
       mime.enable = true;
       mimeApps = {
