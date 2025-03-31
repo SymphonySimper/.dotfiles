@@ -196,7 +196,6 @@ in
       in
       {
         inherit name;
-        type = "entry";
         value = {
           inherit name;
           type = "Application";
