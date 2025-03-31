@@ -11,7 +11,8 @@ in
     powerManagement.enable = true;
 
     services = {
-      thermald.enable = true;
+      # TODO: enable whe cpu.intel is enabled
+      thermald.enable = false;
 
       tlp = {
         enable = true;
