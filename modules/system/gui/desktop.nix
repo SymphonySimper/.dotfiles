@@ -6,14 +6,34 @@
 }:
 {
   config = lib.mkIf my.gui.desktop.enable {
-    services.xserver = {
-      enable = true;
-      excludePackages = [ pkgs.xterm ];
-      desktopManager.gnome.enable = true;
-
-      displayManager.gdm = {
+    services = {
+      xserver = {
         enable = true;
-        wayland = true;
+        excludePackages = [ pkgs.xterm ];
+        desktopManager.gnome.enable = true;
+
+        displayManager.gdm = {
+          enable = true;
+          wayland = true;
+        };
+      };
+
+      avahi.enable = lib.mkForce false;
+      dleyna-renderer.enable = lib.mkForce false;
+      dleyna-server.enable = lib.mkForce false;
+
+      gnome = {
+        gnome-browser-connector.enable = lib.mkForce false;
+        gnome-remote-desktop.enable = lib.mkForce false;
+        gnome-online-accounts.enable = lib.mkForce false;
+
+        # disable local network file share
+        gnome-user-share.enable = lib.mkForce false;
+        rygel.enable = lib.mkForce false;
+
+        # disable file search
+        localsearch.enable = lib.mkForce false;
+        tinysparql.enable = lib.mkForce false;
       };
     };
 
@@ -49,7 +69,7 @@
         yelp
       ];
     };
-    
+
     # avatar
     # refer: https://wiki.nixos.org/wiki/GNOME#Change_Profile_Photo_for_Login_and_Lockscreen_-_Declarative
     system.activationScripts.script.text =

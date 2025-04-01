@@ -170,6 +170,27 @@ in
             two-finger-scrolling-enabled = true;
           };
 
+          ## search
+          "org/freedesktop/tracker/miner/files" = {
+            index-recursive-directories = [ ];
+            index-single-directories = [ ];
+          };
+
+          "org/gnome/desktop/search-providers" = {
+            disable-external = false;
+            disabled = [
+              "org.gnome.Calendar.desktop"
+              "org.gnome.clocks.desktop"
+              "org.gnome.Contacts.desktop"
+              "org.gnome.Nautilus.desktop"
+              "org.gnome.seahorse.Application.desktop"
+              "org.gnome.Settings.desktop"
+            ];
+            sort-order = [ "org.gnome.Calculator.desktop" ];
+          };
+
+          "org/gnome/desktop/privacy".remove-old-trash-files = true;
+
           # applications
           "org/gnome/nautilus/preferences" = {
             click-policy = "single";
