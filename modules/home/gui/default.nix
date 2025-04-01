@@ -5,13 +5,14 @@
   ...
 }:
 {
-  imports = lib.optionals my.gui.enable (
-    lib.my.mkReadDir {
-      path = ./.;
-      asPath = true;
-      ignoreDefault = true;
-    }
-  );
+  imports = [
+    ./alacritty.nix
+    ./browser.nix
+    ./mpv.nix
+    ./theme.nix
+
+    ./desktop
+  ];
 
   config = lib.mkIf my.gui.enable {
     programs.zathura.enable = true;

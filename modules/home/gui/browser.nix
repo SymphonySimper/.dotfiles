@@ -138,77 +138,79 @@ let
   desktopFile = "google-chrome.desktop";
 in
 {
-  my.desktop = {
-    appfolder.Bookmarks.categories = [ category ];
+  config = lib.mkIf my.gui.enable {
+    my.desktop = {
+      appfolder.Bookmarks.categories = [ category ];
 
-    autostart = [
-      "${config.programs.chromium.package}/share/applications/${desktopFile}"
-    ];
+      autostart = [
+        "${config.programs.chromium.package}/share/applications/${desktopFile}"
+      ];
 
-    automove = [
-      [
-        desktopFile
-        2
-      ]
-    ];
+      automove = [
+        [
+          desktopFile
+          2
+        ]
+      ];
 
-    mime."google-chrome" = [
-      "application/xhtml+xml"
-      "text/html"
-      "text/xml"
-      "x-scheme-handler/ftp"
-      "x-scheme-handler/http"
-      "x-scheme-handler/https"
-    ];
-  };
+      mime."google-chrome" = [
+        "application/xhtml+xml"
+        "text/html"
+        "text/xml"
+        "x-scheme-handler/ftp"
+        "x-scheme-handler/http"
+        "x-scheme-handler/https"
+      ];
+    };
 
-  programs.chromium = {
-    enable = true;
-    package = pkgs.google-chrome;
+    programs.chromium = {
+      enable = true;
+      package = pkgs.google-chrome;
 
-    commandLineArgs = mkCommandLineArgs { };
+      commandLineArgs = mkCommandLineArgs { };
 
-    extensions = [
-      theme.${my.theme.flavor} # Catppuccin theme
-      "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
-      "nngceckbapebfimnlniiiahkandclblb" # bitwarden
-      "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
-    ];
-  };
+      extensions = [
+        theme.${my.theme.flavor} # Catppuccin theme
+        "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
+        "nngceckbapebfimnlniiiahkandclblb" # bitwarden
+        "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
+      ];
+    };
 
-  xdg.desktopEntries = builtins.listToAttrs (
-    builtins.map (
-      entry:
-      let
-        name = builtins.elemAt entry 0;
-        _url = builtins.elemAt entry 1;
-        url = if lib.strings.hasPrefix "http" _url then _url else "https://${_url}";
+    xdg.desktopEntries = builtins.listToAttrs (
+      builtins.map (
+        entry:
+        let
+          name = builtins.elemAt entry 0;
+          _url = builtins.elemAt entry 1;
+          url = if lib.strings.hasPrefix "http" _url then _url else "https://${_url}";
 
-        cmd = if builtins.length entry == 2 then browsers.default else builtins.elemAt entry 2;
+          cmd = if builtins.length entry == 2 then browsers.default else builtins.elemAt entry 2;
 
-        scriptName = builtins.concatStringsSep "-" (lib.strings.splitString " " (lib.strings.toLower name));
-        execScript = lib.getExe (
-          pkgs.writeShellScriptBin scriptName # sh
-            ''
-              ${cmd} ${url}                
-            ''
-        );
-      in
-      {
-        inherit name;
-        value = {
+          scriptName = builtins.concatStringsSep "-" (lib.strings.splitString " " (lib.strings.toLower name));
+          execScript = lib.getExe (
+            pkgs.writeShellScriptBin scriptName # sh
+              ''
+                ${cmd} ${url}                
+              ''
+          );
+        in
+        {
           inherit name;
-          type = "Application";
-          genericName = name;
-          comment = "Launch ${name}";
-          categories = [ category ];
-          terminal = false;
-          exec = execScript;
-          settings = {
-            StartupWMClass = name;
+          value = {
+            inherit name;
+            type = "Application";
+            genericName = name;
+            comment = "Launch ${name}";
+            categories = [ category ];
+            terminal = false;
+            exec = execScript;
+            settings = {
+              StartupWMClass = name;
+            };
           };
-        };
-      }
-    ) (builtins.concatLists (builtins.attrValues bookmarks))
-  );
+        }
+      ) (builtins.concatLists (builtins.attrValues bookmarks))
+    );
+  };
 }
