@@ -96,6 +96,14 @@ in
         Office.categories = [ "Office" ];
         Utilities.categories = [ "X-GNOME-Utilities" ];
         Waydroid.categories = [ "X-WayDroid-App" ];
+
+        Settings = {
+          apps = [
+            "org.gnome.Extensions.desktop"
+            "solaar.desktop"
+          ];
+          categories = [ "Settings" ];
+        };
       };
 
       mime."org.gnome.Loupe" = [
