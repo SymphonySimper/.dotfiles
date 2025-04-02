@@ -7,7 +7,7 @@
 }:
 let
   cfg = config.my.desktop;
-  workspaces = 5;
+  workspaces = 6;
   workspacesList = builtins.genList (w: builtins.toString (w + 1)) workspaces;
 
   keybinds = [
