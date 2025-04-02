@@ -66,6 +66,7 @@
         gnome-tour
         gnome-weather
         simple-scan
+        totem
         yelp
       ];
     };
