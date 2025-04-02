@@ -147,7 +147,10 @@ in
 {
   config = lib.mkIf my.gui.enable {
     my.desktop = {
-      appfolder.Bookmarks.categories = [ category ];
+      appfolder.Bookmarks = {
+        categories = [ category ];
+        apps = [ "nixos-manual.desktop" ];
+      };
 
       autostart = [
         "${config.programs.chromium.package}/share/applications/${desktopFile}"
