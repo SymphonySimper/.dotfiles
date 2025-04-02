@@ -88,6 +88,10 @@ in
           "Waydroid.desktop"
           5
         ]
+        [
+          "steam.desktop"
+          5
+        ]
       ];
 
       appfolder = {
