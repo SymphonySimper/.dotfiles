@@ -89,21 +89,28 @@ let
       ]
     ];
 
-    Entertainment = [
-      [
-        "YouTube"
-        "youtube.com"
+    Entertainment = (
+      builtins.concatLists [
+        [
+          [
+            "YouTube"
+            "youtube.com"
+          ]
+          [
+            "Netflix"
+            "www.netflix.com/browse/my-list"
+            browsers.opera
+          ]
+        ]
+
+        (lib.optionals (my.programs.music == "yt") [
+          [
+            "YouTube Music"
+            "music.youtube.com"
+          ]
+        ])
       ]
-      [
-        "YouTube Music"
-        "music.youtube.com"
-      ]
-      [
-        "Netflix"
-        "www.netflix.com/browse/my-list"
-        browsers.opera
-      ]
-    ];
+    );
 
     Anime = [
       [
