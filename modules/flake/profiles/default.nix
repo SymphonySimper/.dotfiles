@@ -101,7 +101,7 @@ let
           (profileDir + "/${my.profile}/${for}.nix")
         ]
         ++ (lib.optionals (for == "home") [
-          inputs.catppuccin.homeManagerModules.catppuccin
+          inputs.catppuccin.homeModules.catppuccin
           inputs.nix-index-database.hmModules.nix-index
         ])
         ++ (lib.optionals (for == "system") [
