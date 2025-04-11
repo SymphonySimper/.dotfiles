@@ -6,19 +6,6 @@
 }:
 let
   cfg = config.my.programs.steam;
-
-  args = builtins.concatLists [
-    [
-      "-f" # full screen
-      "--mouse-sensitivity 1" # increase mouse speed
-      "--force-grab-cursor"
-    ]
-    (lib.optionals cfg.display.vrr [ "--adaptive-sync" ])
-    (lib.optionals (cfg.display.width != null) [
-      "-W ${builtins.toString cfg.display.width}"
-    ])
-    (lib.optionals (cfg.display.height != null) [ "-H ${builtins.toString cfg.display.height}" ])
-  ];
 in
 {
   options.my.programs.steam = {
@@ -57,7 +44,14 @@ in
         localNetworkGameTransfers.openFirewall = false; # Open ports in the firewall for Steam Local Network Game Transfers
         remotePlay.openFirewall = false; # Open ports in the firewall for Steam Remote Play
 
-        gamescopeSession.enable = false;
+        gamescopeSession = {
+          enable = true;
+          args = [
+            "-f" # full screen
+            "--mouse-sensitivity 1" # increase mouse speed
+            "--force-grab-cursor"
+          ];
+        };
       };
 
       # `gamemoderun %command%`
@@ -69,7 +63,14 @@ in
       gamescope = {
         enable = true;
         capSysNice = false;
-        inherit args;
+        args = builtins.concatLists [
+          config.programs.steam.gamescopeSession.args
+          (lib.optionals cfg.display.vrr [ "--adaptive-sync" ])
+          (lib.optionals (cfg.display.width != null) [
+            "-W ${builtins.toString cfg.display.width}"
+          ])
+          (lib.optionals (cfg.display.height != null) [ "-H ${builtins.toString cfg.display.height}" ])
+        ];
       };
     };
 
