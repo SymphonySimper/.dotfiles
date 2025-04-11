@@ -7,7 +7,7 @@
 }:
 let
   cfg = config.my.desktop;
-  workspaces = 6;
+  workspaces = 4;
   workspacesList = builtins.genList (w: builtins.toString (w + 1)) workspaces;
 
   keybinds = [
@@ -86,11 +86,11 @@ in
       automove = [
         [
           "Waydroid.desktop"
-          5
+          4
         ]
         [
           "steam.desktop"
-          5
+          4
         ]
       ];
 
