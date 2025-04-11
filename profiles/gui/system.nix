@@ -30,15 +30,12 @@
       };
     };
 
-    programs = {
-      vm.waydroid.enable = true;
-      steam = {
-        enable = true;
-        display = {
-          width = 1920;
-          height = 1200;
-          vrr = true;
-        };
+    programs.steam = {
+      enable = true;
+      display = {
+        width = 1920;
+        height = 1200;
+        vrr = true;
       };
     };
   };
