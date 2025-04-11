@@ -118,9 +118,10 @@ in
 
     programs.gnome-shell = {
       enable = true;
-      extensions = [
-        { package = pkgs.gnomeExtensions.caffeine; }
-        { package = pkgs.gnomeExtensions.auto-move-windows; }
+      extensions = with pkgs.gnomeExtensions; [
+        { package = caffeine; }
+        { package = auto-move-windows; }
+        { package = just-perfection; }
       ];
     };
 
@@ -234,6 +235,12 @@ in
           "org/gnome/shell/extensions/auto-move-windows".application-list = builtins.map (
             entry: "${builtins.elemAt entry 0}:${builtins.toString (builtins.elemAt entry 1)}"
           ) cfg.automove;
+
+          "org/gnome/shell/extensions/just-perfection" = {
+            panel = false;
+            panel-in-overview = true;
+            support-notifier-type = 0;
+          };
         }
 
         (lib.mkMerge [
