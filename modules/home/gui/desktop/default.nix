@@ -170,6 +170,16 @@ in
             night-light-temperature = lib.hm.gvariant.mkUint32 4700;
           };
 
+          ## wallpaper
+          "org/gnome/desktop/background" = {
+            picture-uri = my.theme.wallpaper;
+            picture-uri-dark = my.theme.wallpaper;
+          };
+
+          "org/gnome/desktop/screensaver" = {
+            picture-uri = my.theme.wallpaper;
+          };
+
           "org/gnome/mutter".experimental-features = [
             "scale-monitor-framebuffer" # fractional scaling
             "variable-refresh-rate"
