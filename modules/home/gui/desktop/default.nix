@@ -151,7 +151,10 @@ in
       settings = lib.mkMerge [
         {
           # shell
-          "org/gnome/shell".app-picker-layout = [ ]; # resets app order
+          "org/gnome/shell" = {
+            app-picker-layout = [ ]; # resets app order
+            favorite-apps = [ ]; # unpin all apps on dash
+          };
 
           "org/gnome/desktop/interface" = {
             color-scheme = if my.theme.dark then "prefer-dark" else "default";
