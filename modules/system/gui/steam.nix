@@ -44,14 +44,7 @@ in
         localNetworkGameTransfers.openFirewall = false; # Open ports in the firewall for Steam Local Network Game Transfers
         remotePlay.openFirewall = false; # Open ports in the firewall for Steam Remote Play
 
-        gamescopeSession = {
-          enable = true;
-          args = [
-            "-f" # full screen
-            "--mouse-sensitivity 1" # increase mouse speed
-            "--force-grab-cursor"
-          ];
-        };
+        gamescopeSession.enable = false;
       };
 
       # `gamemoderun %command%`
@@ -64,7 +57,12 @@ in
         enable = true;
         capSysNice = false;
         args = builtins.concatLists [
-          config.programs.steam.gamescopeSession.args
+          [
+            "-f" # full screen
+            "--mouse-sensitivity 1" # increase mouse speed
+            "--force-grab-cursor"
+          ]
+
           (lib.optionals cfg.display.vrr [ "--adaptive-sync" ])
           (lib.optionals (cfg.display.width != null) [
             "-W ${builtins.toString cfg.display.width}"
