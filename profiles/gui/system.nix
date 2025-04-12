@@ -29,15 +29,6 @@
         swap = "16G";
       };
     };
-
-    programs.steam = {
-      enable = true;
-      display = {
-        width = 1920;
-        height = 1200;
-        vrr = true;
-      };
-    };
   };
 
   boot.initrd.availableKernelModules = [
