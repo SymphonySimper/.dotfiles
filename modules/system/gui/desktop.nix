@@ -47,7 +47,10 @@
           ''
             sudo systemctl restart kanata-keyboard.service        
             sudo systemctl restart NetworkManager
-            ${lib.my.mkNotification { title = "Restarted network manager and Kanata"; }}
+            ${lib.my.mkNotification {
+              app = "myreload";
+              title = "Restarted network manager and Kanata";
+            }}
           ''
         )
       ];
@@ -83,16 +86,16 @@
           dir_users="''${dir_base}/users"
           icons="''${dir_icons}/${my.name}"
           users="''${dir_users}/${my.name}"
-  
+
           mkdir -p "$dir_icons"
           mkdir -p "$dir_users"
-  
+
           cp "$avatar" "$icons"
           echo -e "[User]\nIcon=$icons\n" > "$users"
-  
+
           chown root:root "$users"
           chmod 0600 "$users"
-  
+
           chown root:root "$icons"
           chmod 0444 "$icons"
         else

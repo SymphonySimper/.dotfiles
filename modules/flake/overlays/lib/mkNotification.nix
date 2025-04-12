@@ -1,21 +1,19 @@
-{ pkgs, lib,... }:
+{ pkgs, lib, ... }:
 let
   mkNotification =
     {
       title ? throw "Title for notification cannot be empty",
       body ? "",
-      tag ? "",
-      progress ? "",
+      app ? null,
       urgency ? "normal", # low, normal, critical
       extraArgs ? "",
     }:
     let
       cmd = "${lib.getExe' pkgs.libnotify "notify-send"}";
-      replaceArg = if builtins.stringLength tag > 0 then "-h string:x-dunst-stack-tag:${tag}" else "";
-      progressBarArg = if builtins.stringLength progress > 0 then "-h int:value:${progress}" else "";
+      appArg = if app != null then "-app ${app}" else "";
     in
     ''
-      ${cmd} ${replaceArg} ${progressBarArg} -u ${urgency} "${title}" "${body}" ${extraArgs}
+      ${cmd} ${appArg} -u ${urgency} "${title}" "${body}" ${extraArgs}
     '';
 in
 mkNotification

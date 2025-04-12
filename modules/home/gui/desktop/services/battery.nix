@@ -10,7 +10,7 @@
 
         function battery_notify() {
          ${lib.my.mkNotification {
-           tag = "my-battery-status";
+           app = name;
            title = "$1";
            urgency = "critical";
          }}
