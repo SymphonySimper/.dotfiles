@@ -39,19 +39,27 @@ let
       )
     ];
 
+  categoryBrowser = [ "WebBrowser" ];
   browsers = {
-    # refer: https://www.reddit.com/r/NixOS/comments/1cl2kvr/opera_hardware_acceleration_not_working/
-    opera = builtins.concatStringsSep " " (
-      [
-        "LD_LIBRARY_PATH=\"${lib.makeLibraryPath [ pkgs.libGL ]}\""
-        (lib.getExe' (pkgs.opera.override { proprietaryCodecs = true; }) "opera")
-      ]
-      ++ (mkCommandLineArgs {
-        ozone = true;
-      })
-    );
-
     default = lib.getExe' pkgs.xdg-utils "xdg-open";
+
+    # refer: https://www.reddit.com/r/NixOS/comments/1cl2kvr/opera_hardware_acceleration_not_working/
+    opera = lib.getExe (
+      pkgs.writeShellScriptBin "opera" # sh
+        ''
+          ${
+            builtins.concatStringsSep " " (
+              [
+                "LD_LIBRARY_PATH=\"${lib.makeLibraryPath [ pkgs.libGL ]}\""
+                (lib.getExe' (pkgs.opera.override { proprietaryCodecs = true; }) "opera")
+              ]
+              ++ (mkCommandLineArgs {
+                ozone = true;
+              })
+            )
+          } "$@"
+        ''
+    );
   };
 
   theme = {
@@ -131,85 +139,102 @@ let
     ];
   };
 
-  desktopFile = "google-chrome.desktop";
 in
 {
-  config = lib.mkIf my.gui.enable {
-    my.desktop = {
-      appfolder.Bookmarks = {
-        categories = [ category ];
-        apps = [ "nixos-manual.desktop" ];
-      };
+  config = lib.mkIf my.gui.enable (
+    lib.mkMerge [
+      # Bookmarks
+      {
+        my.desktop.appfolder.Bookmarks = {
+          categories = [ category ];
+          apps = [ "nixos-manual.desktop" ];
+        };
 
-      autostart = [
-        "${config.programs.chromium.package}/share/applications/${desktopFile}"
-      ];
+        xdg.desktopEntries = builtins.listToAttrs (
+          builtins.map (
+            entry:
+            let
+              name = builtins.elemAt entry 0;
+              _url = builtins.elemAt entry 1;
+              url = if lib.strings.hasPrefix "http" _url then _url else "https://${_url}";
 
-      automove = [
-        [
-          desktopFile
-          2
-        ]
-      ];
+              cmd = if builtins.length entry == 2 then browsers.default else builtins.elemAt entry 2;
 
-      mime."google-chrome" = [
-        "application/xhtml+xml"
-        "text/html"
-        "text/xml"
-        "x-scheme-handler/ftp"
-        "x-scheme-handler/http"
-        "x-scheme-handler/https"
-      ];
-    };
+              scriptName = builtins.concatStringsSep "-" (lib.strings.splitString " " (lib.strings.toLower name));
+              execScript = lib.getExe (
+                pkgs.writeShellScriptBin scriptName # sh
+                  ''
+                    ${cmd} ${url}                
+                  ''
+              );
+            in
+            {
+              inherit name;
+              value = {
+                inherit name;
+                type = "Application";
+                genericName = name;
+                comment = "Launch ${name}";
+                categories = [ category ];
+                terminal = false;
+                exec = execScript;
+                settings = {
+                  StartupWMClass = name;
+                };
+              };
+            }
+          ) (builtins.concatLists (builtins.attrValues bookmarks))
+        );
+      }
 
-    programs.chromium = {
-      enable = true;
-      package = pkgs.google-chrome;
+      # Browsers
+      {
+        my.desktop.appfolder.Browsers.categories = categoryBrowser;
+      }
 
-      commandLineArgs = mkCommandLineArgs { };
-
-      extensions = [
-        theme.${my.theme.flavor} # Catppuccin theme
-        "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
-        "nngceckbapebfimnlniiiahkandclblb" # bitwarden
-        "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
-      ];
-    };
-
-    xdg.desktopEntries = builtins.listToAttrs (
-      builtins.map (
-        entry:
+      ## Chromium
+      (
         let
-          name = builtins.elemAt entry 0;
-          _url = builtins.elemAt entry 1;
-          url = if lib.strings.hasPrefix "http" _url then _url else "https://${_url}";
-
-          cmd = if builtins.length entry == 2 then browsers.default else builtins.elemAt entry 2;
-
-          scriptName = builtins.concatStringsSep "-" (lib.strings.splitString " " (lib.strings.toLower name));
-          execScript = lib.getExe (
-            pkgs.writeShellScriptBin scriptName # sh
-              ''
-                ${cmd} ${url}                
-              ''
-          );
+          desktop = "google-chrome.desktop";
         in
         {
-          inherit name;
-          value = {
-            inherit name;
-            type = "Application";
-            genericName = name;
-            comment = "Launch ${name}";
-            categories = [ category ];
-            terminal = false;
-            exec = execScript;
-            settings = {
-              StartupWMClass = name;
-            };
+          programs.chromium = {
+            enable = true;
+            package = pkgs.google-chrome;
+
+            commandLineArgs = mkCommandLineArgs { };
+
+            extensions = [
+              theme.${my.theme.flavor} # Catppuccin theme
+              "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
+              "nngceckbapebfimnlniiiahkandclblb" # bitwarden
+              "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
+            ];
+          };
+
+          my.desktop = {
+            autostart = [
+              "${config.programs.chromium.package}/share/applications/${desktop}"
+            ];
+
+            automove = [
+              [
+                desktop
+                2
+              ]
+            ];
+
+            mime."google-chrome" = [
+              "application/xhtml+xml"
+              "text/html"
+              "text/xml"
+              "x-scheme-handler/ftp"
+              "x-scheme-handler/http"
+              "x-scheme-handler/https"
+            ];
           };
         }
-      ) (builtins.concatLists (builtins.attrValues bookmarks))
-    );
-  };
+      )
+    ]
+  );
 }
