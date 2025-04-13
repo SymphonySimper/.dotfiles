@@ -20,9 +20,6 @@
       "application/pdf"
     ];
 
-    home.packages = with pkgs; [
-      libreoffice
-      qbittorrent
-    ];
+    home.packages = with pkgs; [ libreoffice ];
   };
 }
