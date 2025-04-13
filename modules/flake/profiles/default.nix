@@ -71,7 +71,13 @@ let
 
         flavor = builtins.getAttr (if theme.dark then "dark" else "light") theme.flavors;
         altFlavor = builtins.getAttr (if theme.dark then "light" else "dark") theme.flavors;
-        color = (import ./colors.nix { flavor = theme.flavor; });
+
+        # refer: https://github.com/catppuccin/palette/blob/main/palette.json
+        color =
+          builtins.mapAttrs (_: value: value.hex)
+            (builtins.fromJSON (builtins.readFile "${inputs.catppuccin-palette}/palette.json"))
+            .${theme.flavor}.colors;
+
         gtk = if theme.dark then "Adwaita-dark" else "Adwaita";
         wallpaper = "${dir.home}/.dotfiles/modules/flake/assets/images/wallpaper.png";
 

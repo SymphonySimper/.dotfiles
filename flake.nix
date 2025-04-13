@@ -6,8 +6,12 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # common
-    catppuccin.url = "github:catppuccin/nix";
     systems.url = "github:nix-systems/default";
+    catppuccin.url = "github:catppuccin/nix";
+    catppuccin-palette = {
+      url = "github:catppuccin/palette";
+      flake = false;
+    };
 
     # system
     disko = {
