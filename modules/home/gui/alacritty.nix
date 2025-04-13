@@ -15,11 +15,11 @@ in
         "${config.programs.alacritty.package}/share/applications/${desktopFile}"
       ];
 
-      automove = [
-        [
-          desktopFile
-          1
-        ]
+      windows = [
+        {
+          id = "Alacritty";
+          workspace = 1;
+        }
       ];
     };
 

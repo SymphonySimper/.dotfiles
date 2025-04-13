@@ -32,6 +32,33 @@ let
       gui = {
         enable = mkGetDefault settings "gui.enable" false;
         desktop.enable = mkGetDefault settings "gui.desktop.enable" false;
+
+        display = rec {
+          name = mkGetDefault settings "gui.display.name" "eDP-1";
+          scale = mkGetDefault settings "gui.display.scale" 1;
+          width = mkGetDefault settings "gui.display.width" 1920;
+          height = mkGetDefault settings "gui.display.height" 1080;
+          refreshRate = mkGetDefault settings "gui.display.refreshRate" 60;
+          maxRefreshRate = mkGetDefault settings "gui.display.maxRefreshRate" refreshRate;
+
+          desktop = {
+            width = width / scale;
+            height = height / scale;
+          };
+
+          string = {
+            scale = builtins.toString scale;
+            width = builtins.toString width;
+            height = builtins.toString height;
+            refreshRate = builtins.toString refreshRate;
+            maxRefreshRate = builtins.toString maxRefreshRate;
+
+            desktop = {
+              width = builtins.toString desktop.width;
+              height = builtins.toString desktop.height;
+            };
+          };
+        };
       };
 
       theme = {

@@ -8,11 +8,11 @@
   config = lib.mkIf my.gui.enable {
     catppuccin.mpv.enable = false;
 
-    my.desktop.automove = [
-      [
-        "mpv.desktop"
-        4
-      ]
+    my.desktop.windows = [
+      {
+        id = "mpv";
+        workspace = 5;
+      }
     ];
 
     programs.mpv = {

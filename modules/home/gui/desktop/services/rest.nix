@@ -10,7 +10,7 @@
 
         function notify() {
          ${lib.my.mkNotification {
-           app = name;
+           tag = "my-rest-status";
            title = "$1";
            body = "$2";
            urgency = "critical";

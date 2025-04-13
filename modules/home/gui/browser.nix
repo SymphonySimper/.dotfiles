@@ -39,7 +39,6 @@ let
       )
     ];
 
-  categoryBrowser = [ "WebBrowser" ];
   browsers = {
     default = lib.getExe' pkgs.xdg-utils "xdg-open";
 
@@ -145,11 +144,6 @@ in
     lib.mkMerge [
       # Bookmarks
       {
-        my.desktop.appfolder.Bookmarks = {
-          categories = [ category ];
-          apps = [ "nixos-manual.desktop" ];
-        };
-
         xdg.desktopEntries = builtins.listToAttrs (
           builtins.map (
             entry:
@@ -188,10 +182,6 @@ in
       }
 
       # Browsers
-      {
-        my.desktop.appfolder.Browsers.categories = categoryBrowser;
-      }
-
       ## Chromium
       (
         let
@@ -217,13 +207,6 @@ in
               "${config.programs.chromium.package}/share/applications/${desktop}"
             ];
 
-            automove = [
-              [
-                desktop
-                2
-              ]
-            ];
-
             mime."google-chrome" = [
               "application/xhtml+xml"
               "text/html"
@@ -232,9 +215,33 @@ in
               "x-scheme-handler/http"
               "x-scheme-handler/https"
             ];
+
+            windows = [
+              {
+                id = "google-chrome";
+                silent = true;
+                workspace = 2;
+              }
+              {
+                id = ".*sharing your screen.*";
+                silent = true;
+                workspace = 10;
+              }
+            ];
           };
         }
       )
+
+      ## Opera
+      {
+        my.desktop.windows = [
+          {
+            id = ".*Opera";
+            type = "title";
+            workspace = 5;
+          }
+        ];
+      }
     ]
   );
 }

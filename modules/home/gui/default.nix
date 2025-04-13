@@ -14,12 +14,37 @@
     ./desktop
   ];
 
-  config = lib.mkIf my.gui.enable {
-    programs.zathura.enable = true;
-    my.desktop.mime."org.pwmt.zathura" = [
-      "application/pdf"
-    ];
+  config = lib.mkIf my.gui.enable (
+    lib.mkMerge [
+      {
+        programs.obs-studio.enable = true;
+        my.desktop.windows = [
+          {
+            id = "com.obsproject.Studio";
+            workspace = 9;
+          }
+        ];
+      }
 
-    home.packages = with pkgs; [ libreoffice ];
-  };
+      {
+        programs.zathura.enable = true;
+        my.desktop = {
+          mime."org.pwmt.zathura" = [
+            "application/pdf"
+          ];
+
+          windows = [
+            {
+              id = "org.pwmt.zathura";
+              workspace = 4;
+            }
+          ];
+        };
+      }
+
+      {
+        home.packages = with pkgs; [ libreoffice ];
+      }
+    ]
+  );
 }
