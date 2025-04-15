@@ -22,4 +22,6 @@ in
       };
     };
   };
+
+  my.programs.docker.enable = true;
 }
