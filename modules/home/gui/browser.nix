@@ -224,6 +224,7 @@ in
               }
               {
                 id = ".*sharing your screen.*";
+                type = "title";
                 silent = true;
                 workspace = 10;
               }
