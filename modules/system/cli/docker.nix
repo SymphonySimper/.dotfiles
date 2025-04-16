@@ -1,8 +1,14 @@
-{ lib, config, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   options.my.programs.docker = {
     enable = lib.mkEnableOption "Docker";
   };
+
   config = lib.mkIf config.my.programs.docker.enable {
     virtualisation.docker = {
       enable = true;
@@ -17,6 +23,17 @@
       };
     };
 
-    environment.shellAliases.docker_cln = "docker system prune --volumes";
+    environment.systemPackages = [
+      (pkgs.writeShellScriptBin "mydocker" # sh
+        ''
+          case "$1" in
+            cln|clean)
+              docker system prune --volumes
+              docker image prune -a
+            ;;
+          esac
+        ''
+      )
+    ];
   };
 }
