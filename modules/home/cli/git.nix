@@ -4,6 +4,17 @@
   pkgs,
   ...
 }:
+let
+  mkSSHClone =
+    {
+      host ? "github.com",
+      user ? null,
+    }:
+    let
+      suffix = if user == null then "\${1}" else "${user}/\${1}";
+    in
+    "!fc() { git clone git@${host}:${suffix}; }; fc";
+in
 {
   home.packages = with pkgs; [
     git-filter-repo
@@ -66,6 +77,10 @@
       # (i.e) `p` == `P`
       aliases = {
         c = "clone";
+        cs = mkSSHClone { };
+        csp = mkSSHClone { user = my.fullName; };
+        cw = mkSSHClone { host = "work-github"; };
+
         s = "status";
         a = "add";
         m = "commit";
