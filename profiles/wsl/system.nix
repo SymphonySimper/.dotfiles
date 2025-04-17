@@ -23,5 +23,9 @@ in
     };
   };
 
-  my.programs.docker.enable = true;
+  my.programs.docker = {
+    enable = true;
+    enableRootless = false;
+    enableGroup = true;
+  };
 }
