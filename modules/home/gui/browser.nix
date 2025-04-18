@@ -39,27 +39,7 @@ let
       )
     ];
 
-  browsers = {
-    default = lib.getExe' pkgs.xdg-utils "xdg-open";
-
-    # refer: https://www.reddit.com/r/NixOS/comments/1cl2kvr/opera_hardware_acceleration_not_working/
-    opera = lib.getExe (
-      pkgs.writeShellScriptBin "opera" # sh
-        ''
-          ${
-            builtins.concatStringsSep " " (
-              [
-                "LD_LIBRARY_PATH=\"${lib.makeLibraryPath [ pkgs.libGL ]}\""
-                (lib.getExe' (pkgs.opera.override { proprietaryCodecs = true; }) "opera")
-              ]
-              ++ (mkCommandLineArgs {
-                ozone = true;
-              })
-            )
-          } "$@"
-        ''
-    );
-  };
+  browsers.default = lib.getExe' pkgs.xdg-utils "xdg-open";
 
   theme = {
     frappe = "olhelnoplefjdmncknfphenjclimckaf";
@@ -100,11 +80,6 @@ let
       [
         "YouTube"
         "youtube.com"
-      ]
-      [
-        "Netflix"
-        "www.netflix.com/browse/my-list"
-        browsers.opera
       ]
     ];
 
@@ -232,17 +207,6 @@ in
           };
         }
       )
-
-      ## Opera
-      {
-        my.desktop.windows = [
-          {
-            id = ".*Opera";
-            type = "title";
-            workspace = 5;
-          }
-        ];
-      }
     ]
   );
 }
