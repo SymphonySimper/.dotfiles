@@ -11,7 +11,7 @@ let
       in
       {
         name = if viaGoogle then "Google ${name}" else name;
-        shortcut = "@${builtins.elemAt option 1}";
+        shortcut = "!${builtins.elemAt option 1}";
         url = if viaGoogle then "https://www.google.com/search?q=site%3A${url}+{searchTerms}" else url;
       }
     ) options;
