@@ -1,10 +1,64 @@
 { lib, config, ... }:
 let
   cfg = config.my.networking.begone;
+
+  default = {
+    anime = [
+      "hianime.to"
+      "www.crunchyroll.com"
+    ];
+
+    discord = [
+      "discord.com"
+      "discord.gg"
+      "discordapp.com"
+    ];
+
+    fb = [
+      "www.facebook.com"
+      "www.fb.com"
+    ];
+
+    insta = [ "www.instagram.com" ];
+
+    music = [
+      "music.youtube.com"
+      "open.spotify.com"
+    ];
+
+    ott = [
+      "www.hotstar.com"
+      "www.primevideo.com"
+      "www.sonyliv.com"
+      "www.sunnxt.com"
+      "www.zee5.com"
+      "netflix.com"
+    ];
+
+    steam = [
+      "store.steampowered.com"
+      "steamcommunity.com"
+    ];
+
+    twitch = [ "www.twitch.tv" ];
+    twitter = [
+      "www.twitter.com"
+      "x.com"
+    ];
+
+    yt = [ "www.youtube.com" ];
+  };
 in
 {
   options.my.networking.begone = {
     enable = lib.mkEnableOption "Begone";
+    allow = lib.mkOption {
+      type = lib.types.submodule {
+        options = lib.attrsets.genAttrs (builtins.attrNames default) (name: lib.mkEnableOption name);
+      };
+      description = "Unblock sites that are blocked by default";
+    };
+
     sites = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       description = "Begone sites";
@@ -13,36 +67,13 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    my.networking.begone.sites = [
-      # Music
-      # "music.youtube.com"
-      # "open.spotify.com"
+    my.networking.begone = {
+      allow = builtins.mapAttrs (name: _: lib.mkDefault false) default;
 
-      # Social Media
-      # "discord.com"
-      # "discord.gg"
-      # "discordapp.com"
-      "www.facebook.com"
-      "www.fb.com"
-      "www.instagram.com"
-      "www.twitch.tv"
-      "www.twitter.com"
-      # "www.youtube.com"
-      "x.com"
-
-      # OTT
-      "www.hotstar.com"
-      "www.primevideo.com"
-      "www.sonyliv.com"
-      "www.sunnxt.com"
-      "www.zee5.com"
-      ## Anime
-      "hianime.to"
-      # "www.crunchyroll.com"
-
-      # Misc
-      # "store.steampowered.com"
-    ];
+      sites = lib.lists.flatten (
+        builtins.map (host: lib.optionals (!cfg.allow.${host.name}) host.value) (lib.attrsToList default)
+      );
+    };
 
     networking.hosts."0.0.0.0" = lib.lists.unique cfg.sites;
   };
