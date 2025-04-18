@@ -39,4 +39,14 @@
       font = "${pkgs.nerd-fonts.jetbrains-mono}/share/fonts/truetype/NerdFonts/JetBrainsMono/JetBrainsMonoNerdFont-Regular.ttf";
     };
   };
+
+  home.activation = {
+    # refer: https://github.com/philj56/tofi/issues/115#issuecomment-1950273960
+    rmTofiCache =
+      lib.hm.dag.entryAfter [ "writeBoundary" ] # sh
+        ''
+          tofi_cache=${config.xdg.cacheHome}/tofi-drun
+          [[ -f "$tofi_cache" ]] && rm "$tofi_cache"
+        '';
+  };
 }
