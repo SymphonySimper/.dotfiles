@@ -48,15 +48,7 @@ let
       '';
 in
 {
-  home = {
-    shellAliases = {
-      snrs = "cd $HOME/.dotfiles && sudo nixos-rebuild switch --flake .#$(hostname)";
-      hmbs = "cd $HOME/.dotfiles && home-manager build switch --flake .#$(hostname)";
-      nd = "nix develop";
-    };
-
-    packages = [ mynix ];
-  };
+  home.packages = [ mynix ];
 
   programs = {
     nix-index = {
