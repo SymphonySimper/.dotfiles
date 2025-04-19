@@ -19,9 +19,6 @@ let
               *) echo "Aborted."
             esac
             ;;
-          cln|clean)
-            sudo nix-collect-garbage -d && nix-collect-garbage -d
-            ;;
           new|init)
             if [ -z "$2" ]; then
               echo "Template name not passed."
