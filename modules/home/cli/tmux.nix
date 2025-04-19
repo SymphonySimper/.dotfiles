@@ -70,10 +70,6 @@ in
           bind -r g new-window -c "#{pane_current_path}" "${lib.getExe pkgs.lazygit}"
           bind -r y new-window -c "#{pane_current_path}" "${lib.getExe pkgs.yazi}"
 
-          ## Open dev projects
-          unbind o
-          bind -r o run-shell -b mydev
-
           ## easy-to-remember split pane commands and open panes in cwd
           unbind '"'
           unbind %
