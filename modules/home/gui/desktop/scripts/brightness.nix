@@ -5,7 +5,7 @@
   ...
 }:
 let
-  brightness =
+  brightness = lib.getExe (
     pkgs.writeShellScriptBin "mybrightness" # sh
       ''
         app_bin="${lib.getExe pkgs.brightnessctl}"
@@ -60,19 +60,51 @@ let
         -t) toggle_ness ;;
         -r) restore ;; # Restore brightness
         esac
-      '';
+      ''
+  );
 in
 {
-  home.packages = [ brightness ];
+  my.desktop = {
+    keybinds = [
+      {
+        key = "F5";
+        cmd = "${brightness} -d";
+      }
+      {
+        key = "F6";
+        cmd = "${brightness} -u";
+      }
+    ];
 
-  my.desktop.keybinds = [
-    {
-      key = "F5";
-      cmd = "${lib.getExe brightness} -d";
-    }
-    {
-      key = "F6";
-      cmd = "${lib.getExe brightness} -u";
-    }
-  ];
+    notifybar.modules."5" =
+      let
+        cfg = config.my.desktop.notifybar;
+      in
+      {
+        title = "Brightness";
+        logic = # sh
+          ''
+            brightness_status=$(${brightness} -g)
+            brightness_title_style="${cfg.style.normal}"
+            if [ $brightness_status -gt 80 ]; then
+              brightness_color="${cfg.color.err}"
+              brightness_title_style="bold"
+            elif [ $brightness_status -gt 50 ]; then
+              brightness_color="${cfg.color.warn}"
+              brightness_title_style="bold"
+            elif [ $brightness_status -gt 20 ]; then
+              brightness_color="${cfg.color.ok}"
+            else
+              brightness_color="${cfg.color.good}"
+            fi
+          '';
+        style = "$brightness_title_style";
+        value = [
+          {
+            text = "\${brightness_status}%";
+            color = "$brightness_color";
+          }
+        ];
+      };
+  };
 }

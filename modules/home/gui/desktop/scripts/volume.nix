@@ -1,6 +1,11 @@
-{ pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 let
-  volume =
+  volume = lib.getExe (
     pkgs.writeShellScriptBin "myvolume" # sh
       ''
         app="${lib.getExe' pkgs.wireplumber "wpctl"}"
@@ -72,29 +77,95 @@ let
         # Get mic mute
         -gM) get_mute "mic" ;;
         esac
-      '';
+      ''
+  );
 in
 {
-  home.packages = [ volume ];
+  my.desktop = {
+    keybinds = [
+      {
+        key = "F2";
+        cmd = "${volume} -d";
+      }
+      {
+        key = "F3";
+        cmd = "${volume} -u";
+      }
+      {
+        mod = "SHIFT";
+        key = "F2";
+        cmd = "${volume} -m";
+      }
+      {
+        super = false;
+        key = "F8";
+        cmd = "${volume} -M"; # toggle mic
+      }
+    ];
 
-  my.desktop.keybinds = [
-    {
-      key = "F2";
-      cmd = "${lib.getExe volume} -d";
-    }
-    {
-      key = "F3";
-      cmd = "${lib.getExe volume} -u";
-    }
-    {
-      mod = "SHIFT";
-      key = "F2";
-      cmd = "${lib.getExe volume} -m";
-    }
-    {
-      super = false;
-      key = "F8";
-      cmd = "${lib.getExe volume} -M"; # toggle mic
-    }
-  ];
+    notifybar.modules =
+      let
+        cfg = config.my.desktop.notifybar;
+      in
+      {
+        "7" = {
+          title = "Audio";
+          logic = # sh
+            ''
+              audio_mute=$(${volume} -gm)
+              audio_volume=$(${volume} -gV)
+              audio_title_style="${cfg.style.normal}"
+              if [ $audio_mute -eq 0 ]; then
+                audio="MUTED"
+                audio_title_style="${cfg.style.bold}"
+                audio_color="${cfg.color.err}"
+              else
+                audio="$audio_volume"
+                if [ $audio_volume -gt 80 ]; then
+                  audio_color="${cfg.color.err}"
+                  audio_title_style="bold"
+                elif [ $audio_volume -gt 50 ]; then
+                  audio_color="${cfg.color.warn}"
+                  audio_title_style="bold"
+                elif [ $audio_volume -gt 20 ]; then
+                  audio_color="${cfg.color.ok}"
+                else
+                  audio_color="${cfg.color.good}"
+                fi
+              fi
+            '';
+          style = "$audio_title_style";
+          value = [
+            {
+              text = "\${audio}%";
+              color = "$audio_color";
+            }
+          ];
+        };
+
+        "8" = {
+          title = "Mic";
+          logic = # sh
+            ''
+              mic_mute=$(${volume} -gM)
+              mic_title_style="${cfg.style.normal}"
+              if [ $mic_mute -eq 0 ]; then
+                mic="MUTED"
+                mic_color="${cfg.color.good}"
+              else
+                mic="UNMUTED"
+                mic_title_style="bold"
+                mic_color="${cfg.color.err}"
+              fi
+            '';
+          style = "$mic_title_style";
+          value = [
+            {
+              text = "$mic";
+              color = "$mic_color";
+            }
+          ];
+        };
+      };
+  };
 }

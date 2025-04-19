@@ -1,11 +1,12 @@
 {
   my,
+  config,
   pkgs,
   lib,
   ...
 }:
 let
-  caffeine =
+  caffeine = lib.getExe (
     pkgs.writeShellScriptBin "mycaffeine" # sh
       ''
         handle_idle() {
@@ -36,7 +37,8 @@ let
             fi
             ;;
         esac
-      '';
+      ''
+  );
 in
 {
   services.hypridle = {
@@ -61,13 +63,42 @@ in
     };
   };
 
-  home.packages = [ caffeine ];
-  my.desktop.keybinds = [
-    {
-      key = "F10";
-      cmd = "${lib.getExe caffeine}";
-    }
-  ];
+  my.desktop = {
+    keybinds = [
+      {
+        key = "F10";
+        cmd = "${caffeine}";
+      }
+    ];
+
+    notifybar.modules."6" =
+      let
+        cfg = config.my.desktop.notifybar;
+      in
+      {
+        title = "Caffeine";
+        logic = # sh
+          ''
+            caffeine_inactive=$(${caffeine} -g)
+            caffeine_title_style="${cfg.style.normal}"
+            if [ $caffeine_inactive -eq 1 ]; then
+              caffeine_status="DISABLED"
+              caffeine_color="${my.theme.color.overlay0}"
+            else
+              caffeine_status="ENABLED"
+              caffeine_title_style="bold"
+              caffeine_color="${my.theme.color.peach}"
+            fi
+          '';
+        style = "$caffeine_title_style";
+        value = [
+          {
+            text = "$caffeine_status";
+            color = "$caffeine_color";
+          }
+        ];
+      };
+  };
 
   programs.hyprlock = {
     enable = true;
