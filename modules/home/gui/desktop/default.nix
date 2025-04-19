@@ -145,159 +145,211 @@ in
       }
     '';
 
-    wayland.windowManager.hyprland = {
-      enable = true;
-      xwayland.enable = true;
-      systemd = {
-        enable = false;
-        variables = [ "--all" ];
-      };
-
-      settings = {
-        monitor = builtins.concatStringsSep " ," [
-          my.gui.display.name
-          (builtins.concatStringsSep "" [
-            my.gui.display.string.width
-            "x"
-            my.gui.display.string.height
-            "@"
-            my.gui.display.string.refreshRate
-            "Hz"
-          ])
-          "auto"
-          my.gui.display.string.scale
-        ];
-
-        # uwsm-app doesn't seem to be reliable on startup
-        exec-once = builtins.map (cmd: "uwsm app -- ${cmd}") [
-          # set wallpaper
-          (lib.getExe (
-            pkgs.writeShellScriptBin "myswaybg" ''
-              ${lib.getExe' pkgs.swaybg "swaybg"} -c "${my.theme.color.crust}" -m solid_color
-            ''
-          ))
-
-          "myppd" # set power profile
-        ];
-
-        env = [
-          "XCURSOR_SIZE,24"
-          "HYPRCURSOR_SIZE,24"
-        ];
-
-        # Look and Feel
-        general = {
-          gaps_in = 0;
-          gaps_out = 0;
-          border_size = 1;
-          resize_on_border = false;
-          allow_tearing = false;
-          layout = "dwindle";
-
-          "col.inactive_border" = "$overlay0";
-          "col.active_border" = "$accent";
+    wayland.windowManager.hyprland = lib.mkMerge [
+      {
+        enable = true;
+        xwayland.enable = true;
+        systemd = {
+          enable = false;
+          variables = [ "--all" ];
         };
 
-        decoration = {
-          rounding = 0;
+        settings = {
+          monitor = builtins.concatStringsSep ", " [
+            my.gui.display.name
+            (builtins.concatStringsSep "" [
+              my.gui.display.string.width
+              "x"
+              my.gui.display.string.height
+              "@"
+              my.gui.display.string.refreshRate
+              "Hz"
+            ])
+            "auto"
+            my.gui.display.string.scale
+          ];
 
-          active_opacity = 1.0;
-          inactive_opacity = 1.0;
+          # uwsm-app doesn't seem to be reliable on startup
+          exec-once = builtins.map (cmd: "uwsm app -- ${cmd}") [
+            # set wallpaper
+            (lib.getExe (
+              pkgs.writeShellScriptBin "myswaybg" ''
+                ${lib.getExe' pkgs.swaybg "swaybg"} -c "${my.theme.color.crust}" -m solid_color
+              ''
+            ))
 
-          shadow.enabled = false;
-          blur.enabled = true;
-        };
-        animations.enabled = false;
+            "myppd" # set power profile
+          ];
 
-        dwindle = {
-          pseudotile = true;
-          preserve_split = true;
-          force_split = 2;
-        };
+          env = [
+            "XCURSOR_SIZE,24"
+            "HYPRCURSOR_SIZE,24"
+          ];
 
-        misc = {
-          force_default_wallpaper = 0;
-          disable_splash_rendering = true;
-          disable_hyprland_logo = true;
-          focus_on_activate = false;
-          # Disable Adaptive sync
-          vrr = 0;
-        };
+          # Look and Feel
+          general = {
+            gaps_in = 0;
+            gaps_out = 0;
+            border_size = 1;
+            resize_on_border = false;
+            allow_tearing = false;
+            layout = "dwindle";
 
-        input = {
-          kb_layout = "us";
-          follow_mouse = 0;
-          sensitivity = 0;
-          accel_profile = "flat";
-
-          touchpad = {
-            natural_scroll = false;
-            tap-to-click = true;
+            "col.inactive_border" = "$overlay0";
+            "col.active_border" = "$accent";
           };
-        };
 
-        gestures = {
-          workspace_swipe = false;
-        };
+          decoration = {
+            rounding = 0;
 
-        bind = lib.lists.flatten [
-          "${keys.mod}, Q, killactive"
-          "${keys.mod} SHIFT, E, exec, uwsm stop"
-          "${keys.mod}, V, togglefloating"
-          "${keys.mod} SHIFT, F, fullscreen"
+            active_opacity = 1.0;
+            inactive_opacity = 1.0;
 
-          "${keys.mod}, ${keys.left}, movefocus, l"
-          "${keys.mod}, ${keys.right}, movefocus, r"
-          "${keys.mod}, ${keys.up}, movefocus, u"
-          "${keys.mod}, ${keys.down}, movefocus, d"
+            shadow.enabled = false;
+            blur.enabled = true;
+          };
+          animations.enabled = false;
 
-          (builtins.map (
-            bind:
-            let
-              modKey = if bind.super then "${keys.mod}" else "";
-              action = if bind.mod != null then bind.mod else "";
+          dwindle = {
+            pseudotile = true;
+            preserve_split = true;
+            force_split = 2;
+          };
 
-              prefix = if modKey == "" && action == "" then "," else "${modKey} ${action},";
-            in
-            "${prefix} ${bind.key}, exec, ${if bind.uwsm then cfg.uwsm else ""} ${bind.cmd}"
-          ) cfg.keybinds)
+          misc = {
+            force_default_wallpaper = 0;
+            disable_splash_rendering = true;
+            disable_hyprland_logo = true;
+            focus_on_activate = false;
+            # Disable Adaptive sync
+            vrr = 0;
+          };
 
-          (builtins.concatMap (
-            num:
-            let
-              workspaceNum = builtins.toString (if num == 0 then 10 else num);
-              numStr = builtins.toString num;
-            in
-            [
-              # Switch workspaces with mainMod + [0-9]
-              "${keys.mod}, ${numStr}, workspace, ${workspaceNum}"
-              # Move active window to a workspace with mainMod + SHIFT + [0-9]
-              "${keys.mod} SHIFT, ${numStr}, movetoworkspace, ${workspaceNum}"
-            ]
-          ) (lib.lists.range 0 9))
-        ];
+          input = {
+            kb_layout = "us";
+            follow_mouse = 0;
+            sensitivity = 0;
+            accel_profile = "flat";
 
-        windowrule = lib.lists.flatten [
-          # refer: https://github.com/hyprwm/Hyprland/pull/4704#issuecomment-2304649119
-          "noborder, onworkspace:w[tv1] f[-1], floating:0"
+            touchpad = {
+              natural_scroll = false;
+              tap-to-click = true;
+            };
+          };
 
-          (builtins.map (
-            window:
-            builtins.concatStringsSep " ," (
-              builtins.filter (r: (builtins.stringLength r) > 0) [
-                (lib.strings.optionalString (window.state != null) window.state)
-                (lib.strings.optionalString (window.state == "float") "center") # center floating window
-                (lib.strings.optionalString (
-                  window.workspace != null
-                ) "workspace ${builtins.toString window.workspace} ${if window.silent then "silent" else ""}")
-                "${window.type}:^(${window.id})$"
+          gestures = {
+            workspace_swipe = false;
+          };
+
+          bind = lib.lists.flatten [
+            "${keys.mod}, Q, killactive"
+            "${keys.mod} SHIFT, E, exec, uwsm stop"
+            "${keys.mod}, V, togglefloating"
+            "${keys.mod} SHIFT, F, fullscreen"
+
+            (builtins.map (
+              bind:
+              let
+                modKey = if bind.super then "${keys.mod}" else "";
+                action = if bind.mod != null then bind.mod else "";
+
+                prefix = if modKey == "" && action == "" then "," else "${modKey} ${action},";
+              in
+              "${prefix} ${bind.key}, exec, ${if bind.uwsm then cfg.uwsm else ""} ${bind.cmd}"
+            ) cfg.keybinds)
+
+            (builtins.concatMap (
+              num:
+              let
+                workspaceNum = builtins.toString (if num == 0 then 10 else num);
+                numStr = builtins.toString num;
+              in
+              [
+                # Switch workspaces with mainMod + [0-9]
+                "${keys.mod}, ${numStr}, workspace, ${workspaceNum}"
+                # Move active window to a workspace with mainMod + SHIFT + [0-9]
+                "${keys.mod} SHIFT, ${numStr}, movetoworkspace, ${workspaceNum}"
               ]
-            )
-          ) cfg.windows)
-        ];
-      };
+            ) (lib.lists.range 0 9))
+          ];
 
-    };
+          windowrule = lib.lists.flatten [
+            # refer: https://github.com/hyprwm/Hyprland/pull/4704#issuecomment-2304649119
+            "noborder, onworkspace:w[tv1] f[-1], floating:0"
+
+            (builtins.map (
+              window:
+              builtins.concatStringsSep ", " (
+                builtins.filter (r: (builtins.stringLength r) > 0) [
+                  (lib.strings.optionalString (window.state != null) window.state)
+                  (lib.strings.optionalString (window.state == "float") "center") # center floating window
+                  (lib.strings.optionalString (
+                    window.workspace != null
+                  ) "workspace ${builtins.toString window.workspace} ${if window.silent then "silent" else ""}")
+                  "${window.type}:^(${window.id})$"
+                ]
+              )
+            ) cfg.windows)
+          ];
+        };
+      }
+
+      {
+        # window manipulation binds
+        settings.bind = lib.lists.flatten (
+          builtins.map
+            (
+              action:
+              (lib.attrsets.mapAttrsToList
+                (
+                  name: value:
+                  (builtins.concatStringsSep ", " [
+                    (builtins.concatStringsSep " " ([ keys.mod ] ++ action.mod))
+                    value
+                    action.name
+                    name
+                  ])
+                )
+                {
+                  l = keys.left;
+                  r = keys.right;
+                  u = keys.up;
+                  d = keys.down;
+                }
+              )
+            )
+            [
+              {
+                name = "movefocus";
+                mod = [ ];
+              }
+              {
+                name = "swapwindow";
+                mod = [ "SHIFT" ];
+              }
+              {
+                name = "movewindow";
+                mod = [ "CTRL" ];
+              }
+            ]
+        );
+
+        ## resize windows
+        extraConfig = # conf
+          ''
+            bind = ${keys.mod}, R, submap, resize
+            submap = resize
+
+            binde = , ${keys.right}, resizeactive, 10 0
+            binde = , ${keys.left}, resizeactive, -10 0
+            binde = , ${keys.up}, resizeactive, 0 -10
+            binde = , ${keys.down}, resizeactive, 0 10
+
+            bind = , escape, submap, reset
+            submap = reset
+          '';
+      }
+    ];
 
     xdg = {
       mime.enable = true;
