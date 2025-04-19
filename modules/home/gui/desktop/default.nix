@@ -154,7 +154,19 @@ in
       };
 
       settings = {
-        monitor = "${my.gui.display.name},${my.gui.display.string.width}x${my.gui.display.string.height}@${my.gui.display.string.refreshRate}Hz,auto,${my.gui.display.string.scale}";
+        monitor = builtins.concatStringsSep " ," [
+          my.gui.display.name
+          (builtins.concatStringsSep "" [
+            my.gui.display.string.width
+            "x"
+            my.gui.display.string.height
+            "@"
+            my.gui.display.string.refreshRate
+            "Hz"
+          ])
+          "auto"
+          my.gui.display.string.scale
+        ];
 
         # uwsm-app doesn't seem to be reliable on startup
         exec-once = builtins.map (cmd: "uwsm app -- ${cmd}") [
