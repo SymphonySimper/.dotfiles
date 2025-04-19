@@ -100,16 +100,16 @@ let
           brightness_color="${my.theme.color.green}"
         fi
 
-        # Caffiene
-        caffiene_inactive=$(mycaffiene -g)
-        caffiene_title_style="${titleDefaultStyle}"
-        if [ $caffiene_inactive -eq 1 ]; then
-          caffiene_status="DISABLED"
-          caffiene_color="${my.theme.color.overlay0}"
+        # Caffeine
+        caffeine_inactive=$(mycaffeine -g)
+        caffeine_title_style="${titleDefaultStyle}"
+        if [ $caffeine_inactive -eq 1 ]; then
+          caffeine_status="DISABLED"
+          caffeine_color="${my.theme.color.overlay0}"
         else
-          caffiene_status="ENABLED"
-          caffiene_title_style="bold"
-          caffiene_color="${my.theme.color.peach}"
+          caffeine_status="ENABLED"
+          caffeine_title_style="bold"
+          caffeine_color="${my.theme.color.peach}"
         fi
 
         # Audio
@@ -213,11 +213,11 @@ let
               };
             }}
             ${mkInfoLine {
-              title = "Caffiene";
-              titleStyle = "$caffiene_title_style";
+              title = "Caffeine";
+              titleStyle = "$caffeine_title_style";
               body = mkStyledText {
-                text = "$caffiene_status";
-                color = "$caffiene_color";
+                text = "$caffeine_status";
+                color = "$caffeine_color";
               };
             }}
             ${mkInfoLine {

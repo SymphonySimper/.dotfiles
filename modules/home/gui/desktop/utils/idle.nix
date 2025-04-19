@@ -5,8 +5,8 @@
   ...
 }:
 let
-  caffiene =
-    pkgs.writeShellScriptBin "mycaffiene" # sh
+  caffeine =
+    pkgs.writeShellScriptBin "mycaffeine" # sh
       ''
         handle_idle() {
           systemctl $1 --user hypridle;
@@ -14,8 +14,8 @@ let
 
         noti() {
           ${lib.my.mkNotification {
-            tag = "mycaffiene";
-            title = "Caffiene $1";
+            tag = "mycaffeine";
+            title = "Caffeine $1";
           }}
         }
 
@@ -61,11 +61,11 @@ in
     };
   };
 
-  home.packages = [ caffiene ];
+  home.packages = [ caffeine ];
   my.desktop.keybinds = [
     {
       key = "F10";
-      cmd = "${lib.getExe caffiene}";
+      cmd = "${lib.getExe caffeine}";
     }
   ];
 
