@@ -86,9 +86,24 @@ in
       type = lib.types.listOf (
         lib.types.submodule {
           options = {
+            state = lib.mkOption {
+              # refer: https://wiki.hyprland.org/Configuring/Window-Rules/#static-rules
+              type = lib.types.nullOr (
+                lib.types.enum [
+                  "float"
+                  "tile"
+                  "fullscreen"
+                  "maximize"
+                ]
+              );
+              description = "State of the window";
+              default = null;
+            };
+
             workspace = lib.mkOption {
-              type = lib.types.enum (builtins.genList (x: x + 1) 10);
+              type = lib.types.nullOr (lib.types.enum (builtins.genList (x: x + 1) 10));
               description = "Workspace where the window should be placed";
+              default = null;
             };
 
             silent = lib.mkEnableOption "Silent";
@@ -253,16 +268,19 @@ in
         windowrule = lib.lists.flatten [
           # refer: https://github.com/hyprwm/Hyprland/pull/4704#issuecomment-2304649119
           "noborder, onworkspace:w[tv1] f[-1], floating:0"
-          (builtins.map (value: "fullscreen, class:^(${value})$") [
-            "waydroid.com.mojang.minecraftpe"
-            "gamescope"
-          ])
 
           (builtins.map (
             window:
-            "workspace ${builtins.toString window.workspace} ${
-              if window.silent then "silent" else ""
-            }, ${window.type}:^(${window.id})$"
+            builtins.concatStringsSep " ," (
+              builtins.filter (r: (builtins.stringLength r) > 0) [
+                (lib.strings.optionalString (window.state != null) window.state)
+                (lib.strings.optionalString (window.state == "float") "center") # center floating window
+                (lib.strings.optionalString (
+                  window.workspace != null
+                ) "workspace ${builtins.toString window.workspace} ${if window.silent then "silent" else ""}")
+                "${window.type}:^(${window.id})$"
+              ]
+            )
           ) cfg.windows)
         ];
       };
@@ -308,8 +326,18 @@ in
 
       windows = [
         {
+          id = "xdg-desktop-portal-gtk";
+          state = "float";
+        }
+
+        # waydroid
+        {
           id = "Waydroid";
           workspace = 7;
+        }
+        {
+          id = "waydroid.com.mojang.minecraftpe";
+          state = "fullscreen";
         }
 
         # steam
@@ -325,6 +353,7 @@ in
         {
           id = "gamescope";
           workspace = 7;
+          state = "fullscreen";
         }
       ];
     };
