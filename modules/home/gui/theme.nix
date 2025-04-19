@@ -5,7 +5,9 @@
   ...
 }:
 let
-  gtkExtraSettings = ''gtk-application-prefer-dark-theme=${if my.theme.dark then "1" else "0"}'';
+  gtkExtraSettings = {
+    gtk-application-prefer-dark-theme = my.theme.dark;
+  };
 in
 {
   config = lib.mkIf my.gui.enable {
@@ -34,9 +36,8 @@ in
         name = "Adwaita";
       };
 
-      gtk3.extraConfig.settings = gtkExtraSettings;
-
-      gtk4.extraConfig.settings = gtkExtraSettings;
+      gtk3.extraConfig = gtkExtraSettings;
+      gtk4.extraConfig = gtkExtraSettings; # required for non libadwaita applications
 
       # font = {
       #   name = "Sans";
