@@ -38,8 +38,6 @@
         swap = "16G";
       };
     };
-
-    programs.docker.enable = true;
   };
 
   boot.initrd.availableKernelModules = [
