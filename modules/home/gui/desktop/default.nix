@@ -250,7 +250,7 @@ in
           ) (lib.lists.range 0 9))
         ];
 
-        windowrulev2 = lib.lists.flatten [
+        windowrule = lib.lists.flatten [
           # refer: https://github.com/hyprwm/Hyprland/pull/4704#issuecomment-2304649119
           "noborder, onworkspace:w[tv1] f[-1], floating:0"
           (builtins.map (value: "fullscreen, class:^(${value})$") [
