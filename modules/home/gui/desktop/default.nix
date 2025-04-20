@@ -185,18 +185,6 @@ in
             my.gui.display.string.scale
           ];
 
-          # uwsm-app doesn't seem to be reliable on startup
-          exec-once = builtins.map (cmd: "uwsm app -- ${cmd}") [
-            # set wallpaper
-            (lib.getExe (
-              pkgs.writeShellScriptBin "myswaybg" ''
-                ${lib.getExe' pkgs.swaybg "swaybg"} -c "${my.theme.color.crust}" -m solid_color
-              ''
-            ))
-
-            "myppd" # set power profile
-          ];
-
           env = [
             "XCURSOR_SIZE,24"
             "HYPRCURSOR_SIZE,24"
@@ -410,6 +398,20 @@ in
     };
 
     my.desktop = {
+      autostart = [
+        {
+          # set wallpaper
+          name = "myswaybg";
+          cmd = lib.getExe (
+            pkgs.writeShellScriptBin "myswaybg" ''
+              ${lib.getExe' pkgs.swaybg "swaybg"} -c "${my.theme.color.crust}" -m solid_color
+            ''
+          );
+        }
+
+        "myppd" # set power profile
+      ];
+
       mime."org.gnome.Loupe" = [
         "image/jpeg"
         "image/png"
