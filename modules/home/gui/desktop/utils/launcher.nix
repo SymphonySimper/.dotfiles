@@ -42,7 +42,7 @@
 
   home.activation = {
     # refer: https://github.com/philj56/tofi/issues/115#issuecomment-1950273960
-    rmTofiCache =
+    myRmTofiCache =
       lib.hm.dag.entryAfter [ "writeBoundary" ] # sh
         ''
           tofi_cache=${config.xdg.cacheHome}/tofi-drun
