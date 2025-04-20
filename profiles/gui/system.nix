@@ -20,7 +20,6 @@
       enable = true;
 
       allow = {
-        yt = true;
         reddit = true;
         discord = true;
       };
