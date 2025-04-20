@@ -158,55 +158,48 @@ in
 
       # Browsers
       ## Chromium
-      (
-        let
-          desktop = "google-chrome.desktop";
-        in
-        {
-          programs.chromium = {
-            enable = true;
-            package = pkgs.google-chrome;
+      {
+        programs.chromium = {
+          enable = true;
+          package = pkgs.google-chrome;
 
-            commandLineArgs = mkCommandLineArgs { };
+          commandLineArgs = mkCommandLineArgs { };
 
-            extensions = [
-              theme.${my.theme.flavor} # Catppuccin theme
-              "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
-              "nngceckbapebfimnlniiiahkandclblb" # bitwarden
-              "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
-            ];
-          };
+          extensions = [
+            theme.${my.theme.flavor} # Catppuccin theme
+            "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
+            "nngceckbapebfimnlniiiahkandclblb" # bitwarden
+            "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
+          ];
+        };
 
-          my.desktop = {
-            autostart = [
-              "${config.programs.chromium.package}/share/applications/${desktop}"
-            ];
+        my.desktop = {
+          autostart = [ "google-chrome-stable" ];
 
-            mime."google-chrome" = [
-              "application/xhtml+xml"
-              "text/html"
-              "text/xml"
-              "x-scheme-handler/ftp"
-              "x-scheme-handler/http"
-              "x-scheme-handler/https"
-            ];
+          mime."google-chrome" = [
+            "application/xhtml+xml"
+            "text/html"
+            "text/xml"
+            "x-scheme-handler/ftp"
+            "x-scheme-handler/http"
+            "x-scheme-handler/https"
+          ];
 
-            windows = [
-              {
-                id = "google-chrome";
-                silent = true;
-                workspace = 2;
-              }
-              {
-                id = ".*sharing your screen.*";
-                type = "title";
-                silent = true;
-                workspace = 10;
-              }
-            ];
-          };
-        }
-      )
+          windows = [
+            {
+              id = "google-chrome";
+              silent = true;
+              workspace = 2;
+            }
+            {
+              id = ".*sharing your screen.*";
+              type = "title";
+              silent = true;
+              workspace = 10;
+            }
+          ];
+        };
+      }
     ]
   );
 }

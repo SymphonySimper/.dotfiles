@@ -25,8 +25,24 @@ in
 
   options.my.desktop = {
     autostart = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      description = "Desktop entries to autostart on startup";
+      type = lib.types.listOf (
+        lib.types.oneOf [
+          lib.types.str
+          (lib.types.submodule {
+            options = {
+              name = lib.mkOption {
+                type = lib.types.str;
+                description = "Name of the desktop entry";
+              };
+              cmd = lib.mkOption {
+                type = lib.types.str;
+                description = "Command to exec";
+              };
+            };
+          })
+        ]
+      );
+      description = "Desktop or command entries to autostart on startup";
       default = [ ];
     };
 
@@ -370,7 +386,26 @@ in
 
       autostart = lib.mkIf (builtins.length cfg.autostart > 0) {
         enable = true;
-        entries = cfg.autostart;
+        entries = builtins.map (
+          entry:
+          let
+            suffix = ".desktop";
+
+            isString = (builtins.typeOf entry) == "string";
+            name = if isString then entry else entry.name;
+            exec = if isString then entry else entry.cmd;
+          in
+          if isString && (lib.strings.hasSuffix suffix entry) then
+            entry
+          else
+            let
+              desktopEntry = pkgs.makeDesktopItem {
+                inherit name exec;
+                desktopName = name;
+              };
+            in
+            "${desktopEntry}/share/applications/${name}${suffix}"
+        ) cfg.autostart;
       };
     };
 

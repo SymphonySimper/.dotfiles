@@ -1,19 +1,11 @@
-{
-  my,
-  config,
-  lib,
-  ...
-}:
+{ my, lib, ... }:
 let
   padding = 2;
-  desktopFile = "Alacritty.desktop";
 in
 {
   config = lib.mkIf my.gui.enable {
     my.desktop = {
-      autostart = [
-        "${config.programs.alacritty.package}/share/applications/${desktopFile}"
-      ];
+      autostart = [ "alacritty" ];
 
       windows = [
         {
