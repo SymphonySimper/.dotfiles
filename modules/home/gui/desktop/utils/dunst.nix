@@ -240,7 +240,7 @@ in
               ''
                 time_date_string="$(date '+%H:%M;%d/%m/%Y')"
                 IFS=";"
-                time_date=($time_date_string)
+                read -ra time_date <<<"$time_date_string"
                 unset IFS
               '';
             value = [
@@ -295,11 +295,11 @@ in
                 'Discharging') battery_status_color="${cfg.color.warn}" ;;
                 esac
 
-                if [ $battery_capacity -gt 80 ]; then
+                if [[ $battery_capacity -gt 80 ]]; then
                   battery_capacity_color="${cfg.color.warn}"
-                elif [ $battery_capacity -gt 50 ]; then
+                elif [[ $battery_capacity -gt 50 ]]; then
                   battery_capacity_color="${cfg.color.good}"
-                elif [ $battery_capacity -gt 20 ]; then
+                elif [[ $battery_capacity -gt 20 ]]; then
                   battery_capacity_color="${cfg.color.ok}"
                   battery_title_style="${cfg.style.bold}"
                 else

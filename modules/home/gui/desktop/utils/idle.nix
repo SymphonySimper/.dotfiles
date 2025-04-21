@@ -28,7 +28,7 @@ let
           -g) get_status ;;
            *)
             is_inactive=$(get_status)
-            if [ $is_inactive -eq 0 ]; then
+            if [[ $is_inactive -eq 0 ]]; then
               handle_idle start
               noti "Disabled"
             else
@@ -81,7 +81,7 @@ in
           ''
             caffeine_inactive=$(${caffeine} -g)
             caffeine_title_style="${cfg.style.normal}"
-            if [ $caffeine_inactive -eq 1 ]; then
+            if [[ $caffeine_inactive -eq 1 ]]; then
               caffeine_status="DISABLED"
               caffeine_color="${my.theme.color.overlay0}"
             else

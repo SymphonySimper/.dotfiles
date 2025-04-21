@@ -20,7 +20,7 @@ let
 
         get_volume() {
           volume=$($app get-volume $sink | cut -d ' ' -f2)
-          echo $(echo "$volume * 100 / 1" | "${lib.getExe' pkgs.bc "bc"}")
+          echo "$volume * 100 / 1" | "${lib.getExe' pkgs.bc "bc"}"
         }
 
         change_vol() {
@@ -36,7 +36,7 @@ let
         set_vol() { change_vol "$1"; }
 
         notify_toggle() {
-          if [ $(get_mute $1) -eq 0 ]; then
+          if [[ $(get_mute $1) -eq 0 ]]; then
             status="muted"
           else
             status="unmuted"
@@ -115,19 +115,19 @@ in
               audio_mute=$(${volume} -gm)
               audio_volume=$(${volume} -gV)
               audio_title_style="${cfg.style.normal}"
-              if [ $audio_mute -eq 0 ]; then
+              if [[ $audio_mute -eq 0 ]]; then
                 audio="MUTED"
                 audio_title_style="${cfg.style.bold}"
                 audio_color="${cfg.color.err}"
               else
                 audio="$audio_volume"
-                if [ $audio_volume -gt 80 ]; then
+                if [[ $audio_volume -gt 80 ]]; then
                   audio_color="${cfg.color.err}"
                   audio_title_style="bold"
-                elif [ $audio_volume -gt 50 ]; then
+                elif [[ $audio_volume -gt 50 ]]; then
                   audio_color="${cfg.color.warn}"
                   audio_title_style="bold"
-                elif [ $audio_volume -gt 20 ]; then
+                elif [[ $audio_volume -gt 20 ]]; then
                   audio_color="${cfg.color.ok}"
                 else
                   audio_color="${cfg.color.good}"
@@ -149,7 +149,7 @@ in
             ''
               mic_mute=$(${volume} -gM)
               mic_title_style="${cfg.style.normal}"
-              if [ $mic_mute -eq 0 ]; then
+              if [[ $mic_mute -eq 0 ]]; then
                 mic="MUTED"
                 mic_color="${cfg.color.good}"
               else

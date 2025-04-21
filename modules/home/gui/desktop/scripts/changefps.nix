@@ -80,7 +80,7 @@ in
             refresh_rate_status=$(${changefps} get)
             refresh_rate_title_style="${cfg.style.normal}"
 
-            if [ $refresh_rate_status -eq ${my.gui.display.string.refreshRate} ]; then
+            if [[ $refresh_rate_status -eq ${my.gui.display.string.refreshRate} ]]; then
               refresh_rate_color="${cfg.color.good}"
             else
               refresh_rate_color="${cfg.color.err}"

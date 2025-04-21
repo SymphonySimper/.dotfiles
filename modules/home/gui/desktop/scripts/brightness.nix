@@ -86,13 +86,13 @@ in
           ''
             brightness_status=$(${brightness} -g)
             brightness_title_style="${cfg.style.normal}"
-            if [ $brightness_status -gt 80 ]; then
+            if [[ $brightness_status -gt 80 ]]; then
               brightness_color="${cfg.color.err}"
               brightness_title_style="bold"
-            elif [ $brightness_status -gt 50 ]; then
+            elif [[ $brightness_status -gt 50 ]]; then
               brightness_color="${cfg.color.warn}"
               brightness_title_style="bold"
-            elif [ $brightness_status -gt 20 ]; then
+            elif [[ $brightness_status -gt 20 ]]; then
               brightness_color="${cfg.color.ok}"
             else
               brightness_color="${cfg.color.good}"

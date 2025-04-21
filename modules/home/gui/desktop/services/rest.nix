@@ -25,7 +25,7 @@
           title="Short rest"
           body="15 minutes!"
 
-          if [ $new_count -eq 5 ]; then
+          if [[ $new_count -eq 5 ]]; then
             new_count=1
             title="Long rest"
             body="60 minutes!"

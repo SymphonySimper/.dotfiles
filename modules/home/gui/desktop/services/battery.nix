@@ -23,10 +23,10 @@
         battery_status=$(</sys/class/power_supply/BAT0/status)
         battery_capacity=$(</sys/class/power_supply/BAT0/capacity)
 
-        if [ $battery_capacity -gt 80 ] && [[ $battery_status == 'Charging' ]]; then
+        if [[ $battery_capacity -gt 80 ]] && [[ $battery_status == 'Charging' ]]; then
           battery_notify "Battery is greater than 80% ($battery_capacity) unplug the charger"
         fi
-        if [ $battery_capacity -le 40 ] && [[ $battery_status == 'Discharging' ]]; then
+        if [[ $battery_capacity -le 40 ]] && [[ $battery_status == 'Discharging' ]]; then
           if [ ! -f "$tmp_file" ]; then
             default_temp_file
           fi
