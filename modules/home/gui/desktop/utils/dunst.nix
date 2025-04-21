@@ -259,7 +259,7 @@ in
             title = "Network";
             logic = # sh
               ''
-                network_status=$(nmcli -p -g type connection show --active | head -n1 | cut -d '-' -f3)
+                network_status=$(${lib.getExe' pkgs.networkmanager "nmcli"} -p -g type connection show --active | head -n1 | cut -d '-' -f3)
                 network_title_style="${cfg.style.normal}"
                 network="''${network_status^}"
                 case "$network_status" in
