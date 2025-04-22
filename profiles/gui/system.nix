@@ -18,11 +18,7 @@
   my = {
     networking.begone = {
       enable = true;
-
-      allow = {
-        reddit = true;
-        discord = true;
-      };
+      allow.discord = true;
     };
 
     hardware = {
