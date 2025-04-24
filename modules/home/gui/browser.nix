@@ -170,7 +170,6 @@ in
             [
               theme.${my.theme.flavor} # Catppuccin theme
               "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
-              "nngceckbapebfimnlniiiahkandclblb" # bitwarden
               "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
             ];
         };

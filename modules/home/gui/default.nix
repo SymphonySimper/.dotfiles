@@ -43,6 +43,16 @@
       }
 
       {
+        home.packages = [ pkgs.bitwarden-desktop ];
+        my.desktop.windows = [
+          {
+            id = "Bitwarden";
+            workspace = 8;
+          }
+        ];
+      }
+
+      {
         home.packages = with pkgs; [ libreoffice ];
       }
     ]
