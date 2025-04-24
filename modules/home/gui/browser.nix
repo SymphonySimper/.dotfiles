@@ -68,9 +68,9 @@ in
   config = lib.mkIf cfg.enable {
     my = {
       desktop = {
-        autostart = [ "google-chrome-stable" ];
+        autostart = [ "chromium-browser" ];
 
-        mime."google-chrome" = [
+        mime."chromium-browser" = [
           "application/xhtml+xml"
           "text/html"
           "text/xml"
@@ -81,7 +81,7 @@ in
 
         windows = [
           {
-            id = "google-chrome";
+            id = "chromium-browser";
             silent = true;
             workspace = 2;
           }
@@ -112,7 +112,7 @@ in
     # Browser
     programs.chromium = {
       enable = true;
-      package = pkgs.google-chrome;
+      package = pkgs.chromium.override { enableWideVine = true; };
       commandLineArgs = cfg.args;
 
       extensions =
