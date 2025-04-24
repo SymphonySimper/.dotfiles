@@ -54,6 +54,11 @@ in
         # PasswordManagerEnabled = false;
         RestoreOnStartup = 1;
         DefaultBrowserSettingEnabled = false; # do not check for default browser
+        GenAiDefaultSettings = 2; # disable all Genarative AI features
+        AutofillCreditCardEnabled = false;
+        AutofillAddressEnabled = false;
+        AutoplayAllowed = false;
+
         SiteSearchSettings = mkSiteSearchSettings [
           [
             "YouTube"
