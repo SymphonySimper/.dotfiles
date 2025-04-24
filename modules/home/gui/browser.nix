@@ -41,13 +41,6 @@ let
 
   browsers.default = lib.getExe' pkgs.xdg-utils "xdg-open";
 
-  theme = {
-    frappe = "olhelnoplefjdmncknfphenjclimckaf";
-    latte = "jhjnalhegpceacdhbplhnakmkdliaddd";
-    macchiato = "cmpdlhmnmjhihmcfnigoememnffkimlk";
-    mocha = "bkkmolkhemgaeaeggcmfbghljjjoofoh";
-  };
-
   category = "X-MY-Bookmarks";
   bookmarks = {
     "Social Media" = [
@@ -165,12 +158,21 @@ in
 
           commandLineArgs = mkCommandLineArgs { };
 
-          extensions = [
-            theme.${my.theme.flavor} # Catppuccin theme
-            "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
-            "nngceckbapebfimnlniiiahkandclblb" # bitwarden
-            "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
-          ];
+          extensions =
+            let
+              theme = {
+                frappe = "olhelnoplefjdmncknfphenjclimckaf";
+                latte = "jhjnalhegpceacdhbplhnakmkdliaddd";
+                macchiato = "cmpdlhmnmjhihmcfnigoememnffkimlk";
+                mocha = "bkkmolkhemgaeaeggcmfbghljjjoofoh";
+              };
+            in
+            [
+              theme.${my.theme.flavor} # Catppuccin theme
+              "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
+              "nngceckbapebfimnlniiiahkandclblb" # bitwarden
+              "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
+            ];
         };
 
         my.desktop = {
