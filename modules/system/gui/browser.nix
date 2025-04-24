@@ -53,6 +53,7 @@ in
       extraOpts = {
         # PasswordManagerEnabled = false;
         RestoreOnStartup = 1;
+        DefaultBrowserSettingEnabled = false; # do not check for default browser
         SiteSearchSettings = mkSiteSearchSettings [
           [
             "YouTube"
