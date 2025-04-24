@@ -138,4 +138,6 @@ in
       "!.gitattributes"
     ];
   };
+
+  my.programs.browser.entries.Github.url = "github.com";
 }

@@ -17,6 +17,12 @@
   config = lib.mkIf my.gui.enable (
     lib.mkMerge [
       {
+        my.programs = {
+          browser.enable = lib.mkDefault my.gui.enable;
+        };
+      }
+
+      {
         programs.obs-studio.enable = true;
         my.desktop.windows = [
           {
