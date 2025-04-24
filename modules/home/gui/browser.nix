@@ -33,19 +33,13 @@ in
             ];
           };
         in
-        builtins.concatLists [
-          [
-            "--ozone-platform-hint=auto"
-          ]
-
-          (builtins.map (feature: "--${feature.name}-features=${builtins.concatStringsSep "," feature.value}")
-            (
-              builtins.filter (f: (builtins.length f.value) > 0) (
-                lib.attrsets.mapAttrsToList (name: value: { inherit name value; }) features
-              )
+        (builtins.map (feature: "--${feature.name}-features=${builtins.concatStringsSep "," feature.value}")
+          (
+            builtins.filter (f: (builtins.length f.value) > 0) (
+              lib.attrsets.mapAttrsToList (name: value: { inherit name value; }) features
             )
           )
-        ]
+        )
       );
     };
 
