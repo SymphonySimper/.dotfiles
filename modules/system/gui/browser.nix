@@ -58,6 +58,7 @@ in
         AutofillCreditCardEnabled = false;
         AutofillAddressEnabled = false;
         AutoplayAllowed = false;
+        BrowserLabsEnabled = false;
 
         SiteSearchSettings = mkSiteSearchSettings [
           [
