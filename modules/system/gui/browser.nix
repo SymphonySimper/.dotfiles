@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  my,
+  config,
+  lib,
+  ...
+}:
 let
   cfg = config.my.programs.browser;
 
@@ -8,6 +13,19 @@ let
       site ? null,
     }:
     "https://search.brave.com/search?q=${if site != null then "site%3A${site}+" else ""}{searchTerms}";
+
+  blankPage = "file://${
+    builtins.toFile "home.html" # html
+      ''
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <title>New Tab</title>
+          </head>
+          <body style="background-color: ${my.theme.color.base};"></body>
+        </html>
+      ''
+  }";
 in
 {
   options.my.programs.browser = {
@@ -159,6 +177,12 @@ in
         DefaultSearchProviderEnabled = true;
         DefaultSearchProviderName = DefaultSearchProvider;
         DefaultSearchProviderSearchURL = mkDefaultSearchProviderURL { };
+        DefaultSearchProviderNewTabURL = blankPage;
+
+        ShowHomeButton = false;
+        HomepageIsNewTabPage = true;
+        HomepageLocation = blankPage;
+        NewTabPageLocation = blankPage;
 
         SiteSearchSettings = builtins.map (
           option:
