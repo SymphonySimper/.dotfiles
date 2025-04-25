@@ -23,6 +23,7 @@ in
             enable = [
               # https://wiki.archlinux.org/title/Chromium#Hardware_video_acceleration
               "AcceleratedVideoDecodeLinuxGL"
+              "AcceleratedVideoEncoder"
             ];
           };
         in
