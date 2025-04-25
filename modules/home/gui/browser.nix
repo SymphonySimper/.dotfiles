@@ -120,8 +120,8 @@ in
         in
         [
           theme.${my.theme.flavor} # Catppuccin theme
-          "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
-          "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
+          # "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
+          # "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
         ];
     };
 

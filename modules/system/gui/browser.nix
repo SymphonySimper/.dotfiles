@@ -79,9 +79,9 @@ in
         };
       };
 
-      extensions = [
-        "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
-      ];
+      # extensions = [
+      #   "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
+      # ];
 
       bookmarks = {
         Anime = {
