@@ -23,13 +23,6 @@ in
             enable = [
               # https://wiki.archlinux.org/title/Chromium#Hardware_video_acceleration
               "AcceleratedVideoDecodeLinuxGL"
-
-              # https://wiki.archlinux.org/title/Chromium#Vulkan
-              "VaapiVideoDecoder"
-              "VaapiIgnoreDriverChecks"
-              "Vulkan"
-              "DefaultANGLEVulkan"
-              "VulkanFromANGLE"
             ];
           };
         in
