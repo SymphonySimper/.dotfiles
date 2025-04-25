@@ -1,6 +1,13 @@
 { config, lib, ... }:
 let
   cfg = config.my.programs.browser;
+
+  DefaultSearchProvider = "Brave";
+  mkDefaultSearchProviderURL =
+    {
+      site ? null,
+    }:
+    "https://search.brave.com/search?q=${if site != null then "site%3A${site}+" else ""}{searchTerms}";
 in
 {
   options.my.programs.browser = {
@@ -65,7 +72,7 @@ in
           url = "https://www.youtube.com/results?search_query={searchTerms}";
         };
 
-        # Search sites via Google
+        # Search sites via Default Search Provider
         "rt" = {
           name = "Reddit";
           url = "reddit.com";
@@ -145,17 +152,25 @@ in
         AutoplayAllowed = false;
         BrowserLabsEnabled = false;
 
+        # Balanced memory savings
+        HighEfficiencyModeEnabled = true;
+        MemorySaverModeSavings = 1;
+
+        DefaultSearchProviderEnabled = true;
+        DefaultSearchProviderName = DefaultSearchProvider;
+        DefaultSearchProviderSearchURL = mkDefaultSearchProviderURL { };
+
         SiteSearchSettings = builtins.map (
           option:
           let
             name = option.value.name;
             url = option.value.url;
-            viaGoogle = if lib.strings.hasPrefix "http" url then false else true;
+            viaDefaultSearch = if lib.strings.hasPrefix "http" url then false else true;
           in
           {
-            name = if viaGoogle then "Google ${name}" else name;
+            name = if viaDefaultSearch then "${DefaultSearchProvider} ${name}" else name;
             shortcut = "!${option.name}";
-            url = if viaGoogle then "https://www.google.com/search?q=site%3A${url}+{searchTerms}" else url;
+            url = if viaDefaultSearch then mkDefaultSearchProviderURL { site = url; } else url;
           }
         ) (lib.attrsets.attrsToList cfg.search);
 
