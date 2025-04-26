@@ -14,7 +14,7 @@
 
   home.packages = [
     (pkgs.google-chrome.override {
-      commandLineArgs = builtins.concatStringsSep " " config.my.programs.browser.args;
+      commandLineArgs = builtins.concatStringsSep " " config.my.programs.browser.chromiumArgs;
     })
   ];
 }
