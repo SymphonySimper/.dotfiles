@@ -104,16 +104,30 @@ in
           options = {
             state = lib.mkOption {
               # refer: https://wiki.hyprland.org/Configuring/Window-Rules/#static-rules
-              type = lib.types.nullOr (
-                lib.types.enum [
-                  "float"
-                  "tile"
-                  "fullscreen"
-                  "maximize"
-                ]
-              );
+              type =
+                let
+                  states = lib.types.enum [
+                    "float"
+                    "tile"
+                    "fullscreen"
+                    "maximize"
+                    "pin"
+                  ];
+                in
+                lib.types.nullOr (
+                  lib.types.oneOf [
+                    states
+                    (lib.types.listOf states)
+                  ]
+                );
               description = "State of the window";
               default = null;
+            };
+
+            center = lib.mkOption {
+              type = lib.types.bool;
+              description = "Keep the floating window at ther center";
+              default = true;
             };
 
             workspace = lib.mkOption {
@@ -281,18 +295,24 @@ in
             # refer: https://github.com/hyprwm/Hyprland/pull/4704#issuecomment-2304649119
             "noborder, onworkspace:w[tv1] f[-1], floating:0"
 
-            (builtins.map (
+            (builtins.concatMap (
               window:
-              builtins.concatStringsSep ", " (
-                builtins.filter (r: (builtins.stringLength r) > 0) [
-                  (lib.strings.optionalString (window.state != null) window.state)
-                  (lib.strings.optionalString (window.state == "float") "center") # center floating window
-                  (lib.strings.optionalString (
-                    window.workspace != null
-                  ) "workspace ${builtins.toString window.workspace} ${if window.silent then "silent" else ""}")
-                  "${window.type}:^(${window.id})$"
-                ]
-              )
+              let
+                states = if builtins.typeOf window.state == "list" then window.state else [ window.state ];
+              in
+              builtins.map (
+                state:
+                builtins.concatStringsSep ", " (
+                  builtins.filter (r: (builtins.stringLength r) > 0) [
+                    (lib.strings.optionalString (state != null) state)
+                    (lib.strings.optionalString (state == "float" && window.center) "center") # center floating window
+                    (lib.strings.optionalString (
+                      window.workspace != null
+                    ) "workspace ${builtins.toString window.workspace} ${if window.silent then "silent" else ""}")
+                    "${window.type}:^(${window.id})$"
+                  ]
+                )
+              ) states
             ) cfg.windows)
           ];
         };
