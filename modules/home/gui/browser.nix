@@ -159,6 +159,15 @@ in
               workspace = 2;
             }
             {
+              id = "Picture-in-Picture";
+              type = "title";
+              state = [
+                "float"
+                "pin"
+              ];
+              center = false;
+            }
+            {
               id = ".*sharing your screen.*";
               type = "title";
               silent = true;
