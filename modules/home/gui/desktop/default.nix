@@ -321,43 +321,50 @@ in
 
       {
         # window manipulation binds
-        settings.bind = lib.lists.flatten (
-          builtins.map
-            (
-              action:
-              (lib.attrsets.mapAttrsToList
-                (
-                  name: value:
-                  (builtins.concatStringsSep ", " [
-                    (builtins.concatStringsSep " " ([ keys.mod ] ++ action.mod))
-                    value
-                    action.name
-                    name
-                  ])
+        settings = {
+          bind = lib.lists.flatten (
+            builtins.map
+              (
+                action:
+                (lib.attrsets.mapAttrsToList
+                  (
+                    name: value:
+                    (builtins.concatStringsSep ", " [
+                      (builtins.concatStringsSep " " ([ keys.mod ] ++ action.mod))
+                      value
+                      action.name
+                      name
+                    ])
+                  )
+                  {
+                    l = keys.left;
+                    r = keys.right;
+                    u = keys.up;
+                    d = keys.down;
+                  }
                 )
-                {
-                  l = keys.left;
-                  r = keys.right;
-                  u = keys.up;
-                  d = keys.down;
-                }
               )
-            )
-            [
-              {
-                name = "movefocus";
-                mod = [ ];
-              }
-              {
-                name = "swapwindow";
-                mod = [ "SHIFT" ];
-              }
-              {
-                name = "movewindow";
-                mod = [ "CTRL" ];
-              }
-            ]
-        );
+              [
+                {
+                  name = "movefocus";
+                  mod = [ ];
+                }
+                {
+                  name = "swapwindow";
+                  mod = [ "SHIFT" ];
+                }
+                {
+                  name = "movewindow";
+                  mod = [ "CTRL" ];
+                }
+              ]
+          );
+
+          bindm = [
+            "${keys.mod}, mouse:272, movewindow"
+            "${keys.mod}, mouse:273, resizewindow"
+          ];
+        };
 
         ## resize windows
         extraConfig = # conf
