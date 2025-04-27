@@ -264,6 +264,7 @@ in
             "${keys.mod} SHIFT, E, exec, uwsm stop"
             "${keys.mod}, V, togglefloating"
             "${keys.mod} SHIFT, F, fullscreen"
+            "${keys.mod}, space, cyclenext"
 
             (builtins.map (
               bind:
