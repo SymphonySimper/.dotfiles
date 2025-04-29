@@ -2,7 +2,7 @@
 {
   imports = [
     ./desktop.nix
-    ./kanata.nix
+    ./keyboard.nix
     ./steam.nix
 
     ./vm
