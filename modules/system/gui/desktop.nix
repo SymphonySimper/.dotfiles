@@ -29,11 +29,10 @@
       systemPackages = [
         (pkgs.writeShellScriptBin "myreload" # sh
           ''
-            sudo systemctl restart kanata-keyboard.service        
             sudo systemctl restart NetworkManager
             ${lib.my.mkNotification {
               tag = "myreload";
-              title = "Restarted network manager and Kanata";
+              title = "Restarted network manager";
             }}
           ''
         )
