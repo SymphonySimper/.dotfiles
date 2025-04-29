@@ -1,19 +1,9 @@
-{
-  config,
-  modulesPath,
-  ...
-}:
+{ modulesPath, ... }:
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     ../../modules/system
   ];
-
-  boot.binfmt.emulatedSystems = [
-    "i686-linux"
-    "aarch64-linux"
-  ];
-  nix.settings.extra-platforms = config.boot.binfmt.emulatedSystems;
 
   my = {
     networking.begone = {
