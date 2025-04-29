@@ -436,8 +436,6 @@ in
             ''
           );
         }
-
-        "myppd" # set power profile
       ];
 
       mime."org.gnome.Loupe" = [

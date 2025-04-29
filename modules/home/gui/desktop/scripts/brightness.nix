@@ -76,7 +76,7 @@ in
       }
     ];
 
-    notifybar.modules."5" =
+    notifybar.modules."4" =
       let
         cfg = config.my.desktop.notifybar;
       in

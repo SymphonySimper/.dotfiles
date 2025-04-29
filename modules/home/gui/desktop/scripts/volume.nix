@@ -108,7 +108,7 @@ in
         cfg = config.my.desktop.notifybar;
       in
       {
-        "7" = {
+        "6" = {
           title = "Audio";
           logic = # sh
             ''
@@ -143,7 +143,7 @@ in
           ];
         };
 
-        "8" = {
+        "7" = {
           title = "Mic";
           logic = # sh
             ''

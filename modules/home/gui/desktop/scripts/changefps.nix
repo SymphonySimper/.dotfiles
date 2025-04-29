@@ -33,13 +33,11 @@ let
         function min() {
             ${mkMonitor my.gui.display.string.refreshRate false}
             notify "${my.gui.display.string.refreshRate}"
-            myppd
         }
 
         function max() {
             ${mkMonitor my.gui.display.string.maxRefreshRate true}
             notify "${my.gui.display.string.maxRefreshRate}"
-            myppd max
         }
 
         function toggle() {
@@ -69,7 +67,7 @@ in
       }
     ];
 
-    notifybar.modules."4" =
+    notifybar.modules."3" =
       let
         cfg = config.my.desktop.notifybar;
       in
