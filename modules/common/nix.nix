@@ -55,6 +55,10 @@ in
               "flakes"
             ];
           }
+
+          (lib.attrsets.optionalAttrs (system) {
+            extra-platforms = config.boot.binfmt.emulatedSystems;
+          })
         ];
 
         registry = {
