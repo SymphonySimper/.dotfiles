@@ -9,8 +9,6 @@
 let
   frequency = "weekly";
   system = config.my.common.system;
-
-  mkUnsafeIf = condition: content: if condition then content else { };
 in
 {
   options.my.common = {
@@ -33,11 +31,11 @@ in
             options = "--delete-older-than 14d";
           }
 
-          (mkUnsafeIf system {
+          (lib.attrsets.optionalAttrs system {
             dates = frequency;
           })
 
-          (mkUnsafeIf (!system) {
+          (lib.attrsets.optionalAttrs (!system) {
             inherit frequency;
           })
         ];
@@ -65,7 +63,7 @@ in
         };
       }
 
-      (mkUnsafeIf (system) {
+      (lib.attrsets.optionalAttrs (system) {
         # Storage optimization
         optimise.automatic = true;
       })
