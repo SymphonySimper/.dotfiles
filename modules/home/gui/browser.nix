@@ -11,7 +11,6 @@ let
 in
 {
   options.my.programs.browser = {
-    enable = lib.mkEnableOption "Browser";
     enableContainer = lib.mkEnableOption "Container";
 
     chromiumArgs = lib.mkOption {
@@ -39,33 +38,6 @@ in
       );
     };
 
-    bookmarks = lib.mkOption {
-      type = lib.types.attrsOf (
-        lib.types.attrsOf (
-          lib.types.oneOf [
-            lib.types.str
-            (lib.types.submodule {
-              options = {
-                url = lib.mkOption {
-                  type = lib.types.str;
-                  description = "Site URL";
-                };
-
-                entry = lib.mkEnableOption "Also show as desktop entry";
-                browser = lib.mkOption {
-                  type = lib.types.str;
-                  description = "Browser to use for opening the desktop entry";
-                  default = lib.getExe' pkgs.xdg-utils "xdg-open";
-                };
-              };
-            })
-          ]
-        )
-      );
-      description = "Browser bookmarks";
-      default = { };
-    };
-
     extensions = lib.mkOption {
       type = lib.types.attrsOf (
         lib.types.oneOf [
@@ -84,49 +56,6 @@ in
         ]
       );
       description = "Entensions to be force installed";
-      default = { };
-    };
-
-    search = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          name = lib.mkOption {
-            type = lib.types.str;
-            description = "Name of the search provider";
-          };
-
-          alias = lib.mkOption {
-            type = lib.types.str;
-            description = "Alias for the search provider";
-          };
-
-          url = lib.mkOption {
-            type = lib.types.str;
-            description = "URL to pass query params";
-            example = "https://search.brave.com/search?q=";
-          };
-        };
-      };
-      description = "Default search engine";
-    };
-
-    engines = lib.mkOption {
-      type = lib.types.attrsOf (
-        lib.types.submodule {
-          options = {
-            name = lib.mkOption {
-              type = lib.types.str;
-              description = "Name to be show in address bar";
-            };
-
-            url = lib.mkOption {
-              type = lib.types.str;
-              description = "URL of search provider";
-            };
-          };
-        }
-      );
-      description = "Site search providers";
       default = { };
     };
   };
@@ -174,42 +103,6 @@ in
         };
 
       programs.browser = {
-        search = {
-          name = "Brave";
-          alias = "brave";
-          url = "https://search.brave.com/search?q=";
-        };
-
-        engines = {
-          "ng" = {
-            name = "Nix Noogle";
-            url = "https://noogle.dev/q?term={searchTerms}";
-          };
-          "no" = {
-            name = "Nix Options";
-            url = "https://search.nixos.org/options?channel=unstable&from=0&size=50&sort=relevance&type=packages&query={searchTerms}";
-          };
-          "np" = {
-            name = "Nix Packages";
-            url = "https://search.nixos.org/packages?channel=unstable&from=0&size=50&sort=relevance&type=packages&query={searchTerms}";
-          };
-
-          "yt" = {
-            name = "YouTube";
-            url = "https://www.youtube.com/results?search_query={searchTerms}";
-          };
-
-          # Search sites via Default Search Provider
-          "rt" = {
-            name = "Reddit";
-            url = "reddit.com";
-          };
-          "mdn" = {
-            name = "MDN Web Docs";
-            url = "developer.mozilla.org";
-          };
-        };
-
         # for set key aka `id` refer: about:support#addons
         # or run `nix run github:tupakkatapa/mozid -- <addon-url>`
         extensions = lib.mkMerge [
@@ -239,88 +132,6 @@ in
             "@testpilot-containers" = "multi-account-containers";
           })
         ];
-
-        bookmarks = {
-          Anime = {
-            Crunchyroll = "crunchyroll.com";
-            MyAnimeList = "myanimelist.net/animelist/SymphonySimper";
-          };
-
-          Bills = {
-            "Airfiber Networks" = "https://login.airfiber.co.in/customer_portal";
-            "Indian Post Insurance" = "pli.indiapost.gov.in";
-          };
-
-          Dev = {
-            Github = {
-              url = "github.com";
-              entry = true;
-            };
-
-            "Google Fonts" = "fonts.google.com";
-            LeetCode = "leetcode.com";
-            Regex101 = "regex101.com";
-            "Svelte Changelog" = "svelte-changelog.vercel.app";
-            "Svelte" = "svelte.dev";
-            Tailwindcss = "tailwindcss.com/docs/installation";
-          };
-
-          Email = {
-            Gmail = {
-              url = "mail.google.com/mail/u/0/#inbox";
-              entry = true;
-            };
-
-            "Gmail 1" = {
-              url = "mail.google.com/mail/u/1/#inbox";
-              entry = true;
-            };
-          };
-
-          Entertainment = {
-            YouTube = "youtube.com";
-            "YouTube Music" = "music.youtube.com";
-          };
-
-          Misc = {
-            "Chrome Enterprise policy list" = "chromeenterprise.google/policies";
-          };
-
-          Nix = {
-            "Nix Builtins" = "nix.dev/manual/nix/latest/language/builtins.html";
-            "Nix PR Tracker" = "nixpk.gs/pr-tracker.html";
-            "Nix Wiki" = "wiki.nixos.org/wiki/NixOS_Wiki";
-            Noogle = "noogle.dev";
-          };
-
-          "Socila Media" = {
-            Discord = {
-              url = "discord.com/channels/@me";
-              entry = true;
-            };
-
-            Reddit = "www.reddit.com";
-
-            WhatsApp = {
-              url = "web.whatsapp.com";
-              entry = true;
-            };
-          };
-
-          Utility = {
-            Excalidarw = {
-              url = "excalidraw.com";
-              entry = true;
-            };
-
-            Monkeytype = {
-              url = "monkeytype.com";
-              entry = true;
-            };
-
-            ProtonDB = "www.protondb.com";
-          };
-        };
       };
     };
 
@@ -514,7 +325,7 @@ in
                 }:
                 {
                   inherit name;
-                  definedAliases = [ "@${alias}" ];
+                  definedAliases = [ "${cfg.search.prefix}${alias}" ];
                   # hide from url bar
                   metaData.hideOneOffButton = true;
                   urls = [ { template = url; } ];
@@ -541,12 +352,12 @@ in
               (builtins.mapAttrs (
                 name: value:
                 let
-                  viaGoogle = if lib.strings.hasPrefix "http" value.url then false else true;
+                  viaDefaultSearch = if lib.strings.hasPrefix "http" value.url then false else true;
                 in
                 mkEngine {
-                  name = if viaGoogle then "Google ${value.name}" else value.name;
+                  name = if viaDefaultSearch then "${cfg.search.name} ${value.name}" else value.name;
                   alias = name;
-                  url = if viaGoogle then "${cfg.search.url}site%3A${value.url}+{searchTerms}" else value.url;
+                  url = if viaDefaultSearch then "${cfg.search.url}site%3A${value.url}+{searchTerms}" else value.url;
                 }
               ) cfg.engines)
             ];
