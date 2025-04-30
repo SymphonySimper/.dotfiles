@@ -1,6 +1,7 @@
-{ lib, ... }:
+{ my, lib, ... }:
 {
   imports = [
+    ./browser.nix
     ./desktop.nix
     ./keyboard.nix
     ./steam.nix
@@ -9,6 +10,7 @@
   ];
 
   my.programs = {
+    browser.enable = lib.mkDefault my.gui.enable;
     steam.enable = lib.mkDefault false;
 
     vm = {
