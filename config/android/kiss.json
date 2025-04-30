@@ -9,7 +9,11 @@
   "enable-search": false,
   "enable-shortcuts": false,
   "exclude-favorites-history": false,
-  "excluded-apps": ["fr.neamar.kiss/fr.neamar.kiss.MainActivity"],
+  "excluded-apps": [
+    "fr.neamar.kiss/fr.neamar.kiss.MainActivity",
+    "com.android.stk/com.android.stk.StkLauncherListActivity",
+    "com.android.vending/com.android.vending.AssetBrowserActivity"
+  ],
   "favorite-apps-list": "",
   "first-run-favorites": false,
   "first-run-shortcuts": false,
@@ -17,7 +21,7 @@
   "force-portrait": true,
   "freeze-history": true,
   "gesture-left": "launch-pojo",
-  "gesture-left-launch-id": "app://com.google.android.apps.nbu.paisa.user/com.google.nbu.paisa.flutter.gpay.app.LauncherActivity",
+  "gesture-left-launch-id": "app://in.org.npci.upiapp/lbs.N",
   "gesture-right": "launch-pojo",
   "gesture-right-launch-id": "app://com.whatsapp/com.whatsapp.Main",
   "gesture-up": "launch-pojo",
