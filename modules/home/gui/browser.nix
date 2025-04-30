@@ -148,77 +148,83 @@ in
         }) { }
       );
 
-      policies = {
-        DisableAccounts = true;
-        DisableFirefoxAccounts = true;
-        DisablePocket = true;
-        DisableTelemetry = true;
-        DisableFirefoxStudies = true;
-        DontCheckDefaultBrowser = true;
-        DisableProfileImport = true;
-        DisableSetDesktopBackground = true;
-        HttpsOnlyMode = "force_enabled";
+      policies =
+        let
+          enabled = {
+            Enabled = true;
+            Locked = true;
+          };
+        in
+        {
+          DisableAccounts = true;
+          DisableFirefoxAccounts = true;
+          DisablePocket = true;
+          DisableTelemetry = true;
+          DisableFirefoxStudies = true;
+          DontCheckDefaultBrowser = true;
+          DisableProfileImport = true;
+          DisableSetDesktopBackground = true;
+          HttpsOnlyMode = "force_enabled";
 
-        OfferToSaveLogins = false;
-        PasswordManagerEnabled = false;
+          OfferToSaveLogins = false;
+          PasswordManagerEnabled = false;
 
-        SearchSuggestEnabled = false;
-        FirefoxSuggest = {
-          WebSuggestions = false;
-          SponsoredSuggestions = false;
-          ImproveSuggest = false;
-          Locked = true;
-        };
+          EncryptedMediaExtensions = enabled; # DRM
 
-        HardwareAcceleration = true;
-        PromptForDownloadLocation = true;
-        TranslateEnabled = true;
-        PictureInPicture = {
-          Enabled = true;
-          Locked = true;
-        };
+          SearchSuggestEnabled = false;
+          FirefoxSuggest = {
+            WebSuggestions = false;
+            SponsoredSuggestions = false;
+            ImproveSuggest = false;
+            Locked = true;
+          };
 
-        DisplayBookmarksToolbar = "newtab";
-        OverrideFirstRunPage = "";
-        OverridePostUpdatePage = "";
-        NewTabPage = true;
-        ShowHomeButton = false;
-        FirefoxHome = {
-          Search = false;
-          TopSites = false;
-          SponsoredTopSites = false;
-          Highlights = false;
-          Pocket = false;
-          SponsoredPocket = false;
-          Snippets = false;
-          Locked = true;
-        };
-        Homepage.StartPage = "previous-session";
+          HardwareAcceleration = true;
+          PromptForDownloadLocation = true;
+          TranslateEnabled = true;
+          PictureInPicture = enabled;
 
-        ExtensionSettings = lib.mkMerge [
-          {
-            "*".installation_mode = "blocked"; # or `allowed`
-          }
+          DisplayBookmarksToolbar = "newtab";
+          OverrideFirstRunPage = "";
+          OverridePostUpdatePage = "";
+          NewTabPage = true;
+          ShowHomeButton = false;
+          FirefoxHome = {
+            Search = false;
+            TopSites = false;
+            SponsoredTopSites = false;
+            Highlights = false;
+            Pocket = false;
+            SponsoredPocket = false;
+            Snippets = false;
+            Locked = true;
+          };
+          Homepage.StartPage = "previous-session";
 
-          (builtins.mapAttrs (
-            name: value:
-            let
-              isSet = builtins.typeOf value == "set";
-            in
+          ExtensionSettings = lib.mkMerge [
             {
-              # https://addons.mozilla.org/en-US/firefox/addon/<slug>
-              install_url = "https://addons.mozilla.org/firefox/downloads/latest/${
-                if isSet then value.slug else value
-              }/latest.xpi";
-              installation_mode = "force_installed";
-              # now pinning is handled by settings
-              # default_area = if lib.my.mkGetDefault extension "pin" false then "navbar" else "menupanel";
-              default_area = "menupanel";
-              private_browsing = if isSet then value.private else false;
+              "*".installation_mode = "blocked"; # or `allowed`
             }
-          ) (cfg.extensions))
-        ];
-      };
+
+            (builtins.mapAttrs (
+              name: value:
+              let
+                isSet = builtins.typeOf value == "set";
+              in
+              {
+                # https://addons.mozilla.org/en-US/firefox/addon/<slug>
+                install_url = "https://addons.mozilla.org/firefox/downloads/latest/${
+                  if isSet then value.slug else value
+                }/latest.xpi";
+                installation_mode = "force_installed";
+                # now pinning is handled by settings
+                # default_area = if lib.my.mkGetDefault extension "pin" false then "navbar" else "menupanel";
+                default_area = "menupanel";
+                private_browsing = if isSet then value.private else false;
+              }
+            ) (cfg.extensions))
+          ];
+        };
 
       profiles.default = {
         id = 0;
