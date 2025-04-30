@@ -103,10 +103,7 @@ in
           url = lib.mkOption {
             type = lib.types.str;
             description = "URL to pass query params";
-            example = ''
-              # until the user input
-              `https://search.brave.com/search?q=`
-            '';
+            example = "https://search.brave.com/search?q=";
           };
         };
       };
