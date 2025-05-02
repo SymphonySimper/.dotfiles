@@ -13,7 +13,7 @@
           ''
             cmd=$(${lib.getExe' config.programs.tofi.package "tofi-drun"})
             if [[ -n "$cmd" ]]; then
-              ${config.my.desktop.uwsm} $cmd
+              exec ${config.my.desktop.uwsm} $cmd
             fi
           ''
       );

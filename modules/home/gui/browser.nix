@@ -400,7 +400,7 @@ in
             execScript = lib.getExe (
               pkgs.writeShellScriptBin scriptName # sh
                 ''
-                  ${value.browser} ${url}                
+                  exec ${value.browser} ${url}                
                 ''
             );
           in

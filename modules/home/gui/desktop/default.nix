@@ -432,7 +432,7 @@ in
           name = "myswaybg";
           cmd = lib.getExe (
             pkgs.writeShellScriptBin "myswaybg" ''
-              ${lib.getExe' pkgs.swaybg "swaybg"} -c "${my.theme.color.crust}" -m solid_color
+              exec ${lib.getExe' pkgs.swaybg "swaybg"} -c "${my.theme.color.crust}" -m solid_color
             ''
           );
         }
