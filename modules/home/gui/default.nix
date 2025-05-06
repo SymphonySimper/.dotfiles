@@ -9,6 +9,7 @@
     ./alacritty.nix
     ./browser.nix
     ./mpv.nix
+    ./music.nix
     ./theme.nix
 
     ./desktop
@@ -19,6 +20,7 @@
       {
         my.programs = {
           browser.enable = lib.mkDefault my.gui.enable;
+          music.enable = lib.mkDefault my.gui.enable;
         };
       }
 
