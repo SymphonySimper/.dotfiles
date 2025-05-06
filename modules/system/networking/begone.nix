@@ -70,7 +70,7 @@ in
 
   config = lib.mkIf cfg.enable {
     my.networking.begone = {
-      allow = builtins.mapAttrs (name: _: lib.mkDefault false) default;
+      allow = builtins.mapAttrs (name: _: lib.mkDefault (builtins.elem name [ "music" ])) default;
 
       sites = lib.lists.flatten (
         builtins.map (host: lib.optionals (!cfg.allow.${host.name}) host.value) (lib.attrsToList default)
