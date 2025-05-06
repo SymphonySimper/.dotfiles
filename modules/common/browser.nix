@@ -164,13 +164,19 @@ in
           };
         };
 
-        Entertainment = {
-          YouTube = "youtube.com";
-          "YouTube Music" = "music.youtube.com";
-        };
+        # Entertainment = {};
 
         Misc = {
           "Chrome Enterprise policy list" = "chromeenterprise.google/policies";
+        };
+
+        Music = {
+          Spotify = "open.spotify.com";
+
+          "YouTube Music" = {
+            url = "music.youtube.com";
+            entry = true;
+          };
         };
 
         Nix = {
@@ -192,6 +198,8 @@ in
             url = "web.whatsapp.com";
             entry = true;
           };
+
+          YouTube = "youtube.com";
         };
 
         Utility = {
