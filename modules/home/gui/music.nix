@@ -116,7 +116,7 @@ in
       (lib.my.mkSystemdTimer rec {
         name = "my-kill-${id}";
         desc = "Kill ${id} when inactive";
-        time = "2m";
+        time = "15m";
         ExecStart = lib.getExe (
           pkgs.writeShellScriptBin "${name}" ''
             app='.spotify-wrappe'
