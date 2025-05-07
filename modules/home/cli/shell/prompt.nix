@@ -12,7 +12,7 @@
       command_timeout = 80; # default 500
       format = lib.concatStrings [
         "$all"
-        "$fill"
+        # "$fill"
         "$time"
         "$line_break"
         "$character"
@@ -37,7 +37,7 @@
       time = {
         disabled = false;
         format = "[($time)](overlay0)";
-        time_format = "%H:%M";
+        time_format = "(%H:%M)";
         utc_time_offset = "local";
       };
 
