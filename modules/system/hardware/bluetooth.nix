@@ -1,6 +1,6 @@
 {
   config,
-  pkgs,
+  # pkgs,
   lib,
   ...
 }:
@@ -12,10 +12,10 @@
       powerOnBoot = true; # powers up the default Bluetooth controller on boot
     };
 
-    # services.blueman.enable = true; # gui
-    environment.systemPackages = [
-      # pkgs.overskride # gui
-      pkgs.bluetui
-    ];
+    services.blueman.enable = true; # gui
+    # environment.systemPackages = [
+    #   # pkgs.overskride # gui
+    #   pkgs.bluetui
+    # ];
   };
 }
