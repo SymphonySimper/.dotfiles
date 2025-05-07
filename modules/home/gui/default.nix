@@ -1,15 +1,11 @@
-{
-  my,
-  pkgs,
-  lib,
-  ...
-}:
+{ my, lib, ... }:
 {
   imports = [
     ./alacritty.nix
     ./browser.nix
     ./mpv.nix
     ./music.nix
+    ./office.nix
     ./theme.nix
 
     ./desktop
@@ -21,6 +17,7 @@
         my.programs = {
           browser.enable = lib.mkDefault my.gui.enable;
           music.enable = lib.mkDefault my.gui.enable;
+          office.enable = lib.mkDefault my.gui.enable;
         };
       }
 
@@ -32,26 +29,6 @@
             workspace = 9;
           }
         ];
-      }
-
-      {
-        programs.zathura.enable = true;
-        my.desktop = {
-          mime."org.pwmt.zathura" = [
-            "application/pdf"
-          ];
-
-          windows = [
-            {
-              id = "org.pwmt.zathura";
-              workspace = 4;
-            }
-          ];
-        };
-      }
-
-      {
-        home.packages = with pkgs; [ libreoffice ];
       }
     ]
   );
