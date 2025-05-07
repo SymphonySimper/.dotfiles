@@ -13,6 +13,7 @@
 
     hardware = {
       cpu.amd.enable = true;
+      bluetooth.enable = true;
       gpu.amd.enable = true;
       ssd.enable = true;
       led.enable = true;
