@@ -1,6 +1,6 @@
 {
   config,
-  # pkgs,
+  pkgs,
   lib,
   ...
 }:
@@ -13,9 +13,9 @@
     };
 
     services.blueman.enable = true; # gui
-    # environment.systemPackages = [
-    #   # pkgs.overskride # gui
-    #   pkgs.bluetui
-    # ];
+    environment.systemPackages = [
+      # pkgs.overskride # gui
+      pkgs.bluetui
+    ];
   };
 }
