@@ -10,6 +10,7 @@ let
 
   id = "Music";
   app = pkgs.spotify;
+  status_file = "/tmp/my-music-status";
 
   script =
     pkgs.writeShellScriptBin "my${id}" # sh
@@ -46,16 +47,22 @@ let
           }}
         }
 
+        function get_status() {
+          current_status="$($cmd status)"
+          echo "''${current_status,,}"
+        }
+
         case "$1" in
-        open_play_pause) open_play_pause ;;
+        open_play_pause)
+          open_play_pause
+          sleep 0.5s
+          get_status > ${status_file}
+          ;;
         next) $cmd next ;;
         prev) $cmd previous ;;
         up) set_volume inc ;;
         down) set_volume dec ;;
-        status)
-          current_status="$($cmd status)"
-          echo "''${current_status,,}"
-          ;;
+        status) get_status ;;
         esac
       '';
 
@@ -113,37 +120,47 @@ in
         };
       }
 
-      (lib.my.mkSystemdTimer rec {
-        name = "my-kill-${id}";
-        desc = "Kill ${id} when inactive";
-        time = "15m";
-        ExecStart = lib.getExe (
-          pkgs.writeShellScriptBin "${name}" ''
-            app='.spotify-wrappe'
-            my_script="${exe}"
-            temp_file="/tmp/${name}"
-            status='paused'
+      (
+        let
+          date = lib.getExe' pkgs.coreutils "date";
+          waitTime = 10;
+        in
+        (lib.my.mkSystemdTimer rec {
+          name = "my-kill-${id}";
+          desc = "Kill ${id} when inactive";
+          time = "${builtins.toString (waitTime / 2)}m";
+          ExecStart = lib.getExe (
+            pkgs.writeShellScriptBin "${name}" ''
+              app='.spotify-wrappe'
+              status='paused'
 
-            if [ ! -f $temp_file ]; then
-              echo "init" > $temp_file
-            fi 
-              
-            prev_status="$(<$temp_file)"
-            curr_status="$($my_script status)"
-            if [[ "$curr_status" == "$status" ]] && [[ "$prev_status" == "$status" ]]; then
-              ${lib.getExe' pkgs.procps "pkill"} "$app" > /dev/null
-              ${lib.my.mkNotification {
-                title = "Bye ${id}";
-                body = "Killed ${id} due to inactivity.";
-                tag = name;
-                urgency = "normal";
-              }}
-            else
-              echo "$curr_status" > $temp_file
-            fi
-          ''
-        );
-      })
+              if [[ ! -f ${status_file} ]]; then
+                ${exe} status > "${status_file}"
+                exit 0
+              fi
+
+              time_diff=$(($(${date} +%s) - $(${date} -r ${status_file} +%s)))
+              if [[ $time_diff -lt ${builtins.toString (waitTime * 60)} ]]; then
+                exit 0
+              fi
+
+              prev_status="$(<${status_file})"
+              curr_status="$(${exe} status)"
+              if [[ "$curr_status" == "$status" ]] && [[ "$prev_status" == "$status" ]]; then
+                ${lib.getExe' pkgs.procps "pkill"} "$app" > /dev/null
+                ${lib.my.mkNotification {
+                  title = "Bye ${id}";
+                  body = "Killed ${id} due to inactivity.";
+                  tag = name;
+                  urgency = "normal";
+                }}
+              else
+                echo "$curr_status" > "${status_file}"
+              fi
+            ''
+          );
+        })
+      )
     ]
   );
 }
