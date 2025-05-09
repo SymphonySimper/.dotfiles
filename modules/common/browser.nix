@@ -208,6 +208,11 @@ in
             entry = true;
           };
 
+          Keybr = {
+            url = "www.keybr.com";
+            entry = true;
+          };
+
           Monkeytype = {
             url = "monkeytype.com";
             entry = true;
