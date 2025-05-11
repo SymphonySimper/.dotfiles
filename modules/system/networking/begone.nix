@@ -3,6 +3,12 @@ let
   cfg = config.my.networking.begone;
 
   allowed = {
+    discord = [
+      "discord.com"
+      "discord.gg"
+      "discordapp.com"
+    ];
+
     music = [
       "music.youtube.com"
       "open.spotify.com"
@@ -14,12 +20,6 @@ let
     anime = [
       "hianime.to"
       "www.crunchyroll.com"
-    ];
-
-    discord = [
-      "discord.com"
-      "discord.gg"
-      "discordapp.com"
     ];
 
     fb = [

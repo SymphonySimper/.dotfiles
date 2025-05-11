@@ -6,10 +6,7 @@
   ];
 
   my = {
-    networking.begone = {
-      enable = true;
-      allow.discord = true;
-    };
+    networking.begone.enable = true;
 
     hardware = {
       cpu.amd.enable = true;
