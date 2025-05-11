@@ -10,6 +10,12 @@
 
   xdg = {
     enable = true;
+
+    userDirs = {
+      enable = true;
+      createDirectories = true;
+    };
+
     configFile."nixpkgs/config.nix".text = # nix
       ''
         { allowUnfree = true; }
