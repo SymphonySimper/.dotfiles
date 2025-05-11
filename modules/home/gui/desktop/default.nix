@@ -411,6 +411,8 @@ in
 
       autostart = lib.mkIf (builtins.length cfg.autostart > 0) {
         enable = true;
+        readOnly = true;
+
         entries = builtins.map (
           entry:
           let
