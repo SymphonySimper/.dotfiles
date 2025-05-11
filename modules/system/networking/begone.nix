@@ -2,7 +2,15 @@
 let
   cfg = config.my.networking.begone;
 
-  default = {
+  allowed = {
+    music = [
+      "music.youtube.com"
+      "open.spotify.com"
+    ];
+  };
+
+  denied = {
+
     anime = [
       "hianime.to"
       "www.crunchyroll.com"
@@ -20,11 +28,6 @@ let
     ];
 
     insta = [ "www.instagram.com" ];
-
-    music = [
-      "music.youtube.com"
-      "open.spotify.com"
-    ];
 
     ott = [
       "www.hotstar.com"
@@ -50,6 +53,8 @@ let
 
     yt = [ "www.youtube.com" ];
   };
+
+  default = allowed // denied;
 in
 {
   options.my.networking.begone = {
@@ -70,7 +75,9 @@ in
 
   config = lib.mkIf cfg.enable {
     my.networking.begone = {
-      allow = builtins.mapAttrs (name: _: lib.mkDefault (builtins.elem name [ "music" ])) default;
+      allow = builtins.mapAttrs (
+        name: _: lib.mkDefault (builtins.elem name (builtins.attrNames allowed))
+      ) default;
 
       sites = lib.lists.flatten (
         builtins.map (host: lib.optionals (!cfg.allow.${host.name}) host.value) (lib.attrsToList default)
