@@ -38,7 +38,10 @@ let
       "netflix.com"
     ];
 
-    reddit = [ "www.reddit.com" ];
+    reddit = [
+      "www.reddit.com"
+      "ol.reddit.com"
+    ];
 
     steam = [
       "store.steampowered.com"
