@@ -219,6 +219,7 @@ in
           };
 
           ProtonDB = "www.protondb.com";
+          Virustotal = "www.virustotal.com";
         };
       };
     };
