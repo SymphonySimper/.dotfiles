@@ -13,6 +13,10 @@
         zlib
       ]
     );
+
+    # disable python downloads
+    # refer: https://docs.astral.sh/uv/configuration/environment/#uv_python_downloads
+    UV_PYTHON_DOWNLOADS = "never";
   };
 
   shellHook = # sh
