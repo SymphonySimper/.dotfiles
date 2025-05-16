@@ -1,5 +1,5 @@
 { pkgs, lib, ... }:
-# bash
+# sh
 ''
   app= "${lib.getExe' pkgs.ffmpeg "ffmpeg"}"
 

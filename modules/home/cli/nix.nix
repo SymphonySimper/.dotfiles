@@ -2,7 +2,7 @@
 let
   mynix =
     pkgs.writeShellScriptBin "mynix"
-      # bash
+      # sh
       ''
         case "$1" in
           cpu)

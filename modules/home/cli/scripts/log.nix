@@ -10,7 +10,7 @@ let
   readlink = lib.getExe' pkgs.coreutils-full "readlink";
   ln = lib.getExe' pkgs.coreutils-full "ln";
 in
-# bash
+# sh
 ''
   if [[ ! -d "${loc}" ]]; then
     echo "Cloning repo to ${loc}"
