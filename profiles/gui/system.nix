@@ -1,20 +1,17 @@
-{ modulesPath, ... }:
+{ ... }:
 {
-  imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-    ../../modules/system
-  ];
-
   my = {
     networking.begone.enable = true;
 
     hardware = {
       cpu.amd.enable = true;
-      bluetooth.enable = true;
       gpu.amd.enable = true;
+
+      bluetooth.enable = true;
       ssd.enable = true;
       led.enable = true;
       logitech.enable = true;
+
       disko = {
         enable = true;
         disk = "/dev/nvme0n1";

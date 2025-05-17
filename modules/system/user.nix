@@ -21,6 +21,13 @@ in
       description = "Adds groups to extraGroups";
       default = [ ];
     };
+
+    bin = lib.mkOption {
+      type = lib.types.str;
+      description = "Current bin Path";
+      default = "/run/current-system/sw/bin";
+      readOnly = true;
+    };
   };
 
   config = {

@@ -11,8 +11,7 @@ in
     powerManagement.enable = true;
 
     services = {
-      # TODO: enable whe cpu.intel is enabled
-      thermald.enable = false;
+      thermald.enable = config.my.hardware.cpu.intel.enable;
       tlp.enable = true;
     };
   };

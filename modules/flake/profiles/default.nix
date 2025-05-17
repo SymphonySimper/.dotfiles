@@ -130,16 +130,9 @@ let
       };
 
       modules =
-        [
-          (profileDir + "/${my.profile}/${for}.nix")
-        ]
-        ++ (lib.optionals (for == "home") [
-          inputs.catppuccin.homeModules.catppuccin
-          inputs.nix-index-database.hmModules.nix-index
-        ])
-        ++ (lib.optionals (for == "system") [
-          inputs.catppuccin.nixosModules.catppuccin
-        ]);
+        [ (profileDir + "/${my.profile}/${for}.nix") ]
+        ++ (lib.optionals (for == "home") [ ../../home ])
+        ++ (lib.optionals (for == "system") [ ../../system ]);
 
       specialArgs = {
         inherit my;

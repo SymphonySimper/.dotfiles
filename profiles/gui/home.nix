@@ -1,9 +1,5 @@
 { config, pkgs, ... }:
 {
-  imports = [
-    ../../modules/home
-  ];
-
   # Add Google Chrome
   home.packages = [
     (pkgs.google-chrome.override {
@@ -11,12 +7,18 @@
     })
   ];
 
-  my.desktop = {
+  my.programs.desktop = {
     autostart = [
       {
         name = "google-chrome";
         cmd = "google-chrome-stable";
-        days = [1 2 3 4 5];
+        days = [
+          1
+          2
+          3
+          4
+          5
+        ];
       }
     ];
 

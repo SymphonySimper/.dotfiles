@@ -6,7 +6,6 @@ in
   imports = [
     # include NixOS-WSL modules
     inputs.nixos-wsl.nixosModules.wsl
-    ../../modules/system
   ];
 
   wsl = {
@@ -23,7 +22,7 @@ in
     };
   };
 
-  my.programs.docker = {
+  my.programs.vm.docker = {
     enable = true;
     enableRootless = false;
     enableGroup = true;

@@ -1,12 +1,51 @@
-{ my, pkgs, ... }:
+{
+  inputs,
+  my,
+  lib,
+  ...
+}:
 {
   imports = [
+    inputs.catppuccin.homeModules.catppuccin
+    inputs.nix-index-database.hmModules.nix-index
+
     ../common
-    ./cli
-    ./gui
+
+    # cli
+    ./editor.nix
+    ./file-manager.nix
+    ./mux.nix
+    ./nix.nix
+    ./shell.nix
+    ./ssh.nix
+    ./top.nix
+    ./utility.nix
+    ./vcs.nix
+
+    ./scripts
+
+    # gui
+    ./browser.nix
+    ./music.nix
+    ./office.nix
+    ./terminal.nix
+    ./theme.nix
+    ./video.nix
+
+    ./desktop
   ];
 
-  my.common.system = false;
+  my = {
+    common.system = false;
+
+    programs = {
+      desktop.enable = lib.mkDefault my.gui.desktop.enable;
+      browser.enable = lib.mkDefault my.gui.enable;
+      music.enable = lib.mkDefault my.gui.enable;
+      office.enable = lib.mkDefault my.gui.enable;
+      video.enable = lib.mkDefault my.gui.enable;
+    };
+  };
 
   xdg = {
     enable = true;
@@ -31,14 +70,4 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-
-  fonts.fontconfig.enable = true;
-  home.packages = with pkgs; [
-    (google-fonts.override { fonts = [ "Poppins" ]; })
-    font-awesome
-    nerd-fonts.jetbrains-mono
-    noto-fonts
-    noto-fonts-cjk-sans
-    noto-fonts-emoji
-  ];
 }
