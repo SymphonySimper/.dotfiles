@@ -1,6 +1,7 @@
 {
   my,
   config,
+  pkgs,
   lib,
   ...
 }:
@@ -26,6 +27,15 @@ in
         catppuccin.mpv.enable = false;
         programs.mpv = {
           enable = true;
+
+          package = (
+            pkgs.mpv-unwrapped.wrapper {
+              mpv = pkgs.mpv-unwrapped.override {
+                ffmpeg = pkgs.ffmpeg-full;
+                waylandSupport = true;
+              };
+            }
+          );
 
           bindings = {
             "Alt+LEFT" = "script-message Cycle_Video_Rotate -90";
@@ -55,6 +65,12 @@ in
             sub-font = my.theme.font.sans;
             sub-font-size = 48;
             sub-border-size = 2.0;
+
+            # Hardware acceleration
+            hwdec = "auto-safe";
+            vo = "gpu";
+            profile = "gpu-hq";
+            gpu-context = "wayland";
 
             # Audio
             audio-file-auto = "fuzzy"; # external audio doesn't has to match the file name exactly to autoload
