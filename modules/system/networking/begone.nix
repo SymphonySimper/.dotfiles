@@ -8,11 +8,6 @@ let
       "discord.gg"
       "discordapp.com"
     ];
-
-    music = [
-      "music.youtube.com"
-      "open.spotify.com"
-    ];
   };
 
   denied = {

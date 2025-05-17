@@ -170,15 +170,6 @@ in
           "Chrome Enterprise policy list" = "chromeenterprise.google/policies";
         };
 
-        Music = {
-          Spotify = "open.spotify.com";
-
-          "YouTube Music" = {
-            url = "music.youtube.com";
-            entry = true;
-          };
-        };
-
         Nix = {
           "Nix Builtins" = "nix.dev/manual/nix/latest/language/builtins.html";
           "Nix PR Tracker" = "nixpk.gs/pr-tracker.html";
