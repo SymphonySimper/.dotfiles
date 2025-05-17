@@ -8,7 +8,7 @@ let
   cfg = config.my.programs.vm;
 in
 {
-  imports = [ ./waydroid.nix ];
+  imports = [ ./android.nix ];
 
   options.my.programs.vm.enable = lib.mkEnableOption "VM";
 

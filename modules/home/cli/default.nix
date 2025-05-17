@@ -1,12 +1,12 @@
 { pkgs, ... }:
 {
   imports = [
-    ./git.nix
+    ./file-manager.nix
+    ./mux.nix
     ./nix.nix
     ./ssh.nix
-    ./tmux.nix
     ./top.nix
-    ./yazi.nix
+    ./vcs.nix
 
     ./editor
     ./scripts

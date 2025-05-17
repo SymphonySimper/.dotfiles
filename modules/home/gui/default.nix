@@ -1,10 +1,10 @@
 { my, lib, ... }:
 {
   imports = [
-    ./alacritty.nix
     ./browser.nix
     ./music.nix
     ./office.nix
+    ./terminal.nix
     ./theme.nix
     ./video.nix
 
