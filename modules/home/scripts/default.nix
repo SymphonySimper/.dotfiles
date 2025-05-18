@@ -13,6 +13,11 @@ in
   options.my.programs.scripts.enable = lib.mkEnableOption "Scripts";
 
   config = {
-    my.programs.scripts.reload.enable = lib.mkDefault cfg.enable;
+    my.programs.scripts = {
+      ffmpeg.enable = lib.mkDefault cfg.enable;
+      log.enable = lib.mkDefault cfg.enable;
+      ocr.enable = lib.mkDefault cfg.enable;
+      reload.enable = lib.mkDefault cfg.enable;
+    };
   };
 }
