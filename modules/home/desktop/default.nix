@@ -187,14 +187,6 @@ in
         "image/png"
       ];
 
-      keybinds = [
-        {
-          mod = "SHIFT";
-          key = "F5";
-          cmd = "myreload";
-        }
-      ];
-
       windows = [
         {
           id = "xdg-desktop-portal-gtk";

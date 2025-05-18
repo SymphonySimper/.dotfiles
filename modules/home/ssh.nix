@@ -20,4 +20,9 @@
       };
     };
   };
+
+  my.programs.scripts.reload.commands."SSH Agent" = {
+    cmd = "systemctl restart --user ssh-agent.service";
+    check = "ssh-agent";
+  };
 }

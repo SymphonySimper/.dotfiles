@@ -39,8 +39,12 @@
     common.system = false;
 
     programs = {
-      desktop.enable = lib.mkDefault my.gui.desktop.enable;
+      # cli
+      scripts.enable = lib.mkDefault true;
+
+      # gui
       browser.enable = lib.mkDefault my.gui.enable;
+      desktop.enable = lib.mkDefault my.gui.desktop.enable;
       music.enable = lib.mkDefault my.gui.enable;
       office.enable = lib.mkDefault my.gui.enable;
       video.enable = lib.mkDefault my.gui.enable;

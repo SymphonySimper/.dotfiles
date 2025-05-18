@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}:
+{ config, lib, ... }:
 {
   options.my.programs.desktop.enable = lib.mkEnableOption "Desktop";
 
@@ -24,21 +19,7 @@
 
     services.udisks2.enable = true;
 
-    environment = {
-      sessionVariables.NIXOS_OZONE_WL = "1";
-
-      systemPackages = [
-        (pkgs.writeShellScriptBin "myreload" # sh
-          ''
-            sudo systemctl restart NetworkManager
-            ${lib.my.mkNotification {
-              tag = "myreload";
-              title = "Restarted network manager";
-            }}
-          ''
-        )
-      ];
-    };
+    environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
     my = {
       boot.enable = true;
