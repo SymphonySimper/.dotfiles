@@ -24,7 +24,6 @@ in
 
   my.programs.vm.docker = {
     enable = true;
-    enableRootless = false;
-    enableGroup = true;
+    enableRootless = true;
   };
 }
