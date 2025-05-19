@@ -14,6 +14,7 @@
     gnutar
     unzip
     zip
+    p7zip
   ];
 
   programs.yazi = lib.mkMerge [
@@ -42,6 +43,30 @@
             }
           ];
 
+          open = [
+            {
+              run = ''xdg-open "$@"'';
+              desc = "Open";
+              for = "linux";
+            }
+          ];
+
+          reveal = [
+            {
+              run = ''xdg-open "$(dirname "$1")"'';
+              desc = "Reveal";
+              for = "linux";
+            }
+          ];
+
+          extract = [
+            {
+              run = ''ya pub extract --list "$@"'';
+              desc = "Extract here";
+              for = "unix";
+            }
+          ];
+
           play = [
             {
               run = ''${my.programs.video} "$@"'';
@@ -49,25 +74,21 @@
               for = "unix";
             }
           ];
-
-          open = [
-            {
-              run = ''xdg-open "$@"'';
-              desc = "Open";
-            }
-          ];
         };
 
+        # refer: https://github.com/sxyazi/yazi/blob/shipped/yazi-config/preset/yazi-default.toml#L61
         open.rules = [
+          # Folder
           {
             name = "*/";
             use = [
-              "open"
               "edit"
+              "open"
               "reveal"
             ];
           }
 
+          # Text
           {
             mime = "text/*";
             use = [
@@ -76,6 +97,7 @@
             ];
           }
 
+          # Image
           {
             mime = "image/*";
             use = [
@@ -84,32 +106,27 @@
             ];
           }
 
+          # Media
           {
-            mime = "video/*";
+            mime = "{audio,video}/*";
             use = [
               "play"
               "reveal"
             ];
           }
 
+          # Archive
           {
-            mime = "audio/*";
+            name = "*.{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}";
             use = [
-              "play"
+              "extract"
               "reveal"
             ];
           }
 
+          # JSON
           {
-            mime = "inode/x-empty";
-            use = [
-              "edit"
-              "reveal"
-            ];
-          }
-
-          {
-            mime = "application/json";
+            mime = "application/{json,ndjson}";
             use = [
               "edit"
               "reveal"
@@ -124,69 +141,16 @@
             ];
           }
 
+          # Empty file
           {
-            mime = "application/zip";
+            mime = "inode/empty";
             use = [
-              "extract"
+              "edit"
               "reveal"
-              "archive"
             ];
           }
 
-          {
-            mime = "application/gzip";
-            use = [
-              "extract"
-              "reveal"
-              "archive"
-            ];
-          }
-
-          {
-            mime = "application/x-tar";
-            use = [
-              "extract"
-              "reveal"
-              "archive"
-            ];
-          }
-
-          {
-            mime = "application/x-bzip";
-            use = [
-              "extract"
-              "reveal"
-              "archive"
-            ];
-          }
-
-          {
-            mime = "application/x-bzip2";
-            use = [
-              "extract"
-              "reveal"
-              "archive"
-            ];
-          }
-
-          {
-            mime = "application/x-7z-compressed";
-            use = [
-              "extract"
-              "reveal"
-              "archive"
-            ];
-          }
-
-          {
-            mime = "application/x-rar";
-            use = [
-              "extract"
-              "reveal"
-              "archive"
-            ];
-          }
-
+          # Fallback
           {
             name = "*";
             use = [
@@ -196,7 +160,6 @@
           }
         ];
       };
-
     }
 
     # Plugins
