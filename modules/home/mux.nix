@@ -7,31 +7,11 @@
 }:
 let
   defaultTerminal = if my.profile == "wsl" then "xterm-256color" else my.programs.terminal;
-
-  profile = "${my.dir.home}/.profile";
-  mkProfileScript =
-    name: cmd:
-    lib.getExe (
-      pkgs.writeShellScriptBin name # sh
-        ''
-          if [ -f "${profile}" ]; then
-            source "${profile}"
-          fi
-
-          ${cmd}
-        ''
-    );
 in
 {
-  programs = {
-    bash.initExtra = # sh
-      ''
-        # Auto start tmux
-        if [ -z "''${TMUX}" ]; then
-            exec ${lib.getExe pkgs.tmux} -f "${config.xdg.configHome}/tmux/tmux.conf" new >/dev/null 2>&1
-        fi
-      '';
+  my.programs.terminal.shell.cmd = "tmux new";
 
+  programs = {
     tmux = {
       enable = true;
       terminal = defaultTerminal;
@@ -44,8 +24,10 @@ in
       customPaneNavigationAndResize = true;
       newSession = false;
 
-      extraConfig = # tmux
+      extraConfig = # conf
         ''
+          set -g default-command "exec ${config.my.programs.shell.exe}"
+
           # RGB colors
           # https://github.com/tmux/tmux/wiki/FAQ#how-do-i-use-rgb-colour
           set -as terminal-features ",${defaultTerminal}:RGB"
@@ -81,8 +63,8 @@ in
           bind-key -T copy-mode-vi "Bspace" send -X halfpage-up
 
           ## Open program in new window
-          bind -r g new-window -c "#{pane_current_path}" "${mkProfileScript "tmuxlazygit" (lib.getExe pkgs.lazygit)}"
-          bind -r y new-window -c "#{pane_current_path}" "${mkProfileScript "tmuxyazi" (lib.getExe pkgs.yazi)}"
+          bind -r g new-window -c "#{pane_current_path}" "${lib.getExe config.programs.lazygit.package}"
+          bind -r y new-window -c "#{pane_current_path}" "${lib.getExe config.programs.yazi.package}"
 
           ## easy-to-remember split pane commands and open panes in cwd
           unbind '"'
