@@ -1,5 +1,27 @@
-{ pkgs, lib, ... }:
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+let
+  mkReadOnlyStrOption =
+    value:
+    lib.mkOption {
+      type = lib.types.str;
+      default = value;
+      readOnly = true;
+    };
+in
+{
+  options.my.programs.shell = {
+    exe = mkReadOnlyStrOption (lib.getExe config.programs.bash.package);
+    args = {
+      login = mkReadOnlyStrOption "-l";
+      cmd = mkReadOnlyStrOption "-c";
+    };
+  };
+
   config = lib.mkMerge [
     {
       home.shellAliases = rec {
