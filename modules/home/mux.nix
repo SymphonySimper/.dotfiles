@@ -1,12 +1,26 @@
 {
+  my,
+  config,
   pkgs,
   lib,
-  config,
-  my,
   ...
 }:
 let
   terminalFeatures = if my.profile == "wsl" then "xterm-256color" else my.programs.terminal;
+
+  profile = "${my.dir.home}/.profile";
+  mkProfileScript =
+    name: cmd:
+    lib.getExe (
+      pkgs.writeShellScriptBin name # sh
+        ''
+          if [ -f "${profile}" ]; then
+            source "${profile}"
+          fi
+
+          ${cmd}
+        ''
+    );
 in
 {
   programs = {
@@ -67,8 +81,8 @@ in
           bind-key -T copy-mode-vi "Bspace" send -X halfpage-up
 
           ## Open program in new window
-          bind -r g new-window -c "#{pane_current_path}" "${lib.getExe pkgs.lazygit}"
-          bind -r y new-window -c "#{pane_current_path}" "${lib.getExe pkgs.yazi}"
+          bind -r g new-window -c "#{pane_current_path}" "${mkProfileScript "tmuxlazygit" (lib.getExe pkgs.lazygit)}"
+          bind -r y new-window -c "#{pane_current_path}" "${mkProfileScript "tmuxyazi" (lib.getExe pkgs.yazi)}"
 
           ## easy-to-remember split pane commands and open panes in cwd
           unbind '"'
