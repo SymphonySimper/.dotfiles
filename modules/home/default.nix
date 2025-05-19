@@ -26,11 +26,10 @@
 
     # gui
     ./browser.nix
-    ./music.nix
+    ./media.nix
     ./office.nix
     ./terminal.nix
     ./theme.nix
-    ./video.nix
 
     ./desktop
   ];
@@ -45,9 +44,8 @@
       # gui
       browser.enable = lib.mkDefault my.gui.enable;
       desktop.enable = lib.mkDefault my.gui.desktop.enable;
-      music.enable = lib.mkDefault my.gui.enable;
+      media.enable = lib.mkDefault my.gui.enable;
       office.enable = lib.mkDefault my.gui.enable;
-      video.enable = lib.mkDefault my.gui.enable;
     };
   };
 

@@ -182,11 +182,6 @@ in
         }
       ];
 
-      mime."org.gnome.Loupe" = [
-        "image/jpeg"
-        "image/png"
-      ];
-
       windows = [
         {
           id = "xdg-desktop-portal-gtk";
