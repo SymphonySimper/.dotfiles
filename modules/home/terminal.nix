@@ -1,8 +1,21 @@
-{ my, lib, ... }:
+{
+  my,
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 let
-  padding = 2;
+  cfg = config.my.programs.terminal;
+
 in
 {
+  options.my.programs.terminal.shell.cmd = lib.mkOption {
+    description = "Default command to run on launch";
+    type = lib.types.nullOr lib.types.str;
+    default = null;
+  };
+
   config = lib.mkIf my.gui.enable {
     my.programs.desktop = {
       autostart = [ "alacritty" ];
@@ -27,9 +40,9 @@ in
           decorations = "none";
           opacity = 1;
           startup_mode = "Maximized";
-          padding = {
-            x = padding;
-            y = padding;
+          padding = rec {
+            x = 2;
+            y = x;
           };
           dynamic_padding = true;
         };
@@ -63,6 +76,22 @@ in
             shape = "Block";
           };
         };
+
+        terminal.shell =
+          let
+            cfgSh = config.my.programs.shell;
+          in
+          {
+            program = cfgSh.exe;
+            args =
+              [
+                cfgSh.args.login
+              ]
+              ++ (lib.lists.optionals (cfg.shell.cmd != null) [
+                cfgSh.args.cmd
+                cfg.shell.cmd
+              ]);
+          };
 
         mouse.hide_when_typing = true;
 
