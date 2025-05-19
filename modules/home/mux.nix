@@ -6,7 +6,7 @@
   ...
 }:
 let
-  terminalFeatures = if my.profile == "wsl" then "xterm-256color" else my.programs.terminal;
+  defaultTerminal = if my.profile == "wsl" then "xterm-256color" else my.programs.terminal;
 
   profile = "${my.dir.home}/.profile";
   mkProfileScript =
@@ -34,7 +34,7 @@ in
 
     tmux = {
       enable = true;
-      terminal = "tmux-256color";
+      terminal = defaultTerminal;
       prefix = "C-a";
       shortcut = "a";
       keyMode = "vi";
@@ -48,7 +48,7 @@ in
         ''
           # RGB colors
           # https://github.com/tmux/tmux/wiki/FAQ#how-do-i-use-rgb-colour
-          set -as terminal-features ",${terminalFeatures}:RGB"
+          set -as terminal-features ",${defaultTerminal}:RGB"
 
           # For yazi
           set -g allow-passthrough on
