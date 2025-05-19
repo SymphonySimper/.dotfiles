@@ -112,4 +112,15 @@ index = 17
 color = "#dc8a78"
 
 [terminal.shell]
-program = "wsl -d NixOS --cd ~"
+program = "wsl"
+args = [
+  "-d",
+  "NixOS",
+  "--cd",
+  "~",
+  "--shell-type",
+  "login",
+  "--",
+  "tmux",
+  "new",
+]
