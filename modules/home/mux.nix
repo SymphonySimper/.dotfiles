@@ -7,6 +7,20 @@
 }:
 let
   defaultTerminal = if my.profile == "wsl" then "xterm-256color" else my.programs.terminal;
+
+  history = lib.getExe (
+    let
+      mkCoreutil = name: lib.getExe' pkgs.coreutils name;
+    in
+    pkgs.writeShellScriptBin "my-tmux-history" # sh
+      ''
+        temp_file=$(${mkCoreutil "mktemp"})
+
+        # captures entire history
+        tmux capture-pane -p -S - > "$temp_file"
+        tmux new-window "${my.programs.editor} $temp_file; ${mkCoreutil "rm"} $temp_file"
+      ''
+  );
 in
 {
   my.programs.terminal.shell.cmd = "tmux new";
@@ -65,6 +79,9 @@ in
           ## Open program in new window
           bind -r g new-window -c "#{pane_current_path}" "${lib.getExe config.programs.lazygit.package}"
           bind -r y new-window -c "#{pane_current_path}" "${lib.getExe config.programs.yazi.package}"
+
+          ## Open history in editor
+          bind -r e run-shell "${history}" 
 
           ## easy-to-remember split pane commands and open panes in cwd
           unbind '"'
