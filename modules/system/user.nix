@@ -10,10 +10,19 @@ let
 in
 {
   options.my.user = {
-    sudo.nopasswd = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      description = "Sudo commands to run without password";
-      default = [ ];
+    sudo = {
+      nopasswd = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        description = "Sudo commands to run without password";
+        default = [ ];
+      };
+
+      exe = lib.mkOption {
+        type = lib.types.str;
+        description = "Sudo exe path";
+        default = "/run/wrappers/bin/sudo";
+        readOnly = true;
+      };
     };
 
     groups = lib.mkOption {
