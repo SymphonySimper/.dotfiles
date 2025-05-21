@@ -146,6 +146,20 @@ in
                   esac
                   ;;
 
+                # hide desktop entries
+                hide)
+                  key="NoDisplay"
+                  key_value="$key=true"
+
+                  for entry in "$XDG_DATA_HOME"/applications/waydroid.*; do
+                    if ${lib.getExe' gnugrep "grep"} -q "$key" "$entry"; then
+                      ${lib.getExe gnused} -i "/$key/c\\$key_value" "$entry"
+                    else
+                      ${lib.getExe gnused} -i "/Type/a $key_value" "$entry"
+                    fi
+                  done
+                  ;;
+
                 clean|cln)
                   ${sudo} rm -rf ${
                     builtins.concatStringsSep " " [
