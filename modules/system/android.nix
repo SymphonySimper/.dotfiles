@@ -29,69 +29,138 @@ in
       let
         sudo = config.my.user.sudo.exe;
 
-        waydroidPkg = lib.getExe pkgs.waydroid;
-        waydroidRestart = # sh
-          "${config.my.user.bin}/systemctl restart waydroid-container.service";
+        waydroid = lib.getExe pkgs.waydroid;
+        actions = lib.attrsets.genAttrs [ "start" "stop" "restart" ] (
+          action: "${config.my.user.bin}/systemctl ${action} waydroid-container.service"
+        );
 
-        mkWaydroidSetRes =
+        mkSetRes =
           {
             w ? my.gui.display.string.desktop.width,
             h ? my.gui.display.string.desktop.height,
           }:
           ''
-            ${waydroidPkg} prop set persist.waydroid.width ${w}
-            ${waydroidPkg} prop set persist.waydroid.height ${h}
-            ${sudo} ${waydroidRestart}
+            ${waydroid} prop set persist.waydroid.width ${w}
+            ${waydroid} prop set persist.waydroid.height ${h}
+            ${sudo} ${actions.restart}
           '';
+
+        extras = lib.getExe (
+          pkgs.writeShellApplication {
+            name = "my-waydroid-extras"; # sh
+
+            runtimeInputs = with pkgs; [
+              git
+              python3Full
+              # python3Packages.regex
+              lzip
+            ];
+
+            text =
+              let
+                dir = "/tmp/waydroid_script";
+                venv = ".venv";
+              in
+              # sh
+              ''
+                if [ ! -d "${dir}" ]; then
+                  git clone "https://github.com/casualsnek/waydroid_script" "${dir}"
+                fi
+
+                cd "${dir}"
+
+                if [ ! -d "${venv}" ]; then
+                  python -m venv "${venv}"
+                  ${venv}/bin/pip install -r requirements.txt
+                fi
+
+                ${sudo} ${venv}/bin/python main.py "''${@}"
+              '';
+          }
+        );
       in
       lib.mkIf cfg.vm.enable {
         virtualisation.waydroid.enable = true;
-        my.user.sudo.nopasswd = [
-          waydroidRestart
-        ];
+        my.user.sudo.nopasswd = builtins.attrValues actions;
 
         environment.systemPackages = with pkgs; [
           wl-clipboard
-          python3Packages.pyclip
 
-          (writeShellScriptBin "my-waydroid-init" # sh
+          (writeShellScriptBin "mywaydroid" # sh
             ''
               set -e # exit on any error
 
-              ${sudo} ${waydroidPkg} init -s GAPPS
+              case "$1" in
+                init)
+                  ${sudo} ${waydroid} init
 
-              # controller support (Allows access to all plugged in devices)
-              ${waydroidPkg} prop set persist.waydroid.udev true
-              ${waydroidPkg} prop set persist.waydroid.uevent true
+                  ${extras} ${
+                    builtins.concatStringsSep " " [
+                      "-a"
+                      "11" # android version
+                      "install"
+                      "gapps"
+                      "widevine"
+                      (lib.strings.optionalString config.my.hardware.cpu.amd.enable "libndk")
+                      (lib.strings.optionalString config.my.hardware.cpu.intel.enable "libhoudini")
+                    ]
+                  }
 
-              # Disable freeform apps (Only fullscreen apps)
-              ${waydroidPkg} prop set persist.waydroid.multi_windows false
+                  # controller support (Allows access to all plugged in devices)
+                  ${waydroid} prop set persist.waydroid.udev true
+                  ${waydroid} prop set persist.waydroid.uevent true
 
-              ${mkWaydroidSetRes { }}
+                  # Disable freeform apps (Only fullscreen apps)
+                  ${waydroid} prop set persist.waydroid.multi_windows false
 
-              ${sudo} ${waydroidRestart}
+                  ${mkSetRes { }}
 
-              ${waydroidPkg} show-full-ui &
-              sleep 5
+                  ${sudo} ${actions.restart}
 
-              # refer: https://docs.waydro.id/faq/google-play-certification
-              certify_url="https://www.google.com/android/uncertified"
+                  ${waydroid} show-full-ui &
+                  ${lib.getExe' coreutils "sleep"} 30
 
-              android_id=$(${sudo} ${waydroidPkg} shell sqlite3 /data/data/com.google.android.gsf/databases/gservices.db "select * from main where name = \"android_id\";" | ${lib.getExe' pkgs.coreutils-full "cut"} -d '|' -f2)
-              "${lib.getExe' pkgs.wl-clipboard "wl-copy"}" "$android_id"
+                  ${extras} certified
+                  ;;
 
-              echo "Android ID (copied to clipboard): $android_id"
-              echo "Enter ID in this page: $certify_url"
+                extras)
+                  shift
+                  ${extras} "''${@}"
+                  ;;
 
-              "${lib.getExe' pkgs.xdg-utils "xdg-open"}" "$certify_url"
+                # Actions
+                start) ${sudo} ${actions.start} ;;
+                stop) ${sudo} ${actions.stop} ;;
+                restart) ${sudo} ${actions.restart} ;;
+
+                res)
+                  shift
+                  case "$1" in
+                    set) ${mkSetRes { }} ;;
+                    reset) ${
+                      mkSetRes {
+                        w = "";
+                        h = "";
+                      }
+                    } ;;
+                  esac
+                  ;;
+
+                clean|cln)
+                  ${sudo} rm -rf ${
+                    builtins.concatStringsSep " " [
+                      "/var/lib/waydroid"
+                      "/home/.waydroid"
+                      "~/waydroid"
+                      "~/.share/waydroid"
+                      "~/.local/share/applications/*aydroid*"
+                      "~/.local/share/waydroid"
+                    ]
+                  }              
+                  ;;
+              esac
             ''
           )
-
-          (writeShellScriptBin "my-waydroid-reset-res" (mkWaydroidSetRes {
-            w = "";
-            h = "";
-          }))
-          (writeShellScriptBin "my-waydroid-set-res" (mkWaydroidSetRes { }))
         ];
       }
     )
