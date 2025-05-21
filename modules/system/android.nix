@@ -27,7 +27,7 @@ in
 
     (
       let
-        sudo = "/run/wrappers/bin/sudo";
+        sudo = config.my.user.sudo.exe;
 
         waydroidPkg = lib.getExe pkgs.waydroid;
         waydroidRestart = # sh
@@ -54,7 +54,7 @@ in
           wl-clipboard
           python3Packages.pyclip
 
-          (writeShellScriptBin "waydroid-init" # sh
+          (writeShellScriptBin "my-waydroid-init" # sh
             ''
               set -e # exit on any error
 
@@ -87,11 +87,11 @@ in
             ''
           )
 
-          (writeShellScriptBin "waydroid-reset-res" (mkWaydroidSetRes {
+          (writeShellScriptBin "my-waydroid-reset-res" (mkWaydroidSetRes {
             w = "";
             h = "";
           }))
-          (writeShellScriptBin "waydroid-set-res" (mkWaydroidSetRes { }))
+          (writeShellScriptBin "my-waydroid-set-res" (mkWaydroidSetRes { }))
         ];
       }
     )
