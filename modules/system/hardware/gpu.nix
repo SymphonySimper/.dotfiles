@@ -9,7 +9,11 @@ let
 in
 {
   options.my.hardware.gpu = {
-    amd.enable = lib.mkEnableOption "AMD";
+    amd = {
+      enable = lib.mkEnableOption "AMD";
+      enableVulkan = lib.mkEnableOption "AMDVULK";
+    };
+
     intel.enable = lib.mkEnableOption "Intel";
 
     nvidia = {
@@ -29,11 +33,11 @@ in
     (lib.mkIf cfg.amd.enable {
       hardware = {
         graphics = lib.mkMerge [
-          {
-            # Vulkan
+          (lib.mkIf cfg.amd.enableVulkan {
             extraPackages = [ pkgs.amdvlk ];
             extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
-          }
+          })
+
           {
             # OpenCL
             extraPackages = [ pkgs.rocmPackages.clr.icd ];
