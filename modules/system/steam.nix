@@ -37,8 +37,6 @@ in
     programs = {
       steam = {
         enable = true;
-        # Refer: https://nixos.wiki/wiki/Steam
-        extest.enable = true;
 
         dedicatedServer.openFirewall = false; # Open ports in the firewall for Source Dedicated Server
         localNetworkGameTransfers.openFirewall = false; # Open ports in the firewall for Steam Local Network Game Transfers
