@@ -118,6 +118,7 @@ in
               type =
                 let
                   states = lib.types.enum [
+                    null
                     "float"
                     "tile"
                     "fullscreen"
@@ -211,7 +212,10 @@ in
         {
           id = "gamescope";
           workspace = 7;
-          state = "fullscreen";
+          state = [
+            null
+            "fullscreen"
+          ];
         }
       ];
     };
@@ -385,7 +389,7 @@ in
                     (lib.strings.optionalString (state != null) state)
                     (lib.strings.optionalString (state == "float" && window.center) "center") # center floating window
                     (lib.strings.optionalString (
-                      window.workspace != null
+                      window.workspace != null && state == null
                     ) "workspace ${builtins.toString window.workspace} ${if window.silent then "silent" else ""}")
                     "${window.type}:^(${window.id})$"
                   ]
