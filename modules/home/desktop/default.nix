@@ -329,24 +329,6 @@ in
             "${keys.mod} SHIFT, F, fullscreen"
             "${keys.mod}, space, cyclenext"
 
-            (
-              let
-                playerctl = lib.getExe pkgs.playerctl;
-              in
-              builtins.concatMap
-                (action: builtins.map (key: ",XF86Audio${key}, exec, ${playerctl} ${action.name}") action.value)
-                (
-                  lib.attrsets.attrsToList {
-                    play-pause = [
-                      "Play"
-                      "Pause"
-                    ];
-                    next = [ "Next" ];
-                    previous = [ "Prev" ];
-                  }
-                )
-            )
-
             (builtins.map (
               bind:
               let

@@ -19,10 +19,59 @@ in
   config = lib.mkIf cfg.enable (
     lib.mkMerge [
       {
-        my.programs.media = {
-          image.enable = lib.mkDefault true;
-          recorder.enable = lib.mkDefault false;
-          video.enable = lib.mkDefault true;
+        my.programs = {
+          media = {
+            image.enable = lib.mkDefault true;
+            recorder.enable = lib.mkDefault false;
+            video.enable = lib.mkDefault true;
+          };
+
+          desktop.keybinds =
+            let
+              playerctl = lib.getExe pkgs.playerctl;
+            in
+            builtins.concatMap
+              (
+                action:
+                let
+                  default = {
+                    super = false;
+                    cmd = "${playerctl} ${action.cmd}";
+                  };
+                in
+                (
+                  (builtins.map (key: default // { key = "XF86Audio${key}"; }) action.fn)
+                  ++ [
+                    (
+                      default
+                      // {
+                        key = "F7";
+                        mod = action.mod;
+                      }
+                    )
+                  ]
+                )
+              )
+              [
+                {
+                  cmd = "play-pause";
+                  fn = [
+                    "Play"
+                    "Pause"
+                  ];
+                  mod = null;
+                }
+                {
+                  cmd = "next";
+                  fn = [ "Next" ];
+                  mod = "SHIFT";
+                }
+                {
+                  cmd = "previous";
+                  fn = [ "Prev" ];
+                  mod = "CTRL";
+                }
+              ];
         };
       }
 
