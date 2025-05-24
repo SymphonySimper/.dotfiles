@@ -19,7 +19,10 @@
       };
     };
 
-    programs.android.vm.enable = true;
+    programs = {
+      android.vm.enable = true;
+      steam.enable = true;
+    };
   };
 
   boot.initrd.availableKernelModules = [
