@@ -34,6 +34,8 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    my.networking.begone.allow.steam = true;
+
     programs = {
       steam = {
         enable = true;
