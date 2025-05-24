@@ -14,11 +14,6 @@ let
         "discord.gg"
         "discordapp.com"
       ];
-
-      music = [
-        "music.youtube.com"
-        "open.spotify.com"
-      ];
     };
 
     denied = {
@@ -33,6 +28,11 @@ let
       ];
 
       insta = [ "www.instagram.com" ];
+
+      music = [
+        "music.youtube.com"
+        "open.spotify.com"
+      ];
 
       ott = [
         "www.hotstar.com"
