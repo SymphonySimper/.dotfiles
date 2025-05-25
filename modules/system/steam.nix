@@ -1,4 +1,5 @@
 {
+  my,
   config,
   pkgs,
   lib,
@@ -34,7 +35,10 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    my.networking.begone.allow.steam = true;
+    my = {
+      networking.begone.allow.steam = true;
+      programs.steam.display.vrr = lib.mkDefault my.gui.display.vrr;
+    };
 
     programs = {
       steam = {

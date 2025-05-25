@@ -40,6 +40,7 @@ let
           height = mkGetDefault settings "gui.display.height" 1080;
           refreshRate = mkGetDefault settings "gui.display.refreshRate" 60;
           maxRefreshRate = mkGetDefault settings "gui.display.maxRefreshRate" refreshRate;
+          vrr = mkGetDefault settings "gui.display.vrr" false;
 
           desktop = {
             width = width / scale;

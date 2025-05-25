@@ -36,7 +36,7 @@ let
         }
 
         function max() {
-            ${mkMonitor my.gui.display.string.maxRefreshRate true}
+            ${mkMonitor my.gui.display.string.maxRefreshRate my.gui.display.vrr}
             notify "${my.gui.display.string.maxRefreshRate}"
         }
 

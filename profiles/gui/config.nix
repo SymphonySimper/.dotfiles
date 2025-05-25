@@ -10,6 +10,7 @@
         height = 1800;
         refreshRate = 48;
         maxRefreshRate = 120;
+        vrr = true;
       };
     };
   };
