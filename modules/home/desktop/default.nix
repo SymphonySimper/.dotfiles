@@ -119,11 +119,16 @@ in
                 let
                   states = lib.types.enum [
                     null
+
+                    # static
                     "float"
                     "tile"
                     "fullscreen"
                     "maximize"
                     "pin"
+
+                    # dynamic
+                    "idle" # idleinhibit
                   ];
                 in
                 lib.types.nullOr (
@@ -210,11 +215,12 @@ in
           workspace = 7;
         }
         {
-          id = "gamescope";
+          id = ".*gamescope.*";
           workspace = 7;
           state = [
             null
             "fullscreen"
+            "idle"
           ];
         }
       ];
@@ -368,11 +374,15 @@ in
                 state:
                 builtins.concatStringsSep ", " (
                   builtins.filter (r: (builtins.stringLength r) > 0) [
-                    (lib.strings.optionalString (state != null) state)
+                    (lib.strings.optionalString (state != null) (
+                      if state == "idle" then "idleinhibit focus" else state
+                    ))
                     (lib.strings.optionalString (state == "float" && window.center) "center") # center floating window
+
                     (lib.strings.optionalString (
                       window.workspace != null && state == null
                     ) "workspace ${builtins.toString window.workspace} ${if window.silent then "silent" else ""}")
+
                     "${window.type}:^(${window.id})$"
                   ]
                 )

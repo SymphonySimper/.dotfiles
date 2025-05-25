@@ -100,6 +100,7 @@ in
           {
             id = "mpv";
             workspace = 5;
+            state = [ "idle" ];
           }
         ];
 
