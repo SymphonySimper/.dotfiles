@@ -21,13 +21,13 @@ in
           width = lib.mkOption {
             type = lib.types.nullOr lib.types.numbers.positive;
             description = "Width of the display";
-            default = null;
+            default = my.gui.display.width;
           };
 
           height = lib.mkOption {
             type = lib.types.nullOr lib.types.numbers.positive;
             description = "Height of the display";
-            default = null;
+            default = my.gui.display.height;
           };
         };
       };
