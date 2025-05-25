@@ -165,7 +165,10 @@ in
             };
 
             id = lib.mkOption {
-              type = lib.types.str;
+              type = lib.types.oneOf [
+                lib.types.str
+                (lib.types.listOf lib.types.str)
+              ];
               description = "Window identifier";
             };
           };
@@ -194,28 +197,19 @@ in
           state = "float";
         }
 
-        # waydroid
-        {
-          id = "Waydroid";
-          workspace = 7;
-        }
-        {
-          id = "waydroid.com.mojang.minecraftpe";
-          state = "fullscreen";
-        }
-
-        # steam
+        # Gaming
         {
           id = "steam";
           silent = true;
           workspace = 6;
         }
         {
-          id = "steam_app_.*";
-          workspace = 7;
-        }
-        {
-          id = ".*gamescope.*";
+          id = [
+            "steam_app_.*"
+            ".*gamescope.*"
+
+            "Waydroid"
+          ];
           workspace = 7;
           state = [
             null
@@ -368,25 +362,29 @@ in
             (builtins.concatMap (
               window:
               let
+                ids = if builtins.typeOf window.id == "list" then window.id else [ window.id ];
                 states = if builtins.typeOf window.state == "list" then window.state else [ window.state ];
               in
-              builtins.map (
-                state:
-                builtins.concatStringsSep ", " (
-                  builtins.filter (r: (builtins.stringLength r) > 0) [
-                    (lib.strings.optionalString (state != null) (
-                      if state == "idle" then "idleinhibit focus" else state
-                    ))
-                    (lib.strings.optionalString (state == "float" && window.center) "center") # center floating window
+              builtins.concatMap (
+                id:
+                (builtins.map (
+                  state:
+                  builtins.concatStringsSep ", " (
+                    builtins.filter (r: (builtins.stringLength r) > 0) [
+                      (lib.strings.optionalString (state != null) (
+                        if state == "idle" then "idleinhibit focus" else state
+                      ))
+                      (lib.strings.optionalString (state == "float" && window.center) "center") # center floating window
 
-                    (lib.strings.optionalString (
-                      window.workspace != null && state == null
-                    ) "workspace ${builtins.toString window.workspace} ${if window.silent then "silent" else ""}")
+                      (lib.strings.optionalString (
+                        window.workspace != null && state == null
+                      ) "workspace ${builtins.toString window.workspace} ${if window.silent then "silent" else ""}")
 
-                    "${window.type}:^(${window.id})$"
-                  ]
-                )
-              ) states
+                      "${window.type}:^(${id})$"
+                    ]
+                  )
+                ) states)
+              ) ids
             ) cfg.windows)
           ];
         };
