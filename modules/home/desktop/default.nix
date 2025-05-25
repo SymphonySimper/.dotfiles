@@ -290,6 +290,10 @@ in
             "HYPRCURSOR_SIZE,24"
           ];
 
+          # https://github.com/ValveSoftware/gamescope/issues/1825
+          # https://github.com/hyprwm/Hyprland/issues/9064
+          debug.full_cm_proto = true;
+
           # Look and Feel
           general = {
             gaps_in = 0;
