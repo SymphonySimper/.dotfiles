@@ -118,33 +118,52 @@ in
               type =
                 let
                   states = lib.types.enum [
-                    null
-
                     # static
                     "float"
+                    "center"
                     "tile"
                     "fullscreen"
                     "maximize"
                     "pin"
 
                     # dynamic
-                    "idle" # idleinhibit
+                    "idleinhibit"
                   ];
+
+                  statesSubmodule = lib.types.submodule {
+                    options = {
+                      name = lib.mkOption {
+                        type = states;
+                        description = "Name of state";
+                      };
+
+                      opts = lib.mkOption {
+                        type = lib.types.nullOr (
+                          lib.types.oneOf [
+                            lib.types.str
+                            (lib.types.listOf lib.types.str)
+                          ]
+                        );
+                        description = "Additional options for state";
+                        default = null;
+                      };
+                    };
+                  };
                 in
                 lib.types.nullOr (
                   lib.types.oneOf [
                     states
-                    (lib.types.listOf states)
+                    statesSubmodule
+                    (lib.types.listOf (
+                      lib.types.oneOf [
+                        states
+                        statesSubmodule
+                      ]
+                    ))
                   ]
                 );
               description = "State of the window";
               default = null;
-            };
-
-            center = lib.mkOption {
-              type = lib.types.bool;
-              description = "Keep the floating window at ther center";
-              default = true;
             };
 
             workspace = lib.mkOption {
@@ -194,7 +213,10 @@ in
       windows = [
         {
           id = "xdg-desktop-portal-gtk";
-          state = "float";
+          state = [
+            "float"
+            "center"
+          ];
         }
 
         # Gaming
@@ -212,9 +234,11 @@ in
           ];
           workspace = 7;
           state = [
-            null
             "fullscreen"
-            "idle"
+            {
+              name = "idleinhibit";
+              opts = "focus";
+            }
           ];
         }
       ];
@@ -363,7 +387,9 @@ in
               window:
               let
                 ids = if builtins.typeOf window.id == "list" then window.id else [ window.id ];
-                states = if builtins.typeOf window.state == "list" then window.state else [ window.state ];
+                states =
+                  (if builtins.typeOf window.state == "list" then window.state else [ window.state ])
+                  ++ (lib.optionals (window.workspace != null) [ null ]);
               in
               builtins.concatMap (
                 id:
@@ -372,13 +398,27 @@ in
                   builtins.concatStringsSep ", " (
                     builtins.filter (r: (builtins.stringLength r) > 0) [
                       (lib.strings.optionalString (state != null) (
-                        if state == "idle" then "idleinhibit focus" else state
+                        if builtins.typeOf state == "string" then
+                          state
+                        else
+                          builtins.concatStringsSep " " (
+                            [ state.name ]
+                            ++ (
+                              let
+                                opts = state.opts;
+                              in
+                              lib.optionals (opts != null) (if builtins.typeOf opts == "list" then opts else [ opts ])
+                            )
+                          )
                       ))
-                      (lib.strings.optionalString (state == "float" && window.center) "center") # center floating window
 
-                      (lib.strings.optionalString (
-                        window.workspace != null && state == null
-                      ) "workspace ${builtins.toString window.workspace} ${if window.silent then "silent" else ""}")
+                      (lib.strings.optionalString (window.workspace != null && state == null) (
+                        builtins.concatStringsSep " " [
+                          "workspace"
+                          (builtins.toString window.workspace)
+                          (lib.strings.optionalString window.silent "silent")
+                        ]
+                      ))
 
                       "${window.type}:^(${id})$"
                     ]

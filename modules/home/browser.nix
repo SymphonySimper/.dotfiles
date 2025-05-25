@@ -83,6 +83,10 @@ in
               inherit id;
               silent = true;
               workspace = 2;
+              state = {
+                name = "idleinhibit";
+                opts = "fullscreen";
+              };
             }
             {
               id = "Picture-in-Picture";
@@ -90,8 +94,11 @@ in
               state = [
                 "float"
                 "pin"
+                {
+                  name = "idleinhibit";
+                  opts = "always";
+                }
               ];
-              center = false;
             }
             {
               id = ".*sharing your screen.*";
