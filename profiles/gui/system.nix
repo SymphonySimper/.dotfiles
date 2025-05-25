@@ -21,7 +21,15 @@
 
     programs = {
       android.vm.enable = true;
-      steam.enable = true;
+
+      steam = {
+        enable = true;
+
+        display = {
+          width = 1920;
+          height = 1200;
+        };
+      };
     };
   };
 
