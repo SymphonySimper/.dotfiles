@@ -21,7 +21,6 @@ clean-home:
 [group('clean')]
 clean: clean-system clean-home
 
-[group('update')]
 last-week-commits:
     my-flake-update-commits
 
