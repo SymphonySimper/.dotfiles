@@ -49,6 +49,8 @@ in
         remotePlay.openFirewall = false; # Open ports in the firewall for Steam Remote Play
 
         gamescopeSession.enable = false;
+
+        extraCompatPackages = [ pkgs.proton-ge-bin ];
       };
 
       # `gamemoderun %command%`
@@ -76,9 +78,13 @@ in
       };
     };
 
-    environment.systemPackages = with pkgs; [
-      # `mangohud %command%`
-      mangohud
-    ];
+    environment = {
+      sessionVariables.PROTON_ENABLE_WAYLAND = 1;
+
+      systemPackages = with pkgs; [
+        # `mangohud %command%`
+        mangohud
+      ];
+    };
   };
 }
