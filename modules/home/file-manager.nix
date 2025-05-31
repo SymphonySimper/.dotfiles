@@ -30,7 +30,7 @@
       shellWrapperName = "y";
 
       settings = {
-        manager = {
+        mgr = {
           ratio = [
             1 # left
             3 # center
@@ -182,7 +182,7 @@
     # Plugins
     {
       plugins.mount = "${inputs.yazi-plugins}/mount.yazi";
-      keymap.manager.prepend_keymap = [
+      keymap.mgr.prepend_keymap = [
         {
           on = "M";
           run = "plugin mount";
@@ -200,7 +200,7 @@
     }
     {
       plugins.jump-to-char = "${inputs.yazi-plugins}/jump-to-char.yazi";
-      keymap.manager.prepend_keymap = [
+      keymap.mgr.prepend_keymap = [
         {
           on = "f";
           run = "plugin jump-to-char";
