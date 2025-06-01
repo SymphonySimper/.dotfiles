@@ -18,10 +18,6 @@
         swap = "16G";
       };
     };
-
-    programs = {
-      android.vm.enable = true;
-    };
   };
 
   boot.initrd.availableKernelModules = [
