@@ -229,6 +229,7 @@ in
           id = [
             "steam_app_.*"
             ".*gamescope.*"
+            ".*\\.exe"
 
             "Waydroid"
           ];
