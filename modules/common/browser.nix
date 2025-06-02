@@ -210,6 +210,7 @@ in
           };
 
           ProtonDB = "www.protondb.com";
+          Squoosh = "squoosh.app";
           Virustotal = "www.virustotal.com";
         };
       };
