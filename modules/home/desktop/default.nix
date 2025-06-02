@@ -351,8 +351,8 @@ in
           bind = lib.lists.flatten [
             "${keys.mod}, Q, killactive"
             "${keys.mod} SHIFT, E, exec, uwsm stop"
-            "${keys.mod}, V, togglefloating"
-            "${keys.mod} SHIFT, F, fullscreen"
+            "${keys.mod}, f, fullscreen"
+            "${keys.mod} SHIFT, F, togglefloating"
             "${keys.mod}, space, cyclenext"
 
             (builtins.map (
