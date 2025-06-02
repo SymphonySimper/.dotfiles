@@ -40,6 +40,7 @@
     programs = {
       # cli
       scripts.enable = lib.mkDefault true;
+      mux.enable = lib.mkDefault true;
 
       # gui
       browser.enable = lib.mkDefault my.gui.enable;
