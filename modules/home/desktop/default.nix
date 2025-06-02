@@ -120,6 +120,7 @@ in
                   states = lib.types.enum [
                     # static
                     "float"
+                    "size"
                     "center"
                     "tile"
                     "fullscreen"
