@@ -1,7 +1,6 @@
 {
   my,
   config,
-  pkgs,
   lib,
   ...
 }:
@@ -10,10 +9,31 @@ let
 
 in
 {
-  options.my.programs.terminal.shell.cmd = lib.mkOption {
-    description = "Default command to run on launch";
-    type = lib.types.nullOr lib.types.str;
-    default = null;
+  options.my.programs.terminal = {
+    exe = lib.mkOption {
+      description = "Terminal package";
+      type = lib.types.str;
+      default = lib.getExe config.programs.alacritty.package;
+      readOnly = true;
+    };
+
+    args = lib.mkOption {
+      description = "Args that can be passed";
+      type = lib.types.attrsOf lib.types.str;
+      readOnly = true;
+      default = {
+        cmd = "-e";
+        class = "--class";
+      };
+    };
+
+    shell = {
+      cmd = lib.mkOption {
+        description = "Default command to run on launch";
+        type = lib.types.nullOr lib.types.str;
+        default = null;
+      };
+    };
   };
 
   config = lib.mkIf my.gui.enable {
