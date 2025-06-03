@@ -269,6 +269,7 @@ in
                 h = "select_references_to_symbol_under_cursor";
                 b = ":sh ${lib.getExe pkgs.git} -C $(dirname $(realpath %{buffer_name})) blame -L %{cursor_line},%{cursor_line} $(realpath %{buffer_name})";
                 s = "signature_help";
+                y = ":yank-diagnostic";
               };
 
               f = {
