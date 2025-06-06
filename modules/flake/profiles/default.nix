@@ -76,8 +76,9 @@ let
         # refer: https://github.com/catppuccin/palette/blob/main/palette.json
         color =
           builtins.mapAttrs (_: value: value.hex)
-            (builtins.fromJSON (builtins.readFile "${inputs.catppuccin-palette}/palette.json"))
-            .${theme.flavor}.colors;
+            (builtins.fromJSON (
+              builtins.readFile "${inputs.catppuccin.packages.${system}.palette}/palette.json"
+            )).${theme.flavor}.colors;
 
         gtk = if theme.dark then "Adwaita-dark" else "Adwaita";
         wallpaper = "${dir.home}/.dotfiles/modules/flake/assets/images/wallpaper.png";

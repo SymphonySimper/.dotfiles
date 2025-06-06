@@ -8,10 +8,6 @@
     # common
     systems.url = "github:nix-systems/default";
     catppuccin.url = "github:catppuccin/nix";
-    catppuccin-palette = {
-      url = "github:catppuccin/palette";
-      flake = false;
-    };
 
     # system
     disko = {
