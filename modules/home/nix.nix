@@ -1,4 +1,9 @@
-{ pkgs, lib, ... }:
+{
+  my,
+  pkgs,
+  lib,
+  ...
+}:
 let
   mynix =
     pkgs.writeShellScriptBin "mynix"
@@ -52,13 +57,24 @@ in
       enable = true;
       enableBashIntegration = false;
     };
+
     nix-index-database.comma.enable = true;
   };
 
-  my.programs.editor = {
-    lsp.nil = {
-      command = "${lib.getExe pkgs.nil}";
-      config.nil.nix.flake.autoArchive = true;
+  my.programs.editor = rec {
+    lsp.nixd = {
+      command = "${lib.getExe pkgs.nixd}";
+      args = [ "--inlay-hints=false" ];
+
+      config.nixd = {
+        nixpkgs.expr = "import <nixpkgs> { }";
+        formatting.command = [ language.nix.formatter.command ];
+
+        options = {
+          nixos.expr = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.${my.profile}.options";
+          home-manager.expr = "(builtins.getFlake (builtins.toString ./.)).homeConfigurations.${my.profile}.options";
+        };
+      };
     };
 
     language.nix.formatter.command = "${lib.getExe pkgs.nixfmt-rfc-style}";
