@@ -191,8 +191,22 @@ in
         {
           # JS / TS
           lsp.typescript-language-server.command = lib.getExe pkgs.typescript-language-server;
-          language.javascript.formatter = mkPrettier "typescript";
-          language.typescript.formatter = mkPrettier "typescript";
+
+          language =
+            lib.attrsets.genAttrs
+              [
+                "javascript"
+                "jsx"
+
+                "typescript"
+                "tsx"
+              ]
+              (name: {
+                formatter = mkPrettier "typescript";
+                language-servers = [
+                  "typescript-language-server"
+                ] ++ (lib.optionals (lib.strings.hasSuffix "sx" name) [ "tailwindcss-ls" ]);
+              });
 
           ignore = [
             "node_modules"
