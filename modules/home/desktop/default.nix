@@ -220,6 +220,11 @@ in
           ];
         }
 
+        {
+          id = "jetbrains-studio";
+          workspace = 4;
+        }
+
         # Gaming
         {
           id = "steam";

@@ -23,6 +23,13 @@ in
 
       programs.adb.enable = true;
       services.gvfs.enable = true;
+
+      environment.systemPackages = [
+        (pkgs.android-studio.override {
+          tiling_wm = config.my.programs.desktop.enable;
+          forceWayland = config.my.programs.desktop.enable;
+        })
+      ];
     })
 
     (
