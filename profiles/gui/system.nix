@@ -1,7 +1,10 @@
 { ... }:
 {
   my = {
-    networking.begone.enable = true;
+    networking.begone = {
+      enable = true;
+      allow.yt = true;
+    };
 
     hardware = {
       cpu.amd.enable = true;
@@ -18,6 +21,8 @@
         swap = "16G";
       };
     };
+
+    programs.android.enable = true;
   };
 
   boot.initrd.availableKernelModules = [
