@@ -146,6 +146,7 @@ in
 
           "Google Fonts" = "fonts.google.com";
           LeetCode = "leetcode.com";
+          "NPM Clayien Packages" ="www.npmjs.com/settings/clayien/packages";
           Regex101 = "regex101.com";
           "Svelte Changelog" = "svelte-changelog.vercel.app";
           "Svelte" = "svelte.dev";
