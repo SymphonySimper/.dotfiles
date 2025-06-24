@@ -205,6 +205,7 @@
         "nix-index-database": "nix-index-database",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_4",
+        "schemastore": "schemastore",
         "systems": "systems",
         "yazi-plugins": "yazi-plugins"
       }
@@ -227,6 +228,22 @@
       "original": {
         "owner": "oxalica",
         "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "schemastore": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1750726033,
+        "narHash": "sha256-y9HNhyoNlou4EZGoENESRWey2VXQmgIMb8EyhcE9qIM=",
+        "owner": "SchemaStore",
+        "repo": "schemastore",
+        "rev": "f6cd98d85149700f5233ff965dcc60fc8b8db426",
+        "type": "github"
+      },
+      "original": {
+        "owner": "SchemaStore",
+        "repo": "schemastore",
         "type": "github"
       }
     },

@@ -8,6 +8,14 @@
 }:
 let
   cfg = config.my.programs.editor;
+
+  # refer:  https://www.schemastore.org/
+  mkSchema =
+    name:
+    if (lib.strings.hasInfix "/" name) then
+      name
+    else
+      "${inputs.schemastore}/src/schemas/json/${name}.json";
 in
 {
   options.my.programs.editor = {
@@ -28,6 +36,33 @@ in
       description = "Alias for languages.langauge";
       default = { };
     };
+
+    schema = (
+      lib.genAttrs [ "json" ] (
+        lang:
+        lib.mkOption {
+          description = "Schema for completion support from LSP";
+
+          type = lib.types.listOf (
+            lib.types.submodule {
+              options = {
+                name = lib.mkOption {
+                  type = lib.types.str;
+                  description = "Name / URL of Schema";
+                };
+
+                file = lib.mkOption {
+                  type = lib.types.listOf lib.types.str;
+                  description = "File patterns";
+                };
+              };
+            }
+          );
+
+          default = [ ];
+        }
+      )
+    );
   };
 
   config = {
@@ -119,20 +154,12 @@ in
                 command = lib.getExe' pkgs.vscode-langservers-extracted vsLsp;
                 config.json = {
                   validate.enable = true;
-                  # refer:  https://www.schemastore.org/
-                  schemas = [
-                    {
-                      fileMatch = [ "package.json" ];
-                      url = "https://json.schemastore.org/package.json";
-                    }
-                    {
-                      fileMatch = [
-                        "tsconfig.json"
-                        "tsconfig.*.json"
-                      ];
-                      url = "https://json.schemastore.org/tsconfig.json";
-                    }
-                  ];
+                  schemas = (
+                    builtins.map (schema: {
+                      fileMatch = schema.file;
+                      url = mkSchema schema.name;
+                    }) cfg.schema.json
+                  );
                 };
               };
             };
@@ -254,6 +281,20 @@ in
                   "typescript-language-server"
                 ] ++ (lib.optionals (lib.strings.hasSuffix "sx" name) [ "tailwindcss-ls" ]);
               });
+
+          schema.json = [
+            {
+              name = "package";
+              file = [ "package.json" ];
+            }
+            {
+              name = "tsconfig";
+              file = [
+                "tsconfig.json"
+                "tsconfig.*.json"
+              ];
+            }
+          ];
 
           ignore = [
             "node_modules"

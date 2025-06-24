@@ -30,6 +30,10 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    schemastore = {
+      url = "github:SchemaStore/schemastore";
+      flake = false;
+    };
   };
 
   nixConfig = {
