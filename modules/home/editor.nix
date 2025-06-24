@@ -103,11 +103,58 @@ in
           };
         }
 
-        {
-          # JSON
-          language.json.formatter = mkPrettier "json";
-          language.jsonc.formatter = mkPrettier "jsonc";
-        }
+        (
+          let
+            vsLsp = "vscode-json-language-server";
+          in
+          {
+            # JSON
+            lsp = {
+              biome = {
+                command = lib.getExe pkgs.biome;
+                args = [ "lsp-proxy" ];
+              };
+
+              ${vsLsp} = {
+                command = lib.getExe' pkgs.vscode-langservers-extracted vsLsp;
+                config.json = {
+                  validate.enable = true;
+                  # refer:  https://www.schemastore.org/
+                  schemas = [
+                    {
+                      fileMatch = [ "package.json" ];
+                      url = "https://json.schemastore.org/package.json";
+                    }
+                    {
+                      fileMatch = [
+                        "tsconfig.json"
+                        "tsconfig.*.json"
+                      ];
+                      url = "https://json.schemastore.org/tsconfig.json";
+                    }
+                  ];
+                };
+              };
+            };
+
+            language = lib.genAttrs [ "json" "jsonc" ] (name: {
+              formatter = mkPrettier name;
+              language-servers = [
+                {
+                  name = vsLsp;
+                  only-features = [
+                    "completion"
+                    "hover"
+                  ];
+                }
+                {
+                  name = "biome";
+                  only-features = [ "diagnostics" ];
+                }
+              ];
+            });
+          }
+        )
 
         {
           # Rust
