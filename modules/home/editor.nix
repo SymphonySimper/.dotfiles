@@ -34,7 +34,7 @@ in
     my.programs.editor =
       let
         mkPrettier = name: {
-          command = "${lib.getExe pkgs.nodePackages.prettier}";
+          command = lib.getExe pkgs.nodePackages.prettier;
           args = [
             "--parser"
             name
@@ -78,14 +78,14 @@ in
         {
           # Just
           language.just.formatter = {
-            command = "${lib.getExe pkgs.just}";
+            command = lib.getExe pkgs.just;
             args = [ "--dump" ];
           };
         }
 
         {
           # Docker
-          lsp.docker-langserver.command = "${lib.getExe pkgs.dockerfile-language-server-nodejs}";
+          lsp.docker-langserver.command = lib.getExe pkgs.dockerfile-language-server-nodejs;
         }
 
         {
@@ -94,7 +94,7 @@ in
             yaml.formatter = mkPrettier "yaml";
 
             toml.formatter = {
-              command = "${lib.getExe pkgs.taplo}";
+              command = lib.getExe pkgs.taplo;
               args = [
                 "format"
                 "-"
@@ -182,7 +182,7 @@ in
             ];
 
             formatter = {
-              command = "${lib.getExe pkgs.ruff}";
+              command = lib.getExe pkgs.ruff;
               args = [
                 "format"
                 "--line-length"
@@ -201,14 +201,14 @@ in
 
         {
           # Markdown
-          lsp.markdown-oxide.command = "${lib.getExe pkgs.markdown-oxide}";
+          lsp.markdown-oxide.command = lib.getExe pkgs.markdown-oxide;
           language.markdown.formatter = mkPrettier "markdown";
         }
 
         {
           # Tailwindcss
           lsp.tailwindcss-ls = {
-            command = "${lib.getExe pkgs.tailwindcss-language-server}";
+            command = lib.getExe pkgs.tailwindcss-language-server;
             args = [ "--stdio" ];
           };
         }
@@ -264,7 +264,7 @@ in
 
         {
           # Svelte
-          lsp.svelteserver.command = "${lib.getExe pkgs.svelte-language-server}";
+          lsp.svelteserver.command = lib.getExe pkgs.svelte-language-server;
           language.svelte = {
             language-servers = [
               "svelteserver"
