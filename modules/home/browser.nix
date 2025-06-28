@@ -320,6 +320,8 @@ in
           "sidebar.main.tools" = "history,bookmarks";
 
           "browser.toolbars.bookmarks.visibility" = policies.DisplayBookmarksToolbar;
+
+          "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
         };
 
         search = {
