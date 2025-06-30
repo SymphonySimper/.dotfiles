@@ -31,11 +31,7 @@
   my = {
     common.system = true;
     boot.enable = lib.mkDefault false;
-
-    networking = {
-      enable = lib.mkDefault true;
-      begone.enable = lib.mkDefault false;
-    };
+    networking.enable = lib.mkDefault true;
 
     programs = {
       android.enable = lib.mkDefault false;

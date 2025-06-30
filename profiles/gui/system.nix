@@ -1,11 +1,6 @@
 { ... }:
 {
   my = {
-    networking.begone = {
-      enable = true;
-      allow.yt = true;
-    };
-
     hardware = {
       cpu.amd.enable = true;
       gpu.amd.enable = true;
