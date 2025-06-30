@@ -39,11 +39,7 @@
     };
 
     programs = {
-      android = {
-        enable = lib.mkDefault false;
-        vm.enable = lib.mkDefault false;
-      };
-
+      android.enable = lib.mkDefault false;
       browser.enable = lib.mkDefault my.gui.enable;
       desktop.enable = lib.mkDefault my.gui.desktop.enable;
       steam.enable = lib.mkDefault false;

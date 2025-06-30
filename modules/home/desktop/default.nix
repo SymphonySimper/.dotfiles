@@ -236,8 +236,6 @@ in
             "steam_app_.*"
             ".*gamescope.*"
             ".*\\.exe"
-
-            "Waydroid"
           ];
           workspace = 7;
           state = [
