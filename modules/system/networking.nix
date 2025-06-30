@@ -17,10 +17,6 @@ let
     };
 
     denied = {
-      anime = [
-        "hianime.to"
-        "www.crunchyroll.com"
-      ];
 
       fb = [
         "www.facebook.com"

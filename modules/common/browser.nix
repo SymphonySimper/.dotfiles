@@ -128,11 +128,6 @@ in
       };
 
       bookmarks = {
-        Anime = {
-          Crunchyroll = "crunchyroll.com";
-          MyAnimeList = "myanimelist.net/animelist/SymphonySimper";
-        };
-
         Bills = {
           "Airfiber Networks" = "https://login.airfiber.co.in/customer_portal";
           "Indian Post Insurance" = "pli.indiapost.gov.in";
