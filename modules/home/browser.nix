@@ -133,6 +133,11 @@ in
               slug = "chrome-mask";
               private = true;
             };
+
+            "harper@writewithharper.com" = {
+              slug = "private-grammar-checker-harper";
+              private = true;
+            };
           }
 
           (lib.mkIf cfg.enableContainer {

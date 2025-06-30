@@ -39,6 +39,7 @@ in
       search.prefix = "!";
       extensions = [
         "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
+        "lodbfhdipoipcjmlebjbgmmgekckhpfb" # harper
       ];
     };
 
