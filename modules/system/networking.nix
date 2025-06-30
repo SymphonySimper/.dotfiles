@@ -17,37 +17,9 @@ let
     };
 
     denied = {
-
-      fb = [
-        "www.facebook.com"
-        "www.fb.com"
-      ];
-
-      insta = [ "www.instagram.com" ];
-
-      music = [
-        "music.youtube.com"
-        "open.spotify.com"
-      ];
-
-      ott = [
-        "www.hotstar.com"
-        "www.primevideo.com"
-        "www.sonyliv.com"
-        "www.sunnxt.com"
-        "www.zee5.com"
-        "netflix.com"
-      ];
-
       reddit = [
         "www.reddit.com"
         "ol.reddit.com"
-      ];
-
-      twitch = [ "www.twitch.tv" ];
-      twitter = [
-        "www.twitter.com"
-        "x.com"
       ];
 
       yt = [ "www.youtube.com" ];
