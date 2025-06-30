@@ -228,8 +228,23 @@ in
 
         {
           # Markdown
-          lsp.markdown-oxide.command = lib.getExe pkgs.markdown-oxide;
-          language.markdown.formatter = mkPrettier "markdown";
+          lsp = {
+            markdown-oxide.command = lib.getExe pkgs.markdown-oxide;
+
+            harper-ls = {
+              command = lib.getExe pkgs.harper;
+              args = [ "--stdio" ];
+            };
+          };
+
+          language.markdown = {
+            formatter = mkPrettier "markdown";
+
+            language-servers = [
+              "markdown-oxide"
+              "harper-ls"
+            ];
+          };
         }
 
         {
