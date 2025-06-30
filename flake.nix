@@ -1,5 +1,5 @@
 {
-  description = "Home Manager configuration of symph";
+  description = "NixOS and Home Manager configuration of SymphonySimper";
 
   inputs = {
     # packages
