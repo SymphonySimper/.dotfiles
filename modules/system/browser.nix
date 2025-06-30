@@ -40,6 +40,7 @@ in
       extensions = [
         "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
         "lodbfhdipoipcjmlebjbgmmgekckhpfb" # harper
+        "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
       ];
     };
 
