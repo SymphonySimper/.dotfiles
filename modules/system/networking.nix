@@ -48,11 +48,6 @@ let
         "ol.reddit.com"
       ];
 
-      steam = [
-        "store.steampowered.com"
-        "steamcommunity.com"
-      ];
-
       twitch = [ "www.twitch.tv" ];
       twitter = [
         "www.twitter.com"

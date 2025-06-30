@@ -18,7 +18,6 @@
     # gui
     ./browser.nix
     ./desktop.nix
-    ./steam.nix
 
     # cli + gui
     ./android.nix
@@ -42,7 +41,6 @@
       android.enable = lib.mkDefault false;
       browser.enable = lib.mkDefault my.gui.enable;
       desktop.enable = lib.mkDefault my.gui.desktop.enable;
-      steam.enable = lib.mkDefault false;
       vm.enable = lib.mkDefault false;
     };
   };

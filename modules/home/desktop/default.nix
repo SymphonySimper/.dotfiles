@@ -224,28 +224,6 @@ in
           id = "jetbrains-studio";
           workspace = 4;
         }
-
-        # Gaming
-        {
-          id = "steam";
-          silent = true;
-          workspace = 6;
-        }
-        {
-          id = [
-            "steam_app_.*"
-            ".*gamescope.*"
-            ".*\\.exe"
-          ];
-          workspace = 7;
-          state = [
-            "fullscreen"
-            {
-              name = "idleinhibit";
-              opts = "focus";
-            }
-          ];
-        }
       ];
     };
 
