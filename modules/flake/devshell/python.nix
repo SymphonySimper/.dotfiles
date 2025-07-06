@@ -29,9 +29,5 @@
       if [ -d "$venv_dir" ]; then
         source "./$venv_dir/bin/activate"
       fi
-
-      alias py="python"
-      alias pvc="uv venv $venv_dir"
-      alias pva="source $venv_dir/bin/activate"
     '';
 }
