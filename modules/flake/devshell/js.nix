@@ -5,9 +5,8 @@
     corepack
   ];
 
-  env = {
-    PNPM_HOME = "$XDG_DATA_HOME/pnpm";
-    PATH = "$PATH:$PNPM_HOME";
-  };
-
+  shellHook = ''
+    export PNPM_HOME="$XDG_DATA_HOME/pnpm";
+    export PATH="$PATH:$PNPM_HOME";
+  '';
 }
