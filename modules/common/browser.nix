@@ -128,6 +128,11 @@ in
       };
 
       bookmarks = {
+        Bank = {
+          EPFO = "unifiedportal-mem.epfindia.gov.in/memberinterface";
+          "EPFO Pasbook" = "passbook.epfindia.gov.in/MemberPassBook/login";
+        };
+
         Bills = {
           "Airfiber Networks" = "https://login.airfiber.co.in/customer_portal";
           "Indian Post Insurance" = "pli.indiapost.gov.in";
