@@ -148,6 +148,8 @@ in
     };
 
     # Browser
+    catppuccin.firefox.profiles.default.enable = false;
+
     programs.firefox = rec {
       enable = true;
 
