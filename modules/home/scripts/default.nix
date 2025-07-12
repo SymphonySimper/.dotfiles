@@ -5,7 +5,6 @@ in
 {
   imports = [
     ./ffmpeg.nix
-    ./log.nix
     ./ocr.nix
     ./reload.nix
   ];
@@ -15,7 +14,6 @@ in
   config = {
     my.programs.scripts = {
       ffmpeg.enable = lib.mkDefault cfg.enable;
-      log.enable = lib.mkDefault cfg.enable;
       ocr.enable = lib.mkDefault cfg.enable;
       reload.enable = lib.mkDefault cfg.enable;
     };
