@@ -403,6 +403,8 @@ in
                 b = "buffer_picker";
                 d = "diagnostics_picker";
                 D = "workspace_diagnostics_picker";
+                e = "file_explorer";
+                E = "file_explorer_in_current_buffer_directory";
                 f = "file_picker";
                 F = "file_picker_in_current_buffer_directory"; # prev: file_picker_in_current_directory
                 g = "changed_file_picker";
