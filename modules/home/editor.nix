@@ -356,6 +356,15 @@ in
             select = normal;
           };
 
+          auto-completion = true;
+          path-completion = true;
+          preview-completion-insert = true;
+          completion-replace = true;
+          word-completion = {
+            enable = true;
+            trigger-length = 4;
+          };
+
           end-of-line-diagnostics = "hint";
           inline-diagnostics.cursor-line = "warning";
           lsp = {
