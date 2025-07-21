@@ -190,22 +190,29 @@ in
 
         {
           # Python
+          # NOTE:Switching until ty or ruff impletements goto feature
           lsp = {
+            pyright = {
+              command = lib.getExe' pkgs.pyright "pyright-langserver";
+              config.python.analysis.typeCheckingMode = "basic";
+            };
+
             ruff = {
               command = lib.getExe' pkgs.ruff "ruff";
               args = [ "server" ];
             };
 
-            ty = {
-              command = lib.getExe pkgs.ty;
-              args = [ "server" ];
-            };
+            # ty = {
+            #   command = lib.getExe pkgs.ty;
+            #   args = [ "server" ];
+            # };
           };
 
           language.python = {
             language-servers = [
+              "pyright"
               "ruff"
-              "ty"
+              # "ty"
             ];
 
             formatter = {
