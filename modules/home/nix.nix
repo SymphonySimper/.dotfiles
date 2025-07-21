@@ -61,14 +61,13 @@ in
     nix-index-database.comma.enable = true;
   };
 
-  my.programs.editor = rec {
+  my.programs.editor = {
     lsp.nixd = {
       command = "${lib.getExe pkgs.nixd}";
       args = [ "--inlay-hints=false" ];
 
       config.nixd = {
         nixpkgs.expr = "import <nixpkgs> { }";
-        formatting.command = [ language.nix.formatter.command ];
 
         options = {
           nixos.expr = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.${my.profile}.options";
@@ -77,6 +76,15 @@ in
       };
     };
 
-    language.nix.formatter.command = "${lib.getExe pkgs.nixfmt-rfc-style}";
+    language.nix = {
+      formatter.command = "${lib.getExe pkgs.nixfmt}";
+
+      language-servers = [
+        {
+          name = "nixd";
+          except-features = [ "format" ];
+        }
+      ];
+    };
   };
 }
