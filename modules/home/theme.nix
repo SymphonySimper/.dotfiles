@@ -27,7 +27,7 @@ in
 
       {
         catppuccin = {
-          gtk.enable = false;
+          gtk.icon.enable = false;
           kvantum.enable = false; # qt
         };
 
