@@ -8,20 +8,6 @@
   ];
 
   my.programs.desktop = {
-    autostart = [
-      {
-        name = "google-chrome";
-        cmd = "google-chrome-stable";
-        days = [
-          1
-          2
-          3
-          4
-          5
-        ];
-      }
-    ];
-
     windows = [
       {
         id = "google-chrome";
