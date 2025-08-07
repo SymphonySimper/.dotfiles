@@ -254,19 +254,20 @@ in
         };
 
         settings = {
-          monitor = builtins.concatStringsSep ", " [
-            my.gui.display.name
-            (builtins.concatStringsSep "" [
-              my.gui.display.string.width
-              "x"
-              my.gui.display.string.height
-              "@"
-              my.gui.display.string.refreshRate
-              "Hz"
-            ])
-            "auto"
-            my.gui.display.string.scale
-          ];
+          monitorv2 = {
+            output = my.gui.display.name;
+            mode = (
+              builtins.concatStringsSep "" [
+                my.gui.display.string.width
+                "x"
+                my.gui.display.string.height
+                "@"
+                my.gui.display.string.refreshRate
+              ]
+            );
+            position = "0x0";
+            scale = my.gui.display.string.scale;
+          };
 
           env = [
             "XCURSOR_SIZE,24"
