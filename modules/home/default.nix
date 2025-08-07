@@ -12,6 +12,7 @@
     ../common
 
     # cli
+    ./dev.nix
     ./editor.nix
     ./file-manager.nix
     ./mux.nix
