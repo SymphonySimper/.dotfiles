@@ -126,6 +126,7 @@ in
           showBottomLine = false;
           showPanelJumps = false;
           nerdFontsVersion = "3";
+          useHunkModeInStagingView = false;
         };
       };
     };
