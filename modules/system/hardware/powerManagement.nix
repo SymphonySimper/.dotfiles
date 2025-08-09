@@ -11,6 +11,8 @@ in
     powerManagement.enable = true;
 
     services = {
+      auto-cpufreq.enable = lib.mkForce false;
+      power-profiles-daemon.enable = lib.mkForce false;
       thermald.enable = config.my.hardware.cpu.intel.enable;
 
       tlp = {
