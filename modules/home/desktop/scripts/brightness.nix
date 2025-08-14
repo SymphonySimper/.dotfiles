@@ -11,7 +11,7 @@ let
         app_bin="${lib.getExe pkgs.brightnessctl}"
         app="$app_bin -m"
         backup_file="${config.xdg.cacheHome}/last-brightness"
-        save_file="${config.xdg.dataHome}/.my-brightness"
+        save_file="${config.xdg.stateHome}/.my-brightness"
 
         toggle_ness() {
         	if [ -f $backup_file ]; then
