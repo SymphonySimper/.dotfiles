@@ -1,8 +1,6 @@
 { pkgs, lib, ... }:
 {
   packages = with pkgs; [
-    just
-
     (
       let
         open = lib.getExe' pkgs.xdg-utils "xdg-open";
