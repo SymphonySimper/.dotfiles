@@ -52,6 +52,8 @@ in
       [
         {
           # Just
+          packages = [ pkgs.just ];
+
           language.just.formatter = {
             command = lib.getExe pkgs.just;
             args = [ "--dump" ];
