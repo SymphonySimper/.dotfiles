@@ -38,8 +38,6 @@
 
             # TODO: Update packages and shellHook
             packages = with pkgs; [
-              just # do not remove
-
               # replace with packages that you need in env
               cowsay
             ];
