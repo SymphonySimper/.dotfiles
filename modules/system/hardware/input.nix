@@ -44,6 +44,8 @@ in
         idProduct = "c548";
       in
       lib.mkIf cfg.logitech.enable {
+        my.hardware.bluetooth.enable =  lib.mkDefault true;
+
         environment.systemPackages = [ pkgs.solaar ];
 
         hardware.logitech.wireless.enable = true;
