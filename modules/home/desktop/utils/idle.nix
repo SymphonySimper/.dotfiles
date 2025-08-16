@@ -73,12 +73,11 @@ in
         }
       ];
 
-      notifybar.modules."5" =
+      notifybar.modules."Caffeine" =
         let
           cfg = config.my.programs.desktop.notifybar;
         in
-        {
-          title = "Caffeine";
+        lib.hm.dag.entryAfter [ "Brightness" ] {
           logic = # sh
             ''
               caffeine_inactive=$(${caffeine} -g)

@@ -108,8 +108,7 @@ in
         cfg = config.my.programs.desktop.notifybar;
       in
       {
-        "6" = {
-          title = "Audio";
+        "Audio" = lib.hm.dag.entryAfter [ "Caffeine" ] {
           logic = # sh
             ''
               audio_mute=$(${volume} -gm)
@@ -143,8 +142,7 @@ in
           ];
         };
 
-        "7" = {
-          title = "Mic";
+        "Mic" = lib.hm.dag.entryAfter [ "Audio" ] {
           logic = # sh
             ''
               mic_mute=$(${volume} -gM)

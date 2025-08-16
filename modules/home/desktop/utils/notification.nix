@@ -28,50 +28,53 @@ let
       inherit default;
     };
 
-  notifybar = (
-    builtins.map (
-      i:
-      let
-        mod = builtins.getAttr i cfg.modules;
+  notifybar =
+    let
+      sorted = lib.hm.dag.topoSort cfg.modules;
+    in
+    lib.trivial.throwIfNot (sorted ? result) "Failed to build notifybar!" (
+      builtins.map (
+        module:
+        let
+          mod = module.data;
 
-        mkText =
-          {
-            text,
-            style,
-            color ? cfg.color.default,
-            prefix ? "",
-            suffix ? "",
+          mkText =
+            {
+              text,
+              style,
+              color ? cfg.color.default,
+              prefix ? "",
+              suffix ? "",
 
-          }:
-          "${prefix}<span foreground='${color}' font_weight='${style}'>${text}</span>${suffix}";
+            }:
+            "${prefix}<span foreground='${color}' font_weight='${style}'>${text}</span>${suffix}";
 
-        title = mkText {
-          text = mod.title;
-          style = mod.style;
-        };
+          title = mkText {
+            text = module.name;
+            style = mod.style;
+          };
 
-        body = builtins.concatStringsSep "" (
-          builtins.map (
-            v:
-            mkText {
-              text = v.text;
-              color = v.color;
-              style = v.style;
-              prefix = v.prefix;
-              suffix = v.suffix;
-            }
-          ) mod.value
-        );
-      in
-      {
-        logic = mod.logic;
-        notify = "<span>${title}: ${body}</span>";
-      }
-    ) (builtins.genList (i: builtins.toString i) (builtins.length (builtins.attrNames cfg.modules)))
-  );
+          body = builtins.concatStringsSep "" (
+            builtins.map (
+              v:
+              mkText {
+                text = v.text;
+                color = v.color;
+                style = v.style;
+                prefix = v.prefix;
+                suffix = v.suffix;
+              }
+            ) mod.value
+          );
+        in
+        {
+          logic = mod.logic;
+          notify = "<span>${title}: ${body}</span>";
+        }
+      ) sorted.result
+    );
 in
 {
-
   options.my.programs.desktop.notifybar = lib.mkOption {
     type = lib.types.submodule {
       options = {
@@ -79,14 +82,9 @@ in
         color = mkReadOnlyOption "color" defaultColors;
 
         modules = lib.mkOption {
-          type = lib.types.attrsOf (
+          type = lib.hm.types.dagOf (
             lib.types.submodule {
               options = {
-                title = lib.mkOption {
-                  type = lib.types.str;
-                  description = "Title of the module";
-                };
-
                 style = lib.mkOption {
                   type = lib.types.str;
                   description = "Style of the module";
@@ -235,8 +233,7 @@ in
           ];
 
           notifybar.modules = {
-            "0" = {
-              title = "Date";
+            "Date" = lib.hm.dag.entryBefore [ "Network" ] {
               style = "normal";
               logic = # sh
                 ''
@@ -257,8 +254,7 @@ in
               ];
             };
 
-            "1" = {
-              title = "Network";
+            "Network" = lib.hm.dag.entryAfter [ "Date" ] {
               logic = # sh
                 ''
                   network_status=$(${lib.getExe' pkgs.networkmanager "nmcli"} -p -g type connection show --active | head -n1 | cut -d '-' -f3)
@@ -283,8 +279,7 @@ in
               ];
             };
 
-            "2" = {
-              title = "Battery";
+            "Battery" = lib.hm.dag.entryAfter [ "Network" ] {
               logic = # sh
                 ''
                   battery_status=$(</sys/class/power_supply/BAT0/status)

@@ -67,12 +67,11 @@ in
       }
     ];
 
-    notifybar.modules."3" =
+    notifybar.modules."Refresh Rate" =
       let
         cfg = config.my.programs.desktop.notifybar;
       in
-      {
-        title = "Refresh Rate";
+      lib.hm.dag.entryAfter [ "Battery" ] {
         logic = # sh
           ''
             refresh_rate_status=$(${changefps} get)

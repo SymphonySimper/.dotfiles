@@ -76,12 +76,11 @@ in
       }
     ];
 
-    notifybar.modules."4" =
+    notifybar.modules."Brightness" =
       let
         cfg = config.my.programs.desktop.notifybar;
       in
-      {
-        title = "Brightness";
+      lib.hm.dag.entryAfter [ "Refresh Rate" ] {
         logic = # sh
           ''
             brightness_status=$(${brightness} -g)
