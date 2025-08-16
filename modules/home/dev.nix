@@ -293,6 +293,9 @@ in
             "node_modules"
             "vite.config.js.timestamp-*"
             "vite.config.ts.timestamp-*"
+
+            "!*prettier*"
+            "!.npmrc"
           ];
         }
 
