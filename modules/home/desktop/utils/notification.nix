@@ -271,103 +271,140 @@ in
             }
           ];
 
-          notifybar.modules = [
-            {
-              name = "Date";
+          notifybar.modules =
+            let
+              coreutils = lib.attrsets.genAttrs [ "cut" "head" ] (e: lib.getExe' pkgs.coreutils e);
+            in
+            [
+              {
+                name = "Date";
 
-              order = {
-                type = "before";
-                module = "Network";
-              };
+                order = {
+                  type = "before";
+                  module = "Network";
+                };
 
-              style = "normal";
-              logic = # sh
-                ''
-                  time_date_string="$(date '+%H:%M;%d/%m/%Y')"
-                  IFS=";"
-                  read -ra time_date <<<"$time_date_string"
-                  unset IFS
-                '';
-              value = [
-                {
-                  text = "\${time_date[0]}";
-                  style = cfg.style.bold;
-                }
-                {
-                  prefix = " ";
-                  text = "\${time_date[1]}";
-                }
-              ];
-            }
-            {
-              name = "Network";
-              order.module = "Date";
-              logic = # sh
-                ''
-                  network_status=$(${lib.getExe' pkgs.networkmanager "nmcli"} -p -g type connection show --active | head -n1 | cut -d '-' -f3)
-                  network_title_style="${cfg.style.normal}"
-                  network="''${network_status^}"
-                  case "$network_status" in
-                    ethernet) network_color="${cfg.color.good}" ;;
-                    wireless) network_color="${cfg.color.ok}" ;;
-                    *)
-                      network="Disconnected"
-                      network_title_style="${cfg.style.bold}"
-                      network_color="${cfg.color.err}"
-                    ;;
-                  esac
-                '';
-              style = "$network_title_style";
-              value = [
-                {
-                  text = "$network";
-                  color = "$network_color";
-                }
-              ];
-            }
-            {
-              name = "Battery";
-              order.module = "Network";
-              logic = # sh
-                ''
-                  battery_status=$(</sys/class/power_supply/BAT0/status)
-                  battery_capacity=$(</sys/class/power_supply/BAT0/capacity)
-                  battery_remaining_time=$(${lib.getExe pkgs.acpi} -r | ${lib.getExe' pkgs.coreutils "cut"} -d ' ' -f5)
-                  battery_title_style="${cfg.style.normal}"
+                style = "normal";
+                logic = # sh
+                  ''
+                    time_date_string="$(date '+%H:%M;%d/%m/%Y')"
+                    IFS=";"
+                    read -ra time_date <<<"$time_date_string"
+                    unset IFS
+                  '';
+                value = [
+                  {
+                    text = "\${time_date[0]}";
+                    style = cfg.style.bold;
+                  }
+                  {
+                    prefix = " ";
+                    text = "\${time_date[1]}";
+                  }
+                ];
+              }
+              {
+                name = "Network";
+                order.module = "Date";
+                logic = # sh
+                  ''
+                    network_status=$(${lib.getExe' pkgs.networkmanager "nmcli"} -p -g type connection show --active | ${coreutils.head} -n1 | ${coreutils.cut} -d '-' -f3)
+                    network_title_style="${cfg.style.normal}"
+                    network="''${network_status^}"
+                    case "$network_status" in
+                      ethernet) network_color="${cfg.color.good}" ;;
+                      wireless) network_color="${cfg.color.ok}" ;;
+                      *)
+                        network="Disconnected"
+                        network_title_style="${cfg.style.bold}"
+                        network_color="${cfg.color.err}"
+                      ;;
+                    esac
+                  '';
+                style = "$network_title_style";
+                value = [
+                  {
+                    text = "$network";
+                    color = "$network_color";
+                  }
+                ];
+              }
+              {
+                name = "Battery";
+                order.module = "Network";
+                logic = # sh
+                  ''
+                    battery_status=$(</sys/class/power_supply/BAT0/status)
+                    battery_capacity=$(</sys/class/power_supply/BAT0/capacity)
+                    battery_remaining_time=$(${lib.getExe pkgs.acpi} -r | ${coreutils.cut} -d ' ' -f5)
+                    battery_title_style="${cfg.style.normal}"
 
-                  case "$battery_status" in
-                  'Charging') battery_status_color="${cfg.color.good}" ;;
-                  'Discharging') battery_status_color="${cfg.color.warn}" ;;
-                  esac
+                    case "$battery_status" in
+                    'Charging') battery_status_color="${cfg.color.good}" ;;
+                    'Discharging') battery_status_color="${cfg.color.warn}" ;;
+                    esac
 
-                  if [[ $battery_capacity -gt 80 ]]; then
-                    battery_capacity_color="${cfg.color.warn}"
-                  elif [[ $battery_capacity -gt 50 ]]; then
-                    battery_capacity_color="${cfg.color.good}"
-                  elif [[ $battery_capacity -gt 20 ]]; then
-                    battery_capacity_color="${cfg.color.ok}"
-                    battery_title_style="${cfg.style.bold}"
-                  else
-                    battery_capacity_color="${cfg.color.err}"
-                    battery_title_style="${cfg.style.bold}"
-                  fi
-                '';
-              style = "$battery_title_style";
-              value = [
-                {
-                  text = "\${battery_capacity}%";
-                  color = "$battery_capacity_color";
-                  suffix = " ";
-                }
-                {
-                  prefix = "(";
-                  suffix = ")";
-                  text = "$battery_remaining_time";
-                  color = "$battery_status_color";
-                }
-              ];
-            }
-          ];
+                    if [[ $battery_capacity -gt 80 ]]; then
+                      battery_capacity_color="${cfg.color.warn}"
+                    elif [[ $battery_capacity -gt 50 ]]; then
+                      battery_capacity_color="${cfg.color.good}"
+                    elif [[ $battery_capacity -gt 20 ]]; then
+                      battery_capacity_color="${cfg.color.ok}"
+                      battery_title_style="${cfg.style.bold}"
+                    else
+                      battery_capacity_color="${cfg.color.err}"
+                      battery_title_style="${cfg.style.bold}"
+                    fi
+                  '';
+                style = "$battery_title_style";
+                value = [
+                  {
+                    text = "\${battery_capacity}%";
+                    color = "$battery_capacity_color";
+                    suffix = " ";
+                  }
+                  {
+                    prefix = "(";
+                    suffix = ")";
+                    text = "$battery_remaining_time";
+                    color = "$battery_status_color";
+                  }
+                ];
+              }
+              {
+                name = "Bluetooth";
+                order.module = "Mic";
+                logic = # sh
+                  ''
+                    bluetooth_color="${cfg.color.disabled}"
+                    bluetooth_title_style="${cfg.style.normal}"
+
+                    bluetooth_exists=$(command -v "bluetoothctl")
+                    if [ -z "$bluetooth_exists" ]; then
+                      bluetooth_status="Disabled"
+                    else
+                      readarray -t bluetooth_connected_devices < <(${lib.getExe' pkgs.bluez "bluetoothctl"} devices Connected | ${lib.getExe' pkgs.gnugrep "grep"} 'Device' | cut -d ' ' -f3-)
+
+                      if [[ "''${bluetooth_connected_devices[@]}" -eq 0 ]]; then
+                        bluetooth_status="No devices connected."
+                        bluetooth_color="${cfg.color.ok}"
+                      else
+                        bluetooth_title_style="${cfg.style.bold}"
+                        bluetooth_connected_devices_join=$(IFS=', '; echo "''${bluetooth_connected_devices[*]}")
+                        bluetooth_status="''${bluetooth_connected_devices_join//,/, }"
+                        bluetooth_color="${cfg.color.default}"
+                      fi
+                    fi
+                  '';
+                style = "$bluetooth_title_style";
+                value = [
+                  {
+                    text = "$bluetooth_status";
+                    color = "$bluetooth_color";
+                  }
+                ];
+              }
+            ];
         };
       }
     ]
