@@ -76,34 +76,38 @@ in
       }
     ];
 
-    notifybar.modules."Brightness" =
+    notifybar.modules =
       let
         cfg = config.my.programs.desktop.notifybar;
       in
-      lib.hm.dag.entryAfter [ "Refresh Rate" ] {
-        logic = # sh
-          ''
-            brightness_status=$(${brightness} -g)
-            brightness_title_style="${cfg.style.normal}"
-            if [[ $brightness_status -gt 80 ]]; then
-              brightness_color="${cfg.color.err}"
-              brightness_title_style="bold"
-            elif [[ $brightness_status -gt 50 ]]; then
-              brightness_color="${cfg.color.warn}"
-              brightness_title_style="bold"
-            elif [[ $brightness_status -gt 20 ]]; then
-              brightness_color="${cfg.color.ok}"
-            else
-              brightness_color="${cfg.color.good}"
-            fi
-          '';
-        style = "$brightness_title_style";
-        value = [
-          {
-            text = "\${brightness_status}%";
-            color = "$brightness_color";
-          }
-        ];
-      };
+      [
+        {
+          name = "Brightness";
+          order.module = "Refresh Rate";
+          logic = # sh
+            ''
+              brightness_status=$(${brightness} -g)
+              brightness_title_style="${cfg.style.normal}"
+              if [[ $brightness_status -gt 80 ]]; then
+                brightness_color="${cfg.color.err}"
+                brightness_title_style="bold"
+              elif [[ $brightness_status -gt 50 ]]; then
+                brightness_color="${cfg.color.warn}"
+                brightness_title_style="bold"
+              elif [[ $brightness_status -gt 20 ]]; then
+                brightness_color="${cfg.color.ok}"
+              else
+                brightness_color="${cfg.color.good}"
+              fi
+            '';
+          style = "$brightness_title_style";
+          value = [
+            {
+              text = "\${brightness_status}%";
+              color = "$brightness_color";
+            }
+          ];
+        }
+      ];
   };
 }

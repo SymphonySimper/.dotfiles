@@ -73,32 +73,36 @@ in
         }
       ];
 
-      notifybar.modules."Caffeine" =
+      notifybar.modules =
         let
           cfg = config.my.programs.desktop.notifybar;
         in
-        lib.hm.dag.entryAfter [ "Brightness" ] {
-          logic = # sh
-            ''
-              caffeine_inactive=$(${caffeine} -g)
-              caffeine_title_style="${cfg.style.normal}"
-              if [[ $caffeine_inactive -eq 1 ]]; then
-                caffeine_status="DISABLED"
-                caffeine_color="${my.theme.color.overlay0}"
-              else
-                caffeine_status="ENABLED"
-                caffeine_title_style="bold"
-                caffeine_color="${my.theme.color.peach}"
-              fi
-            '';
-          style = "$caffeine_title_style";
-          value = [
-            {
-              text = "$caffeine_status";
-              color = "$caffeine_color";
-            }
-          ];
-        };
+        [
+          {
+            name = "Caffeine";
+            order.module = "Brightness";
+            logic = # sh
+              ''
+                caffeine_inactive=$(${caffeine} -g)
+                caffeine_title_style="${cfg.style.normal}"
+                if [[ $caffeine_inactive -eq 1 ]]; then
+                  caffeine_status="DISABLED"
+                  caffeine_color="${my.theme.color.overlay0}"
+                else
+                  caffeine_status="ENABLED"
+                  caffeine_title_style="bold"
+                  caffeine_color="${my.theme.color.peach}"
+                fi
+              '';
+            style = "$caffeine_title_style";
+            value = [
+              {
+                text = "$caffeine_status";
+                color = "$caffeine_color";
+              }
+            ];
+          }
+        ];
     };
 
     programs.hyprlock = {

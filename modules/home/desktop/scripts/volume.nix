@@ -107,8 +107,10 @@ in
       let
         cfg = config.my.programs.desktop.notifybar;
       in
-      {
-        "Audio" = lib.hm.dag.entryAfter [ "Caffeine" ] {
+      [
+        {
+          name = "Audio";
+          order.module = "Caffeine";
           logic = # sh
             ''
               audio_mute=$(${volume} -gm)
@@ -140,9 +142,11 @@ in
               color = "$audio_color";
             }
           ];
-        };
+        }
 
-        "Mic" = lib.hm.dag.entryAfter [ "Audio" ] {
+        {
+          name = "Mic";
+          order.module = "Audio";
           logic = # sh
             ''
               mic_mute=$(${volume} -gM)
@@ -163,7 +167,7 @@ in
               color = "$mic_color";
             }
           ];
-        };
-      };
+        }
+      ];
   };
 }

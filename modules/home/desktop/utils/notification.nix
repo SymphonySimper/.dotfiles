@@ -30,7 +30,20 @@ let
 
   notifybar =
     let
-      sorted = lib.hm.dag.topoSort cfg.modules;
+      sorted = lib.hm.dag.topoSort (
+        lib.attrsets.listToAttrs (
+          builtins.map (
+            module:
+            let
+              order = if module.order.type == "before" then lib.hm.dag.entryBefore else lib.hm.dag.entryAfter;
+            in
+            {
+              name = module.name;
+              value = order [ module.order.module ] module;
+            }
+          ) cfg.modules
+        )
+      );
     in
     lib.trivial.throwIfNot (sorted ? result) "Failed to build notifybar!" (
       builtins.map (
@@ -82,9 +95,34 @@ in
         color = mkReadOnlyOption "color" defaultColors;
 
         modules = lib.mkOption {
-          type = lib.hm.types.dagOf (
+          type = lib.types.listOf (
             lib.types.submodule {
               options = {
+                name = lib.mkOption {
+                  type = lib.types.str;
+                  description = "Name of the module";
+                };
+
+                order = lib.mkOption {
+                  type = lib.types.submodule {
+                    options = {
+                      type = lib.mkOption {
+                        type = lib.types.enum [
+                          "before"
+                          "after"
+                        ];
+                        description = "Odering type of the module";
+                        default = "after";
+                      };
+
+                      module = lib.mkOption {
+                        type = lib.types.nullOr lib.types.str;
+                        description = "Name of the module that should be palce before/after this module";
+                      };
+                    };
+                  };
+                };
+
                 style = lib.mkOption {
                   type = lib.types.str;
                   description = "Style of the module";
@@ -232,8 +270,15 @@ in
             }
           ];
 
-          notifybar.modules = {
-            "Date" = lib.hm.dag.entryBefore [ "Network" ] {
+          notifybar.modules = [
+            {
+              name = "Date";
+
+              order = {
+                type = "before";
+                module = "Network";
+              };
+
               style = "normal";
               logic = # sh
                 ''
@@ -252,9 +297,10 @@ in
                   text = "\${time_date[1]}";
                 }
               ];
-            };
-
-            "Network" = lib.hm.dag.entryAfter [ "Date" ] {
+            }
+            {
+              name = "Network";
+              order.module = "Date";
               logic = # sh
                 ''
                   network_status=$(${lib.getExe' pkgs.networkmanager "nmcli"} -p -g type connection show --active | head -n1 | cut -d '-' -f3)
@@ -277,9 +323,10 @@ in
                   color = "$network_color";
                 }
               ];
-            };
-
-            "Battery" = lib.hm.dag.entryAfter [ "Network" ] {
+            }
+            {
+              name = "Battery";
+              order.module = "Network";
               logic = # sh
                 ''
                   battery_status=$(</sys/class/power_supply/BAT0/status)
@@ -318,8 +365,8 @@ in
                   color = "$battery_status_color";
                 }
               ];
-            };
-          };
+            }
+          ];
         };
       }
     ]
