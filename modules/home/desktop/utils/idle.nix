@@ -87,7 +87,7 @@ in
                 caffeine_title_style="${cfg.style.normal}"
                 if [[ $caffeine_inactive -eq 1 ]]; then
                   caffeine_status="DISABLED"
-                  caffeine_color="${my.theme.color.overlay0}"
+                  caffeine_color="${cfg.color.disabled}"
                 else
                   caffeine_status="ENABLED"
                   caffeine_title_style="bold"

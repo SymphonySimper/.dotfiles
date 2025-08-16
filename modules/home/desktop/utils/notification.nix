@@ -17,6 +17,7 @@ let
     ok = my.theme.color.yellow;
     warn = my.theme.color.maroon;
     err = my.theme.color.red;
+    disabled = my.theme.color.overlay0;
   };
 
   mkReadOnlyOption =
