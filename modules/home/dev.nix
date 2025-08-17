@@ -51,6 +51,11 @@ in
       )
       [
         {
+          # Work
+          packages = [ pkgs.google-cloud-sdk ];
+        }
+
+        {
           # Just
           packages = [ pkgs.just ];
 
