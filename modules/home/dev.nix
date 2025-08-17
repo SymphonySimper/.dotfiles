@@ -33,19 +33,21 @@ in
           onlyList = key: only lib.lists.optionals key;
         in
         {
-          my.programs.editor = {
-            language = onlyAttr "language";
-            lsp = onlyAttr "lsp";
-            schema = onlyAttr "schema";
-            ignore = onlyList "ignore";
+          my.programs = {
+            editor = {
+              language = onlyAttr "language";
+              lsp = onlyAttr "lsp";
+              schema = onlyAttr "schema";
+              ignore = onlyList "ignore";
+            };
+
+            shell = {
+              env = onlyAttr "env";
+              path = onlyList "path";
+            };
           };
 
-          home = {
-            packages = onlyList "packages";
-            sessionVariables = onlyAttr "env";
-            sessionPath = onlyList "path";
-          };
-
+          home.packages = onlyList "packages";
           programs = onlyAttr "programs";
         }
       )

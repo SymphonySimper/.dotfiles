@@ -14,6 +14,11 @@ let
     };
 in
 {
+  imports = [
+    (lib.modules.mkAliasOptionModule [ "my" "programs" "shell" "env" ] [ "home" "sessionVariables" ])
+    (lib.modules.mkAliasOptionModule [ "my" "programs" "shell" "path" ] [ "home" "sessionPath" ])
+  ];
+
   options.my.programs.shell = {
     exe = mkReadOnlyStrOption (lib.getExe config.programs.bash.package);
     args = {
@@ -102,9 +107,7 @@ in
     }
 
     {
-      home.sessionVariables = {
-        STARSHIP_LOG = "error";
-      };
+      my.programs.shell.env.STARSHIP_LOG = "error";
 
       programs.starship = {
         enable = true;
