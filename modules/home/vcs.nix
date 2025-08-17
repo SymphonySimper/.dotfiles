@@ -2,6 +2,7 @@
   config,
   my,
   pkgs,
+  lib,
   ...
 }:
 let
@@ -16,6 +17,10 @@ let
     "!fc() { git clone git@${host}:${suffix}; }; fc";
 in
 {
+  imports = [
+    (lib.modules.mkAliasOptionModule [ "my" "programs" "vcs" ] [ "programs" "git" ])
+  ];
+
   home.packages = with pkgs; [
     git-filter-repo
     git-quick-stats
