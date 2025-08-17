@@ -21,8 +21,9 @@ let
 
       dir = {
         home = "/home/${name}";
-        dev = "${dir.home}/lifeisfun";
         data = "${dir.home}/importantnt";
+        dev = "${dir.home}/lifeisfun";
+        work = "${dir.dev}/work";
       };
 
       profile = mkGetDefault passedProfile "name" "default";
@@ -128,13 +129,15 @@ let
         system = my.system;
         overlays = [
           (import ../overlays/lib { inherit my helpers; })
-        ] ++ (lib.optionals (for == "home") [ ]);
+        ]
+        ++ (lib.optionals (for == "home") [ ]);
       };
 
-      modules =
-        [ (profileDir + "/${my.profile}/${for}.nix") ]
-        ++ (lib.optionals (for == "home") [ ../../home ])
-        ++ (lib.optionals (for == "system") [ ../../system ]);
+      modules = [
+        (profileDir + "/${my.profile}/${for}.nix")
+      ]
+      ++ (lib.optionals (for == "home") [ ../../home ])
+      ++ (lib.optionals (for == "system") [ ../../system ]);
 
       specialArgs = {
         inherit my;

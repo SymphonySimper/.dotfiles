@@ -29,7 +29,7 @@ in
 
       includes = [
         {
-          condition = "gitdir:${my.dir.dev}/work/";
+          condition = "gitdir:${my.dir.work}/";
           contents = {
             user = {
               name = "Sri Senthil Balaji J";

@@ -68,9 +68,9 @@
     in
     {
       "${my.name}-fav-dirs" = {
-        "${my.dir.dev}" = defaultDirConfig;
-        "${my.dir.dev}/work" = defaultDirConfig;
         "${my.dir.data}" = defaultDirConfig;
+        "${my.dir.dev}" = defaultDirConfig;
+        "${my.dir.work}" = defaultDirConfig;
       };
     };
 
