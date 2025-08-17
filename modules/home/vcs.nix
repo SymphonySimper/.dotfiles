@@ -18,7 +18,7 @@ let
 in
 {
   imports = [
-    (lib.modules.mkAliasOptionModule [ "my" "programs" "vcs" ] [ "programs" "git" ])
+    (lib.modules.mkAliasOptionModule [ "my" "programs" "vcs" "root" ] [ "programs" "git" ])
   ];
 
   home.packages = with pkgs; [
