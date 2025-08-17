@@ -26,18 +26,10 @@ in
       enable = true;
       addKeysToAgent = "yes";
 
-      matchBlocks = {
-        "github" = {
-          hostname = "github.com";
-          identityFile = "${cfg.dir}/id_ed25519";
-          identitiesOnly = true;
-        };
-
-        "work-github" = {
-          hostname = "github.com";
-          identityFile = "${cfg.dir}/work_id_ed25519";
-          identitiesOnly = true;
-        };
+      matchBlocks."github" = {
+        hostname = "github.com";
+        identityFile = "${cfg.dir}/id_ed25519";
+        identitiesOnly = true;
       };
     };
 

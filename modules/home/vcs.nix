@@ -45,18 +45,6 @@ in
         userName = my.fullName;
         userEmail = "50240805+SymphonySimper@users.noreply.github.com";
 
-        includes = [
-          {
-            condition = "gitdir:${my.dir.work}/";
-            contents = {
-              user = {
-                name = "Sri Senthil Balaji J";
-                email = "176003709+smollan-sri-senthil-balaji@users.noreply.github.com";
-              };
-            };
-          }
-        ];
-
         ignores = [
           "node_modules"
         ];

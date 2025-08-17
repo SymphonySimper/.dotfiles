@@ -53,12 +53,6 @@ in
       )
       [
         {
-          # Work
-          packages = [ pkgs.google-cloud-sdk ];
-          env.GOOGLE_APPLICATION_CREDENTIALS = "${config.xdg.configHome}/gcloud/application_default_credentials.json";
-        }
-
-        {
           # Just
           packages = [ pkgs.just ];
 
