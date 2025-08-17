@@ -9,7 +9,7 @@ let
 in
 {
   imports = [
-    (lib.modules.mkAliasOptionModule [ "my" "programs" "ssh" ] [ "programs" "ssh" ])
+    (lib.modules.mkAliasOptionModule [ "my" "programs" "ssh" "root" ] [ "programs" "ssh" ])
   ];
 
   options.my.programs.ssh.dir = lib.mkOption {
