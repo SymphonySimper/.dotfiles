@@ -10,17 +10,18 @@ let
   cfg = config.my.programs.editor;
 in
 {
+  imports = [
+    (lib.modules.mkAliasOptionModule
+      [ "my" "programs" "editor" "lsp" ]
+      [ "programs" "helix" "languages" "language-server" ]
+    )
+  ];
+
   options.my.programs.editor = {
     ignore = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       description = "Global ignore patterns for editor.file-picker";
       default = [ ];
-    };
-
-    lsp = lib.mkOption {
-      type = lib.types.attrsOf lib.types.anything;
-      description = "Alias for languages.langauge-server";
-      default = { };
     };
 
     language = lib.mkOption {
@@ -182,7 +183,6 @@ in
       };
 
       languages = {
-        language-server = cfg.lsp;
         language = lib.attrsets.mapAttrsToList (name: value: { inherit name; } // value) (cfg.language);
       };
     };
