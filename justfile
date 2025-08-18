@@ -26,3 +26,6 @@ last-week-commits:
 
 news-home HOST=hostname:
     home-manager news --flake .#{{ HOST }}
+
+update-flake:
+    nix flake update --commit-lock-file
