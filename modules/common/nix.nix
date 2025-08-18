@@ -57,7 +57,7 @@ in
             commit-lock-file-summary = "chore(flake): update flake.lock";
           }
 
-          (lib.attrsets.optionalAttrs (system) {
+          (lib.attrsets.optionalAttrs system {
             extra-platforms = config.boot.binfmt.emulatedSystems;
           })
         ];
@@ -68,7 +68,7 @@ in
         };
       }
 
-      (lib.attrsets.optionalAttrs (system) {
+      (lib.attrsets.optionalAttrs system {
         # Storage optimization
         optimise.automatic = true;
       })
