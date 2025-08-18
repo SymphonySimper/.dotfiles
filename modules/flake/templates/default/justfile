@@ -4,4 +4,4 @@ greet:
     @echo "Hello from Just!"
 
 update-flake:
-    nix flake update --commit-lock-file
+    nix --option commit-lockfile-summary "chore(flake): update flake.lock" flake update --commit-lock-file
