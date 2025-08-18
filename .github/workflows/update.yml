@@ -25,5 +25,5 @@ jobs:
         with:
           base: "main"
           branch: "feat/update-flake-${{ env.DATE }}"
-          commit-msg: "feat(flake)!: update"
+          commit-msg: "chore(flake): update flake.lock"
           pr-title: "Update flake ${{ env.DATE }}"

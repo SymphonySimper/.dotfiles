@@ -54,6 +54,7 @@ in
               "nix-command"
               "flakes"
             ];
+            commit-lock-file-summary = "chore(flake): update flake.lock";
           }
 
           (lib.attrsets.optionalAttrs (system) {
