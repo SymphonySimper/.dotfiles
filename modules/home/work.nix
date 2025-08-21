@@ -31,8 +31,11 @@
 
     {
       home.packages = [ pkgs.google-cloud-sdk ];
-      my.programs.shell.env.GOOGLE_APPLICATION_CREDENTIALS =
-        "${config.xdg.configHome}/gcloud/application_default_credentials.json";
+
+      my.programs = {
+        shell.env.GOOGLE_APPLICATION_CREDENTIALS = "${config.xdg.configHome}/gcloud/application_default_credentials.json";
+        editor.ignore = [ "!.gcloudignore" ];
+      };
     }
   ];
 }
