@@ -36,6 +36,8 @@ in
         ls = "ls --almost-all --color=yes --group-directories-first --human-readable";
         lsl = "${ls} -l --size";
       };
+
+      my.programs.shell.path = [ "${config.xdg.dataHome}/../bin" ];
     }
 
     {
