@@ -14,8 +14,9 @@
         f:
         inputs.nixpkgs.lib.genAttrs (import inputs.systems) (
           system:
-          f {
+          f rec {
             pkgs = import inputs.nixpkgs { inherit system; };
+            lib = pkgs.lib;
           }
         );
     in
