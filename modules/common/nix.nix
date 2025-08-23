@@ -7,7 +7,6 @@
   ...
 }:
 let
-  frequency = "weekly";
   system = config.my.common.system;
 in
 {
@@ -25,20 +24,11 @@ in
         nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
         # Garbage Collection
-        gc = lib.mkMerge [
-          {
-            automatic = true;
-            options = "--delete-older-than 14d";
-          }
-
-          (lib.attrsets.optionalAttrs system {
-            dates = frequency;
-          })
-
-          (lib.attrsets.optionalAttrs (!system) {
-            inherit frequency;
-          })
-        ];
+        gc = {
+          automatic = true;
+          options = "--delete-older-than 14d";
+          dates = "weekly";
+        };
 
         settings = lib.mkMerge [
           {
