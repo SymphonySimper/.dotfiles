@@ -144,7 +144,7 @@ in
 
               c = {
                 a = "code_action";
-                b = ":sh ${lib.getExe pkgs.git} -C $(dirname $(realpath %{buffer_name})) blame -L %{cursor_line},%{cursor_line} $(realpath %{buffer_name})";
+                b = ":sh ${lib.getExe pkgs.git} -C %{workspace_directory} blame -L %{cursor_line},%{cursor_line} $(realpath %{buffer_name})";
                 C = "toggle_block_comments";
                 c = "toggle_comments";
                 f = ":format";
