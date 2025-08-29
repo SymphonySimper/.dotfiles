@@ -310,6 +310,10 @@ in
               "tailwindcss-ls"
             ];
             formatter = mkPrettier "svelte";
+            block-comment-tokens = {
+              start = "<!--";
+              end = "-->";
+            };
           };
 
           ignore = [ ".svelte-kit" ];
