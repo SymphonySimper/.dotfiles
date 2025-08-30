@@ -149,6 +149,8 @@ in
                 c = "toggle_comments";
                 f = ":format";
                 h = "select_references_to_symbol_under_cursor";
+                I = "decrement";
+                i = "increment";
                 l = ":lsp-restart";
                 r = "rename_symbol";
                 s = "signature_help";
