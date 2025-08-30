@@ -53,6 +53,11 @@ in
       )
       [
         {
+          # Tree-Sitter
+          lsp.ts_query_ls.command = lib.getExe pkgs.ts_query_ls;
+        }
+
+        {
           # Just
           packages = [ pkgs.just ];
 
