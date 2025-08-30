@@ -7,13 +7,17 @@
     })
   ];
 
-  my.programs.desktop = {
-    windows = [
-      {
-        id = "google-chrome";
-        workspace = 3;
-        silent = true;
-      }
-    ];
+  my.programs = {
+    desktop = {
+      windows = [
+        {
+          id = "google-chrome";
+          workspace = 3;
+          silent = true;
+        }
+      ];
+    };
+
+    media.recorder.enable = true;
   };
 }
