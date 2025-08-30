@@ -60,11 +60,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1756550939,
-        "narHash": "sha256-njOByyJTPP7KJS7mx+xOFIMggqaR/8JXZ9ixLf57IP0=",
+        "lastModified": 1756570440,
+        "narHash": "sha256-yOnMAJ5gOl6+zL8kN7p9OWoiAz8lGe+tkRSm6LBN8Hc=",
         "owner": "SymphonySimper",
         "repo": "fork-helix",
-        "rev": "41b0d15634830d794a72e20977e80ed61093935a",
+        "rev": "ddec362df66c9c0e75f03f14585769685ceb7b65",
         "type": "github"
       },
       "original": {
