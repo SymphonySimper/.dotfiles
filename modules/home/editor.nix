@@ -155,6 +155,16 @@ in
                 r = "rename_symbol";
                 s = "signature_help";
                 y = ":yank-diagnostic";
+
+                t = {
+                  s = ":tree-sitter-scopes";
+                  h = ":tree-sitter-highlight-name";
+                  t = ":tree-sitter-subtree";
+                  T = [
+                    "select_all"
+                    ":tree-sitter-subtree"
+                  ];
+                };
               };
 
               f = {
