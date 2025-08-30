@@ -132,7 +132,7 @@ in
           };
         };
 
-        keys = {
+        keys = rec {
           normal = {
             space = {
               b = {
@@ -187,6 +187,8 @@ in
               q = ":quit";
             };
           };
+
+          select = normal;
 
           insert = {
             C-p = "signature_help";
