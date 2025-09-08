@@ -144,6 +144,7 @@ in
             entry = true;
           };
 
+          "CSSBattle" = "cssbattle.dev";
           "Google Fonts" = "fonts.google.com";
           LeetCode = "leetcode.com";
           "NPM Clayien Packages" ="www.npmjs.com/settings/clayien/packages";
