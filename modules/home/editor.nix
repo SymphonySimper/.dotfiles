@@ -187,17 +187,7 @@ in
               # macros
               m = {
                 ## add xml like tag with the closing tag
-                t =
-                  let
-                    script = lib.getExe (
-                      pkgs.writeShellScriptBin "my-helix-xml-tag" ''
-                        echo "<xxx>"
-                          ${lib.getExe' pkgs.coreutils "cat"}
-                        echo "</xxx>"
-                      ''
-                    );
-                  in
-                  "@|${script}<ret>sxxx<ret>c";
+                t = "@|printf<space>'<lt>xxx<gt>\n<lt>/xxx<gt>'<ret>sxxx<ret>c";
               };
 
               q = ":quit";
