@@ -181,7 +181,6 @@ in
                 j = "jumplist_picker";
                 s = "symbol_picker";
                 S = "workspace_symbol_picker";
-                y = ":sh ${lib.getExe pkgs.tmux} new-window ${lib.getExe' pkgs.yazi "yazi"} $(realpath %{buffer_name}) ";
               };
 
               # macros
