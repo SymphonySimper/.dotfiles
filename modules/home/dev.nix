@@ -147,7 +147,7 @@ in
         {
           # Python
           packages = with pkgs; [
-            python3Full
+            python3
             uv
           ];
 
