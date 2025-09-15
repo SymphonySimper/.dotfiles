@@ -10,7 +10,6 @@ in
 {
   options.my.networking = {
     enable = lib.mkEnableOption "networking";
-    useDHCP = lib.mkEnableOption "useDHCP";
     nm.enable = lib.mkEnableOption "NetworkManager";
     firewall.enable = lib.mkEnableOption "firewall";
 
@@ -33,15 +32,12 @@ in
         user.sudo.nopasswd = lib.lists.optional (cfg.nm.enable) "${config.my.user.bin}/systemctl restart NetworkManager";
 
         networking = {
-          useDHCP = lib.mkDefault true;
           nm.enable = lib.mkDefault true;
           firewall.enable = lib.mkDefault true;
         };
       };
 
       networking = {
-        useDHCP = lib.mkDefault cfg.useDHCP;
-
         networkmanager = {
           enable = cfg.nm.enable;
         };
