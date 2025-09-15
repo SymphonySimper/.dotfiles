@@ -207,7 +207,7 @@ in
               # macros
               m = {
                 ## add xml like tag with the closing tag
-                t = "@|printf<space>'<lt>xxx<gt>\n<lt>/xxx<gt>'<ret>sxxx<ret>c";
+                t = "@o<esc>|printf<space>'<lt>xxx<gt>\n<lt>/xxx<gt>\n'<ret>sxxx<ret>c";
               };
 
               q = ":quit";
