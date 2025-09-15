@@ -60,16 +60,16 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1757755954,
-        "narHash": "sha256-EcaVto3SLmCRYqHRaH8iTOQyzKUyWNas3Axdh3aelkY=",
-        "owner": "SymphonySimper",
-        "repo": "fork-helix",
-        "rev": "907ed53b9a9beb3bf28bc8322960772766118d71",
+        "lastModified": 1757943935,
+        "narHash": "sha256-rsLEJYap8Da+COMnm3/qQqbuRU06+zOEDKsMFN8CxKg=",
+        "owner": "helix-editor",
+        "repo": "helix",
+        "rev": "ea2541f424a2a12ced530ae6894daa749e084d63",
         "type": "github"
       },
       "original": {
-        "owner": "SymphonySimper",
-        "repo": "fork-helix",
+        "owner": "helix-editor",
+        "repo": "helix",
         "type": "github"
       }
     },

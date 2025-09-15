@@ -21,7 +21,8 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    helix.url = "github:SymphonySimper/fork-helix";
+    helix.url = "github:helix-editor/helix";
+    # helix.url = "github:SymphonySimper/fork-helix";
     yazi-plugins = {
       url = "github:yazi-rs/plugins";
       flake = false;
