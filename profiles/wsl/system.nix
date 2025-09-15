@@ -1,6 +1,6 @@
 { my, inputs, ... }:
 let
-  interop = false;
+  interop = true;
 in
 {
   imports = [
@@ -13,8 +13,10 @@ in
     defaultUser = my.name;
     interop.includePath = interop;
     startMenuLaunchers = false;
+
     wslConf = {
       user.default = my.name;
+
       interop = {
         enabled = interop;
         appendWindowsPath = interop;
