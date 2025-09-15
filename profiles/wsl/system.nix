@@ -30,7 +30,7 @@ in
     };
 
     programs.vm.docker = {
-      enable = true;
+      enable = false;
       enableRootless = true;
     };
   };
