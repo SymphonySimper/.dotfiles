@@ -22,8 +22,14 @@ in
     };
   };
 
-  my.programs.vm.docker = {
-    enable = true;
-    enableRootless = true;
+  my = {
+    networking = {
+      enable = false;
+    };
+
+    programs.vm.docker = {
+      enable = true;
+      enableRootless = true;
+    };
   };
 }
