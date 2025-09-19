@@ -9,11 +9,10 @@
 
   my.programs = {
     desktop = {
-      windows = [
+      automove = [
         {
-          id = "google-chrome";
-          workspace = 3;
-          silent = true;
+          name = "google-chrome.desktop";
+          workspace = 2;
         }
       ];
     };

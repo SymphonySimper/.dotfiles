@@ -40,9 +40,9 @@ in
     my.programs.desktop = {
       autostart = [ "alacritty" ];
 
-      windows = [
+      automove = [
         {
-          id = "Alacritty";
+          name = "Alacritty.desktop";
           workspace = 1;
         }
       ];

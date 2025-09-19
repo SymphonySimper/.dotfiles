@@ -25,53 +25,6 @@ in
             recorder.enable = lib.mkDefault false;
             video.enable = lib.mkDefault true;
           };
-
-          desktop.keybinds =
-            let
-              playerctl = lib.getExe pkgs.playerctl;
-            in
-            builtins.concatMap
-              (
-                action:
-                let
-                  default = {
-                    super = false;
-                    cmd = "${playerctl} ${action.cmd}";
-                  };
-                in
-                (
-                  (builtins.map (key: default // { key = "XF86Audio${key}"; }) action.fn)
-                  ++ [
-                    (
-                      default
-                      // {
-                        key = "F7";
-                        mod = action.mod;
-                      }
-                    )
-                  ]
-                )
-              )
-              [
-                {
-                  cmd = "play-pause";
-                  fn = [
-                    "Play"
-                    "Pause"
-                  ];
-                  mod = null;
-                }
-                {
-                  cmd = "next";
-                  fn = [ "Next" ];
-                  mod = "SHIFT";
-                }
-                {
-                  cmd = "previous";
-                  fn = [ "Prev" ];
-                  mod = "CTRL";
-                }
-              ];
         };
       }
 
@@ -87,26 +40,19 @@ in
       (lib.mkIf cfg.recorder.enable {
         programs.obs-studio.enable = true;
 
-        my.programs.desktop.windows = [
+        my.programs.desktop.automove = [
           {
-            id = "com.obsproject.Studio";
-            workspace = 9;
+            name = "com.obsproject.Studio.desktop";
+            workspace = 5;
           }
         ];
       })
 
       (lib.mkIf cfg.video.enable {
-        my.programs.desktop.windows = [
+        my.programs.desktop.automove = [
           {
-            id = "mpv";
+            name = "mpv.desktop";
             workspace = 5;
-            state = [
-              "fullscreen"
-              {
-                name = "idleinhibit";
-                opts = "focus";
-              }
-            ];
           }
         ];
 
