@@ -210,6 +210,12 @@ in
           "org/gnome/desktop/break-reminders/eyesight".play-sound = true;
           "org/gnome/desktop/break-reminders/movement".play-sound = true;
 
+          # privacy
+          "org/gnome/desktop/privacy" = {
+            remove-old-temp-files = true;
+            remove-old-trash-files = true;
+          };
+
           # extensions
           "org/gnome/shell/extensions/caffeine" = {
             indicator-position-max = 1;
