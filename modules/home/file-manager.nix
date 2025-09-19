@@ -17,7 +17,6 @@
     # yazi
     ## image
     chafa
-    ueberzugpp
     ## archive
     p7zip
   ];
