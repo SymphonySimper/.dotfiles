@@ -1,71 +1,59 @@
-{ config, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   options.my.programs.desktop.enable = lib.mkEnableOption "Desktop";
 
-  config = lib.mkIf config.my.programs.desktop.enable (
-    lib.mkMerge [
-      {
-        programs.hyprland = {
+  config = lib.mkIf config.my.programs.desktop.enable {
+    services = {
+      desktopManager.gnome.enable = true;
+
+      displayManager.gdm = {
+        enable = true;
+        wayland = true;
+      };
+    };
+
+    environment = {
+      sessionVariables.NIXOS_OZONE_WL = "1";
+
+      gnome.excludePackages = with pkgs; [
+        epiphany
+        geary
+        gnome-characters
+        gnome-connections
+        gnome-console
+        gnome-contacts
+        gnome-maps
+        gnome-music
+        gnome-shell-extensions
+        gnome-text-editor
+        gnome-tour
+        gnome-weather
+        simple-scan
+        yelp
+      ];
+    };
+
+    my = {
+      boot.enable = true;
+
+      hardware = {
+        audio = {
           enable = true;
-          withUWSM = true;
+          programs.enable = lib.mkDefault true;
         };
 
-        security = {
-          polkit.enable = true;
-          pam.services = {
-            hyprland.enableGnomeKeyring = true;
-            # Enable hyprlock
-            hyprlock = { };
-          };
-        };
+        keyboard.enable = true;
+        powerManagement.enable = true;
+      };
 
-        services = {
-          udisks2.enable = true;
-        };
-
-        environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
-        my = {
-          boot.enable = true;
-
-          hardware = {
-            audio = {
-              enable = true;
-              programs.enable = lib.mkDefault true;
-            };
-
-            keyboard.enable = true;
-            powerManagement.enable = true;
-          };
-
-          programs = {
-            browser.enable = true;
-          };
-        };
-      }
-
-      {
-        # uwsm module enables display manager.
-        # which then overrides tty1 (https://github.com/NixOS/nixpkgs/pull/429845)
-        services.displayManager.enable = lib.mkForce false;
-
-        my.programs.tty."1" = {
-          skipUsername = true;
-          launch =
-            let
-              uwsm = "${lib.getExe config.programs.uwsm.package}";
-            in
-            {
-              command = # sh
-                ''
-                  if ${uwsm} check may-start; then
-                      exec ${uwsm} start ${config.my.user.bin}/Hyprland
-                  fi
-                '';
-              dbus = false;
-            };
-        };
-      }
-    ]
-  );
+      programs = {
+        browser.enable = true;
+      };
+    };
+  };
 }

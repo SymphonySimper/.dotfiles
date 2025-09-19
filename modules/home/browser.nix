@@ -6,6 +6,7 @@
 }:
 let
   cfg = config.my.programs.browser;
+  category = "X-MY-Bookmarks";
 
   mkGetURL = url: if lib.strings.hasPrefix "http" url then url else "https://${url}";
 in
@@ -78,35 +79,14 @@ in
             "x-scheme-handler/https"
           ];
 
-          windows = [
+          automove = [
             {
-              inherit id;
-              silent = true;
+              name = "${id}.desktop";
               workspace = 2;
-              state = {
-                name = "idleinhibit";
-                opts = "fullscreen";
-              };
-            }
-            {
-              id = "Picture-in-Picture";
-              type = "title";
-              state = [
-                "float"
-                "pin"
-                {
-                  name = "idleinhibit";
-                  opts = "always";
-                }
-              ];
-            }
-            {
-              id = ".*sharing your screen.*";
-              type = "title";
-              silent = true;
-              workspace = 10;
             }
           ];
+
+          appfolder.Bookmarks.categories = [ category ];
         };
 
       browser = {
@@ -425,7 +405,7 @@ in
             type = "Application";
             genericName = name;
             comment = "Launch ${name}";
-            categories = [ "X-MY-Bookmarks" ];
+            categories = [ category ];
             terminal = false;
             exec = execScript;
             settings.StartupWMClass = name;
