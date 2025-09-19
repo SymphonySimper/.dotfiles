@@ -59,7 +59,7 @@ in
         window = {
           decorations = "none";
           opacity = 1;
-          startup_mode = "Maximized";
+          startup_mode = "Fullscreen";
           padding = rec {
             x = 2;
             y = x;
