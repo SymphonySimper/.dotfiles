@@ -11,7 +11,6 @@ in
 {
   options.my.programs.media = {
     enable = lib.mkEnableOption "Media";
-    image.enable = lib.mkEnableOption "Image";
     recorder.enable = lib.mkEnableOption "Recorder";
     video.enable = lib.mkEnableOption "Video";
   };
@@ -21,21 +20,11 @@ in
       {
         my.programs = {
           media = {
-            image.enable = lib.mkDefault true;
             recorder.enable = lib.mkDefault false;
             video.enable = lib.mkDefault true;
           };
         };
       }
-
-      (lib.mkIf cfg.image.enable {
-        home.packages = [ pkgs.loupe ];
-
-        my.programs.desktop.mime."org.gnome.Loupe" = [
-          "image/jpeg"
-          "image/png"
-        ];
-      })
 
       (lib.mkIf cfg.recorder.enable {
         programs.obs-studio.enable = true;

@@ -138,6 +138,11 @@ in
         Office.categories = [ "Office" ];
         Utilities.categories = [ "X-GNOME-Utilities" ];
       };
+
+      mime."org.gnome.Loupe" = [
+        "image/jpeg"
+        "image/png"
+      ];
     };
 
     programs.gnome-shell = {
