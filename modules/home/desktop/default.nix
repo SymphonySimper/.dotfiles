@@ -120,18 +120,6 @@ in
 
   config = lib.mkIf cfg.enable {
     my.programs.desktop = {
-      autostart = [
-        {
-          # set wallpaper
-          name = "myswaybg";
-          cmd = lib.getExe (
-            pkgs.writeShellScriptBin "myswaybg" ''
-              exec ${lib.getExe' pkgs.swaybg "swaybg"} -c "${my.theme.color.crust}" -m solid_color
-            ''
-          );
-        }
-      ];
-
       appfolder = {
         CLI.categories = [ "ConsoleOnly" ];
         Games.categories = [ "Game" ];
