@@ -17,6 +17,6 @@
       ];
     };
 
-    media.recorder.enable = true;
+    media.recorder.enable = false;
   };
 }
