@@ -21,12 +21,14 @@
       sessionVariables.NIXOS_OZONE_WL = "1";
 
       gnome.excludePackages = with pkgs; [
+        decibels
         epiphany
         geary
         gnome-characters
         gnome-connections
         gnome-console
         gnome-contacts
+        gnome-font-viewer
         gnome-maps
         gnome-music
         gnome-shell-extensions
