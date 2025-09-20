@@ -163,6 +163,16 @@ in
             toolkit-accessibility = false;
           };
 
+          ## wallpaper
+          "org/gnome/desktop/background" = {
+            picture-uri = my.theme.wallpaper;
+            picture-uri-dark = my.theme.wallpaper;
+          };
+
+          "org/gnome/desktop/screensaver" = {
+            picture-uri = my.theme.wallpaper;
+          };
+
           # "org/gnome/settings-daemon/plugins/color" = {
           #   night-light-enabled = true;
           #   night-light-schedule-automatic = false;
