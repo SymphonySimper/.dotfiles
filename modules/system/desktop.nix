@@ -20,6 +20,7 @@
 
     environment = {
       sessionVariables.NIXOS_OZONE_WL = "1";
+      systemPackages = [ pkgs.dconf-editor ];
 
       gnome.excludePackages = with pkgs; [
         decibels
