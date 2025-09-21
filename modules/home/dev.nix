@@ -69,7 +69,7 @@ in
 
         {
           # Docker
-          lsp.docker-langserver.command = lib.getExe pkgs.dockerfile-language-server-nodejs;
+          lsp.docker-langserver.command = lib.getExe pkgs.dockerfile-language-server;
         }
 
         {
