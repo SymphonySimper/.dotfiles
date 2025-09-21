@@ -72,7 +72,6 @@ in
 
           settings."org/gnome/desktop/interface" = {
             color-scheme = if my.theme.dark then "prefer-dark" else "default";
-            cursor-size = 16;
             cursor-theme = "Adwaita";
             gtk-theme = my.theme.gtk;
             icon-theme = "Adwaita";
