@@ -16,7 +16,7 @@ in
     )
   ];
 
-  options.my.programs.editor = {
+  options.my.programs.editor = (lib.my.mkNameOption "Editor" "hx") // {
     ignore = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       description = "Global ignore patterns for editor.file-picker";
@@ -78,36 +78,38 @@ in
   };
 
   config = {
-    my.programs.editor.ignore = builtins.concatLists [
-      [
-        # general
-        ".DS_Store"
-        "build"
+    my.programs = {
+      editor.ignore = builtins.concatLists [
+        [
+          # general
+          ".DS_Store"
+          "build"
 
-        # binary
-        "**/*.exe"
-        "**/*.zip"
-        "**/*.parquet"
-        ## media
-        "**/*.png"
-        "**/*.jp[e]?g"
-        "**/*.web[pm]"
-        ## doc
-        "**/*.pdf"
-        "**/*.epub"
-        "**/*.odt"
-        "**/*.doc[x]?"
-        "**/*.calc"
-        "**/*.xls[x]?"
-        "**/*:Zone.Identifier"
-      ]
+          # binary
+          "**/*.exe"
+          "**/*.zip"
+          "**/*.parquet"
+          ## media
+          "**/*.png"
+          "**/*.jp[e]?g"
+          "**/*.web[pm]"
+          ## doc
+          "**/*.pdf"
+          "**/*.epub"
+          "**/*.odt"
+          "**/*.doc[x]?"
+          "**/*.calc"
+          "**/*.xls[x]?"
+          "**/*:Zone.Identifier"
+        ]
 
-      # Do not ignore
-      [
-        "!.github/"
-        "!.env*"
-      ]
-    ];
+        # Do not ignore
+        [
+          "!.github/"
+          "!.env*"
+        ]
+      ];
+    };
 
     xdg.configFile."helix/ignore".text = builtins.concatStringsSep "\n" (lib.lists.unique cfg.ignore);
 

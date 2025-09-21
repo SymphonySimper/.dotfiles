@@ -62,8 +62,6 @@ let
           glyph = "Font Awesome 6 Free";
         };
       };
-
-      programs = (import ./programs.nix);
     };
 
   profileDir = ../../../profiles;

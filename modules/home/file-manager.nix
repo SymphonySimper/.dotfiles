@@ -1,10 +1,13 @@
 {
-  my,
   inputs,
+  config,
   pkgs,
   lib,
   ...
 }:
+let
+  xdg-open = lib.getExe' pkgs.xdg-utils "xdg-open";
+in
 {
   home.packages = with pkgs; [
     trash-cli # trash
@@ -41,7 +44,7 @@
         opener = {
           edit = [
             {
-              run = ''${my.programs.editor} "$@"'';
+              run = ''${config.my.programs.editor.name} "$@"'';
               block = true;
               for = "unix";
             }
@@ -49,7 +52,7 @@
 
           open = [
             {
-              run = ''xdg-open "$@"'';
+              run = ''${xdg-open} "$@"'';
               desc = "Open";
               for = "linux";
             }
@@ -57,7 +60,7 @@
 
           reveal = [
             {
-              run = ''xdg-open "$(dirname "$1")"'';
+              run = ''${xdg-open} "$(dirname "$1")"'';
               desc = "Reveal";
               for = "linux";
             }
@@ -73,7 +76,7 @@
 
           play = [
             {
-              run = ''${my.programs.video} "$@"'';
+              run = ''${xdg-open} "$@"'';
               orphan = true;
               for = "unix";
             }

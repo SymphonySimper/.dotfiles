@@ -6,6 +6,8 @@
   ...
 }:
 let
+  cfg = config.my.programs.vcs;
+
   mkSSHClone =
     {
       host ? "github.com",
@@ -51,14 +53,14 @@ in
 
         extraConfig = {
           init.defaultBranch = "main";
-          core.editor = my.programs.editor;
+          core.editor = config.my.programs.editor.name;
           push.autoSetupRemote = true;
           mergetool.keepBackup = false;
           pull.rebase = true;
           rebase.autoStash = true;
 
           merge = {
-            tool = if my.programs.editor == "nvim" then "nvimdiff" else "";
+            tool = if config.my.programs.editor.name == "nvim" then "nvimdiff" else "";
             conflictStyle = "zdiff3"; # delta
           };
 
@@ -85,10 +87,10 @@ in
           c = "clone";
           cs = mkSSHClone { };
           csp = mkSSHClone {
-            host = config.my.programs.vcs.sshHost.default;
+            host = cfg.sshHost.default;
             user = my.fullName;
           };
-          cw = mkSSHClone { host = config.my.programs.vcs.sshHost.work; };
+          cw = mkSSHClone { host = cfg.sshHost.work; };
 
           s = "status";
           a = "add";

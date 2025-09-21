@@ -9,7 +9,7 @@ let
 
 in
 {
-  options.my.programs.terminal = {
+  options.my.programs.terminal = (lib.my.mkNameOption "Terminal" "alacritty") // {
     exe = lib.mkOption {
       description = "Terminal package";
       type = lib.types.str;
@@ -103,14 +103,13 @@ in
           in
           {
             program = cfgSh.exe;
-            args =
-              [
-                cfgSh.args.login
-              ]
-              ++ (lib.lists.optionals (cfg.shell.cmd != null) [
-                cfgSh.args.cmd
-                cfg.shell.cmd
-              ]);
+            args = [
+              cfgSh.args.login
+            ]
+            ++ (lib.lists.optionals (cfg.shell.cmd != null) [
+              cfgSh.args.cmd
+              cfg.shell.cmd
+            ]);
           };
 
         mouse.hide_when_typing = true;
