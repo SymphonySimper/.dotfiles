@@ -14,25 +14,23 @@ in
     bookmarks = lib.mkOption {
       type = lib.types.attrsOf (
         lib.types.attrsOf (
-          lib.types.oneOf [
-            lib.types.str
-            (lib.types.submodule {
-              options = {
-                url = lib.mkOption {
-                  type = lib.types.str;
-                  description = "Site URL";
-                };
-
-                # `entry` and `browser` works only with home-manager
-                entry = lib.mkEnableOption "Also show as desktop entry";
-                browser = lib.mkOption {
-                  type = lib.types.str;
-                  description = "Browser to use for opening the desktop entry";
-                  default = lib.getExe' pkgs.xdg-utils "xdg-open";
-                };
+          lib.types.submodule {
+            options = {
+              url = lib.mkOption {
+                type = lib.types.str;
+                description = "Site URL";
               };
-            })
-          ]
+              # `entry` and `browser` works only with home-manager
+              entry = (lib.mkEnableOption "Also show as desktop entry") // {
+                default = true;
+              };
+              browser = lib.mkOption {
+                type = lib.types.str;
+                description = "Browser to use for opening the desktop entry";
+                default = lib.getExe' pkgs.xdg-utils "xdg-open";
+              };
+            };
+          }
         )
       );
       description = "Browser bookmarks";
@@ -129,90 +127,58 @@ in
 
       bookmarks = {
         Bank = {
-          EPFO = "unifiedportal-mem.epfindia.gov.in/memberinterface";
-          "EPFO Pasbook" = "passbook.epfindia.gov.in/MemberPassBook/login";
+          EPFO.url = "unifiedportal-mem.epfindia.gov.in/memberinterface";
+          "EPFO Pasbook".url = "passbook.epfindia.gov.in/MemberPassBook/login";
         };
 
         Bills = {
-          "Airfiber Networks" = "login.airfiber.co.in/customer_portal";
-          "Indian Post Insurance" = "pli.indiapost.gov.in";
+          "Airfiber Networks".url = "login.airfiber.co.in/customer_portal";
+          "Indian Post Insurance".url = "pli.indiapost.gov.in";
         };
 
         Dev = {
-          Github = {
-            url = "github.com";
-            entry = true;
-          };
-
-          "CSSBattle" = "cssbattle.dev";
-          "Google Fonts" = "fonts.google.com";
-          LeetCode = "leetcode.com";
-          "NPM Clayien Packages" ="www.npmjs.com/settings/clayien/packages";
-          Regex101 = "regex101.com";
-          "Svelte Changelog" = "svelte-changelog.vercel.app";
-          "Svelte" = "svelte.dev";
-          Tailwindcss = "tailwindcss.com/docs/installation";
+          "CSSBattle".url = "cssbattle.dev";
+          Github.url = "github.com";
+          "Google Fonts".url = "fonts.google.com";
+          LeetCode.url = "leetcode.com";
+          "NPM Clayien Packages".url = "www.npmjs.com/settings/clayien/packages";
+          Regex101.url = "regex101.com";
+          "Svelte Changelog".url = "svelte-changelog.vercel.app";
+          "Svelte".url = "svelte.dev";
+          Tailwindcss.url = "tailwindcss.com/docs/installation";
         };
 
         Email = {
-          Gmail = {
-            url = "mail.google.com/mail/u/0/#inbox";
-            entry = true;
-          };
-
-          "Gmail 1" = {
-            url = "mail.google.com/mail/u/1/#inbox";
-            entry = true;
-          };
+          Gmail.url = "mail.google.com/mail/u/0/#inbox";
+          "Gmail 1".url = "mail.google.com/mail/u/1/#inbox";
         };
 
         # Entertainment = {};
 
         Misc = {
-          "Chrome Enterprise policy list" = "chromeenterprise.google/policies";
+          "Chrome Enterprise policy list".url = "chromeenterprise.google/policies";
         };
 
         Nix = {
-          "Nix Builtins" = "nix.dev/manual/nix/latest/language/builtins.html";
-          "Nix PR Tracker" = "nixpk.gs/pr-tracker.html";
-          "Nix Wiki" = "wiki.nixos.org/wiki/NixOS_Wiki";
-          Noogle = "noogle.dev";
+          "Nix Builtins".url = "nix.dev/manual/nix/latest/language/builtins.html";
+          "Nix PR Tracker".url = "nixpk.gs/pr-tracker.html";
+          "Nix Wiki".url = "wiki.nixos.org/wiki/NixOS_Wiki";
+          Noogle.url = "noogle.dev";
         };
 
         "Socila Media" = {
-          Discord = {
-            url = "discord.com/channels/@me";
-            entry = true;
-          };
-
-          Reddit = "www.reddit.com";
-
-          WhatsApp = {
-            url = "web.whatsapp.com";
-            entry = true;
-          };
-
-          YouTube = "youtube.com";
+          Discord.url = "discord.com/channels/@me";
+          Reddit.url = "www.reddit.com";
+          WhatsApp.url = "web.whatsapp.com";
+          YouTube.url = "youtube.com";
         };
 
         Utility = {
-          Excalidarw = {
-            url = "excalidraw.com";
-            entry = true;
-          };
-
-          Keybr = {
-            url = "www.keybr.com";
-            entry = true;
-          };
-
-          Monkeytype = {
-            url = "monkeytype.com";
-            entry = true;
-          };
-
-          Squoosh = "squoosh.app";
-          Virustotal = "www.virustotal.com";
+          Excalidarw.url = "excalidraw.com";
+          Keybr.url = "www.keybr.com";
+          Monkeytype.url = "monkeytype.com";
+          Squoosh.url = "squoosh.app";
+          Virustotal.url = "www.virustotal.com";
         };
       };
     };

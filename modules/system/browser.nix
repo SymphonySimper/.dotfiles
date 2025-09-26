@@ -98,7 +98,7 @@ in
             children = builtins.map (
               v:
               let
-                url = if builtins.typeOf v.value == "set" then v.value.url else v.value;
+                url = v.value.url;
               in
               {
                 name = v.name;

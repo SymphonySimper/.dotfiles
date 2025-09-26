@@ -113,7 +113,7 @@ in
           }
         )
         (
-          lib.attrsets.filterAttrs (_: value: (builtins.typeOf value == "set") && (value.entry == true)) (
+          lib.attrsets.filterAttrs (_: value: value.entry == true) (
             lib.attrsets.mergeAttrsList (builtins.attrValues cfg.bookmarks)
           )
         );
