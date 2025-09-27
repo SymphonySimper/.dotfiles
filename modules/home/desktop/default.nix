@@ -214,6 +214,7 @@ in
           # extensions
           "org/gnome/shell/extensions/caffeine" = {
             indicator-position-max = 1;
+            enable-fullscreen = false;
             show-indicator = "only-active";
             show-notifications = false;
             toggle-shortcut = [ "<Super>F10" ];
