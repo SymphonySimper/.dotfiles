@@ -21,6 +21,16 @@ let
       name
     else
       "${inputs.schemastore}/src/schemas/json/${name}.json";
+
+  mkVscodeLsp =
+    name:
+    let
+      fullName = "vscode-${name}-language-server";
+    in
+    {
+      name = fullName;
+      cmd = lib.getExe' pkgs.vscode-langservers-extracted fullName;
+    };
 in
 {
   config = lib.mkMerge (
@@ -89,7 +99,7 @@ in
 
         (
           let
-            vsLsp = "vscode-json-language-server";
+            jsonLsp = mkVscodeLsp "json";
           in
           {
             # JSON
@@ -99,8 +109,8 @@ in
                 args = [ "lsp-proxy" ];
               };
 
-              ${vsLsp} = {
-                command = lib.getExe' pkgs.vscode-langservers-extracted vsLsp;
+              ${jsonLsp.name} = {
+                command = jsonLsp.cmd;
                 config.json = {
                   validate.enable = true;
                   schemas = (
@@ -117,7 +127,7 @@ in
               formatter = mkPrettier name;
               language-servers = [
                 {
-                  name = vsLsp;
+                  name = jsonLsp.name;
                   only-features = [
                     "completion"
                     "hover"
@@ -230,27 +240,33 @@ in
           };
         }
 
-        {
-          # HTML
-          lsp.vscode-html-language-server.command = lib.getExe' pkgs.vscode-langservers-extracted "vscode-html-language-server";
-          language.html = {
-            language-servers = [
-              "vscode-html-language-server"
-              "tailwindcss-ls"
-            ];
-            formatter = mkPrettier "html";
-          };
+        (
+          let
+            htmlLsp = mkVscodeLsp "html";
+            cssLsp = mkVscodeLsp "css";
+          in
+          {
+            # HTML
+            lsp.${htmlLsp.name}.command = htmlLsp.cmd;
+            language.html = {
+              language-servers = [
+                htmlLsp.name
+                "tailwindcss-ls"
+              ];
+              formatter = mkPrettier "html";
+            };
 
-          # CSS
-          lsp.vscode-css-language-server.command = lib.getExe' pkgs.vscode-langservers-extracted "vscode-css-language-server";
-          language.css = {
-            language-servers = [
-              "vscode-css-language-server"
-              "tailwindcss-ls"
-            ];
-            formatter = mkPrettier "css";
-          };
-        }
+            # CSS
+            lsp.${cssLsp.name}.command = cssLsp.cmd;
+            language.css = {
+              language-servers = [
+                cssLsp.name
+                "tailwindcss-ls"
+              ];
+              formatter = mkPrettier "css";
+            };
+          }
+        )
 
         rec {
           # JS / TS
