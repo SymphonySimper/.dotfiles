@@ -141,7 +141,6 @@ in
       extensions = [
         { package = pkgs.gnomeExtensions.caffeine; }
         { package = pkgs.gnomeExtensions.auto-move-windows; }
-        { package = pkgs.gnomeExtensions.hide-top-bar; }
       ];
     };
 
@@ -224,13 +223,6 @@ in
           "org/gnome/shell/extensions/auto-move-windows".application-list = builtins.map (
             entry: "${entry.name}:${builtins.toString entry.workspace}"
           ) cfg.automove;
-
-          "org/gnome/shell/extensions/hidetopbar" = {
-            enable-active-window = false;
-            enable-intellihide = false;
-            hot-corner = false;
-            mouse-sensitive-fullscreen-window = false;
-          };
         }
 
         (lib.mkMerge [
