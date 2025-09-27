@@ -31,6 +31,14 @@ let
       name = fullName;
       cmd = lib.getExe' pkgs.vscode-langservers-extracted fullName;
     };
+
+  lsps = {
+    tailwind = {
+      name = "tailwindcss-ls";
+      cmd = lib.getExe pkgs.tailwindcss-language-server;
+    };
+    eslint = mkVscodeLsp "eslint";
+  };
 in
 {
   config = lib.mkMerge (
@@ -234,10 +242,15 @@ in
 
         {
           # Tailwindcss
-          lsp.tailwindcss-ls = {
-            command = lib.getExe pkgs.tailwindcss-language-server;
+          lsp.${lsps.tailwind.name} = {
+            command = lsps.tailwind.cmd;
             args = [ "--stdio" ];
           };
+        }
+
+        {
+          # Eslint
+          lsp.${lsps.eslint.name}.command = lsps.eslint.cmd;
         }
 
         (
@@ -251,7 +264,7 @@ in
             language.html = {
               language-servers = [
                 htmlLsp.name
-                "tailwindcss-ls"
+                lsps.tailwind.name
               ];
               formatter = mkPrettier "html";
             };
@@ -261,7 +274,7 @@ in
             language.css = {
               language-servers = [
                 cssLsp.name
-                "tailwindcss-ls"
+                lsps.tailwind.name
               ];
               formatter = mkPrettier "css";
             };
@@ -294,8 +307,9 @@ in
                 formatter = mkPrettier "typescript";
                 language-servers = [
                   "typescript-language-server"
+                  lsps.eslint.name
                 ]
-                ++ (lib.optionals (lib.strings.hasSuffix "sx" name) [ "tailwindcss-ls" ]);
+                ++ (lib.optionals (lib.strings.hasSuffix "sx" name) [ lsps.tailwind.name ]);
               });
 
           schema.json = [
@@ -328,7 +342,8 @@ in
           language.svelte = {
             language-servers = [
               "svelteserver"
-              "tailwindcss-ls"
+              lsps.tailwind.name
+              lsps.eslint.name
             ];
             formatter = mkPrettier "svelte";
             block-comment-tokens = {
