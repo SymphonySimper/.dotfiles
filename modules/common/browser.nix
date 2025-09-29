@@ -146,6 +146,7 @@ in
           "Svelte Changelog".url = "svelte-changelog.vercel.app";
           "Svelte".url = "svelte.dev";
           Tailwindcss.url = "tailwindcss.com/docs/installation";
+          JoshWComeauCources.url = "courses.joshwcomeau.com";
         };
 
         Email = {
