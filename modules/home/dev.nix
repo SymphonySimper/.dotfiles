@@ -338,7 +338,13 @@ in
 
         {
           # Svelte
-          lsp.svelteserver.command = lib.getExe pkgs.svelte-language-server;
+          lsp.svelteserver = {
+            command = lib.getExe pkgs.svelte-language-server;
+            config.configuration = {
+              svelte.plugin.svelte.defaultScriptLanguage = "ts";
+            };
+          };
+
           language.svelte = {
             language-servers = [
               "svelteserver"
