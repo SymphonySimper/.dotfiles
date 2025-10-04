@@ -138,15 +138,16 @@ in
 
         Dev = {
           "CSSBattle".url = "cssbattle.dev";
+          "dotfiles".url = "https://github.com/SymphonySimper/.dotfiles";
           Github.url = "github.com";
           "Google Fonts".url = "fonts.google.com";
+          JoshWComeauCources.url = "courses.joshwcomeau.com";
           LeetCode.url = "leetcode.com";
           "NPM Clayien Packages".url = "www.npmjs.com/settings/clayien/packages";
           Regex101.url = "regex101.com";
           "Svelte Changelog".url = "svelte-changelog.vercel.app";
           "Svelte".url = "svelte.dev";
           Tailwindcss.url = "tailwindcss.com/docs/installation";
-          JoshWComeauCources.url = "courses.joshwcomeau.com";
         };
 
         Email = {
