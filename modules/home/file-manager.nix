@@ -1,4 +1,5 @@
 {
+  my,
   inputs,
   config,
   pkgs,
@@ -20,6 +21,7 @@ in
     # yazi
     ## image
     chafa
+    ueberzugpp
     ## archive
     p7zip
   ];
@@ -39,6 +41,18 @@ in
             4 # right
           ];
           linemode = "size";
+        };
+
+        preview = {
+          max_width = my.gui.display.width / 2;
+          max_height = my.gui.display.height / 2;
+          ueberzug_scale = my.gui.display.scale / 2;
+          # ueberzug_offset = [
+          #   ((my.gui.display.scale * 10) + my.gui.display.scale) # x
+          #   (my.gui.display.scale) # y
+          #   0.0 # w
+          #   0.0 # h
+          # ];
         };
 
         opener = {

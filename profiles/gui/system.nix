@@ -5,7 +5,11 @@
       cpu.amd.enable = true;
       gpu.amd.enable = true;
 
-      bluetooth.enable = true;
+      bluetooth = {
+        enable = true;
+        blueman.enable = true;
+      };
+
       ssd.enable = true;
       led.enable = true;
       logitech.enable = true;

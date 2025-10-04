@@ -31,8 +31,12 @@ in
       };
     };
 
-    environment.systemPackages = lib.mkIf cfg.programs.enable [
-      pkgs.helvum
-    ];
+    environment.systemPackages = lib.mkIf cfg.programs.enable (
+      with pkgs;
+      [
+        helvum
+        pavucontrol
+      ]
+    );
   };
 }

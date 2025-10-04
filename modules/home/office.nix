@@ -12,21 +12,17 @@
     # PDF
     programs.zathura.enable = true;
 
-    my.programs.desktop =
-      let
-        id = "org.pwmt.zathura";
-      in
-      {
-        mime.${id} = [
-          "application/pdf"
-        ];
+    my.programs.desktop = {
+      mime."org.pwmt.zathura" = [
+        "application/pdf"
+      ];
 
-        automove = [
-          {
-            name = "${id}.desktop";
-            workspace = 4;
-          }
-        ];
-      };
+      windows = [
+        {
+          id = "org.pwmt.zathura";
+          workspace = 4;
+        }
+      ];
+    };
   };
 }

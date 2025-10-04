@@ -40,9 +40,9 @@ in
     my.programs.desktop = {
       autostart = [ "alacritty" ];
 
-      automove = [
+      windows = [
         {
-          name = "Alacritty.desktop";
+          id = "Alacritty";
           workspace = 1;
         }
       ];
@@ -59,7 +59,7 @@ in
         window = {
           decorations = "none";
           opacity = 1;
-          startup_mode = "Fullscreen";
+          startup_mode = "Maximized";
           padding = rec {
             x = 2;
             y = x;
