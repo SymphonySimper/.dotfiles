@@ -110,8 +110,8 @@ in
 
       settings = {
         general = {
-          disable_loading_bar = false;
           hide_cursor = true;
+          ignore_empty_input = true;
           fractional_scaling = 0;
         };
 
@@ -135,6 +135,9 @@ in
             hide_input = true;
             hide_input_base_color = "$accent";
             rounding = 0;
+            check_color = "$text";
+            fail_color = "$red";
+            fail_text = "";
             position = "0, 0";
             halign = "center";
             valign = "center";
