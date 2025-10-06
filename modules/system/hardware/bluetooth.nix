@@ -10,25 +10,20 @@ in
 {
   options.my.hardware.bluetooth = {
     enable = lib.mkEnableOption "Bluetooth";
-    blueman.enable = lib.mkEnableOption "Blueman";
+    gui.enable = lib.mkEnableOption "GUI";
+    tui.enable = lib.mkEnableOption "TUI";
   };
 
-  config = lib.mkIf cfg.enable (
-    lib.mkMerge [
-      {
-        hardware.bluetooth = {
-          enable = true; # enables support for Bluetooth
-          powerOnBoot = true; # powers up the default Bluetooth controller on boot
-        };
-      }
+  config = lib.mkIf cfg.enable {
+    hardware.bluetooth = {
+      enable = true; # enables support for Bluetooth
+      powerOnBoot = true; # powers up the default Bluetooth controller on boot
+    };
 
-      (lib.mkIf cfg.blueman.enable {
-        services.blueman.enable = true; # gui
-        environment.systemPackages = [
-          # pkgs.overskride # gui
-          pkgs.bluetui
-        ];
-      })
-    ]
-  );
+    services.blueman.enable = cfg.gui.enable;
+    environment.systemPackages = lib.lists.optionals cfg.tui.enable [
+      # pkgs.overskride # gui
+      pkgs.bluetui
+    ];
+  };
 }

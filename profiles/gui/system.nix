@@ -7,7 +7,8 @@
 
       bluetooth = {
         enable = true;
-        blueman.enable = true;
+        gui.enable = true;
+        tui.enable = true;
       };
 
       ssd.enable = true;
