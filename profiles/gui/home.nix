@@ -20,7 +20,7 @@
 
     media = {
       video.enable = true;
-      recorder.enable = false;
+      recorder.enable = true;
     };
   };
 }
