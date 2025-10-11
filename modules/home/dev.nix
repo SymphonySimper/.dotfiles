@@ -231,6 +231,14 @@ in
           };
 
           language.markdown = {
+            # refer: https://github.com/helix-editor/helix/wiki/Recipes#continue-markdown-lists--quotes
+            comment-tokens = [
+              "-"
+              "+"
+              "*"
+              "- [ ]"
+              ">"
+            ];
             formatter = mkPrettier "markdown";
 
             language-servers = [
