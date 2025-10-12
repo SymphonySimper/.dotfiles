@@ -249,7 +249,7 @@ in
         enable = true;
         package = null;
         portalPackage = null;
-        xwayland.enable = true;
+        xwayland.enable = false;
         systemd = {
           enable = false;
           variables = [ "--all" ];
