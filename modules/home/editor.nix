@@ -145,6 +145,101 @@ in
 
     xdg.configFile."helix/ignore".text = builtins.concatStringsSep "\n" (lib.lists.unique cfg.ignore);
 
+    catppuccin.zed.enable = false;
+    programs.zed-editor = {
+      enable = my.gui.enable;
+
+      extensions = [
+        "catppuccin"
+        "catppuccin-icons"
+
+        "nix"
+
+        "html"
+        "emmet"
+        "svelte"
+
+        "ruff"
+
+        "toml"
+        "justfile"
+        "markdown-oxide"
+        "harper"
+        "dockerfile"
+      ];
+
+      userSettings = rec {
+        disable_ai = true;
+
+        # font
+        buffer_font_family = my.theme.font.mono;
+        ui_font_size = 16;
+        buffer_font_size = 15;
+
+        theme = {
+          mode = "system";
+          light = "Catppuccin ${lib.strings.toSentenceCase my.theme.flavors.light}";
+          dark = "Catppuccin ${lib.strings.toSentenceCase my.theme.flavors.dark}";
+        };
+        icon_theme = theme;
+
+        title_bar = {
+          show_branch_icon = true;
+          show_branch_name = true;
+          show_sign_in = false;
+        };
+        tab_bar.show = false;
+        minimap.show = "never";
+
+        scroll_beyond_last_line = "one_page";
+        vertical_scroll_margin = 5;
+        horizontal_scroll_margin = vertical_scroll_margin;
+
+        cursor_blink = false;
+        cursor_shape = "block";
+        current_line_highlight = "all";
+
+        soft_wrap = "editor_width";
+        preferred_line_length = 80;
+        show_wrap_guides = true;
+        relative_line_numbers = true;
+
+        tab_size = 2;
+
+        format_on_save = "off";
+        ensure_final_newline_on_save = true;
+        use_autoclose = true;
+        use_auto_surround = true;
+
+        file_finder.include_ignored = true;
+
+        # panels
+        collaboration_panel.button = false;
+
+        # search
+        search.regex = true;
+        use_smartcase_search = true;
+        seed_search_query_from_cursor = "selection";
+
+        # lsp
+        enable_language_server = true;
+        inlay_hints.enabled = false;
+        auto_signature_help = false;
+        inline_code_actions = true;
+        diagnostics_max_severity = null;
+        diagnostics.inline.enabled = true;
+        hover_popover_enabled = true;
+
+        # keymap
+        vim_mode = true;
+        helix_mode = true;
+
+        # misc
+        use_system_path_prompts = false;
+        use_system_prompts = false;
+      };
+    };
+
     programs.helix = {
       enable = true;
       package = inputs.helix.packages.${my.system}.default;
