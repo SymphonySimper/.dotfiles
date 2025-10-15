@@ -62,6 +62,8 @@ in
   };
 
   my.programs.editor = {
+    extensions = [ "nix" ];
+
     lsp.nixd = {
       command = "${lib.getExe pkgs.nixd}";
       args = [ "--inlay-hints=false" ];

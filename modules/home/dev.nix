@@ -57,6 +57,7 @@ in
               lsp = onlyAttr "lsp";
               schema = onlyAttr "schema";
               ignore = onlyList "ignore";
+              extensions = onlyList "extensions";
             };
 
             shell = {
@@ -78,6 +79,7 @@ in
         {
           # Just
           packages = [ pkgs.just ];
+          extensions = [ "justfile" ];
 
           language.just.formatter = {
             command = lib.getExe pkgs.just;
@@ -87,11 +89,14 @@ in
 
         {
           # Docker
+          extensions = [ "dockerfile" ];
           lsp.docker-langserver.command = lib.getExe pkgs.dockerfile-language-server;
         }
 
         {
           # markup
+          extensions = [ "toml" ];
+
           language = {
             yaml.formatter = mkPrettier "yaml";
 
@@ -176,6 +181,8 @@ in
             };
           };
 
+          extensions = [ "ruff" ];
+
           # NOTE: Switching until ty or ruff impletements goto feature
           lsp = {
             pyright = {
@@ -221,6 +228,11 @@ in
 
         {
           # Markdown
+          extensions = [
+            "markdown-oxide"
+            "harper"
+          ];
+
           lsp = {
             markdown-oxide.command = lib.getExe pkgs.markdown-oxide;
 
@@ -267,7 +279,13 @@ in
             cssLsp = mkVscodeLsp "css";
           in
           {
+
             # HTML
+            extensions = [
+              "html"
+              "emmet"
+            ];
+
             lsp.${htmlLsp.name}.command = htmlLsp.cmd;
             language.html = {
               language-servers = [
@@ -346,6 +364,8 @@ in
 
         {
           # Svelte
+          extensions = [ "svelte" ];
+
           lsp.svelteserver = {
             command = lib.getExe pkgs.svelte-language-server;
             config.configuration = {

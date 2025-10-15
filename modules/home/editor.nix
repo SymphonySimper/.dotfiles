@@ -156,20 +156,6 @@ in
       extensions = [
         "catppuccin"
         "catppuccin-icons"
-
-        "nix"
-
-        "html"
-        "emmet"
-        "svelte"
-
-        "ruff"
-
-        "toml"
-        "justfile"
-        "markdown-oxide"
-        "harper"
-        "dockerfile"
       ];
 
       userSettings = rec {
