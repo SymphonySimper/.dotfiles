@@ -14,6 +14,10 @@ in
       [ "my" "programs" "editor" "lsp" ]
       [ "programs" "helix" "languages" "language-server" ]
     )
+    (lib.modules.mkAliasOptionModule
+      [ "my" "programs" "editor" "extensions" ]
+      [ "programs" "zed-editor" "extensions" ]
+    )
   ];
 
   options.my.programs.editor = (lib.my.mkNameOption "Editor" "hx") // {
@@ -249,15 +253,59 @@ in
         use_system_prompts = false;
       };
 
-      userKeymaps = [
-        {
-          context = "vim_mode == normal";
-          bindings = {
+      userKeymaps =
+        let
+          common = {
+            # clipboard
             "space y" = "editor::Copy";
             "space p" = "editor::Paste";
+
+            # pickers
+            "space f c" = "command_palette::Toggle";
+            "space f f" = "file_finder::Toggle";
+            "space f b" = "tab_switcher::ToggleAll";
+            "space f s" = "project_symbols::Toggle";
+            "space f e" = "project_panel::ToggleFocus";
+            "space f /" = "pane::DeploySearch";
+
+            # window
+            "space w h" = "workspace::ActivatePaneLeft";
+            "space w l" = "workspace::ActivatePaneRight";
+            "space w k" = "workspace::ActivatePaneUp";
+            "space w j" = "workspace::ActivatePaneDown";
+            "space w q" = "pane::CloseActiveItem";
+            "space w s" = "pane::SplitRight";
+            "space w r" = "pane::SplitRight";
+            "space w v" = "pane::SplitDown";
+            "space w d" = "pane::SplitDown";
+
+            # code
+            "space c c" = "editor::ToggleComments";
+            "space c d" = "editor::GoToDiagnostic";
+            "space c r" = "editor::Rename";
+            "space c a" = "editor::ToggleCodeActions";
+
+            # misc
+            "space k" = "editor::Hover";
+            "space h" = "editor::SelectAllMatches";
           };
-        }
-      ] ;
+        in
+        [
+          {
+            context = "Workspace";
+            bindings = {
+              "ctrl-e" = "workspace::ToggleLeftDock";
+            };
+          }
+          {
+            context = "vim_mode == normal";
+            bindings = { } // common;
+          }
+          {
+            context = "vim_mode == visual";
+            bindings = { } // common;
+          }
+        ];
     };
 
     programs.helix = {
