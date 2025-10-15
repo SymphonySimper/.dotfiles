@@ -237,6 +237,10 @@ in
         # misc
         use_system_path_prompts = false;
         use_system_prompts = false;
+
+        languages = {
+          Nix.language_servers= [ "nixd" "!nil" ];
+        };
       };
 
       userKeymaps =
@@ -253,6 +257,7 @@ in
             "space f s" = "project_symbols::Toggle";
             "space f e" = "project_panel::ToggleFocus";
             "space f /" = "pane::DeploySearch";
+            "space f o" = "workspace::Open";
 
             # window
             "space w h" = "workspace::ActivatePaneLeft";
@@ -270,6 +275,7 @@ in
             "space c d" = "editor::GoToDiagnostic";
             "space c r" = "editor::Rename";
             "space c a" = "editor::ToggleCodeActions";
+            "space c w" = "workspace::Save";
 
             # misc
             "space k" = "editor::Hover";
@@ -280,7 +286,9 @@ in
           {
             context = "Workspace";
             bindings = {
+              "ctrl-o" = "workspace::Open";
               "ctrl-e" = "workspace::ToggleLeftDock";
+              "ctrl-t" = "terminal_panel::Toggle";
             };
           }
           {

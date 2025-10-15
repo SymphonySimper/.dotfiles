@@ -41,8 +41,8 @@ let
             shift;
             devshell="$1"
             shift;
-            
-            nix develop "$devshell" 
+
+            nix develop "$devshell"
             ;;
           update) nix flake update --commit-lock-file ;;
           *) echo "Unknown option" ;;
@@ -50,7 +50,7 @@ let
       '';
 in
 {
-  home.packages = [ mynix ];
+  home.packages = [ mynix pkgs.nixd ];
 
   programs = {
     nix-index = {
@@ -65,7 +65,6 @@ in
     extensions = [ "nix" ];
 
     lsp.nixd = {
-      command = "${lib.getExe pkgs.nixd}";
       args = [ "--inlay-hints=false" ];
 
       config.nixd = {
