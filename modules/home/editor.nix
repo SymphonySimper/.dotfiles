@@ -232,7 +232,13 @@ in
 
         # keymap
         vim_mode = true;
-        helix_mode = true;
+        helix_mode = false;
+        vim.cursor_shape = {
+          normal = cursor_shape;
+          insert = "bar";
+          replace = "underline";
+          visual = cursor_shape;
+        };
 
         # misc
         use_system_path_prompts = false;
