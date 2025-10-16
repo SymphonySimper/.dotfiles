@@ -11,6 +11,10 @@ in
 {
   imports = [
     (lib.modules.mkAliasOptionModule
+      [ "my" "programs" "editor" "packages" ]
+      [ "home" "packages" ]
+    )
+    (lib.modules.mkAliasOptionModule
       [ "my" "programs" "editor" "lsp" ]
       [ "programs" "helix" "languages" "language-server" ]
     )
@@ -31,6 +35,20 @@ in
       type = lib.types.attrsOf lib.types.anything;
       description = "Alias for languages.langauge";
       default = { };
+    };
+
+    gui= {
+      language = lib.mkOption {
+        type = lib.types.attrsOf lib.types.anything;
+        description = "GUI Editor language settings";
+        default = { };
+      };
+
+      lsp = lib.mkOption {
+        type = lib.types.attrsOf lib.types.anything;
+        description = "GUI Editor lsp settings";
+        default = { };
+      };
     };
 
     schema = (
@@ -238,9 +256,8 @@ in
         use_system_path_prompts = false;
         use_system_prompts = false;
 
-        languages = {
-          Nix.language_servers= [ "nixd" "!nil" ];
-        };
+        languages = cfg.gui.language;
+        lsp = cfg.gui.lsp;
       };
 
       userKeymaps =
@@ -258,7 +275,6 @@ in
             "space f e" = "project_panel::ToggleFocus";
             "space f /" = "pane::DeploySearch";
             "space f o" = "workspace::Open";
-
             # window
             "space w c" = "pane::CloseCleanItems";
             "space w shift-c" = "pane::CloseAllItems";
@@ -286,7 +302,7 @@ in
            "space g A" = "git::Amend";
            "space g p" = "git::Pull";
            "space g P" = "git::Push";
-           "spcae g d" = "git::Diff";
+           "space g d" = "git::Diff";
            "space g B" = "git::Branch";
 
            # surround

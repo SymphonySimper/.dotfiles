@@ -50,7 +50,7 @@ let
       '';
 in
 {
-  home.packages = [ mynix pkgs.nixd ];
+  home.packages = [ mynix ];
 
   programs = {
     nix-index = {
@@ -61,13 +61,9 @@ in
     nix-index-database.comma.enable = true;
   };
 
-  my.programs.editor = {
-    gui.extensions = [ "nix" ];
-
-    lsp.nixd = {
-      args = [ "--inlay-hints=false" ];
-
-      config.nixd = {
+  my.programs.editor =
+    let
+      nixdConfig = {
         nixpkgs.expr = "import <nixpkgs> { }";
 
         options = {
@@ -75,17 +71,44 @@ in
           home-manager.expr = "(builtins.getFlake (builtins.toString ./.)).homeConfigurations.${my.profile}.options";
         };
       };
-    };
-
-    language.nix = {
-      formatter.command = "${lib.getExe pkgs.nixfmt}";
-
-      language-servers = [
-        {
-          name = "nixd";
-          except-features = [ "format" ];
-        }
+      nixdArgs = [ "--inlay-hints=false" ];
+      formatter = "nixfmt";
+    in
+    {
+      packages = [
+        pkgs.nixd
+        pkgs.${formatter}
       ];
+
+      gui = {
+        extensions = [ "nix" ];
+        language.Nix = {
+          language_servers = [
+            "nixd"
+            "!nil"
+          ];
+          formatter.external.command = formatter;
+        };
+        lsp.nixd = {
+          binary.arguments = nixdArgs;
+          settings = nixdConfig;
+        };
+      };
+
+      lsp.nixd = {
+        args = nixdArgs;
+        config.nixd = nixdConfig;
+      };
+
+      language.nix = {
+        formatter.command = formatter;
+
+        language-servers = [
+          {
+            name = "nixd";
+            except-features = [ "format" ];
+          }
+        ];
+      };
     };
-  };
 }
