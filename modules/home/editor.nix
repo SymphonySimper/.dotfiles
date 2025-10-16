@@ -290,6 +290,7 @@ in
            "space g u"= "git::StageAndNext";
            "space g shift-u"= "git::UnstageAndNext";
            "space g g" = "git_panel::ToggleFocus";
+           "space g b"= "editor::BlameHover";
 
             # misc
             "space k" = "editor::Hover";
