@@ -262,10 +262,6 @@ in
             # window
             "space w c" = "pane::CloseCleanItems";
             "space w shift-c" = "pane::CloseAllItems";
-            "space w d l" = "workspace::ToggleLeftDock";
-            "space w d r" = "workspace::ToggleRightDock";
-            "space w d b" = "workspace::ToggleBottomDock";
-            "space w d c" = "workspace::CloseAllDocks";
 
             # code
             "space c c" = "editor::ToggleComments";
@@ -301,17 +297,34 @@ in
           {
             bindings = {
               "ctrl-o" = "workspace::Open";
-              "ctrl-e" = "workspace::ToggleLeftDock";
+              "ctrl-b" = "tab_switcher::ToggleAll";
+              "ctrl-p" = "command_palette::Toggle";
+              "ctrl-f" = "file_finder::Toggle";
+              "ctrl-s" = "project_symbols::Toggle";
+              "ctrl-e" = "project_panel::ToggleFocus";
+              "ctrl-shift-s" = "pane::DeploySearch";
+
               "ctrl-t" = "terminal_panel::Toggle";
               "ctrl-g" = "git_panel::ToggleFocus";
-              "ctrl-b" = "tab_switcher::ToggleAll";
-              # navigation
               "ctrl-h" = "workspace::ActivatePaneLeft";
               "ctrl-l" = "workspace::ActivatePaneRight";
               "ctrl-k" = "workspace::ActivatePaneUp";
               "ctrl-j" = "workspace::ActivatePaneDown";
+              "ctrl-shift-h" = "workspace::SwapPaneLeft";
+              "ctrl-shift-l" = "workspace::SwapPaneRight";
+              "ctrl-shift-k" = "workspace::SwapPaneUp";
+              "ctrl-shift-j" = "workspace::SwapPaneDown";
               "ctrl-|" = "pane::SplitRight";
               "ctrl-_" = "pane::SplitDown";
+
+              "ctrl-w c" = "pane::CloseActiveItem";
+              "ctrl-w shift-c" = "pane::CloseAllItems";
+              "ctrl-w w" = "workspace::CloseWindow";
+              "ctrl-w z" = "workspace::CloseAllDocks";
+              "ctrl-w l" = "workspace::ToggleLeftDock";
+              "ctrl-w r" = "workspace::ToggleRightDock";
+              "ctrl-w b" = "workspace::ToggleBottomDock";
+              "ctrl-shift-q" = "zed::Quit";
             };
           }
           {
