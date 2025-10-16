@@ -10,10 +10,7 @@ let
 in
 {
   imports = [
-    (lib.modules.mkAliasOptionModule
-      [ "my" "programs" "editor" "packages" ]
-      [ "home" "packages" ]
-    )
+    (lib.modules.mkAliasOptionModule [ "my" "programs" "editor" "packages" ] [ "home" "packages" ])
     (lib.modules.mkAliasOptionModule
       [ "my" "programs" "editor" "lsp" ]
       [ "programs" "helix" "languages" "language-server" ]
@@ -37,7 +34,7 @@ in
       default = { };
     };
 
-    gui= {
+    gui = {
       language = lib.mkOption {
         type = lib.types.attrsOf lib.types.anything;
         description = "GUI Editor language settings";
@@ -287,29 +284,29 @@ in
             "space c f" = "editor::Format";
 
             # buffer (active pane)
-           "space b w" = "workspace::Save";
-           "space b f" = common."space f b";
-           "space b c" = "pane::CloseActiveItem";
+            "space b w" = "workspace::Save";
+            "space b f" = common."space f b";
+            "space b c" = "pane::CloseActiveItem";
 
-           # git
-           "space g g" = "git_panel::ToggleFocus";
-           "space g a"= "git::ToggleStaged";
-           "space g u"= "git::StageAndNext";
-           "space g shift-u"= "git::UnstageAndNext";
-           "space g b" = "editor::BlameHover";
-           "space g r"= "git::Restore";
-           "space g c" = "git::Commit";
-           "space g A" = "git::Amend";
-           "space g p" = "git::Pull";
-           "space g P" = "git::Push";
-           "space g d" = "git::Diff";
-           "space g B" = "git::Branch";
+            # git
+            "space g g" = "git_panel::ToggleFocus";
+            "space g a" = "git::ToggleStaged";
+            "space g u" = "git::StageAndNext";
+            "space g shift-u" = "git::UnstageAndNext";
+            "space g b" = "editor::BlameHover";
+            "space g r" = "git::Restore";
+            "space g c" = "git::Commit";
+            "space g A" = "git::Amend";
+            "space g p" = "git::Pull";
+            "space g P" = "git::Push";
+            "space g d" = "git::Diff";
+            "space g B" = "git::Branch";
 
-           # surround
-           "s a" = "vim::PushAddSurrounds";
-           "s c" = "vim::PushChangeSurrounds";
-           "s d" = "vim::PushDeleteSurrounds";
-           "s m" = "vim::Matching";
+            # surround
+            "s a" = "vim::PushAddSurrounds";
+            "s c" = "vim::PushChangeSurrounds";
+            "s d" = "vim::PushDeleteSurrounds";
+            "s m" = "vim::Matching";
 
             # misc
             "space k" = "editor::Hover";
@@ -356,8 +353,9 @@ in
               # multi-cursor
               "shift-c" = "editor::AddSelectionBelow";
               "alt-c" = "editor::AddSelectionAbove";
-              ";"= "vim::HelixCollapseSelection";
-            } // common;
+              ";" = "vim::HelixCollapseSelection";
+            }
+            // common;
           }
           {
             context = "vim_mode == visual";
