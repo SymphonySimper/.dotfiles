@@ -298,9 +298,14 @@ in
     (lib.mkIf my.gui.enable {
       home.activation = {
         myRmZedConfig =
+          let
+            configDir = "${config.xdg.configHome}/zed/";
+          in
           lib.hm.dag.entryBefore [ "linkGeneration" ] # sh
             ''
-              rm -rf ${config.xdg.configHome}/zed/
+              if [ -d "${configDir}" ]; then
+                rm -rf "${configDir}"
+              fi
             '';
       };
 
