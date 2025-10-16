@@ -340,10 +340,10 @@ in
               "ctrl-w c" = "pane::CloseActiveItem";
               "ctrl-w shift-c" = "pane::CloseAllItems";
               "ctrl-w w" = "workspace::CloseWindow";
-              "ctrl-w z" = "workspace::CloseAllDocks";
-              "ctrl-w l" = "workspace::ToggleLeftDock";
-              "ctrl-w r" = "workspace::ToggleRightDock";
-              "ctrl-w b" = "workspace::ToggleBottomDock";
+              "ctrl-w h" = "workspace::ToggleLeftDock";
+              "ctrl-w j" = "workspace::ToggleBottomDock";
+              "ctrl-w k" = "workspace::CloseAllDocks";
+              "ctrl-w l" = "workspace::ToggleRightDock";
               "ctrl-shift-q" = "zed::Quit";
             };
           }
