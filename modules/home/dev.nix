@@ -85,7 +85,7 @@ in
           packages = [ pkgs.just ];
           extensions = [ "justfile" ];
 
-          guiLanguage.just = mkGuiFormatter language.just.formatter;
+          guiLanguage.Just = mkGuiFormatter language.just.formatter;
           language.just.formatter = {
             command = "just";
             args = [ "--dump" ];
@@ -101,7 +101,7 @@ in
         rec {
           # markup
           extensions = [ "toml" ];
-          editorExtension = [pkgs.taplo];
+          editorExtension = [ pkgs.taplo ];
 
           language = {
             yaml.formatter = mkPrettier "yaml";
@@ -115,7 +115,12 @@ in
             };
           };
 
-          guiLanguage = builtins.mapAttrs (name: value: mkGuiFormatter value.formatter) language;
+          guiLanguage = builtins.listToAttrs (
+            builtins.map (lang: {
+              name = lib.strings.toUpper lang.name;
+              value = mkGuiFormatter lang.value.formatter;
+            }) (lib.attrsets.attrsToList language)
+          );
         }
 
         (
@@ -145,7 +150,13 @@ in
             });
 
             guiLsp.${jsonLsp.name}.settings = lsp.${jsonLsp.name}.config;
-            guiLanguage = builtins.mapAttrs (name: value: mkGuiFormatter value.formatter) language;
+
+            guiLanguage = builtins.listToAttrs (
+              builtins.map (lang: {
+                name = lib.strings.toUpper lang.name;
+                value = mkGuiFormatter lang.value.formatter;
+              }) (lib.attrsets.attrsToList language)
+            );
           }
         )
 
@@ -224,7 +235,7 @@ in
             "**/__pycache__/"
           ];
 
-          guiLanguage.python = mkGuiFormatter language.python.formatter;
+          guiLanguage.Python = mkGuiFormatter language.python.formatter;
         }
 
         {
@@ -306,7 +317,7 @@ in
               ];
               formatter = mkPrettier "html";
             };
-            guiLanguage.html = mkGuiFormatter language.html.formatter;
+            guiLanguage.HTML = mkGuiFormatter language.html.formatter;
 
             # CSS
             lsp.${cssLsp.name}.command = cssLsp.cmd;
@@ -317,67 +328,82 @@ in
               ];
               formatter = mkPrettier "css";
             };
-            guiLanguage.css = mkGuiFormatter language.css.formatter;
+            guiLanguage.CSS = mkGuiFormatter language.css.formatter;
           }
         )
 
-        rec {
-          # JS / TS
+        (
+          let
+            langs = [
+              "JavaScript"
+              "TypeScript"
+              "TSX"
+            ];
+          in
+          rec {
+            # JS / TS
+            packages = with pkgs; [
+              nodejs
+              corepack
+            ];
+            editorPackages = [
+              pkgs.typescript-language-server
+            ];
 
-          packages = with pkgs; [
-            nodejs
-            corepack
-          ];
-          editorPackages = [
-            pkgs.typescript-language-server
-          ];
+            env.PNPM_HOME = "${config.xdg.dataHome}/pnpm";
+            path = [ env.PNPM_HOME ];
 
-          env.PNPM_HOME = "${config.xdg.dataHome}/pnpm";
-          path = [ env.PNPM_HOME ];
+            language = builtins.listToAttrs (
+              builtins.map (
+                lang:
+                let
+                  name = lib.strings.toLower lang;
+                in
+                {
+                  inherit name;
+                  value = {
+                    formatter = mkPrettier "typescript";
+                    language-servers = [
+                      "typescript-language-server"
+                      lsps.eslint.name
+                    ]
+                    ++ (lib.optionals (lib.strings.hasSuffix "sx" name) [ lsps.tailwind.name ]);
+                  };
+                }
+              ) (langs ++ [ "JSX" ])
+            );
 
-          language =
-            lib.attrsets.genAttrs
-              [
-                "javascript"
-                "jsx"
+            guiLanguage = builtins.listToAttrs (
+              builtins.map (lang: {
+                name = lang;
+                value = mkGuiFormatter language.${lib.strings.toLower lang}.formatter;
+              }) langs
+            );
 
-                "typescript"
-                "tsx"
-              ]
-              (name: {
-                formatter = mkPrettier "typescript";
-                language-servers = [
-                  "typescript-language-server"
-                  lsps.eslint.name
-                ]
-                ++ (lib.optionals (lib.strings.hasSuffix "sx" name) [ lsps.tailwind.name ]);
-              });
+            schema.json = [
+              {
+                name = "package";
+                file = [ "package.json" ];
+              }
+              {
+                name = "tsconfig";
+                file = [
+                  "tsconfig.json"
+                  "tsconfig.*.json"
+                ];
+              }
+            ];
 
-          guiLanguage = builtins.mapAttrs (name: value: mkGuiFormatter value.formatter) language;
+            ignore = [
+              "node_modules"
+              "vite.config.js.timestamp-*"
+              "vite.config.ts.timestamp-*"
 
-          schema.json = [
-            {
-              name = "package";
-              file = [ "package.json" ];
-            }
-            {
-              name = "tsconfig";
-              file = [
-                "tsconfig.json"
-                "tsconfig.*.json"
-              ];
-            }
-          ];
-
-          ignore = [
-            "node_modules"
-            "vite.config.js.timestamp-*"
-            "vite.config.ts.timestamp-*"
-
-            "!*prettier*"
-            "!.npmrc"
-          ];
-        }
+              "!*prettier*"
+              "!.npmrc"
+            ];
+          }
+        )
 
         (
           let
@@ -408,7 +434,7 @@ in
             };
 
             guiLsp.svelte-language-server.initialization_options = lsp.${lspName}.config;
-            guiLanguage.svelte = mkGuiFormatter language.svelte.formatter;
+            guiLanguage.Svelte = mkGuiFormatter language.svelte.formatter;
 
             ignore = [ ".svelte-kit" ];
           }
