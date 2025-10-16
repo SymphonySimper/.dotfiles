@@ -1,13 +1,21 @@
 {
-  inputs,
   config,
   pkgs,
   lib,
   ...
 }:
 let
+  mkGuiFormatter =
+    { command, args }:
+    {
+      formatter.external = {
+        inherit command;
+        arguments = args;
+      };
+    };
+
   mkPrettier = name: {
-    command = lib.getExe pkgs.nodePackages.prettier;
+    command = "prettier";
     args = [
       "--parser"
       name
@@ -16,26 +24,19 @@ let
 
   # refer:  https://www.schemastore.org/
   mkSchema =
-    name:
-    if (lib.strings.hasInfix "/" name) then
-      name
-    else
-      "${inputs.schemastore}/src/schemas/json/${name}.json";
+    name: if (lib.strings.hasInfix "/" name) then name else "https://www.schemastore.org/${name}.json";
 
-  mkVscodeLsp =
-    name:
-    let
-      fullName = "vscode-${name}-language-server";
-    in
-    {
-      name = fullName;
-      cmd = lib.getExe' pkgs.vscode-langservers-extracted fullName;
-    };
+  mkVscodeLsp = lspName: rec {
+    name = "vscode-${lspName}-language-server";
+    cmd = name;
+    pkg = pkgs.vscode-langservers-extracted;
+  };
 
   lsps = {
-    tailwind = {
+    tailwind = rec {
       name = "tailwindcss-ls";
-      cmd = lib.getExe pkgs.tailwindcss-language-server;
+      cmd = "tailwindcss-language-server";
+      pkg = pkgs.${cmd};
     };
     eslint = mkVscodeLsp "eslint";
   };
@@ -57,7 +58,10 @@ in
               lsp = onlyAttr "lsp";
               schema = onlyAttr "schema";
               ignore = onlyList "ignore";
+              gui.language = onlyAttr "guiLanguage";
+              gui.lsp = onlyAttr "guiLsp";
               gui.extensions = onlyList "extensions";
+              packages = [ pkgs.nodePackages.prettier ] ++ (onlyList "editorPackages");
             };
 
             shell = {
@@ -73,16 +77,17 @@ in
       [
         {
           # Tree-Sitter
-          lsp.ts_query_ls.command = lib.getExe pkgs.ts_query_ls;
+          editorPackages = [ pkgs.ts_query_ls ];
         }
 
-        {
+        rec {
           # Just
           packages = [ pkgs.just ];
           extensions = [ "justfile" ];
 
+          guiLanguage.just = mkGuiFormatter language.just.formatter;
           language.just.formatter = {
-            command = lib.getExe pkgs.just;
+            command = "just";
             args = [ "--dump" ];
           };
         }
@@ -90,68 +95,57 @@ in
         {
           # Docker
           extensions = [ "dockerfile" ];
-          lsp.docker-langserver.command = lib.getExe pkgs.dockerfile-language-server;
+          editorPackages = [ pkgs.dockerfile-language-server ];
         }
 
-        {
+        rec {
           # markup
           extensions = [ "toml" ];
+          editorExtension = [pkgs.taplo];
 
           language = {
             yaml.formatter = mkPrettier "yaml";
 
             toml.formatter = {
-              command = lib.getExe pkgs.taplo;
+              command = "taplo";
               args = [
                 "format"
                 "-"
               ];
             };
           };
+
+          guiLanguage = builtins.mapAttrs (name: value: mkGuiFormatter value.formatter) language;
         }
 
         (
           let
             jsonLsp = mkVscodeLsp "json";
           in
-          {
+          rec {
             # JSON
-            lsp = {
-              biome = {
-                command = lib.getExe pkgs.biome;
-                args = [ "lsp-proxy" ];
-              };
+            editorPackages = [ jsonLsp.pkg ];
 
-              ${jsonLsp.name} = {
-                command = jsonLsp.cmd;
-                config.json = {
-                  validate.enable = true;
-                  schemas = (
-                    builtins.map (schema: {
-                      fileMatch = schema.file;
-                      url = mkSchema schema.name;
-                    }) config.my.programs.editor.schema.json
-                  );
-                };
+            lsp.${jsonLsp.name} = {
+              command = jsonLsp.name;
+              config.json = {
+                validate.enable = true;
+                schemas = (
+                  builtins.map (schema: {
+                    fileMatch = schema.file;
+                    url = mkSchema schema.name;
+                  }) config.my.programs.editor.schema.json
+                );
               };
             };
 
             language = lib.genAttrs [ "json" "jsonc" ] (name: {
               formatter = mkPrettier name;
-              language-servers = [
-                {
-                  name = jsonLsp.name;
-                  only-features = [
-                    "completion"
-                    "hover"
-                  ];
-                }
-                {
-                  name = "biome";
-                  only-features = [ "diagnostics" ];
-                }
-              ];
+              language-servers = [ jsonLsp.name ];
             });
+
+            guiLsp.${jsonLsp.name}.settings = lsp.${jsonLsp.name}.config;
+            guiLanguage = builtins.mapAttrs (name: value: mkGuiFormatter value.formatter) language;
           }
         )
 
@@ -165,9 +159,10 @@ in
           env.RUST_BACKTRACE = "1";
 
           lsp.rust-analyzer.config.check = "clippy";
+          guiLsp.rust-analyzer.initialization_options.check = "clippy";
         }
 
-        {
+        rec {
           # Python
           packages = with pkgs; [
             python3
@@ -182,16 +177,20 @@ in
           };
 
           extensions = [ "ruff" ];
+          extensionPackages = [
+            pkgs.pyright
+            pkgs.ruff
+          ];
 
           # NOTE: Switching until ty or ruff impletements goto feature
           lsp = {
             pyright = {
-              command = lib.getExe' pkgs.pyright "pyright-langserver";
+              command = "pyright-langserver";
               config.python.analysis.typeCheckingMode = "basic";
             };
 
             ruff = {
-              command = lib.getExe' pkgs.ruff "ruff";
+              command = "ruff";
               args = [ "server" ];
             };
 
@@ -209,7 +208,7 @@ in
             ];
 
             formatter = {
-              command = lib.getExe pkgs.ruff;
+              command = "ruff";
               args = [
                 "format"
                 "--line-length"
@@ -224,6 +223,8 @@ in
             "venv"
             "**/__pycache__/"
           ];
+
+          guiLanguage.python = mkGuiFormatter language.python.formatter;
         }
 
         {
@@ -232,12 +233,16 @@ in
             "markdown-oxide"
             "harper"
           ];
+          editorPackages = [
+            pkgs.markdown-oxide
+            pkgs.harper
+          ];
 
           lsp = {
-            markdown-oxide.command = lib.getExe pkgs.markdown-oxide;
+            markdown-oxide.command = "markdown-oxide";
 
             harper-ls = {
-              command = lib.getExe pkgs.harper;
+              command = "harper-ls";
               args = [ "--stdio" ];
             };
           };
@@ -262,6 +267,8 @@ in
 
         {
           # Tailwindcss
+          editorPackages = [ lsps.tailwind.pkg ];
+
           lsp.${lsps.tailwind.name} = {
             command = lsps.tailwind.cmd;
             args = [ "--stdio" ];
@@ -270,6 +277,7 @@ in
 
         {
           # Eslint
+          editorPackages = [ lsps.eslint.pkg ];
           lsp.${lsps.eslint.name}.command = lsps.eslint.cmd;
         }
 
@@ -278,12 +286,16 @@ in
             htmlLsp = mkVscodeLsp "html";
             cssLsp = mkVscodeLsp "css";
           in
-          {
+          rec {
 
             # HTML
             extensions = [
               "html"
               "emmet"
+            ];
+            editorPackages = [
+              htmlLsp.pkg
+              cssLsp.pkg
             ];
 
             lsp.${htmlLsp.name}.command = htmlLsp.cmd;
@@ -294,6 +306,7 @@ in
               ];
               formatter = mkPrettier "html";
             };
+            guiLanguage.html = mkGuiFormatter language.html.formatter;
 
             # CSS
             lsp.${cssLsp.name}.command = cssLsp.cmd;
@@ -304,6 +317,7 @@ in
               ];
               formatter = mkPrettier "css";
             };
+            guiLanguage.css = mkGuiFormatter language.css.formatter;
           }
         )
 
@@ -314,11 +328,12 @@ in
             nodejs
             corepack
           ];
+          editorPackages = [
+            pkgs.typescript-language-server
+          ];
 
           env.PNPM_HOME = "${config.xdg.dataHome}/pnpm";
           path = [ env.PNPM_HOME ];
-
-          lsp.typescript-language-server.command = lib.getExe pkgs.typescript-language-server;
 
           language =
             lib.attrsets.genAttrs
@@ -337,6 +352,8 @@ in
                 ]
                 ++ (lib.optionals (lib.strings.hasSuffix "sx" name) [ lsps.tailwind.name ]);
               });
+
+          guiLanguage = builtins.mapAttrs (name: value: mkGuiFormatter value.formatter) language;
 
           schema.json = [
             {
@@ -362,32 +379,40 @@ in
           ];
         }
 
-        {
-          # Svelte
-          extensions = [ "svelte" ];
+        (
+          let
+            lspName = "svelteserver";
+          in
+          rec {
+            # Svelte
+            extensions = [ "svelte" ];
+            editorPackages = [ pkgs.svelte-language-server ];
 
-          lsp.svelteserver = {
-            command = lib.getExe pkgs.svelte-language-server;
-            config.configuration = {
-              svelte.plugin.svelte.defaultScriptLanguage = "ts";
+            lsp.${lspName} = {
+              config.configuration = {
+                svelte.plugin.svelte.defaultScriptLanguage = "ts";
+              };
             };
-          };
 
-          language.svelte = {
-            language-servers = [
-              "svelteserver"
-              lsps.tailwind.name
-              lsps.eslint.name
-            ];
-            formatter = mkPrettier "svelte";
-            block-comment-tokens = {
-              start = "<!--";
-              end = "-->";
+            language.svelte = {
+              language-servers = [
+                lspName
+                lsps.tailwind.name
+                lsps.eslint.name
+              ];
+              formatter = mkPrettier "svelte";
+              block-comment-tokens = {
+                start = "<!--";
+                end = "-->";
+              };
             };
-          };
 
-          ignore = [ ".svelte-kit" ];
-        }
+            guiLsp.svelte-language-server.initialization_options = lsp.${lspName}.config;
+            guiLanguage.svelte = mkGuiFormatter language.svelte.formatter;
+
+            ignore = [ ".svelte-kit" ];
+          }
+        )
       ]
   );
 }
