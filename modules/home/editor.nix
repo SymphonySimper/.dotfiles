@@ -260,14 +260,8 @@ in
             "space f o" = "workspace::Open";
 
             # window
-            "space w h" = "workspace::ActivatePaneLeft";
-            "space w l" = "workspace::ActivatePaneRight";
-            "space w k" = "workspace::ActivatePaneUp";
-            "space w j" = "workspace::ActivatePaneDown";
             "space w c" = "pane::CloseCleanItems";
             "space w shift-c" = "pane::CloseAllItems";
-            "space w r" = "pane::SplitRight";
-            "space w b" = "pane::SplitDown";
             "space w d l" = "workspace::ToggleLeftDock";
             "space w d r" = "workspace::ToggleRightDock";
             "space w d b" = "workspace::ToggleBottomDock";
@@ -305,13 +299,19 @@ in
         in
         [
           {
-            context = "Workspace";
             bindings = {
               "ctrl-o" = "workspace::Open";
               "ctrl-e" = "workspace::ToggleLeftDock";
               "ctrl-t" = "terminal_panel::Toggle";
               "ctrl-g" = "git_panel::ToggleFocus";
               "ctrl-b" = "tab_switcher::ToggleAll";
+              # navigation
+              "ctrl-h" = "workspace::ActivatePaneLeft";
+              "ctrl-l" = "workspace::ActivatePaneRight";
+              "ctrl-k" = "workspace::ActivatePaneUp";
+              "ctrl-j" = "workspace::ActivatePaneDown";
+              "ctrl-|" = "pane::SplitRight";
+              "ctrl-_" = "pane::SplitDown";
             };
           }
           {
