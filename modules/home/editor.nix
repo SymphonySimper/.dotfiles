@@ -15,7 +15,7 @@ in
       [ "programs" "helix" "languages" "language-server" ]
     )
     (lib.modules.mkAliasOptionModule
-      [ "my" "programs" "editor" "extensions" ]
+      [ "my" "programs" "editor" "gui" "extensions" ]
       [ "programs" "zed-editor" "extensions" ]
     )
   ];
@@ -264,18 +264,32 @@ in
             "space w l" = "workspace::ActivatePaneRight";
             "space w k" = "workspace::ActivatePaneUp";
             "space w j" = "workspace::ActivatePaneDown";
-            "space w q" = "pane::CloseActiveItem";
-            "space w s" = "pane::SplitRight";
+            "space w c" = "pane::CloseCleanItems";
+            "space w shift-c" = "pane::CloseAllItems";
             "space w r" = "pane::SplitRight";
-            "space w v" = "pane::SplitDown";
-            "space w d" = "pane::SplitDown";
+            "space w b" = "pane::SplitDown";
+            "space w d l" = "workspace::ToggleLeftDock";
+            "space w d r" = "workspace::ToggleRightDock";
+            "space w d b" = "workspace::ToggleBottomDock";
+            "space w d c" = "workspace::CloseAllDocks";
 
             # code
             "space c c" = "editor::ToggleComments";
             "space c d" = "editor::GoToDiagnostic";
             "space c r" = "editor::Rename";
             "space c a" = "editor::ToggleCodeActions";
-            "space c w" = "workspace::Save";
+
+            # buffer (active pane)
+           "space b w" = "workspace::Save";
+           "space b f" = common."space f b";
+           "space b c" = "pane::CloseActiveItem";
+
+           # git
+           "space g a"= "git::ToggleStaged";
+           "space g r"= "git::Restore";
+           "space g u"= "git::StageAndNext";
+           "space g shift-u"= "git::UnstageAndNext";
+           "space g g" = "git_panel::ToggleFocus";
 
             # misc
             "space k" = "editor::Hover";
@@ -289,11 +303,17 @@ in
               "ctrl-o" = "workspace::Open";
               "ctrl-e" = "workspace::ToggleLeftDock";
               "ctrl-t" = "terminal_panel::Toggle";
+              "ctrl-g" = "git_panel::ToggleFocus";
             };
           }
           {
             context = "vim_mode == normal";
-            bindings = { } // common;
+            bindings = {
+              # multi-cursor
+              "shift-c" = "editor::AddSelectionBelow";
+              "alt-c" = "editor::AddSelectionAbove";
+              ";"= "vim::HelixCollapseSelection";
+            } // common;
           }
           {
             context = "vim_mode == visual";

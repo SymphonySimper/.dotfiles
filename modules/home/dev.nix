@@ -57,7 +57,7 @@ in
               lsp = onlyAttr "lsp";
               schema = onlyAttr "schema";
               ignore = onlyList "ignore";
-              extensions = onlyList "extensions";
+              gui.extensions = onlyList "extensions";
             };
 
             shell = {

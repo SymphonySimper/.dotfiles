@@ -62,7 +62,7 @@ in
   };
 
   my.programs.editor = {
-    extensions = [ "nix" ];
+    gui.extensions = [ "nix" ];
 
     lsp.nixd = {
       args = [ "--inlay-hints=false" ];
