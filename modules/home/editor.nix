@@ -155,7 +155,7 @@ in
 
       extensions = [
         "catppuccin"
-        "catppuccin-icons"
+        # "catppuccin-icons" # slows down startup
       ];
 
       userSettings = rec {
@@ -171,7 +171,7 @@ in
           light = "Catppuccin ${lib.strings.toSentenceCase my.theme.flavors.light}";
           dark = "Catppuccin ${lib.strings.toSentenceCase my.theme.flavors.dark}";
         };
-        icon_theme = theme;
+        # icon_theme = theme; # slows down startup
 
         title_bar = {
           show_branch_icon = true;
