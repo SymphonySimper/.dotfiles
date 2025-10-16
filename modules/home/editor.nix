@@ -285,12 +285,18 @@ in
            "space b c" = "pane::CloseActiveItem";
 
            # git
+           "space g g" = "git_panel::ToggleFocus";
            "space g a"= "git::ToggleStaged";
-           "space g r"= "git::Restore";
            "space g u"= "git::StageAndNext";
            "space g shift-u"= "git::UnstageAndNext";
-           "space g g" = "git_panel::ToggleFocus";
-           "space g b"= "editor::BlameHover";
+           "space g b" = "editor::BlameHover";
+           "space g r"= "git::Restore";
+           "space g c" = "git::Commit";
+           "space g A" = "git::Amend";
+           "space g p" = "git::Pull";
+           "space g P" = "git::Push";
+           "spcae g d" = "git::Diff";
+           "space g B" = "git::Branch";
 
             # misc
             "space k" = "editor::Hover";
@@ -305,6 +311,7 @@ in
               "ctrl-e" = "workspace::ToggleLeftDock";
               "ctrl-t" = "terminal_panel::Toggle";
               "ctrl-g" = "git_panel::ToggleFocus";
+              "ctrl-b" = "tab_switcher::ToggleAll";
             };
           }
           {
