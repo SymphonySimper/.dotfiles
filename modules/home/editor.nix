@@ -268,6 +268,7 @@ in
             "space c d" = "editor::GoToDiagnostic";
             "space c r" = "editor::Rename";
             "space c a" = "editor::ToggleCodeActions";
+            "space c f" = "editor::Format";
 
             # buffer (active pane)
            "space b w" = "workspace::Save";
@@ -287,6 +288,12 @@ in
            "space g P" = "git::Push";
            "spcae g d" = "git::Diff";
            "space g B" = "git::Branch";
+
+           # surround
+           "s a" = "vim::PushAddSurrounds";
+           "s c" = "vim::PushChangeSurrounds";
+           "s d" = "vim::PushDeleteSurrounds";
+           "s m" = "vim::Matching";
 
             # misc
             "space k" = "editor::Hover";
