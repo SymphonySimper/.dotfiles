@@ -161,7 +161,7 @@ in
       (lib.mkIf cfg.video.enable {
         programs = {
           yt-dlp.enable = true;
-          mpv.config.script-opts = "ytdl_hook-ytdl_path=${lib.getExe config.programs.yt-dlp.package}";
+          mpv.config.script-opts = "ytdl_hook-ytdl_path=yt-dlp";
         };
       })
     ]

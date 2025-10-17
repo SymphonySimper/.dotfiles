@@ -142,13 +142,13 @@ in
             key = "Y";
             mods = "Control|Shift";
             cli = true;
-            program = "yazi";
+            program = config.my.programs.file-manager.command;
           })
           (mkProgramKeyBind {
             key = "G";
             mods = "Control|Shift";
             cli = true;
-            program = "lazygit";
+            program = config.my.programs.vcs.tui.command;
           })
         ];
       };

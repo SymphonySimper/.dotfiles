@@ -33,6 +33,8 @@ in
         work = "work-github";
       };
     };
+
+    tui = lib.my.mkCommandOption "VCS TUI" "lazygit";
   };
 
   config = {
@@ -121,7 +123,7 @@ in
 
           # shell
           do = "!git fetch && git diff origin";
-          z = "!lazygit";
+          z = "!${cfg.tui.command}";
         };
       };
 

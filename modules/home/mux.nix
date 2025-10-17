@@ -75,13 +75,13 @@ in
           key = "g";
           action = "new-window";
           cd = true;
-          args = [ (lib.getExe config.programs.lazygit.package) ];
+          args = [ (config.my.programs.vcs.tui.command) ];
         }
         {
           key = "y";
           action = "new-window";
           cd = true;
-          args = [ (lib.getExe config.programs.yazi.package) ];
+          args = [ (config.my.programs.file-manager.command) ];
         }
 
         # Open history in editor

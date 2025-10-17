@@ -52,19 +52,15 @@
 
         my.programs.tty."1" = {
           skipUsername = true;
-          launch =
-            let
-              uwsm = "${lib.getExe config.programs.uwsm.package}";
-            in
-            {
-              command = # sh
-                ''
-                  if ${uwsm} check may-start; then
-                      exec ${uwsm} start /run/current-system/sw/bin/Hyprland
-                  fi
-                '';
-              dbus = false;
-            };
+          launch = {
+            command = # sh
+              ''
+                if uwsm check may-start; then
+                    exec uwsm start /run/current-system/sw/bin/Hyprland
+                fi
+              '';
+            dbus = false;
+          };
         };
       }
     ]

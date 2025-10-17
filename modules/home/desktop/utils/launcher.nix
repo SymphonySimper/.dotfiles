@@ -12,7 +12,7 @@
         command = lib.getExe (
           pkgs.writeShellScriptBin "mylauncher" # sh
             ''
-              command=$(${lib.getExe' config.programs.tofi.package "tofi-drun"})
+              command=$(tofi-drun)
               if [[ -n "$command" ]]; then
                 exec ${config.my.programs.desktop.uwsm} $command
               fi
