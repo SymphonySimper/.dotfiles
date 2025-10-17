@@ -72,7 +72,7 @@ in
       {
         mod = "SHIFT";
         key = "F10";
-        cmd = "${changefps} toggle";
+        command = "${changefps} toggle";
       }
     ];
 

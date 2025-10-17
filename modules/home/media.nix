@@ -33,7 +33,7 @@ in
                 let
                   default = {
                     super = false;
-                    cmd = "${playerctl} ${action.cmd}";
+                    command = "${playerctl} ${action.command}";
                   };
                 in
                 (
@@ -51,7 +51,7 @@ in
               )
               [
                 {
-                  cmd = "play-pause";
+                  command = "play-pause";
                   fn = [
                     "Play"
                     "Pause"
@@ -59,12 +59,12 @@ in
                   mod = null;
                 }
                 {
-                  cmd = "next";
+                  command = "next";
                   fn = [ "Next" ];
                   mod = "SHIFT";
                 }
                 {
-                  cmd = "previous";
+                  command = "previous";
                   fn = [ "Prev" ];
                   mod = "CTRL";
                 }

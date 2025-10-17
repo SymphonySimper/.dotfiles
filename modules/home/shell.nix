@@ -22,7 +22,7 @@ in
   options.my.programs.shell = (lib.my.mkCommandOption "Shell" "bash") // {
     args = {
       login = mkReadOnlyStrOption "-l";
-      cmd = mkReadOnlyStrOption "-c";
+      command = mkReadOnlyStrOption "-c";
     };
   };
 

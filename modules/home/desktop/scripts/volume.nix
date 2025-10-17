@@ -85,21 +85,21 @@ in
     keybinds = [
       {
         key = "F2";
-        cmd = "${volume} -d";
+        command = "${volume} -d";
       }
       {
         key = "F3";
-        cmd = "${volume} -u";
+        command = "${volume} -u";
       }
       {
         mod = "SHIFT";
         key = "F2";
-        cmd = "${volume} -m";
+        command = "${volume} -m";
       }
       {
         super = false;
         key = "F8";
-        cmd = "${volume} -M"; # toggle mic
+        command = "${volume} -M"; # toggle mic
       }
     ];
 

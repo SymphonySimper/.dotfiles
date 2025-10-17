@@ -9,12 +9,12 @@
     my.programs.desktop.keybinds = [
       {
         key = "d";
-        cmd = lib.getExe (
+        command = lib.getExe (
           pkgs.writeShellScriptBin "mylauncher" # sh
             ''
-              cmd=$(${lib.getExe' config.programs.tofi.package "tofi-drun"})
-              if [[ -n "$cmd" ]]; then
-                exec ${config.my.programs.desktop.uwsm} $cmd
+              command=$(${lib.getExe' config.programs.tofi.package "tofi-drun"})
+              if [[ -n "$command" ]]; then
+                exec ${config.my.programs.desktop.uwsm} $command
               fi
             ''
         );

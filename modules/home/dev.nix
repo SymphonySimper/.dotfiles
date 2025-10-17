@@ -29,13 +29,13 @@ let
     in
     {
       name = fullName;
-      cmd = lib.getExe' pkgs.vscode-langservers-extracted fullName;
+      command = lib.getExe' pkgs.vscode-langservers-extracted fullName;
     };
 
   lsps = {
     tailwind = {
       name = "tailwindcss-ls";
-      cmd = lib.getExe pkgs.tailwindcss-language-server;
+      command = lib.getExe pkgs.tailwindcss-language-server;
     };
     eslint = mkVscodeLsp "eslint";
   };
@@ -118,7 +118,7 @@ in
               };
 
               ${jsonLsp.name} = {
-                command = jsonLsp.cmd;
+                command = jsonLsp.command;
                 config.json = {
                   validate.enable = true;
                   schemas = (
@@ -251,14 +251,14 @@ in
         {
           # Tailwindcss
           lsp.${lsps.tailwind.name} = {
-            command = lsps.tailwind.cmd;
+            command = lsps.tailwind.command;
             args = [ "--stdio" ];
           };
         }
 
         {
           # Eslint
-          lsp.${lsps.eslint.name}.command = lsps.eslint.cmd;
+          lsp.${lsps.eslint.name}.command = lsps.eslint.command;
         }
 
         (
@@ -268,7 +268,7 @@ in
           in
           {
             # HTML
-            lsp.${htmlLsp.name}.command = htmlLsp.cmd;
+            lsp.${htmlLsp.name}.command = htmlLsp.command;
             language.html = {
               language-servers = [
                 htmlLsp.name
@@ -278,7 +278,7 @@ in
             };
 
             # CSS
-            lsp.${cssLsp.name}.command = cssLsp.cmd;
+            lsp.${cssLsp.name}.command = cssLsp.command;
             language.css = {
               language-servers = [
                 cssLsp.name

@@ -67,7 +67,7 @@ in
 
   config = lib.mkIf cfg.enable {
     my.programs = {
-      terminal.shell.cmd = "tmux new";
+      terminal.shell.command = "tmux new";
 
       mux.keybinds = [
         # Open program in new window

@@ -200,22 +200,22 @@ in
           {
             super = false;
             key = "F9";
-            cmd = "${dunstctl} close";
+            command = "${dunstctl} close";
           }
           {
             super = false;
             mod = "SHIFT";
             key = "F9";
-            cmd = "${dunstctl} action";
+            command = "${dunstctl} action";
           }
           {
             mod = "SHIFT";
             key = "F9";
-            cmd = "${dunstctl} history-pop";
+            command = "${dunstctl} history-pop";
           }
           {
             key = "F9";
-            cmd = lib.getExe (
+            command = lib.getExe (
               pkgs.writeShellScriptBin "mydunst-toggle" # sh
                 ''
                   function notify() {
@@ -249,7 +249,7 @@ in
           keybinds = [
             {
               key = "b";
-              cmd = (
+              command = (
                 lib.getExe (
                   pkgs.writeShellScriptBin "mynotifybar" (
                     lib.strings.concatLines (

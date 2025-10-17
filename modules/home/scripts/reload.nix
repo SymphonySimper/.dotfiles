@@ -18,13 +18,13 @@ let
           # sh
           ''
             if command -v ${command.value.check} >/dev/null 2>&1; then
-              ${command.value.cmd}
+              ${command.value.command}
               ${append}
             fi
           ''
         else
           ''
-            ${command.value.cmd}
+            ${command.value.command}
             ${append}
           '';
     in
@@ -64,7 +64,7 @@ in
       type = lib.types.attrsOf (
         lib.types.submodule {
           options = {
-            cmd = lib.mkOption {
+            command = lib.mkOption {
               type = lib.types.str;
               description = "Command to restart";
             };
@@ -85,7 +85,7 @@ in
     my.programs = {
       scripts.reload.commands = {
         "Network Manager" = {
-          cmd = "sudo systemctl restart NetworkManager";
+          command = "sudo systemctl restart NetworkManager";
           check = "NetworkManager";
         };
       };
@@ -94,7 +94,7 @@ in
         {
           mod = "SHIFT";
           key = "F5";
-          cmd = lib.getExe reload;
+          command = lib.getExe reload;
         }
       ];
     };

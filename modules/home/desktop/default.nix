@@ -37,7 +37,7 @@ in
                 description = "Name of the desktop entry";
               };
 
-              cmd = lib.mkOption {
+              command = lib.mkOption {
                 type = lib.types.str;
                 description = "Command to exec";
               };
@@ -97,7 +97,7 @@ in
               description = "Finaly key in the combination";
             };
 
-            cmd = lib.mkOption {
+            command = lib.mkOption {
               type = lib.types.str;
               description = "Command to run";
             };
@@ -203,7 +203,7 @@ in
         {
           # set wallpaper
           name = "myswaybg";
-          cmd = lib.getExe (
+          command = lib.getExe (
             pkgs.writeShellScriptBin "myswaybg" ''
               exec ${lib.getExe' pkgs.swaybg "swaybg"} -c "${my.theme.color.crust}" -m solid_color
             ''
@@ -344,7 +344,7 @@ in
 
                 prefix = if modKey == "" && action == "" then "," else "${modKey} ${action},";
               in
-              "${prefix} ${bind.key}, exec, ${if bind.uwsm then cfg.uwsm else ""} ${bind.cmd}"
+              "${prefix} ${bind.key}, exec, ${if bind.uwsm then cfg.uwsm else ""} ${bind.command}"
             ) cfg.keybinds)
 
             (builtins.concatMap (
@@ -516,12 +516,12 @@ in
                       curr_day=$(${lib.getExe' pkgs.coreutils "date"} +%u)
 
                       if [[ " ''${allowed_days[*]} " == *" $curr_day "* ]]; then
-                        exec ${entry.cmd}
+                        exec ${entry.command}
                       fi
                     ''
                 )
               else
-                entry.cmd;
+                entry.command;
           in
           if isString && (lib.strings.hasSuffix suffix entry) then
             entry

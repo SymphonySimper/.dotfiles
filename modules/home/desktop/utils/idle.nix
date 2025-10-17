@@ -69,7 +69,7 @@ in
       keybinds = [
         {
           key = "F10";
-          cmd = "${caffeine}";
+          command = "${caffeine}";
         }
       ];
 

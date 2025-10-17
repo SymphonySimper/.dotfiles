@@ -10,12 +10,12 @@ let
       extraArgs ? "",
     }:
     let
-      cmd = "${lib.getExe' pkgs.libnotify "notify-send"}";
+      command = "${lib.getExe' pkgs.libnotify "notify-send"}";
       replaceArg = if builtins.stringLength tag > 0 then "-h string:x-dunst-stack-tag:${tag}" else "";
       progressBarArg = if builtins.stringLength progress > 0 then "-h int:value:${progress}" else "";
     in
     ''
-      ${cmd} ${replaceArg} ${progressBarArg} -u ${urgency} "${title}" "${body}" ${extraArgs}
+      ${command} ${replaceArg} ${progressBarArg} -u ${urgency} "${title}" "${body}" ${extraArgs}
     '';
 in
 mkNotification

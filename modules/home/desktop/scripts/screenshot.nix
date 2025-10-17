@@ -18,17 +18,17 @@ in
   my.programs.desktop.keybinds = [
     {
       key = "F11";
-      cmd = "${screenshot} screen";
+      command = "${screenshot} screen";
     }
     {
       mod = "CTRL";
       key = "F11";
-      cmd = "${screenshot} window";
+      command = "${screenshot} window";
     }
     {
       mod = "SHIFT";
       key = "F11";
-      cmd = "${screenshot} area";
+      command = "${screenshot} area";
     }
   ];
 }

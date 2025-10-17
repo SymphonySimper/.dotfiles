@@ -26,7 +26,7 @@ let
               "-e"
               cfgSh.command
               cfgSh.args.login
-              cfgSh.args.cmd
+              cfgSh.args.command
               (lib.strings.escapeShellArgs ([ program ] ++ args))
             ]
           else
@@ -41,13 +41,13 @@ in
       type = lib.types.attrsOf lib.types.str;
       readOnly = true;
       default = {
-        cmd = "-e";
+        command = "-e";
         class = "--class";
       };
     };
 
     shell = {
-      cmd = lib.mkOption {
+      command = lib.mkOption {
         description = "Default command to run on launch";
         type = lib.types.nullOr lib.types.str;
         default = null;
@@ -121,9 +121,9 @@ in
           args = [
             cfgSh.args.login
           ]
-          ++ (lib.lists.optionals (cfg.shell.cmd != null) [
-            cfgSh.args.cmd
-            cfg.shell.cmd
+          ++ (lib.lists.optionals (cfg.shell.command != null) [
+            cfgSh.args.command
+            cfg.shell.command
           ]);
         };
 

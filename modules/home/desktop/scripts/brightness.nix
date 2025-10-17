@@ -68,11 +68,11 @@ in
     keybinds = [
       {
         key = "F5";
-        cmd = "${brightness} -d";
+        command = "${brightness} -d";
       }
       {
         key = "F6";
-        cmd = "${brightness} -u";
+        command = "${brightness} -u";
       }
     ];
 
