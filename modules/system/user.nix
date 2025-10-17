@@ -16,14 +16,8 @@ in
         description = "Sudo commands to run without password";
         default = [ ];
       };
-
-      exe = lib.mkOption {
-        type = lib.types.str;
-        description = "Sudo exe path";
-        default = "/run/wrappers/bin/sudo";
-        readOnly = true;
-      };
-    };
+    }
+    // (lib.my.mkCommandOption "Sudo" "/run/wrappers/bin/sudo");
 
     groups = lib.mkOption {
       type = lib.types.listOf lib.types.str;
