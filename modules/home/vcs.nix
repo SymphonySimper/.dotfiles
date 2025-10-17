@@ -53,14 +53,14 @@ in
 
         extraConfig = {
           init.defaultBranch = "main";
-          core.editor = config.my.programs.editor.name;
+          core.editor = config.my.programs.editor.command;
           push.autoSetupRemote = true;
           mergetool.keepBackup = false;
           pull.rebase = true;
           rebase.autoStash = true;
 
           merge = {
-            tool = if config.my.programs.editor.name == "nvim" then "nvimdiff" else "";
+            tool = if config.my.programs.editor.command == "nvim" then "nvimdiff" else "";
             conflictStyle = "zdiff3"; # delta
           };
 

@@ -16,7 +16,7 @@ in
     )
   ];
 
-  options.my.programs.editor = (lib.my.mkNameOption "Editor" "hx") // {
+  options.my.programs.editor = (lib.my.mkCommandOption "Editor" "hx") // {
     ignore = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       description = "Global ignore patterns for editor.file-picker";

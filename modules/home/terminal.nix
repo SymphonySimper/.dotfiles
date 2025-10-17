@@ -35,7 +35,7 @@ let
     };
 in
 {
-  options.my.programs.terminal = (lib.my.mkNameOption "Terminal" "alacritty") // {
+  options.my.programs.terminal = (lib.my.mkCommandOption "Terminal" "alacritty") // {
     exe = lib.mkOption {
       description = "Terminal package";
       type = lib.types.str;

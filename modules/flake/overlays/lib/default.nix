@@ -10,7 +10,7 @@ let
       lib = pkgs.lib;
     in
     {
-      mkNameOption = (import ./mkNameOption.nix { inherit lib; });
+      mkCommandOption = (import ./mkCommandOption.nix { inherit lib; });
       mkNotification = (import ./mkNotification.nix { inherit pkgs lib; });
       mkSystemdTimer = import ./mkSystemdTimer.nix;
     };

@@ -8,7 +8,7 @@
 let
   cfg = config.my.programs.mux;
   defaultTerminal =
-    if my.profile == "wsl" then "xterm-256color" else config.my.programs.terminal.name;
+    if my.profile == "wsl" then "xterm-256color" else config.my.programs.terminal.command;
 
   history = lib.getExe (
     let
@@ -20,7 +20,7 @@ let
 
         # captures entire history
         tmux capture-pane -p -S - > "$temp_file"
-        tmux new-window "${config.my.programs.editor.name} $temp_file; ${mkCoreutil "rm"} $temp_file"
+        tmux new-window "${config.my.programs.editor.command} $temp_file; ${mkCoreutil "rm"} $temp_file"
       ''
   );
 in

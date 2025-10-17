@@ -58,7 +58,7 @@ in
         opener = {
           edit = [
             {
-              run = ''${config.my.programs.editor.name} "$@"'';
+              run = ''${config.my.programs.editor.command} "$@"'';
               block = true;
               for = "unix";
             }
