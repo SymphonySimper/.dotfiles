@@ -372,30 +372,6 @@ in
                 ];
               }
               {
-                name = "Power Profile";
-                order.module = "Brightness";
-                logic = # sh
-                  ''
-                    power_profile_status=$(myppd get)
-                    power_profile_title_style="${cfg.style.normal}"
-                    if [ "$power_profile_status" == "power-saver" ]; then
-                      power_profile_color="${cfg.color.good}"
-                    elif [ "$power_profile_status" == "balanced" ]; then
-                      power_profile_color="${cfg.color.ok}"
-                    else
-                      power_profile_color="${cfg.color.err}"
-                      power_profile_title_style="${cfg.style.bold}"
-                    fi
-                  '';
-                style = "$power_profile_title_style";
-                value = [
-                  {
-                    text = "\${power_profile_status}";
-                    color = "$power_profile_color";
-                  }
-                ];
-              }
-              {
                 name = "Bluetooth";
                 order.module = "Mic";
                 logic = # sh
