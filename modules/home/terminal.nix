@@ -6,7 +6,33 @@
 }:
 let
   cfg = config.my.programs.terminal;
+  cfgSh = config.my.programs.shell;
 
+  mkProgramKeyBind =
+    {
+      key,
+      mods,
+      cli ? true,
+      program,
+      args ? [ ],
+    }:
+    {
+      inherit key mods;
+      command = {
+        program = if cli then "alacritty" else program;
+        args =
+          if cli then
+            [
+              "-e"
+              cfgSh.exe
+              cfgSh.args.login
+              cfgSh.args.cmd
+              (lib.strings.escapeShellArgs ([ program ] ++ args))
+            ]
+          else
+            args;
+      };
+    };
 in
 {
   options.my.programs.terminal = (lib.my.mkNameOption "Terminal" "alacritty") // {
@@ -52,14 +78,14 @@ in
       enable = true;
       settings = {
         general = {
-          live_config_reload = false;
+          live_config_reload = true;
           ipc_socket = false;
         };
 
         window = {
           decorations = "none";
           opacity = 1;
-          startup_mode = "Maximized";
+          # startup_mode = "Maximized";
           padding = rec {
             x = 2;
             y = x;
@@ -67,7 +93,7 @@ in
           dynamic_padding = true;
         };
 
-        scrolling.history = 0;
+        scrolling.history = 10000;
 
         font = {
           size = 12;
@@ -97,25 +123,41 @@ in
           };
         };
 
-        terminal.shell =
-          let
-            cfgSh = config.my.programs.shell;
-          in
-          {
-            program = cfgSh.exe;
-            args = [
-              cfgSh.args.login
-            ]
-            ++ (lib.lists.optionals (cfg.shell.cmd != null) [
-              cfgSh.args.cmd
-              cfg.shell.cmd
-            ]);
-          };
+        terminal.shell = {
+          program = cfgSh.exe;
+          args = [
+            cfgSh.args.login
+          ]
+          ++ (lib.lists.optionals (cfg.shell.cmd != null) [
+            cfgSh.args.cmd
+            cfg.shell.cmd
+          ]);
+        };
 
         mouse.hide_when_typing = true;
 
-        # disable hints
-        hints.enabled = [ ];
+        # comment out below line to disable hints
+        # hints.enabled = [ ];
+
+        keyboard.bindings = [
+          {
+            key = "N";
+            mods = "Control|Shift";
+            action = "CreateNewWindow";
+          }
+          (mkProgramKeyBind {
+            key = "Y";
+            mods = "Control|Shift";
+            cli = true;
+            program = "yazi";
+          })
+          (mkProgramKeyBind {
+            key = "G";
+            mods = "Control|Shift";
+            cli = true;
+            program = "lazygit";
+          })
+        ];
       };
     };
   };
