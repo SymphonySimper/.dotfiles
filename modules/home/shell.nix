@@ -19,8 +19,7 @@ in
     (lib.modules.mkAliasOptionModule [ "my" "programs" "shell" "path" ] [ "home" "sessionPath" ])
   ];
 
-  options.my.programs.shell = {
-    exe = mkReadOnlyStrOption (lib.getExe config.programs.bash.package);
+  options.my.programs.shell = (lib.my.mkCommandOption "Shell" "bash") // {
     args = {
       login = mkReadOnlyStrOption "-l";
       cmd = mkReadOnlyStrOption "-c";

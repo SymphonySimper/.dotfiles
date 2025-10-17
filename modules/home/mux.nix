@@ -151,7 +151,7 @@ in
             [
               # conf
               ''
-                set -g default-command "exec ${config.my.programs.shell.exe}"
+                set -g default-command "exec ${config.my.programs.shell.command}"
 
                 # RGB colors
                 # https://github.com/tmux/tmux/wiki/FAQ#how-do-i-use-rgb-colour

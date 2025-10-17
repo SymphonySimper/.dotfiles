@@ -24,7 +24,7 @@ let
           if cli then
             [
               "-e"
-              cfgSh.exe
+              cfgSh.command
               cfgSh.args.login
               cfgSh.args.cmd
               (lib.strings.escapeShellArgs ([ program ] ++ args))
@@ -36,13 +36,6 @@ let
 in
 {
   options.my.programs.terminal = (lib.my.mkCommandOption "Terminal" "alacritty") // {
-    exe = lib.mkOption {
-      description = "Terminal package";
-      type = lib.types.str;
-      default = lib.getExe config.programs.alacritty.package;
-      readOnly = true;
-    };
-
     args = lib.mkOption {
       description = "Args that can be passed";
       type = lib.types.attrsOf lib.types.str;
@@ -124,7 +117,7 @@ in
         };
 
         terminal.shell = {
-          program = cfgSh.exe;
+          program = cfgSh.command;
           args = [
             cfgSh.args.login
           ]
