@@ -29,7 +29,8 @@ let
       # sh
       ''
         function get_rr() {
-            hyprctl monitors -j | ${jq} '.[0].refreshRate' | cut -d '.' -f1
+            rr=$(hyprctl monitors -j | ${jq} '.[0].refreshRate') 
+            echo "''${rr%.*}"
         }
 
         function notify() {

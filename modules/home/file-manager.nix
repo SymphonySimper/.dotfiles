@@ -6,9 +6,6 @@
   lib,
   ...
 }:
-let
-  xdg-open = lib.getExe' pkgs.xdg-utils "xdg-open";
-in
 {
   options.my.programs.file-manager = lib.my.mkCommandOption "File Manager" "yazi";
 
@@ -69,7 +66,7 @@ in
 
             open = [
               {
-                run = ''${xdg-open} "$@"'';
+                run = ''xdg-open "$@"'';
                 desc = "Open";
                 for = "linux";
               }
@@ -77,7 +74,7 @@ in
 
             reveal = [
               {
-                run = ''${xdg-open} "$(dirname "$1")"'';
+                run = ''xdg-open "$(dirname "$1")"'';
                 desc = "Reveal";
                 for = "linux";
               }
@@ -93,7 +90,7 @@ in
 
             play = [
               {
-                run = ''${xdg-open} "$@"'';
+                run = ''xdg-open "$@"'';
                 orphan = true;
                 for = "unix";
               }

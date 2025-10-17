@@ -53,10 +53,14 @@
         my.programs.tty."1" = {
           skipUsername = true;
           launch = {
-            command = # sh
+            command =
+              let
+                uwsm = "${config.my.user.bin}/uwsm";
+              in
+              # sh
               ''
-                if uwsm check may-start; then
-                    exec uwsm start /run/current-system/sw/bin/Hyprland
+                if ${uwsm} check may-start; then
+                    exec ${uwsm} start ${config.my.user.bin}/Hyprland
                 fi
               '';
             dbus = false;

@@ -8,7 +8,7 @@ let
   volume = lib.getExe (
     pkgs.writeShellScriptBin "myvolume" # sh
       ''
-        app="${lib.getExe' pkgs.wireplumber "wpctl"}"
+        app="wpctl"
 
         #Icons
         sink="@DEFAULT_AUDIO_SINK@"
@@ -19,8 +19,8 @@ let
         }
 
         get_volume() {
-          volume=$($app get-volume $sink | cut -d ' ' -f2)
-          echo "$volume * 100 / 1" | "${lib.getExe' pkgs.bc "bc"}"
+          volume=$($app get-volume $sink)
+          echo "''${volume#*.}"
         }
 
         change_vol() {

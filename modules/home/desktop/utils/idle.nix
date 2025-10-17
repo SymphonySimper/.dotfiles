@@ -153,7 +153,7 @@ in
           [
             {
               # Date
-              text = "cmd[update:60000] ${lib.getExe' pkgs.coreutils "date"} +'%A, %d %B %Y'"; # update every 60 seconds
+              text = "cmd[update:60000] date +'%A, %d %B %Y'"; # update every 60 seconds
               font_size = dateFontSize;
               font_family = my.theme.font.mono;
               color = "$text";

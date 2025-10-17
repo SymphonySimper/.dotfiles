@@ -513,7 +513,7 @@ in
                   pkgs.writeShellScriptBin "${name}-day-launcher" # sh
                     ''
                       ${lib.strings.toShellVar "allowed_days" entry.days}
-                      curr_day=$(${lib.getExe' pkgs.coreutils "date"} +%u)
+                      curr_day=$(date +%u)
 
                       if [[ " ''${allowed_days[*]} " == *" $curr_day "* ]]; then
                         exec ${entry.command}

@@ -29,7 +29,7 @@ let
                         if [[ "$(tty)" = "/dev/tty${tty}" ]]; then
                            ${
                              if (builtins.getAttr "dbus" option.value.launch) then
-                               "exec ${lib.getExe' pkgs.dbus "dbus-run-session"} ${option.value.launch.command}"
+                               "exec ${config.my.user.bin}/dbus-run-session ${option.value.launch.command}"
                              else
                                option.value.launch.command
                            }
@@ -46,7 +46,7 @@ let
                       overrideStrategy = "asDropin";
                       serviceConfig.ExecStart = [
                         ""
-                        "@${lib.getExe' pkgs.util-linux "agetty"} agetty --login-program ${lib.getExe' pkgs.shadow "login"} -o '-p -- ${my.name}' --noclear --skip-login %I $TERM"
+                        "@${config.my.user.bin}/agetty agetty --login-program ${config.my.user.bin}/login -o '-p -- ${my.name}' --noclear --skip-login %I $TERM"
                       ];
                     };
 

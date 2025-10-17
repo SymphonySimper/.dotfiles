@@ -27,7 +27,7 @@ in
               browser = lib.mkOption {
                 type = lib.types.str;
                 description = "Browser to use for opening the desktop entry";
-                default = lib.getExe' pkgs.xdg-utils "xdg-open";
+                default = "xdg-open";
               };
             };
           }

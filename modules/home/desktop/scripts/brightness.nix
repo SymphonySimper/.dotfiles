@@ -29,7 +29,9 @@ let
         }
 
         get_brightness() {
-          echo "$($app i | cut -d ',' -f4 | tr -d '%')"
+          value="$($app i)"
+          value="''${value%%%*}"
+          echo "''${value##*,}"
         }
 
         save() {
