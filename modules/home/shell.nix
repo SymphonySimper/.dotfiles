@@ -71,10 +71,10 @@ in
 
       };
 
-      my.programs.editor.lsp.bash-language-server = {
-        command = "${lib.getExe pkgs.bash-language-server}";
-        environment.SHFMT_PATH = "${lib.getExe pkgs.shfmt}";
-      };
+      my.programs.editor.packages = [
+        pkgs.bash-language-server
+        pkgs.shfmt
+      ];
     }
 
     {
@@ -102,7 +102,7 @@ in
         bash.initExtra =
           lib.mkOrder 2000 # sh
             ''
-              eval "$(${lib.getExe pkgs.zoxide} init bash)"    
+              eval "$(zoxide init bash)"    
             '';
       };
     }

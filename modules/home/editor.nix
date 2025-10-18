@@ -10,6 +10,7 @@ let
 in
 {
   imports = [
+    (lib.modules.mkAliasOptionModule [ "my" "programs" "editor" "packages" ] [ "home" "packages" ])
     (lib.modules.mkAliasOptionModule
       [ "my" "programs" "editor" "lsp" ]
       [ "programs" "helix" "languages" "language-server" ]

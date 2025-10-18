@@ -69,8 +69,12 @@ in
   };
 
   my.programs.editor = {
+    packages = [
+      pkgs.nixd
+      pkgs.nixfmt
+    ];
+
     lsp.nixd = {
-      command = "${lib.getExe pkgs.nixd}";
       args = [ "--inlay-hints=false" ];
 
       config.nixd = {
@@ -84,7 +88,7 @@ in
     };
 
     language.nix = {
-      formatter.command = "${lib.getExe pkgs.nixfmt}";
+      formatter.command = "nixfmt";
 
       language-servers = [
         {
