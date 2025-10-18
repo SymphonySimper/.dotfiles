@@ -134,19 +134,34 @@ in
 
         keyboard.bindings = [
           {
+            key = "V";
+            mods = "Alt|Shift";
+            action = "ToggleViMode";
+          }
+          {
             key = "N";
-            mods = "Control|Shift";
+            mods = "Alt|Shift";
             action = "CreateNewWindow";
+          }
+          {
+            key = "M";
+            mods = "Alt|Shift";
+            action = "ToggleMaximized";
+          }
+          {
+            key = "F";
+            mods = "Alt|Shift";
+            action = "ToggleFullscreen";
           }
           (mkProgramKeyBind {
             key = "Y";
-            mods = "Control|Shift";
+            mods = "Alt|Shift";
             cli = true;
             program = config.my.programs.file-manager.command;
           })
           (mkProgramKeyBind {
             key = "G";
-            mods = "Control|Shift";
+            mods = "Alt|Shift";
             cli = true;
             program = config.my.programs.vcs.tui.command;
           })
