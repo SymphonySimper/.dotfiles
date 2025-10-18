@@ -1,0 +1,7 @@
+git:
+  disableForcePushing: true
+gui:
+  nerdFontsVersion: "3"
+  showBottomLine: false
+  showPanelJumps: false
+  useHunkModeInStagingView: false
