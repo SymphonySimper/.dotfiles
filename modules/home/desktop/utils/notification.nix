@@ -342,7 +342,7 @@ in
                   battery_capacity="''${battery_capacity%%%*}"
 
                   battery_remaining_time="''${battery_acpi##*,[[:space:]]}"
-                  battery_remaining_time="''${battery_remaining_time%[[:space:]]*}"
+                  battery_remaining_time="''${battery_remaining_time%%[[:space:]]*}"
 
                   battery_title_style="${cfg.style.normal}"
 
