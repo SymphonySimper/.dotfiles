@@ -20,7 +20,13 @@ let
 
         get_volume() {
           volume=$($app get-volume $sink)
-          echo "''${volume#*.}"
+          volume="''${volume#*[[:space:]]}"
+
+          if [[ $volume == 1.00 ]] || [[ $volume > 1.00 ]]; then
+            echo "''${volume/.}"
+          else
+            echo "''${volume#0.}"
+          fi
         }
 
         change_vol() {
