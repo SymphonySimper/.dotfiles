@@ -26,12 +26,18 @@
             echo -1 > "$tmp_file";
           }
 
-          battery_status=$(</sys/class/power_supply/BAT0/status)
-          battery_capacity=$(</sys/class/power_supply/BAT0/capacity)
+          battery_acpi=$(${lib.getExe pkgs.acpi} -r)
+          battery_acpi="''${battery_acpi#*:[[:space:]]}"
+
+          battery_status="''${battery_acpi%%,*}"
+
+          battery_capacity="''${battery_acpi#*,[[:space:]]}"
+          battery_capacity="''${battery_capacity%%%*}"
 
           if [[ $battery_capacity -gt 80 ]] && [[ $battery_status == 'Charging' ]]; then
             battery_notify "Battery is greater than 80% ($battery_capacity) unplug the charger"
           fi
+
           if [[ $battery_capacity -le 40 ]] && [[ $battery_status == 'Discharging' ]]; then
             if [ ! -f "$tmp_file" ]; then
               default_temp_file
