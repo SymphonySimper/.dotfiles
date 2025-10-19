@@ -5,6 +5,15 @@
   ...
 }:
 let
+  mkGuiFormatter =
+    { command, args }:
+    {
+      formatter.external = {
+        inherit command;
+        arguments = args;
+      };
+    };
+
   mkPrettier = name: {
     command = "prettier";
     args = [
@@ -46,6 +55,7 @@ in
                 pkgs.vscode-langservers-extracted
               ]
               ++ (onlyList "packages");
+              gui = onlyAttr "gui";
             };
 
             shell = {
@@ -64,7 +74,7 @@ in
           packages = [ pkgs.ts_query_ls ];
         }
 
-        {
+        rec {
           # Just
           homePackages = [ pkgs.just ];
 
@@ -72,14 +82,20 @@ in
             command = "just";
             args = [ "--dump" ];
           };
+
+          gui = {
+            extensions = [ "just" ];
+            language.Just = mkGuiFormatter language.just.formatter;
+          };
         }
 
         {
           # Docker
           packages = [ pkgs.dockerfile-language-server ];
+          gui.extensions = [ "dockerfile" ];
         }
 
-        {
+        rec {
           # markup
           packages = [ pkgs.taplo ];
 
@@ -94,13 +110,22 @@ in
               ];
             };
           };
+
+          gui = {
+            extensions = [ "toml" ];
+
+            language = {
+              YAML = mkGuiFormatter language.yaml.formatter;
+              TOML = mkGuiFormatter language.toml.formatter;
+            };
+          };
         }
 
         (
           let
             jsonLsp = mkVscodeLsp "json";
           in
-          {
+          rec {
             # JSON
             lsp.${jsonLsp}.config.json = {
               validate.enable = true;
@@ -117,10 +142,15 @@ in
               formatter = mkPrettier name;
               language-servers = [ jsonLsp ];
             });
+
+            gui = {
+              lsp.${jsonLsp}.settings = lsp.${jsonLsp}.config;
+              language.JSON = mkGuiFormatter language.json.formatter;
+            };
           }
         )
 
-        {
+        rec {
           # Rust
           homePackages = with pkgs; [
             rustup
@@ -129,6 +159,7 @@ in
 
           env.RUST_BACKTRACE = "1";
           lsp.rust-analyzer.config.check = "clippy";
+          gui.lsp.rust-analyzer.initialization_options = lsp.rust-analyzer.config;
         }
 
         {
@@ -216,6 +247,11 @@ in
               "harper-ls"
             ];
           };
+
+          gui.extensions = [
+            "markdown-oxide"
+            "harper"
+          ];
         }
 
         {
@@ -246,6 +282,11 @@ in
               ];
               formatter = mkPrettier "css";
             };
+
+            extensions = [
+              "html"
+              "emmet"
+            ];
           }
         )
 
@@ -302,7 +343,7 @@ in
           ];
         }
 
-        {
+        rec {
           # Svelte
           packages = [ pkgs.svelte-language-server ];
 
@@ -324,6 +365,11 @@ in
           };
 
           ignore = [ ".svelte-kit" ];
+
+          gui = {
+            extensions = [ "svelte" ];
+            lsp.svelte-language-server.initialization_options = lsp.svelteserver.config;
+          };
         }
       ]
   );

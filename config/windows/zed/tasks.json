@@ -1,0 +1,29 @@
+[
+  {
+    "allow_concurrent_runs": false,
+    "args": [
+      "$ZED_DIRNAME"
+    ],
+    "command": "yazi",
+    "env": {},
+    "hide": "always",
+    "label": "Start TUI File-Manager",
+    "reveal": "always",
+    "reveal_target": "center",
+    "use_new_terminal": true
+  },
+  {
+    "allow_concurrent_runs": false,
+    "args": [
+      "-p",
+      "$ZED_WORKTREE_ROOT"
+    ],
+    "command": "lazygit",
+    "env": {},
+    "hide": "always",
+    "label": "Start VCS TUI",
+    "reveal": "always",
+    "reveal_target": "center",
+    "use_new_terminal": true
+  }
+]
