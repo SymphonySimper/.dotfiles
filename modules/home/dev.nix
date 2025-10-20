@@ -74,11 +74,6 @@ in
           packages = [ pkgs.ts_query_ls ];
         }
 
-        {
-          # Lua
-          packages = [ pkgs.lua-language-server ];
-        }
-
         rec {
           # Just
           homePackages = [ pkgs.just ];
