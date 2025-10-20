@@ -1,4 +1,5 @@
 {
+  my,
   config,
   pkgs,
   lib,
@@ -24,6 +25,7 @@ in
       login = mkReadOnlyStrOption "-l";
       command = mkReadOnlyStrOption "-c";
     };
+    bin = mkReadOnlyStrOption "${my.dir.home}/.nix-profile/bin";
   };
 
   config = lib.mkMerge [
