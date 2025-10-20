@@ -230,6 +230,16 @@ in
                 };
               };
 
+              # external programs
+              e =
+                let
+                  cfgT = config.my.programs.terminal;
+                in
+                {
+                  y = ":sh ${cfgT.command} ${cfgT.args.command} ${config.my.programs.file-manager.command} $(realpath %{buffer_name})";
+                  g = ":sh ${cfgT.command} ${cfgT.args.command} ${config.my.programs.vcs.tui.command} ${config.my.programs.vcs.tui.args.path} %{workspace_directory}";
+                };
+
               f = {
                 "'" = "last_picker";
                 b = "buffer_picker";

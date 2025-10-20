@@ -70,6 +70,10 @@ h = ":tree-sitter-highlight-name"
 s = ":tree-sitter-scopes"
 t = ":tree-sitter-subtree"
 
+[keys.normal.space.e]
+g = ":sh alacritty -e lazygit -p %{workspace_directory}"
+y = ":sh alacritty -e yazi $(realpath %{buffer_name})"
+
 [keys.normal.space.f]
 "'" = "last_picker"
 "/" = "global_search"
@@ -120,6 +124,10 @@ T = ["select_all", ":tree-sitter-subtree"]
 h = ":tree-sitter-highlight-name"
 s = ":tree-sitter-scopes"
 t = ":tree-sitter-subtree"
+
+[keys.select.space.e]
+g = ":sh alacritty -e lazygit -p %{workspace_directory}"
+y = ":sh alacritty -e yazi $(realpath %{buffer_name})"
 
 [keys.select.space.f]
 "'" = "last_picker"
