@@ -168,5 +168,131 @@ in
         ];
       };
     };
+
+    programs.rio = {
+      enable = true;
+
+      settings = {
+        use-fork = false;
+        hide-mouse-cursor-when-typing = true;
+
+        padding-x = 2;
+        padding-y = [
+          2
+          0
+        ];
+
+        cursor = {
+          shape = "block";
+          blinking = false;
+        };
+
+        fonts = {
+          size = 16;
+          family = my.theme.font.mono;
+        };
+
+        colors = {
+          split = lib.mkForce my.theme.color.mauve;
+          tabs = lib.mkForce my.theme.color.overlay0;
+          tabs-active-highlight = lib.mkForce my.theme.color.mauve;
+        };
+
+        window = {
+          mode = "Maximized";
+          decorations = "Disabled";
+        };
+
+        editor.program = config.my.programs.editor.command;
+
+        bindings.keys = [
+          {
+            key = "c";
+            "with" = "control | shift";
+            action = "Copy";
+          }
+          {
+            key = "p";
+            "with" = "control | shift";
+            action = "Paste";
+          }
+
+          {
+            key = "t";
+            "with" = "alt";
+            action = "CreateTab";
+          }
+          {
+            key = "w";
+            "with" = "alt";
+            action = "CloseSplitOrTab";
+          }
+
+          {
+            key = "\\";
+            "with" = "alt | shift";
+            action = "SplitRight";
+          }
+          {
+            key = "-";
+            "with" = "alt | shift";
+            action = "SplitDown";
+          }
+
+          {
+            key = "k";
+            "with" = "alt";
+            action = "SelectPrevSplitOrTab";
+          }
+          {
+            key = "j";
+            "with" = "alt";
+            action = "SelectNextSplitOrTab";
+          }
+
+          {
+            key = "k";
+            "with" = "alt | shift";
+            action = "MoveDividerUp";
+          }
+          {
+            key = "j";
+            "with" = "alt | shift";
+            action = "MoveDividerDown";
+          }
+          {
+            key = "h";
+            "with" = "alt | shift";
+            action = "MoveDividerLeft";
+          }
+          {
+            key = "l";
+            "with" = "alt | shift";
+            action = "MoveDividerRight";
+          }
+        ]
+        ++ (builtins.genList (num: {
+          key = builtins.toString (if num == 9 then 0 else num + 1);
+          "with" = "alt";
+          action = "SelectTab(${builtins.toString num})";
+        }) 10);
+
+        platform = {
+          linux = {
+            shell = {
+              program = "${config.my.programs.shell.command}";
+              args = [ config.my.programs.shell.args.login ];
+            };
+          };
+
+          windows = {
+            shell = {
+              program = "pwsh";
+              args = [ "-l" ];
+            };
+          };
+        };
+      };
+    };
   };
 }

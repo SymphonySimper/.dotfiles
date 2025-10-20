@@ -1,0 +1,176 @@
+hide-mouse-cursor-when-typing = true
+padding-x = 2
+padding-y = [2, 0]
+use-fork = false
+
+[[bindings.keys]]
+action = "Copy"
+key = "c"
+with = "control | shift"
+
+[[bindings.keys]]
+action = "Paste"
+key = "p"
+with = "control | shift"
+
+[[bindings.keys]]
+action = "CreateTab"
+key = "t"
+with = "alt"
+
+[[bindings.keys]]
+action = "CloseSplitOrTab"
+key = "w"
+with = "alt"
+
+[[bindings.keys]]
+action = "SplitRight"
+key = "\\"
+with = "alt | shift"
+
+[[bindings.keys]]
+action = "SplitDown"
+key = "-"
+with = "alt | shift"
+
+[[bindings.keys]]
+action = "SelectPrevSplitOrTab"
+key = "k"
+with = "alt"
+
+[[bindings.keys]]
+action = "SelectNextSplitOrTab"
+key = "j"
+with = "alt"
+
+[[bindings.keys]]
+action = "MoveDividerUp"
+key = "k"
+with = "alt | shift"
+
+[[bindings.keys]]
+action = "MoveDividerDown"
+key = "j"
+with = "alt | shift"
+
+[[bindings.keys]]
+action = "MoveDividerLeft"
+key = "h"
+with = "alt | shift"
+
+[[bindings.keys]]
+action = "MoveDividerRight"
+key = "l"
+with = "alt | shift"
+
+[[bindings.keys]]
+action = "SelectTab(0)"
+key = "1"
+with = "alt"
+
+[[bindings.keys]]
+action = "SelectTab(1)"
+key = "2"
+with = "alt"
+
+[[bindings.keys]]
+action = "SelectTab(2)"
+key = "3"
+with = "alt"
+
+[[bindings.keys]]
+action = "SelectTab(3)"
+key = "4"
+with = "alt"
+
+[[bindings.keys]]
+action = "SelectTab(4)"
+key = "5"
+with = "alt"
+
+[[bindings.keys]]
+action = "SelectTab(5)"
+key = "6"
+with = "alt"
+
+[[bindings.keys]]
+action = "SelectTab(6)"
+key = "7"
+with = "alt"
+
+[[bindings.keys]]
+action = "SelectTab(7)"
+key = "8"
+with = "alt"
+
+[[bindings.keys]]
+action = "SelectTab(8)"
+key = "9"
+with = "alt"
+
+[[bindings.keys]]
+action = "SelectTab(9)"
+key = "0"
+with = "alt"
+
+[colors]
+background = "#eff1f5"
+black = "#bcc0cc"
+blue = "#1e66f5"
+cursor = "#dc8a78"
+cyan = "#179299"
+dim-black = "#bcc0cc"
+dim-blue = "#1e66f5"
+dim-cyan = "#179299"
+dim-foreground = "#4c4f69"
+dim-green = "#40a02b"
+dim-magenta = "#ea76cb"
+dim-red = "#d20f39"
+dim-white = "#5c5f77"
+dim-yellow = "#df8e1d"
+foreground = "#4c4f69"
+green = "#40a02b"
+light-black = "#acb0be"
+light-blue = "#1e66f5"
+light-cyan = "#179299"
+light-foreground = "#4c4f69"
+light-green = "#40a02b"
+light-magenta = "#ea76cb"
+light-red = "#d20f39"
+light-white = "#6c6f85"
+light-yellow = "#df8e1d"
+magenta = "#ea76cb"
+red = "#d20f39"
+selection-background = "#dc8a78"
+selection-foreground = "#eff1f5"
+split = "#8839ef"
+tabs = "#9ca0b0"
+tabs-active = "#7287fd"
+tabs-active-foreground = "#dce0e8"
+tabs-active-highlight = "#8839ef"
+tabs-foreground = "#4c4f69"
+white = "#5c5f77"
+yellow = "#df8e1d"
+
+[cursor]
+blinking = false
+shape = "block"
+
+[editor]
+program = "hx"
+
+[fonts]
+family = "JetBrainsMono Nerd Font"
+size = 16
+
+[platform.linux.shell]
+args = ["-l"]
+program = "bash"
+
+[platform.windows.shell]
+args = ["-l"]
+program = "pwsh"
+
+[window]
+decorations = "Disabled"
+mode = "Maximized"
