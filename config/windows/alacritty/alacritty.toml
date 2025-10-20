@@ -48,22 +48,6 @@ action = "ToggleFullscreen"
 key = "F"
 mods = "Alt|Shift"
 
-[[keyboard.bindings]]
-key = "Y"
-mods = "Alt|Shift"
-
-[keyboard.bindings.command]
-args = ["-e", "pwsh", "-command", "yazi"]
-program = "alacritty"
-
-[[keyboard.bindings]]
-key = "G"
-mods = "Alt|Shift"
-
-[keyboard.bindings.command]
-args = ["-e", "pwsh", "-command", "lazygit"]
-program = "alacritty"
-
 [mouse]
 hide_when_typing = true
 

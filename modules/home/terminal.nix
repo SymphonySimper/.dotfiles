@@ -7,32 +7,6 @@
 let
   cfg = config.my.programs.terminal;
   cfgSh = config.my.programs.shell;
-
-  mkProgramKeyBind =
-    {
-      key,
-      mods,
-      cli ? true,
-      program,
-      args ? [ ],
-    }:
-    {
-      inherit key mods;
-      command = {
-        program = if cli then "alacritty" else program;
-        args =
-          if cli then
-            [
-              "-e"
-              cfgSh.command
-              cfgSh.args.login
-              cfgSh.args.command
-              (lib.strings.escapeShellArgs ([ program ] ++ args))
-            ]
-          else
-            args;
-      };
-    };
 in
 {
   options.my.programs.terminal = (lib.my.mkCommandOption "Terminal" "alacritty") // {
@@ -153,18 +127,6 @@ in
             mods = "Alt|Shift";
             action = "ToggleFullscreen";
           }
-          (mkProgramKeyBind {
-            key = "Y";
-            mods = "Alt|Shift";
-            cli = true;
-            program = config.my.programs.file-manager.command;
-          })
-          (mkProgramKeyBind {
-            key = "G";
-            mods = "Alt|Shift";
-            cli = true;
-            program = config.my.programs.vcs.tui.command;
-          })
         ];
       };
     };
