@@ -34,7 +34,13 @@ in
       };
     };
 
-    tui = lib.my.mkCommandOption "VCS TUI" "lazygit";
+    tui = (lib.my.mkCommandOption "VCS TUI" "lazygit") // {
+      args.path = lib.mkOption {
+        type = lib.types.str;
+        readOnly = true;
+        default = "-p";
+      };
+    };
   };
 
   config = {
