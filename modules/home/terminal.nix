@@ -109,17 +109,17 @@ in
         keyboard.bindings = [
           {
             key = "V";
-            mods = "Alt|Shift";
+            mods = "Alt";
             action = "ToggleViMode";
           }
           {
-            key = "N";
-            mods = "Alt|Shift";
+            key = "T";
+            mods = "Alt";
             action = "CreateNewWindow";
           }
           {
             key = "M";
-            mods = "Alt|Shift";
+            mods = "Alt";
             action = "ToggleMaximized";
           }
           {

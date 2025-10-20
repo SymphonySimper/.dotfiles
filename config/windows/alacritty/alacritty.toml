@@ -31,17 +31,17 @@ live_config_reload = true
 [[keyboard.bindings]]
 action = "ToggleViMode"
 key = "V"
-mods = "Alt|Shift"
+mods = "Alt"
 
 [[keyboard.bindings]]
 action = "CreateNewWindow"
-key = "N"
-mods = "Alt|Shift"
+key = "T"
+mods = "Alt"
 
 [[keyboard.bindings]]
 action = "ToggleMaximized"
 key = "M"
-mods = "Alt|Shift"
+mods = "Alt"
 
 [[keyboard.bindings]]
 action = "ToggleFullscreen"
