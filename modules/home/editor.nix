@@ -193,6 +193,24 @@ in
                 custom = cfg.clipboardProvider;
               }
           );
+
+          statusline = {
+            left = [
+              "mode"
+              "file-name"
+            ];
+
+            right = [
+              "spinner"
+              "diagnostics"
+              # "version-control"
+              "selections"
+              # "register"
+              # "position"
+              "read-only-indicator"
+              "file-modification-indicator"
+            ];
+          };
         };
 
         keys = rec {
@@ -207,7 +225,6 @@ in
 
               c = {
                 a = "code_action";
-                b = ":sh git -C %{workspace_directory} blame -L %{cursor_line},%{cursor_line} $(realpath %{buffer_name})";
                 C = "toggle_block_comments";
                 c = "toggle_comments";
                 f = ":format";
@@ -259,6 +276,18 @@ in
                 s = "symbol_picker";
                 S = "workspace_symbol_picker";
               };
+
+              # vcs
+              g =
+                let
+                  vcs = config.my.programs.vcs.command;
+                in
+                {
+                  b = ":sh ${vcs} -C %{workspace_directory} blame -L %{cursor_line},%{cursor_line} $(realpath %{buffer_name})";
+
+                  B = ":echo %sh{${vcs} branch --show-current}";
+                  R = ":reset-diff-change";
+                };
 
               # macros
               m = {

@@ -34,6 +34,16 @@ enable = true
 [editor.soft-wrap]
 enable = true
 
+[editor.statusline]
+left = ["mode", "file-name"]
+right = [
+  "spinner",
+  "diagnostics",
+  "selections",
+  "read-only-indicator",
+  "file-modification-indicator",
+]
+
 [editor.word-completion]
 enable = true
 trigger-length = 4
@@ -54,7 +64,6 @@ w = ":w"
 C = "toggle_block_comments"
 I = "decrement"
 a = "code_action"
-b = ":sh git -C %{workspace_directory} blame -L %{cursor_line},%{cursor_line} $(realpath %{buffer_name})"
 c = "toggle_comments"
 f = ":format"
 h = "select_references_to_symbol_under_cursor"
@@ -93,6 +102,11 @@ s = "symbol_picker"
 e = "file_explorer_in_current_buffer_directory"
 f = "file_picker_in_current_buffer_directory"
 
+[keys.normal.space.g]
+B = ":echo %sh{git branch --show-current}"
+R = ":reset-diff-change"
+b = ":sh git -C %{workspace_directory} blame -L %{cursor_line},%{cursor_line} $(realpath %{buffer_name})"
+
 [keys.normal.space.m]
 t = "@o<esc>|printf<space>'<lt>xxx<gt>\n<lt>/xxx<gt>\n'<ret>sxxx<ret>c"
 
@@ -109,7 +123,6 @@ w = ":w"
 C = "toggle_block_comments"
 I = "decrement"
 a = "code_action"
-b = ":sh git -C %{workspace_directory} blame -L %{cursor_line},%{cursor_line} $(realpath %{buffer_name})"
 c = "toggle_comments"
 f = ":format"
 h = "select_references_to_symbol_under_cursor"
@@ -147,6 +160,11 @@ s = "symbol_picker"
 [keys.select.space.f.B]
 e = "file_explorer_in_current_buffer_directory"
 f = "file_picker_in_current_buffer_directory"
+
+[keys.select.space.g]
+B = ":echo %sh{git branch --show-current}"
+R = ":reset-diff-change"
+b = ":sh git -C %{workspace_directory} blame -L %{cursor_line},%{cursor_line} $(realpath %{buffer_name})"
 
 [keys.select.space.m]
 t = "@o<esc>|printf<space>'<lt>xxx<gt>\n<lt>/xxx<gt>\n'<ret>sxxx<ret>c"
