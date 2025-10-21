@@ -23,7 +23,7 @@ in
     (lib.modules.mkAliasOptionModule [ "my" "programs" "vcs" "root" ] [ "programs" "git" ])
   ];
 
-  options.my.programs.vcs = {
+  options.my.programs.vcs = (lib.my.mkCommandOption "VCS" "git") // {
     sshHost = lib.mkOption {
       type = lib.types.attrsOf lib.types.str;
       description = "Host for different profiles";
