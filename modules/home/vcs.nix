@@ -43,14 +43,20 @@ in
     };
   };
 
-  config = {
-    home.packages = with pkgs; [
-      git-filter-repo
-      git-quick-stats
-    ];
+  config = lib.mkMerge [
+    {
+      home.packages = with pkgs; [
+        git-filter-repo
+        git-quick-stats
+      ];
 
-    programs = {
-      git = {
+      my.programs.editor.ignore = [
+        # do not ignore
+        "!.gitignore"
+        "!.gitattributes"
+      ];
+
+      programs.git = {
         enable = true;
         userName = my.fullName;
         userEmail = "50240805+SymphonySimper@users.noreply.github.com";
@@ -133,7 +139,13 @@ in
         };
       };
 
-      lazygit = {
+      programs.bat.enable = config.programs.git.delta.enable;
+    }
+
+    {
+      catppuccin.lazygit.enable = false;
+
+      programs.lazygit = {
         enable = true;
 
         settings = {
@@ -146,18 +158,27 @@ in
             showPanelJumps = false;
             nerdFontsVersion = "3";
             useHunkModeInStagingView = false;
-          };
+          }
+          // (
+            let
+              themeFile = lib.my.mkGetThemeSource {
+                package = "lazygit";
+                filename = "FLAVOR/ACCENT.yml";
+                returnFile = true;
+              };
+            in
+            (builtins.fromJSON (
+              builtins.readFile (
+                pkgs.runCommandNoCC "lazygit-theme-yaml.json" { }
+                  # sh
+                  ''
+                    ${lib.getExe' pkgs.yj "yj"} < "${themeFile}" > "$out"
+                  ''
+              )
+            ))
+          ).gui;
         };
       };
-
-      bat.enable = config.programs.git.delta.enable;
-
-    };
-
-    my.programs.editor.ignore = [
-      # do not ignore
-      "!.gitignore"
-      "!.gitattributes"
-    ];
-  };
+    }
+  ];
 }
