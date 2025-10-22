@@ -126,7 +126,7 @@ let
       pkgs = helpers.mkPkgs {
         system = my.system;
         overlays = [
-          (import ../overlays/lib { inherit my helpers; })
+          (import ../overlays/lib { inherit my inputs helpers; })
         ]
         ++ (lib.optionals (for == "home") [ ]);
       };
