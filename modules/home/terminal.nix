@@ -1,5 +1,6 @@
 {
   my,
+  inputs,
   config,
   lib,
   ...
@@ -41,8 +42,10 @@ in
       ];
     };
 
+    catppuccin.alacritty.enable = false;
     programs.alacritty = {
       enable = true;
+
       settings = {
         general = {
           live_config_reload = true;
@@ -128,6 +131,14 @@ in
             action = "ToggleFullscreen";
           }
         ];
+
+        colors =
+          (builtins.fromTOML (
+            lib.my.mkGetThemeSource {
+              package = "alacritty";
+              filename = "NAME-FLAVOR.toml";
+            }
+          )).colors;
       };
     };
   };
