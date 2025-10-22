@@ -71,6 +71,8 @@ let
           light = "latte";
         };
 
+        accent = "mauve";
+
         flavor = builtins.getAttr (if theme.dark then "dark" else "light") theme.flavors;
         altFlavor = builtins.getAttr (if theme.dark then "light" else "dark") theme.flavors;
 
