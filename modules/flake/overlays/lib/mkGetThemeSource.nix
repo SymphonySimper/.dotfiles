@@ -8,6 +8,7 @@ let
     {
       package,
       filename,
+      returnFile ? false,
       capitalize ? false,
       capitalizeFlavor ? null,
       capitalizeName ? null,
@@ -28,7 +29,8 @@ let
       formattedFileName =
         builtins.replaceStrings [ "NAME" "FLAVOR" "ACCENT" ] [ name flavor accent ]
           filename;
+      themeFile = "${inputs.catppuccin.packages.${my.system}.${package}}/${formattedFileName}";
     in
-    (builtins.readFile "${inputs.catppuccin.packages.${my.system}.${package}}/${formattedFileName}");
+    if returnFile then themeFile else (builtins.readFile themeFile);
 in
 mkGetThemeSource
