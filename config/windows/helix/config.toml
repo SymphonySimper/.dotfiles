@@ -1,7 +1,7 @@
-theme = "catppuccin_latte"
+theme = "catppuccin-latte"
 
 [editor]
-shell = ["pwsh", "-command"]
+shell = ["pwsh", "-Command"] 
 auto-completion = true
 auto-format = false
 auto-pairs = true
@@ -36,13 +36,7 @@ enable = true
 
 [editor.statusline]
 left = ["mode", "file-name"]
-right = [
-  "spinner",
-  "diagnostics",
-  "selections",
-  "read-only-indicator",
-  "file-modification-indicator",
-]
+right = ["spinner", "diagnostics", "selections", "read-only-indicator", "file-modification-indicator"]
 
 [editor.word-completion]
 enable = true
@@ -168,3 +162,4 @@ b = ":sh git -C %{workspace_directory} blame -L %{cursor_line},%{cursor_line} $(
 
 [keys.select.space.m]
 t = "@o<esc>|printf<space>'<lt>xxx<gt>\n<lt>/xxx<gt>\n'<ret>sxxx<ret>c"
+

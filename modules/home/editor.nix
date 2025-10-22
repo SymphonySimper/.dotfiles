@@ -142,6 +142,19 @@ in
           "!.env*"
         ]
       ];
+
+      copy.of = [
+        {
+          from = "CONFIG/helix/";
+          to = "WINDOWS/helix/";
+          exclude = [ "runtime/" ];
+
+          post = # sh
+            ''
+              sed -i '4i shell = ["pwsh", "-Command"] ' "WINDOWS/helix/config.toml"
+            '';
+        }
+      ];
     };
 
     xdg.configFile."helix/ignore".text = builtins.concatStringsSep "\n" (lib.lists.unique cfg.ignore);

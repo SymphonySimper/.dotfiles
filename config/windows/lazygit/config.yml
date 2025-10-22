@@ -1,7 +1,29 @@
 git:
   disableForcePushing: true
 gui:
-  nerdFontsVersion: "3"
+  authorColors:
+    '*': '#7287fd'
+  nerdFontsVersion: '3'
   showBottomLine: false
   showPanelJumps: false
+  theme:
+    activeBorderColor:
+    - '#8839ef'
+    - bold
+    cherryPickedCommitBgColor:
+    - '#bcc0cc'
+    cherryPickedCommitFgColor:
+    - '#8839ef'
+    defaultFgColor:
+    - '#4c4f69'
+    inactiveBorderColor:
+    - '#6c6f85'
+    optionsTextColor:
+    - '#1e66f5'
+    searchingActiveBorderColor:
+    - '#df8e1d'
+    selectedLineBgColor:
+    - '#ccd0da'
+    unstagedChangesColor:
+    - '#d20f39'
   useHunkModeInStagingView: false

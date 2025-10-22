@@ -245,5 +245,12 @@
             dark = "${themeName}"
           '';
       };
+
+    my.programs.copy.of = [
+      {
+        from = "CONFIG/yazi/";
+        to = "WINDOWS/yazi/";
+      }
+    ];
   };
 }

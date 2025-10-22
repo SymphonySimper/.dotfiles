@@ -1,0 +1,3399 @@
+[cmp.border]
+fg = "#8839ef"
+
+[confirm.border]
+fg = "#8839ef"
+
+[confirm.btn_no]
+
+[confirm.btn_yes]
+reversed = true
+
+[confirm.content]
+
+[confirm.list]
+
+[confirm.title]
+fg = "#8839ef"
+
+[[filetype.rules]]
+fg = "#179299"
+mime = "image/*"
+
+[[filetype.rules]]
+fg = "#df8e1d"
+mime = "{audio,video}/*"
+
+[[filetype.rules]]
+fg = "#ea76cb"
+mime = "application/*zip"
+
+[[filetype.rules]]
+fg = "#ea76cb"
+mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}"
+
+[[filetype.rules]]
+fg = "#40a02b"
+mime = "application/{pdf,doc,rtf}"
+
+[[filetype.rules]]
+fg = "#4c4f69"
+name = "*"
+
+[[filetype.rules]]
+fg = "#8839ef"
+name = "*/"
+
+[help.desc]
+fg = "#7c7f93"
+
+[help.footer]
+bg = "#bcc0cc"
+fg = "#4c4f69"
+
+[help.hovered]
+bg = "#acb0be"
+bold = true
+
+[help.on]
+fg = "#179299"
+
+[help.run]
+fg = "#ea76cb"
+
+[[icon.exts]]
+fg = "#eff1f5"
+name = "otf"
+text = ""
+
+[[icon.exts]]
+fg = "#eff1f5"
+name = "import"
+text = ""
+
+[[icon.exts]]
+fg = "#ea76cb"
+name = "krz"
+text = ""
+
+[[icon.exts]]
+fg = "#dce0e8"
+name = "adb"
+text = ""
+
+[[icon.exts]]
+fg = "#eff1f5"
+name = "ttf"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "webpack"
+text = "󰜫"
+
+[[icon.exts]]
+fg = "#1e66f5"
+name = "dart"
+text = ""
+
+[[icon.exts]]
+fg = "#7287fd"
+name = "vsh"
+text = ""
+
+[[icon.exts]]
+fg = "#1e66f5"
+name = "doc"
+text = "󰈬"
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "zsh"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "ex"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "hx"
+text = ""
+
+[[icon.exts]]
+fg = "#04a5e5"
+name = "fodt"
+text = ""
+
+[[icon.exts]]
+fg = "#fe640b"
+name = "mojo"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "templ"
+text = ""
+
+[[icon.exts]]
+fg = "#04a5e5"
+name = "nix"
+text = ""
+
+[[icon.exts]]
+fg = "#8839ef"
+name = "cshtml"
+text = "󱦗"
+
+[[icon.exts]]
+fg = "#5c5f77"
+name = "fish"
+text = ""
+
+[[icon.exts]]
+fg = "#8c8fa1"
+name = "ply"
+text = "󰆧"
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "sldprt"
+text = "󰻫"
+
+[[icon.exts]]
+fg = "#d20f39"
+name = "gemspec"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "mjs"
+text = ""
+
+[[icon.exts]]
+fg = "#5c5f77"
+name = "csh"
+text = ""
+
+[[icon.exts]]
+fg = "#dce0e8"
+name = "cmake"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "fodp"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "vi"
+text = ""
+
+[[icon.exts]]
+fg = "#1e66f5"
+name = "msf"
+text = ""
+
+[[icon.exts]]
+fg = "#7287fd"
+name = "blp"
+text = "󰺾"
+
+[[icon.exts]]
+fg = "#4c4f69"
+name = "less"
+text = ""
+
+[[icon.exts]]
+fg = "#5c5f77"
+name = "sh"
+text = ""
+
+[[icon.exts]]
+fg = "#eff1f5"
+name = "odg"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "mint"
+text = "󰌪"
+
+[[icon.exts]]
+fg = "#4c4f69"
+name = "dll"
+text = ""
+
+[[icon.exts]]
+fg = "#ea76cb"
+name = "odf"
+text = ""
+
+[[icon.exts]]
+fg = "#dce0e8"
+name = "sqlite3"
+text = ""
+
+[[icon.exts]]
+fg = "#7287fd"
+name = "Dockerfile"
+text = "󰡨"
+
+[[icon.exts]]
+fg = "#5c5f77"
+name = "ksh"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "rmd"
+text = ""
+
+[[icon.exts]]
+fg = "#04a5e5"
+name = "wv"
+text = ""
+
+[[icon.exts]]
+fg = "#fe640b"
+name = "xml"
+text = "󰗀"
+
+[[icon.exts]]
+fg = "#4c4f69"
+name = "markdown"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "qml"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "3gp"
+text = ""
+
+[[icon.exts]]
+fg = "#04a5e5"
+name = "pxi"
+text = ""
+
+[[icon.exts]]
+fg = "#1e66f5"
+name = "flac"
+text = ""
+
+[[icon.exts]]
+fg = "#ea76cb"
+name = "gpr"
+text = ""
+
+[[icon.exts]]
+fg = "#8839ef"
+name = "huff"
+text = "󰡘"
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "json"
+text = ""
+
+[[icon.exts]]
+fg = "#1e66f5"
+name = "gv"
+text = "󱁉"
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "bmp"
+text = ""
+
+[[icon.exts]]
+fg = "#bcc0cc"
+name = "lock"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "sha384"
+text = "󰕥"
+
+[[icon.exts]]
+fg = "#1e66f5"
+name = "cobol"
+text = "⚙"
+
+[[icon.exts]]
+fg = "#1e66f5"
+name = "cob"
+text = "⚙"
+
+[[icon.exts]]
+fg = "#d20f39"
+name = "java"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "cjs"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "qm"
+text = ""
+
+[[icon.exts]]
+fg = "#4c4f69"
+name = "ebuild"
+text = ""
+
+[[icon.exts]]
+fg = "#fe640b"
+name = "mustache"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "terminal"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "ejs"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "brep"
+text = "󰻫"
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "rar"
+text = ""
+
+[[icon.exts]]
+fg = "#1e66f5"
+name = "gradle"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "gnumakefile"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "applescript"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "elm"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "ebook"
+text = ""
+
+[[icon.exts]]
+fg = "#ea76cb"
+name = "kra"
+text = ""
+
+[[icon.exts]]
+fg = "#8839ef"
+name = "tf"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "xls"
+text = "󰈛"
+
+[[icon.exts]]
+fg = "#eff1f5"
+name = "fnl"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "kdbx"
+text = ""
+
+[[icon.exts]]
+fg = "#eff1f5"
+name = "kicad_pcb"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "cfg"
+text = ""
+
+[[icon.exts]]
+fg = "#04a5e5"
+name = "ape"
+text = ""
+
+[[icon.exts]]
+fg = "#179299"
+name = "org"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "yml"
+text = ""
+
+[[icon.exts]]
+fg = "#fe640b"
+name = "swift"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "eln"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "sol"
+text = ""
+
+[[icon.exts]]
+fg = "#5c5f77"
+name = "awk"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "7z"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "apl"
+text = "⍝"
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "epp"
+text = ""
+
+[[icon.exts]]
+fg = "#d20f39"
+name = "app"
+text = ""
+
+[[icon.exts]]
+fg = "#1e66f5"
+name = "dot"
+text = "󱁉"
+
+[[icon.exts]]
+fg = "#ea76cb"
+name = "kpp"
+text = ""
+
+[[icon.exts]]
+fg = "#eff1f5"
+name = "eot"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "hpp"
+text = ""
+
+[[icon.exts]]
+fg = "#1e66f5"
+name = "spec.tsx"
+text = ""
+
+[[icon.exts]]
+fg = "#e64553"
+name = "hurl"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "cxxm"
+text = ""
+
+[[icon.exts]]
+fg = "#7287fd"
+name = "c"
+text = ""
+
+[[icon.exts]]
+fg = "#d20f39"
+name = "fcmacro"
+text = ""
+
+[[icon.exts]]
+fg = "#dd7878"
+name = "sass"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "yaml"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "xz"
+text = ""
+
+[[icon.exts]]
+fg = "#ea76cb"
+name = "material"
+text = "󰔉"
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "json5"
+text = ""
+
+[[icon.exts]]
+fg = "#fe640b"
+name = "signature"
+text = "λ"
+
+[[icon.exts]]
+fg = "#8c8fa1"
+name = "3mf"
+text = "󰆧"
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "jpg"
+text = ""
+
+[[icon.exts]]
+fg = "#fe640b"
+name = "xpi"
+text = ""
+
+[[icon.exts]]
+fg = "#d20f39"
+name = "fcmat"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "pot"
+text = ""
+
+[[icon.exts]]
+fg = "#d20f39"
+name = "bin"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "xlsx"
+text = "󰈛"
+
+[[icon.exts]]
+fg = "#04a5e5"
+name = "aac"
+text = ""
+
+[[icon.exts]]
+fg = "#eff1f5"
+name = "kicad_sym"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "xcstrings"
+text = ""
+
+[[icon.exts]]
+fg = "#eff1f5"
+name = "lff"
+text = ""
+
+[[icon.exts]]
+fg = "#5c5f77"
+name = "xcf"
+text = ""
+
+[[icon.exts]]
+fg = "#1e66f5"
+name = "azcli"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "license"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "jsonc"
+text = ""
+
+[[icon.exts]]
+fg = "#8839ef"
+name = "xaml"
+text = "󰙳"
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "md5"
+text = "󰕥"
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "xm"
+text = ""
+
+[[icon.exts]]
+fg = "#8839ef"
+name = "sln"
+text = ""
+
+[[icon.exts]]
+fg = "#ea76cb"
+name = "jl"
+text = ""
+
+[[icon.exts]]
+fg = "#fe640b"
+name = "ml"
+text = ""
+
+[[icon.exts]]
+fg = "#04a5e5"
+name = "http"
+text = ""
+
+[[icon.exts]]
+fg = "#7287fd"
+name = "x"
+text = ""
+
+[[icon.exts]]
+fg = "#04a5e5"
+name = "wvc"
+text = ""
+
+[[icon.exts]]
+fg = "#8c8fa1"
+name = "wrz"
+text = "󰆧"
+
+[[icon.exts]]
+fg = "#8839ef"
+name = "csproj"
+text = "󰪮"
+
+[[icon.exts]]
+fg = "#8c8fa1"
+name = "wrl"
+text = "󰆧"
+
+[[icon.exts]]
+fg = "#04a5e5"
+name = "wma"
+text = ""
+
+[[icon.exts]]
+fg = "#eff1f5"
+name = "woff2"
+text = ""
+
+[[icon.exts]]
+fg = "#eff1f5"
+name = "woff"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "tscn"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "webmanifest"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "webm"
+text = ""
+
+[[icon.exts]]
+fg = "#d20f39"
+name = "fcbak"
+text = ""
+
+[[icon.exts]]
+fg = "#4c4f69"
+name = "log"
+text = "󰌱"
+
+[[icon.exts]]
+fg = "#04a5e5"
+name = "wav"
+text = ""
+
+[[icon.exts]]
+fg = "#8839ef"
+name = "wasm"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "styl"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "gif"
+text = ""
+
+[[icon.exts]]
+fg = "#dd7878"
+name = "resi"
+text = ""
+
+[[icon.exts]]
+fg = "#04a5e5"
+name = "aiff"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "sha256"
+text = "󰕥"
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "igs"
+text = "󰻫"
+
+[[icon.exts]]
+fg = "#8839ef"
+name = "vsix"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "vim"
+text = ""
+
+[[icon.exts]]
+fg = "#4c4f69"
+name = "diff"
+text = ""
+
+[[icon.exts]]
+fg = "#dc8a78"
+name = "drl"
+text = ""
+
+[[icon.exts]]
+fg = "#ea76cb"
+name = "erl"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "vhdl"
+text = "󰍛"
+
+[[icon.exts]]
+fg = "#fe640b"
+name = "🔥"
+text = ""
+
+[[icon.exts]]
+fg = "#ea76cb"
+name = "hrl"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "fsi"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "mm"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "bz"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "vh"
+text = "󰍛"
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "kdb"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "gz"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "cpp"
+text = ""
+
+[[icon.exts]]
+fg = "#1e66f5"
+name = "ui"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "txt"
+text = "󰈙"
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "spec.ts"
+text = ""
+
+[[icon.exts]]
+fg = "#e64553"
+name = "ccm"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "typoscript"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "typ"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "txz"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "test.ts"
+text = ""
+
+[[icon.exts]]
+fg = "#1e66f5"
+name = "tsx"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "mk"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "webp"
+text = ""
+
+[[icon.exts]]
+fg = "#1e66f5"
+name = "opus"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "bicep"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "ts"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "tres"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "torrent"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "cxx"
+text = ""
+
+[[icon.exts]]
+fg = "#bcc0cc"
+name = "iso"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "ixx"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "hxx"
+text = ""
+
+[[icon.exts]]
+fg = "#ea76cb"
+name = "gql"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "tmux"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "ini"
+text = ""
+
+[[icon.exts]]
+fg = "#dd7878"
+name = "m3u8"
+text = "󰲹"
+
+[[icon.exts]]
+fg = "#bcc0cc"
+name = "image"
+text = ""
+
+[[icon.exts]]
+fg = "#8839ef"
+name = "tfvars"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "tex"
+text = ""
+
+[[icon.exts]]
+fg = "#1e66f5"
+name = "cbl"
+text = "⚙"
+
+[[icon.exts]]
+fg = "#eff1f5"
+name = "flc"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "elc"
+text = ""
+
+[[icon.exts]]
+fg = "#1e66f5"
+name = "test.tsx"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "twig"
+text = ""
+
+[[icon.exts]]
+fg = "#dce0e8"
+name = "sql"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "test.jsx"
+text = ""
+
+[[icon.exts]]
+fg = "#fe640b"
+name = "htm"
+text = ""
+
+[[icon.exts]]
+fg = "#1e66f5"
+name = "gcode"
+text = "󰐫"
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "test.js"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "ino"
+text = ""
+
+[[icon.exts]]
+fg = "#1e66f5"
+name = "tcl"
+text = "󰛓"
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "cljs"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "tsconfig"
+text = ""
+
+[[icon.exts]]
+fg = "#bcc0cc"
+name = "img"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "t"
+text = ""
+
+[[icon.exts]]
+fg = "#d20f39"
+name = "fcstd1"
+text = ""
+
+[[icon.exts]]
+fg = "#d20f39"
+name = "out"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "jsx"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "bash"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "edn"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "rss"
+text = ""
+
+[[icon.exts]]
+fg = "#eff1f5"
+name = "flf"
+text = ""
+
+[[icon.exts]]
+fg = "#eff1f5"
+name = "cache"
+text = ""
+
+[[icon.exts]]
+fg = "#d20f39"
+name = "sbt"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "cppm"
+text = ""
+
+[[icon.exts]]
+fg = "#fe640b"
+name = "svelte"
+text = ""
+
+[[icon.exts]]
+fg = "#7287fd"
+name = "mo"
+text = "∞"
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "sv"
+text = "󰍛"
+
+[[icon.exts]]
+fg = "#e6e9ef"
+name = "ko"
+text = ""
+
+[[icon.exts]]
+fg = "#8839ef"
+name = "suo"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "sldasm"
+text = "󰻫"
+
+[[icon.exts]]
+fg = "#4c4f69"
+name = "icalendar"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "go"
+text = ""
+
+[[icon.exts]]
+fg = "#fe640b"
+name = "sublime"
+text = ""
+
+[[icon.exts]]
+fg = "#8c8fa1"
+name = "stl"
+text = "󰆧"
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "mobi"
+text = ""
+
+[[icon.exts]]
+fg = "#ea76cb"
+name = "graphql"
+text = ""
+
+[[icon.exts]]
+fg = "#dd7878"
+name = "m3u"
+text = "󰲹"
+
+[[icon.exts]]
+fg = "#1e66f5"
+name = "cpy"
+text = "⚙"
+
+[[icon.exts]]
+fg = "#04a5e5"
+name = "kdenlive"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "pyo"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "po"
+text = ""
+
+[[icon.exts]]
+fg = "#d20f39"
+name = "scala"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "exs"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "odp"
+text = ""
+
+[[icon.exts]]
+fg = "#dce0e8"
+name = "dump"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "stp"
+text = "󰻫"
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "step"
+text = "󰻫"
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "ste"
+text = "󰻫"
+
+[[icon.exts]]
+fg = "#04a5e5"
+name = "aif"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "strings"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "cp"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "fsscript"
+text = ""
+
+[[icon.exts]]
+fg = "#fe640b"
+name = "mli"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "bak"
+text = "󰁯"
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "ssa"
+text = "󰨖"
+
+[[icon.exts]]
+fg = "#d20f39"
+name = "toml"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "makefile"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "php"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "zst"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "spec.jsx"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "kbx"
+text = "󰯄"
+
+[[icon.exts]]
+fg = "#8c8fa1"
+name = "fbx"
+text = "󰆧"
+
+[[icon.exts]]
+fg = "#fe640b"
+name = "blend"
+text = "󰂫"
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "ifc"
+text = "󰻫"
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "spec.js"
+text = ""
+
+[[icon.exts]]
+fg = "#e6e9ef"
+name = "so"
+text = ""
+
+[[icon.exts]]
+fg = "#4c4f69"
+name = "desktop"
+text = ""
+
+[[icon.exts]]
+fg = "#fe640b"
+name = "sml"
+text = "λ"
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "slvs"
+text = "󰻫"
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "pp"
+text = ""
+
+[[icon.exts]]
+fg = "#1e66f5"
+name = "ps1"
+text = "󰨊"
+
+[[icon.exts]]
+fg = "#1e66f5"
+name = "dropbox"
+text = ""
+
+[[icon.exts]]
+fg = "#eff1f5"
+name = "kicad_mod"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "bat"
+text = ""
+
+[[icon.exts]]
+fg = "#fe640b"
+name = "slim"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "skp"
+text = "󰻫"
+
+[[icon.exts]]
+fg = "#04a5e5"
+name = "css"
+text = ""
+
+[[icon.exts]]
+fg = "#fe640b"
+name = "xul"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "ige"
+text = "󰻫"
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "glb"
+text = ""
+
+[[icon.exts]]
+fg = "#e64553"
+name = "ppt"
+text = "󰈧"
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "sha512"
+text = "󰕥"
+
+[[icon.exts]]
+fg = "#4c4f69"
+name = "ics"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "mdx"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "sha1"
+text = "󰕥"
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "f3d"
+text = "󰻫"
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "ass"
+text = "󰨖"
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "godot"
+text = ""
+
+[[icon.exts]]
+fg = "#4c4f69"
+name = "ifb"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "cson"
+text = ""
+
+[[icon.exts]]
+fg = "#4c4f69"
+name = "lib"
+text = ""
+
+[[icon.exts]]
+fg = "#04a5e5"
+name = "luac"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "heex"
+text = ""
+
+[[icon.exts]]
+fg = "#eff1f5"
+name = "scm"
+text = "󰘧"
+
+[[icon.exts]]
+fg = "#7287fd"
+name = "psd1"
+text = "󰨊"
+
+[[icon.exts]]
+fg = "#d20f39"
+name = "sc"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "scad"
+text = ""
+
+[[icon.exts]]
+fg = "#8839ef"
+name = "kts"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "svh"
+text = "󰍛"
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "mts"
+text = ""
+
+[[icon.exts]]
+fg = "#eff1f5"
+name = "nfo"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "pck"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "rproj"
+text = "󰗆"
+
+[[icon.exts]]
+fg = "#dc8a78"
+name = "rlib"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "cljd"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "ods"
+text = ""
+
+[[icon.exts]]
+fg = "#d20f39"
+name = "res"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "apk"
+text = ""
+
+[[icon.exts]]
+fg = "#eff1f5"
+name = "haml"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "d.ts"
+text = ""
+
+[[icon.exts]]
+fg = "#8839ef"
+name = "razor"
+text = "󱦘"
+
+[[icon.exts]]
+fg = "#d20f39"
+name = "rake"
+text = ""
+
+[[icon.exts]]
+fg = "#4c4f69"
+name = "patch"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "cuh"
+text = ""
+
+[[icon.exts]]
+fg = "#d20f39"
+name = "d"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "query"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "psb"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "nu"
+text = ">"
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "mov"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "lrc"
+text = "󰨖"
+
+[[icon.exts]]
+fg = "#04a5e5"
+name = "pyx"
+text = ""
+
+[[icon.exts]]
+fg = "#04a5e5"
+name = "pyw"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "cu"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "bazel"
+text = ""
+
+[[icon.exts]]
+fg = "#8c8fa1"
+name = "obj"
+text = "󰆧"
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "pyi"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "pyd"
+text = ""
+
+[[icon.exts]]
+fg = "#d20f39"
+name = "exe"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "pyc"
+text = ""
+
+[[icon.exts]]
+fg = "#d20f39"
+name = "fctb"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "part"
+text = ""
+
+[[icon.exts]]
+fg = "#e64553"
+name = "blade.php"
+text = ""
+
+[[icon.exts]]
+fg = "#fe640b"
+name = "git"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "psd"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "qss"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "csv"
+text = ""
+
+[[icon.exts]]
+fg = "#7287fd"
+name = "psm1"
+text = "󰨊"
+
+[[icon.exts]]
+fg = "#eff1f5"
+name = "dconf"
+text = ""
+
+[[icon.exts]]
+fg = "#d20f39"
+name = "config.ru"
+text = ""
+
+[[icon.exts]]
+fg = "#1e66f5"
+name = "prisma"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "conf"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "clj"
+text = ""
+
+[[icon.exts]]
+fg = "#d20f39"
+name = "o"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "mp4"
+text = ""
+
+[[icon.exts]]
+fg = "#e64553"
+name = "cc"
+text = ""
+
+[[icon.exts]]
+fg = "#eff1f5"
+name = "kicad_prl"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "bz3"
+text = ""
+
+[[icon.exts]]
+fg = "#6c6f85"
+name = "asc"
+text = "󰦝"
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "png"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "android"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "pm"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "h"
+text = ""
+
+[[icon.exts]]
+fg = "#dd7878"
+name = "pls"
+text = "󰲹"
+
+[[icon.exts]]
+fg = "#fe640b"
+name = "ipynb"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "pl"
+text = ""
+
+[[icon.exts]]
+fg = "#eff1f5"
+name = "ads"
+text = ""
+
+[[icon.exts]]
+fg = "#dce0e8"
+name = "sqlite"
+text = ""
+
+[[icon.exts]]
+fg = "#d20f39"
+name = "pdf"
+text = ""
+
+[[icon.exts]]
+fg = "#1e66f5"
+name = "pcm"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "ico"
+text = ""
+
+[[icon.exts]]
+fg = "#e6e9ef"
+name = "a"
+text = ""
+
+[[icon.exts]]
+fg = "#1e66f5"
+name = "R"
+text = "󰟔"
+
+[[icon.exts]]
+fg = "#1e66f5"
+name = "ogg"
+text = ""
+
+[[icon.exts]]
+fg = "#04a5e5"
+name = "pxd"
+text = ""
+
+[[icon.exts]]
+fg = "#04a5e5"
+name = "kdenlivetitle"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "jxl"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "nswag"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "nim"
+text = ""
+
+[[icon.exts]]
+fg = "#179299"
+name = "bqn"
+text = "⎉"
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "cts"
+text = ""
+
+[[icon.exts]]
+fg = "#d20f39"
+name = "fcparam"
+text = ""
+
+[[icon.exts]]
+fg = "#dc8a78"
+name = "rs"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "mpp"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "fdmdownload"
+text = ""
+
+[[icon.exts]]
+fg = "#e64553"
+name = "pptx"
+text = "󰈧"
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "jpeg"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "bib"
+text = "󱉟"
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "vhd"
+text = "󰍛"
+
+[[icon.exts]]
+fg = "#7287fd"
+name = "m"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "js"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "eex"
+text = ""
+
+[[icon.exts]]
+fg = "#1e66f5"
+name = "tbc"
+text = "󰛓"
+
+[[icon.exts]]
+fg = "#e64553"
+name = "astro"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "sha224"
+text = "󰕥"
+
+[[icon.exts]]
+fg = "#fe640b"
+name = "xcplayground"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "el"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "m4v"
+text = ""
+
+[[icon.exts]]
+fg = "#04a5e5"
+name = "m4a"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "cs"
+text = "󰌛"
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "hs"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "tgz"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "fs"
+text = ""
+
+[[icon.exts]]
+fg = "#04a5e5"
+name = "luau"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "dxf"
+text = "󰻫"
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "download"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "cast"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "qrc"
+text = ""
+
+[[icon.exts]]
+fg = "#04a5e5"
+name = "lua"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "lhs"
+text = ""
+
+[[icon.exts]]
+fg = "#4c4f69"
+name = "md"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "leex"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "ai"
+text = ""
+
+[[icon.exts]]
+fg = "#bcc0cc"
+name = "lck"
+text = ""
+
+[[icon.exts]]
+fg = "#8839ef"
+name = "kt"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "bicepparam"
+text = ""
+
+[[icon.exts]]
+fg = "#1e66f5"
+name = "hex"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "zig"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "bzl"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "cljc"
+text = ""
+
+[[icon.exts]]
+fg = "#eff1f5"
+name = "kicad_dru"
+text = ""
+
+[[icon.exts]]
+fg = "#d20f39"
+name = "fctl"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "f#"
+text = ""
+
+[[icon.exts]]
+fg = "#04a5e5"
+name = "odt"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "conda"
+text = ""
+
+[[icon.exts]]
+fg = "#8839ef"
+name = "vala"
+text = ""
+
+[[icon.exts]]
+fg = "#d20f39"
+name = "erb"
+text = ""
+
+[[icon.exts]]
+fg = "#04a5e5"
+name = "mp3"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "bz2"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "coffee"
+text = ""
+
+[[icon.exts]]
+fg = "#ccd0da"
+name = "cr"
+text = ""
+
+[[icon.exts]]
+fg = "#5c5f77"
+name = "f90"
+text = "󱈚"
+
+[[icon.exts]]
+fg = "#1e66f5"
+name = "jwmrc"
+text = ""
+
+[[icon.exts]]
+fg = "#e64553"
+name = "c++"
+text = ""
+
+[[icon.exts]]
+fg = "#d20f39"
+name = "fcscript"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "fods"
+text = ""
+
+[[icon.exts]]
+fg = "#dd7878"
+name = "cue"
+text = "󰲹"
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "srt"
+text = "󰨖"
+
+[[icon.exts]]
+fg = "#eff1f5"
+name = "info"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "hh"
+text = ""
+
+[[icon.exts]]
+fg = "#fe640b"
+name = "sig"
+text = "λ"
+
+[[icon.exts]]
+fg = "#fe640b"
+name = "html"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "iges"
+text = "󰻫"
+
+[[icon.exts]]
+fg = "#eff1f5"
+name = "kicad_wks"
+text = ""
+
+[[icon.exts]]
+fg = "#fe640b"
+name = "hbs"
+text = ""
+
+[[icon.exts]]
+fg = "#d20f39"
+name = "fcstd"
+text = ""
+
+[[icon.exts]]
+fg = "#eff1f5"
+name = "gresource"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "sub"
+text = "󰨖"
+
+[[icon.exts]]
+fg = "#4c4f69"
+name = "ical"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "crdownload"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "pub"
+text = "󰷖"
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "vue"
+text = ""
+
+[[icon.exts]]
+fg = "#7c7f93"
+name = "gd"
+text = ""
+
+[[icon.exts]]
+fg = "#209fb5"
+name = "fsx"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "mkv"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "py"
+text = ""
+
+[[icon.exts]]
+fg = "#eff1f5"
+name = "kicad_sch"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "epub"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "env"
+text = ""
+
+[[icon.exts]]
+fg = "#d20f39"
+name = "magnet"
+text = ""
+
+[[icon.exts]]
+fg = "#d20f39"
+name = "elf"
+text = ""
+
+[[icon.exts]]
+fg = "#eff1f5"
+name = "fodg"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "svg"
+text = "󰜡"
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "dwg"
+text = "󰻫"
+
+[[icon.exts]]
+fg = "#1e66f5"
+name = "docx"
+text = "󰈬"
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "pro"
+text = ""
+
+[[icon.exts]]
+fg = "#dce0e8"
+name = "db"
+text = ""
+
+[[icon.exts]]
+fg = "#d20f39"
+name = "rb"
+text = ""
+
+[[icon.exts]]
+fg = "#1e66f5"
+name = "r"
+text = "󰟔"
+
+[[icon.exts]]
+fg = "#dd7878"
+name = "scss"
+text = ""
+
+[[icon.exts]]
+fg = "#fe640b"
+name = "cow"
+text = "󰆚"
+
+[[icon.exts]]
+fg = "#ea76cb"
+name = "gleam"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "v"
+text = "󰍛"
+
+[[icon.exts]]
+fg = "#eff1f5"
+name = "kicad_pro"
+text = ""
+
+[[icon.exts]]
+fg = "#40a02b"
+name = "liquid"
+text = ""
+
+[[icon.exts]]
+fg = "#df8e1d"
+name = "zip"
+text = ""
+
+[[icon.files]]
+fg = "#ea76cb"
+name = "kritadisplayrc"
+text = ""
+
+[[icon.files]]
+fg = "#eff1f5"
+name = ".gtkrc-2.0"
+text = ""
+
+[[icon.files]]
+fg = "#4c4f69"
+name = "bspwmrc"
+text = ""
+
+[[icon.files]]
+fg = "#209fb5"
+name = "webpack"
+text = "󰜫"
+
+[[icon.files]]
+fg = "#209fb5"
+name = "tsconfig.json"
+text = ""
+
+[[icon.files]]
+fg = "#40a02b"
+name = ".vimrc"
+text = ""
+
+[[icon.files]]
+fg = "#d20f39"
+name = "gemfile$"
+text = ""
+
+[[icon.files]]
+fg = "#e64553"
+name = "xmobarrc"
+text = ""
+
+[[icon.files]]
+fg = "#7c7f93"
+name = "avif"
+text = ""
+
+[[icon.files]]
+fg = "#eff1f5"
+name = "fp-info-cache"
+text = ""
+
+[[icon.files]]
+fg = "#40a02b"
+name = ".zshrc"
+text = ""
+
+[[icon.files]]
+fg = "#6c6f85"
+name = "robots.txt"
+text = "󰚩"
+
+[[icon.files]]
+fg = "#7287fd"
+name = "dockerfile"
+text = "󰡨"
+
+[[icon.files]]
+fg = "#fe640b"
+name = ".git-blame-ignore-revs"
+text = ""
+
+[[icon.files]]
+fg = "#40a02b"
+name = ".nvmrc"
+text = ""
+
+[[icon.files]]
+fg = "#209fb5"
+name = "hyprpaper.conf"
+text = ""
+
+[[icon.files]]
+fg = "#7287fd"
+name = ".prettierignore"
+text = ""
+
+[[icon.files]]
+fg = "#d20f39"
+name = "rakefile"
+text = ""
+
+[[icon.files]]
+fg = "#e64553"
+name = "code_of_conduct"
+text = ""
+
+[[icon.files]]
+fg = "#dce0e8"
+name = "cmakelists.txt"
+text = ""
+
+[[icon.files]]
+fg = "#df8e1d"
+name = ".env"
+text = ""
+
+[[icon.files]]
+fg = "#40a02b"
+name = "copying.lesser"
+text = ""
+
+[[icon.files]]
+fg = "#eff1f5"
+name = "readme"
+text = "󰂺"
+
+[[icon.files]]
+fg = "#1e66f5"
+name = "settings.gradle"
+text = ""
+
+[[icon.files]]
+fg = "#fe640b"
+name = "gruntfile.coffee"
+text = ""
+
+[[icon.files]]
+fg = "#8839ef"
+name = ".eslintignore"
+text = ""
+
+[[icon.files]]
+fg = "#04a5e5"
+name = "kalgebrarc"
+text = ""
+
+[[icon.files]]
+fg = "#04a5e5"
+name = "kdenliverc"
+text = ""
+
+[[icon.files]]
+fg = "#7287fd"
+name = ".prettierrc.cjs"
+text = ""
+
+[[icon.files]]
+fg = "#04a5e5"
+name = "cantorrc"
+text = ""
+
+[[icon.files]]
+fg = "#209fb5"
+name = "rmd"
+text = ""
+
+[[icon.files]]
+fg = "#1e66f5"
+name = "vagrantfile$"
+text = ""
+
+[[icon.files]]
+fg = "#fe640b"
+name = ".Xauthority"
+text = ""
+
+[[icon.files]]
+fg = "#7287fd"
+name = "prettier.config.ts"
+text = ""
+
+[[icon.files]]
+fg = "#e64553"
+name = "node_modules"
+text = ""
+
+[[icon.files]]
+fg = "#7287fd"
+name = ".prettierrc.toml"
+text = ""
+
+[[icon.files]]
+fg = "#df8e1d"
+name = "build.zig.zon"
+text = ""
+
+[[icon.files]]
+fg = "#4c4f69"
+name = ".ds_store"
+text = ""
+
+[[icon.files]]
+fg = "#04a5e5"
+name = "PKGBUILD"
+text = ""
+
+[[icon.files]]
+fg = "#7287fd"
+name = ".prettierrc"
+text = ""
+
+[[icon.files]]
+fg = "#40a02b"
+name = ".bash_profile"
+text = ""
+
+[[icon.files]]
+fg = "#e64553"
+name = ".npmignore"
+text = ""
+
+[[icon.files]]
+fg = "#fe640b"
+name = ".mailmap"
+text = "󰊢"
+
+[[icon.files]]
+fg = "#40a02b"
+name = ".codespellrc"
+text = "󰓆"
+
+[[icon.files]]
+fg = "#fe640b"
+name = "svelte.config.js"
+text = ""
+
+[[icon.files]]
+fg = "#8839ef"
+name = "eslint.config.ts"
+text = ""
+
+[[icon.files]]
+fg = "#7c7f93"
+name = "config"
+text = ""
+
+[[icon.files]]
+fg = "#e64553"
+name = ".gitlab-ci.yml"
+text = ""
+
+[[icon.files]]
+fg = "#fe640b"
+name = ".gitconfig"
+text = ""
+
+[[icon.files]]
+fg = "#40a02b"
+name = "_gvimrc"
+text = ""
+
+[[icon.files]]
+fg = "#fe640b"
+name = ".xinitrc"
+text = ""
+
+[[icon.files]]
+fg = "#04a5e5"
+name = "checkhealth"
+text = "󰓙"
+
+[[icon.files]]
+fg = "#4c4f69"
+name = "sxhkdrc"
+text = ""
+
+[[icon.files]]
+fg = "#40a02b"
+name = ".bashrc"
+text = ""
+
+[[icon.files]]
+fg = "#209fb5"
+name = "tailwind.config.mjs"
+text = "󱏿"
+
+[[icon.files]]
+fg = "#df8e1d"
+name = "ext_typoscript_setup.txt"
+text = ""
+
+[[icon.files]]
+fg = "#179299"
+name = "commitlint.config.ts"
+text = "󰜘"
+
+[[icon.files]]
+fg = "#df8e1d"
+name = "py.typed"
+text = ""
+
+[[icon.files]]
+fg = "#4c4f69"
+name = ".nanorc"
+text = ""
+
+[[icon.files]]
+fg = "#fe640b"
+name = "commit_editmsg"
+text = ""
+
+[[icon.files]]
+fg = "#04a5e5"
+name = ".luaurc"
+text = ""
+
+[[icon.files]]
+fg = "#eff1f5"
+name = "fp-lib-table"
+text = ""
+
+[[icon.files]]
+fg = "#eff1f5"
+name = ".editorconfig"
+text = ""
+
+[[icon.files]]
+fg = "#7c7f93"
+name = "justfile"
+text = ""
+
+[[icon.files]]
+fg = "#04a5e5"
+name = "kdeglobals"
+text = ""
+
+[[icon.files]]
+fg = "#df8e1d"
+name = "license.md"
+text = ""
+
+[[icon.files]]
+fg = "#7c7f93"
+name = ".clang-format"
+text = ""
+
+[[icon.files]]
+fg = "#7287fd"
+name = "docker-compose.yaml"
+text = "󰡨"
+
+[[icon.files]]
+fg = "#40a02b"
+name = "copying"
+text = ""
+
+[[icon.files]]
+fg = "#209fb5"
+name = "go.mod"
+text = ""
+
+[[icon.files]]
+fg = "#04a5e5"
+name = "lxqt.conf"
+text = ""
+
+[[icon.files]]
+fg = "#d20f39"
+name = "brewfile"
+text = ""
+
+[[icon.files]]
+fg = "#d20f39"
+name = "gulpfile.coffee"
+text = ""
+
+[[icon.files]]
+fg = "#7287fd"
+name = ".dockerignore"
+text = "󰡨"
+
+[[icon.files]]
+fg = "#8839ef"
+name = ".settings.json"
+text = ""
+
+[[icon.files]]
+fg = "#209fb5"
+name = "tailwind.config.js"
+text = "󱏿"
+
+[[icon.files]]
+fg = "#7c7f93"
+name = ".clang-tidy"
+text = ""
+
+[[icon.files]]
+fg = "#40a02b"
+name = ".gvimrc"
+text = ""
+
+[[icon.files]]
+fg = "#40a02b"
+name = "nuxt.config.cjs"
+text = "󱄆"
+
+[[icon.files]]
+fg = "#fe640b"
+name = "xsettingsd.conf"
+text = ""
+
+[[icon.files]]
+fg = "#40a02b"
+name = "nuxt.config.js"
+text = "󱄆"
+
+[[icon.files]]
+fg = "#8839ef"
+name = "eslint.config.cjs"
+text = ""
+
+[[icon.files]]
+fg = "#eff1f5"
+name = "sym-lib-table"
+text = ""
+
+[[icon.files]]
+fg = "#40a02b"
+name = ".condarc"
+text = ""
+
+[[icon.files]]
+fg = "#e64553"
+name = "xmonad.hs"
+text = ""
+
+[[icon.files]]
+fg = "#40a02b"
+name = "tmux.conf"
+text = ""
+
+[[icon.files]]
+fg = "#e64553"
+name = "xmobarrc.hs"
+text = ""
+
+[[icon.files]]
+fg = "#7287fd"
+name = ".prettierrc.yaml"
+text = ""
+
+[[icon.files]]
+fg = "#df8e1d"
+name = ".pre-commit-config.yaml"
+text = "󰛢"
+
+[[icon.files]]
+fg = "#e6e9ef"
+name = "i3blocks.conf"
+text = ""
+
+[[icon.files]]
+fg = "#fe640b"
+name = "xorg.conf"
+text = ""
+
+[[icon.files]]
+fg = "#40a02b"
+name = ".zshenv"
+text = ""
+
+[[icon.files]]
+fg = "#fe640b"
+name = "vlcrc"
+text = "󰕼"
+
+[[icon.files]]
+fg = "#df8e1d"
+name = "license"
+text = ""
+
+[[icon.files]]
+fg = "#df8e1d"
+name = "unlicense"
+text = ""
+
+[[icon.files]]
+fg = "#40a02b"
+name = "tmux.conf.local"
+text = ""
+
+[[icon.files]]
+fg = "#04a5e5"
+name = ".SRCINFO"
+text = "󰣇"
+
+[[icon.files]]
+fg = "#209fb5"
+name = "tailwind.config.ts"
+text = "󱏿"
+
+[[icon.files]]
+fg = "#bcc0cc"
+name = "security.md"
+text = "󰒃"
+
+[[icon.files]]
+fg = "#bcc0cc"
+name = "security"
+text = "󰒃"
+
+[[icon.files]]
+fg = "#8839ef"
+name = ".eslintrc"
+text = ""
+
+[[icon.files]]
+fg = "#1e66f5"
+name = "gradle.properties"
+text = ""
+
+[[icon.files]]
+fg = "#e64553"
+name = "code_of_conduct.md"
+text = ""
+
+[[icon.files]]
+fg = "#fe640b"
+name = "PrusaSlicerGcodeViewer.ini"
+text = ""
+
+[[icon.files]]
+fg = "#fe640b"
+name = "PrusaSlicer.ini"
+text = ""
+
+[[icon.files]]
+fg = "#7c7f93"
+name = "procfile"
+text = ""
+
+[[icon.files]]
+fg = "#4c4f69"
+name = "mpv.conf"
+text = ""
+
+[[icon.files]]
+fg = "#7287fd"
+name = ".prettierrc.json5"
+text = ""
+
+[[icon.files]]
+fg = "#e6e9ef"
+name = "i3status.conf"
+text = ""
+
+[[icon.files]]
+fg = "#7287fd"
+name = "prettier.config.mjs"
+text = ""
+
+[[icon.files]]
+fg = "#7c7f93"
+name = ".pylintrc"
+text = ""
+
+[[icon.files]]
+fg = "#7287fd"
+name = "prettier.config.cjs"
+text = ""
+
+[[icon.files]]
+fg = "#04a5e5"
+name = ".luacheckrc"
+text = ""
+
+[[icon.files]]
+fg = "#7287fd"
+name = "containerfile"
+text = "󰡨"
+
+[[icon.files]]
+fg = "#8839ef"
+name = "eslint.config.mjs"
+text = ""
+
+[[icon.files]]
+fg = "#fe640b"
+name = "gruntfile.js"
+text = ""
+
+[[icon.files]]
+fg = "#eff1f5"
+name = "bun.lockb"
+text = ""
+
+[[icon.files]]
+fg = "#fe640b"
+name = ".gitattributes"
+text = ""
+
+[[icon.files]]
+fg = "#fe640b"
+name = "gruntfile.ts"
+text = ""
+
+[[icon.files]]
+fg = "#d20f39"
+name = "pom.xml"
+text = ""
+
+[[icon.files]]
+fg = "#40a02b"
+name = "favicon.ico"
+text = ""
+
+[[icon.files]]
+fg = "#d20f39"
+name = "package-lock.json"
+text = ""
+
+[[icon.files]]
+fg = "#40a02b"
+name = "build"
+text = ""
+
+[[icon.files]]
+fg = "#e64553"
+name = "package.json"
+text = ""
+
+[[icon.files]]
+fg = "#40a02b"
+name = "nuxt.config.ts"
+text = "󱄆"
+
+[[icon.files]]
+fg = "#40a02b"
+name = "nuxt.config.mjs"
+text = "󱄆"
+
+[[icon.files]]
+fg = "#7c7f93"
+name = "mix.lock"
+text = ""
+
+[[icon.files]]
+fg = "#7c7f93"
+name = "makefile"
+text = ""
+
+[[icon.files]]
+fg = "#d20f39"
+name = "gulpfile.js"
+text = ""
+
+[[icon.files]]
+fg = "#8c8fa1"
+name = "lxde-rc.xml"
+text = ""
+
+[[icon.files]]
+fg = "#ea76cb"
+name = "kritarc"
+text = ""
+
+[[icon.files]]
+fg = "#eff1f5"
+name = "gtkrc"
+text = ""
+
+[[icon.files]]
+fg = "#7287fd"
+name = "ionic.config.json"
+text = ""
+
+[[icon.files]]
+fg = "#7287fd"
+name = ".prettierrc.mjs"
+text = ""
+
+[[icon.files]]
+fg = "#7287fd"
+name = ".prettierrc.yml"
+text = ""
+
+[[icon.files]]
+fg = "#e64553"
+name = ".npmrc"
+text = ""
+
+[[icon.files]]
+fg = "#df8e1d"
+name = "weston.ini"
+text = ""
+
+[[icon.files]]
+fg = "#d20f39"
+name = "gulpfile.babel.js"
+text = ""
+
+[[icon.files]]
+fg = "#7287fd"
+name = "i18n.config.ts"
+text = "󰗊"
+
+[[icon.files]]
+fg = "#179299"
+name = "commitlint.config.js"
+text = "󰜘"
+
+[[icon.files]]
+fg = "#fe640b"
+name = ".gitmodules"
+text = ""
+
+[[icon.files]]
+fg = "#1e66f5"
+name = "gradle-wrapper.properties"
+text = ""
+
+[[icon.files]]
+fg = "#209fb5"
+name = "hypridle.conf"
+text = ""
+
+[[icon.files]]
+fg = "#eff1f5"
+name = "vercel.json"
+text = "▲"
+
+[[icon.files]]
+fg = "#209fb5"
+name = "hyprlock.conf"
+text = ""
+
+[[icon.files]]
+fg = "#209fb5"
+name = "go.sum"
+text = ""
+
+[[icon.files]]
+fg = "#04a5e5"
+name = "kdenlive-layoutsrc"
+text = ""
+
+[[icon.files]]
+fg = "#fe640b"
+name = "gruntfile.babel.js"
+text = ""
+
+[[icon.files]]
+fg = "#7287fd"
+name = "compose.yml"
+text = "󰡨"
+
+[[icon.files]]
+fg = "#7287fd"
+name = "i18n.config.js"
+text = "󰗊"
+
+[[icon.files]]
+fg = "#eff1f5"
+name = "readme.md"
+text = "󰂺"
+
+[[icon.files]]
+fg = "#1e66f5"
+name = "gradlew"
+text = ""
+
+[[icon.files]]
+fg = "#209fb5"
+name = "go.work"
+text = ""
+
+[[icon.files]]
+fg = "#d20f39"
+name = "gulpfile.ts"
+text = ""
+
+[[icon.files]]
+fg = "#7c7f93"
+name = "gnumakefile"
+text = ""
+
+[[icon.files]]
+fg = "#d20f39"
+name = "FreeCAD.conf"
+text = ""
+
+[[icon.files]]
+fg = "#7287fd"
+name = "compose.yaml"
+text = "󰡨"
+
+[[icon.files]]
+fg = "#8839ef"
+name = "eslint.config.js"
+text = ""
+
+[[icon.files]]
+fg = "#209fb5"
+name = "hyprland.conf"
+text = ""
+
+[[icon.files]]
+fg = "#7287fd"
+name = "docker-compose.yml"
+text = "󰡨"
+
+[[icon.files]]
+fg = "#5c5f77"
+name = "groovy"
+text = ""
+
+[[icon.files]]
+fg = "#40a02b"
+name = "QtProject.conf"
+text = ""
+
+[[icon.files]]
+fg = "#fe640b"
+name = "platformio.ini"
+text = ""
+
+[[icon.files]]
+fg = "#1e66f5"
+name = "build.gradle"
+text = ""
+
+[[icon.files]]
+fg = "#40a02b"
+name = ".nuxtrc"
+text = "󱄆"
+
+[[icon.files]]
+fg = "#40a02b"
+name = "_vimrc"
+text = ""
+
+[[icon.files]]
+fg = "#40a02b"
+name = ".zprofile"
+text = ""
+
+[[icon.files]]
+fg = "#fe640b"
+name = ".xsession"
+text = ""
+
+[[icon.files]]
+fg = "#7287fd"
+name = "prettier.config.js"
+text = ""
+
+[[icon.files]]
+fg = "#40a02b"
+name = ".babelrc"
+text = ""
+
+[[icon.files]]
+fg = "#40a02b"
+name = "workspace"
+text = ""
+
+[[icon.files]]
+fg = "#7287fd"
+name = ".prettierrc.json"
+text = ""
+
+[[icon.files]]
+fg = "#7287fd"
+name = ".prettierrc.js"
+text = ""
+
+[[icon.files]]
+fg = "#fe640b"
+name = ".Xresources"
+text = ""
+
+[[icon.files]]
+fg = "#fe640b"
+name = ".gitignore"
+text = ""
+
+[[icon.files]]
+fg = "#7c7f93"
+name = ".justfile"
+text = ""
+
+[input.border]
+fg = "#8839ef"
+
+[input.selected]
+reversed = true
+
+[input.title]
+
+[input.value]
+
+[mgr]
+border_symbol = "│"
+syntect_theme = "~/.config/yazi/Catppuccin-latte.tmTheme"
+
+[mgr.border_style]
+fg = "#8c8fa1"
+
+[mgr.count_copied]
+bg = "#40a02b"
+fg = "#eff1f5"
+
+[mgr.count_cut]
+bg = "#d20f39"
+fg = "#eff1f5"
+
+[mgr.count_selected]
+bg = "#8839ef"
+fg = "#eff1f5"
+
+[mgr.cwd]
+fg = "#179299"
+
+[mgr.find_keyword]
+fg = "#df8e1d"
+italic = true
+
+[mgr.find_position]
+bg = "reset"
+fg = "#ea76cb"
+italic = true
+
+[mgr.hovered]
+bg = "#8839ef"
+fg = "#eff1f5"
+
+[mgr.marker_copied]
+bg = "#40a02b"
+fg = "#40a02b"
+
+[mgr.marker_cut]
+bg = "#d20f39"
+fg = "#d20f39"
+
+[mgr.marker_marked]
+bg = "#179299"
+fg = "#179299"
+
+[mgr.marker_selected]
+bg = "#8839ef"
+fg = "#8839ef"
+
+[mgr.preview_hovered]
+bg = "#4c4f69"
+fg = "#eff1f5"
+
+[mode.normal_alt]
+bg = "#ccd0da"
+fg = "#8839ef"
+
+[mode.normal_main]
+bg = "#8839ef"
+bold = true
+fg = "#eff1f5"
+
+[mode.select_alt]
+bg = "#ccd0da"
+fg = "#40a02b"
+
+[mode.select_main]
+bg = "#40a02b"
+bold = true
+fg = "#eff1f5"
+
+[mode.unset_alt]
+bg = "#ccd0da"
+fg = "#dd7878"
+
+[mode.unset_main]
+bg = "#dd7878"
+bold = true
+fg = "#eff1f5"
+
+[notify.title_error]
+fg = "#d20f39"
+
+[notify.title_info]
+fg = "#179299"
+
+[notify.title_warn]
+fg = "#df8e1d"
+
+[pick.active]
+fg = "#ea76cb"
+
+[pick.border]
+fg = "#8839ef"
+
+[pick.inactive]
+
+[spot.border]
+fg = "#8839ef"
+
+[spot.tbl_cell]
+fg = "#8839ef"
+reversed = true
+
+[spot.tbl_col]
+bold = true
+
+[spot.title]
+fg = "#8839ef"
+
+[status.perm_exec]
+fg = "#40a02b"
+
+[status.perm_read]
+fg = "#df8e1d"
+
+[status.perm_sep]
+fg = "#8c8fa1"
+
+[status.perm_type]
+fg = "#1e66f5"
+
+[status.perm_write]
+fg = "#d20f39"
+
+[status.progress_error]
+bg = "#bcc0cc"
+fg = "#d20f39"
+
+[status.progress_label]
+bold = true
+fg = "#ffffff"
+
+[status.progress_normal]
+bg = "#bcc0cc"
+fg = "#1e66f5"
+
+[status.sep_left]
+close = ""
+open = ""
+
+[status.sep_right]
+close = ""
+open = ""
+
+[tabs.active]
+bg = "#4c4f69"
+bold = true
+fg = "#eff1f5"
+
+[tabs.inactive]
+bg = "#bcc0cc"
+fg = "#4c4f69"
+
+[tasks.border]
+fg = "#8839ef"
+
+[tasks.hovered]
+underline = true
+
+[tasks.title]
+
+[which]
+separator = "  "
+
+[which.cand]
+fg = "#179299"
+
+[which.desc]
+fg = "#ea76cb"
+
+[which.mask]
+bg = "#ccd0da"
+
+[which.rest]
+fg = "#7c7f93"
+
+[which.separator_style]
+fg = "#acb0be"

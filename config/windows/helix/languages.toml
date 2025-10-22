@@ -15,10 +15,7 @@ args = ["--parser", "html"]
 command = "prettier"
 
 [[language]]
-language-servers = [
-  "typescript-language-server",
-  "vscode-eslint-language-server",
-]
+language-servers = ["typescript-language-server", "vscode-eslint-language-server"]
 name = "javascript"
 
 [language.formatter]
@@ -42,11 +39,7 @@ args = ["--parser", "jsonc"]
 command = "prettier"
 
 [[language]]
-language-servers = [
-  "typescript-language-server",
-  "vscode-eslint-language-server",
-  "tailwindcss-ls",
-]
+language-servers = ["typescript-language-server", "vscode-eslint-language-server", "tailwindcss-ls"]
 name = "jsx"
 
 [language.formatter]
@@ -87,11 +80,7 @@ args = ["format", "--line-length", "88", "-"]
 command = "ruff"
 
 [[language]]
-language-servers = [
-  "svelteserver",
-  "tailwindcss-ls",
-  "vscode-eslint-language-server",
-]
+language-servers = ["svelteserver", "tailwindcss-ls", "vscode-eslint-language-server"]
 name = "svelte"
 
 [language.block-comment-tokens]
@@ -110,11 +99,7 @@ args = ["format", "-"]
 command = "taplo"
 
 [[language]]
-language-servers = [
-  "typescript-language-server",
-  "vscode-eslint-language-server",
-  "tailwindcss-ls",
-]
+language-servers = ["typescript-language-server", "vscode-eslint-language-server", "tailwindcss-ls"]
 name = "tsx"
 
 [language.formatter]
@@ -122,10 +107,7 @@ args = ["--parser", "typescript"]
 command = "prettier"
 
 [[language]]
-language-servers = [
-  "typescript-language-server",
-  "vscode-eslint-language-server",
-]
+language-servers = ["typescript-language-server", "vscode-eslint-language-server"]
 name = "typescript"
 
 [language.formatter]

@@ -31,13 +31,22 @@ in
   };
 
   config = lib.mkIf my.gui.enable {
-    my.programs.desktop = {
-      autostart = [ "alacritty" ];
+    my.programs = {
+      desktop = {
+        autostart = [ "alacritty" ];
 
-      windows = [
+        windows = [
+          {
+            id = "Alacritty";
+            workspace = 1;
+          }
+        ];
+      };
+
+      copy.of = [
         {
-          id = "Alacritty";
-          workspace = 1;
+          from = "CONFIG/alacritty/alacritty.toml";
+          to = "WINDOWS/alacritty/alacritty.toml";
         }
       ];
     };

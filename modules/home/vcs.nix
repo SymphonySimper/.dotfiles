@@ -179,6 +179,13 @@ in
           ).gui;
         };
       };
+
+      my.programs.copy.of = [
+        {
+          from = "CONFIG/lazygit/";
+          to = "WINDOWS/lazygit/";
+        }
+      ];
     }
   ];
 }
