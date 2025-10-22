@@ -93,7 +93,7 @@ style = "Regular"
 [general]
 import = ["./unix.toml", "./windows.toml"]
 ipc_socket = false
-live_config_reload = true
+live_config_reload = false
 
 [[keyboard.bindings]]
 action = "ToggleViMode"

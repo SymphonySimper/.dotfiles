@@ -78,7 +78,7 @@ in
             "./windows.toml"
           ];
 
-          live_config_reload = true;
+          live_config_reload = false;
           ipc_socket = false;
         };
 
