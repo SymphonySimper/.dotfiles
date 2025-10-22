@@ -1,0 +1,18 @@
+[window]
+startup_mode = "Maximized"
+
+[terminal.shell]
+program = "pwsh"
+args = ["-WorkingDirectory", "~"]
+# program = "wsl"
+# args = [
+#   "-d",
+#   "NixOS",
+#   "--cd",
+#   "~",
+#   "--shell-type",
+#   "login",
+#   "--",
+#   "tmux",
+#   "new",
+# ]

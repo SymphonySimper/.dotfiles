@@ -1,7 +1,7 @@
 {
   my,
-  inputs,
   config,
+  pkgs,
   lib,
   ...
 }:
@@ -43,11 +43,32 @@ in
     };
 
     catppuccin.alacritty.enable = false;
+
+    xdg.configFile."alacritty/unix.toml".source = (
+      (pkgs.formats.toml { }).generate "unix.toml" {
+        terminal.shell = {
+          program = cfgSh.command;
+          args = [
+            cfgSh.args.login
+          ]
+          ++ (lib.lists.optionals (cfg.shell.command != null) [
+            cfgSh.args.command
+            cfg.shell.command
+          ]);
+        };
+      }
+    );
+
     programs.alacritty = {
       enable = true;
 
       settings = {
         general = {
+          import = [
+            "./unix.toml"
+            "./windows.toml"
+          ];
+
           live_config_reload = true;
           ipc_socket = false;
         };
@@ -55,7 +76,7 @@ in
         window = {
           decorations = "none";
           opacity = 1;
-          startup_mode = "Maximized";
+          # startup_mode = "Maximized";
           padding = rec {
             x = 2;
             y = x;
@@ -91,17 +112,6 @@ in
             blinking = "off";
             shape = "Block";
           };
-        };
-
-        terminal.shell = {
-          program = cfgSh.command;
-          args = [
-            cfgSh.args.login
-          ]
-          ++ (lib.lists.optionals (cfg.shell.command != null) [
-            cfgSh.args.command
-            cfg.shell.command
-          ]);
         };
 
         mouse.hide_when_typing = true;
