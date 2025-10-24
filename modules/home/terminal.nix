@@ -93,7 +93,7 @@ in
           dynamic_padding = true;
         };
 
-        scrolling.history = 10000;
+        scrolling.history = 1000;
 
         font = {
           size = 12;

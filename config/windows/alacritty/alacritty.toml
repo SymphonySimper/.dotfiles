@@ -119,7 +119,7 @@ mods = "Alt|Shift"
 hide_when_typing = true
 
 [scrolling]
-history = 10000
+history = 1000
 
 [window]
 decorations = "none"
