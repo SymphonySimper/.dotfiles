@@ -80,7 +80,7 @@ in
         [
           {
             name = "Caffeine";
-            order.module = "Brightness";
+            order.module = "Power Profile";
             logic = # sh
               ''
                 caffeine_inactive=$(${caffeine} -g)
