@@ -157,8 +157,6 @@ in
                 bind p paste-buffer
                 bind-key -T copy-mode-vi "v" send -X begin-selection
                 bind-key -T copy-mode-vi "y" send -X copy-selection
-                bind-key -T copy-mode-vi "Space" send -X halfpage-down
-                bind-key -T copy-mode-vi "Bspace" send -X halfpage-up
 
                 ## Sync pane
                 bind -r b set-window-option synchronize-panes
