@@ -103,28 +103,6 @@ in
           action = "new-window";
           cd = true;
         }
-
-        ## Open a pane with 30% width
-        {
-          unbind = true;
-          key = "'\"'";
-          action = "split-window";
-          cd = true;
-          args = [
-            "-h"
-            "-l '30%'"
-          ];
-        }
-        {
-          unbind = true;
-          key = "\"'\"";
-          action = "split-window";
-          cd = true;
-          args = [
-            "-v"
-            "-l '20%'"
-          ];
-        }
       ];
     };
 
