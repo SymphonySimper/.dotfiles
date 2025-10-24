@@ -125,6 +125,7 @@ in
           homePackages = with pkgs; [
             rustup
             sccache
+            gcc
           ];
 
           env.RUST_BACKTRACE = "1";
