@@ -283,7 +283,7 @@ in
             border_size = 1;
             resize_on_border = false;
             allow_tearing = false;
-            layout = "dwindle";
+            layout = "master";
 
             "col.inactive_border" = "$overlay0";
             "col.active_border" = "$accent";
@@ -304,6 +304,11 @@ in
             pseudotile = true;
             preserve_split = true;
             force_split = 2;
+          };
+
+          master = {
+            mfact = 0.70;
+            inherit_fullscreen = true;
           };
 
           misc = {
