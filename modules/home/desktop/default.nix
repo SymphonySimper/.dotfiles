@@ -334,6 +334,11 @@ in
 
           gesture = [ "3, horizontal, workspace" ];
 
+          binds = {
+            workspace_back_and_forth = true;
+            movefocus_cycles_fullscreen = true;
+          };
+
           bind = lib.lists.flatten [
             "${keys.mod}, Q, killactive"
             "${keys.mod} SHIFT, E, exec, uwsm stop"
