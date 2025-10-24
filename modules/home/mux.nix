@@ -160,9 +160,6 @@ in
 
                 ## Create new session
                 bind -r C-n new
-
-                ## Reload config with prefix+r
-                bind r source-file "${config.xdg.configHome}/tmux/tmux.conf"
               ''
             ]
 
