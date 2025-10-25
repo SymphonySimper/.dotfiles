@@ -1,39 +1,19 @@
-{ lib, config, ... }:
+{ pkgs, ... }:
 {
-  programs.htop = {
+  programs.btop = {
     enable = true;
 
-    settings = lib.mkMerge [
-      {
-        color_scheme = 0;
+    package = pkgs.btop.override {
+      # GPU support
+      rocmSupport = true; # amd
+      cudaSupport = true; # nvida
+    };
 
-        tree_view = 1;
-        all_branches_collapsed = 1;
-        show_program_path = 0;
-        highlight_base_name = 1;
-
-        hide_kernel_threads = 1;
-      }
-
-      (
-        with config.lib.htop;
-        leftMeters [
-          (bar "CPU")
-          (bar "LeftCPUs2")
-          (bar "Memory")
-          (bar "Swap")
-        ]
-      )
-
-      (
-        with config.lib.htop;
-        rightMeters [
-          (bar "RightCPUs2")
-          (text "Tasks")
-          (text "LoadAverage")
-          (text "Uptime")
-        ]
-      )
-    ];
+    settings = {
+      vim_keys = true;
+      shown_boxes = "cpu mem net proc gpu0";
+      update_ms = 2000; # recommended
+      proc_tree = false;
+    };
   };
 }
