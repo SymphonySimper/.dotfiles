@@ -58,16 +58,20 @@ in
 
       programs.git = {
         enable = true;
-        userName = my.fullName;
-        userEmail = "50240805+SymphonySimper@users.noreply.github.com";
 
         ignores = [
           "node_modules"
         ];
 
-        extraConfig = {
+        settings = {
+          user = {
+            name = my.fullName;
+            email = "50240805+SymphonySimper@users.noreply.github.com";
+          };
+
           init.defaultBranch = "main";
           core.editor = config.my.programs.editor.command;
+
           push.autoSetupRemote = true;
           mergetool.keepBackup = false;
           pull.rebase = true;
@@ -75,17 +79,68 @@ in
 
           merge = {
             tool = if config.my.programs.editor.command == "nvim" then "nvimdiff" else "";
-            conflictStyle = "zdiff3"; # delta
+            conflictStyle = "zdiff3";
           };
 
           rerere = {
             enabled = true;
             autoUpdate = true;
           };
+
+          # NOTE: Aliases seems to be Case-insensitive
+          # (i.e) `p` == `P`
+          alias = {
+            c = "clone";
+            cs = mkSSHClone { };
+            csp = mkSSHClone {
+              host = cfg.sshHost.default;
+              user = my.fullName;
+            };
+            cw = mkSSHClone { host = cfg.sshHost.work; };
+
+            s = "status";
+            a = "add";
+            m = "commit";
+
+            p = "pull";
+            po = "pull origin";
+
+            pu = "push";
+            puf = "push --force-with-lease";
+
+            st = "stash";
+            stp = "stash pop";
+
+            b = "branch";
+            ce = "checkout";
+            sw = "switch";
+
+            r = "reset";
+            rh = "reset --hard HEAD";
+            ro = "!git reset --hard origin/$(git branch --show-current)";
+
+            f = "fetch";
+            fpa = "fetch --prune --all";
+
+            # misc
+            cln = "clean -fdx";
+
+            # shell
+            do = "!git fetch && git diff origin";
+            z = "!${cfg.tui.command}";
+          };
         };
 
+        lfs.enable = true;
+      };
+    }
+
+    {
+      programs = {
         delta = {
           enable = true;
+          enableGitIntegration = true;
+
           options = {
             navigate = true;
             side-by-side = true;
@@ -93,53 +148,9 @@ in
           };
         };
 
-        lfs.enable = true;
-
-        # NOTE: Aliases seems to be Case-insensitive
-        # (i.e) `p` == `P`
-        aliases = {
-          c = "clone";
-          cs = mkSSHClone { };
-          csp = mkSSHClone {
-            host = cfg.sshHost.default;
-            user = my.fullName;
-          };
-          cw = mkSSHClone { host = cfg.sshHost.work; };
-
-          s = "status";
-          a = "add";
-          m = "commit";
-
-          p = "pull";
-          po = "pull origin";
-
-          pu = "push";
-          puf = "push --force-with-lease";
-
-          st = "stash";
-          stp = "stash pop";
-
-          b = "branch";
-          ce = "checkout";
-          sw = "switch";
-
-          r = "reset";
-          rh = "reset --hard HEAD";
-          ro = "!git reset --hard origin/$(git branch --show-current)";
-
-          f = "fetch";
-          fpa = "fetch --prune --all";
-
-          # misc
-          cln = "clean -fdx";
-
-          # shell
-          do = "!git fetch && git diff origin";
-          z = "!${cfg.tui.command}";
-        };
+        git.settings.merge.conflictStyle = "zdiff3";
+        bat.enable = config.programs.delta.enable;
       };
-
-      programs.bat.enable = config.programs.git.delta.enable;
     }
 
     {
