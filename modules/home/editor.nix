@@ -10,7 +10,6 @@ let
 in
 {
   imports = [
-    (lib.modules.mkAliasOptionModule [ "my" "programs" "editor" "packages" ] [ "home" "packages" ])
     (lib.modules.mkAliasOptionModule
       [ "my" "programs" "editor" "lsp" ]
       [ "programs" "helix" "languages" "language-server" ]
@@ -108,6 +107,12 @@ in
       description = "clipboard-provider";
       default = null;
     };
+
+    packages = lib.mkOption {
+      type = lib.types.listOf lib.types.package;
+      description = "Packages to add to extraPackages";
+      default = [ ];
+    };
   };
 
   config = {
@@ -163,6 +168,7 @@ in
       enable = true;
       package = inputs.helix.packages.${my.system}.default;
       defaultEditor = true;
+      extraPackages = cfg.packages;
 
       settings = {
         editor = {
