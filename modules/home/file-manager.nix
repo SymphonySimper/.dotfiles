@@ -17,13 +17,6 @@
       gnutar
       unzip
       zip
-
-      # yazi
-      ## image
-      chafa
-      ueberzugpp
-      ## archive
-      p7zip
     ];
 
     programs.yazi = lib.mkMerge [
@@ -41,18 +34,6 @@
               4 # right
             ];
             linemode = "size";
-          };
-
-          preview = {
-            max_width = my.gui.display.width / 2;
-            max_height = my.gui.display.height / 2;
-            ueberzug_scale = my.gui.display.scale / 2;
-            # ueberzug_offset = [
-            #   ((my.gui.display.scale * 10) + my.gui.display.scale) # x
-            #   (my.gui.display.scale) # y
-            #   0.0 # w
-            #   0.0 # h
-            # ];
           };
 
           opener = {
@@ -136,15 +117,6 @@
               ];
             }
 
-            # Archive
-            {
-              name = "*.{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}";
-              use = [
-                "extract"
-                "reveal"
-              ];
-            }
-
             # JSON
             {
               mime = "application/{json,ndjson}";
@@ -183,6 +155,55 @@
         };
       }
 
+      {
+        ## image preview
+        extraPackages = [
+          pkgs.chafa
+          pkgs.ueberzugpp
+        ];
+
+        settings.preview = {
+          max_width = my.gui.display.width / 2;
+          max_height = my.gui.display.height / 2;
+          ueberzug_scale = my.gui.display.scale / 2;
+          # ueberzug_offset = [
+          #   ((my.gui.display.scale * 10) + my.gui.display.scale) # x
+          #   (my.gui.display.scale) # y
+          #   0.0 # w
+          #   0.0 # h
+          # ];
+        };
+      }
+
+      {
+        # Archive
+        extraPackages = [ pkgs.p7zip ];
+
+        settings.open.rules = [
+          {
+            name = "*.{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}";
+            use = [
+              "extract"
+              "reveal"
+            ];
+          }
+        ];
+      }
+
+      {
+        extraPackages = [ pkgs.ripdrag ];
+        keymap.mgr.prepend_keymap = [
+          {
+            on = "<C-n>";
+            run = # sh
+              ''
+                shell 'ripdrag "$@" -x 2>/dev/null &' --confirm
+              '';
+            desc = "Drag and drop using ripdrag";
+          }
+        ];
+      }
+
       # Plugins
       {
         plugins.mount = "${inputs.yazi-plugins}/mount.yazi";
@@ -192,14 +213,6 @@
             run = "plugin mount";
           }
 
-          {
-            on = "<C-n>";
-            run = # sh
-              ''
-                shell '${lib.getExe pkgs.ripdrag} "$@" -x 2>/dev/null &' --confirm
-              '';
-            desc = "Drag and drop using ripdrag";
-          }
         ];
       }
       {
