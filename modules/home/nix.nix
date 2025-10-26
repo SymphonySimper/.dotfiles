@@ -68,16 +68,12 @@ in
     nix-index-database.comma.enable = true;
   };
 
-  my.programs.editor = {
-    packages = [
-      pkgs.nixd
-      pkgs.nixfmt
-    ];
+  my.programs.editor =
+    let
+      formatter = "nixfmt";
+      nixdArgs = [ "--inlay-hints=false" ];
 
-    lsp.nixd = {
-      args = [ "--inlay-hints=false" ];
-
-      config.nixd = {
+      nixdConfig = {
         nixpkgs.expr = "import <nixpkgs> { }";
 
         options = {
@@ -85,17 +81,44 @@ in
           home-manager.expr = "(builtins.getFlake (builtins.toString ./.)).homeConfigurations.${my.profile}.options";
         };
       };
-    };
-
-    language.nix = {
-      formatter.command = "nixfmt";
-
-      language-servers = [
-        {
-          name = "nixd";
-          except-features = [ "format" ];
-        }
+    in
+    {
+      packages = [
+        pkgs.nixd
+        pkgs.nixfmt
       ];
+
+      lsp.nixd = {
+        args = nixdArgs;
+        config.nixd = nixdConfig;
+      };
+
+      language.nix = {
+        formatter.command = formatter;
+
+        language-servers = [
+          {
+            name = "nixd";
+            except-features = [ "format" ];
+          }
+        ];
+      };
+
+      gui = {
+        extensions = [ "nix" ];
+
+        language.Nix = {
+          language_servers = [
+            "nixd"
+            "!nil"
+          ];
+          formatter.external.command = formatter;
+        };
+
+        lsp.nixd = {
+          binary.arguments = nixdArgs;
+          settings = nixdConfig;
+        };
+      };
     };
-  };
 }

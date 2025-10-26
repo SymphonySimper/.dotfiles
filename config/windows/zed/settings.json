@@ -1,0 +1,208 @@
+{
+  "auto_install_extensions": {
+    "basher": true,
+    "catppuccin": true,
+    "dockerfile": true,
+    "emmet": true,
+    "harper": true,
+    "html": true,
+    "just": true,
+    "markdown-oxide": true,
+    "nix": true,
+    "svelte": true,
+    "toml": true
+  },
+  "auto_signature_help": false,
+  "base_keymap": "VSCode",
+  "buffer_font_family": "JetBrainsMono Nerd Font",
+  "buffer_font_size": 15,
+  "collaboration_panel": {
+    "button": false
+  },
+  "current_line_highlight": "all",
+  "cursor_blink": false,
+  "cursor_shape": "block",
+  "diagnostics": {
+    "inline": {
+      "enabled": true
+    }
+  },
+  "diagnostics_max_severity": null,
+  "disable_ai": true,
+  "enable_language_server": true,
+  "ensure_final_newline_on_save": true,
+  "file_finder": {
+    "include_ignored": true
+  },
+  "format_on_save": "off",
+  "helix_mode": true,
+  "horizontal_scroll_margin": 5,
+  "hover_popover_enabled": true,
+  "inlay_hints": {
+    "enabled": false
+  },
+  "inline_code_actions": true,
+  "languages": {
+    "Just": {
+      "formatter": {
+        "external": {
+          "arguments": [
+            "--dump"
+          ],
+          "command": "just"
+        }
+      }
+    },
+    "Nix": {
+      "formatter": {
+        "external": {
+          "command": "nixfmt"
+        }
+      },
+      "language_servers": [
+        "nixd",
+        "!nil"
+      ]
+    },
+    "TOML": {
+      "formatter": {
+        "external": {
+          "arguments": [
+            "format",
+            "-"
+          ],
+          "command": "taplo"
+        }
+      }
+    }
+  },
+  "lsp": {
+    "nixd": {
+      "binary": {
+        "arguments": [
+          "--inlay-hints=false"
+        ]
+      },
+      "settings": {
+        "nixpkgs": {
+          "expr": "import <nixpkgs> { }"
+        },
+        "options": {
+          "home-manager": {
+            "expr": "(builtins.getFlake (builtins.toString ./.)).homeConfigurations.gui.options"
+          },
+          "nixos": {
+            "expr": "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.gui.options"
+          }
+        }
+      }
+    },
+    "rust-analyzer": {
+      "initialization_options": {
+        "check": "clippy"
+      }
+    },
+    "svelte-language-server": {
+      "initialization_options": {
+        "configuration": {
+          "svelte": {
+            "plugin": {
+              "svelte": {
+                "defaultScriptLanguage": "ts"
+              }
+            }
+          }
+        }
+      }
+    },
+    "vscode-json-language-server": {
+      "settings": {
+        "json": {
+          "schemas": [
+            {
+              "fileMatch": [
+                "package.json"
+              ],
+              "url": "https://www.schemastore.org/package.json"
+            },
+            {
+              "fileMatch": [
+                "tsconfig.json",
+                "tsconfig.*.json"
+              ],
+              "url": "https://www.schemastore.org/tsconfig.json"
+            }
+          ],
+          "validate": {
+            "enable": true
+          }
+        }
+      }
+    }
+  },
+  "minimap": {
+    "show": "never"
+  },
+  "preferred_line_length": 80,
+  "relative_line_numbers": true,
+  "restore_on_file_reopen": false,
+  "restore_on_startup": "last_session",
+  "scroll_beyond_last_line": "one_page",
+  "search": {
+    "regex": true
+  },
+  "seed_search_query_from_cursor": "selection",
+  "session": {
+    "restore_unsaved_buffers": false
+  },
+  "show_wrap_guides": true,
+  "soft_wrap": "editor_width",
+  "tab_bar": {
+    "show": true
+  },
+  "tab_size": 2,
+  "tabs": {
+    "file_icons": true,
+    "git_status": true,
+    "show_close_button": "hover",
+    "show_diagnostics": "all"
+  },
+  "terminal": {
+    "default_height": 9999
+  },
+  "theme": {
+    "dark": "Catppuccin Mocha",
+    "light": "Catppuccin Latte",
+    "mode": "system"
+  },
+  "title_bar": {
+    "show_branch_icon": true,
+    "show_branch_name": true,
+    "show_sign_in": false
+  },
+  "toolbar": {
+    "agent_review": false,
+    "breadcrumbs": false,
+    "code_actions": false,
+    "quick_actions": false,
+    "selections_menu": false
+  },
+  "ui_font_size": 16,
+  "use_auto_surround": true,
+  "use_autoclose": true,
+  "use_smartcase_search": true,
+  "use_system_path_prompts": false,
+  "use_system_prompts": false,
+  "vertical_scroll_margin": 5,
+  "vim": {
+    "cursor_shape": {
+      "insert": "bar",
+      "normal": "block",
+      "replace": "underline",
+      "visual": "block"
+    },
+    "use_smartcase_find": true,
+    "use_system_clipboard": "never"
+  },
+  "vim_mode": true
+}

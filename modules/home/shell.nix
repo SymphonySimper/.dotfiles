@@ -73,10 +73,15 @@ in
 
       };
 
-      my.programs.editor.packages = [
-        pkgs.bash-language-server
-        pkgs.shfmt
-      ];
+      my.programs.editor = {
+        packages = with pkgs; [
+          bash-language-server
+          shfmt
+          shellcheck
+        ];
+
+        gui.extensions = [ "basher" ];
+      };
     }
 
     {
