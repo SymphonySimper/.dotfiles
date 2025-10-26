@@ -70,61 +70,67 @@ in
   };
 
   config = lib.mkIf ((builtins.length cfg.of) > 0) {
-    home.activation = {
-      mkMyCopy = lib.hm.dag.entryAfter [ "writeBoundary" ] (
-        lib.strings.concatLines (
-          builtins.map (
-            file:
-            let
-              from = mkReplaceExpansions file.from;
-              to = mkReplaceExpansions file.to;
-              exclude = lib.lists.optionals ((builtins.length file.exclude) > 0) (
-                builtins.map (ex: "--exclude=${ex}") file.exclude
-              );
-              post = mkReplaceExpansions file.post;
-            in
-            # sh
-            ''
-              if [ -d "${to}" ] || [ -f "${to}" ] || [ -L "${to}" ]; then
-                ${mkCliCommand "rm"
-                  [
-                    "--force"
-                    "--recursive"
-                    # "--verbose"
-                  ]
-                  [ to ]
-                }
-                # echo "Removed: ${to}"
-              fi
-
-              if [ -d "${from}" ] || [ -f "${from}" ] || [ -L "${from}" ]; then
-                ${mkCliCommand rsync
-                  (
+    home.activation =
+      let
+        name = "myCopy";
+        # filter is not required, but it's here to make sure nothing funky happens
+        entries = builtins.filter (entry: entry != name) (builtins.attrNames config.home.activation);
+      in
+      {
+        ${name} = lib.hm.dag.entryAfter entries (
+          lib.strings.concatLines (
+            builtins.map (
+              file:
+              let
+                from = mkReplaceExpansions file.from;
+                to = mkReplaceExpansions file.to;
+                exclude = lib.lists.optionals ((builtins.length file.exclude) > 0) (
+                  builtins.map (ex: "--exclude=${ex}") file.exclude
+                );
+                post = mkReplaceExpansions file.post;
+              in
+              # sh
+              ''
+                if [ -d "${to}" ] || [ -f "${to}" ] || [ -L "${to}" ]; then
+                  ${mkCliCommand "rm"
                     [
-                      "--archive"
-                      "--no-perms"
-                      "--chmod=ugo=rwX"
                       "--force"
-                      "--copy-links"
                       "--recursive"
                       # "--verbose"
                     ]
-                    ++ exclude
-                  )
-                  [
-                    from
-                    to
-                  ]
-                }
+                    [ to ]
+                  }
+                  # echo "Removed: ${to}"
+                fi
 
-                ${post}
+                if [ -d "${from}" ] || [ -f "${from}" ] || [ -L "${from}" ]; then
+                  ${mkCliCommand rsync
+                    (
+                      [
+                        "--archive"
+                        "--no-perms"
+                        "--chmod=ugo=rwX"
+                        "--force"
+                        "--copy-links"
+                        "--recursive"
+                        # "--verbose"
+                      ]
+                      ++ exclude
+                    )
+                    [
+                      from
+                      to
+                    ]
+                  }
 
-                echo "Copied: ${from} to ${to}"
-              fi
-            ''
-          ) cfg.of
-        )
-      );
-    };
+                  ${post}
+
+                  echo "Copied: ${from} to ${to}"
+                fi
+              ''
+            ) cfg.of
+          )
+        );
+      };
   };
 }
