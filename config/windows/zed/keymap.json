@@ -1,44 +1,45 @@
 [
   {
     "bindings": {
-      "alt-_": "pane::SplitDown",
-      "alt-b": "tab_switcher::ToggleAll",
-      "alt-e": "project_panel::ToggleFocus",
-      "alt-f": "file_finder::Toggle",
-      "alt-g": [
+      "alt-d g": "git_panel::ToggleFocus",
+      "alt-d h": "workspace::ToggleLeftDock",
+      "alt-d j": "workspace::ToggleBottomDock",
+      "alt-d k": "workspace::CloseAllDocks",
+      "alt-d l": "workspace::ToggleRightDock",
+      "alt-d t": "terminal_panel::Toggle",
+      "alt-f b": "tab_switcher::ToggleAll",
+      "alt-f e": "project_panel::ToggleFocus",
+      "alt-f f": "file_finder::Toggle",
+      "alt-f o": "workspace::Open",
+      "alt-f p": "command_palette::Toggle",
+      "alt-f s": "pane::DeploySearch",
+      "alt-f t": "task::Spawn",
+      "alt-shift-q": "zed::Quit",
+      "alt-t g": [
         "task::Spawn",
         {
           "task_name": "Start VCS TUI"
         }
       ],
-      "alt-o": "workspace::Open",
-      "alt-p": "command_palette::Toggle",
-      "alt-shift-h": "workspace::SwapPaneLeft",
-      "alt-shift-j": "workspace::SwapPaneDown",
-      "alt-shift-k": "workspace::SwapPaneUp",
-      "alt-shift-l": "workspace::SwapPaneRight",
-      "alt-shift-s": "pane::DeploySearch",
-      "alt-t": "terminal_panel::Toggle",
-      "alt-y": [
+      "alt-t y": [
         "task::Spawn",
         {
           "task_name": "Start TUI File-Manager"
         }
       ],
-      "alt-|": "pane::SplitRight",
-      "ctrl-g": "git_panel::ToggleFocus",
-      "ctrl-h": "workspace::ActivatePaneLeft",
-      "ctrl-j": "workspace::ActivatePaneDown",
-      "ctrl-k": "workspace::ActivatePaneUp",
-      "ctrl-l": "workspace::ActivatePaneRight",
-      "ctrl-shift-q": "zed::Quit",
-      "ctrl-w c": "pane::CloseActiveItem",
-      "ctrl-w h": "workspace::ToggleLeftDock",
-      "ctrl-w j": "workspace::ToggleBottomDock",
-      "ctrl-w k": "workspace::CloseAllDocks",
-      "ctrl-w l": "workspace::ToggleRightDock",
-      "ctrl-w shift-c": "pane::CloseAllItems",
-      "ctrl-w w": "workspace::CloseWindow"
+      "alt-w _": "pane::SplitDown",
+      "alt-w c": "pane::CloseActiveItem",
+      "alt-w h": "workspace::ActivatePaneLeft",
+      "alt-w j": "workspace::ActivatePaneDown",
+      "alt-w k": "workspace::ActivatePaneUp",
+      "alt-w l": "workspace::ActivatePaneRight",
+      "alt-w shift-c": "pane::CloseAllItems",
+      "alt-w shift-h": "workspace::SwapPaneLeft",
+      "alt-w shift-j": "workspace::SwapPaneDown",
+      "alt-w shift-k": "workspace::SwapPaneUp",
+      "alt-w shift-l": "workspace::SwapPaneRight",
+      "alt-w w": "workspace::CloseWindow",
+      "alt-w |": "pane::SplitRight"
     }
   },
   {

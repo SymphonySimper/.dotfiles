@@ -454,7 +454,7 @@ in
             ];
             reveal_target = "center";
             hide = "always";
-            keymap = "alt-g";
+            keymap = "g";
             use_new_terminal = true;
           };
 
@@ -464,7 +464,7 @@ in
             args = [ "$ZED_DIRNAME" ];
             reveal_target = "center";
             hide = "always";
-            keymap = "alt-y";
+            keymap = "y";
             use_new_terminal = true;
           };
         };
@@ -669,38 +669,41 @@ in
           [
             {
               bindings = {
-                "alt-o" = "workspace::Open";
-                "alt-b" = "tab_switcher::ToggleAll";
-                "alt-p" = "command_palette::Toggle";
-                "alt-f" = "file_finder::Toggle";
-                "alt-e" = "project_panel::ToggleFocus";
-                "alt-shift-s" = "pane::DeploySearch";
+                "alt-f o" = "workspace::Open";
+                "alt-f b" = "tab_switcher::ToggleAll";
+                "alt-f p" = "command_palette::Toggle";
+                "alt-f f" = "file_finder::Toggle";
+                "alt-f e" = "project_panel::ToggleFocus";
+                "alt-f s" = "pane::DeploySearch";
+                "alt-f t" = "task::Spawn";
 
-                "alt-t" = "terminal_panel::Toggle";
-                "ctrl-g" = "git_panel::ToggleFocus";
-                "ctrl-h" = "workspace::ActivatePaneLeft";
-                "ctrl-l" = "workspace::ActivatePaneRight";
-                "ctrl-k" = "workspace::ActivatePaneUp";
-                "ctrl-j" = "workspace::ActivatePaneDown";
-                "alt-shift-h" = "workspace::SwapPaneLeft";
-                "alt-shift-l" = "workspace::SwapPaneRight";
-                "alt-shift-k" = "workspace::SwapPaneUp";
-                "alt-shift-j" = "workspace::SwapPaneDown";
-                "alt-|" = "pane::SplitRight";
-                "alt-_" = "pane::SplitDown";
+                "alt-w c" = "pane::CloseActiveItem";
+                "alt-w shift-c" = "pane::CloseAllItems";
+                "alt-w |" = "pane::SplitRight";
+                "alt-w _" = "pane::SplitDown";
 
-                "ctrl-w c" = "pane::CloseActiveItem";
-                "ctrl-w shift-c" = "pane::CloseAllItems";
-                "ctrl-w w" = "workspace::CloseWindow";
-                "ctrl-w h" = "workspace::ToggleLeftDock";
-                "ctrl-w j" = "workspace::ToggleBottomDock";
-                "ctrl-w k" = "workspace::CloseAllDocks";
-                "ctrl-w l" = "workspace::ToggleRightDock";
-                "ctrl-shift-q" = "zed::Quit";
+                "alt-w w" = "workspace::CloseWindow";
+                "alt-w h" = "workspace::ActivatePaneLeft";
+                "alt-w l" = "workspace::ActivatePaneRight";
+                "alt-w k" = "workspace::ActivatePaneUp";
+                "alt-w j" = "workspace::ActivatePaneDown";
+                "alt-w shift-h" = "workspace::SwapPaneLeft";
+                "alt-w shift-l" = "workspace::SwapPaneRight";
+                "alt-w shift-k" = "workspace::SwapPaneUp";
+                "alt-w shift-j" = "workspace::SwapPaneDown";
+
+                "alt-d t" = "terminal_panel::Toggle";
+                "alt-d g" = "git_panel::ToggleFocus";
+                "alt-d h" = "workspace::ToggleLeftDock";
+                "alt-d j" = "workspace::ToggleBottomDock";
+                "alt-d k" = "workspace::CloseAllDocks";
+                "alt-d l" = "workspace::ToggleRightDock";
+
+                "alt-shift-q" = "zed::Quit";
               }
               // (builtins.listToAttrs (
                 builtins.map (task: {
-                  name = task.keymap;
+                  name = "alt-t ${task.keymap}";
                   value = [
                     "task::Spawn"
                     { task_name = task.label; }
