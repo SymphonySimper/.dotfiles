@@ -24,6 +24,15 @@ let
   expansionValues = builtins.map (expansion: expansion.value) expansions;
 
   mkReplaceExpansions = content: builtins.replaceStrings expansionKeys expansionValues content;
+  mkCliCommand =
+    command: args: argsToEscape:
+    builtins.concatStringsSep " " (
+      builtins.concatLists [
+        [ command ]
+        args
+        [ (lib.strings.escapeShellArgs argsToEscape) ]
+      ]
+    );
 in
 {
   options.my.programs.copy = {
@@ -69,23 +78,48 @@ in
             let
               from = mkReplaceExpansions file.from;
               to = mkReplaceExpansions file.to;
-              exclude =
-                if (builtins.length file.exclude) == 0 then
-                  ""
-                else
-                  builtins.concatStringsSep " " (builtins.map (ex: "--exclude=${ex}") file.exclude);
+              exclude = lib.lists.optionals ((builtins.length file.exclude) > 0) (
+                builtins.map (ex: "--exclude=${ex}") file.exclude
+              );
               post = mkReplaceExpansions file.post;
             in
             # sh
             ''
               if [ -d "${to}" ] || [ -f "${to}" ] || [ -L "${to}" ]; then
-                rm --force --recursive --verbose "${to}"
+                ${mkCliCommand "rm"
+                  [
+                    "--force"
+                    "--recursive"
+                    # "--verbose"
+                  ]
+                  [ to ]
+                }
+                # echo "Removed: ${to}"
               fi
 
               if [ -d "${from}" ] || [ -f "${from}" ] || [ -L "${from}" ]; then
-                ${rsync} --archive --no-perms --chmod=ugo=rwX --force --copy-links --recursive --verbose ${exclude} "${from}" "${to}"
+                ${mkCliCommand rsync
+                  (
+                    [
+                      "--archive"
+                      "--no-perms"
+                      "--chmod=ugo=rwX"
+                      "--force"
+                      "--copy-links"
+                      "--recursive"
+                      # "--verbose"
+                    ]
+                    ++ exclude
+                  )
+                  [
+                    from
+                    to
+                  ]
+                }
 
                 ${post}
+
+                echo "Copied: ${from} to ${to}"
               fi
             ''
           ) cfg.of
