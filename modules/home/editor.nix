@@ -553,10 +553,6 @@ in
           # panels
           collaboration_panel.button = false;
 
-          terminal = {
-            default_height = 9999;
-          };
-
           # search
           search.regex = true;
           use_smartcase_search = true;
@@ -683,6 +679,7 @@ in
                 "alt-w _" = "pane::SplitDown";
 
                 "alt-w w" = "workspace::CloseWindow";
+                "alt-w z" = "workspace::ToggleZoom";
                 "alt-w h" = "workspace::ActivatePaneLeft";
                 "alt-w l" = "workspace::ActivatePaneRight";
                 "alt-w k" = "workspace::ActivatePaneUp";

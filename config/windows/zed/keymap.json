@@ -39,6 +39,7 @@
       "alt-w shift-k": "workspace::SwapPaneUp",
       "alt-w shift-l": "workspace::SwapPaneRight",
       "alt-w w": "workspace::CloseWindow",
+      "alt-w z": "workspace::ToggleZoom",
       "alt-w |": "pane::SplitRight"
     }
   },

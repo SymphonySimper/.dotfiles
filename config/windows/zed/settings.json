@@ -167,9 +167,6 @@
     "show_close_button": "hover",
     "show_diagnostics": "all"
   },
-  "terminal": {
-    "default_height": 9999
-  },
   "theme": {
     "dark": "Catppuccin Mocha",
     "light": "Catppuccin Latte",
