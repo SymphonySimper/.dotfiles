@@ -35,7 +35,7 @@
     "include_ignored": true
   },
   "format_on_save": "off",
-  "helix_mode": true,
+  "helix_mode": false,
   "horizontal_scroll_margin": 5,
   "hover_popover_enabled": true,
   "inlay_hints": {

@@ -52,7 +52,6 @@
           "around": true
         }
       ],
-      "m c": "vim::PushChangeSurrounds",
       "m d": "vim::PushDeleteSurrounds",
       "m i": [
         "vim::PushObject",
@@ -61,6 +60,7 @@
         }
       ],
       "m m": "vim::Matching",
+      "m r": "vim::PushChangeSurrounds",
       "m s": "vim::PushAddSurrounds",
       "shift-c": "editor::AddSelectionBelow",
       "space b c": "pane::CloseActiveItem",
@@ -97,7 +97,7 @@
       "space w shift-c": "pane::CloseAllItems",
       "space y": "editor::Copy"
     },
-    "context": "vim_mode == helix_normal"
+    "context": "vim_mode == normal"
   },
   {
     "bindings": {
@@ -107,7 +107,6 @@
           "around": true
         }
       ],
-      "m c": "vim::PushChangeSurrounds",
       "m d": "vim::PushDeleteSurrounds",
       "m i": [
         "vim::PushObject",
@@ -116,6 +115,7 @@
         }
       ],
       "m m": "vim::Matching",
+      "m r": "vim::PushChangeSurrounds",
       "m s": "vim::PushAddSurrounds",
       "space b c": "pane::CloseActiveItem",
       "space b f": "tab_switcher::ToggleAll",
@@ -151,6 +151,6 @@
       "space w shift-c": "pane::CloseAllItems",
       "space y": "editor::Copy"
     },
-    "context": "vim_mode == helix_visual"
+    "context": "vim_mode == visual"
   }
 ]

@@ -573,7 +573,7 @@ in
 
           # keymap
           vim_mode = true;
-          helix_mode = true;
+          helix_mode = false;
           vim = {
             use_system_clipboard = "never";
             use_smartcase_find = use_smartcase_search;
@@ -649,7 +649,7 @@ in
 
               # surround
               "m s" = "vim::PushAddSurrounds";
-              "m c" = "vim::PushChangeSurrounds";
+              "m r" = "vim::PushChangeSurrounds";
               "m d" = "vim::PushDeleteSurrounds";
               "m m" = "vim::Matching";
               "m i" = [
@@ -712,7 +712,7 @@ in
               ));
             }
             {
-              context = "vim_mode == helix_normal";
+              context = "vim_mode == normal";
               bindings = {
                 # multi-cursor
                 "shift-c" = "editor::AddSelectionBelow";
@@ -722,7 +722,7 @@ in
               // common;
             }
             {
-              context = "vim_mode == helix_visual";
+              context = "vim_mode == visual";
               bindings = { } // common;
             }
           ];
