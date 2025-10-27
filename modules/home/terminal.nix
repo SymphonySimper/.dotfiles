@@ -8,6 +8,32 @@
 let
   cfg = config.my.programs.terminal;
   cfgSh = config.my.programs.shell;
+
+  mkProgramKeyBind =
+    {
+      key,
+      mods,
+      cli ? true,
+      program,
+      args ? [ ],
+    }:
+    {
+      inherit key mods;
+      command = {
+        program = if cli then "alacritty" else program;
+        args =
+          if cli then
+            [
+              cfg.args.command
+              cfgSh.command
+              cfgSh.args.login
+              cfgSh.args.command
+              (lib.strings.escapeShellArgs ([ program ] ++ args))
+            ]
+          else
+            args;
+      };
+    };
 in
 {
   options.my.programs.terminal =
@@ -64,6 +90,16 @@ in
             cfg.shell.command
           ]);
         };
+
+        keyboard.bindings = [
+          (mkProgramKeyBind {
+            key = "T";
+            mods = "Alt|Shift";
+            cli = true;
+            program = config.my.programs.mux.command;
+            args = [ config.my.programs.mux.args.new ];
+          })
+        ];
       }
     );
 
