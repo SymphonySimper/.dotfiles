@@ -79,8 +79,6 @@ in
           shfmt
           shellcheck
         ];
-
-        gui.extensions = [ "basher" ];
       };
     }
 
