@@ -637,11 +637,11 @@ in
               "space g b" = "editor::BlameHover";
               "space g r" = "git::Restore";
               "space g c" = "git::Commit";
-              "space g A" = "git::Amend";
+              "space g shift-a" = "git::Amend";
               "space g p" = "git::Pull";
-              "space g P" = "git::Push";
+              "space g shift-p" = "git::Push";
               "space g d" = "git::Diff";
-              "space g B" = "git::Branch";
+              "space g shift-b" = "git::Branch";
 
               # surround
               "m s" = "vim::PushAddSurrounds";
@@ -690,11 +690,19 @@ in
                 "alt-w shift-j" = "workspace::SwapPaneDown";
 
                 "alt-d t" = "terminal_panel::Toggle";
-                "alt-d g" = "git_panel::ToggleFocus";
                 "alt-d h" = "workspace::ToggleLeftDock";
                 "alt-d j" = "workspace::ToggleBottomDock";
                 "alt-d k" = "workspace::CloseAllDocks";
                 "alt-d l" = "workspace::ToggleRightDock";
+
+                "alt-g g" = "git_panel::ToggleFocus";
+                "alt-g c" = "git::Commit";
+                "alt-g shift-a" = "git::Amend";
+                "alt-g p" = "git::Pull";
+                "alt-g shift-p" = "git::Push";
+                "alt-g d" = "git::Diff";
+                "alt-g b" = "git::Branch";
+                "alt-g shift-b" = "git::Blame";
 
                 "alt-shift-q" = "zed::Quit";
               }
