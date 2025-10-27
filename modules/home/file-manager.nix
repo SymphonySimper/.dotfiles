@@ -229,44 +229,5 @@
         ];
       }
     ];
-
-    catppuccin.yazi.enable = false;
-
-    xdg.configFile =
-      let
-        themeName = "my-theme";
-        flavorsParent = "yazi/flavors/${themeName}.yazi";
-
-        formatTOML = pkgs.formats.toml { };
-        theme = builtins.removeAttrs (builtins.fromTOML (
-          lib.my.mkGetThemeSource {
-            package = "yazi";
-            filename = "FLAVOR/NAME-FLAVOR-ACCENT.toml";
-          }
-        )) [ "mgr.syntect_theme" ];
-      in
-      {
-        "${flavorsParent}/flavor.toml".source = formatTOML.generate "yazi-theme.toml" theme;
-        "${flavorsParent}/ththeme.xml".source = lib.my.mkGetThemeSource {
-          package = "bat";
-          filename = "NAME FLAVOR.tmTheme";
-          capitalize = true;
-          returnFile = true;
-        };
-
-        "yazi/theme.toml".text = # toml
-          ''
-            [flavor]
-            light = "${themeName}"
-            dark = "${themeName}"
-          '';
-      };
-
-    my.programs.copy.of = [
-      {
-        from = "CONFIG/yazi/";
-        to = "WINDOWS/yazi/";
-      }
-    ];
   };
 }
