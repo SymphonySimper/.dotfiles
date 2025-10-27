@@ -199,6 +199,7 @@ in
         };
 
         scrolling.history = 1000;
+        selection.save_to_clipboard = true;
 
         font = {
           size = 12;
