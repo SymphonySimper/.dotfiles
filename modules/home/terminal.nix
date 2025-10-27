@@ -8,6 +8,13 @@
 let
   cfg = config.my.programs.terminal;
   cfgSh = config.my.programs.shell;
+  cfgM = config.my.programs.mux;
+
+  terminalFiles = {
+    unix = "unix.toml";
+    winGen = "windows-gen.toml";
+    win = "windows.toml";
+  };
 
   mkProgramKeyBind =
     {
@@ -20,7 +27,7 @@ let
     {
       inherit key mods;
       command = {
-        program = if cli then "alacritty" else program;
+        program = if cli then cfg.command else program;
         args =
           if cli then
             [
@@ -58,7 +65,7 @@ in
   config = lib.mkIf my.gui.enable {
     my.programs = {
       desktop = {
-        autostart = [ "alacritty" ];
+        autostart = [ cfg.command ];
 
         windows = [
           {
@@ -68,40 +75,103 @@ in
         ];
       };
 
-      copy.of = [
-        {
-          from = "CONFIG/alacritty/alacritty.toml";
-          to = "WINDOWS/alacritty/alacritty.toml";
-        }
-      ];
+      copy.of =
+        let
+          winDir = "WINDOWS/${cfg.command}";
+        in
+        [
+          {
+            from = "CONFIG/${cfg.command}/";
+            to = "${winDir}/";
+            exclude = [ terminalFiles.unix ];
+            post = # sh
+              ''
+                mv "${winDir}/${terminalFiles.winGen}" "${winDir}/${terminalFiles.win}"
+              '';
+          }
+        ];
     };
 
     catppuccin.alacritty.enable = false;
 
-    xdg.configFile."alacritty/unix.toml".source = (
-      (pkgs.formats.toml { }).generate "unix.toml" {
-        terminal.shell = {
-          program = cfgSh.command;
-          args = [
-            cfgSh.args.login
-          ]
-          ++ (lib.lists.optionals (cfg.shell.command != null) [
-            cfgSh.args.command
-            cfg.shell.command
-          ]);
-        };
+    xdg.configFile =
+      let
+        formatToml = pkgs.formats.toml { };
+      in
+      {
+        "${cfg.command}/${terminalFiles.unix}".source = (
+          formatToml.generate terminalFiles.unix {
+            terminal.shell = {
+              program = cfgSh.command;
+              args = [
+                cfgSh.args.login
+              ]
+              ++ (lib.lists.optionals (cfg.shell.command != null) [
+                cfgSh.args.command
+                cfg.shell.command
+              ]);
+            };
 
-        keyboard.bindings = [
-          (mkProgramKeyBind {
-            key = "T";
-            mods = "Alt|Shift";
-            cli = true;
-            program = config.my.programs.mux.command;
-            args = [ config.my.programs.mux.args.new ];
-          })
-        ];
-      }
-    );
+            keyboard.bindings = [
+              (mkProgramKeyBind {
+                key = "T";
+                mods = "Alt|Shift";
+                cli = true;
+                program = cfgM.command;
+                args = [ cfgM.args.new ];
+              })
+            ];
+          }
+        );
+
+        "${cfg.command}/${terminalFiles.winGen}".source =
+          let
+            wsl = {
+              command = "wsl";
+              args = [
+                "-d"
+                "NixOS"
+                "--cd"
+                "~"
+                "--shell-type"
+                "login"
+              ];
+              mux = [
+                "--"
+                cfgM.command
+                cfgM.args.new
+              ];
+            };
+          in
+          (formatToml.generate terminalFiles.winGen {
+            window.startup_mode = "Maximized";
+
+            terminal.shell = {
+              # program = "pwsh";
+              # args = ["-WorkingDirectory" "~"];
+              program = wsl.command;
+              args = wsl.args;
+            };
+
+            keyboard.bindings = [
+              {
+                key = "T";
+                mods = "Alt|Shift";
+                command = {
+                  program = cfg.command;
+                  args = builtins.concatLists [
+                    [
+                      cfg.args.command
+                      wsl.command
+                    ]
+                    wsl.args
+                    wsl.mux
+                  ];
+                };
+              }
+            ];
+          });
+      };
 
     programs.alacritty = {
       enable = true;
@@ -109,8 +179,8 @@ in
       settings = {
         general = {
           import = [
-            "./unix.toml"
-            "./windows.toml"
+            "./${terminalFiles.unix}"
+            "./${terminalFiles.win}"
           ];
 
           live_config_reload = false;
@@ -189,7 +259,7 @@ in
         colors =
           (builtins.fromTOML (
             lib.my.mkGetThemeSource {
-              package = "alacritty";
+              package = cfg.command;
               filename = "NAME-FLAVOR.toml";
             }
           )).colors;

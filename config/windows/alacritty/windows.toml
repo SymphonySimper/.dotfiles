@@ -1,18 +1,21 @@
-[window]
-startup_mode = "Maximized"
+[[keyboard.bindings]]
+key = "T"
+mods = "Alt|Shift"
+
+[keyboard.bindings.command]
+args = ["-e", "wsl", "-d", "NixOS", "--cd", "~", "--shell-type", "login", "--", "tmux", "new"]
+program = "alacritty"
 
 [terminal.shell]
-program = "pwsh"
-args = ["-WorkingDirectory", "~"]
-# program = "wsl"
-# args = [
-#   "-d",
-#   "NixOS",
-#   "--cd",
-#   "~",
-#   "--shell-type",
-#   "login",
-#   "--",
-#   "tmux",
-#   "new",
-# ]
+args = [
+    "-d",
+    "NixOS",
+    "--cd",
+    "~",
+    "--shell-type",
+    "login",
+]
+program = "wsl"
+
+[window]
+startup_mode = "Maximized"
