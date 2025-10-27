@@ -159,8 +159,6 @@ in
     }
 
     {
-      catppuccin.lazygit.enable = false;
-
       programs.lazygit = {
         enable = true;
 
@@ -174,34 +172,9 @@ in
             showPanelJumps = false;
             nerdFontsVersion = "3";
             useHunkModeInStagingView = false;
-          }
-          // (
-            let
-              themeFile = lib.my.mkGetThemeSource {
-                package = "lazygit";
-                filename = "FLAVOR/ACCENT.yml";
-                returnFile = true;
-              };
-            in
-            (builtins.fromJSON (
-              builtins.readFile (
-                pkgs.runCommandNoCC "lazygit-theme-yaml.json" { }
-                  # sh
-                  ''
-                    ${lib.getExe' pkgs.yj "yj"} < "${themeFile}" > "$out"
-                  ''
-              )
-            ))
-          ).gui;
+          };
         };
       };
-
-      my.programs.copy.of = [
-        {
-          from = "CONFIG/lazygit/";
-          to = "WINDOWS/lazygit/";
-        }
-      ];
     }
   ];
 }
