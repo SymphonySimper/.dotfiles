@@ -5,7 +5,6 @@
       "alt-d j": "workspace::ToggleBottomDock",
       "alt-d k": "workspace::CloseAllDocks",
       "alt-d l": "workspace::ToggleRightDock",
-      "alt-d t": "terminal_panel::Toggle",
       "alt-f b": "tab_switcher::ToggleAll",
       "alt-f e": "project_panel::ToggleFocus",
       "alt-f f": "file_finder::Toggle",

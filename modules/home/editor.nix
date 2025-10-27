@@ -689,7 +689,7 @@ in
                 "alt-w shift-k" = "workspace::SwapPaneUp";
                 "alt-w shift-j" = "workspace::SwapPaneDown";
 
-                "alt-d t" = "terminal_panel::Toggle";
+                # "alt-d t" = "terminal_panel::Toggle";
                 "alt-d h" = "workspace::ToggleLeftDock";
                 "alt-d j" = "workspace::ToggleBottomDock";
                 "alt-d k" = "workspace::CloseAllDocks";
