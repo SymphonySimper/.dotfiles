@@ -5,28 +5,23 @@
   lib,
   ...
 }:
-let
-  mkReadOnlyStrOption =
-    value:
-    lib.mkOption {
-      type = lib.types.str;
-      default = value;
-      readOnly = true;
-    };
-in
 {
   imports = [
     (lib.modules.mkAliasOptionModule [ "my" "programs" "shell" "env" ] [ "home" "sessionVariables" ])
     (lib.modules.mkAliasOptionModule [ "my" "programs" "shell" "path" ] [ "home" "sessionPath" ])
   ];
 
-  options.my.programs.shell = (lib.my.mkCommandOption "Shell" "bash") // {
-    args = {
-      login = mkReadOnlyStrOption "-l";
-      command = mkReadOnlyStrOption "-c";
-    };
-    bin = mkReadOnlyStrOption "${my.dir.home}/.nix-profile/bin";
-  };
+  options.my.programs.shell = (
+    lib.my.mkCommandOption {
+      category = "Shell";
+      command = "bash";
+      args = {
+        login = "-l";
+        command = "-c";
+        bin = "${my.dir.home}/.nix-profile/bin";
+      };
+    }
+  );
 
   config = lib.mkMerge [
     {

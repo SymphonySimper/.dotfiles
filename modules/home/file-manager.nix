@@ -7,7 +7,10 @@
   ...
 }:
 {
-  options.my.programs.file-manager = lib.my.mkCommandOption "File Manager" "yazi";
+  options.my.programs.file-manager = lib.my.mkCommandOption {
+    category = "File Manager";
+    command = "yazi";
+  };
 
   config = {
     home.packages = with pkgs; [

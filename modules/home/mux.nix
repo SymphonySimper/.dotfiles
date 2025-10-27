@@ -22,45 +22,53 @@ let
   );
 in
 {
-  options.my.programs.mux = {
-    enable = lib.mkEnableOption "Terminal MUX";
+  options.my.programs.mux =
+    (lib.my.mkCommandOption {
+      category = "Terminal";
+      command = "tmux";
+      args = {
+        new = "new";
+      };
+    })
+    // {
+      enable = lib.mkEnableOption "Terminal MUX";
 
-    keybinds = lib.mkOption {
-      description = "MUX keybinds";
-      type = lib.types.listOf (
-        lib.types.submodule {
-          options = {
-            repeat = lib.mkEnableOption "Repeat key";
+      keybinds = lib.mkOption {
+        description = "MUX keybinds";
+        type = lib.types.listOf (
+          lib.types.submodule {
+            options = {
+              repeat = lib.mkEnableOption "Repeat key";
 
-            unbind = lib.mkEnableOption "Unbid key";
-            key = lib.mkOption {
-              description = "Key for action";
-              type = lib.types.str;
+              unbind = lib.mkEnableOption "Unbid key";
+              key = lib.mkOption {
+                description = "Key for action";
+                type = lib.types.str;
+              };
+
+              action = lib.mkOption {
+                description = "Action to perfom on keybind";
+                type = lib.types.enum [
+                  "new-window"
+                  "run-window"
+                  "split-window"
+
+                  "run-shell"
+                  "display-popup"
+                ];
+              };
+              cd = lib.mkEnableOption "CD";
+              args = lib.mkOption {
+                description = "Args for action";
+                type = lib.types.listOf lib.types.str;
+                default = [ ];
+              };
             };
-
-            action = lib.mkOption {
-              description = "Action to perfom on keybind";
-              type = lib.types.enum [
-                "new-window"
-                "run-window"
-                "split-window"
-
-                "run-shell"
-                "display-popup"
-              ];
-            };
-            cd = lib.mkEnableOption "CD";
-            args = lib.mkOption {
-              description = "Args for action";
-              type = lib.types.listOf lib.types.str;
-              default = [ ];
-            };
-          };
-        }
-      );
-      default = [ ];
+          }
+        );
+        default = [ ];
+      };
     };
-  };
 
   config = lib.mkIf cfg.enable {
     my.programs = {

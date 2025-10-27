@@ -10,25 +10,24 @@ let
   cfgSh = config.my.programs.shell;
 in
 {
-  options.my.programs.terminal = (lib.my.mkCommandOption "Terminal" "alacritty") // {
-    args = lib.mkOption {
-      description = "Args that can be passed";
-      type = lib.types.attrsOf lib.types.str;
-      readOnly = true;
-      default = {
+  options.my.programs.terminal =
+    (lib.my.mkCommandOption {
+      category = "Terminal";
+      command = "alacritty";
+      args = {
         command = "-e";
         class = "--class";
       };
-    };
-
-    shell = {
-      command = lib.mkOption {
-        description = "Default command to run on launch";
-        type = lib.types.nullOr lib.types.str;
-        default = null;
+    })
+    // {
+      shell = {
+        command = lib.mkOption {
+          description = "Default command to run on launch";
+          type = lib.types.nullOr lib.types.str;
+          default = null;
+        };
       };
     };
-  };
 
   config = lib.mkIf my.gui.enable {
     my.programs = {

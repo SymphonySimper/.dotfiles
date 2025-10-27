@@ -17,7 +17,10 @@ in
         default = [ ];
       };
     }
-    // (lib.my.mkCommandOption "Sudo" "/run/wrappers/bin/sudo");
+    // (lib.my.mkCommandOption {
+      category = "Sudo";
+      command = "/run/wrappers/bin/sudo";
+    });
 
     groups = lib.mkOption {
       type = lib.types.listOf lib.types.str;

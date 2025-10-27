@@ -23,25 +23,30 @@ in
     (lib.modules.mkAliasOptionModule [ "my" "programs" "vcs" "root" ] [ "programs" "git" ])
   ];
 
-  options.my.programs.vcs = (lib.my.mkCommandOption "VCS" "git") // {
-    sshHost = lib.mkOption {
-      type = lib.types.attrsOf lib.types.str;
-      description = "Host for different profiles";
-      readOnly = true;
-      default = {
-        default = "github";
-        work = "work-github";
-      };
-    };
-
-    tui = (lib.my.mkCommandOption "VCS TUI" "lazygit") // {
-      args.path = lib.mkOption {
-        type = lib.types.str;
+  options.my.programs.vcs =
+    (lib.my.mkCommandOption {
+      category = "VCS";
+      command = "git";
+    })
+    // {
+      sshHost = lib.mkOption {
+        type = lib.types.attrsOf lib.types.str;
+        description = "Host for different profiles";
         readOnly = true;
-        default = "-p";
+        default = {
+          default = "github";
+          work = "work-github";
+        };
       };
+
+      tui = (
+        lib.my.mkCommandOption {
+          category = "VCS TUI";
+          command = "lazygit";
+          args.path = "-p";
+        }
+      );
     };
-  };
 
   config = lib.mkMerge [
     {
