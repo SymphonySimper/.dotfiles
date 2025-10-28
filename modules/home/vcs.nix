@@ -50,10 +50,7 @@ in
 
   config = lib.mkMerge [
     {
-      home.packages = with pkgs; [
-        git-filter-repo
-        git-quick-stats
-      ];
+      home.packages = with pkgs; [ git-filter-repo ];
 
       my.programs.editor.ignore = [
         # do not ignore
