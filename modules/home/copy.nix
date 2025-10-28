@@ -38,6 +38,7 @@ in
   options.my.programs.copy = {
     of = lib.mkOption {
       description = "Files to be copied";
+      default = [ ];
 
       type = lib.types.listOf (
         lib.types.submodule {
