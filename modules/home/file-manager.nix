@@ -160,9 +160,10 @@
 
       {
         ## image preview
-        extraPackages = [
-          pkgs.chafa
-          pkgs.ueberzugpp
+        extraPackages = with pkgs; [
+          chafa
+          ueberzugpp
+          resvg
         ];
 
         settings.preview = {
