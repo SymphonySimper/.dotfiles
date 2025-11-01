@@ -138,24 +138,6 @@ in
     }
 
     {
-      programs = {
-        delta = {
-          enable = true;
-          enableGitIntegration = true;
-
-          options = {
-            navigate = true;
-            side-by-side = true;
-            line-numbers = true;
-          };
-        };
-
-        git.settings.merge.conflictStyle = "zdiff3";
-        bat.enable = config.programs.delta.enable;
-      };
-    }
-
-    {
       programs.lazygit = {
         enable = true;
 
