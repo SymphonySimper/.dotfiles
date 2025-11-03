@@ -8,6 +8,7 @@
   config = lib.mkIf config.my.programs.desktop.enable {
     my.programs.desktop.keybinds = [
       {
+        mods = [ "super" ];
         key = "d";
         command = lib.getExe (
           pkgs.writeShellScriptBin "mylauncher" # sh

@@ -32,7 +32,6 @@ in
                 action:
                 let
                   default = {
-                    super = false;
                     command = "${playerctl} ${action.command}";
                   };
                 in
@@ -43,7 +42,7 @@ in
                       default
                       // {
                         key = "F7";
-                        mod = action.mod;
+                        mods = action.mods;
                       }
                     )
                   ]
@@ -56,17 +55,17 @@ in
                     "Play"
                     "Pause"
                   ];
-                  mod = null;
+                  mods = null;
                 }
                 {
                   command = "next";
                   fn = [ "Next" ];
-                  mod = "SHIFT";
+                  mods = [ "shift" ];
                 }
                 {
                   command = "previous";
                   fn = [ "Prev" ];
-                  mod = "CTRL";
+                  mods = [ "ctrl" ];
                 }
               ];
         };

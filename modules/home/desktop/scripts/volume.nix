@@ -90,20 +90,24 @@ in
   my.programs.desktop = {
     keybinds = [
       {
+        mods = [ "super" ];
         key = "F2";
         command = "${volume} -d";
       }
       {
+        mods = [ "super" ];
         key = "F3";
         command = "${volume} -u";
       }
       {
-        mod = "SHIFT";
+        mods = [
+          "super"
+          "shift"
+        ];
         key = "F2";
         command = "${volume} -m";
       }
       {
-        super = false;
         key = "F8";
         command = "${volume} -M"; # toggle mic
       }

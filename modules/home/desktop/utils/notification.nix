@@ -198,22 +198,24 @@ in
 
         my.programs.desktop.keybinds = [
           {
-            super = false;
             key = "F9";
             command = "${dunstctl} close";
           }
           {
-            super = false;
-            mod = "SHIFT";
+            mods = [ "shift" ];
             key = "F9";
             command = "${dunstctl} action";
           }
           {
-            mod = "SHIFT";
+            mods = [
+              "super"
+              "shift"
+            ];
             key = "F9";
             command = "${dunstctl} history-pop";
           }
           {
+            mods = [ "super" ];
             key = "F9";
             command = lib.getExe (
               pkgs.writeShellScriptBin "mydunst-toggle" # sh
@@ -248,6 +250,7 @@ in
         my.programs.desktop = {
           keybinds = [
             {
+              mods = [ "super" ];
               key = "b";
               command = (
                 lib.getExe (

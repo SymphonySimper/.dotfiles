@@ -71,7 +71,10 @@ in
   my.programs.desktop = {
     keybinds = [
       {
-        mod = "SHIFT";
+        mods = [
+          "super"
+          "shift"
+        ];
         key = "F10";
         command = "${changefps} toggle";
       }

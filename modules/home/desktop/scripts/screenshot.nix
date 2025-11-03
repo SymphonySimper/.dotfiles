@@ -17,16 +17,23 @@ in
 {
   my.programs.desktop.keybinds = [
     {
+      mods = [ "super" ];
       key = "F11";
       command = "${screenshot} screen";
     }
     {
-      mod = "CTRL";
+      mods = [
+        "super"
+        "ctrl"
+      ];
       key = "F11";
       command = "${screenshot} window";
     }
     {
-      mod = "SHIFT";
+      mods = [
+        "super"
+        "shift"
+      ];
       key = "F11";
       command = "${screenshot} area";
     }

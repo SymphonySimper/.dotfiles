@@ -68,6 +68,7 @@ in
     my.programs.desktop = {
       keybinds = [
         {
+          mods = [ "super" ];
           key = "F10";
           command = "${caffeine}";
         }

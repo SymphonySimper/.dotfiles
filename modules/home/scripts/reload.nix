@@ -92,7 +92,7 @@ in
 
       desktop.keybinds = [
         {
-          mod = "SHIFT";
+          mods = [ "super" "shift" ];
           key = "F5";
           command = lib.getExe reload;
         }

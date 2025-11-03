@@ -69,10 +69,12 @@ in
   my.programs.desktop = {
     keybinds = [
       {
+        mods = [ "super" ];
         key = "F5";
         command = "${brightness} -d";
       }
       {
+        mods = [ "super" ];
         key = "F6";
         command = "${brightness} -u";
       }

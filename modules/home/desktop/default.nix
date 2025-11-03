@@ -9,11 +9,19 @@ let
   cfg = config.my.programs.desktop;
 
   keys = {
-    mod = "SUPER";
-    left = "h";
-    down = "j";
-    up = "k";
-    right = "l";
+    mod = {
+      super = "SUPER";
+      ctrl = "CTRL";
+      alt = "ALT";
+      shift = "SHIFT";
+    };
+
+    direction = {
+      left = "h";
+      down = "j";
+      up = "k";
+      right = "l";
+    };
   };
 in
 {
@@ -75,20 +83,9 @@ in
       type = lib.types.listOf (
         lib.types.submodule {
           options = {
-            super = lib.mkOption {
-              type = lib.types.bool;
-              description = "Include super key in combination";
-              default = true;
-            };
-
-            mod = lib.mkOption {
-              type = lib.types.nullOr (
-                lib.types.enum [
-                  "CTRL"
-                  "SHIFT"
-                ]
-              );
-              description = "Modifier to be used";
+            mods = lib.mkOption {
+              type = lib.types.nullOr (lib.types.listOf (lib.types.enum (builtins.attrNames keys.mod)));
+              description = "Modifiers to be use";
               default = null;
             };
 
@@ -340,19 +337,16 @@ in
           };
 
           bind = lib.lists.flatten [
-            "${keys.mod}, Q, killactive"
-            "${keys.mod} SHIFT, E, exec, uwsm stop"
-            "${keys.mod}, f, fullscreen"
-            "${keys.mod} SHIFT, F, togglefloating"
-            "${keys.mod}, space, cyclenext"
+            "${keys.mod.super}, Q, killactive"
+            "${keys.mod.super} ${keys.mod.shift}, E, exec, uwsm stop"
+            "${keys.mod.super}, f, fullscreen"
+            "${keys.mod.super} ${keys.mod.shift}, F, togglefloating"
+            "${keys.mod.super}, space, cyclenext"
 
             (builtins.map (
               bind:
               let
-                modKey = if bind.super then "${keys.mod}" else "";
-                action = if bind.mod != null then bind.mod else "";
-
-                prefix = if modKey == "" && action == "" then "," else "${modKey} ${action},";
+                prefix = if bind.mods == null then "," else "${builtins.concatStringsSep " " bind.mods},";
               in
               "${prefix} ${bind.key}, exec, ${if bind.uwsm then cfg.uwsm else ""} ${bind.command}"
             ) cfg.keybinds)
@@ -365,9 +359,9 @@ in
               in
               [
                 # Switch workspaces with mainMod + [0-9]
-                "${keys.mod}, ${numStr}, workspace, ${workspaceNum}"
+                "${keys.mod.super}, ${numStr}, workspace, ${workspaceNum}"
                 # Move active window to a workspace with mainMod + SHIFT + [0-9]
-                "${keys.mod} SHIFT, ${numStr}, movetoworkspace, ${workspaceNum}"
+                "${keys.mod.super} SHIFT, ${numStr}, movetoworkspace, ${workspaceNum}"
               ]
             ) (lib.lists.range 0 9))
           ];
@@ -434,17 +428,17 @@ in
                   (
                     name: value:
                     (builtins.concatStringsSep ", " [
-                      (builtins.concatStringsSep " " ([ keys.mod ] ++ action.mod))
+                      (builtins.concatStringsSep " " ([ keys.mod.super ] ++ action.mod))
                       value
                       action.name
                       name
                     ])
                   )
                   {
-                    l = keys.left;
-                    r = keys.right;
-                    u = keys.up;
-                    d = keys.down;
+                    l = keys.direction.left;
+                    r = keys.direction.right;
+                    u = keys.direction.up;
+                    d = keys.direction.down;
                   }
                 )
               )
@@ -455,31 +449,31 @@ in
                 }
                 {
                   name = "swapwindow";
-                  mod = [ "SHIFT" ];
+                  mod = [ keys.mod.shift ];
                 }
                 {
                   name = "movewindow";
-                  mod = [ "CTRL" ];
+                  mod = [ keys.mod.ctrl ];
                 }
               ]
           );
 
           bindm = [
-            "${keys.mod}, mouse:272, movewindow"
-            "${keys.mod}, mouse:273, resizewindow"
+            "${keys.mod.super}, mouse:272, movewindow"
+            "${keys.mod.super}, mouse:273, resizewindow"
           ];
         };
 
         ## resize windows
         extraConfig = # conf
           ''
-            bind = ${keys.mod}, R, submap, resize
+            bind = ${keys.mod.super}, R, submap, resize
             submap = resize
 
-            binde = , ${keys.right}, resizeactive, 10 0
-            binde = , ${keys.left}, resizeactive, -10 0
-            binde = , ${keys.up}, resizeactive, 0 -10
-            binde = , ${keys.down}, resizeactive, 0 10
+            binde = , ${keys.direction.right}, resizeactive, 10 0
+            binde = , ${keys.direction.left}, resizeactive, -10 0
+            binde = , ${keys.direction.up}, resizeactive, 0 -10
+            binde = , ${keys.direction.down}, resizeactive, 0 10
 
             bind = , escape, submap, reset
             submap = reset
