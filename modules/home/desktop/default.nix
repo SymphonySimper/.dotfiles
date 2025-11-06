@@ -23,6 +23,8 @@ let
       right = "l";
     };
   };
+
+  workspaces = builtins.genList (x: x + 1) 10;
 in
 {
   imports = [
@@ -165,7 +167,7 @@ in
             };
 
             workspace = lib.mkOption {
-              type = lib.types.nullOr (lib.types.enum (builtins.genList (x: x + 1) 10));
+              type = lib.types.nullOr (lib.types.enum workspaces);
               description = "Workspace where the window should be placed";
               default = null;
             };
@@ -354,16 +356,16 @@ in
             (builtins.concatMap (
               num:
               let
-                workspaceNum = builtins.toString (if num == 0 then 10 else num);
-                numStr = builtins.toString num;
+                index = builtins.toString num;
+                key = builtins.toString (if num == 10 then 0 else num);
               in
               [
                 # Switch workspaces with mainMod + [0-9]
-                "${keys.mod.super}, ${numStr}, workspace, ${workspaceNum}"
-                # Move active window to a workspace with mainMod + SHIFT + [0-9]
-                "${keys.mod.super} SHIFT, ${numStr}, movetoworkspace, ${workspaceNum}"
+                "${keys.mod.super}, ${key}, workspace, ${index}"
+                # Move active window to a workspace with mainMod + shift + [0-9]
+                "${keys.mod.super} ${keys.mod.shift}, ${key}, movetoworkspace, ${index}"
               ]
-            ) (lib.lists.range 0 9))
+            ) workspaces)
           ];
 
           windowrule = lib.lists.flatten [
