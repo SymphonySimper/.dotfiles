@@ -16,6 +16,3 @@ args = [
     "login",
 ]
 program = "wsl"
-
-[window]
-startup_mode = "Maximized"

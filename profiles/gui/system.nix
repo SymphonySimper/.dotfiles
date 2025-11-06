@@ -7,7 +7,6 @@
 
       bluetooth = {
         enable = true;
-        gui.enable = true;
         tui.enable = true;
       };
 

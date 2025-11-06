@@ -144,8 +144,6 @@ in
             };
           in
           (formatToml.generate terminalFiles.winGen {
-            window.startup_mode = "Maximized";
-
             terminal.shell = {
               # program = "pwsh";
               # args = ["-WorkingDirectory" "~"];
@@ -190,7 +188,7 @@ in
         window = {
           decorations = "none";
           opacity = 1;
-          # startup_mode = "Maximized";
+          startup_mode = "Maximized";
           padding = rec {
             x = 2;
             y = x;

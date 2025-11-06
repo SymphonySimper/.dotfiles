@@ -22,52 +22,6 @@ in
           media = {
             recorder.enable = lib.mkDefault false;
           };
-
-          desktop.keybinds =
-            let
-              playerctl = lib.getExe pkgs.playerctl;
-            in
-            builtins.concatMap
-              (
-                action:
-                let
-                  default = {
-                    command = "${playerctl} ${action.command}";
-                  };
-                in
-                (
-                  (builtins.map (key: default // { key = "XF86Audio${key}"; }) action.fn)
-                  ++ [
-                    (
-                      default
-                      // {
-                        key = "F7";
-                        mods = action.mods;
-                      }
-                    )
-                  ]
-                )
-              )
-              [
-                {
-                  command = "play-pause";
-                  fn = [
-                    "Play"
-                    "Pause"
-                  ];
-                  mods = null;
-                }
-                {
-                  command = "next";
-                  fn = [ "Next" ];
-                  mods = [ "shift" ];
-                }
-                {
-                  command = "previous";
-                  fn = [ "Prev" ];
-                  mods = [ "ctrl" ];
-                }
-              ];
         };
       }
 
@@ -77,7 +31,7 @@ in
         my.programs.desktop.windows = [
           {
             id = "com.obsproject.Studio";
-            workspace = 9;
+            workspace = 4;
           }
         ];
       })
@@ -86,14 +40,7 @@ in
         my.programs.desktop.windows = [
           {
             id = "mpv";
-            workspace = 5;
-            state = [
-              "fullscreen"
-              {
-                name = "idleinhibit";
-                opts = "focus";
-              }
-            ];
+            workspace = 3;
           }
         ];
 

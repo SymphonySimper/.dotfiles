@@ -12,8 +12,7 @@
       windows = [
         {
           id = "google-chrome";
-          workspace = 3;
-          silent = true;
+          workspace = 2;
         }
       ];
     };
