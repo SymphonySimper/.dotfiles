@@ -114,6 +114,21 @@ in
       ];
     };
 
+    catppuccin.tmux.extraConfig = # conf
+      ''
+        ## status
+        set -g status on
+        set -g status-left ""
+        set -g status-right ""
+        set -g status-interval 5
+
+        set -g @catppuccin_window_status_style "basic"
+
+        setw -g automatic-rename off
+        set -g @catppuccin_window_text " #{pane_current_command}"
+        set -g @catppuccin_window_current_text " #{pane_current_command}"
+      '';
+
     programs = {
       tmux = {
         enable = true;
@@ -147,13 +162,7 @@ in
                 setw -g monitor-activity on
                 set -g visual-activity off # If enabled shows activity in window message
 
-                # Turn off automatic renaming
-                setw -g automatic-rename off
-
                 # UI
-                ## status
-                set -g status off
-
                 ## window
                 set -g renumber-window on # renumber when window is closed
                 set -g window-status-separator "" # remove gap between window text
