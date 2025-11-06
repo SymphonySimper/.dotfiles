@@ -58,21 +58,11 @@ in
           windows = [
             {
               inherit id;
-              silent = true;
               workspace = 2;
-
-              state = {
-                name = "idleinhibit";
-                opts = "fullscreen";
-              };
-            }
-            {
-              id = ".*sharing your screen.*";
-              type = "title";
-              silent = true;
-              workspace = 10;
             }
           ];
+
+          appfolder.Bookmarks.categories = [ category ];
         };
     };
 

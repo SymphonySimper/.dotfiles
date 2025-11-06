@@ -128,6 +128,7 @@ save_to_clipboard = true
 decorations = "none"
 dynamic_padding = true
 opacity = 1
+startup_mode = "Maximized"
 
 [window.padding]
 x = 2
