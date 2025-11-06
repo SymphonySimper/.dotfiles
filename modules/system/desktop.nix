@@ -1,28 +1,74 @@
-{ config, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   options.my.programs.desktop.enable = lib.mkEnableOption "Desktop";
 
   config = lib.mkIf config.my.programs.desktop.enable (
     lib.mkMerge [
       {
-        programs.hyprland = {
-          enable = true;
-          withUWSM = true;
-          xwayland.enable = false;
-        };
+        services = {
+          desktopManager.gnome.enable = true;
 
-        security = {
-          polkit.enable = true;
-          pam.services = {
-            hyprland.enableGnomeKeyring = true;
-            # Enable hyprlock
-            hyprlock = { };
+          displayManager.gdm = {
+            enable = true;
+            wayland = true;
           };
         };
 
-        services = {
-          udisks2.enable = true;
+        environment = {
+          gnome.excludePackages = with pkgs; [
+            decibels
+            epiphany
+            geary
+            gnome-characters
+            gnome-connections
+            gnome-console
+            gnome-contacts
+            gnome-font-viewer
+            gnome-maps
+            gnome-music
+            gnome-shell-extensions
+            gnome-text-editor
+            gnome-tour
+            gnome-weather
+            simple-scan
+            yelp
+          ];
         };
+
+        # avatar
+        # refer: https://wiki.nixos.org/wiki/GNOME#Change_Profile_Photo_for_Login_and_Lockscreen_-_Declarative
+        system.activationScripts.script.text =
+          # sh
+          ''
+            avatar="${my.dir.home}/.face"
+            if [ ! -f "$avatar" ]; then
+              echo "$avatar not found!"
+              exit
+            fi
+
+            dir_base="/var/lib/AccountsService"
+            dir_icons="''${dir_base}/icons"
+            dir_users="''${dir_base}/users"
+            icons="''${dir_icons}/${my.name}"
+            users="''${dir_users}/${my.name}"
+
+            mkdir -p "$dir_icons"
+            mkdir -p "$dir_users"
+
+            cp "$avatar" "$icons"
+            echo -e "[User]\nIcon=$icons\n" > "$users"
+
+            chown root:root "$users"
+            chmod 0600 "$users"
+
+            chown root:root "$icons"
+            chmod 0444 "$icons"
+          '';
       }
       {
         environment.sessionVariables.NIXOS_OZONE_WL = "1";
@@ -42,28 +88,6 @@
 
           programs = {
             browser.enable = true;
-          };
-        };
-      }
-      {
-        # uwsm module enables display manager.
-        # which then overrides tty1 (https://github.com/NixOS/nixpkgs/pull/429845)
-        services.displayManager.enable = lib.mkForce false;
-
-        my.programs.tty."1" = {
-          skipUsername = true;
-          launch = {
-            command =
-              let
-                uwsm = "${config.my.user.bin}/uwsm";
-              in
-              # sh
-              ''
-                if ${uwsm} check may-start; then
-                    exec ${uwsm} start ${config.my.user.bin}/Hyprland
-                fi
-              '';
-            dbus = false;
           };
         };
       }
