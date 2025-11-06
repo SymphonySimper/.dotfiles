@@ -10,10 +10,9 @@ let
   cfgSh = config.my.programs.shell;
   cfgM = config.my.programs.mux;
 
-  terminalFiles = {
-    unix = "unix.toml";
-    winGen = "windows-gen.toml";
-    win = "windows.toml";
+  extraConfigFile = {
+    default = "extra.toml";
+    win = "extra-windows.toml";
   };
 
   mkProgramKeyBind =
@@ -83,10 +82,10 @@ in
           {
             from = "CONFIG/${cfg.command}/";
             to = "${winDir}/";
-            exclude = [ terminalFiles.unix ];
+            exclude = [ extraConfigFile.default ];
             post = # sh
               ''
-                mv "${winDir}/${terminalFiles.winGen}" "${winDir}/${terminalFiles.win}"
+                mv "${winDir}/${extraConfigFile.win}" "${winDir}/${extraConfigFile.default}"
               '';
           }
         ];
@@ -99,8 +98,8 @@ in
         formatToml = pkgs.formats.toml { };
       in
       {
-        "${cfg.command}/${terminalFiles.unix}".source = (
-          formatToml.generate terminalFiles.unix {
+        "${cfg.command}/${extraConfigFile.default}".source = (
+          formatToml.generate extraConfigFile.default {
             terminal.shell = {
               program = cfgSh.command;
               args = [
@@ -124,7 +123,7 @@ in
           }
         );
 
-        "${cfg.command}/${terminalFiles.winGen}".source =
+        "${cfg.command}/${extraConfigFile.win}".source =
           let
             wsl = {
               command = "wsl";
@@ -143,7 +142,7 @@ in
               ];
             };
           in
-          (formatToml.generate terminalFiles.winGen {
+          (formatToml.generate extraConfigFile.win {
             terminal.shell = {
               # program = "pwsh";
               # args = ["-WorkingDirectory" "~"];
@@ -176,11 +175,7 @@ in
 
       settings = {
         general = {
-          import = [
-            "./${terminalFiles.unix}"
-            "./${terminalFiles.win}"
-          ];
-
+          import = [ "./${extraConfigFile.default}" ];
           live_config_reload = false;
           ipc_socket = false;
         };

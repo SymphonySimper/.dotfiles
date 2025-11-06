@@ -91,7 +91,7 @@ family = "JetBrainsMono Nerd Font"
 style = "Regular"
 
 [general]
-import = ["./unix.toml", "./windows.toml"]
+import = ["./extra.toml"]
 ipc_socket = false
 live_config_reload = false
 
