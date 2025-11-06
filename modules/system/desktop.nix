@@ -23,7 +23,8 @@
         services = {
           udisks2.enable = true;
         };
-
+      }
+      {
         environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
         my = {
@@ -44,7 +45,6 @@
           };
         };
       }
-
       {
         # uwsm module enables display manager.
         # which then overrides tty1 (https://github.com/NixOS/nixpkgs/pull/429845)
