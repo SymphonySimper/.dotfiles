@@ -157,9 +157,6 @@ in
           ];
         };
 
-        # avatar
-        home.file.".face".source = ../../flake/assets/images/avatar.png; # it has to be a png
-
         programs.gnome-shell = {
           enable = true;
           extensions = [
