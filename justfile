@@ -22,7 +22,7 @@ clean-home:
 clean: clean-system clean-home
 
 last-week-commits:
-    my-flake-update-commits
+    ./scripts/flake-last-week-commits.sh
 
 news-home HOST=hostname:
     home-manager news --flake .#{{ HOST }}
