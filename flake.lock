@@ -205,8 +205,7 @@
         "nix-index-database": "nix-index-database",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_4",
-        "systems": "systems",
-        "yazi-plugins": "yazi-plugins"
+        "systems": "systems"
       }
     },
     "rust-overlay": {
@@ -242,22 +241,6 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
-        "type": "github"
-      }
-    },
-    "yazi-plugins": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1761133023,
-        "narHash": "sha256-7vsqHvdNimH/YVWegfAo7DfJ+InDr3a1aNU0f+gjcdw=",
-        "owner": "yazi-rs",
-        "repo": "plugins",
-        "rev": "8f1d9711bcd0e48af1fcb4153c16d24da76e732d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "yazi-rs",
-        "repo": "plugins",
         "type": "github"
       }
     }

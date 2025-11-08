@@ -23,10 +23,6 @@
     };
     helix.url = "github:helix-editor/helix";
     # helix.url = "github:SymphonySimper/fork-helix";
-    yazi-plugins = {
-      url = "github:yazi-rs/plugins";
-      flake = false;
-    };
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";

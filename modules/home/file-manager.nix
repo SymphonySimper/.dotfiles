@@ -1,6 +1,4 @@
 {
-  my,
-  inputs,
   config,
   pkgs,
   lib,
@@ -198,17 +196,16 @@
 
       # Plugins
       {
-        plugins.mount = "${inputs.yazi-plugins}/mount.yazi";
+        plugins.mount = pkgs.yaziPlugins.mount;
         keymap.mgr.prepend_keymap = [
           {
             on = "M";
             run = "plugin mount";
           }
-
         ];
       }
       {
-        plugins.jump-to-char = "${inputs.yazi-plugins}/jump-to-char.yazi";
+        plugins.jump-to-char = pkgs.yaziPlugins.jump-to-char;
         keymap.mgr.prepend_keymap = [
           {
             on = "f";
