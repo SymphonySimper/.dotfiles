@@ -20,9 +20,15 @@
     programs.android.enable = true;
   };
 
-  boot.initrd.availableKernelModules = [
-    "nvme"
-    "xhci_pci"
-    "usbhid"
-  ];
+  boot = {
+    initrd.availableKernelModules = [
+      "nvme"
+      "xhci_pci"
+      "usbhid"
+    ];
+
+    # refer: https://gitlab.freedesktop.org/drm/amd/-/issues/3647
+    # prevents system freeze
+    kernelParams = [ "amdgpu.dcdebugmask=0x10" ];
+  };
 }
