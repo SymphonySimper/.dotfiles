@@ -367,7 +367,12 @@ in
                     volume-down = [ "${keys.mod.super}F2" ];
                     volume-mute = [ "${keys.mod.super}${keys.mod.shift}F2" ];
                     volume-up = [ "${keys.mod.super}F3" ];
-                    screensaver = [ ];
+
+                    screensaver = [ "${keys.mod.super}Escape" ];
+                    logout = [ "${keys.mod.super}${keys.mod.ctrl}Escape" ];
+                    shutdown = [ "${keys.mod.super}${keys.mod.alt}Escape" ];
+                    reboot = [ "${keys.mod.super}${keys.mod.ctrl}${keys.mod.alt}Escape" ];
+
                     custom-keybindings = builtins.map (name: "/${name}/") (builtins.attrNames customKeybinds);
                   };
 
