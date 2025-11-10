@@ -169,7 +169,6 @@ in
             auto-format = false;
             bufferline = "never";
             auto-pairs = true;
-            true-color = my.profile == "wsl";
             indent-guides.render = false;
             soft-wrap.enable = true;
 
