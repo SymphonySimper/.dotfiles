@@ -48,7 +48,7 @@ let
 
         ${lib.strings.optionalString my.gui.enable (
           lib.my.mkNotification {
-            tag = "myreload";
+            app = "myreload";
             title = "Restarted";
             body = "$reloaded_cmds";
           }
