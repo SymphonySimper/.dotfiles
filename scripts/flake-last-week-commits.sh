@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-flakes=("nix-community/home-manager" "nix-community/NixOS-WSL" "catppuccin/nix" "helix-editor/helix")
+flakes=("nix-community/disko" "nix-community/home-manager" "nix-community/NixOS-WSL" "catppuccin/nix" "helix-editor/helix")
 
 last_saturday="$(date -d 'last saturday' +%Y-%m-%d)"
 saturday="$(date -d 'saturday' +%Y-%m-%d)"
