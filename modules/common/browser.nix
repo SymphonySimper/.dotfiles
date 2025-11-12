@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}:
+{ config, lib, ... }:
 let
   cfg = config.my.programs.browser;
 in
@@ -163,7 +158,7 @@ in
 
         Nix = {
           "Nix Builtins".url = "nix.dev/manual/nix/latest/language/builtins.html";
-          "Nix PR Tracker".url = "nixpk.gs/pr-tracker.html";
+          "Nix PR Tracker".url = "nixpkgs-tracker.ocfox.me";
           "Nix Wiki".url = "wiki.nixos.org/wiki/NixOS_Wiki";
           Noogle.url = "noogle.dev";
         };
