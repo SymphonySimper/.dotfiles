@@ -159,22 +159,41 @@ in
 
         programs.gnome-shell = {
           enable = true;
-          extensions = [
-            { package = pkgs.gnomeExtensions.caffeine; }
-            { package = pkgs.gnomeExtensions.auto-move-windows; }
-            {
-              package = pkgs.stdenv.mkDerivation rec {
-                pname = "hide-top-panel";
-                uuid = "${pname}@symphonysimper.com";
-                version = "1";
-                src = ./extensions/${pname};
-                passthru.extensionUuid = uuid;
-                installPhase = ''
-                  mkdir -p $out/share/gnome-shell/extensions/${uuid}
-                  cp -r ./* $out/share/gnome-shell/extensions/${uuid}
-                '';
-              };
-            }
+          extensions = builtins.concatLists [
+            [
+              { package = pkgs.gnomeExtensions.caffeine; }
+              { package = pkgs.gnomeExtensions.auto-move-windows; }
+            ]
+
+            (builtins.map
+              (
+                dir:
+                let
+                  pname = builtins.baseNameOf dir;
+                  uuid = "${pname}@symphonysimper.com";
+                in
+                {
+                  package = pkgs.stdenv.mkDerivation {
+                    pname = pname;
+                    uuid = uuid;
+                    version = "1";
+                    src = ./extensions/${pname};
+                    passthru.extensionUuid = uuid;
+                    installPhase = ''
+                      mkdir -p $out/share/gnome-shell/extensions/${uuid}
+                      cp -r ./* $out/share/gnome-shell/extensions/${uuid}
+                    '';
+                  };
+                }
+              )
+              (
+                lib.my.mkReadDir {
+                  path = ./extensions;
+                  asPath = true;
+                  type = "directory";
+                }
+              )
+            )
           ];
         };
 
