@@ -1,6 +1,0 @@
-{
-  "name": "Show Overview on Enable",
-  "description": "Show Overview when extenson is enabled.",
-  "uuid": "show-overview-on-enable@symphonysimper.com",
-  "shell-version": ["48"]
-}
