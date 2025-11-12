@@ -214,6 +214,10 @@ in
                 show-battery-percentage = true;
               };
 
+              "org/gnome/desktop/sound" = {
+                allow-volume-above-100-percent = true;
+              };
+
               ## wallpaper
               "org/gnome/desktop/background" = {
                 picture-uri = my.theme.wallpaper;
