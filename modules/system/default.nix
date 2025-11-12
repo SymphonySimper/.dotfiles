@@ -82,25 +82,22 @@
   time.timeZone = lib.mkDefault "Asia/Kolkata";
   services.timesyncd.enable = true;
 
-  i18n =
-    let
-      locale = "en_US.UTF-8";
-    in
-    {
-      defaultLocale = locale;
+  # refer: https://sourceware.org/git/?p=glibc.git;a=blob;f=localedata/SUPPORTED
+  i18n = rec {
+    defaultLocale = "en_IN";
 
-      extraLocaleSettings = {
-        LC_ADDRESS = locale;
-        LC_IDENTIFICATION = locale;
-        LC_MEASUREMENT = locale;
-        LC_MONETARY = locale;
-        LC_NAME = locale;
-        LC_NUMERIC = locale;
-        LC_PAPER = locale;
-        LC_TELEPHONE = locale;
-        LC_TIME = locale;
-      };
+    extraLocaleSettings = {
+      LC_ADDRESS = defaultLocale;
+      LC_IDENTIFICATION = defaultLocale;
+      LC_MEASUREMENT = defaultLocale;
+      LC_MONETARY = defaultLocale;
+      LC_NAME = defaultLocale;
+      LC_NUMERIC = defaultLocale;
+      LC_PAPER = defaultLocale;
+      LC_TELEPHONE = defaultLocale;
+      LC_TIME = defaultLocale;
     };
+  };
 
   nixpkgs.hostPlatform = lib.mkDefault my.system;
   system.stateVersion = "23.11"; # Do no change
