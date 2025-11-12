@@ -170,18 +170,18 @@ in
                 dir:
                 let
                   pname = builtins.baseNameOf dir;
-                  uuid = "${pname}@symphonysimper.com";
+                  metadata = builtins.fromJSON (builtins.readFile (dir + "/metadata.json"));
                 in
                 {
                   package = pkgs.stdenv.mkDerivation {
                     pname = pname;
-                    uuid = uuid;
+                    uuid = metadata.uuid;
                     version = "1";
                     src = ./extensions/${pname};
-                    passthru.extensionUuid = uuid;
+                    passthru.extensionUuid = metadata.uuid;
                     installPhase = ''
-                      mkdir -p $out/share/gnome-shell/extensions/${uuid}
-                      cp -r ./* $out/share/gnome-shell/extensions/${uuid}
+                      mkdir -p $out/share/gnome-shell/extensions/${metadata.uuid}
+                      cp -r ./* $out/share/gnome-shell/extensions/${metadata.uuid}
                     '';
                   };
                 }
