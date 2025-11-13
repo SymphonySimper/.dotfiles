@@ -84,7 +84,7 @@
 
   # refer: https://sourceware.org/git/?p=glibc.git;a=blob;f=localedata/SUPPORTED
   i18n = rec {
-    defaultLocale = "en_IN";
+    defaultLocale = "en_US.UTF-8";
 
     extraLocaleSettings = {
       LC_ADDRESS = defaultLocale;
