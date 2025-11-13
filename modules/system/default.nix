@@ -83,21 +83,7 @@
   services.timesyncd.enable = true;
 
   # refer: https://sourceware.org/git/?p=glibc.git;a=blob;f=localedata/SUPPORTED
-  i18n = rec {
-    defaultLocale = "en_US.UTF-8";
-
-    extraLocaleSettings = {
-      LC_ADDRESS = defaultLocale;
-      LC_IDENTIFICATION = defaultLocale;
-      LC_MEASUREMENT = defaultLocale;
-      LC_MONETARY = defaultLocale;
-      LC_NAME = defaultLocale;
-      LC_NUMERIC = defaultLocale;
-      LC_PAPER = defaultLocale;
-      LC_TELEPHONE = defaultLocale;
-      LC_TIME = defaultLocale;
-    };
-  };
+  i18n.defaultLocale = "en_US.UTF-8";
 
   nixpkgs.hostPlatform = lib.mkDefault my.system;
   system.stateVersion = "23.11"; # Do no change
