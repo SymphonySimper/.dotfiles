@@ -264,7 +264,7 @@ in
                     cfgT = config.my.programs.terminal;
                   in
                   {
-                    y = ":sh ${cfgT.command} ${cfgT.args.command} ${config.my.programs.file-manager.command} $(realpath %{buffer_name})";
+                    y = ":sh ${cfgT.command} ${cfgT.args.command} ${config.my.programs.file-manager.command} %{file_path_absolute}";
                     g = ":sh ${cfgT.command} ${cfgT.args.command} ${config.my.programs.vcs.tui.command} ${config.my.programs.vcs.tui.args.path} %{workspace_directory}";
                   };
 
@@ -294,7 +294,7 @@ in
                     vcs = config.my.programs.vcs.command;
                   in
                   {
-                    b = ":sh ${vcs} -C %{workspace_directory} blame -L %{cursor_line},%{cursor_line} $(realpath %{buffer_name})";
+                    b = ":sh ${vcs} -C %{workspace_directory} blame -L %{cursor_line},%{cursor_line} %{file_path_absolute}";
 
                     B = ":echo %sh{${vcs} branch --show-current}";
                     R = ":reset-diff-change";
