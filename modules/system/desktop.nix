@@ -21,21 +21,19 @@
 
         environment = {
           gnome.excludePackages = with pkgs; [
-            decibels
-            epiphany
-            geary
-            gnome-characters
+            epiphany # browser
+            geary # email
             gnome-connections
             gnome-console
             gnome-contacts
             gnome-font-viewer
             gnome-maps
             gnome-music
-            gnome-shell-extensions
             gnome-text-editor
             gnome-tour
             gnome-weather
             simple-scan
+            sushi # nautilus preview
             yelp
           ];
         };
