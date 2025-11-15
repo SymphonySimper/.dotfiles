@@ -145,10 +145,7 @@ in
       {
         my.programs.desktop = {
           appfolder = {
-            CLI.categories = [ "ConsoleOnly" ];
             Games.categories = [ "Game" ];
-            Office.categories = [ "Office" ];
-            Utilities.categories = [ "X-GNOME-Utilities" ];
           };
 
           mime."org.gnome.Loupe" = [
