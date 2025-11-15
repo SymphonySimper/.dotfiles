@@ -173,16 +173,20 @@ in
                   metadata = builtins.fromJSON (builtins.readFile (dir + "/metadata.json"));
                 in
                 {
+                  # refer: https://github.com/NixOS/nixpkgs/blob/master/pkgs/desktops/gnome/extensions/buildGnomeExtension.nix
                   package = pkgs.stdenv.mkDerivation {
-                    pname = pname;
+                    pname = "gnome-shell-extension-${pname}";
                     uuid = metadata.uuid;
                     version = "1";
                     src = ./extensions/${pname};
-                    passthru.extensionUuid = metadata.uuid;
                     installPhase = ''
-                      mkdir -p $out/share/gnome-shell/extensions/${metadata.uuid}
-                      cp -r ./* $out/share/gnome-shell/extensions/${metadata.uuid}
+                      mkdir -p $out/share/gnome-shell/extensions/
+                      cp -r -T . $out/share/gnome-shell/extensions/${metadata.uuid}
                     '';
+                    passthru = {
+                      extensionPortalSlug = pname;
+                      extensionUuid = metadata.uuid;
+                    };
                   };
                 }
               )
