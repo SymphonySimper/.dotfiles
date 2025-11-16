@@ -13,8 +13,6 @@ in
   config = lib.mkIf my.gui.enable (
     lib.mkMerge [
       {
-        fonts.fontconfig.enable = true;
-
         home.packages = with pkgs; [
           (google-fonts.override { fonts = [ "Poppins" ]; })
           font-awesome
