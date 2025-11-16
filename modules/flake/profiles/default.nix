@@ -59,9 +59,7 @@ let
         wallpaper = "${dir.home}/.dotfiles/modules/flake/assets/images/wallpaper.png";
 
         font = {
-          sans = "Poppins";
           mono = "JetBrainsMono Nerd Font";
-          glyph = "Font Awesome 6 Free";
         };
       };
     };
