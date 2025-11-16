@@ -64,50 +64,18 @@ in
       clipboardProvider = lib.mkOption {
         # refer: https://docs.helix-editor.com/editor.html?highlight=clipboard#editorclipboard-provider-section
         type = lib.types.nullOr (
-          lib.types.oneOf [
-            (
-              let
-                mkClipboardOption =
-                  action:
-                  lib.mkOption {
-                    type = lib.types.submodule {
-                      options = {
-                        command = lib.mkOption {
-                          type = lib.types.str;
-                          description = "${action} command";
-                        };
-
-                        args = lib.mkOption {
-                          type = lib.types.listOf lib.types.str;
-                          description = "${action} command args";
-                        };
-                      };
-                    };
-                    description = "${action} provider options";
-                  };
-              in
-              lib.types.submodule {
-                options = {
-                  yank = mkClipboardOption "Yank";
-                  paste = mkClipboardOption "Paste";
-                };
-              }
-            )
-
-            (lib.types.enum [
-              "pasteboard" # MacOS
-              "wayland"
-              "x-clip"
-              "x-sel"
-              "win32-yank"
-              "termux"
-              "tmux"
-              "windows"
-              "termcode"
-              "none"
-            ])
+          lib.types.enum [
+            "pasteboard" # MacOS
+            "wayland"
+            "x-clip"
+            "x-sel"
+            "win32-yank"
+            "termux"
+            "tmux"
+            "windows"
+            "termcode"
+            "none"
           ]
-
         );
         description = "clipboard-provider";
         default = null;
@@ -196,14 +164,7 @@ in
               display-color-swatches = false;
             };
 
-            clipboard-provider = lib.mkIf (cfg.clipboardProvider != null) (
-              if (builtins.typeOf cfg.clipboardProvider == "string") then
-                cfg.clipboardProvider
-              else
-                {
-                  custom = cfg.clipboardProvider;
-                }
-            );
+            clipboard-provider = lib.mkIf (cfg.clipboardProvider != null) cfg.clipboardProvider;
 
             statusline = {
               left = [
