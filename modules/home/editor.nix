@@ -223,42 +223,35 @@ in
                 e =
                   let
                     cfgT = config.my.programs.terminal;
+                    cfgSh = config.my.programs.shell;
+
                     mkEx = args: (builtins.concatStringsSep " " ([ ":sh" ] ++ (builtins.concatLists args)));
-                    wsl = lib.lists.optionals (my.profile == "wsl") [
-                      "wsl"
-                      "-d"
-                      "NixOS"
-                      "--cd"
-                      "~"
-                      "--shell-type"
-                      "login"
-                      "--"
-                    ];
+                    mkRunTerminal =
+                      args:
+                      mkEx [
+                        [
+                          cfgT.command
+                          cfgT.args.command
+                        ]
+                        (lib.lists.optionals (my.profile == "wsl") (
+                          builtins.concatLists [
+                            [ cfgSh.wsl.command ]
+                            cfgSh.wsl.args.shell
+                            [ cfgSh.wsl.args.separator ]
+                          ]
+                        ))
+                        args
+                      ];
                   in
                   {
-                    y = mkEx [
-                      [
-                        cfgT.command
-                        cfgT.args.command
-                      ]
-                      wsl
-                      [
-                        config.my.programs.file-manager.command
-                        "%{file_path_absolute}"
-                      ]
+                    y = mkRunTerminal [
+                      config.my.programs.file-manager.command
+                      "%{file_path_absolute}"
                     ];
-
-                    g = mkEx [
-                      [
-                        cfgT.command
-                        cfgT.args.command
-                      ]
-                      wsl
-                      [
-                        config.my.programs.vcs.tui.command
-                        config.my.programs.vcs.tui.args.path
-                        "%{workspace_directory}"
-                      ]
+                    g = mkRunTerminal [
+                      config.my.programs.vcs.tui.command
+                      config.my.programs.vcs.tui.args.path
+                      "%{workspace_directory}"
                     ];
                   };
 

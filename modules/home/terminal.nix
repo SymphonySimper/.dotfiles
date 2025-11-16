@@ -123,31 +123,13 @@ in
           }
         );
 
-        "${cfg.command}/${extraConfigFile.win}".source =
-          let
-            wsl = {
-              command = "wsl";
-              args = [
-                "-d"
-                "NixOS"
-                "--cd"
-                "~"
-                "--shell-type"
-                "login"
-              ];
-              mux = [
-                "--"
-                cfgM.command
-                cfgM.args.new
-              ];
-            };
-          in
-          (formatToml.generate extraConfigFile.win {
+        "${cfg.command}/${extraConfigFile.win}".source = (
+          formatToml.generate extraConfigFile.win {
             terminal.shell = {
               # program = "pwsh";
               # args = ["-WorkingDirectory" "~"];
-              program = wsl.command;
-              args = wsl.args;
+              program = cfgSh.wsl.command;
+              args = cfgSh.wsl.args.shell;
             };
 
             keyboard.bindings = [
@@ -159,15 +141,20 @@ in
                   args = builtins.concatLists [
                     [
                       cfg.args.command
-                      wsl.command
+                      cfgSh.wsl.command
                     ]
-                    wsl.args
-                    wsl.mux
+                    cfgSh.wsl.args.shell
+                    [
+                      cfgSh.wsl.args.separator
+                      cfgM.command
+                      cfgM.args.new
+                    ]
                   ];
                 };
               }
             ];
-          });
+          }
+        );
       };
 
     xdg.terminal-exec.enable = true;

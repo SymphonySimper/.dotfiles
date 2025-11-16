@@ -21,6 +21,23 @@
         bin = "${my.dir.home}/.nix-profile/bin";
       };
     }
+    // {
+      wsl = lib.my.mkCommandOption {
+        category = "WSL";
+        command = "wsl";
+        args = {
+          shell = [
+            "-d"
+            "NixOS"
+            "--cd"
+            "~"
+            "--shell-type"
+            "login"
+          ];
+          separator = "--";
+        };
+      };
+    }
   );
 
   config = lib.mkMerge [
