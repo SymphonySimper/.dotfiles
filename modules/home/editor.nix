@@ -223,10 +223,43 @@ in
                 e =
                   let
                     cfgT = config.my.programs.terminal;
+                    mkEx = args: (builtins.concatStringsSep " " ([ ":sh" ] ++ (builtins.concatLists args)));
+                    wsl = lib.lists.optionals (my.profile == "wsl") [
+                      "wsl"
+                      "-d"
+                      "NixOS"
+                      "--cd"
+                      "~"
+                      "--shell-type"
+                      "login"
+                      "--"
+                    ];
                   in
                   {
-                    y = ":sh ${cfgT.command} ${cfgT.args.command} ${config.my.programs.file-manager.command} %{file_path_absolute}";
-                    g = ":sh ${cfgT.command} ${cfgT.args.command} ${config.my.programs.vcs.tui.command} ${config.my.programs.vcs.tui.args.path} %{workspace_directory}";
+                    y = mkEx [
+                      [
+                        cfgT.command
+                        cfgT.args.command
+                      ]
+                      wsl
+                      [
+                        config.my.programs.file-manager.command
+                        "%{file_path_absolute}"
+                      ]
+                    ];
+
+                    g = mkEx [
+                      [
+                        cfgT.command
+                        cfgT.args.command
+                      ]
+                      wsl
+                      [
+                        config.my.programs.vcs.tui.command
+                        config.my.programs.vcs.tui.args.path
+                        "%{workspace_directory}"
+                      ]
+                    ];
                   };
 
                 f = {
