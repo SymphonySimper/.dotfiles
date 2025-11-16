@@ -170,7 +170,7 @@ in
           });
       };
 
-    home.packages = [ pkgs.xdg-terminal-exec ];
+    xdg.terminal-exec.enable = true;
 
     programs.alacritty = {
       enable = true;
