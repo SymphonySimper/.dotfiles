@@ -74,7 +74,7 @@
       };
     };
 
-  fonts = {
+  fonts = lib.mkIf my.gui.enable {
     enableDefaultPackages = true;
     fontDir.enable = true;
   };
