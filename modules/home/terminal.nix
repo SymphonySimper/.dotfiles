@@ -119,6 +119,20 @@ in
                 program = cfgM.command;
                 args = [ cfgM.args.new ];
               })
+
+              (mkProgramKeyBind {
+                key = "G";
+                mods = "Alt";
+                cli = true;
+                program = config.my.programs.vcs.tui.command;
+              })
+
+              (mkProgramKeyBind {
+                key = "Y";
+                mods = "Alt";
+                cli = true;
+                program = config.my.programs.file-manager.command;
+              })
             ];
           }
         );
