@@ -14,12 +14,8 @@ in
     lib.mkMerge [
       {
         home.packages = with pkgs; [
-          (google-fonts.override { fonts = [ "Poppins" ]; })
-          font-awesome
           nerd-fonts.jetbrains-mono
-          noto-fonts
           noto-fonts-cjk-sans
-          noto-fonts-color-emoji
         ];
       }
 
