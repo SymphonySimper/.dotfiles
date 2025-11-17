@@ -347,7 +347,8 @@ in
                       value = {
                         name = if builtins.hasAttr "name" bind then bind.name else bind.command;
                         binding = builtins.concatStringsSep "" (
-                          (lib.lists.optionals (bind.mods != null) bind.mods) ++ [ bind.key ]
+                          (lib.lists.optionals (bind.mods != null) (builtins.map (mod: keys.mod.${mod}) bind.mods))
+                          ++ [ bind.key ]
                         );
                         command = bind.command;
                       };
