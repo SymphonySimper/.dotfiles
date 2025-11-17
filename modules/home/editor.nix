@@ -223,23 +223,12 @@ in
                 e =
                   let
                     cfgT = config.my.programs.terminal;
-                    cfgSh = config.my.programs.shell;
 
                     mkEx = args: (builtins.concatStringsSep " " ([ ":sh" ] ++ (builtins.concatLists args)));
                     mkRunTerminal =
                       args:
                       mkEx [
-                        [
-                          cfgT.command
-                          cfgT.args.command
-                        ]
-                        (lib.lists.optionals (my.profile == "wsl") (
-                          builtins.concatLists [
-                            [ cfgSh.wsl.command ]
-                            cfgSh.wsl.args.shell
-                            [ cfgSh.wsl.args.separator ]
-                          ]
-                        ))
+                        cfgT.args.run
                         args
                       ];
                   in

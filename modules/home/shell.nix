@@ -25,15 +25,27 @@
       wsl = lib.my.mkCommandOption {
         category = "WSL";
         command = "wsl";
-        args = {
-          shell = [
+        args = rec {
+          distro = [
             "-d"
             "NixOS"
-            "--cd"
-            "~"
+          ];
+          shellType = [
             "--shell-type"
             "login"
           ];
+          cd = "--cd";
+          cdHome = [
+            cd
+            "~"
+          ];
+          default = (
+            builtins.concatLists [
+              distro
+              shellType
+              cdHome
+            ]
+          );
           separator = "--";
         };
       };

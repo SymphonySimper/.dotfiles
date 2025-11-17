@@ -43,12 +43,29 @@ let
 in
 {
   options.my.programs.terminal =
-    (lib.my.mkCommandOption {
+    (lib.my.mkCommandOption rec {
       category = "Terminal";
       command = "alacritty";
       args = {
         command = "-e";
         class = "--class";
+        run =
+          let
+            default = [
+              command
+              args.command
+            ];
+          in
+          if my.profile == "wsl" then
+            (builtins.concatLists [
+              default
+              [ cfgSh.wsl.command ]
+              cfgSh.wsl.args.distro
+              cfgSh.wsl.args.shellType
+              [ cfgSh.wsl.args.separator ]
+            ])
+          else
+            default;
       };
     })
     // {
@@ -143,7 +160,7 @@ in
               # program = "pwsh";
               # args = ["-WorkingDirectory" "~"];
               program = cfgSh.wsl.command;
-              args = cfgSh.wsl.args.shell;
+              args = cfgSh.wsl.args.default;
             };
 
             keyboard.bindings = [
@@ -157,7 +174,7 @@ in
                       cfg.args.command
                       cfgSh.wsl.command
                     ]
-                    cfgSh.wsl.args.shell
+                    cfgSh.wsl.args.default
                     [
                       cfgSh.wsl.args.separator
                       cfgM.command

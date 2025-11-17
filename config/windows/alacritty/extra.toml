@@ -3,16 +3,16 @@ key = "T"
 mods = "Alt|Shift"
 
 [keyboard.bindings.command]
-args = ["-e", "wsl", "-d", "NixOS", "--cd", "~", "--shell-type", "login", "--", "tmux", "new"]
+args = ["-e", "wsl", "-d", "NixOS", "--shell-type", "login", "--cd", "~", "--", "tmux", "new"]
 program = "alacritty"
 
 [terminal.shell]
 args = [
     "-d",
     "NixOS",
-    "--cd",
-    "~",
     "--shell-type",
     "login",
+    "--cd",
+    "~",
 ]
 program = "wsl"
