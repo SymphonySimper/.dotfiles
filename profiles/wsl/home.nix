@@ -1,20 +1,16 @@
-{ config, pkgs, ... }:
-let
-  programFiles = "/mnt/c/Program\\ Files";
-in
+{ config, ... }:
 {
-  home.packages = [
-    (pkgs.writeShellScriptBin "win32yank.exe" ''
-      exec ${programFiles}/Neovim/bin/win32yank.exe  "''${@}"
-    '')
-
-    (
+  my.programs = {
+    shell.addToPath =
       let
-        command = config.my.programs.terminal.command;
+        programFiles = "/mnt/c/Program Files";
+        terminal = config.my.programs.terminal.command;
       in
-      pkgs.writeShellScriptBin "${command}" ''exec ${programFiles}/${command}/${command}.exe  "''${@}" ''
-    )
-  ];
+      {
+        "win32yank.exe" = "${programFiles}/Neovim/bin/win32yank.exe";
+        ${terminal} = "${programFiles}/${terminal}/${terminal}.exe";
+      };
 
-  my.programs.editor.clipboardProvider = "win32-yank";
+    editor.clipboardProvider = "win32-yank";
+  };
 }
