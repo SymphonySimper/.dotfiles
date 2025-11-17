@@ -386,7 +386,6 @@ in
                   };
 
                   "org/gnome/settings-daemon/plugins/media-keys" = {
-                    home = [ "${keys.mod.super}e" ];
                     mic-mute = [ "F8" ];
                     play = [ "F7" ];
                     volume-down = [ "${keys.mod.super}F2" ];
@@ -397,6 +396,9 @@ in
                     logout = [ "${keys.mod.super}${keys.mod.ctrl}Escape" ];
                     shutdown = [ "${keys.mod.super}${keys.mod.alt}Escape" ];
                     reboot = [ "${keys.mod.super}${keys.mod.ctrl}${keys.mod.alt}Escape" ];
+
+                    home = [ "${keys.mod.super}e" ];
+                    www = [ "${keys.mod.super}b" ]; # launch browser
 
                     custom-keybindings = builtins.map (name: "/${name}/") (builtins.attrNames customKeybinds);
                   };
