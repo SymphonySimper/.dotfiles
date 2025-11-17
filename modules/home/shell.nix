@@ -5,6 +5,9 @@
   lib,
   ...
 }:
+let
+  cfg = config.my.programs.shell;
+in
 {
   imports = [
     (lib.modules.mkAliasOptionModule [ "my" "programs" "shell" "env" ] [ "home" "sessionVariables" ])
@@ -49,6 +52,12 @@
           separator = "--";
         };
       };
+
+      addToPath = lib.mkOption {
+        type = lib.types.attrsOf lib.types.str;
+        description = "Add a executable to ~/.local/bin";
+        default = { };
+      };
     }
   );
 
@@ -62,8 +71,25 @@
         lsl = "${ls} -l --size";
       };
 
-      my.programs.shell.path = [ "${config.xdg.dataHome}/../bin" ];
     }
+
+    (
+      let
+        path = "../bin"; # relative to XDG_DATA_HOME
+      in
+      {
+        my.programs.shell.path = [ "${config.xdg.dataHome}/${path}" ];
+
+        xdg.dataFile = builtins.listToAttrs (
+          builtins.map (file: {
+            name = "${path}/${file.name}";
+            value = {
+              source = config.lib.file.mkOutOfStoreSymlink file.value;
+            };
+          }) (lib.attrsets.attrsToList cfg.addToPath)
+        );
+      }
+    )
 
     {
       programs = {
