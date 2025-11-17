@@ -89,6 +89,14 @@ in
             workspace = 1;
           }
         ];
+
+        keybinds = [
+          {
+            mods = [ "super" ];
+            key = "t";
+            command = cfg.command;
+          }
+        ];
       };
 
       copy.of =
