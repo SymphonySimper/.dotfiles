@@ -231,16 +231,17 @@ in
                         cfgT.args.run
                         args
                       ];
+                    mkEscapeString = value: if my.profile == "wsl" then "\\'${value}\\'" else "'${value}'";
                   in
                   {
                     y = mkRunTerminal [
                       config.my.programs.file-manager.command
-                      "%{file_path_absolute}"
+                      (mkEscapeString "%{file_path_absolute}")
                     ];
                     g = mkRunTerminal [
                       config.my.programs.vcs.tui.command
                       config.my.programs.vcs.tui.args.path
-                      "%{workspace_directory}"
+                      (mkEscapeString "%{workspace_directory}")
                     ];
                   };
 
