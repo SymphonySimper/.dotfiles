@@ -255,6 +255,14 @@ in
                 search-view = "list-view";
               };
 
+              # wellbeing
+              "org/gnome/desktop/break-reminders".selected-breaks = [
+                "eyesight"
+                "movement"
+              ];
+              "org/gnome/desktop/break-reminders/eyesight".play-sound = true;
+              "org/gnome/desktop/break-reminders/movement".play-sound = true;
+
               # privacy
               "org/gnome/desktop/privacy" = {
                 remove-old-temp-files = true;
