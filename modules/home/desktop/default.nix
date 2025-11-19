@@ -158,7 +158,6 @@ in
           enable = true;
           extensions = builtins.concatLists [
             [
-              { package = pkgs.gnomeExtensions.caffeine; }
               { package = pkgs.gnomeExtensions.auto-move-windows; }
             ]
 
@@ -263,14 +262,6 @@ in
               };
 
               # extensions
-              "org/gnome/shell/extensions/caffeine" = {
-                indicator-position-max = 1;
-                enable-fullscreen = false;
-                show-indicator = "only-active";
-                show-notifications = false;
-                toggle-shortcut = [ "${keys.mod.super}F10" ];
-              };
-
               "org/gnome/shell/extensions/auto-move-windows".application-list = builtins.map (
                 entry: "${entry.id}.desktop:${builtins.toString entry.workspace}"
               ) cfg.windows;
