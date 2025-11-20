@@ -20,7 +20,56 @@ in
 
         keyboards.default = {
           ids = [ "*" ];
-          settings.main.capslock = "overload(control, esc)";
+
+          settings =
+            let
+              keys = rec {
+                mod = {
+                  super = "meta";
+                  ctrl = "control";
+                  alt = "alt";
+                  shift = "shift";
+                };
+                modValue = builtins.mapAttrs (_: value: lib.strings.toUpper (builtins.substring 0 1 value)) mod;
+
+                direction = {
+                  h = "left";
+                  j = "down";
+                  k = "up";
+                  l = "right";
+                };
+              };
+            in
+            {
+              main = rec {
+                leftalt = "layer(${keys.mod.alt})";
+                rightalt = leftalt;
+
+                capslock = "overload(${keys.mod.ctrl}, esc)";
+              };
+            }
+            // (
+              # map keys.direction
+              builtins.listToAttrs (
+                builtins.map
+                  (bind: {
+                    name = bind.layer;
+                    value = builtins.mapAttrs (
+                      _: value: if bind.prefix == null then value else "${bind.prefix}-${value}"
+                    ) keys.direction;
+                  })
+                  [
+                    {
+                      layer = "${keys.mod.super}+${keys.mod.ctrl}";
+                      prefix = null;
+                    }
+                    {
+                      layer = "${keys.mod.super}+${keys.mod.alt}";
+                      prefix = keys.modValue.super;
+                    }
+                  ]
+              )
+            );
         };
       };
 
@@ -44,7 +93,7 @@ in
         idProduct = "c548";
       in
       lib.mkIf cfg.logitech.enable {
-        my.hardware.bluetooth.enable =  lib.mkDefault true;
+        my.hardware.bluetooth.enable = lib.mkDefault true;
 
         environment.systemPackages = [ pkgs.solaar ];
 
