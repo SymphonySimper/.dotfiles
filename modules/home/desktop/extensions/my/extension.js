@@ -1,33 +1,47 @@
 import { panel, overview } from "resource:///org/gnome/shell/ui/main.js";
 
 // panel visiblity logic is based on: https://github.com/fthx/panel-free
-export default class MyExtension {
-  #showPanel = () => {
+class HidePanel {
+  #show = () => {
     panel.visible = true;
   };
 
-  #hidePanel = () => {
+  #hide = () => {
     panel.visible = false;
   };
 
   enable() {
-    // refer (this._shownState): https://github.com/GNOME/gnome-shell/blob/main/js/ui/overview.js#L159
-    if (["HIDDEN", "HIDING"].includes(overview._shownState)) {
-      overview.show();
-    }
-
-    overview.connectObject(
-      "showing",
-      this.#showPanel,
-      "hiding",
-      this.#hidePanel,
-      this,
-    );
+    overview.connectObject("showing", this.#show, "hiding", this.#hide, this);
   }
 
   disable() {
     overview.disconnectObject(this);
 
-    this.#showPanel();
+    this.#show();
+  }
+}
+
+class ShowOverviewOnEnable {
+  enable() {
+    // refer (this._shownState): https://github.com/GNOME/gnome-shell/blob/main/js/ui/overview.js#L159
+    if (["HIDDEN", "HIDING"].includes(overview._shownState)) {
+      overview.show();
+    }
+  }
+
+  disable() {}
+}
+
+export default class MyExtension {
+  #extensions = [HidePanel, ShowOverviewOnEnable].map(
+    (extension) => new extension(),
+  );
+
+  enable() {
+    this.#extensions.forEach((extension) => extension.enable());
+  }
+
+  disable() {
+    this.#extensions.forEach((extension) => extension.disable());
   }
 }
