@@ -1,6 +1,10 @@
 import { InjectionManager } from "resource:///org/gnome/shell/extensions/extension.js";
 import { panel, overview } from "resource:///org/gnome/shell/ui/main.js";
-import { Urgency, Source } from "resource:///org/gnome/shell/ui/messageTray.js";
+import {
+  Urgency,
+  Source,
+  MessageTray,
+} from "resource:///org/gnome/shell/ui/messageTray.js";
 
 // panel visiblity logic is based on: https://github.com/fthx/panel-free
 class HidePanel {
@@ -55,11 +59,34 @@ class MakeAllNotificationsAsCritical {
   }
 }
 
+// shows focus border and default action can be activated with enter / space
+class AllowNotificationFocus {
+  #injectionManager = new InjectionManager();
+
+  enable() {
+    this.#injectionManager.overrideMethod(
+      MessageTray.prototype,
+      "_showNotification",
+      (_showNotification) => {
+        return function (actor, event) {
+          _showNotification.call(this, actor, event);
+          this._banner.can_focus = true;
+        };
+      },
+    );
+  }
+
+  disable() {
+    this.#injectionManager.clear();
+  }
+}
+
 export default class MyExtension {
   #extensions = [
     HidePanel,
     ShowOverviewOnEnable,
     MakeAllNotificationsAsCritical,
+    AllowNotificationFocus,
   ].map((extension) => new extension());
 
   enable() {
