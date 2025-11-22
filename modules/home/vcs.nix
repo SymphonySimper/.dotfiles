@@ -7,16 +7,6 @@
 }:
 let
   cfg = config.my.programs.vcs;
-
-  mkSSHClone =
-    {
-      host ? "github.com",
-      user ? null,
-    }:
-    let
-      suffix = if user == null then "\${1}" else "${user}/\${1}";
-    in
-    "!fc() { git clone git@${host}:${suffix}; }; fc";
 in
 {
   imports = [
@@ -93,13 +83,6 @@ in
           # (i.e) `p` == `P`
           alias = {
             c = "clone";
-            cs = mkSSHClone { };
-            csp = mkSSHClone {
-              host = cfg.sshHost.default;
-              user = my.fullName;
-            };
-            cw = mkSSHClone { host = cfg.sshHost.work; };
-
             s = "status";
             a = "add";
             m = "commit";
