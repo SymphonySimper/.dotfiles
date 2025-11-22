@@ -19,16 +19,6 @@ in
       command = "git";
     })
     // {
-      sshHost = lib.mkOption {
-        type = lib.types.attrsOf lib.types.str;
-        description = "Host for different profiles";
-        readOnly = true;
-        default = {
-          default = "github";
-          work = "work-github";
-        };
-      };
-
       tui = (
         lib.my.mkCommandOption {
           category = "VCS TUI";
@@ -36,17 +26,82 @@ in
           args.path = "-p";
         }
       );
+
+      profiles = lib.mkOption {
+        type = lib.types.attrsOf (
+          lib.types.submodule {
+            options = {
+              name = lib.mkOption {
+                type = lib.types.str;
+                description = "Perfix for indetity file";
+              };
+
+              host = lib.mkOption {
+                type = lib.types.str;
+                description = "Hostname for SSH";
+              };
+
+              email = lib.mkOption {
+                type = lib.types.str;
+                description = "VCS user email and for SSH key generation";
+              };
+
+              config = lib.mkOption {
+                type = lib.types.nullOr (
+                  lib.types.submodule {
+                    options = {
+                      dir = lib.mkOption {
+                        type = lib.types.str;
+                        description = "Directory for VCS condition config";
+                      };
+
+                      settings = lib.mkOption {
+                        type = lib.types.attrsOf lib.types.anything;
+                        description = "VCS config to include for the director";
+                      };
+                    };
+                  }
+                );
+                default = null;
+                description = "Conditional config based on directory";
+              };
+            };
+          }
+        );
+        description = "Profiles per SSH key";
+      };
     };
 
   config = lib.mkMerge [
     {
       home.packages = with pkgs; [ git-filter-repo ];
 
-      my.programs.editor.ignore = [
-        # do not ignore
-        "!.gitignore"
-        "!.gitattributes"
-      ];
+      my.programs = {
+        editor.ignore = [
+          # do not ignore
+          "!.gitignore"
+          "!.gitattributes"
+        ];
+
+        vcs.profiles = {
+          github = {
+            name = "personal";
+            host = "github.com";
+            email = cfg.root.settings.user.email;
+          };
+
+          gnome-gitlab = rec {
+            name = "gnome-gitlab";
+            host = "ssh.gitlab.gnome.org";
+            email = "164710-SymphonySimper@users.noreply.gitlab.gnome.org";
+
+            config = {
+              dir = "${my.dir.dev}/gnome";
+              settings.user.email = email;
+            };
+          };
+        };
+      };
 
       programs.git = {
         enable = true;
@@ -119,6 +174,49 @@ in
         lfs.enable = true;
       };
     }
+
+    # Profiles
+    (
+      let
+        mkSSHIdentityFilename = name: "${config.my.programs.ssh.dir}/${name}_id_ed25519";
+      in
+      {
+        home.packages = [
+          (pkgs.writeShellScriptBin "myvcssshinit" (
+            lib.strings.concatLines (
+              builtins.map (
+                profile:
+                let
+                  identityFile = mkSSHIdentityFilename profile.name;
+                in
+                # sh
+                ''
+                  if [ ! -f "${identityFile}" ]; then
+                    echo "Generating identity for ${profile.name}"
+                    ssh-keygen -t ed25519 -f "${identityFile}" -C "${profile.email}"
+                  fi
+                ''
+              ) (builtins.attrValues cfg.profiles)
+            )
+          ))
+        ];
+
+        my.programs = {
+          ssh.root.matchBlocks = builtins.mapAttrs (name: value: {
+            hostname = value.host;
+            identityFile = mkSSHIdentityFilename value.name;
+            identitiesOnly = true;
+          }) cfg.profiles;
+
+          vcs.root.includes = (
+            builtins.map (profile: {
+              condition = "gitdir:${profile.config.dir}/";
+              contents = profile.config.settings;
+            }) (builtins.filter (profile: profile.config != null) (builtins.attrValues cfg.profiles))
+          );
+        };
+      }
+    )
 
     {
       programs.lazygit = {

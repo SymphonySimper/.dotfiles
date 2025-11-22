@@ -9,22 +9,20 @@
   config = lib.mkMerge [
     {
       my.programs = {
-        vcs.root.includes = [
-          {
-            condition = "gitdir:${my.dir.work}/";
-            contents = {
+        vcs.profiles."work-github" = rec {
+          name = "work";
+          host = "github.com";
+          email = "176003709+smollan-sri-senthil-balaji@users.noreply.github.com";
+
+          config = {
+            dir = my.dir.work;
+            settings = {
               user = {
                 name = "Sri Senthil Balaji J";
-                email = "176003709+smollan-sri-senthil-balaji@users.noreply.github.com";
+                email = email;
               };
             };
-          }
-        ];
-
-        ssh.root.matchBlocks."${config.my.programs.vcs.sshHost.work}" = {
-          hostname = "github.com";
-          identityFile = "${config.my.programs.ssh.dir}/work_id_ed25519";
-          identitiesOnly = true;
+          };
         };
       };
     }

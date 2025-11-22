@@ -26,25 +26,17 @@ in
       enable = true;
       enableDefaultConfig = false;
 
-      matchBlocks = {
-        "*" = {
-          forwardAgent = false;
-          addKeysToAgent = "yes";
-          compression = false;
-          serverAliveInterval = 0;
-          serverAliveCountMax = 3;
-          hashKnownHosts = false;
-          userKnownHostsFile = "${cfg.dir}/known_hosts";
-          controlMaster = "no";
-          controlPath = "${cfg.dir}/master-%r@%n:%p";
-          controlPersist = "no";
-        };
-
-        "github" = {
-          hostname = "github.com";
-          identityFile = "${cfg.dir}/id_ed25519";
-          identitiesOnly = true;
-        };
+      matchBlocks."*" = {
+        forwardAgent = false;
+        addKeysToAgent = "yes";
+        compression = false;
+        serverAliveInterval = 0;
+        serverAliveCountMax = 3;
+        hashKnownHosts = false;
+        userKnownHostsFile = "${cfg.dir}/known_hosts";
+        controlMaster = "no";
+        controlPath = "${cfg.dir}/master-%r@%n:%p";
+        controlPersist = "no";
       };
     };
 
