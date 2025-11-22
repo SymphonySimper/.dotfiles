@@ -5,6 +5,7 @@ import {
   Source,
   MessageTray,
 } from "resource:///org/gnome/shell/ui/messageTray.js";
+import { Message } from "resource:///org/gnome/shell/ui/messageList.js";
 
 // panel visiblity logic is based on: https://github.com/fthx/panel-free
 class HidePanel {
@@ -81,12 +82,35 @@ class AllowNotificationFocus {
   }
 }
 
+class AvoidExpandingNotificationIfExpanded {
+  #injectionManager = new InjectionManager();
+
+  enable() {
+    this.#injectionManager.overrideMethod(
+      Message.prototype,
+      "expand",
+      (expand) => {
+        return function (animate) {
+          if (this.expanded) return;
+
+          expand.call(this, animate);
+        };
+      },
+    );
+  }
+
+  disable() {
+    this.#injectionManager.clear();
+  }
+}
+
 export default class MyExtension {
   #extensions = [
     HidePanel,
     ShowOverviewOnEnable,
     MakeAllNotificationsAsCritical,
     AllowNotificationFocus,
+    AvoidExpandingNotificationIfExpanded,
   ].map((extension) => new extension());
 
   enable() {
