@@ -7,6 +7,7 @@
 }:
 let
   cfg = config.my.programs.vcs;
+  defaultProfile = "default";
 in
 {
   imports = [
@@ -31,11 +32,6 @@ in
         type = lib.types.attrsOf (
           lib.types.submodule {
             options = {
-              name = lib.mkOption {
-                type = lib.types.str;
-                description = "Perfix for indetity file";
-              };
-
               host = lib.mkOption {
                 type = lib.types.str;
                 description = "Hostname for SSH";
@@ -47,21 +43,7 @@ in
               };
 
               config = lib.mkOption {
-                type = lib.types.nullOr (
-                  lib.types.submodule {
-                    options = {
-                      dir = lib.mkOption {
-                        type = lib.types.str;
-                        description = "Directory for VCS condition config";
-                      };
-
-                      settings = lib.mkOption {
-                        type = lib.types.attrsOf lib.types.anything;
-                        description = "VCS config to include for the director";
-                      };
-                    };
-                  }
-                );
+                type = lib.types.nullOr (lib.types.attrsOf lib.types.anything);
                 default = null;
                 description = "Conditional config based on directory";
               };
@@ -84,21 +66,15 @@ in
         ];
 
         vcs.profiles = {
-          github = {
-            name = "personal";
+          ${defaultProfile} = {
             host = "github.com";
             email = cfg.root.settings.user.email;
           };
 
-          gnome-gitlab = rec {
-            name = "gnome-gitlab";
+          gnome = rec {
             host = "ssh.gitlab.gnome.org";
             email = "164710-SymphonySimper@users.noreply.gitlab.gnome.org";
-
-            config = {
-              dir = "${my.dir.dev}/gnome";
-              settings.user.email = email;
-            };
+            config.user.email = email;
           };
         };
       };
@@ -178,42 +154,102 @@ in
     # Profiles
     (
       let
-        mkSSHIdentityFilename = name: "${config.my.programs.ssh.dir}/${name}_id_ed25519";
+        algorithm = "ed25519";
+
+        mkSSHIdentityFilename = name: "${config.my.programs.ssh.dir}/${name}-id-${algorithm}";
+        mkDir = name: "${my.dir.dev}/${name}";
       in
       {
-        home.packages = [
-          (pkgs.writeShellScriptBin "myvcssshinit" (
+        home.activation = {
+          myVCSProfiles = lib.hm.dag.entryAfter [ "writeBoundary" ] (
             lib.strings.concatLines (
-              builtins.map (
+              builtins.concatMap (
                 profile:
                 let
                   identityFile = mkSSHIdentityFilename profile.name;
+                  dir = mkDir profile.name;
                 in
-                # sh
-                ''
-                  if [ ! -f "${identityFile}" ]; then
-                    echo "Generating identity for ${profile.name}"
-                    ssh-keygen -t ed25519 -f "${identityFile}" -C "${profile.email}"
-                  fi
-                ''
-              ) (builtins.attrValues cfg.profiles)
+                [
+                  (lib.strings.optionalString (profile.name != defaultProfile) # sh
+                    ''
+                      if [ ! -d "${dir}" ]; then
+                        mkdir --parents --verbose "${dir}"
+                      fi
+                    ''
+                  )
+
+                  # sh
+                  ''
+                    if [ ! -f "${identityFile}" ]; then
+                      echo "Generating identity for '${profile.name}':"
+                      ${my.dir.runBin}/ssh-keygen -t ${algorithm} -f "${identityFile}" -C "${profile.value.email}"
+                    fi
+                  ''
+                ]
+              ) (lib.attrsets.attrsToList cfg.profiles)
             )
-          ))
-        ];
+          );
+        };
 
         my.programs = {
           ssh.root.matchBlocks = builtins.mapAttrs (name: value: {
             hostname = value.host;
-            identityFile = mkSSHIdentityFilename value.name;
+            identityFile = mkSSHIdentityFilename name;
             identitiesOnly = true;
           }) cfg.profiles;
 
-          vcs.root.includes = (
-            builtins.map (profile: {
-              condition = "gitdir:${profile.config.dir}/";
-              contents = profile.config.settings;
-            }) (builtins.filter (profile: profile.config != null) (builtins.attrValues cfg.profiles))
-          );
+          vcs.root = {
+            includes = (
+              builtins.map
+                (profile: {
+                  condition = "gitdir:${mkDir profile.name}/";
+                  contents = profile.value.config;
+                })
+                (
+                  lib.attrsets.attrsToList (
+                    lib.attrsets.filterAttrs (
+                      name: value: (name != defaultProfile) && (value.config != null)
+                    ) cfg.profiles
+                  )
+                )
+            );
+
+            settings.alias.cs =
+              let
+                mkClone =
+                  name: # sh
+                  ''
+                    ${cfg.command} clone git@${name}:$suffix "''${@}"
+                  '';
+
+                script = lib.getExe (
+                  pkgs.writeShellScriptBin "my-vcs-clone-ssh" (
+                    lib.strings.concatLines (
+                      builtins.concatLists [
+                        [
+                          # sh
+                          ''
+                            curr_dir=$(pwd)  
+                            suffix="$1"
+                            shift
+                          ''
+                        ]
+                        (builtins.map (
+                          name: # sh
+                          ''
+                            if [ "$curr_dir" == "${mkDir name}" ]; then
+                              ${mkClone name}
+                              exit 0
+                            fi
+                          '') (builtins.filter (name: name != defaultProfile) (builtins.attrNames cfg.profiles)))
+                        [ (mkClone defaultProfile) ]
+                      ]
+                    )
+                  )
+                );
+              in
+              "!${script}";
+          };
         };
       }
     )

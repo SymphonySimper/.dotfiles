@@ -70,7 +70,6 @@
       "${my.name}-fav-dirs" = {
         "${my.dir.data}" = defaultDirConfig;
         "${my.dir.dev}" = defaultDirConfig;
-        "${my.dir.work}" = defaultDirConfig;
       };
     };
 

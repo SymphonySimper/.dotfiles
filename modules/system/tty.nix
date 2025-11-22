@@ -1,7 +1,6 @@
 {
   my,
   config,
-  pkgs,
   lib,
   ...
 }:
@@ -46,7 +45,7 @@ let
                       overrideStrategy = "asDropin";
                       serviceConfig.ExecStart = [
                         ""
-                        "@${config.my.user.bin}/agetty agetty --login-program ${config.my.user.bin}/login -o '-p -- ${my.name}' --noclear --skip-login %I $TERM"
+                        "@${my.dir.runBin}/agetty agetty --login-program ${my.dir.runBin}/login -o '-p -- ${my.name}' --noclear --skip-login %I $TERM"
                       ];
                     };
 

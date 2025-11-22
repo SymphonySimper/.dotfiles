@@ -23,7 +23,7 @@ let
         home = "/home/${name}";
         data = "${dir.home}/importantnt";
         dev = "${dir.home}/lifeisfun";
-        work = "${dir.dev}/work";
+        runBin = "/run/current-system/sw/bin";
       };
 
       profile = mkGetDefault passedProfile "name" "default";

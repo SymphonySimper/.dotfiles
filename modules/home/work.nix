@@ -9,19 +9,13 @@
   config = lib.mkMerge [
     {
       my.programs = {
-        vcs.profiles."work-github" = rec {
-          name = "work";
+        vcs.profiles."work" = rec {
           host = "github.com";
           email = "176003709+smollan-sri-senthil-balaji@users.noreply.github.com";
 
-          config = {
-            dir = my.dir.work;
-            settings = {
-              user = {
-                name = "Sri Senthil Balaji J";
-                email = email;
-              };
-            };
+          config.user = {
+            name = "Sri Senthil Balaji J";
+            email = email;
           };
         };
       };
