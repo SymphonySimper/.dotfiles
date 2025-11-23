@@ -160,7 +160,6 @@
         ## image preview
         extraPackages = with pkgs; [
           chafa
-          ueberzugpp
           resvg
         ];
       }
