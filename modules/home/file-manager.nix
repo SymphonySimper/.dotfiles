@@ -158,10 +158,7 @@
 
       {
         ## image preview
-        extraPackages = with pkgs; [
-          chafa
-          resvg
-        ];
+        extraPackages = [ pkgs.chafa ];
       }
 
       {
