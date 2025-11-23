@@ -52,6 +52,8 @@
         zlib
       ];
     };
+
+    bash.enableLsColors = false;
   };
 
   # Clean /tmp folder on boot
