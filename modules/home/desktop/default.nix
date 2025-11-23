@@ -350,6 +350,7 @@ in
               lib.mkMerge [
                 # Keybinds
                 {
+                  "org/gnome/mutter".overlay-key = "Super_L";
 
                   "org/gnome/desktop/input-sources" = {
                     xkb-options = [
