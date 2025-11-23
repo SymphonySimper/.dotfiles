@@ -365,6 +365,9 @@ in
                     toggle-fullscreen = [ "${keys.mod.super}${keys.mod.shift}f" ];
                     toggle-maximized = [ "${keys.mod.super}f" ];
 
+                    begin-move = [ "${keys.mod.super}m" ];
+                    begin-resize = [ "${keys.mod.super}r" ];
+
                     switch-group = [ ];
                     switch-group-backward = [ ];
                     cycle-group = [ "${keys.mod.super}l" ];
