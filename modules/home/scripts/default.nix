@@ -7,7 +7,6 @@ in
     ./ffmpeg.nix
     ./ocr.nix
     ./reload.nix
-    ./todo.nix
   ];
 
   options.my.programs.scripts.enable = lib.mkEnableOption "Scripts";
@@ -17,7 +16,6 @@ in
       ffmpeg.enable = lib.mkDefault cfg.enable;
       ocr.enable = lib.mkDefault cfg.enable;
       reload.enable = lib.mkDefault cfg.enable;
-      todo.enable = lib.mkDefault cfg.enable;
     };
   };
 }
