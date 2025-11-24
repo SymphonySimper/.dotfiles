@@ -27,34 +27,6 @@ in
       };
     }
     // {
-      wsl = lib.my.mkCommandOption {
-        category = "WSL";
-        command = "wsl";
-        args = rec {
-          distro = [
-            "-d"
-            "NixOS"
-          ];
-          shellType = [
-            "--shell-type"
-            "login"
-          ];
-          cd = "--cd";
-          cdHome = [
-            cd
-            "~"
-          ];
-          default = (
-            builtins.concatLists [
-              distro
-              shellType
-              cdHome
-            ]
-          );
-          separator = "--";
-        };
-      };
-
       addToPath = lib.mkOption {
         type = lib.types.attrsOf lib.types.str;
         description = "Add a executable to ~/.local/bin";

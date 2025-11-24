@@ -1,6 +1,7 @@
 {
   my,
   config,
+  pkgs,
   lib,
   ...
 }:
@@ -20,36 +21,27 @@ let
     {
       inherit key mods;
       command = {
-        program = if cli then cfg.command else program;
-        args =
-          if cli then
-            [
-              cfg.args.command
-              cfgSh.command
-              cfgSh.args.login
-              cfgSh.args.command
-              (lib.strings.escapeShellArgs ([ program ] ++ args))
-            ]
-          else
-            args;
+        program = if cli then cfg.run.command else program;
+        args = if cli then [ (lib.strings.escapeShellArgs ([ program ] ++ args)) ] else args;
       };
     };
 in
 {
   options.my.programs.terminal =
-    (lib.my.mkCommandOption rec {
+    (lib.my.mkCommandOption {
       category = "Terminal";
       command = "alacritty";
       args = {
         command = "-e";
         class = "--class";
-        run = [
-          command
-          args.command
-        ];
       };
     })
     // {
+      run.command = lib.mkOption {
+        type = lib.types.str;
+        description = "Scrip to launch command in terminal";
+      };
+
       shell = {
         command = lib.mkOption {
           description = "Default command to run on launch";
@@ -79,6 +71,12 @@ in
           }
         ];
       };
+
+      terminal.run.command = lib.mkDefault (
+        lib.getExe (
+          pkgs.writeShellScriptBin "my-terminal-run" ''exec ${cfg.command} ${cfg.args.command} "$@"''
+        )
+      );
     };
 
     xdg.terminal-exec.enable = true;

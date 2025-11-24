@@ -224,21 +224,17 @@ in
                   let
                     cfgT = config.my.programs.terminal;
 
-                    mkEx = args: (builtins.concatStringsSep " " ([ ":sh" ] ++ (builtins.concatLists args)));
-                    mkRunTerminal =
-                      args:
-                      mkEx [
-                        cfgT.args.run
-                        args
-                      ];
+                    mkEx = args: (builtins.concatStringsSep " " ([ ":sh" ] ++ args));
                     mkEscapeString = value: if my.profile == "wsl" then "\\'${value}\\'" else "'${value}'";
                   in
                   {
-                    y = mkRunTerminal [
+                    y = mkEx [
+                      cfgT.run.command
                       config.my.programs.file-manager.command
                       (mkEscapeString "%{file_path_absolute}")
                     ];
-                    g = mkRunTerminal [
+                    g = mkEx [
+                      cfgT.run.command
                       config.my.programs.vcs.tui.command
                       config.my.programs.vcs.tui.args.path
                       (mkEscapeString "%{workspace_directory}")
