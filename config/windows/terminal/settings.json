@@ -1,0 +1,236 @@
+{
+  "$help": "https://aka.ms/terminal-documentation",
+  "$schema": "https://aka.ms/terminal-profiles-schema",
+  "centerOnLaunch": true,
+  "launchMode": "maximized",
+  "compatibility.enableUnfocusedAcrylic": false,
+  "useAcrylicInTabRow": false,
+  "copyFormatting": "none",
+  "copyOnSelect": true,
+  "disableAnimations": true,
+  "showTabsInTitlebar": true,
+  "tabSwitcherMode": "inOrder",
+  "newTabMenu": [{ "type": "remainingProfiles" }],
+  "schemes": [
+    {
+      "name": "Catppuccin Latte",
+
+      "cursorColor": "#DC8A78",
+      "selectionBackground": "#ACB0BE",
+
+      "background": "#EFF1F5",
+      "foreground": "#4C4F69",
+
+      "black": "#5C5F77",
+      "red": "#D20F39",
+      "green": "#40A02B",
+      "yellow": "#DF8E1D",
+      "blue": "#1E66F5",
+      "purple": "#EA76CB",
+      "cyan": "#179299",
+      "white": "#ACB0BE",
+
+      "brightBlack": "#ACB0BE",
+      "brightRed": "#D20F39",
+      "brightGreen": "#40A02B",
+      "brightYellow": "#DF8E1D",
+      "brightBlue": "#1E66F5",
+      "brightPurple": "#EA76CB",
+      "brightCyan": "#179299",
+      "brightWhite": "#BCC0CC"
+    },
+    {
+      "name": "Catppuccin Mocha",
+
+      "cursorColor": "#F5E0DC",
+      "selectionBackground": "#585B70",
+
+      "background": "#1E1E2E",
+      "foreground": "#CDD6F4",
+
+      "black": "#45475A",
+      "red": "#F38BA8",
+      "green": "#A6E3A1",
+      "yellow": "#F9E2AF",
+      "blue": "#89B4FA",
+      "purple": "#F5C2E7",
+      "cyan": "#94E2D5",
+      "white": "#BAC2DE",
+
+      "brightBlack": "#585B70",
+      "brightRed": "#F38BA8",
+      "brightGreen": "#A6E3A1",
+      "brightYellow": "#F9E2AF",
+      "brightBlue": "#89B4FA",
+      "brightPurple": "#F5C2E7",
+      "brightCyan": "#94E2D5",
+      "brightWhite": "#A6ADC8"
+    }
+  ],
+  "theme": {
+    "light": "Catppuccin Latte",
+    "dark": "Catppuccin Mocha"
+  },
+  "themes": [
+    {
+      "name": "Catppuccin Latte",
+      "tab": {
+        "background": "#EFF1F5FF",
+        "showCloseButton": "always",
+        "unfocusedBackground": null
+      },
+      "tabRow": {
+        "background": "#E6E9EFFF",
+        "unfocusedBackground": "#DCE0E8FF"
+      },
+      "window": {
+        "applicationTheme": "light"
+      }
+    },
+    {
+      "name": "Catppuccin Mocha",
+      "tab": {
+        "background": "#1E1E2EFF",
+        "showCloseButton": "always",
+        "unfocusedBackground": null
+      },
+      "tabRow": {
+        "background": "#181825FF",
+        "unfocusedBackground": "#11111BFF"
+      },
+      "window": {
+        "applicationTheme": "dark"
+      }
+    }
+  ],
+  "defaultProfile": "{00000000-0000-0000-0000-000000000001}",
+  "profiles": {
+    "defaults": {
+      "colorScheme": {
+        "light": "Catppuccin Latte",
+        "dark": "Catppuccin Mocha"
+      },
+      "cursorShape": "filledBox",
+      "font": { "face": "JetBrainsMono Nerd Font" },
+      "padding": "2",
+      "scrollbarState": "hidden",
+      "altGrAliasing": false
+    },
+    "list": [
+      {
+        "name": "NixOS",
+        "guid": "{00000000-0000-0000-0000-000000000001}",
+        "commandline": "%SystemRoot%\\System32\\wsl.exe -d NixOS",
+        "startingDirectory": "~"
+      },
+      {
+        "name": "PowerShell",
+        "guid": "{00000000-0000-0000-0000-000000000002}",
+        "commandline": "%SystemDrive%\\Program Files\\PowerShell\\7\\pwsh.exe",
+        "startingDirectory": "%USERPROFILE%"
+      },
+      {
+        "name": "Command Prompt",
+        "guid": "{00000000-0000-0000-0000-000000000003}",
+        "commandline": "%SystemRoot%\\System32\\cmd.exe",
+        "startingDirectory": "%USERPROFILE%"
+      },
+      {
+        "name": "Windows PowerShell",
+        "guid": "{00000000-0000-0000-0000-000000000004}",
+        "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "startingDirectory": "%USERPROFILE%"
+      }
+    ]
+  },
+  "actions": [
+    { "id": "User.closeTab", "command": "closeTab" },
+    { "id": "User.tabSearch", "command": "tabSearch" }
+  ],
+  "keybindings": [
+    { "id": "Terminal.CopyToClipboard", "keys": "ctrl+shift+c" },
+    { "id": "Terminal.PasteFromClipboard", "keys": "ctrl+shift+v" },
+    { "id": "Terminal.SelectAll", "keys": "alt+shift+a" },
+    { "id": "Terminal.ToggleMarkMode", "keys": "alt+v" },
+    { "id": "Terminal.FindText", "keys": "ctrl+shift+f" },
+
+    { "id": "Terminal.ToggleCommandPalette", "keys": "alt+shift+p" },
+    { "id": "Terminal.ToggleFullscreen", "keys": "alt+shift+f" },
+
+    { "id": "Terminal.OpenNewTab", "keys": "alt+t" },
+    { "id": "Terminal.OpenNewTabDropdown", "keys": "alt+shift+t" },
+    { "id": "User.tabSearch", "keys": "alt+ctrl+t" },
+    { "id": "User.closeTab", "keys": "alt+shift+c" },
+    { "id": "Terminal.SwitchToTab0", "keys": "alt+1" },
+    { "id": "Terminal.SwitchToTab1", "keys": "alt+2" },
+    { "id": "Terminal.SwitchToTab2", "keys": "alt+3" },
+    { "id": "Terminal.SwitchToTab3", "keys": "alt+4" },
+    { "id": "Terminal.SwitchToTab4", "keys": "alt+5" },
+    { "id": "Terminal.SwitchToTab5", "keys": "alt+6" },
+    { "id": "Terminal.SwitchToTab6", "keys": "alt+7" },
+    { "id": "Terminal.SwitchToTab7", "keys": "alt+8" },
+    { "id": "Terminal.SwitchToLastTab", "keys": "alt+9" },
+
+    { "id": null, "keys": "ctrl+alt+1" },
+    { "id": null, "keys": "ctrl+alt+2" },
+    { "id": null, "keys": "ctrl+alt+3" },
+    { "id": null, "keys": "ctrl+alt+4" },
+    { "id": null, "keys": "ctrl+alt+5" },
+    { "id": null, "keys": "ctrl+alt+6" },
+    { "id": null, "keys": "ctrl+alt+7" },
+    { "id": null, "keys": "ctrl+alt+8" },
+    { "id": null, "keys": "ctrl+alt+9" },
+    { "id": null, "keys": "ctrl+shift+1" },
+    { "id": null, "keys": "ctrl+shift+2" },
+    { "id": null, "keys": "ctrl+shift+3" },
+    { "id": null, "keys": "ctrl+shift+4" },
+    { "id": null, "keys": "ctrl+shift+5" },
+    { "id": null, "keys": "ctrl+shift+6" },
+    { "id": null, "keys": "ctrl+shift+7" },
+    { "id": null, "keys": "ctrl+shift+8" },
+    { "id": null, "keys": "ctrl+shift+9" },
+    { "id": null, "keys": "ctrl+shift+t" },
+    { "id": null, "keys": "ctrl+shift+d" },
+    { "id": null, "keys": "ctrl+tab" },
+    { "id": null, "keys": "ctrl+shift+tab" },
+    { "id": null, "keys": "ctrl+shift+k" },
+    { "id": null, "keys": "ctrl+comma" },
+    { "id": null, "keys": "ctrl+shift+w" },
+    { "id": null, "keys": "enter" },
+    { "id": null, "keys": "ctrl+insert" },
+    { "id": null, "keys": "alt+f4" },
+    { "id": null, "keys": "alt+shift+left" },
+    { "id": null, "keys": "alt+left" },
+    { "id": null, "keys": "f11" },
+    { "id": null, "keys": "ctrl+numpad0" },
+    { "id": null, "keys": "ctrl+shift+period" },
+    { "id": null, "keys": "ctrl+shift+pgup" },
+    { "id": null, "keys": "ctrl+shift+pgdn" },
+    { "id": null, "keys": "ctrl+shift+n" },
+    { "id": null, "keys": "alt+shift+right" },
+    { "id": null, "keys": "alt+space" },
+    { "id": null, "keys": "alt+shift+plus" },
+    { "id": null, "keys": "alt+down" },
+    { "id": null, "keys": "ctrl+numpad_minus" },
+    { "id": null, "keys": "alt+right" },
+    { "id": null, "keys": "alt+up" },
+    { "id": null, "keys": "ctrl+alt+left" },
+    { "id": null, "keys": "shift+insert" },
+    { "id": null, "keys": "ctrl+shift+comma" },
+    { "id": null, "keys": "ctrl+alt+comma" },
+    { "id": null, "keys": "alt+shift+down" },
+    { "id": null, "keys": "alt+shift+up" },
+    { "id": null, "keys": "win+sc(41)" },
+    { "id": null, "keys": "menu" },
+    { "id": null, "keys": "alt+shift+minus" },
+    { "id": null, "keys": "ctrl+shift+space" },
+    { "id": null, "keys": "ctrl+shift+down" },
+    { "id": null, "keys": "ctrl+shift+end" },
+    { "id": null, "keys": "ctrl+shift+home" },
+    { "id": null, "keys": "ctrl+shift+up" },
+    { "id": null, "keys": "ctrl+shift+a" },
+    { "id": null, "keys": "alt+enter" },
+    { "id": null, "keys": "ctrl+shift+m" },
+    { "id": null, "keys": "ctrl+shift+p" }
+  ]
+}
