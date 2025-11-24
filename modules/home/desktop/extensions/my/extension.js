@@ -6,6 +6,7 @@ import {
   MessageTray,
 } from "resource:///org/gnome/shell/ui/messageTray.js";
 import { Message } from "resource:///org/gnome/shell/ui/messageList.js";
+import { Indicator } from "resource:///org/gnome/shell/ui/status/darkMode.js";
 
 // panel visiblity logic is based on: https://github.com/fthx/panel-free
 class HidePanel {
@@ -104,6 +105,22 @@ class AvoidExpandingNotificationIfExpanded {
   }
 }
 
+class RemoveDarkModeToggle {
+  #injectionManager = new InjectionManager();
+
+  enable() {
+    this.#injectionManager.overrideMethod(Indicator.prototype, "_init", () => {
+      return function () {
+        return;
+      };
+    });
+  }
+
+  disable() {
+    this.#injectionManager.clear();
+  }
+}
+
 export default class MyExtension {
   #extensions = [
     HidePanel,
@@ -111,6 +128,7 @@ export default class MyExtension {
     MakeAllNotificationsAsCritical,
     AllowNotificationFocus,
     AvoidExpandingNotificationIfExpanded,
+    RemoveDarkModeToggle,
   ].map((extension) => new extension());
 
   enable() {
