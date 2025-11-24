@@ -1,7 +1,6 @@
 {
   my,
   config,
-  pkgs,
   lib,
   ...
 }:
@@ -9,11 +8,6 @@ let
   cfg = config.my.programs.terminal;
   cfgSh = config.my.programs.shell;
   cfgM = config.my.programs.mux;
-
-  extraConfigFile = {
-    default = "extra.toml";
-    win = "extra-windows.toml";
-  };
 
   mkProgramKeyBind =
     {
@@ -49,23 +43,10 @@ in
       args = {
         command = "-e";
         class = "--class";
-        run =
-          let
-            default = [
-              command
-              args.command
-            ];
-          in
-          if my.profile == "wsl" then
-            (builtins.concatLists [
-              default
-              [ cfgSh.wsl.command ]
-              cfgSh.wsl.args.distro
-              cfgSh.wsl.args.shellType
-              [ cfgSh.wsl.args.separator ]
-            ])
-          else
-            default;
+        run = [
+          command
+          args.command
+        ];
       };
     })
     // {
@@ -98,103 +79,7 @@ in
           }
         ];
       };
-
-      copy.of =
-        let
-          winDir = "WINDOWS/${cfg.command}";
-        in
-        [
-          {
-            from = "CONFIG/${cfg.command}/";
-            to = "${winDir}/";
-            exclude = [ extraConfigFile.default ];
-            post = # sh
-              ''
-                mv "${winDir}/${extraConfigFile.win}" "${winDir}/${extraConfigFile.default}"
-              '';
-          }
-        ];
     };
-
-    catppuccin.alacritty.enable = false;
-
-    xdg.configFile =
-      let
-        formatToml = pkgs.formats.toml { };
-      in
-      {
-        "${cfg.command}/${extraConfigFile.default}".source = (
-          formatToml.generate extraConfigFile.default {
-            terminal.shell = {
-              program = cfgSh.command;
-              args = [
-                cfgSh.args.login
-              ]
-              ++ (lib.lists.optionals (cfg.shell.command != null) [
-                cfgSh.args.command
-                cfg.shell.command
-              ]);
-            };
-
-            keyboard.bindings = [
-              (mkProgramKeyBind {
-                key = "T";
-                mods = "Alt|Shift";
-                cli = true;
-                program = cfgM.command;
-                args = [ cfgM.args.new ];
-              })
-
-              (mkProgramKeyBind {
-                key = "G";
-                mods = "Alt";
-                cli = true;
-                program = config.my.programs.vcs.tui.command;
-              })
-
-              (mkProgramKeyBind {
-                key = "Y";
-                mods = "Alt";
-                cli = true;
-                program = config.my.programs.file-manager.command;
-              })
-            ];
-          }
-        );
-
-        "${cfg.command}/${extraConfigFile.win}".source = (
-          formatToml.generate extraConfigFile.win {
-            terminal.shell = {
-              # program = "pwsh";
-              # args = ["-WorkingDirectory" "~"];
-              program = cfgSh.wsl.command;
-              args = cfgSh.wsl.args.default;
-            };
-
-            keyboard.bindings = [
-              {
-                key = "T";
-                mods = "Alt|Shift";
-                command = {
-                  program = cfg.command;
-                  args = builtins.concatLists [
-                    [
-                      cfg.args.command
-                      cfgSh.wsl.command
-                    ]
-                    cfgSh.wsl.args.default
-                    [
-                      cfgSh.wsl.args.separator
-                      cfgM.command
-                      cfgM.args.new
-                    ]
-                  ];
-                };
-              }
-            ];
-          }
-        );
-      };
 
     xdg.terminal-exec.enable = true;
 
@@ -203,9 +88,19 @@ in
 
       settings = {
         general = {
-          import = [ "./${extraConfigFile.default}" ];
           live_config_reload = false;
           ipc_socket = false;
+        };
+
+        terminal.shell = {
+          program = cfgSh.command;
+          args = [
+            cfgSh.args.login
+          ]
+          ++ (lib.lists.optionals (cfg.shell.command != null) [
+            cfgSh.args.command
+            cfg.shell.command
+          ]);
         };
 
         window = {
@@ -276,15 +171,29 @@ in
             mods = "Alt|Shift";
             action = "ToggleFullscreen";
           }
-        ];
 
-        colors =
-          (builtins.fromTOML (
-            lib.my.mkGetThemeSource {
-              package = cfg.command;
-              filename = "NAME-FLAVOR.toml";
-            }
-          )).colors;
+          (mkProgramKeyBind {
+            key = "T";
+            mods = "Alt|Shift";
+            cli = true;
+            program = cfgM.command;
+            args = [ cfgM.args.new ];
+          })
+
+          (mkProgramKeyBind {
+            key = "G";
+            mods = "Alt";
+            cli = true;
+            program = config.my.programs.vcs.tui.command;
+          })
+
+          (mkProgramKeyBind {
+            key = "Y";
+            mods = "Alt";
+            cli = true;
+            program = config.my.programs.file-manager.command;
+          })
+        ];
       };
     };
   };
