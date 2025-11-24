@@ -146,10 +146,14 @@ in
         config.warn_timeout = "2m";
       };
 
-      my.programs.editor.ignore = [
-        "!.envrc"
-        ".direnv"
-      ];
+      my.programs = {
+        editor.ignore = [
+          "!.envrc"
+          ".direnv"
+        ];
+
+        shell.prompt.settings.direnv.disabled = false;
+      };
     }
 
     {
