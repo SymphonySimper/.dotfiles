@@ -114,7 +114,8 @@
       "font": { "face": "JetBrainsMono Nerd Font" },
       "padding": "2",
       "scrollbarState": "hidden",
-      "altGrAliasing": false
+      "altGrAliasing": false,
+      "historySize": 1000
     },
     "list": [
       {
