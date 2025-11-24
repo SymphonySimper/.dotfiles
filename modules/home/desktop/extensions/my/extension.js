@@ -40,33 +40,24 @@ class ShowOverviewOnEnable {
   disable() {}
 }
 
-class MakeAllNotificationsAsCritical {
+class Overrides {
   #injectionManager = new InjectionManager();
 
-  enable() {
-    this.#injectionManager.overrideMethod(
-      Source.prototype,
-      "addNotification",
-      (addNotification) => {
-        return function (notification) {
-          notification.urgency = Urgency.CRITICAL;
-          addNotification.call(this, notification); // original method
-        };
-      },
-    );
+  #add(prototype, method, override) {
+    this.#injectionManager.overrideMethod(prototype, method, override);
   }
 
-  disable() {
-    this.#injectionManager.clear();
-  }
-}
-
-// shows focus border and default action can be activated with enter / space
-class AllowNotificationFocus {
-  #injectionManager = new InjectionManager();
-
   enable() {
-    this.#injectionManager.overrideMethod(
+    // Make all notifications as critical
+    this.#add(Source.prototype, "addNotification", (addNotification) => {
+      return function (notification) {
+        notification.urgency = Urgency.CRITICAL;
+        addNotification.call(this, notification); // original method
+      };
+    });
+
+    // shows focus border and default action can be activated with enter / space
+    this.#add(
       MessageTray.prototype,
       "_showNotification",
       (_showNotification) => {
@@ -76,43 +67,19 @@ class AllowNotificationFocus {
         };
       },
     );
-  }
 
-  disable() {
-    this.#injectionManager.clear();
-  }
-}
+    // Avoid expanding notification if expanded
+    this.#add(Message.prototype, "expand", (expand) => {
+      return function (animate) {
+        if (this.expanded) return;
 
-class AvoidExpandingNotificationIfExpanded {
-  #injectionManager = new InjectionManager();
-
-  enable() {
-    this.#injectionManager.overrideMethod(
-      Message.prototype,
-      "expand",
-      (expand) => {
-        return function (animate) {
-          if (this.expanded) return;
-
-          expand.call(this, animate);
-        };
-      },
-    );
-  }
-
-  disable() {
-    this.#injectionManager.clear();
-  }
-}
-
-class RemoveDarkModeToggle {
-  #injectionManager = new InjectionManager();
-
-  enable() {
-    this.#injectionManager.overrideMethod(Indicator.prototype, "_init", () => {
-      return function () {
-        return;
+        expand.call(this, animate);
       };
+    });
+
+    // Remove dark mode toggle
+    this.#add(Indicator.prototype, "_init", (_init) => {
+      return function () {};
     });
   }
 
@@ -122,14 +89,9 @@ class RemoveDarkModeToggle {
 }
 
 export default class MyExtension {
-  #extensions = [
-    HidePanel,
-    ShowOverviewOnEnable,
-    MakeAllNotificationsAsCritical,
-    AllowNotificationFocus,
-    AvoidExpandingNotificationIfExpanded,
-    RemoveDarkModeToggle,
-  ].map((extension) => new extension());
+  #extensions = [HidePanel, ShowOverviewOnEnable, Overrides].map(
+    (extension) => new extension(),
+  );
 
   enable() {
     this.#extensions.forEach((extension) => extension.enable());
