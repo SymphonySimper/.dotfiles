@@ -96,6 +96,7 @@ in
         bash = {
           enable = true;
           enableCompletion = true;
+
           shellOptions = [
             "autocd" # cd when directory
           ];
@@ -111,11 +112,13 @@ in
 
         readline = {
           enable = true;
+
           variables = {
             editing-mode = "vi";
             completion-ignore-case = true;
             show-all-if-ambiguous = true;
           };
+
           bindings = {
             "\\C-l" = "clear-screen";
           };
@@ -167,6 +170,7 @@ in
 
       programs.starship = {
         enable = true;
+
         settings = {
           add_newline = false;
           scan_timeout = 30;
