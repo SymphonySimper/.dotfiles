@@ -130,6 +130,8 @@ in
 
         set -g @catppuccin_window_text " #{pane_current_command}"
         set -g @catppuccin_window_current_text " #{pane_current_command}"
+
+        set -ag status-right "#{E:@catppuccin_status_session}"
       '';
 
     programs = {
