@@ -14,34 +14,6 @@ in
   };
 
   config = lib.mkMerge [
-    (lib.mkIf cfg.keyboard.enable {
-      services.keyd = {
-        enable = true;
-
-        keyboards.default = {
-          ids = [ "*" ];
-
-          settings = {
-            main = rec {
-              leftalt = "layer(alt)";
-              rightalt = leftalt;
-
-              capslock = "overload(control, esc)";
-            };
-          };
-        };
-      };
-
-      # refer: https://github.com/rvaiya/keyd?tab=readme-ov-file#why-is-my-trackpad-is-interfering-with-input-after-enabling-keyd
-      environment.etc."libinput/local-overrides.quirks".text = ''
-        [Serial Keyboards]
-
-        MatchUdevType=keyboard
-        MatchName=keyd*keyboard
-        AttrKeyboardIntegration=internal
-      '';
-    })
-
     (
       let # To get idVendor and idProduct run
         ## nix shell nixpkgs#usbutils
