@@ -24,7 +24,7 @@ in
 {
   options.my.programs.mux =
     (lib.my.mkCommandOption {
-      category = "Terminal";
+      category = "Terminal Mux";
       command = "tmux";
       args = {
         new = "new";
