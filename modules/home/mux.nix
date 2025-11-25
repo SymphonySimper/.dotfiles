@@ -125,7 +125,9 @@ in
 
         set -g @catppuccin_window_status_style "basic"
 
-        setw -g automatic-rename off
+        setw -g automatic-rename on
+        setw -g automatic-rename-format "#{pane_current_path}: #{pane_current_command}"
+
         set -g @catppuccin_window_text " #{pane_current_command}"
         set -g @catppuccin_window_current_text " #{pane_current_command}"
       '';
