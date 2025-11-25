@@ -21,55 +21,14 @@ in
         keyboards.default = {
           ids = [ "*" ];
 
-          settings =
-            let
-              keys = rec {
-                mod = {
-                  super = "meta";
-                  ctrl = "control";
-                  alt = "alt";
-                  shift = "shift";
-                };
-                modValue = builtins.mapAttrs (_: value: lib.strings.toUpper (builtins.substring 0 1 value)) mod;
+          settings = {
+            main = rec {
+              leftalt = "layer(alt)";
+              rightalt = leftalt;
 
-                direction = {
-                  h = "left";
-                  j = "down";
-                  k = "up";
-                  l = "right";
-                };
-              };
-            in
-            {
-              main = rec {
-                leftalt = "layer(${keys.mod.alt})";
-                rightalt = leftalt;
-
-                capslock = "overload(${keys.mod.ctrl}, esc)";
-              };
-            }
-            // (
-              # map keys.direction
-              builtins.listToAttrs (
-                builtins.map
-                  (bind: {
-                    name = bind.layer;
-                    value = builtins.mapAttrs (
-                      _: value: if bind.prefix == null then value else "${bind.prefix}-${value}"
-                    ) keys.direction;
-                  })
-                  [
-                    {
-                      layer = "${keys.mod.super}+${keys.mod.ctrl}";
-                      prefix = null;
-                    }
-                    {
-                      layer = "${keys.mod.super}+${keys.mod.alt}";
-                      prefix = keys.modValue.super;
-                    }
-                  ]
-              )
-            );
+              capslock = "overload(control, esc)";
+            };
+          };
         };
       };
 
