@@ -118,6 +118,7 @@ in
       ''
         ## status
         set -g status on
+        set -g status-position top
         set -g status-left ""
         set -g status-right ""
         set -g status-interval 5
