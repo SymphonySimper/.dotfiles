@@ -78,13 +78,13 @@ in
           key = "g";
           action = "new-window";
           cd = true;
-          args = [ (config.my.programs.vcs.tui.command) ];
+          args = [ config.my.programs.vcs.tui.command ];
         }
         {
           key = "y";
           action = "new-window";
           cd = true;
-          args = [ (config.my.programs.file-manager.command) ];
+          args = [ config.my.programs.file-manager.command ];
         }
 
         # Open history in editor
