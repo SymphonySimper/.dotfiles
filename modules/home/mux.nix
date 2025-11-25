@@ -32,6 +32,7 @@ in
     })
     // {
       enable = lib.mkEnableOption "Terminal MUX";
+      status.enable = lib.mkEnableOption "Statusbar";
 
       keybinds = lib.mkOption {
         description = "MUX keybinds";
@@ -114,20 +115,26 @@ in
       ];
     };
 
-    catppuccin.tmux.extraConfig = # conf
-      ''
-        ## status
-        set -g status on
-        set -g status-left ""
-        set -g status-right ""
-        set -g status-interval 5
+    catppuccin.tmux.extraConfig =
+      if cfg.status.enable then
+        ''
+          ## status
+          set -g status on
+          set -g status-left ""
+          set -g status-right ""
+          set -g status-interval 5
 
-        set -g @catppuccin_window_status_style "basic"
+          set -g @catppuccin_window_status_style "basic"
 
-        setw -g automatic-rename off
-        set -g @catppuccin_window_text " #{pane_current_command}"
-        set -g @catppuccin_window_current_text " #{pane_current_command}"
-      '';
+          setw -g automatic-rename off
+          set -g @catppuccin_window_text " #{pane_current_command}"
+          set -g @catppuccin_window_current_text " #{pane_current_command}"
+        ''
+      else
+        ''
+          set -g status off
+          setw -g automatic-rename off
+        '';
 
     programs = {
       tmux = {
@@ -145,7 +152,6 @@ in
         extraConfig = lib.strings.concatLines (
           builtins.concatLists [
             [
-              # conf
               ''
                 set -g default-command "exec ${config.my.programs.shell.command}"
 
