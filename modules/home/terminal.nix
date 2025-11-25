@@ -8,18 +8,12 @@
 let
   cfg = config.my.programs.terminal;
   runCommand = "myterminalrun";
-
-  keys = {
-    alt = "alt";
-    ctrl = "ctrl";
-    shift = "shift";
-  };
 in
 {
   options.my.programs.terminal =
     (lib.my.mkCommandOption {
       category = "Terminal";
-      command = "kitty";
+      command = "alacritty";
       args = {
         command = "-e";
         run = runCommand;
@@ -30,7 +24,7 @@ in
         description = "Terminal run script content";
         type = lib.types.lines;
         default = # sh
-          ''${cfg.command} @ launch --cwd=current --type=tab "$@" > /dev/null 2>&1'';
+          ''${cfg.command} ${cfg.args.command} "$@" > /dev/null 2>&1'';
       };
 
       shell = {
@@ -52,7 +46,7 @@ in
 
           windows = [
             {
-              id = "kitty";
+              id = "Alacritty";
               workspace = 1;
             }
           ];
@@ -69,70 +63,93 @@ in
 
       xdg.terminal-exec.enable = true;
 
-      programs.kitty = {
+      programs.alacritty = {
         enable = true;
-        shellIntegration.mode = "no-prompt-mark no-cursor";
-
-        font = {
-          size = 12;
-          name = my.theme.font.mono;
-        };
 
         settings = {
-          scrollback_lines = 1000;
-          hide_window_decorations = true;
-          allow_remote_control = true;
+          general = {
+            live_config_reload = false;
+            ipc_socket = false;
+          };
 
-          mouse_hide_wait = 0;
+          window = {
+            decorations = "none";
+            opacity = 1;
+            startup_mode = "Maximized";
+            padding = rec {
+              x = 2;
+              y = x;
+            };
+            dynamic_padding = true;
+          };
 
-          cursor_shape = "block";
-          cursor_shape_unfocused = "hollow";
-          cursor_blink_interval = 0;
+          scrolling.history = 1000;
+          selection.save_to_clipboard = true;
 
-          tab_bar_edge = "top";
-          tab_bar_style = "separator";
-          tab_separator = "''";
-          tab_title_template = "' [{index}] {title} '";
-          tab_bar_background = my.theme.color.crust;
-          inactive_tab_background = my.theme.color.surface0;
+          font = {
+            size = 12;
 
-          clear_all_shortcuts = true;
-        };
+            normal = {
+              family = my.theme.font.mono;
+              style = "Regular";
+            };
+          };
 
-        actionAliases = {
-          "launch_tab" = "launch --cwd=current --type=tab";
-        };
+          cursor = {
+            vi_mode_style = "Block";
 
-        keybindings = {
-          "${keys.ctrl}+${keys.shift}+c" = "copy_to_clipboard";
-          "${keys.ctrl}+${keys.shift}+v" = "paste_from_clipboard";
+            style = {
+              blinking = "off";
+              shape = "Block";
+            };
+          };
 
-          "${keys.ctrl}+${keys.shift}+equal" = "change_font_size all +2.0";
-          "${keys.ctrl}+${keys.shift}+plus" = "change_font_size all +2.0";
+          mouse.hide_when_typing = true;
 
-          "${keys.alt}+t" = "launch_tab";
-          "${keys.alt}+${keys.shift}+c" = "close_tab";
+          # comment out below line to disable hints
+          # hints.enabled = [ ];
 
-          "${keys.alt}+v" =
-            "launch_tab --stdin-source=@screen_scrollback ${config.my.programs.editor.command}";
-          "${keys.alt}+${keys.shift}+v" = "open_url_with_hints";
-
-          # external programs
-          "${keys.alt}+g" = "launch_tab ${config.my.programs.vcs.tui.command}";
-          "${keys.alt}+y" = "launch_tab ${config.my.programs.file-manager.command}";
-        }
-        // (builtins.listToAttrs (
-          builtins.map (
-            i:
-            let
-              index = builtins.toString i;
-            in
+          keyboard.bindings = [
             {
-              name = "${keys.alt}+${index}";
-              value = "goto_tab ${index}";
+              key = "V";
+              mods = "Alt";
+              action = "ToggleViMode";
             }
-          ) (builtins.genList (x: x + 1) 9)
-        ));
+            {
+              key = "T";
+              mods = "Alt";
+              action = "CreateNewWindow";
+            }
+            {
+              key = "M";
+              mods = "Alt";
+              action = "ToggleMaximized";
+            }
+            {
+              key = "F";
+              mods = "Alt|Shift";
+              action = "ToggleFullscreen";
+            }
+
+            {
+              key = "G";
+              mods = "Alt";
+              command = {
+                program = cfg.args.run;
+                args = [ config.my.programs.vcs.tui.command ];
+              };
+            }
+
+            {
+              key = "Y";
+              mods = "Alt";
+              command = {
+                program = cfg.args.run;
+                args = [ config.my.programs.file-manager.command ];
+              };
+            }
+          ];
+        };
       };
     })
   ];
