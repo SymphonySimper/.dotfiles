@@ -63,6 +63,57 @@ in
 
       xdg.terminal-exec.enable = true;
 
+      programs.ghostty = {
+        enable = true;
+        clearDefaultKeybinds = true;
+
+        settings = rec {
+          font-family = my.theme.font.mono;
+          font-size = 12;
+          faint-opacity = 1;
+
+          cursor-style = "block";
+          cursor-style-blink = false;
+          mouse-hide-while-typing = true;
+
+          scrollback-limit = 1000;
+
+          maximize = true;
+          window-padding-x = 1;
+          window-padding-y = window-padding-x;
+          window-padding-balance = true;
+          window-decoration = "none";
+          window-show-tab-bar = "never";
+
+          window-inherit-working-directory = true;
+          shell-integration-features = [
+            "title"
+            "no-cursor"
+            "no-sudo"
+          ];
+
+          keybind = [
+            "ctrl+shift+c=copy_to_clipboard"
+            "ctrl+shift+v=paste_from_clipboard"
+
+            "ctrl+equal=increase_font_size:1"
+            "ctrl+minus=decrease_font_size:1"
+            "ctrl+0=reset_font_size"
+
+            "alt+shift+p=toggle_command_palette"
+
+            "alt+v=write_scrollback_file:open"
+
+            "alt+t=new_tab"
+            "alt+ctrl+t=toggle_tab_overview"
+            "alt+shift+c=close_tab"
+          ]
+          ++ (builtins.map (index: "alt+${index}=goto_tab:${index}") (
+            builtins.genList (x: builtins.toString (x + 1)) 9
+          ));
+        };
+      };
+
       programs.alacritty = {
         enable = true;
 
