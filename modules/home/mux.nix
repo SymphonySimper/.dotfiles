@@ -153,12 +153,6 @@ in
                 # https://github.com/tmux/tmux/wiki/FAQ#how-do-i-use-rgb-colour
                 set -as terminal-features ",${defaultTerminal}:RGB"
 
-                # For yazi
-                set -g allow-passthrough on
-
-                set -ga update-environment TERM
-                set -ga update-environment TERM_PROGRAM
-
                 setw -g monitor-activity on
                 set -g visual-activity off # If enabled shows activity in window message
 
