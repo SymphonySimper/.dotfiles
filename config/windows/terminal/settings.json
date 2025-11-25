@@ -182,6 +182,7 @@
     { "id": "Terminal.PasteFromClipboard", "keys": "ctrl+shift+v" },
 
     { "id": "User.ScrollbackEditorWSL", "keys": "alt+v" },
+    { "id": "Terminal.ToggleMarkMode", "keys": "alt+shift+v" },
 
     { "id": "Terminal.ToggleCommandPalette", "keys": "alt+shift+p" },
     { "id": "Terminal.ToggleFullscreen", "keys": "alt+shift+f" },
