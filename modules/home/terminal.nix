@@ -27,11 +27,25 @@ in
           ''${cfg.command} ${cfg.args.command} "$@" > /dev/null 2>&1'';
       };
 
-      shell = {
-        command = lib.mkOption {
-          description = "Default command to run on launch";
-          type = lib.types.nullOr lib.types.str;
-          default = null;
+      shell = lib.mkOption {
+        type = lib.types.submodule {
+          options = {
+            program = lib.mkOption {
+              description = "Program to run on launch";
+              type = lib.types.str;
+            };
+
+            args = lib.mkOption {
+              description = "Args for the program";
+              type = lib.types.listOf lib.types.str;
+              default = [ ];
+            };
+          };
+        };
+
+        default = {
+          program = config.my.programs.shell.command;
+          args = [ config.my.programs.shell.args.login ];
         };
       };
     };
@@ -71,6 +85,8 @@ in
             live_config_reload = false;
             ipc_socket = false;
           };
+
+          terminal.shell = cfg.shell;
 
           window = {
             decorations = "none";
