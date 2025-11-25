@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}:
+{ config, ... }:
 let
   cfgSh = config.my.programs.shell;
 
@@ -20,15 +15,14 @@ in
 
     editor.clipboardProvider = "win32-yank";
 
-    terminal.run.command = lib.getExe (
-      pkgs.writeShellScriptBin "my-wsl-terminal-run" # sh
-        ''
-          user_dir=$(wslpath $(${path.system32}/cmd.exe /c "echo %USERPROFILE%" 2>/dev/null) | tr -d "\r")
+    terminal.runScriptContent = # sh
+      ''
+        user_dir=$(wslpath $(${path.system32}/cmd.exe /c "echo %USERPROFILE%" 2>/dev/null) | tr -d "\r")
 
-          exec "$user_dir/AppData/Local/Microsoft/WindowsApps/wt.exe" \
-            --window 0 --profile "NixOS" \
-            ${cfgSh.command} ${cfgSh.args.login} ${cfgSh.args.command} "$*"
-        ''
-    );
+        exec "$user_dir/AppData/Local/Microsoft/WindowsApps/wt.exe" \
+          --window 0 --profile "NixOS" \
+          ${cfgSh.command} ${cfgSh.args.login} ${cfgSh.args.command} "$*"
+      '';
+
   };
 }

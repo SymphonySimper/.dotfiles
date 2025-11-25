@@ -231,12 +231,12 @@ in
                   in
                   {
                     y = mkEx [
-                      cfgT.run.command
+                      cfgT.args.run
                       config.my.programs.file-manager.command
                       (mkEscapeString "%{file_path_absolute}")
                     ];
                     g = mkEx [
-                      cfgT.run.command
+                      cfgT.args.run
                       config.my.programs.vcs.tui.command
                       config.my.programs.vcs.tui.args.path
                       (mkEscapeString "%{workspace_directory}")
