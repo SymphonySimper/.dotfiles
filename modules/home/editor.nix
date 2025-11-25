@@ -91,6 +91,8 @@ in
   config = lib.mkMerge [
     {
       my.programs = {
+        shell.env.VISUAL = cfg.command;
+
         editor.ignore = builtins.concatLists [
           [
             # general
