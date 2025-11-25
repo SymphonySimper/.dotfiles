@@ -5,13 +5,14 @@ let
       category,
       command,
       args ? null,
+      readOnly ? true,
     }:
     {
       command = lib.mkOption {
         type = lib.types.str;
         description = "${category} command";
         default = command;
-        readOnly = true;
+        inherit readOnly;
       };
     }
     // (lib.attrsets.optionalAttrs (args != null) {
