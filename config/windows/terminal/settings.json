@@ -146,7 +146,6 @@
   },
   "actions": [
     { "id": "User.closeTab", "command": "closeTab" },
-    { "id": "User.tabSearch", "command": "tabSearch" },
     {
       "id": "User.ScrollbackEditor",
       "command": {
@@ -189,7 +188,6 @@
 
     { "id": "Terminal.OpenNewTab", "keys": "alt+t" },
     { "id": "Terminal.OpenNewTabDropdown", "keys": "alt+shift+t" },
-    { "id": "User.tabSearch", "keys": "alt+ctrl+t" },
     { "id": "User.closeTab", "keys": "alt+shift+c" },
     { "id": "Terminal.SwitchToTab0", "keys": "alt+1" },
     { "id": "Terminal.SwitchToTab1", "keys": "alt+2" },
