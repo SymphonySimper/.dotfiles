@@ -37,6 +37,10 @@
             linemode = "size";
           };
 
+          preview = {
+            max_width = 1920;
+          };
+
           opener = {
             edit = [
               {
@@ -154,11 +158,6 @@
             }
           ];
         };
-      }
-
-      {
-        ## image preview
-        extraPackages = [ pkgs.chafa ];
       }
 
       {
