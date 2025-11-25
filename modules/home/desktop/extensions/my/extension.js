@@ -76,11 +76,6 @@ class Overrides {
         expand.call(this, animate);
       };
     });
-
-    // Remove dark mode toggle
-    this.#add(Indicator.prototype, "_init", (_init) => {
-      return function () {};
-    });
   }
 
   disable() {
