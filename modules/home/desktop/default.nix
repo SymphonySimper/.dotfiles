@@ -356,6 +356,7 @@ in
                     xkb-options = [
                       "terminate:ctrl_alt_bksp" # default for xkb-options
                       "lv3:rwin_switch" # alternate characters key: setting it to right super to free right alt
+                      "ctrl:nocaps" # caps lock as ctrl
                     ];
                   };
 
