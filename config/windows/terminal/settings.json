@@ -146,14 +146,43 @@
   },
   "actions": [
     { "id": "User.closeTab", "command": "closeTab" },
-    { "id": "User.tabSearch", "command": "tabSearch" }
+    { "id": "User.tabSearch", "command": "tabSearch" },
+    {
+      "id": "User.ScrollbackEditor",
+      "command": {
+        "action": "multipleActions",
+        "actions": [
+          { "action": "selectAll" },
+          { "action": "copy" },
+          { "action": "scrollToBottom" },
+          {
+            "action": "wt",
+            "commandline": "--window 0 pwsh -c \"Get-Clipboard | hx\""
+          }
+        ]
+      }
+    },
+    {
+      "id": "User.ScrollbackEditorWSL",
+      "command": {
+        "action": "multipleActions",
+        "actions": [
+          { "action": "selectAll" },
+          { "action": "copy" },
+          { "action": "scrollToBottom" },
+          {
+            "action": "wt",
+            "commandline": "--window 0 --profile NixOS bash -l -c \"win32yank.exe -o | hx\""
+          }
+        ]
+      }
+    }
   ],
   "keybindings": [
     { "id": "Terminal.CopyToClipboard", "keys": "ctrl+shift+c" },
     { "id": "Terminal.PasteFromClipboard", "keys": "ctrl+shift+v" },
-    { "id": "Terminal.SelectAll", "keys": "alt+shift+a" },
-    { "id": "Terminal.ToggleMarkMode", "keys": "alt+v" },
-    { "id": "Terminal.FindText", "keys": "ctrl+shift+f" },
+
+    { "id": "User.ScrollbackEditorWSL", "keys": "alt+v" },
 
     { "id": "Terminal.ToggleCommandPalette", "keys": "alt+shift+p" },
     { "id": "Terminal.ToggleFullscreen", "keys": "alt+shift+f" },
