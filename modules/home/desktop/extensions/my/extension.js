@@ -13,6 +13,19 @@ import {
 } from "resource:///org/gnome/shell/ui/messageTray.js";
 import { Message } from "resource:///org/gnome/shell/ui/messageList.js";
 
+class ShowOverviewOnEnable {
+  #states = new Set(["SHOWN", "SHOWING"]);
+
+  enable() {
+    // refer (this._shownState): https://github.com/GNOME/gnome-shell/blob/main/js/ui/overview.js#L159
+    if (this.#states.has(overview._shownState)) return;
+
+    overview.show();
+  }
+
+  disable() {}
+}
+
 // panel visiblity logic is based on: https://github.com/fthx/panel-free
 class HidePanel {
   #show = () => {
@@ -32,17 +45,6 @@ class HidePanel {
 
     this.#show();
   }
-}
-
-class ShowOverviewOnEnable {
-  enable() {
-    // refer (this._shownState): https://github.com/GNOME/gnome-shell/blob/main/js/ui/overview.js#L159
-    if (["HIDDEN", "HIDING"].includes(overview._shownState)) {
-      overview.show();
-    }
-  }
-
-  disable() {}
 }
 
 class Overrides {
@@ -159,7 +161,7 @@ class AltNum {
 }
 
 export default class MyExtension extends Extension {
-  #extensions = [HidePanel, ShowOverviewOnEnable, Overrides, AltNum].map(
+  #extensions = [ShowOverviewOnEnable, HidePanel, Overrides, AltNum].map(
     (extension) => new extension(),
   );
 
