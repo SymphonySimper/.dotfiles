@@ -91,14 +91,15 @@ class Overrides {
 }
 
 class AltNum {
-  #keybindNames = Array.from(
+  #KEYBIND_NAMES = Array.from(
     Array(9)
       .keys()
       .map((i) => `focus-window-${i + 1}`),
   );
 
-  #windowList = [];
   #workspace = null;
+  #windows = new Map();
+  #ids = [];
 
   #resetWorkspace() {
     if (this.#workspace === null) return;
@@ -107,31 +108,52 @@ class AltNum {
     this.#workspace = null;
   }
 
-  #focusWindow(index) {
-    if (this.#windowList.length <= index) return;
+  #populateWindows() {
+    const windows = global.display
+      .get_tab_list(Meta.TabList.NORMAL_ALL, this.#workspace)
+      .map((w) => [w.get_id(), w])
+      .toSorted((a, b) => a[0] - b[0]);
 
-    this.#windowList[index].activate(0);
+    this.#windows = new Map(windows);
+    this.#ids = this.#windows.keys().toArray();
   }
+
+  #addWindow = (_, window) => {
+    const id = window.get_id();
+    if (this.#windows.has(id)) return; // not possible, but just for saftey
+
+    this.#windows.set(id, window);
+    this.#ids.push(id);
+  };
+
+  #removeWindow = (_, window) => {
+    const id = window.get_id();
+    if (!this.#windows.has(id)) return;
+
+    this.#windows.delete(id);
+    this.#ids.splice(this.#ids.indexOf(id), 1);
+  };
 
   #updateWorkspace = () => {
     this.#resetWorkspace();
+
     this.#workspace = global.workspace_manager.get_active_workspace();
 
     this.#workspace.connectObject(
       "window-added",
-      this.#updateWindowList,
+      this.#addWindow,
       "window-removed",
-      this.#updateWindowList,
+      this.#removeWindow,
     );
 
-    this.#updateWindowList();
+    this.#populateWindows();
   };
 
-  #updateWindowList = () => {
-    this.#windowList = global.display
-      .get_tab_list(Meta.TabList.NORMAL_ALL, this.#workspace)
-      .toSorted((a, b) => a.get_id() - b.get_id());
-  };
+  #activateWindow(index) {
+    if (this.#windows.size <= index) return;
+
+    this.#windows.get(this.#ids[index]).activate(0);
+  }
 
   enable(settings) {
     this.#updateWorkspace();
@@ -141,25 +163,26 @@ class AltNum {
       this.#updateWorkspace,
     );
 
-    this.#keybindNames.entries().forEach(([index, name]) =>
+    this.#KEYBIND_NAMES.entries().forEach(([index, name]) =>
       wm.addKeybinding(
         name,
         settings,
         Meta.KeyBindingFlags.NONE,
         Shell.ActionMode.ALL,
         () => {
-          this.#focusWindow(index);
+          this.#activateWindow(index);
         },
       ),
     );
   }
 
   disable() {
-    this.#windowList = [];
+    this.#resetWorkspace();
+    this.#windows.clear();
+    this.#ids = [];
 
     global.workspace_manager.disconnectObject(this);
-    this.#resetWorkspace();
-    this.#keybindNames.forEach((name) => wm.removeKeybinding(name));
+    this.#KEYBIND_NAMES.forEach((name) => wm.removeKeybinding(name));
   }
 }
 
