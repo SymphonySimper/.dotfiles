@@ -15,12 +15,16 @@ import { Message } from "resource:///org/gnome/shell/ui/messageList.js";
 
 export default class MyExtension extends Extension {
   #settings = null;
+
   #im = new InjectionManager();
+
   #focusWindowKeybindNames = Array.from(
     Array(9)
       .keys()
       .map((i) => `focus-window-${i + 1}`),
   );
+  #focusWindowList = [];
+  #focusedWorkspace = null;
 
   #showPanel = () => {
     panel.visible = true;
@@ -94,18 +98,38 @@ export default class MyExtension extends Extension {
   }
 
   #focusWindow(index) {
-    const workspace = global.workspace_manager.get_active_workspace();
+    if (this.#focusWindowList.length <= index) return;
 
-    const windows = global.display
-      .get_tab_list(Meta.TabList.NORMAL_ALL, workspace)
-      .toSorted((a, b) => a.get_id() - b.get_id());
-
-    if (windows.length <= index) return;
-
-    windows[index].activate(0);
+    this.#focusWindowList[index].activate(0);
   }
 
+  #updateFocusWindowList = () => {
+    if (this.#focusedWorkspace !== null) {
+      this.#focusedWorkspace.disconnectObject(this);
+    }
+
+    this.#focusedWorkspace = global.workspace_manager.get_active_workspace();
+
+    this.#focusedWorkspace.connectObject(
+      "window-added",
+      this.#updateFocusWindowList,
+      "window-removed",
+      this.#updateFocusWindowList,
+    );
+
+    this.#focusWindowList = global.display
+      .get_tab_list(Meta.TabList.NORMAL_ALL, this.#focusedWorkspace)
+      .toSorted((a, b) => a.get_id() - b.get_id());
+  };
+
   #enableFocusWindowKeybinds() {
+    this.#updateFocusWindowList();
+
+    global.workspace_manager.connectObject(
+      "active-workspace-changed",
+      this.#updateFocusWindowList,
+    );
+
     this.#focusWindowKeybindNames.entries().forEach(([index, name]) =>
       wm.addKeybinding(
         name,
@@ -120,6 +144,10 @@ export default class MyExtension extends Extension {
   }
 
   #disableFocusWindowKeybinds() {
+    global.workspace_manager.disconnectObject(this);
+
+    this.#focusedWorkspace = null;
+    this.#focusWindowList = [];
     this.#focusWindowKeybindNames.forEach((name) => wm.removeKeybinding(name));
   }
 
