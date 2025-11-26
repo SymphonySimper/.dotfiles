@@ -55,7 +55,6 @@ let
               builtins.readFile "${inputs.catppuccin.packages.${system}.palette}/palette.json"
             )).${theme.flavor}.colors;
 
-        gtk = if theme.dark then "Adwaita-dark" else "Adwaita";
         wallpaper = "${dir.home}/.dotfiles/modules/flake/assets/images/wallpaper.png";
 
         font = {
