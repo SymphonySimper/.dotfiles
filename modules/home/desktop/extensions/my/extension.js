@@ -99,10 +99,10 @@ class AltNum {
   #workspace = null;
 
   #resetWorkspace() {
-    if (this.#workspace !== null) {
-      this.#workspace.disconnectObject(this);
-      this.#workspace = null;
-    }
+    if (this.#workspace === null) return;
+
+    this.#workspace.disconnectObject(this);
+    this.#workspace = null;
   }
 
   #focusWindow(index) {
