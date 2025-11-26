@@ -220,6 +220,19 @@ in
         }
 
         {
+          # XML
+          packages = [ pkgs.libxml2 ];
+
+          language.xml.formatter = {
+            command = "xmllint";
+            args = [
+              "--format"
+              "-"
+            ];
+          };
+        }
+
+        {
           # Tailwindcss
           packages = [ pkgs.tailwindcss-language-server ];
         }
