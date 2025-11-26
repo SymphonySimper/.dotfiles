@@ -175,6 +175,12 @@ in
                     uuid = metadata.uuid;
                     version = "1";
                     src = ./extensions/${pname};
+                    nativeBuildInputs = with pkgs; [ buildPackages.glib ];
+                    buildPhase = ''
+                      if [ -d schemas ]; then
+                        glib-compile-schemas --strict schemas
+                      fi
+                    '';
                     installPhase = ''
                       mkdir -p $out/share/gnome-shell/extensions/
                       cp -r -T . $out/share/gnome-shell/extensions/${metadata.uuid}
