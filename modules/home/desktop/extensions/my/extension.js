@@ -13,66 +13,56 @@ import {
 } from "resource:///org/gnome/shell/ui/messageTray.js";
 import { Message } from "resource:///org/gnome/shell/ui/messageList.js";
 
-export default class MyExtension extends Extension {
-  #settings = null;
-
-  #im = new InjectionManager();
-
-  #focusWindowKeybindNames = Array.from(
-    Array(9)
-      .keys()
-      .map((i) => `focus-window-${i + 1}`),
-  );
-  #focusWindowList = [];
-  #focusedWorkspace = null;
-
-  #showPanel = () => {
+// panel visiblity logic is based on: https://github.com/fthx/panel-free
+class HidePanel {
+  #show = () => {
     panel.visible = true;
   };
 
-  #hidePanel = () => {
+  #hide = () => {
     panel.visible = false;
   };
 
-  #enableHidePanel() {
-    // panel visiblity logic is based on: https://github.com/fthx/panel-free
-    overview.connectObject(
-      "showing",
-      this.#showPanel,
-      "hiding",
-      this.#hidePanel,
-      this,
-    );
+  enable() {
+    overview.connectObject("showing", this.#show, "hiding", this.#hide, this);
   }
 
-  #disableHidePanel() {
+  disable() {
     overview.disconnectObject(this);
 
-    this.#showPanel();
+    this.#show();
   }
+}
 
-  #showOverview() {
+class ShowOverviewOnEnable {
+  enable() {
     // refer (this._shownState): https://github.com/GNOME/gnome-shell/blob/main/js/ui/overview.js#L159
     if (["HIDDEN", "HIDING"].includes(overview._shownState)) {
       overview.show();
     }
   }
 
-  #enableOverrides() {
+  disable() {}
+}
+
+class Overrides {
+  #injectionManager = new InjectionManager();
+
+  #add(prototype, method, override) {
+    this.#injectionManager.overrideMethod(prototype, method, override);
+  }
+
+  enable() {
     // Make all notifications as critical
-    this.#im.overrideMethod(
-      Source.prototype,
-      "addNotification",
-      (addNotification) => {
-        return function (notification) {
-          notification.urgency = Urgency.CRITICAL;
-          addNotification.call(this, notification); // original method
-        };
-      },
-    );
+    this.#add(Source.prototype, "addNotification", (addNotification) => {
+      return function (notification) {
+        notification.urgency = Urgency.CRITICAL;
+        addNotification.call(this, notification); // original method
+      };
+    });
 
     // shows focus border and default action can be activated with enter / space
-    this.#im.overrideMethod(
+    this.#add(
       MessageTray.prototype,
       "_showNotification",
       (_showNotification) => {
@@ -84,7 +74,7 @@ export default class MyExtension extends Extension {
     );
 
     // Avoid expanding notification if expanded
-    this.#im.overrideMethod(Message.prototype, "expand", (expand) => {
+    this.#add(Message.prototype, "expand", (expand) => {
       return function (animate) {
         if (this.expanded) return;
 
@@ -93,47 +83,63 @@ export default class MyExtension extends Extension {
     });
   }
 
-  #disableOverrides() {
-    this.#im.clear();
+  disable() {
+    this.#injectionManager.clear();
+  }
+}
+
+class AltNum {
+  #keybindNames = Array.from(
+    Array(9)
+      .keys()
+      .map((i) => `focus-window-${i + 1}`),
+  );
+
+  #windowList = [];
+  #workspace = null;
+
+  #resetWorkspace() {
+    if (this.#workspace !== null) {
+      this.#workspace.disconnectObject(this);
+      this.#workspace = null;
+    }
   }
 
   #focusWindow(index) {
-    if (this.#focusWindowList.length <= index) return;
+    if (this.#windowList.length <= index) return;
 
-    this.#focusWindowList[index].activate(0);
+    this.#windowList[index].activate(0);
   }
 
-  #updateFocusWindowList = () => {
-    if (this.#focusedWorkspace !== null) {
-      this.#focusedWorkspace.disconnectObject(this);
-    }
+  #updateWindowList = () => {
+    this.#resetWorkspace();
 
-    this.#focusedWorkspace = global.workspace_manager.get_active_workspace();
+    this.#workspace = global.workspace_manager.get_active_workspace();
 
-    this.#focusedWorkspace.connectObject(
+    this.#workspace.connectObject(
       "window-added",
-      this.#updateFocusWindowList,
+      this.#updateWindowList,
       "window-removed",
-      this.#updateFocusWindowList,
+      this.#updateWindowList,
     );
 
-    this.#focusWindowList = global.display
-      .get_tab_list(Meta.TabList.NORMAL_ALL, this.#focusedWorkspace)
+    this.#windowList = global.display
+      .get_tab_list(Meta.TabList.NORMAL_ALL, this.#workspace)
       .toSorted((a, b) => a.get_id() - b.get_id());
   };
 
-  #enableFocusWindowKeybinds() {
-    this.#updateFocusWindowList();
+  enable(settings) {
+    this.#updateWindowList();
 
     global.workspace_manager.connectObject(
       "active-workspace-changed",
-      this.#updateFocusWindowList,
+      this.#updateWindowList,
     );
 
-    this.#focusWindowKeybindNames.entries().forEach(([index, name]) =>
+    this.#keybindNames.entries().forEach(([index, name]) =>
       wm.addKeybinding(
         name,
-        this.#settings,
+        settings,
         Meta.KeyBindingFlags.NONE,
         Shell.ActionMode.ALL,
         () => {
@@ -143,28 +149,27 @@ export default class MyExtension extends Extension {
     );
   }
 
-  #disableFocusWindowKeybinds() {
-    global.workspace_manager.disconnectObject(this);
+  disable() {
+    this.#windowList = [];
 
-    this.#focusedWorkspace = null;
-    this.#focusWindowList = [];
-    this.#focusWindowKeybindNames.forEach((name) => wm.removeKeybinding(name));
+    global.workspace_manager.disconnectObject(this);
+    this.#resetWorkspace();
+    this.#keybindNames.forEach((name) => wm.removeKeybinding(name));
   }
+}
+
+export default class MyExtension extends Extension {
+  #extensions = [HidePanel, ShowOverviewOnEnable, Overrides, AltNum].map(
+    (extension) => new extension(),
+  );
 
   enable() {
-    this.#settings = this.getSettings();
+    const settings = this.getSettings();
 
-    this.#enableHidePanel();
-    this.#showOverview();
-    this.#enableOverrides();
-    this.#enableFocusWindowKeybinds();
+    this.#extensions.forEach((extension) => extension.enable(settings));
   }
 
   disable() {
-    this.#settings = null;
-
-    this.#disableHidePanel();
-    this.#disableOverrides();
-    this.#disableFocusWindowKeybinds();
+    this.#extensions.forEach((extension) => extension.disable());
   }
 }
