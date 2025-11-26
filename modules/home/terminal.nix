@@ -15,6 +15,8 @@ in
       category = "Terminal";
       command = "alacritty";
       args = {
+        msg = "msg";
+        newWindow = "create-window";
         command = "-e";
         run = runCommand;
       };
@@ -24,7 +26,7 @@ in
         description = "Terminal run script content";
         type = lib.types.lines;
         default = # sh
-          ''${cfg.command} ${cfg.args.command} "$@" > /dev/null 2>&1'';
+          ''${cfg.command} ${cfg.args.msg} ${cfg.args.newWindow} ${cfg.args.command} "$@" > /dev/null 2>&1'';
       };
 
       shell = lib.mkOption {
@@ -56,7 +58,12 @@ in
     (lib.mkIf my.gui.enable {
       my.programs = {
         desktop = {
-          autostart = [ cfg.command ];
+          autostart = [
+            {
+              name = "alacritty-daemon";
+              command = "${cfg.command} --daemon";
+            }
+          ];
 
           windows = [
             {
@@ -69,7 +76,7 @@ in
             {
               mods = [ "super" ];
               key = "t";
-              command = cfg.command;
+              command = "${cfg.command} ${cfg.args.msg} ${cfg.args.newWindow}";
             }
           ];
         };
@@ -83,7 +90,7 @@ in
         settings = {
           general = {
             live_config_reload = false;
-            ipc_socket = false;
+            ipc_socket = true;
           };
 
           terminal.shell = cfg.shell;
@@ -151,8 +158,11 @@ in
               key = "G";
               mods = "Alt";
               command = {
-                program = cfg.args.run;
-                args = [ config.my.programs.vcs.tui.command ];
+                program = cfg.command;
+                args = [
+                  cfg.args.command
+                  config.my.programs.vcs.tui.command
+                ];
               };
             }
 
@@ -160,8 +170,11 @@ in
               key = "Y";
               mods = "Alt";
               command = {
-                program = cfg.args.run;
-                args = [ config.my.programs.file-manager.command ];
+                program = cfg.command;
+                args = [
+                  cfg.args.command
+                  config.my.programs.file-manager.command
+                ];
               };
             }
           ];
