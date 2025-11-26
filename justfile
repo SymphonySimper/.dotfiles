@@ -31,4 +31,4 @@ update-flake:
     nix flake update --commit-lock-file
 
 gnome-nested-shell:
-    dbus-run-session gnome-shell --devkit --wayland
+    SHELL_DEBUG=all dbus-run-session gnome-shell --devkit --wayland
