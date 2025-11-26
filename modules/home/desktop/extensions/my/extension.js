@@ -1,4 +1,7 @@
-import { InjectionManager } from "resource:///org/gnome/shell/extensions/extension.js";
+import {
+  Extension,
+  InjectionManager,
+} from "resource:///org/gnome/shell/extensions/extension.js";
 import { panel, overview } from "resource:///org/gnome/shell/ui/main.js";
 import {
   Urgency,
@@ -6,58 +9,57 @@ import {
   MessageTray,
 } from "resource:///org/gnome/shell/ui/messageTray.js";
 import { Message } from "resource:///org/gnome/shell/ui/messageList.js";
-import { Indicator } from "resource:///org/gnome/shell/ui/status/darkMode.js";
 
-// panel visiblity logic is based on: https://github.com/fthx/panel-free
-class HidePanel {
-  #show = () => {
+export default class MyExtension extends Extension {
+  #im = new InjectionManager();
+
+  #showPanel = () => {
     panel.visible = true;
   };
 
-  #hide = () => {
+  #hidePanel = () => {
     panel.visible = false;
   };
 
-  enable() {
-    overview.connectObject("showing", this.#show, "hiding", this.#hide, this);
+  #enableHidePanel() {
+    // panel visiblity logic is based on: https://github.com/fthx/panel-free
+    overview.connectObject(
+      "showing",
+      this.#showPanel,
+      "hiding",
+      this.#hidePanel,
+      this,
+    );
   }
 
-  disable() {
+  #disableHidePanel() {
     overview.disconnectObject(this);
 
-    this.#show();
+    this.#showPanel();
   }
-}
 
-class ShowOverviewOnEnable {
-  enable() {
+  #showOverview() {
     // refer (this._shownState): https://github.com/GNOME/gnome-shell/blob/main/js/ui/overview.js#L159
     if (["HIDDEN", "HIDING"].includes(overview._shownState)) {
       overview.show();
     }
   }
 
-  disable() {}
-}
-
-class Overrides {
-  #injectionManager = new InjectionManager();
-
-  #add(prototype, method, override) {
-    this.#injectionManager.overrideMethod(prototype, method, override);
-  }
-
-  enable() {
+  #enableOverrides() {
     // Make all notifications as critical
-    this.#add(Source.prototype, "addNotification", (addNotification) => {
-      return function (notification) {
-        notification.urgency = Urgency.CRITICAL;
-        addNotification.call(this, notification); // original method
-      };
-    });
+    this.#im.overrideMethod(
+      Source.prototype,
+      "addNotification",
+      (addNotification) => {
+        return function (notification) {
+          notification.urgency = Urgency.CRITICAL;
+          addNotification.call(this, notification); // original method
+        };
+      },
+    );
 
     // shows focus border and default action can be activated with enter / space
-    this.#add(
+    this.#im.overrideMethod(
       MessageTray.prototype,
       "_showNotification",
       (_showNotification) => {
@@ -69,7 +71,7 @@ class Overrides {
     );
 
     // Avoid expanding notification if expanded
-    this.#add(Message.prototype, "expand", (expand) => {
+    this.#im.overrideMethod(Message.prototype, "expand", (expand) => {
       return function (animate) {
         if (this.expanded) return;
 
@@ -78,21 +80,18 @@ class Overrides {
     });
   }
 
-  disable() {
-    this.#injectionManager.clear();
+  #disableOverrides() {
+    this.#im.clear();
   }
-}
-
-export default class MyExtension {
-  #extensions = [HidePanel, ShowOverviewOnEnable, Overrides].map(
-    (extension) => new extension(),
-  );
 
   enable() {
-    this.#extensions.forEach((extension) => extension.enable());
+    this.#enableHidePanel();
+    this.#showOverview();
+    this.#enableOverrides();
   }
 
   disable() {
-    this.#extensions.forEach((extension) => extension.disable());
+    this.#disableHidePanel();
+    this.#disableOverrides();
   }
 }
