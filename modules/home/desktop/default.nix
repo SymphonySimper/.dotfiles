@@ -375,16 +375,6 @@ in
                     begin-move = [ "${keys.mod.super}m" ];
                     begin-resize = [ "${keys.mod.super}r" ];
 
-                    switch-group = [ ];
-                    switch-group-backward = [ ];
-                    cycle-group = [ "${keys.mod.super}l" ];
-                    cycle-group-backward = [ "${keys.mod.super}h" ];
-
-                    cycle-windows = [ "${keys.mod.super}k" ];
-                    cycle-windows-backward = [ "${keys.mod.super}j" ];
-                    switch-windows = [ ];
-                    switch-windows-backward = [ ];
-
                     switch-input-source = [ ];
                     switch-input-source-backward = [ ];
                   };
