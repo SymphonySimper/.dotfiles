@@ -113,9 +113,8 @@ class AltNum {
     this.#windowList[index].activate(0);
   }
 
-  #updateWindowList = () => {
+  #updateWorkspace = () => {
     this.#resetWorkspace();
-
     this.#workspace = global.workspace_manager.get_active_workspace();
 
     this.#workspace.connectObject(
@@ -125,17 +124,21 @@ class AltNum {
       this.#updateWindowList,
     );
 
+    this.#updateWindowList();
+  };
+
+  #updateWindowList = () => {
     this.#windowList = global.display
       .get_tab_list(Meta.TabList.NORMAL_ALL, this.#workspace)
       .toSorted((a, b) => a.get_id() - b.get_id());
   };
 
   enable(settings) {
-    this.#updateWindowList();
+    this.#updateWorkspace();
 
     global.workspace_manager.connectObject(
       "active-workspace-changed",
-      this.#updateWindowList,
+      this.#updateWorkspace,
     );
 
     this.#keybindNames.entries().forEach(([index, name]) =>
