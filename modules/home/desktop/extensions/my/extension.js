@@ -1,8 +1,11 @@
+import Meta from "gi://Meta";
+import Shell from "gi://Shell";
+
+import { panel, overview, wm } from "resource:///org/gnome/shell/ui/main.js";
 import {
   Extension,
   InjectionManager,
 } from "resource:///org/gnome/shell/extensions/extension.js";
-import { panel, overview } from "resource:///org/gnome/shell/ui/main.js";
 import {
   Urgency,
   Source,
@@ -11,7 +14,13 @@ import {
 import { Message } from "resource:///org/gnome/shell/ui/messageList.js";
 
 export default class MyExtension extends Extension {
+  #settings = null;
   #im = new InjectionManager();
+  #focusWindowKeybindNames = Array.from(
+    Array(9)
+      .keys()
+      .map((i) => `focus-window-${i + 1}`),
+  );
 
   #showPanel = () => {
     panel.visible = true;
@@ -84,14 +93,50 @@ export default class MyExtension extends Extension {
     this.#im.clear();
   }
 
+  #focusWindow(index) {
+    const workspace = global.workspace_manager.get_active_workspace();
+
+    const windows = global.display
+      .get_tab_list(Meta.TabList.NORMAL_ALL, workspace)
+      .toSorted((a, b) => a.get_id() - b.get_id());
+
+    if (windows.length <= index) return;
+
+    windows[index].activate(0);
+  }
+
+  #enableFocusWindowKeybinds() {
+    this.#focusWindowKeybindNames.entries().forEach(([index, name]) =>
+      wm.addKeybinding(
+        name,
+        this.#settings,
+        Meta.KeyBindingFlags.NONE,
+        Shell.ActionMode.ALL,
+        () => {
+          this.#focusWindow(index);
+        },
+      ),
+    );
+  }
+
+  #disableFocusWindowKeybinds() {
+    this.#focusWindowKeybindNames.forEach((name) => wm.removeKeybinding(name));
+  }
+
   enable() {
+    this.#settings = this.getSettings();
+
     this.#enableHidePanel();
     this.#showOverview();
     this.#enableOverrides();
+    this.#enableFocusWindowKeybinds();
   }
 
   disable() {
+    this.#settings = null;
+
     this.#disableHidePanel();
     this.#disableOverrides();
+    this.#disableFocusWindowKeybinds();
   }
 }

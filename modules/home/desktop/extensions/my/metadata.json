@@ -2,5 +2,6 @@
   "name": "My",
   "description": "Just the way I like it.",
   "uuid": "my@symphonysimper.com",
+  "settings-schema": "org.gnome.shell.extensions.my",
   "shell-version": ["49"]
 }

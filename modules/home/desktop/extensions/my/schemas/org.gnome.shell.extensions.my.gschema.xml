@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.my" path="/org/gnome/shell/extensions/my/">
+    <key type="as" name="focus-window-1">
+      <default><![CDATA[['<Alt>1']]]></default>
+    </key>
+    <key type="as" name="focus-window-2">
+      <default><![CDATA[['<Alt>2']]]></default>
+    </key>
+    <key type="as" name="focus-window-3">
+      <default><![CDATA[['<Alt>3']]]></default>
+    </key>
+    <key type="as" name="focus-window-4">
+      <default><![CDATA[['<Alt>4']]]></default>
+    </key>
+    <key type="as" name="focus-window-5">
+      <default><![CDATA[['<Alt>5']]]></default>
+    </key>
+    <key type="as" name="focus-window-6">
+      <default><![CDATA[['<Alt>6']]]></default>
+    </key>
+    <key type="as" name="focus-window-7">
+      <default><![CDATA[['<Alt>7']]]></default>
+    </key>
+    <key type="as" name="focus-window-8">
+      <default><![CDATA[['<Alt>8']]]></default>
+    </key>
+    <key type="as" name="focus-window-9">
+      <default><![CDATA[['<Alt>9']]]></default>
+    </key>
+  </schema>
+</schemalist>
