@@ -15,13 +15,6 @@ let
       alt = "<Alt>";
       shift = "<Shift>";
     };
-
-    direction = {
-      left = "h";
-      down = "j";
-      up = "k";
-      right = "l";
-    };
   };
 
   workspaces = (builtins.genList (x: builtins.toString (x + 1)) 9);
