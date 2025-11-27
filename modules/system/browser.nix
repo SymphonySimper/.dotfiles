@@ -1,24 +1,6 @@
-{
-  my,
-  config,
-  lib,
-  ...
-}:
+{ config, lib, ... }:
 let
   cfg = config.my.programs.browser;
-
-  blankPage = "file://${
-    builtins.toFile "home.html" # html
-      ''
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <title>New Tab</title>
-          </head>
-          <body style="background-color: ${my.theme.color.base};"></body>
-        </html>
-      ''
-  }";
 in
 {
   options.my.programs.browser = {
@@ -158,12 +140,9 @@ in
           DefaultSearchProviderEnabled = true;
           DefaultSearchProviderName = cfg.search.name;
           DefaultSearchProviderSearchURL = mkDefaultSearchProviderURL { };
-          DefaultSearchProviderNewTabURL = blankPage;
 
           ShowHomeButton = false;
           HomepageIsNewTabPage = true;
-          HomepageLocation = blankPage;
-          NewTabPageLocation = blankPage;
 
           SiteSearchSettings = builtins.map (
             option:
