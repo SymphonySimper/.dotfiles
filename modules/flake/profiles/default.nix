@@ -7,6 +7,8 @@
 let
   mkGetDefault = helpers.mkGetDefault;
 
+  colors = import ./colors.nix;
+
   mkMy =
     {
       settings ? { },
@@ -39,21 +41,20 @@ let
         dark = mkGetDefault settings "theme.dark" false;
 
         flavors = {
-          dark = "mocha";
           light = "latte";
+          dark = "mocha";
         };
 
         accent = "mauve";
-
         flavor = builtins.getAttr (if theme.dark then "dark" else "light") theme.flavors;
         altFlavor = builtins.getAttr (if theme.dark then "light" else "dark") theme.flavors;
 
-        # refer: https://github.com/catppuccin/palette/blob/main/palette.json
-        color =
-          builtins.mapAttrs (_: value: value.hex)
-            (builtins.fromJSON (
-              builtins.readFile "${inputs.catppuccin.packages.${system}.palette}/palette.json"
-            )).${theme.flavor}.colors;
+        colors = {
+          light = colors.${theme.flavors.light};
+          dark = colors.${theme.flavors.dark};
+        };
+
+        color = theme.colors.${if theme.dark then theme.colors.dark else theme.colors.light} ;
 
         wallpaper = "${dir.home}/.dotfiles/modules/flake/assets/images/wallpaper.png";
 
