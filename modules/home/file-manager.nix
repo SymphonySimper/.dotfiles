@@ -11,15 +11,6 @@
   };
 
   config = {
-    home.packages = with pkgs; [
-      trash-cli # trash
-
-      # Archive
-      gnutar
-      unzip
-      zip
-    ];
-
     programs.yazi = lib.mkMerge [
       {
         enable = true;
