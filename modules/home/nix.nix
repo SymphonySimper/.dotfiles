@@ -44,13 +44,6 @@ let
 
             nix flake "$1" --template "my#templates.$2" $3
             ;;
-          dev)
-            shift;
-            devshell="$1"
-            shift;
-            
-            nix develop "$devshell" 
-            ;;
           update) nix flake update --commit-lock-file ;;
           *) abort "Unknown option." ;;
         esac
