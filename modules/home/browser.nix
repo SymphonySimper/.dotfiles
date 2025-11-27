@@ -1,5 +1,4 @@
 {
-  my,
   config,
   pkgs,
   lib,
@@ -121,22 +120,14 @@ in
     };
 
     # Browser
+    catppuccin.chromium.enable = false;
+
     programs.chromium = {
       enable = true;
       package = pkgs.chromium.override { enableWideVine = true; };
       commandLineArgs = cfg.args.chromium;
       extensions = [
         "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
-        (
-          # Catppuccin theme
-          {
-            frappe = "olhelnoplefjdmncknfphenjclimckaf";
-            latte = "jhjnalhegpceacdhbplhnakmkdliaddd";
-            macchiato = "cmpdlhmnmjhihmcfnigoememnffkimlk";
-            mocha = "bkkmolkhemgaeaeggcmfbghljjjoofoh";
-          }
-          .${my.theme.flavor}
-        )
       ];
     };
 
