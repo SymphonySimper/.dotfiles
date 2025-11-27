@@ -1,7 +1,12 @@
 import Meta from "gi://Meta";
 import Shell from "gi://Shell";
 
-import { panel, overview, wm } from "resource:///org/gnome/shell/ui/main.js";
+import {
+  panel,
+  overview,
+  wm,
+  layoutManager,
+} from "resource:///org/gnome/shell/ui/main.js";
 import {
   Extension,
   InjectionManager,
@@ -17,7 +22,7 @@ class ShowOverviewOnEnable {
   #states = new Set(["SHOWN", "SHOWING"]);
 
   enable() {
-    // refer (this._shownState): https://github.com/GNOME/gnome-shell/blob/main/js/ui/overview.js#L159
+    if (layoutManager._startingUp) return;
     if (this.#states.has(overview._shownState)) return;
 
     overview.show();
