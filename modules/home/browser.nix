@@ -55,13 +55,6 @@ in
             "x-scheme-handler/https"
           ];
 
-          windows = [
-            {
-              inherit id;
-              workspace = 2;
-            }
-          ];
-
           appfolder.Bookmarks.categories = [ category ];
         };
     };

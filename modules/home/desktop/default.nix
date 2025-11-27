@@ -94,30 +94,6 @@ in
       );
     };
 
-    windows = lib.mkOption {
-      description = "Windows";
-      type = lib.types.listOf (
-        lib.types.submodule {
-          options = {
-            workspace = lib.mkOption {
-              type = lib.types.nullOr (lib.types.enum workspaces);
-              description = "Workspace where the window should be placed";
-              default = null;
-            };
-
-            id = lib.mkOption {
-              type = lib.types.oneOf [
-                lib.types.str
-                (lib.types.listOf lib.types.str)
-              ];
-              description = "Window identifier";
-              example = "alacritty.desktop";
-            };
-          };
-        }
-      );
-    };
-
     appfolder = lib.mkOption {
       description = "Create app folder";
       default = { };
@@ -157,10 +133,6 @@ in
         programs.gnome-shell = {
           enable = true;
           extensions = builtins.concatLists [
-            [
-              { package = pkgs.gnomeExtensions.auto-move-windows; }
-            ]
-
             (builtins.map
               (
                 dir:
@@ -266,11 +238,6 @@ in
                 remove-old-temp-files = true;
                 remove-old-trash-files = true;
               };
-
-              # extensions
-              "org/gnome/shell/extensions/auto-move-windows".application-list = builtins.map (
-                entry: "${entry.id}.desktop:${builtins.toString entry.workspace}"
-              ) cfg.windows;
             }
 
             (lib.mkMerge [

@@ -6,15 +6,4 @@
       commandLineArgs = builtins.concatStringsSep " " config.my.programs.browser.chromiumArgs;
     })
   ];
-
-  my.programs = {
-    desktop = {
-      windows = [
-        {
-          id = "google-chrome";
-          workspace = 2;
-        }
-      ];
-    };
-  };
 }

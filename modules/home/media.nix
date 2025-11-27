@@ -20,13 +20,6 @@ in
 
       (lib.mkIf cfg.recorder.enable {
         programs.obs-studio.enable = true;
-
-        my.programs.desktop.windows = [
-          {
-            id = "com.obsproject.Studio";
-            workspace = 4;
-          }
-        ];
       })
     ]
   );
