@@ -65,13 +65,6 @@ in
             }
           ];
 
-          windows = [
-            {
-              id = "Alacritty";
-              workspace = 1;
-            }
-          ];
-
           keybinds = [
             {
               mods = [ "super" ];
