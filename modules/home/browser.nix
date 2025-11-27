@@ -92,8 +92,8 @@ in
         Tailwindcss = "tailwindcss.com/docs/installation";
 
         # Email
-        Gmail = "mail.google.com/mail/u/0/#inbox";
-        "Gmail 1" = "mail.google.com/mail/u/1/#inbox";
+        Gmail = "mail.google.com/mail/u/0";
+        "Gmail 1" = "mail.google.com/mail/u/1";
 
         # Misc
         "Chrome Enterprise policy list" = "chromeenterprise.google/policies";
@@ -136,17 +136,9 @@ in
       name: value:
       let
         isString = builtins.typeOf value == "string";
-        url = if isString then value else value.url;
-        scriptName = builtins.concatStringsSep "-" (lib.strings.splitString " " (lib.strings.toLower name));
-
-        execScript = lib.getExe (
-          pkgs.writeShellScriptBin scriptName # sh
-            ''
-              exec ${if isString then cfg.command else value.browser} ${
-                if lib.strings.hasPrefix "http" url then url else "https://${url}"
-              }                
-            ''
-        );
+        browser = if isString then cfg.command else value.browser;
+        _url = if isString then value else value.url;
+        url = if lib.strings.hasPrefix "http" _url then _url else "https://${_url}";
       in
       {
         inherit name;
@@ -155,7 +147,7 @@ in
         comment = "Launch ${name}";
         categories = [ category ];
         terminal = false;
-        exec = execScript;
+        exec = "${browser} ${url}";
         settings.StartupWMClass = name;
       }
     ) cfg.bookmarks;
