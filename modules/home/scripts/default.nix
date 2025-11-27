@@ -6,7 +6,6 @@ in
   imports = [
     ./ffmpeg.nix
     ./ocr.nix
-    ./reload.nix
   ];
 
   options.my.programs.scripts.enable = lib.mkEnableOption "Scripts";
@@ -15,7 +14,6 @@ in
     my.programs.scripts = {
       ffmpeg.enable = lib.mkDefault cfg.enable;
       ocr.enable = lib.mkDefault cfg.enable;
-      reload.enable = lib.mkDefault cfg.enable;
     };
   };
 }

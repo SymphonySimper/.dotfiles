@@ -39,10 +39,5 @@ in
         controlPersist = "no";
       };
     };
-
-    my.programs.scripts.reload.commands."SSH Agent" = {
-      command = "systemctl restart --user ssh-agent.service";
-      check = "ssh-agent";
-    };
   };
 }
