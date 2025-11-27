@@ -52,7 +52,6 @@
     {
       homeConfigurations = flake.profiles.home;
       nixosConfigurations = flake.profiles.system;
-      devShells = flake.devShells;
 
       templates = flake.templates;
       defaultTemplate = self.templates.default;

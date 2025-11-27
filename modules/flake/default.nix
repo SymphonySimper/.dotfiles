@@ -7,5 +7,4 @@ rec {
   profiles = import ./profiles { inherit inputs lib helpers; };
 
   templates = import ./templates { inherit helpers; };
-  devShells = import ./devshell { inherit inputs helpers; };
 }
