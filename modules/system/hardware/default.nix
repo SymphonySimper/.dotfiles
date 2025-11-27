@@ -8,7 +8,6 @@
     ./cpu.nix
     ./disko.nix
     ./gpu.nix
-    ./ideapad.nix
     ./input.nix
     ./led.nix
     ./powerManagement.nix
@@ -19,7 +18,6 @@
     audio.enable = lib.mkDefault false;
     bluetooth.enable = lib.mkDefault false;
     disko.enable = lib.mkDefault false;
-    ideapad.enable = lib.mkDefault false;
     keyboard.enable = lib.mkDefault false;
     led.enable = lib.mkDefault false;
     logitech.enable = lib.mkDefault false;
