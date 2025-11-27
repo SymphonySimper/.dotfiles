@@ -125,46 +125,37 @@ in
 
         programs.gnome-shell = {
           enable = true;
-          extensions = builtins.concatLists [
-            (builtins.map
-              (
-                dir:
+
+          extensions = [
+            {
+              # refer: https://github.com/NixOS/nixpkgs/blob/master/pkgs/desktops/gnome/extensions/buildGnomeExtension.nix
+              package =
                 let
-                  pname = builtins.baseNameOf dir;
-                  metadata = builtins.fromJSON (builtins.readFile (dir + "/metadata.json"));
+                  pname = "my";
+                  uuid = "my@symphonysimper.com";
                 in
-                {
-                  # refer: https://github.com/NixOS/nixpkgs/blob/master/pkgs/desktops/gnome/extensions/buildGnomeExtension.nix
-                  package = pkgs.stdenv.mkDerivation {
-                    pname = "gnome-shell-extension-${pname}";
-                    uuid = metadata.uuid;
-                    version = "1";
-                    src = ./extensions/${pname};
-                    nativeBuildInputs = with pkgs; [ buildPackages.glib ];
-                    buildPhase = ''
-                      if [ -d schemas ]; then
-                        glib-compile-schemas --strict schemas
-                      fi
-                    '';
-                    installPhase = ''
-                      mkdir -p $out/share/gnome-shell/extensions/
-                      cp -r -T . $out/share/gnome-shell/extensions/${metadata.uuid}
-                    '';
-                    passthru = {
-                      extensionPortalSlug = pname;
-                      extensionUuid = metadata.uuid;
-                    };
+                pkgs.stdenv.mkDerivation {
+                  pname = "gnome-shell-extension-${pname}";
+                  uuid = uuid;
+                  version = "1";
+                  src = ./extension;
+
+                  nativeBuildInputs = with pkgs; [ buildPackages.glib ];
+                  buildPhase = ''
+                    glib-compile-schemas --strict schemas
+                  '';
+
+                  installPhase = ''
+                    mkdir -p $out/share/gnome-shell/extensions/
+                    cp -r -T . $out/share/gnome-shell/extensions/${uuid}
+                  '';
+
+                  passthru = {
+                    extensionPortalSlug = pname;
+                    extensionUuid = uuid;
                   };
-                }
-              )
-              (
-                lib.my.mkReadDir {
-                  path = ./extensions;
-                  asPath = true;
-                  type = "directory";
-                }
-              )
-            )
+                };
+            }
           ];
         };
 
