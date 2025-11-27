@@ -56,12 +56,6 @@ in
       default = [ ];
     };
 
-    mime = lib.mkOption {
-      description = "Mimeapps";
-      type = lib.types.attrsOf (lib.types.listOf lib.types.str);
-      default = { };
-    };
-
     keybinds = lib.mkOption {
       description = "Keybinds";
       type = lib.types.listOf (
@@ -116,11 +110,6 @@ in
           appfolder = {
             Games.categories = [ "Game" ];
           };
-
-          mime."org.gnome.Loupe" = [
-            "image/jpeg"
-            "image/png"
-          ];
         };
 
         programs.gnome-shell = {
@@ -361,22 +350,6 @@ in
 
       {
         xdg = {
-          mime.enable = true;
-          mimeApps = {
-            enable = true;
-            defaultApplications = builtins.listToAttrs (
-              lib.lists.flatten (
-                lib.attrsets.mapAttrsToList (
-                  name: value:
-                  (builtins.map (v: {
-                    name = v;
-                    value = "${name}.desktop";
-                  }) value)
-                ) cfg.mime
-              )
-            );
-          };
-
           autostart = lib.mkIf (builtins.length cfg.autostart > 0) {
             enable = true;
             readOnly = true;
