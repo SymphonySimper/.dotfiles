@@ -1,14 +1,11 @@
 {
   my,
-  inputs,
   pkgs,
   lib,
   ...
 }:
 {
   imports = [
-    inputs.catppuccin.nixosModules.catppuccin
-
     # cli
     ./boot.nix
     ./networking.nix

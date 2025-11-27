@@ -29,8 +29,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    catppuccin.tty.enable = my.theme.dark;
-
     boot = {
       kernelPackages =
         if builtins.typeOf cfg.kernel == "string" then kernels.${cfg.kernel} else cfg.kernel;
