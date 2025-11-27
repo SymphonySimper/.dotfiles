@@ -12,7 +12,6 @@
     # cli
     ./boot.nix
     ./networking.nix
-    ./tty.nix
     ./user.nix
 
     # gui
