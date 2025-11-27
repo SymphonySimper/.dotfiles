@@ -50,7 +50,6 @@
               programs.enable = lib.mkDefault true;
             };
 
-            keyboard.enable = true;
             powerManagement.enable = true;
           };
 
