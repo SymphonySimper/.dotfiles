@@ -18,7 +18,6 @@
            ${lib.my.mkNotification {
              app = "my-battery-status";
              title = "$1";
-             urgency = "critical";
            }}
           }
 

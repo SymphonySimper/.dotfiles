@@ -19,7 +19,6 @@
              app = "my-rest-status";
              title = "$1";
              body = "$2";
-             urgency = "critical";
            }}
           }
 
