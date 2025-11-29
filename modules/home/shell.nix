@@ -128,11 +128,6 @@ in
           ''
             set -U fish_greeting
           '';
-
-        interactiveShellInit = # fish
-          ''
-            set -g fish_key_bindings fish_vi_key_bindings
-          '';
       };
     }
 
