@@ -13,7 +13,7 @@
 
           (nerd-fonts.jetbrains-mono.overrideAttrs {
             # refer: https://github.com/NixOS/nixpkgs/blob/master/pkgs/data/fonts/nerd-fonts/default.nix#L65
-            postInstall =
+            preInstall =
               let
                 variants = builtins.concatStringsSep "\\|" [
                   "Regular"
@@ -23,7 +23,7 @@
               in
               # sh
               ''
-                find "$dst_truetype" -type f -not -regex ".*JetBrainsMonoNerdFont-\(${variants}\).ttf" -delete
+                find . -type f -not -regex ".*JetBrainsMonoNerdFont-\(${variants}\).ttf" -delete
               '';
           })
         ];
