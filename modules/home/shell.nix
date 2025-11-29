@@ -44,6 +44,9 @@ in
         lsl = "${ls} -l --size";
       };
 
+      my.programs.shell.env = {
+        LS_COLORS = ""; # Some programs misbehave when this is not set.
+      };
     }
 
     (
