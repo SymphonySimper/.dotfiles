@@ -194,11 +194,5 @@ in
         };
       };
     }
-
-    {
-      programs.vivid = {
-        enable = true;
-      };
-    }
   ];
 }
