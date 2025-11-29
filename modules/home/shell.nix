@@ -21,8 +21,8 @@ in
       category = "Shell";
       command = "bash";
       args = {
-        login = "-l";
-        command = "-c";
+        login = "--login";
+        command = "--command";
         bin = "${my.dir.home}/.nix-profile/bin";
       };
     }
@@ -98,7 +98,6 @@ in
             "\\e[Z" = "menu-complete"; # Shift+Tab to cycle through complete options
           };
         };
-
       };
 
       my.programs.editor = {
