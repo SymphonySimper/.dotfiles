@@ -141,6 +141,7 @@ in
             auto-pairs = true;
             indent-guides.render = false;
             soft-wrap.enable = true;
+            buffer-picker.start-position = "current";
 
             cursor-shape = rec {
               normal = "block";
