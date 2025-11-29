@@ -15,7 +15,6 @@
       {
         enable = true;
         # package = inputs.yazi.packages.${pkgs.system}.default;
-        enableBashIntegration = true;
         shellWrapperName = "y";
 
         settings = {
