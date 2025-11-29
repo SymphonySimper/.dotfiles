@@ -98,7 +98,6 @@ in
           enable = true;
 
           variables = {
-            editing-mode = "vi";
             completion-ignore-case = true;
             show-all-if-ambiguous = true;
           };
