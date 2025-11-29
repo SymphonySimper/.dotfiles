@@ -105,6 +105,7 @@ in
           bindings = {
             "\\C-l" = "clear-screen";
             "\\e[Z" = "menu-complete"; # Shift+Tab to cycle through complete options
+            "\\ee" = "edit-and-execute-command"; # open and edit command in $EDITOR
           };
         };
       };
