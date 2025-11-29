@@ -16,8 +16,8 @@ in
     (lib.modules.mkAliasOptionModule [ "my" "programs" "shell" "prompt" ] [ "programs" "starship" ])
   ];
 
-  options.my.programs.shell = (
-    lib.my.mkCommandOption {
+  options.my.programs.shell =
+    (lib.my.mkCommandOption {
       category = "Shell";
       command = "bash";
       args = {
@@ -25,15 +25,14 @@ in
         command = "--command";
         bin = "${my.dir.home}/.nix-profile/bin";
       };
-    }
+    })
     // {
       addToPath = lib.mkOption {
         type = lib.types.attrsOf lib.types.str;
         description = "Add a executable to ~/.local/bin";
         default = { };
       };
-    }
-  );
+    };
 
   config = lib.mkMerge [
     {
