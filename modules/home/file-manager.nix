@@ -33,7 +33,6 @@
               {
                 run = ''${config.my.programs.editor.command} "$@"'';
                 block = true;
-                for = "unix";
               }
             ];
 
