@@ -27,6 +27,14 @@ in
       };
     })
     // {
+      user = lib.my.mkCommandOption {
+        category = "User shell";
+        command = "fish";
+        args = {
+          command = "--command";
+        };
+      };
+
       addToPath = lib.mkOption {
         type = lib.types.attrsOf lib.types.str;
         description = "Add a executable to ~/.local/bin";
@@ -108,6 +116,23 @@ in
           shfmt
           shellcheck
         ];
+      };
+    }
+
+    {
+      programs.fish = {
+        enable = true;
+        generateCompletions = true;
+
+        shellInit = # fish
+          ''
+            set -U fish_greeting
+          '';
+
+        interactiveShellInit = # fish
+          ''
+            set -g fish_key_bindings fish_vi_key_bindings
+          '';
       };
     }
 
