@@ -56,6 +56,9 @@ in
     nix-index = {
       enable = true;
       enableBashIntegration = false;
+      enableFishIntegration = false;
+      enableNushellIntegration = false;
+      enableZshIntegration = false;
     };
   };
 
