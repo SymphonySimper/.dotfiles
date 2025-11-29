@@ -46,8 +46,8 @@ in
         };
 
         default = {
-          program = config.my.programs.shell.command;
-          args = [ config.my.programs.shell.args.login ];
+          program = config.my.programs.shell.user.command;
+          args = [ ];
         };
       };
     };
