@@ -16,8 +16,6 @@ let
       shift = "<Shift>";
     };
   };
-
-  workspaces = (builtins.genList (x: builtins.toString (x + 1)) 9);
 in
 {
   imports = [ ./services ];
@@ -148,16 +146,22 @@ in
 
           settings = lib.mkMerge [
             {
-              "org/gnome/mutter".experimental-features = [
-                # "scale-monitor-framebuffer" # fractional scaling
-                # "variable-refresh-rate"
-              ];
+              "org/gnome/mutter" = {
+                dynamic-workspaces = true;
+
+                experimental-features = [
+                  # "scale-monitor-framebuffer" # fractional scaling
+                  # "variable-refresh-rate"
+                ];
+              };
 
               # shell
               "org/gnome/shell" = {
                 app-picker-layout = [ ]; # resets app order
                 favorite-apps = [ ];
               };
+
+              "org/gnome/shell/app-switcher".current-workspace-only = true;
 
               "org/gnome/desktop/interface" = {
                 enable-animations = true;
@@ -229,38 +233,6 @@ in
 
               { "org/gnome/desktop/app-folders".folder-children = builtins.attrNames cfg.appfolder; }
             ])
-
-            {
-              # workspace
-              "org/gnome/mutter".dynamic-workspaces = true;
-              "org/gnome/shell/app-switcher".current-workspace-only = true;
-
-              "org/gnome/desktop/wm/keybindings" = builtins.listToAttrs (
-                builtins.concatMap (index: [
-                  {
-                    name = "move-to-workspace-${index}";
-                    value = [ "${keys.mod.super}${keys.mod.shift}${index}" ];
-                  }
-                  {
-                    name = "switch-to-workspace-${index}";
-                    value = [ "${keys.mod.super}${index}" ];
-                  }
-                ]) workspaces
-              );
-
-              "org/gnome/shell/keybindings" = builtins.listToAttrs (
-                builtins.map (
-                  w:
-                  let
-                    index = builtins.toString w;
-                  in
-                  {
-                    name = "switch-to-application-${index}";
-                    value = [ ];
-                  }
-                ) workspaces
-              );
-            }
 
             (
               let
