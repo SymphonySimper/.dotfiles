@@ -32,8 +32,8 @@ in
       shell = lib.mkOption {
         type = lib.types.submodule {
           options = {
-            program = lib.mkOption {
-              description = "Program to run on launch";
+            command = lib.mkOption {
+              description = "Command to run on launch";
               type = lib.types.str;
             };
 
@@ -46,7 +46,7 @@ in
         };
 
         default = {
-          program = config.my.programs.shell.user.command;
+          command = config.my.programs.shell.user.command;
           args = [ ];
         };
       };
@@ -86,7 +86,10 @@ in
             ipc_socket = true;
           };
 
-          terminal.shell = cfg.shell;
+          terminal.shell = {
+            program = cfg.shell.command;
+            args = cfg.shell.args;
+          };
 
           window = {
             decorations = "none";
