@@ -148,6 +148,11 @@ in
 
           settings = lib.mkMerge [
             {
+              "org/gnome/mutter".experimental-features = [
+                # "scale-monitor-framebuffer" # fractional scaling
+                # "variable-refresh-rate"
+              ];
+
               # shell
               "org/gnome/shell" = {
                 app-picker-layout = [ ]; # resets app order
@@ -179,11 +184,6 @@ in
                 night-light-schedule-automatic = false;
                 night-light-temperature = lib.hm.gvariant.mkUint32 3700;
               };
-
-              "org/gnome/mutter".experimental-features = [
-                # "scale-monitor-framebuffer" # fractional scaling
-                # "variable-refresh-rate"
-              ];
 
               ## mouse
               "org/gnome/desktop/peripherals/mouse".accel-profile = "flat";
