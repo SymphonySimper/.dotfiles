@@ -21,7 +21,7 @@ in
 
         exec "$user_dir/AppData/Local/Microsoft/WindowsApps/wt.exe" \
           --window 0 --profile "NixOS" \
-          ${cfgSh.command} ${cfgSh.args.command} "$*"
+          ${cfgSh.command} ${cfgSh.args.login} ${cfgSh.args.command} "$*"
       '';
 
   };
