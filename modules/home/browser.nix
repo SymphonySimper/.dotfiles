@@ -67,7 +67,12 @@ in
   config = lib.mkIf cfg.enable {
     my.programs = {
       desktop = {
-        autostart = [ cfg.command ];
+        autostart = [
+          {
+            name = "Browser";
+            command = cfg.command;
+          }
+        ];
         appfolder.Bookmarks.categories = [ category ];
       };
 

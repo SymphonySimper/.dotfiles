@@ -25,22 +25,19 @@ in
 
     autostart = lib.mkOption {
       type = lib.types.listOf (
-        lib.types.oneOf [
-          lib.types.str
-          (lib.types.submodule {
-            options = {
-              name = lib.mkOption {
-                type = lib.types.str;
-                description = "Name of the desktop entry";
-              };
-
-              command = lib.mkOption {
-                type = lib.types.str;
-                description = "Command to exec";
-              };
+        lib.types.submodule {
+          options = {
+            name = lib.mkOption {
+              type = lib.types.str;
+              description = "Name of the desktop entry";
             };
-          })
-        ]
+
+            command = lib.mkOption {
+              type = lib.types.str;
+              description = "Command to exec";
+            };
+          };
+        }
       );
       description = "Desktop or command entries to autostart on startup";
       default = [ ];
@@ -322,22 +319,13 @@ in
             entries = builtins.map (
               entry:
               let
-                suffix = ".desktop";
-
-                isString = (builtins.typeOf entry) == "string";
-                name = if isString then entry else entry.name;
-                exec = if isString then entry else entry.command;
+                desktopEntry = pkgs.makeDesktopItem {
+                  name = entry.name;
+                  exec = entry.command;
+                  desktopName = entry.name;
+                };
               in
-              if isString && (lib.strings.hasSuffix suffix entry) then
-                entry
-              else
-                let
-                  desktopEntry = pkgs.makeDesktopItem {
-                    inherit name exec;
-                    desktopName = name;
-                  };
-                in
-                "${desktopEntry}/share/applications/${name}${suffix}"
+              "${desktopEntry}/share/applications/${entry.name}.desktop"
             ) cfg.autostart;
           };
         };
