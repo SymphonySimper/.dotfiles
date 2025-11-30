@@ -147,7 +147,9 @@
 
       {
         ## image preview
-        extraPackages = [ pkgs.chafa ];
+        settings.preview = {
+          max_width = 1920;
+        };
       }
 
       {
