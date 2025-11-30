@@ -256,43 +256,43 @@ in
 
                   "org/gnome/desktop/wm/keybindings" = {
                     minimize = [ ];
-                    close = [ "${keys.mod.super}q" ]; # close app
-                    toggle-fullscreen = [ "${keys.mod.super}${keys.mod.shift}f" ];
-                    toggle-maximized = [ "${keys.mod.super}f" ];
+                    close = [ "<Super>q" ]; # close app
+                    toggle-maximized = [ "<Super>f" ];
+                    toggle-fullscreen = [ "<Super><Shift>f" ];
 
-                    switch-windows = [ "${keys.mod.alt}Tab" ];
-                    switch-windows-backward = [ "${keys.mod.alt}${keys.mod.shift}Tab" ];
+                    switch-windows = [ "<Alt>Tab" ];
+                    switch-windows-backward = [ "<Alt><Shift>Tab" ];
 
-                    switch-to-workspace-left = [ "${keys.mod.super}j" ];
-                    switch-to-workspace-right = [ "${keys.mod.super}k" ];
+                    switch-to-workspace-left = [ "<Super>j" ];
+                    switch-to-workspace-right = [ "<Super>k" ];
 
-                    begin-move = [ "${keys.mod.super}m" ];
-                    begin-resize = [ "${keys.mod.super}r" ];
+                    begin-move = [ "<Super>m" ];
+                    begin-resize = [ "<Super>r" ];
 
                     switch-input-source = [ ];
                     switch-input-source-backward = [ ];
                   };
 
                   "org/gnome/shell/keybindings" = {
-                    screenshot = [ "${keys.mod.super}F11" ];
-                    show-screenshot-ui = [ "${keys.mod.super}${keys.mod.shift}F11" ];
-                    show-screen-recording-ui = [ "${keys.mod.super}${keys.mod.ctrl}F11" ];
+                    screenshot = [ "<Super>F11" ];
+                    show-screenshot-ui = [ "<Super><Shift>F11" ];
+                    show-screen-recording-ui = [ "<Super><Control>F11" ];
                   };
 
                   "org/gnome/settings-daemon/plugins/media-keys" = {
                     mic-mute = [ "F8" ];
                     play = [ "F7" ];
-                    volume-down = [ "${keys.mod.super}F2" ];
-                    volume-mute = [ "${keys.mod.super}${keys.mod.shift}F2" ];
-                    volume-up = [ "${keys.mod.super}F3" ];
+                    volume-down = [ "<Super>F2" ];
+                    volume-mute = [ "<Super><Shift>F2" ];
+                    volume-up = [ "<Super>F3" ];
 
-                    screensaver = [ "${keys.mod.super}Escape" ];
-                    logout = [ "${keys.mod.super}${keys.mod.ctrl}Escape" ];
-                    shutdown = [ "${keys.mod.super}${keys.mod.alt}Escape" ];
-                    reboot = [ "${keys.mod.super}${keys.mod.ctrl}${keys.mod.alt}Escape" ];
+                    screensaver = [ "<Super>Escape" ];
+                    logout = [ "<Super><Control>Escape" ];
+                    shutdown = [ "<Super><Alt>Escape" ];
+                    reboot = [ "<Super><Alt><Control>Escape" ];
 
-                    home = [ "${keys.mod.super}e" ];
-                    www = [ "${keys.mod.super}b" ]; # launch browser
+                    home = [ "<Super>e" ];
+                    www = [ "<Super>b" ]; # launch browser
 
                     custom-keybindings = builtins.map (name: "/${name}/") (builtins.attrNames customKeybinds);
                   };
