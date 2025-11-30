@@ -173,7 +173,7 @@ class AltNum {
         name,
         settings,
         Meta.KeyBindingFlags.NONE,
-        Shell.ActionMode.ALL,
+        Shell.ActionMode.NORMAL,
         () => {
           this.#activateWindow(index);
         },
