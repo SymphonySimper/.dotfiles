@@ -66,7 +66,10 @@ in
         };
       };
 
-      xdg.terminal-exec.enable = true;
+      xdg.terminal-exec = {
+        enable = true;
+        settings.default = [ "kitty.desktop" ];
+      };
 
       programs.kitty = {
         enable = true;
