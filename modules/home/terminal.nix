@@ -58,18 +58,11 @@ in
     (lib.mkIf my.gui.enable {
       my.programs = {
         desktop = {
-          autostart = [
-            {
-              name = "alacritty-daemon";
-              command = "${cfg.command} --daemon";
-            }
-          ];
-
           keybinds = [
             {
               mods = [ "super" ];
               key = "t";
-              command = "${cfg.command} ${cfg.args.msg} ${cfg.args.newWindow}";
+              command = cfg.command;
             }
           ];
         };
