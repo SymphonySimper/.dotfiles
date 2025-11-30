@@ -299,6 +299,9 @@ in
                     toggle-fullscreen = [ "${keys.mod.super}${keys.mod.shift}f" ];
                     toggle-maximized = [ "${keys.mod.super}f" ];
 
+                    switch-windows = [ "${keys.mod.alt}Tab" ];
+                    switch-windows-backward = [ "${keys.mod.alt}${keys.mod.shift}Tab" ];
+
                     begin-move = [ "${keys.mod.super}m" ];
                     begin-resize = [ "${keys.mod.super}r" ];
 
