@@ -15,13 +15,14 @@ in
 
     editor.clipboardProvider = "win32-yank";
 
+    # NOTE: profile option is just for other settings not starting shell
     terminal.runScriptContent = # sh
       ''
         user_dir=$(wslpath $(${path.system32}/cmd.exe /c "echo %USERPROFILE%" 2>/dev/null) | tr -d "\r")
 
         exec "$user_dir/AppData/Local/Microsoft/WindowsApps/wt.exe" \
-          --window 0 --profile "NixOS" \
-          ${cfgSh.command} ${cfgSh.args.login} ${cfgSh.args.command} "$*"
+          --window 0 \
+          --profile "NixOS" wsl.exe -d NixOS --cd ~ ${cfgSh.command} ${cfgSh.args.login} ${cfgSh.args.command} "$*"
       '';
 
   };
