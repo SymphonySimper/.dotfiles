@@ -38,14 +38,6 @@ in
                 type = lib.types.str;
                 description = "Command to exec";
               };
-
-              days = lib.mkOption {
-                # 1: monday
-                # 7: sunday
-                type = lib.types.nullOr (lib.types.listOf (lib.types.ints.between 1 7));
-                description = "Autostart only on these days";
-                default = null;
-              };
             };
           })
         ]
@@ -334,23 +326,7 @@ in
 
                 isString = (builtins.typeOf entry) == "string";
                 name = if isString then entry else entry.name;
-                exec =
-                  if isString then
-                    entry
-                  else if entry.days != null then
-                    lib.getExe (
-                      pkgs.writeShellScriptBin "${name}-day-launcher" # sh
-                        ''
-                          ${lib.strings.toShellVar "allowed_days" entry.days}
-                          curr_day=$(date +%u)
-
-                          if [[ " ''${allowed_days[*]} " == *" $curr_day "* ]]; then
-                            exec ${entry.command}
-                          fi
-                        ''
-                    )
-                  else
-                    entry.command;
+                exec = if isString then entry else entry.command;
               in
               if isString && (lib.strings.hasSuffix suffix entry) then
                 entry
