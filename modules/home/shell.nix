@@ -22,7 +22,7 @@ in
       command = "bash";
       args = {
         login = "--login";
-        command = "--command";
+        command = "-c";
         bin = "${my.dir.home}/.nix-profile/bin";
       };
     })
