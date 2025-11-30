@@ -54,7 +54,7 @@ let
           dark = colors.${theme.flavors.dark};
         };
 
-        color = theme.colors.${if theme.dark then theme.colors.dark else theme.colors.light} ;
+        color = theme.colors.${if theme.dark then "dark" else "light"};
 
         wallpaper = "${dir.home}/.dotfiles/modules/flake/assets/images/wallpaper.png";
 
