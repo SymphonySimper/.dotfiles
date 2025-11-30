@@ -40,6 +40,8 @@ in
     category = "Browser";
     command = "chromium-browser";
     args = {
+      newWindow = "--new-window";
+
       chromium = (
         let
           features = {
@@ -149,6 +151,13 @@ in
         terminal = false;
         exec = "${browser} ${url}";
         settings.StartupWMClass = name;
+
+        actions = {
+          "new-window" = {
+            name = "New Window";
+            exec = "${browser} ${cfg.args.newWindow} ${url}";
+          };
+        };
       }
     ) cfg.bookmarks;
   };
