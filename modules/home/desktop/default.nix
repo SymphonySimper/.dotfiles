@@ -302,6 +302,9 @@ in
                     switch-windows = [ "${keys.mod.alt}Tab" ];
                     switch-windows-backward = [ "${keys.mod.alt}${keys.mod.shift}Tab" ];
 
+                    switch-to-workspace-left = [ "${keys.mod.super}j" ];
+                    switch-to-workspace-right = [ "${keys.mod.super}k" ];
+
                     begin-move = [ "${keys.mod.super}m" ];
                     begin-resize = [ "${keys.mod.super}r" ];
 
