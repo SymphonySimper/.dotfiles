@@ -129,11 +129,6 @@ in
                   version = "1";
                   src = ./extension;
 
-                  nativeBuildInputs = with pkgs; [ buildPackages.glib ];
-                  buildPhase = ''
-                    glib-compile-schemas --strict schemas
-                  '';
-
                   installPhase = ''
                     mkdir -p $out/share/gnome-shell/extensions/
                     cp -r -T . $out/share/gnome-shell/extensions/${uuid}

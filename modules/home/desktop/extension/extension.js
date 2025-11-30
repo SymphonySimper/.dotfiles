@@ -1,10 +1,6 @@
-import Meta from "gi://Meta";
-import Shell from "gi://Shell";
-
 import {
   panel,
   overview,
-  wm,
   layoutManager,
 } from "resource:///org/gnome/shell/ui/main.js";
 import {
@@ -95,111 +91,13 @@ class Overrides {
   }
 }
 
-class AltNum {
-  #KEYBIND_NAMES = Array.from(
-    Array(9)
-      .keys()
-      .map((i) => `focus-window-${i + 1}`),
-  );
-
-  #workspace = null;
-  #windows = new Map();
-  #ids = [];
-
-  #resetWorkspace() {
-    if (this.#workspace === null) return;
-
-    this.#workspace.disconnectObject(this);
-    this.#workspace = null;
-  }
-
-  #populateWindows() {
-    const windows = global.display
-      .get_tab_list(Meta.TabList.NORMAL_ALL, this.#workspace)
-      .map((w) => [w.get_id(), w])
-      .toSorted((a, b) => a[0] - b[0]);
-
-    this.#windows = new Map(windows);
-    this.#ids = this.#windows.keys().toArray();
-  }
-
-  #addWindow = (_, window) => {
-    const id = window.get_id();
-    if (this.#windows.has(id)) return; // not possible, but just for saftey
-
-    this.#windows.set(id, window);
-    this.#ids.push(id);
-  };
-
-  #removeWindow = (_, window) => {
-    const id = window.get_id();
-    if (!this.#windows.has(id)) return;
-
-    this.#windows.delete(id);
-    this.#ids.splice(this.#ids.indexOf(id), 1);
-  };
-
-  #updateWorkspace = () => {
-    this.#resetWorkspace();
-
-    this.#workspace = global.workspace_manager.get_active_workspace();
-
-    this.#workspace.connectObject(
-      "window-added",
-      this.#addWindow,
-      "window-removed",
-      this.#removeWindow,
-    );
-
-    this.#populateWindows();
-  };
-
-  #activateWindow(index) {
-    if (this.#windows.size <= index) return;
-
-    this.#windows.get(this.#ids[index]).activate(0);
-  }
-
-  enable(settings) {
-    this.#updateWorkspace();
-
-    global.workspace_manager.connectObject(
-      "active-workspace-changed",
-      this.#updateWorkspace,
-    );
-
-    this.#KEYBIND_NAMES.entries().forEach(([index, name]) =>
-      wm.addKeybinding(
-        name,
-        settings,
-        Meta.KeyBindingFlags.NONE,
-        Shell.ActionMode.NORMAL,
-        () => {
-          this.#activateWindow(index);
-        },
-      ),
-    );
-  }
-
-  disable() {
-    this.#resetWorkspace();
-    this.#windows.clear();
-    this.#ids = [];
-
-    global.workspace_manager.disconnectObject(this);
-    this.#KEYBIND_NAMES.forEach((name) => wm.removeKeybinding(name));
-  }
-}
-
 export default class MyExtension extends Extension {
-  #extensions = [ShowOverviewOnEnable, HidePanel, Overrides, AltNum].map(
+  #extensions = [ShowOverviewOnEnable, HidePanel, Overrides].map(
     (extension) => new extension(),
   );
 
   enable() {
-    const settings = this.getSettings();
-
-    this.#extensions.forEach((extension) => extension.enable(settings));
+    this.#extensions.forEach((extension) => extension.enable());
   }
 
   disable() {
