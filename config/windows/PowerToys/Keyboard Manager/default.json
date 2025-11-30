@@ -1,0 +1,54 @@
+{
+  "remapKeys": {
+    "inProcess": [{ "originalKeys": "20", "newRemapKeys": "162" }]
+  },
+  "remapKeysToText": { "inProcess": [] },
+  "remapShortcuts": {
+    "global": [
+      {
+        "originalKeys": "91;66",
+        "exactMatch": false,
+        "runProgramElevationLevel": 0,
+        "operationType": 1,
+        "runProgramAlreadyRunningAction": 1,
+        "runProgramStartWindowType": 0,
+        "runProgramFilePath": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+        "runProgramArgs": "",
+        "runProgramStartInDir": "",
+        "unicodeText": "*Unsupported*"
+      },
+      {
+        "originalKeys": "91;74",
+        "exactMatch": false,
+        "operationType": 0,
+        "newRemapKeys": "91;162;37"
+      },
+      {
+        "originalKeys": "91;75",
+        "exactMatch": false,
+        "operationType": 0,
+        "newRemapKeys": "91;162;39"
+      },
+      {
+        "originalKeys": "91;81",
+        "exactMatch": false,
+        "operationType": 0,
+        "newRemapKeys": "18;115"
+      },
+      {
+        "originalKeys": "91;84",
+        "exactMatch": false,
+        "runProgramElevationLevel": 0,
+        "operationType": 1,
+        "runProgramAlreadyRunningAction": 1,
+        "runProgramStartWindowType": 0,
+        "runProgramFilePath": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+        "runProgramArgs": "-c wt.exe",
+        "runProgramStartInDir": "",
+        "unicodeText": "*Unsupported*"
+      }
+    ],
+    "appSpecific": []
+  },
+  "remapShortcutsToText": { "global": [], "appSpecific": [] }
+}
