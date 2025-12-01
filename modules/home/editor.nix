@@ -247,15 +247,11 @@ in
                 f = {
                   "'" = "last_picker";
                   b = "buffer_picker";
-                  B = {
-                    e = "file_explorer_in_current_buffer_directory";
-                    f = "file_picker_in_current_buffer_directory";
-                  };
                   d = "diagnostics_picker";
                   D = "workspace_diagnostics_picker";
-                  e = "file_explorer_in_current_directory";
+                  e = "file_explorer_in_current_buffer_directory";
                   E = "file_explorer";
-                  f = "file_picker_in_current_directory";
+                  f = "file_picker_in_current_buffer_directory";
                   F = "file_picker";
                   g = "changed_file_picker";
                   "/" = "global_search";
