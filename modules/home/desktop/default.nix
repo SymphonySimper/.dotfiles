@@ -262,6 +262,9 @@ in
 
                     switch-windows = [ "<Alt>Tab" ];
                     switch-windows-backward = [ "<Alt><Shift>Tab" ];
+                    ## disable switch-applications binding as sometimes it just takes over <Alt>Tab
+                    switch-applications = [ ];
+                    switch-applications-backward = [ ];
 
                     switch-to-workspace-left = [ "<Super>j" ];
                     switch-to-workspace-right = [ "<Super>k" ];
