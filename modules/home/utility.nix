@@ -1,4 +1,5 @@
 {
+  my,
   config,
   pkgs,
   lib,
@@ -21,7 +22,6 @@
       programs.man = {
         enable = true;
         generateCaches = true;
-
       };
     }
 
@@ -60,7 +60,9 @@
 
     # Clipboard
     {
-      home.packages = [ pkgs.wl-clipboard ];
+      home.packages = lib.lists.optional (
+        my.gui.enable && pkgs.stdenv.hostPlatform.isLinux
+      ) pkgs.wl-clipboard;
     }
   ];
 }
