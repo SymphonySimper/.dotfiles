@@ -249,10 +249,10 @@ in
                   b = "buffer_picker";
                   d = "diagnostics_picker";
                   D = "workspace_diagnostics_picker";
-                  e = "file_explorer_in_current_buffer_directory";
-                  E = "file_explorer";
-                  f = "file_picker_in_current_buffer_directory";
-                  F = "file_picker";
+                  e = "file_explorer";
+                  E = "file_explorer_in_current_buffer_directory";
+                  f = "file_picker";
+                  F = "file_picker_in_current_buffer_directory";
                   g = "changed_file_picker";
                   "/" = "global_search";
                   j = "jumplist_picker";
