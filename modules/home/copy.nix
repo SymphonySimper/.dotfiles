@@ -85,6 +85,7 @@ in
               let
                 from = mkReplaceExpansions file.from;
                 to = mkReplaceExpansions file.to;
+                parentDir = builtins.dirOf to;
                 exclude = lib.lists.optionals ((builtins.length file.exclude) > 0) (
                   builtins.map (ex: "--exclude=${ex}") file.exclude
                 );
@@ -102,6 +103,10 @@ in
                     [ to ]
                   }
                   # echo "Removed: ${to}"
+                fi
+
+                if [ ! -d "${parentDir}" ]; then
+                  mkdir -p "${parentDir}"
                 fi
 
                 if [ -d "${from}" ] || [ -f "${from}" ] || [ -L "${from}" ]; then
