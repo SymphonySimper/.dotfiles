@@ -44,12 +44,8 @@ in
 
   config = lib.mkMerge [
     {
-      home.shellAliases = rec {
-        # general
+      home.shellAliases = {
         q = "exit";
-        ## ls
-        ls = "ls --almost-all --color=yes --group-directories-first --human-readable";
-        lsl = "${ls} -l --size";
       };
 
       my.programs.shell.env = {
