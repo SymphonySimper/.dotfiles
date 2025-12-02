@@ -56,6 +56,14 @@ in
           description = "Env to include in generated env";
         };
       };
+
+      common = {
+        env = lib.mkOption {
+          type = lib.types.attrsOf lib.types.str;
+          description = "Common env to include in both the shells";
+          default = { };
+        };
+      };
     };
 
   config = lib.mkMerge [
@@ -64,8 +72,12 @@ in
         q = "exit";
       };
 
-      my.programs.shell.env = {
-        LS_COLORS = ""; # Some programs misbehave when this is not set.
+      my.programs.shell = {
+        common.env = {
+          LS_COLORS = ""; # Some programs misbehave when this is not set.
+        };
+
+        env = cfg.common.env;
       };
     }
 
@@ -166,6 +178,10 @@ in
             env =
               lib.mkBefore # nu
                 ''
+                  ${lib.strings.concatLines (
+                    builtins.map (env: "$env.${env.name} = '${env.value}'") (lib.attrsets.attrsToList cfg.common.env)
+                  )}
+
                   if not ($nu.cache-dir | path exists) {
                     mkdir $nu.cache-dir
                   }

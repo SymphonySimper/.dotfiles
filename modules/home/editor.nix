@@ -91,7 +91,10 @@ in
   config = lib.mkMerge [
     {
       my.programs = {
-        shell.env.VISUAL = cfg.command;
+        shell.common.env = rec {
+          EDITOR = cfg.command;
+          VISUAL = EDITOR;
+        };
 
         editor.ignore = builtins.concatLists [
           [
@@ -130,7 +133,6 @@ in
       programs.helix = {
         enable = true;
         package = inputs.helix.packages.${my.system}.default;
-        defaultEditor = true;
         extraPackages = cfg.packages;
 
         settings = {

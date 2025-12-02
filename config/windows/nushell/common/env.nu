@@ -1,3 +1,8 @@
+$env.EDITOR = 'hx'
+$env.LS_COLORS = ''
+$env.VISUAL = 'hx'
+
+
 if not ($nu.cache-dir | path exists) {
   mkdir $nu.cache-dir
 }
