@@ -55,6 +55,12 @@ in
           type = lib.types.lines;
           description = "Env to include in generated env";
         };
+
+        envVar = lib.mkOption {
+          type = lib.types.attrsOf lib.types.str;
+          description = "Nu specific env";
+          default = { };
+        };
       };
 
       common = {
@@ -179,7 +185,9 @@ in
               lib.mkBefore # nu
                 ''
                   ${lib.strings.concatLines (
-                    builtins.map (env: "$env.${env.name} = '${env.value}'") (lib.attrsets.attrsToList cfg.common.env)
+                    builtins.map (env: "$env.${env.name} = '${env.value}'") (
+                      lib.attrsets.attrsToList (cfg.common.env // cfg.nu.envVar)
+                    )
                   )}
 
                   if not ($nu.cache-dir | path exists) {

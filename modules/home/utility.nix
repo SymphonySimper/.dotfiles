@@ -43,15 +43,22 @@
       home.packages = [ config.services.tldr-update.package ];
     }
 
-    {
-      programs = {
-        fzf = {
+    (
+      let
+        defaultEnv = "FZF_DEFAULT_OPTS";
+      in
+      {
+        programs.fzf = {
           enable = true;
-          defaultOptions = [
-            "--reverse"
-          ];
+          defaultOptions = [ "--reverse" ];
         };
 
+        my.programs.shell.nu.envVar.${defaultEnv} = config.my.programs.shell.env.${defaultEnv};
+      }
+    )
+
+    {
+      programs = {
         fd.enable = true;
         jq.enable = true;
         ripgrep.enable = true;
