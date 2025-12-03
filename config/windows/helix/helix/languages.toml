@@ -1,0 +1,168 @@
+[[language]]
+language-servers = ["vscode-css-language-server", "tailwindcss-ls"]
+name = "css"
+
+[language.formatter]
+args = ["--parser", "css"]
+command = "prettier"
+
+[[language]]
+language-servers = ["vscode-html-language-server", "tailwindcss-ls"]
+name = "html"
+
+[language.formatter]
+args = ["--parser", "html"]
+command = "prettier"
+
+[[language]]
+language-servers = ["typescript-language-server", "vscode-eslint-language-server"]
+name = "javascript"
+
+[language.formatter]
+args = ["--parser", "typescript"]
+command = "prettier"
+
+[[language]]
+language-servers = ["vscode-json-language-server"]
+name = "json"
+
+[language.formatter]
+args = ["--parser", "json"]
+command = "prettier"
+
+[[language]]
+language-servers = ["vscode-json-language-server"]
+name = "jsonc"
+
+[language.formatter]
+args = ["--parser", "jsonc"]
+command = "prettier"
+
+[[language]]
+language-servers = ["typescript-language-server", "vscode-eslint-language-server", "tailwindcss-ls"]
+name = "jsx"
+
+[language.formatter]
+args = ["--parser", "typescript"]
+command = "prettier"
+
+[[language]]
+name = "just"
+
+[language.formatter]
+args = ["--dump"]
+command = "just"
+
+[[language]]
+comment-tokens = ["-", "+", "*", "- [ ]", ">"]
+language-servers = ["markdown-oxide", "harper-ls"]
+name = "markdown"
+
+[language.formatter]
+args = ["--parser", "markdown"]
+command = "prettier"
+
+[[language]]
+name = "nix"
+[[language.language-servers]]
+except-features = ["format"]
+name = "nixd"
+
+[language.formatter]
+command = "nixfmt"
+
+[[language]]
+language-servers = ["pyright", "ruff"]
+name = "python"
+
+[language.formatter]
+args = ["format", "--line-length", "88", "-"]
+command = "ruff"
+
+[[language]]
+language-servers = ["svelteserver", "tailwindcss-ls", "vscode-eslint-language-server"]
+name = "svelte"
+
+[language.block-comment-tokens]
+end = "-->"
+start = "<!--"
+
+[language.formatter]
+args = ["--parser", "svelte"]
+command = "prettier"
+
+[[language]]
+name = "toml"
+
+[language.formatter]
+args = ["format", "-"]
+command = "taplo"
+
+[[language]]
+language-servers = ["typescript-language-server", "vscode-eslint-language-server", "tailwindcss-ls"]
+name = "tsx"
+
+[language.formatter]
+args = ["--parser", "typescript"]
+command = "prettier"
+
+[[language]]
+language-servers = ["typescript-language-server", "vscode-eslint-language-server"]
+name = "typescript"
+
+[language.formatter]
+args = ["--parser", "typescript"]
+command = "prettier"
+
+[[language]]
+name = "xml"
+
+[language.formatter]
+args = ["--format", "-"]
+command = "xmllint"
+
+[[language]]
+name = "yaml"
+
+[language.formatter]
+args = ["--parser", "yaml"]
+command = "prettier"
+
+[language-server.nixd]
+args = ["--inlay-hints=false"]
+
+[language-server.nixd.config.nixd.nixpkgs]
+expr = "import <nixpkgs> { }"
+
+[language-server.nixd.config.nixd.options.home-manager]
+expr = "(builtins.getFlake (builtins.toString ./.)).homeConfigurations.gui.options"
+
+[language-server.nixd.config.nixd.options.nixos]
+expr = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.gui.options"
+
+[language-server.pyright]
+command = "pyright-langserver"
+
+[language-server.pyright.config.python.analysis]
+typeCheckingMode = "basic"
+
+[language-server.ruff]
+args = ["server"]
+command = "ruff"
+
+[language-server.rust-analyzer.config]
+check = "clippy"
+
+[language-server.svelteserver.config.configuration.svelte.plugin.svelte]
+defaultScriptLanguage = "ts"
+
+[[language-server.vscode-json-language-server.config.json.schemas]]
+fileMatch = ["package.json"]
+url = "https://www.schemastore.org/package.json"
+
+[[language-server.vscode-json-language-server.config.json.schemas]]
+fileMatch = ["tsconfig.json", "tsconfig.*.json"]
+url = "https://www.schemastore.org/tsconfig.json"
+
+[language-server.vscode-json-language-server.config.json.validate]
+enable = true
