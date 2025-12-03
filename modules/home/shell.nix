@@ -299,8 +299,6 @@ in
     }
 
     {
-      my.programs.shell.env.STARSHIP_LOG = "error";
-
       programs.starship = {
         enable = true;
         enableNushellIntegration = false;
@@ -351,20 +349,33 @@ in
         };
       };
 
-      my.programs.shell.nu =
-        let
-          file = mkNuCacheFile "starship.nu";
-        in
-        {
-          env = # nu
-            ''
-              if not ("${file}" | path exists) {
-                starship init nu | save -f ${file}
-              }
-            '';
+      my.programs = {
+        copy.of = [
+          {
+            from = "CONFIG/starship.toml";
+            to = "WINDOWS/starship/starship.toml";
+          }
+        ];
 
-          config = "source ${file}";
+        shell = {
+          common.env.STARSHIP_LOG = "error";
+
+          nu =
+            let
+              file = mkNuCacheFile "starship.nu";
+            in
+            {
+              env = # nu
+                ''
+                  if not ("${file}" | path exists) {
+                    starship init nu | save -f ${file}
+                  }
+                '';
+
+              config = "source ${file}";
+            };
         };
+      };
     }
   ];
 }

@@ -19,6 +19,7 @@ let exclude_sources = [] | each {|dir| get-source-folder-name $dir}
 
 let destinations = {
   wsl: $home_dir,
+  starship: $"($home_dir)\\.config",
   terminal: (ls $"($local_dir)\\packages" | where name has "Microsoft.WindowsTerminal_" | first | $"($in.name)\\LocalState"),
   PowerToys: $"($local_dir)\\Microsoft\\PowerToys",
   yazi: $"($config_dir)\\yazi\\config"
