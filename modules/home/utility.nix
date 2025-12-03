@@ -57,13 +57,6 @@
       }
     )
 
-    {
-      programs = {
-        fd.enable = true;
-        ripgrep.enable = true;
-      };
-    }
-
     # Clipboard
     {
       home.packages = lib.lists.optional (
