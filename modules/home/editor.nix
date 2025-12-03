@@ -137,6 +137,11 @@ in
 
         settings = {
           editor = {
+            shell = [
+              config.my.programs.shell.user.command
+              config.my.programs.shell.user.args.command
+            ];
+
             line-number = "relative";
             auto-format = false;
             bufferline = "never";
