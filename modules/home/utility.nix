@@ -8,17 +8,6 @@
 {
   config = lib.mkMerge [
     {
-      home.packages = with pkgs; [
-        bc # calculator
-        killall
-
-        # web
-        curl
-        wget
-      ];
-    }
-
-    {
       programs.man = {
         enable = true;
         generateCaches = true;
