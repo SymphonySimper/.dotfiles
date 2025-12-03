@@ -35,4 +35,4 @@ gnome-nested-shell:
 
 [group('generators')]
 generate-theme-colors:
-    ./scripts/generators/theme-colors.sh
+    nu ./scripts/generators/theme-colors.nu
