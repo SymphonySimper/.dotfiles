@@ -90,48 +90,57 @@ in
                   builtins.map (ex: "--exclude=${ex}") file.exclude
                 );
                 post = mkReplaceExpansions file.post;
+
+                diff = mkCliCommand "diff" (exclude ++ [ "-u" ]) [
+                  from
+                  to
+                ];
               in
               # sh
               ''
-                if [ -d "${to}" ] || [ -f "${to}" ] || [ -L "${to}" ]; then
-                  ${mkCliCommand "rm"
-                    [
-                      "--force"
-                      "--recursive"
-                      # "--verbose"
-                    ]
-                    [ to ]
-                  }
-                  # echo "Removed: ${to}"
-                fi
-
-                if [ ! -d "${parentDir}" ]; then
-                  mkdir -p "${parentDir}"
-                fi
-
-                if [ -d "${from}" ] || [ -f "${from}" ] || [ -L "${from}" ]; then
-                  ${mkCliCommand rsync
-                    (
+                if [[ "$(${diff} | wc -l)" -le 1 ]]; then
+                  echo "No change in ${from}"
+                else
+                  if [ -d "${to}" ] || [ -f "${to}" ] || [ -L "${to}" ]; then
+                    ${mkCliCommand "rm"
                       [
-                        "--archive"
-                        "--no-perms"
-                        "--chmod=ugo=rwX"
                         "--force"
-                        "--copy-links"
                         "--recursive"
                         # "--verbose"
                       ]
-                      ++ exclude
-                    )
-                    [
-                      from
-                      to
-                    ]
-                  }
+                      [ to ]
+                    }
+                    # echo "Removed: ${to}"
+                  fi
 
-                  ${post}
+                  if [ ! -d "${parentDir}" ]; then
+                    mkdir -p "${parentDir}"
+                  fi
 
-                  echo "Copied: ${from} to ${to}"
+                  if [ -d "${from}" ] || [ -f "${from}" ] || [ -L "${from}" ]; then
+                    ${mkCliCommand rsync
+                      (
+                        [
+                          "--archive"
+                          "--no-perms"
+                          "--chmod=ugo=rwX"
+                          "--force"
+                          "--copy-links"
+                          "--recursive"
+                          # "--verbose"
+                        ]
+                        ++ exclude
+                      )
+                      [
+                        from
+                        to
+                      ]
+                    }
+
+                    ${post}
+
+                    echo "Copied: ${from} to ${to}"
+                  fi
                 fi
               ''
             ) cfg.of
