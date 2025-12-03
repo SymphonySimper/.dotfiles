@@ -46,3 +46,8 @@ gnome-nested-shell:
 [unix]
 generate-theme-colors:
     nu ./scripts/generators/theme-colors.nu
+
+[group('scripts')]
+[windows]
+update-config:
+    nu ./scripts/windows/update-config.nu
