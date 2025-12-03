@@ -70,7 +70,7 @@ in
     };
   };
 
-  config = lib.mkIf ((builtins.length cfg.of) > 0) {
+  config = lib.mkIf (((builtins.length cfg.of) > 0) && (my.profile == "gui")) {
     home.activation =
       let
         name = "myCopy";
