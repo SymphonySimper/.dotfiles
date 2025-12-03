@@ -129,8 +129,8 @@ in
 
         copy.of = [
           {
-            from = "CONFIG/helix";
-            to = "WINDOWS/helix";
+            from = "CONFIG/helix/";
+            to = "WINDOWS/helix/";
             exclude = [ "runtime" ];
           }
         ];
