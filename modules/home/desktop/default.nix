@@ -268,6 +268,8 @@ in
 
                     switch-to-workspace-left = [ "<Super>j" ];
                     switch-to-workspace-right = [ "<Super>k" ];
+                    move-to-workspace-left = [ "<Super><Shift>j" ];
+                    move-to-workspace-right = [ "<Super><Shift>k" ];
 
                     begin-move = [ "<Super>m" ];
                     begin-resize = [ "<Super>r" ];
