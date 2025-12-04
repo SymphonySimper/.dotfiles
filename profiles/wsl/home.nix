@@ -26,4 +26,6 @@ in
       '';
 
   };
+
+  services.ssh-agent.enable = true;
 }
