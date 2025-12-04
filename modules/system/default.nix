@@ -38,8 +38,6 @@
   };
 
   programs = {
-    git.enable = lib.mkDefault true;
-
     # FHS environment
     nix-ld = {
       enable = true;
