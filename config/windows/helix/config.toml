@@ -99,9 +99,6 @@ B = ":echo %sh{git branch --show-current}"
 R = ":reset-diff-change"
 b = ":sh git -C %{workspace_directory} blame -L %{cursor_line},%{cursor_line} %{file_path_absolute}"
 
-[keys.normal.space.m]
-t = "@o<esc>|printf<space>'<lt>xxx<gt>\n<lt>/xxx<gt>\n'<ret>sxxx<ret>c"
-
 [keys.select.space]
 q = ":quit"
 
@@ -153,7 +150,4 @@ s = "symbol_picker"
 B = ":echo %sh{git branch --show-current}"
 R = ":reset-diff-change"
 b = ":sh git -C %{workspace_directory} blame -L %{cursor_line},%{cursor_line} %{file_path_absolute}"
-
-[keys.select.space.m]
-t = "@o<esc>|printf<space>'<lt>xxx<gt>\n<lt>/xxx<gt>\n'<ret>sxxx<ret>c"
 

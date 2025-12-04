@@ -287,12 +287,6 @@ in
                     R = ":reset-diff-change";
                   };
 
-                # macros
-                m = {
-                  ## add xml like tag with the closing tag
-                  t = "@o<esc>|printf<space>'<lt>xxx<gt>\n<lt>/xxx<gt>\n'<ret>sxxx<ret>c";
-                };
-
                 q = ":quit";
               };
             };
