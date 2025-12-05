@@ -11,17 +11,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Install Nix
-        uses: cachix/install-nix-action@master
+        uses: cachix/install-nix-action@v31
 
       - name: Get current date
         id: date
         run: echo "DATE=$(date +'%d-%m-%Y')" >> $GITHUB_ENV
 
       - name: Update flake.lock
-        uses: DeterminateSystems/update-flake-lock@main
+        uses: DeterminateSystems/update-flake-lock@v28
         with:
           base: "main"
           branch: "feat/update-flake-${{ env.DATE }}"
