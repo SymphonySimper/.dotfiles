@@ -21,7 +21,6 @@ let
 
   lsps = {
     tailwind = "tailwindcss-ls";
-    eslint = mkVscodeLsp "eslint";
   };
 in
 {
@@ -285,11 +284,7 @@ in
               ]
               (name: {
                 formatter = mkPrettier "typescript";
-                language-servers = [
-                  "typescript-language-server"
-                  lsps.eslint
-                ]
-                ++ (lib.optionals (lib.strings.hasSuffix "sx" name) [ lsps.tailwind ]);
+                language-servers = [ "typescript-language-server" ] ++ (lib.optionals (lib.strings.hasSuffix "sx" name) [ lsps.tailwind ]);
               });
 
           schema.json = [
@@ -328,7 +323,6 @@ in
             language-servers = [
               "svelteserver"
               lsps.tailwind
-              lsps.eslint
             ];
 
             block-comment-tokens = {
