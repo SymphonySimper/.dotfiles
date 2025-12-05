@@ -21,6 +21,7 @@
 
         environment = {
           gnome.excludePackages = with pkgs; [
+            baobab # disk usage analyzer
             epiphany # browser
             geary # email
             gnome-connections
