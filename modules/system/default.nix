@@ -54,21 +54,6 @@
   boot.tmp.cleanOnBoot = true;
   boot.tmp.useTmpfs = true;
 
-  systemd.tmpfiles.settings =
-    let
-      defaultDirConfig.d = {
-        group = "users";
-        user = my.name;
-        mode = "0755";
-      };
-    in
-    {
-      "${my.name}-fav-dirs" = {
-        "${my.dir.data}" = defaultDirConfig;
-        "${my.dir.dev}" = defaultDirConfig;
-      };
-    };
-
   fonts = lib.mkIf my.gui.enable {
     enableDefaultPackages = true;
     fontDir.enable = true;
