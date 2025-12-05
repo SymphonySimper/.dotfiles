@@ -7,8 +7,6 @@
 let
   mkGetDefault = helpers.mkGetDefault;
 
-  colors = import ./colors.nix;
-
   mkMy =
     {
       settings ? { },
@@ -49,12 +47,11 @@ let
         flavor = builtins.getAttr (if theme.dark then "dark" else "light") theme.flavors;
         altFlavor = builtins.getAttr (if theme.dark then "light" else "dark") theme.flavors;
 
-        colors = {
-          light = colors.${theme.flavors.light};
-          dark = colors.${theme.flavors.dark};
-        };
-
-        color = theme.colors.${if theme.dark then "dark" else "light"};
+        color =
+          builtins.mapAttrs (_: value: value.hex)
+            (builtins.fromJSON (
+              builtins.readFile "${inputs.catppuccin.packages.${system}.palette}/palette.json"
+            )).${theme.flavor}.colors;
 
         wallpaper = "${dir.home}/.dotfiles/modules/flake/assets/images/wallpaper.png";
 

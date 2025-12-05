@@ -42,11 +42,6 @@ update-flake:
 gnome-nested-shell:
     SHELL_DEBUG=all dbus-run-session gnome-shell --devkit --wayland
 
-[group('generators')]
-[unix]
-generate-theme-colors:
-    nu ./scripts/generators/theme-colors.nu
-
 [group('scripts')]
 [windows]
 update-config:
