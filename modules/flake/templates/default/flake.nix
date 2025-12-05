@@ -4,7 +4,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    systems.url = "github:nix-systems/default";
   };
 
   outputs =
@@ -12,7 +11,7 @@
     let
       forAllSystems =
         f:
-        inputs.nixpkgs.lib.genAttrs (import inputs.systems) (
+        inputs.nixpkgs.lib.genAttrs (inputs.nixpkgs.lib.systems.flakeExposed) (
           system:
           f {
             pkgs = import inputs.nixpkgs { inherit system; };

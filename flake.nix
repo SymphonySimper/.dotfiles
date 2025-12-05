@@ -6,7 +6,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # common
-    systems.url = "github:nix-systems/default";
     catppuccin.url = "github:catppuccin/nix";
 
     # system
