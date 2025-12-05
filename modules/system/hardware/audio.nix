@@ -30,7 +30,5 @@ in
         # jack.enable = true;
       };
     };
-
-    environment.systemPackages = lib.mkIf cfg.programs.enable [ pkgs.helvum ];
   };
 }
