@@ -27,7 +27,6 @@
 
     # gui
     ./browser.nix
-    ./media.nix
     ./office.nix
     ./terminal.nix
     ./theme.nix
@@ -46,7 +45,6 @@
       # gui
       browser.enable = lib.mkDefault my.gui.enable;
       desktop.enable = lib.mkDefault my.gui.desktop.enable;
-      media.enable = lib.mkDefault my.gui.enable;
       office.enable = lib.mkDefault my.gui.enable;
     };
   };
