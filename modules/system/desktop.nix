@@ -28,6 +28,7 @@
             gnome-console
             gnome-contacts
             gnome-font-viewer
+            gnome-logs
             gnome-maps
             gnome-music
             gnome-system-monitor
