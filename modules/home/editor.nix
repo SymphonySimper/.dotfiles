@@ -126,14 +126,6 @@ in
             "!.env*"
           ]
         ];
-
-        copy.of = [
-          {
-            from = "CONFIG/helix/";
-            to = "WINDOWS/helix/";
-            exclude = [ "runtime" ];
-          }
-        ];
       };
 
       xdg.configFile."helix/ignore".text = builtins.concatStringsSep "\n" (lib.lists.unique cfg.ignore);

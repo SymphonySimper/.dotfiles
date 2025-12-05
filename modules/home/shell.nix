@@ -193,13 +193,6 @@ in
       };
 
       my.programs = {
-        copy.of = [
-          {
-            from = "CONFIG/starship.toml";
-            to = "WINDOWS/starship/starship.toml";
-          }
-        ];
-
         shell.env.STARSHIP_LOG = "error";
       };
     }

@@ -33,9 +33,6 @@
     ./theme.nix
 
     ./desktop
-
-    # misc
-    ./copy.nix
   ];
 
   my = {

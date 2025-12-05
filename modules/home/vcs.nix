@@ -289,13 +289,6 @@ in
           };
         };
       };
-
-      my.programs.copy.of = [
-        {
-          from = "CONFIG/lazygit/config.yml";
-          to = "WINDOWS/lazygit/config.yml";
-        }
-      ];
     }
   ];
 }
