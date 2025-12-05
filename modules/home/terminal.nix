@@ -44,7 +44,7 @@ in
         };
 
         default = {
-          command = config.my.programs.shell.command;
+          command = config.my.programs.shell.user.command;
           args = [ ];
         };
       };
