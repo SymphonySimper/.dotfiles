@@ -11,7 +11,6 @@ end-of-line-diagnostics = "hint"
 line-number = "relative"
 path-completion = true
 preview-completion-insert = true
-shell = ["nu", "--commands"]
 
 [editor.buffer-picker]
 start-position = "current"

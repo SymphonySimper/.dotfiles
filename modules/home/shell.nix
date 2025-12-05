@@ -7,8 +7,6 @@
 }:
 let
   cfg = config.my.programs.shell;
-
-  mkNuCacheFile = file: "$\"($nu.cache-dir)/${file}\"";
 in
 {
   imports = [
@@ -16,7 +14,6 @@ in
     (lib.modules.mkAliasOptionModule [ "my" "programs" "shell" "path" ] [ "home" "sessionPath" ])
 
     (lib.modules.mkAliasOptionModule [ "my" "programs" "shell" "root" ] [ "programs" "bash" ])
-    (lib.modules.mkAliasOptionModule [ "my" "programs" "shell" "nu" "root" ] [ "programs" "nushell" ])
     (lib.modules.mkAliasOptionModule [ "my" "programs" "shell" "prompt" ] [ "programs" "starship" ])
   ];
 
@@ -31,44 +28,10 @@ in
       };
     })
     // {
-      user = lib.my.mkCommandOption {
-        category = "User shell";
-        command = "nu";
-        args = {
-          command = "--commands";
-        };
-      };
-
       addToPath = lib.mkOption {
         type = lib.types.attrsOf lib.types.str;
         description = "Add a executable to ~/.local/bin";
         default = { };
-      };
-
-      nu = {
-        config = lib.mkOption {
-          type = lib.types.lines;
-          description = "Config to include in generated config";
-        };
-
-        env = lib.mkOption {
-          type = lib.types.lines;
-          description = "Env to include in generated env";
-        };
-
-        envVar = lib.mkOption {
-          type = lib.types.attrsOf lib.types.str;
-          description = "Nu specific env";
-          default = { };
-        };
-      };
-
-      common = {
-        env = lib.mkOption {
-          type = lib.types.attrsOf lib.types.str;
-          description = "Common env to include in both the shells";
-          default = { };
-        };
       };
     };
 
@@ -79,11 +42,9 @@ in
       };
 
       my.programs.shell = {
-        common.env = {
+        env = {
           LS_COLORS = ""; # Some programs misbehave when this is not set.
         };
-
-        env = cfg.common.env;
       };
     }
 
@@ -149,106 +110,6 @@ in
       };
     }
 
-    (
-      let
-        common = {
-          config = "common/config.nu";
-          env = "common/env.nu";
-          theme = "common/theme.nu";
-        };
-
-        mkCommonImport = file: ''source $"($nu.default-config-dir)/${common.${file}}"'';
-      in
-      {
-        catppuccin.nushell.enable = false;
-
-        programs.nushell = {
-          enable = true;
-
-          extraConfig = lib.mkAfter (mkCommonImport "config");
-          extraEnv = lib.mkAfter (mkCommonImport "env");
-        };
-
-        home.file = {
-          "${cfg.nu.root.configDir}/${common.config}".text = cfg.nu.config;
-          "${cfg.nu.root.configDir}/${common.env}".text = cfg.nu.env;
-          "${cfg.nu.root.configDir}/${common.theme}".source = lib.my.mkGetThemeSource {
-            package = "nushell";
-            filename = "NAME_FLAVOR.nu";
-            returnFile = true;
-          };
-        };
-
-        my.programs = {
-          shell.nu = {
-            env =
-              lib.mkBefore # nu
-                ''
-                  ${lib.strings.concatLines (
-                    builtins.map (env: "$env.${env.name} = '${env.value}'") (
-                      lib.attrsets.attrsToList (cfg.common.env // cfg.nu.envVar)
-                    )
-                  )}
-
-                  if not ($nu.cache-dir | path exists) {
-                    mkdir $nu.cache-dir
-                  }
-                '';
-
-            config =
-              lib.mkBefore # nu
-                ''
-                  ${mkCommonImport "theme"}
-                   
-                  $env.config.show_banner = false
-
-                  $env.config.buffer_editor = "${config.my.programs.editor.command}"
-
-                  $env.config.history.file_format = "sqlite"
-                  $env.config.history.isolation = true
-
-                  $env.config.completions.algorithm = "fuzzy"
-                  $env.config.completions.external.max_results = 20
-
-                  $env.config.datetime_format.normal = "%d/%m/%y %I:%M:%S%p"
-
-                  $env.config.filesize.unit = "metric"
-                  $env.config.filesize.show_unit = true
-                '';
-          };
-
-          copy.of = (
-            builtins.map (file: {
-              from = "CONFIG/nushell/${file}";
-              to = "WINDOWS/nushell/${file}";
-            }) (builtins.attrValues common)
-          );
-        };
-      }
-    )
-
-    {
-      programs.carapace = {
-        enable = true;
-        enableNushellIntegration = false;
-      };
-
-      my.programs.shell.nu =
-        let
-          file = mkNuCacheFile "carapace.nu";
-        in
-        {
-          env = # nu
-            ''
-              if not ("${file}" | path exists) {
-                carapace _carapace nushell | save -f ${file}
-              }
-            '';
-
-          config = "source ${file}";
-        };
-    }
-
     {
       programs.direnv = {
         enable = true;
@@ -273,35 +134,17 @@ in
         zoxide = {
           enable = true;
           enableBashIntegration = false;
-          enableNushellIntegration = false;
         };
       };
 
       my.programs.shell = {
         root.initExtra = lib.mkOrder 4000 ''eval "$(zoxide init bash)"'';
-
-        nu =
-          let
-            file = mkNuCacheFile "zoxide.nu";
-          in
-          {
-            env = # nu
-              ''
-                if not ("${file}" | path exists) {
-                  zoxide init nushell | save -f ${file}
-                }
-              '';
-
-            config = lib.mkOrder 4000 "source ${file}";
-          };
-
       };
     }
 
     {
       programs.starship = {
         enable = true;
-        enableNushellIntegration = false;
 
         settings = {
           add_newline = false;
@@ -357,24 +200,7 @@ in
           }
         ];
 
-        shell = {
-          common.env.STARSHIP_LOG = "error";
-
-          nu =
-            let
-              file = mkNuCacheFile "starship.nu";
-            in
-            {
-              env = # nu
-                ''
-                  if not ("${file}" | path exists) {
-                    starship init nu | save -f ${file}
-                  }
-                '';
-
-              config = "source ${file}";
-            };
-        };
+        shell.env.STARSHIP_LOG = "error";
       };
     }
   ];

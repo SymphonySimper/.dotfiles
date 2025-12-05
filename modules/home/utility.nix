@@ -32,19 +32,12 @@
       home.packages = [ config.services.tldr-update.package ];
     }
 
-    (
-      let
-        defaultEnv = "FZF_DEFAULT_OPTS";
-      in
-      {
-        programs.fzf = {
-          enable = true;
-          defaultOptions = [ "--reverse" ];
-        };
-
-        my.programs.shell.nu.envVar.${defaultEnv} = config.my.programs.shell.env.${defaultEnv};
-      }
-    )
+    {
+      programs.fzf = {
+        enable = true;
+        defaultOptions = [ "--reverse" ];
+      };
+    }
 
     # Clipboard
     {

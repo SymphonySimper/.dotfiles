@@ -91,7 +91,7 @@ in
   config = lib.mkMerge [
     {
       my.programs = {
-        shell.common.env = rec {
+        shell.env = rec {
           EDITOR = cfg.command;
           VISUAL = EDITOR;
         };
@@ -145,11 +145,6 @@ in
 
         settings = {
           editor = {
-            shell = [
-              config.my.programs.shell.user.command
-              config.my.programs.shell.user.args.command
-            ];
-
             line-number = "relative";
             auto-format = false;
             bufferline = "never";

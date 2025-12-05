@@ -41,8 +41,3 @@ update-flake:
 [linux]
 gnome-nested-shell:
     SHELL_DEBUG=all dbus-run-session gnome-shell --devkit --wayland
-
-[group('scripts')]
-[windows]
-update-config:
-    nu ./scripts/windows/update-config.nu
