@@ -3,10 +3,7 @@ let
   interopAppendPath = false;
 in
 {
-  imports = [
-    # include NixOS-WSL modules
-    inputs.nixos-wsl.nixosModules.wsl
-  ];
+  imports = [ inputs.nixos-wsl.nixosModules.wsl ];
 
   wsl = {
     enable = true;
