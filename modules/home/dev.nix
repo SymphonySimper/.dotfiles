@@ -264,10 +264,11 @@ in
 
         rec {
           # JS / TS
-          homePackages = with pkgs; [
-            nodejs
-            corepack
+          homePackages = [
+            pkgs.nodejs_24
+            pkgs.corepack_24 # switch to corepack for nodejs >= 25
           ];
+
           packages = [ pkgs.typescript-language-server ];
 
           env.PNPM_HOME = "${config.xdg.dataHome}/pnpm";
@@ -284,7 +285,10 @@ in
               ]
               (name: {
                 formatter = mkPrettier "typescript";
-                language-servers = [ "typescript-language-server" ] ++ (lib.optionals (lib.strings.hasSuffix "sx" name) [ lsps.tailwind ]);
+                language-servers = [
+                  "typescript-language-server"
+                ]
+                ++ (lib.optionals (lib.strings.hasSuffix "sx" name) [ lsps.tailwind ]);
               });
 
           schema.json = [
