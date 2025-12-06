@@ -8,6 +8,10 @@
 {
   config = lib.mkMerge [
     {
+      home.packages = with pkgs; [ bc ];
+    }
+
+    {
       programs.man = {
         enable = true;
         generateCaches = true;
