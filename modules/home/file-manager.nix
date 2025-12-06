@@ -1,4 +1,5 @@
 {
+  my,
   config,
   pkgs,
   lib,
@@ -33,7 +34,7 @@
         };
       }
 
-      {
+      (lib.mkIf my.gui.enable {
         extraPackages = [ pkgs.ripdrag ];
         keymap.mgr.prepend_keymap = [
           {
@@ -45,7 +46,7 @@
             desc = "Drag and drop using ripdrag";
           }
         ];
-      }
+      })
 
       # Plugins
       {
