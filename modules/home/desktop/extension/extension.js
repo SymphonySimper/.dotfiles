@@ -75,15 +75,6 @@ class Overrides {
         };
       },
     );
-
-    // Avoid expanding notification if expanded
-    this.#add(Message.prototype, "expand", (expand) => {
-      return function (animate) {
-        if (this.expanded) return;
-
-        expand.call(this, animate);
-      };
-    });
   }
 
   disable() {
