@@ -1,5 +1,5 @@
 [wsl2]
 memory=12GB
 guiApplications=false
-nestedVirtualization=true
+nestedVirtualization=false
 networkingMode=mirrored
