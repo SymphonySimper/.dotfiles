@@ -31,6 +31,16 @@
               block = true;
             }
           ];
+
+          open.prepend_rules = [
+            {
+              mime = "{audio,video}/*";
+              use = [
+                "open"
+                "reveal"
+              ];
+            }
+          ];
         };
       }
 
