@@ -11,7 +11,7 @@ in
   options.my.programs.terminal =
     (lib.my.mkCommandOption {
       category = "Terminal";
-      command = "kitty";
+      command = "alacritty";
       args = {
         command = "-e";
       };
@@ -56,75 +56,79 @@ in
 
       xdg.terminal-exec = {
         enable = true;
-        settings.default = [ "kitty.desktop" ];
+        settings.default = [ "Alacritty.desktop" ];
       };
 
-      programs.kitty = {
+      programs.alacritty = {
         enable = true;
-        shellIntegration.mode = "no-prompt-mark no-cursor";
-
-        font = {
-          size = 12;
-          name = my.theme.font.mono;
-        };
 
         settings = {
-          allow_remote_control = true;
-          hide_window_decorations = true;
-          scrollback_lines = 1000;
-          mouse_hide_wait = -1;
+          general = {
+            live_config_reload = false;
+            ipc_socket = false;
+          };
 
-          shell = builtins.concatStringsSep " " ([ cfg.shell.command ] ++ cfg.shell.args);
+          terminal.shell = {
+            program = cfg.shell.command;
+            args = cfg.shell.args;
+          };
 
-          dim_opacity = 0.9;
+          window = {
+            decorations = "none";
+            opacity = 1;
+            startup_mode = "Maximized";
 
-          cursor_shape = "block";
-          cursor_shape_unfocused = "hollow";
-          cursor_blink_interval = 0;
+            dynamic_padding = true;
+            padding = rec {
+              x = 2;
+              y = x;
+            };
+          };
 
-          tab_bar_edge = "top";
-          tab_bar_style = "separator";
-          tab_separator = "''";
-          tab_title_template = "' [{index}] {title} '";
-          tab_bar_background = my.theme.color.crust;
-          inactive_tab_background = my.theme.color.surface0;
+          scrolling.history = 1000;
+          selection.save_to_clipboard = true;
 
-          # performance
-          repaint_delay = 2; # ms
-          input_delay = 2; # ms
-          sync_to_monitor = false;
-          wayland_enable_ime = false;
+          font = {
+            size = 12;
 
-          clear_all_shortcuts = true;
+            normal = {
+              family = my.theme.font.mono;
+              style = "Regular";
+            };
+          };
+
+          cursor = {
+            vi_mode_style = "Block";
+
+            style = {
+              blinking = "off";
+              shape = "Block";
+            };
+          };
+
+          keyboard.bindings = [
+            {
+              key = "V";
+              mods = "Alt";
+              action = "ToggleViMode";
+            }
+            {
+              key = "T";
+              mods = "Alt";
+              action = "CreateNewWindow";
+            }
+            {
+              key = "M";
+              mods = "Alt";
+              action = "ToggleMaximized";
+            }
+            {
+              key = "F";
+              mods = "Alt|Shift";
+              action = "ToggleFullscreen";
+            }
+          ];
         };
-
-        actionAliases = {
-          "launch_tab" = "launch --cwd=current --type=tab";
-        };
-
-        keybindings = {
-          "ctrl+shift+c" = "copy_to_clipboard";
-          "ctrl+shift+v" = "paste_from_clipboard";
-
-          "ctrl+shift+equal" = "change_font_size all +2.0";
-          "ctrl+shift+plus" = "change_font_size all +2.0";
-
-          "alt+t" = "launch_tab";
-          "alt+shift+c" = "close_tab";
-
-          "alt+v" = "launch_tab --stdin-source=@screen_scrollback ${config.my.programs.editor.command}";
-          "alt+shift+v" = "open_url_with_hints";
-
-          # external programs
-          "alt+g" = "launch_tab ${config.my.programs.vcs.tui.command}";
-          "alt+y" = "launch_tab ${config.my.programs.file-manager.command}";
-        }
-        // (builtins.listToAttrs (
-          builtins.map (index: {
-            name = "alt+${index}";
-            value = "goto_tab ${index}";
-          }) (builtins.genList (x: builtins.toString (x + 1)) 9)
-        ));
       };
     })
   ];
