@@ -137,6 +137,7 @@ in
 
         settings = {
           editor = {
+            mouse = false;
             line-number = "relative";
             auto-format = false;
             bufferline = "never";
