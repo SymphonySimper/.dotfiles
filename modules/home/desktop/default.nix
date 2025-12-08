@@ -296,7 +296,7 @@ in
                     shutdown = [ "<Super><Alt>Escape" ];
                     reboot = [ "<Super><Alt><Control>Escape" ];
 
-                    home = [ "<Super>e" ];
+                    home = [ "<Super><Shift>e" ];
                     www = [ "<Super>b" ]; # launch browser
 
                     custom-keybindings = builtins.map (name: "/${name}/") (builtins.attrNames customKeybinds);

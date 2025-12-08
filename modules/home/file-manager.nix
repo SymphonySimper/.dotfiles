@@ -5,6 +5,9 @@
   lib,
   ...
 }:
+let
+  cfg = config.my.programs.file-manager;
+in
 {
   options.my.programs.file-manager = lib.my.mkCommandOption {
     category = "File Manager";
@@ -12,6 +15,16 @@
   };
 
   config = {
+    my.programs = {
+      desktop.keybinds = [
+        {
+          key = "e";
+          mods = [ "super" ];
+          command = "${config.my.programs.terminal.command} ${config.my.programs.terminal.args.command} ${cfg.command}";
+        }
+      ];
+    };
+
     programs.yazi = lib.mkMerge [
       {
         enable = true;
