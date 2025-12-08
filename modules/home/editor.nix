@@ -225,26 +225,6 @@ in
                   };
                 };
 
-                # external programs
-                e = {
-                  # refer: https://github.com/sxyazi/yazi/pull/2461
-                  y = [
-                    ":new"
-                    ":insert-output ${config.my.programs.file-manager.command} \"%{file_path_absolute}\""
-                    ":buffer-close!"
-                    ":redraw"
-                  ];
-                  # refer: https://github.com/helix-editor/helix/discussions/12045
-                  g = [
-                    ":write-all"
-                    ":new"
-                    ":insert-output ${config.my.programs.vcs.tui.command}"
-                    ":buffer-close!"
-                    ":redraw"
-                    ":reload-all"
-                  ];
-                };
-
                 f = {
                   "'" = "last_picker";
                   b = "buffer_picker";
