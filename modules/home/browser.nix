@@ -1,4 +1,5 @@
 {
+  my,
   config,
   pkgs,
   lib,
@@ -10,7 +11,9 @@ let
 in
 {
   options.my.programs.browser = {
-    enable = lib.mkEnableOption "Browser";
+    enable = (lib.mkEnableOption "Browser") // {
+      default = my.gui.enable;
+    };
 
     bookmarks = lib.mkOption {
       type = lib.types.attrsOf (

@@ -8,7 +8,9 @@ in
     ./ocr.nix
   ];
 
-  options.my.programs.scripts.enable = lib.mkEnableOption "Scripts";
+  options.my.programs.scripts.enable = (lib.mkEnableOption "Scripts") // {
+    default = true;
+  };
 
   config = {
     my.programs.scripts = {

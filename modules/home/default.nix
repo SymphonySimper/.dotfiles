@@ -1,9 +1,4 @@
-{
-  inputs,
-  my,
-  lib,
-  ...
-}:
+{ my, inputs, ... }:
 {
   imports = [
     inputs.catppuccin.homeModules.catppuccin
@@ -36,18 +31,7 @@
     ./copy.nix
   ];
 
-  my = {
-    common.system = false;
-
-    programs = {
-      # cli
-      scripts.enable = lib.mkDefault true;
-
-      # gui
-      browser.enable = lib.mkDefault my.gui.enable;
-      desktop.enable = lib.mkDefault my.gui.desktop.enable;
-    };
-  };
+  my.common.system = false;
 
   catppuccin = {
     enable = true;

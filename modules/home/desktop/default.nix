@@ -21,7 +21,9 @@ in
   imports = [ ./services ];
 
   options.my.programs.desktop = {
-    enable = lib.mkEnableOption "Desktop";
+    enable = (lib.mkEnableOption "Desktop") // {
+      default = my.gui.desktop.enable;
+    };
 
     autostart = lib.mkOption {
       type = lib.types.listOf (
