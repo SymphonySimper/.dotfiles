@@ -43,7 +43,7 @@
         "runProgramAlreadyRunningAction": 1,
         "runProgramStartWindowType": 0,
         "runProgramFilePath": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
-        "runProgramArgs": "-c wt.exe",
+        "runProgramArgs": "-c alacritty",
         "runProgramStartInDir": "",
         "unicodeText": "*Unsupported*"
       }
