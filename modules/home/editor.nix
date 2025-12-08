@@ -226,27 +226,24 @@ in
                 };
 
                 # external programs
-                e =
-                  let
-                    cfgT = config.my.programs.terminal;
-
-                    mkEx = args: (builtins.concatStringsSep " " ([ ":sh" ] ++ args));
-                    mkEscapeString = value: if my.profile == "wsl" then "\\'${value}\\'" else "'${value}'";
-                  in
-                  {
-                    # refer: https://github.com/sxyazi/yazi/pull/2461
-                    y = [
-                      ":insert-output yazi \"%{file_path_absolute}\" >/dev/null 2>&1"
-                      ":insert-output echo '\\x1b[?1049h\\x1b[?2004h' > /dev/tty" # refer: https://github.com/sxyazi/yazi/pull/2461#issuecomment-2710076612
-                      ":redraw"
-                    ];
-                    g = mkEx [
-                      cfgT.args.run
-                      config.my.programs.vcs.tui.command
-                      config.my.programs.vcs.tui.args.path
-                      (mkEscapeString "%{workspace_directory}")
-                    ];
-                  };
+                e = {
+                  # refer: https://github.com/sxyazi/yazi/pull/2461
+                  y = [
+                    ":new"
+                    ":insert-output ${config.my.programs.file-manager.command} \"%{file_path_absolute}\""
+                    ":buffer-close!"
+                    ":redraw"
+                  ];
+                  # refer: https://github.com/helix-editor/helix/discussions/12045
+                  g = [
+                    ":write-all"
+                    ":new"
+                    ":insert-output ${config.my.programs.vcs.tui.command}"
+                    ":buffer-close!"
+                    ":redraw"
+                    ":reload-all"
+                  ];
+                };
 
                 f = {
                   "'" = "last_picker";
