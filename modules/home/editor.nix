@@ -138,7 +138,7 @@ in
         settings = {
           editor = {
             mouse = false;
-            line-number = "relative";
+            line-number = "absolute";
             auto-format = false;
             bufferline = "never";
             auto-pairs = true;
@@ -234,10 +234,11 @@ in
                     mkEscapeString = value: if my.profile == "wsl" then "\\'${value}\\'" else "'${value}'";
                   in
                   {
-                    y = mkEx [
-                      cfgT.args.run
-                      config.my.programs.file-manager.command
-                      (mkEscapeString "%{file_path_absolute}")
+                    # refer: https://github.com/sxyazi/yazi/pull/2461
+                    y = [
+                      ":insert-output yazi \"%{file_path_absolute}\" >/dev/null 2>&1"
+                      ":insert-output echo '\\x1b[?1049h\\x1b[?2004h' > /dev/tty" # refer: https://github.com/sxyazi/yazi/pull/2461#issuecomment-2710076612
+                      ":redraw"
                     ];
                     g = mkEx [
                       cfgT.args.run
