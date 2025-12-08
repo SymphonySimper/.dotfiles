@@ -1,0 +1,5 @@
+[terminal.shell]
+program = "wsl"
+args = ["--cd", "~"]
+
+# fix rendering issues in windows: https://github.com/alacritty/alacritty/issues/8236#issuecomment-2408690086

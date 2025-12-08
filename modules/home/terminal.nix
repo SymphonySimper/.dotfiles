@@ -1,11 +1,18 @@
 {
   my,
   config,
+  pkgs,
   lib,
   ...
 }:
 let
   cfg = config.my.programs.terminal;
+
+  files = {
+    theme = "theme.toml";
+    extra = "extra.toml";
+    config = "alacritty.toml";
+  };
 in
 {
   options.my.programs.terminal =
@@ -52,6 +59,16 @@ in
             }
           ];
         };
+
+        copy.of =
+          (builtins.map (file: {
+            from = "CONFIG/alacritty/${file}";
+            to = "WINDOWS/alacritty/${file}";
+          }))
+            [
+              files.config
+              files.theme
+            ];
       };
 
       xdg.terminal-exec = {
@@ -59,18 +76,39 @@ in
         settings.default = [ "Alacritty.desktop" ];
       };
 
+      catppuccin.alacritty.enable = false;
+
+      xdg.configFile = {
+        "alacritty/${files.theme}".source = lib.my.mkGetThemeSource {
+          package = "alacritty";
+          filename = "NAME-FLAVOR.toml";
+          returnFile = true;
+        };
+
+        "alacritty/${files.extra}".source =
+          let
+            tomlFormat = pkgs.formats.toml { };
+          in
+          tomlFormat.generate files.extra {
+            terminal.shell = {
+              program = cfg.shell.command;
+              args = cfg.shell.args;
+            };
+          };
+      };
+
       programs.alacritty = {
         enable = true;
 
         settings = {
           general = {
+            import = [
+              files.theme
+              files.extra
+            ];
+
             live_config_reload = false;
             ipc_socket = false;
-          };
-
-          terminal.shell = {
-            program = cfg.shell.command;
-            args = cfg.shell.args;
           };
 
           window = {
