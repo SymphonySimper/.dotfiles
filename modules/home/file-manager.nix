@@ -17,10 +17,6 @@
         enable = true;
         shellWrapperName = "y";
 
-        extraPackages = [
-          pkgs.p7zip # archive (opener.extract)
-        ];
-
         settings = {
           preview.max_width = 1920; # image preview
           mgr.linemode = "size";
