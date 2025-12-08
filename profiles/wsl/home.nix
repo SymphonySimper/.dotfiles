@@ -1,25 +1,7 @@
-{ config, pkgs, ... }:
-let
-  cfgSh = config.my.programs.shell;
-
-  path = {
-    programFiles = "/mnt/c/Program Files";
-    system32 = "/mnt/c/windows/system32";
-  };
-in
+{ pkgs, ... }:
 {
   my.programs = {
     editor.clipboardProvider = "win32-yank";
-
-    # NOTE: profile option is just for other settings not starting shell
-    terminal.runScriptContent = # sh
-      ''
-        user_dir=$(wslpath $(${path.system32}/cmd.exe /c "echo %USERPROFILE%" 2>/dev/null) | tr -d "\r")
-
-        exec "$user_dir/AppData/Local/Microsoft/WindowsApps/wt.exe" \
-          --window 0 \
-          --profile "NixOS" wsl.exe -d NixOS --cd ~ ${cfgSh.command} ${cfgSh.args.login} ${cfgSh.args.command} "$*"
-      '';
   };
 
   home.packages = [

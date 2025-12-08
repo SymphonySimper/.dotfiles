@@ -1,13 +1,11 @@
 {
   my,
   config,
-  pkgs,
   lib,
   ...
 }:
 let
   cfg = config.my.programs.terminal;
-  runCommand = "myterminalrun";
 in
 {
   options.my.programs.terminal =
@@ -16,17 +14,9 @@ in
       command = "kitty";
       args = {
         command = "-e";
-        run = runCommand;
       };
     })
     // {
-      runScriptContent = lib.mkOption {
-        description = "Terminal run script content";
-        type = lib.types.lines;
-        default = # sh
-          ''${cfg.command} @ launch --cwd=current --type=tab "$@" > /dev/null 2>&1'';
-      };
-
       shell = lib.mkOption {
         type = lib.types.submodule {
           options = {
@@ -51,8 +41,6 @@ in
     };
 
   config = lib.mkMerge [
-    { home.packages = [ (pkgs.writeShellScriptBin runCommand cfg.runScriptContent) ]; }
-
     (lib.mkIf my.gui.enable {
       my.programs = {
         desktop = {
