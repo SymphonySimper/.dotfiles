@@ -249,8 +249,6 @@ in
     )
 
     {
-      catppuccin.lazygit.enable = false;
-
       programs.lazygit = {
         enable = true;
 
@@ -264,28 +262,6 @@ in
             showPanelJumps = false;
             nerdFontsVersion = "3";
             useHunkModeInStagingView = false;
-
-            theme =
-              with my.theme.color;
-              let
-                accent = my.theme.color.${my.theme.accent};
-              in
-              {
-                activeBorderColor = [
-                  accent
-                  "bold"
-                ];
-                inactiveBorderColor = [ subtext0 ];
-                optionsTextColor = [ blue ];
-                selectedLineBgColor = [ surface0 ];
-                cherryPickedCommitBgColor = [ surface1 ];
-                cherryPickedCommitFgColor = [ accent ];
-                unstagedChangesColor = [ red ];
-                defaultFgColor = [ text ];
-                searchingActiveBorderColor = [ yellow ];
-              };
-
-            authorColors."*" = my.theme.color.lavender;
           };
         };
       };
