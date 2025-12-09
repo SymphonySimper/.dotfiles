@@ -48,7 +48,15 @@ let
         altFlavor = builtins.getAttr (if theme.dark then "light" else "dark") theme.flavors;
 
         color =
-          builtins.mapAttrs (_: value: value.hex)
+          let
+            mkConvertToString = set: builtins.mapAttrs (_: value: builtins.toString value) set;
+          in
+          builtins.mapAttrs
+            (_: value: {
+              hex = value.hex;
+              hsl = mkConvertToString value.hsl;
+              rgb = mkConvertToString value.rgb;
+            })
             (builtins.fromJSON (
               builtins.readFile "${inputs.catppuccin.packages.${system}.palette}/palette.json"
             )).${theme.flavor}.colors;
