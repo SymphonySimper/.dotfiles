@@ -116,7 +116,7 @@ in
         enable = true;
         nix-direnv.enable = true;
 
-        silent = true;
+        silent = false;
         config.warn_timeout = "2m";
       };
 
