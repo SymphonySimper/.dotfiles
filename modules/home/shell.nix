@@ -14,7 +14,6 @@ in
     (lib.modules.mkAliasOptionModule [ "my" "programs" "shell" "path" ] [ "home" "sessionPath" ])
 
     (lib.modules.mkAliasOptionModule [ "my" "programs" "shell" "root" ] [ "programs" "bash" ])
-    (lib.modules.mkAliasOptionModule [ "my" "programs" "shell" "prompt" ] [ "programs" "starship" ])
   ];
 
   options.my.programs.shell =
@@ -75,6 +74,16 @@ in
           shellOptions = [
             "autocd" # cd when directory
           ];
+
+          initExtra =
+            let
+              rgb = my.theme.color.lavender.rgb;
+              boldColor = "\\e[38;2;${rgb.r};${rgb.g};${rgb.b};1m";
+              reset = "\\e[0m";
+            in
+            ''
+              PS1='\[${boldColor}\]\w\n> \[${reset}\]'
+            '';
         };
 
         readline = {
@@ -116,8 +125,6 @@ in
           "!.envrc"
           ".direnv"
         ];
-
-        shell.prompt.settings.direnv.disabled = false;
       };
     }
 
@@ -131,61 +138,6 @@ in
 
       my.programs.shell = {
         root.initExtra = lib.mkOrder 4000 ''eval "$(zoxide init bash)"'';
-      };
-    }
-
-    {
-      programs.starship = {
-        enable = true;
-
-        settings = {
-          add_newline = false;
-          scan_timeout = 30;
-          command_timeout = 30; # default 500
-          format = lib.concatStrings [
-            "$all"
-            # "$fill"
-            "$time"
-            "$line_break"
-            "$character"
-          ];
-
-          character = {
-            success_symbol = "[>](bold lavender)";
-            error_symbol = "[x](bold red)";
-            vimcmd_symbol = "[v](bold peach)";
-          };
-
-          fill = {
-            disabled = false;
-            symbol = " ";
-          };
-
-          directory = {
-            style = "bold lavender";
-            truncate_to_repo = false;
-          };
-
-          time = {
-            disabled = false;
-            format = "[($time)](overlay0)";
-            time_format = "(%H:%M)";
-            utc_time_offset = "local";
-          };
-
-          python.symbol = "󰌠 ";
-
-          nix_shell = {
-            format = "via [$symbol$state]($style) ";
-            symbol = "󱄅 ";
-          };
-
-          gcloud.disabled = true;
-        };
-      };
-
-      my.programs = {
-        shell.env.STARSHIP_LOG = "error";
       };
     }
   ];
