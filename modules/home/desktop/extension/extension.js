@@ -1,7 +1,11 @@
+import GLib from "gi://GLib";
+import UPower from "gi://UPowerGlib";
+
 import {
   panel,
   overview,
   layoutManager,
+  notify,
 } from "resource:///org/gnome/shell/ui/main.js";
 import {
   Extension,
@@ -81,8 +85,39 @@ class Overrides {
   }
 }
 
+class Battery {
+  #MIN = 40;
+  #MAX = 80;
+
+  enable() {
+    this._sourceId = GLib.timeout_add_seconds(GLib.PRIORITY_LOW, 5 * 60, () => {
+      const { Percentage: level, State: state } =
+        panel.statusArea.quickSettings._system._systemItem._powerToggle._proxy;
+
+      if (level < this.#MIN && state === UPower.DeviceState.DISCHARGING) {
+        notify(
+          `Battery is less than ${this.#MIN}% (${level}%) plug the charger.`,
+        );
+      } else if (level > this.#MAX && state === UPower.DeviceState.CHARGING) {
+        notify(
+          `Battery is greater than ${this.#MAX}% (${level}%) unplug the charger`,
+        );
+      }
+
+      return GLib.SOURCE_CONTINUE;
+    });
+  }
+
+  disable() {
+    if (this._sourceId) {
+      GLib.Source.remove(this._sourceId);
+      this._sourceId = null;
+    }
+  }
+}
+
 export default class MyExtension extends Extension {
-  #extensions = [ShowOverviewOnEnable, HidePanel, Overrides].map(
+  #extensions = [ShowOverviewOnEnable, HidePanel, Overrides, Battery].map(
     (extension) => new extension(),
   );
 
