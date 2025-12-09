@@ -12,7 +12,6 @@ import {
   Source,
   MessageTray,
 } from "resource:///org/gnome/shell/ui/messageTray.js";
-import { Message } from "resource:///org/gnome/shell/ui/messageList.js";
 
 class ShowOverviewOnEnable {
   #states = new Set(["SHOWN", "SHOWING"]);
