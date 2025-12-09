@@ -75,14 +75,6 @@ in
           shellOptions = [
             "autocd" # cd when directory
           ];
-
-          # profileExtra = # sh
-          #   ''
-          #     # nix_loc="$HOME"/.nix-profile/etc/profile.d/nix.sh
-          #     # [ -f $nix_loc ] && . $nix_loc
-
-          #     . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
-          #   '';
         };
 
         readline = {
