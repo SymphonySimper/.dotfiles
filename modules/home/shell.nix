@@ -1,13 +1,9 @@
 {
   my,
-  config,
   pkgs,
   lib,
   ...
 }:
-let
-  cfg = config.my.programs.shell;
-in
 {
   imports = [
     (lib.modules.mkAliasOptionModule [ "my" "programs" "shell" "env" ] [ "home" "sessionVariables" ])
@@ -16,23 +12,15 @@ in
     (lib.modules.mkAliasOptionModule [ "my" "programs" "shell" "root" ] [ "programs" "bash" ])
   ];
 
-  options.my.programs.shell =
-    (lib.my.mkCommandOption {
-      category = "Shell";
-      command = "bash";
-      args = {
-        login = "--login";
-        command = "-c";
-        bin = "${my.dir.home}/.nix-profile/bin";
-      };
-    })
-    // {
-      addToPath = lib.mkOption {
-        type = lib.types.attrsOf lib.types.str;
-        description = "Add a executable to ~/.local/bin";
-        default = { };
-      };
+  options.my.programs.shell = lib.my.mkCommandOption {
+    category = "Shell";
+    command = "bash";
+    args = {
+      login = "--login";
+      command = "-c";
+      bin = "${my.dir.home}/.nix-profile/bin";
     };
+  };
 
   config = lib.mkMerge [
     {
@@ -46,24 +34,6 @@ in
         };
       };
     }
-
-    (
-      let
-        path = "../bin"; # relative to XDG_DATA_HOME
-      in
-      {
-        my.programs.shell.path = [ "${config.xdg.dataHome}/${path}" ];
-
-        xdg.dataFile = builtins.listToAttrs (
-          builtins.map (file: {
-            name = "${path}/${file.name}";
-            value = {
-              source = config.lib.file.mkOutOfStoreSymlink file.value;
-            };
-          }) (lib.attrsets.attrsToList cfg.addToPath)
-        );
-      }
-    )
 
     {
       programs = {
