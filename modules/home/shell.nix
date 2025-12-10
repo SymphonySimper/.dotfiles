@@ -101,11 +101,6 @@
     {
       programs.zoxide = {
         enable = true;
-        enableBashIntegration = false;
-      };
-
-      my.programs.shell = {
-        root.initExtra = lib.mkOrder 4000 ''eval "$(zoxide init bash)"'';
       };
     }
   ];
