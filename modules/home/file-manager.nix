@@ -31,7 +31,6 @@ in
         shellWrapperName = "y";
 
         settings = {
-          preview.max_width = 1920; # image preview
           mgr.linemode = "size";
 
           opener.edit = [
