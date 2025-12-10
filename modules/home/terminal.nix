@@ -47,127 +47,125 @@ in
       };
     };
 
-  config = lib.mkMerge [
-    (lib.mkIf my.gui.enable {
-      my.programs = {
-        desktop = {
-          keybinds = [
-            {
-              mods = [ "super" ];
-              key = "t";
-              command = cfg.command;
-            }
+  config = lib.mkIf my.gui.enable {
+    my.programs = {
+      desktop = {
+        keybinds = [
+          {
+            mods = [ "super" ];
+            key = "t";
+            command = cfg.command;
+          }
+        ];
+      };
+
+      copy.of =
+        (builtins.map (file: {
+          from = "CONFIG/alacritty/${file}";
+          to = "WINDOWS/alacritty/${file}";
+        }))
+          [
+            files.config
+            files.theme
           ];
+    };
+
+    xdg.terminal-exec = {
+      enable = true;
+      settings.default = [ "Alacritty.desktop" ];
+    };
+
+    catppuccin.alacritty.enable = false;
+
+    xdg.configFile = {
+      "alacritty/${files.theme}".source = lib.my.mkGetThemeSource {
+        package = "alacritty";
+        filename = "NAME-FLAVOR.toml";
+        returnFile = true;
+      };
+
+      "alacritty/${files.extra}".source =
+        let
+          tomlFormat = pkgs.formats.toml { };
+        in
+        tomlFormat.generate files.extra {
+          terminal.shell = {
+            program = cfg.shell.command;
+            args = cfg.shell.args;
+          };
         };
+    };
 
-        copy.of =
-          (builtins.map (file: {
-            from = "CONFIG/alacritty/${file}";
-            to = "WINDOWS/alacritty/${file}";
-          }))
-            [
-              files.config
-              files.theme
-            ];
-      };
+    programs.alacritty = {
+      enable = true;
 
-      xdg.terminal-exec = {
-        enable = true;
-        settings.default = [ "Alacritty.desktop" ];
-      };
-
-      catppuccin.alacritty.enable = false;
-
-      xdg.configFile = {
-        "alacritty/${files.theme}".source = lib.my.mkGetThemeSource {
-          package = "alacritty";
-          filename = "NAME-FLAVOR.toml";
-          returnFile = true;
-        };
-
-        "alacritty/${files.extra}".source =
-          let
-            tomlFormat = pkgs.formats.toml { };
-          in
-          tomlFormat.generate files.extra {
-            terminal.shell = {
-              program = cfg.shell.command;
-              args = cfg.shell.args;
-            };
-          };
-      };
-
-      programs.alacritty = {
-        enable = true;
-
-        settings = {
-          general = {
-            import = [
-              files.theme
-              files.extra
-            ];
-
-            live_config_reload = false;
-            ipc_socket = false;
-          };
-
-          window = {
-            decorations = "none";
-            opacity = 1;
-            startup_mode = "Maximized";
-
-            dynamic_padding = true;
-            padding = rec {
-              x = 2;
-              y = x;
-            };
-          };
-
-          scrolling.history = 1000;
-          selection.save_to_clipboard = true;
-
-          font = {
-            size = 12;
-
-            normal = {
-              family = my.theme.font.mono;
-              style = "Regular";
-            };
-          };
-
-          cursor = {
-            vi_mode_style = "Block";
-
-            style = {
-              blinking = "off";
-              shape = "Block";
-            };
-          };
-
-          keyboard.bindings = [
-            {
-              key = "V";
-              mods = "Alt";
-              action = "ToggleViMode";
-            }
-            {
-              key = "T";
-              mods = "Alt";
-              action = "CreateNewWindow";
-            }
-            {
-              key = "M";
-              mods = "Alt";
-              action = "ToggleMaximized";
-            }
-            {
-              key = "F";
-              mods = "Alt|Shift";
-              action = "ToggleFullscreen";
-            }
+      settings = {
+        general = {
+          import = [
+            files.theme
+            files.extra
           ];
+
+          live_config_reload = false;
+          ipc_socket = false;
         };
+
+        window = {
+          decorations = "none";
+          opacity = 1;
+          startup_mode = "Maximized";
+
+          dynamic_padding = true;
+          padding = rec {
+            x = 2;
+            y = x;
+          };
+        };
+
+        scrolling.history = 1000;
+        selection.save_to_clipboard = true;
+
+        font = {
+          size = 12;
+
+          normal = {
+            family = my.theme.font.mono;
+            style = "Regular";
+          };
+        };
+
+        cursor = {
+          vi_mode_style = "Block";
+
+          style = {
+            blinking = "off";
+            shape = "Block";
+          };
+        };
+
+        keyboard.bindings = [
+          {
+            key = "V";
+            mods = "Alt";
+            action = "ToggleViMode";
+          }
+          {
+            key = "T";
+            mods = "Alt";
+            action = "CreateNewWindow";
+          }
+          {
+            key = "M";
+            mods = "Alt";
+            action = "ToggleMaximized";
+          }
+          {
+            key = "F";
+            mods = "Alt|Shift";
+            action = "ToggleFullscreen";
+          }
+        ];
       };
-    })
-  ];
+    };
+  };
 }
