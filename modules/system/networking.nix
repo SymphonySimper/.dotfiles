@@ -9,7 +9,10 @@ let
 in
 {
   options.my.networking = {
-    enable = lib.mkEnableOption "networking";
+    enable = lib.mkEnableOption "networking" // {
+      default = true;
+    };
+
     nm.enable = lib.mkEnableOption "NetworkManager";
     firewall.enable = lib.mkEnableOption "firewall";
 

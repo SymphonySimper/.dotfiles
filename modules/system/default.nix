@@ -24,18 +24,7 @@
     ./hardware
   ];
 
-  my = {
-    common.system = true;
-    boot.enable = lib.mkDefault false;
-    networking.enable = lib.mkDefault true;
-
-    programs = {
-      android.enable = lib.mkDefault false;
-      browser.enable = lib.mkDefault my.gui.enable;
-      desktop.enable = lib.mkDefault my.gui.desktop.enable;
-      vm.enable = lib.mkDefault false;
-    };
-  };
+  my.common.system = true;
 
   programs = {
     # FHS environment
@@ -51,8 +40,10 @@
   };
 
   # Clean /tmp folder on boot
-  boot.tmp.cleanOnBoot = true;
-  boot.tmp.useTmpfs = true;
+  boot.tmp = {
+    cleanOnBoot = true;
+    useTmpfs = true;
+  };
 
   fonts = lib.mkIf my.gui.enable {
     enableDefaultPackages = true;

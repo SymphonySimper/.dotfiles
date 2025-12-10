@@ -1,10 +1,17 @@
-{ config, lib, ... }:
+{
+  my,
+  config,
+  lib,
+  ...
+}:
 let
   cfg = config.my.programs.browser;
 in
 {
   options.my.programs.browser = {
-    enable = lib.mkEnableOption "Browser";
+    enable = lib.mkEnableOption "Browser" // {
+      default = my.gui.enable;
+    };
 
     search = lib.mkOption {
       type = lib.types.submodule {

@@ -1,11 +1,14 @@
 {
+  my,
   config,
   pkgs,
   lib,
   ...
 }:
 {
-  options.my.programs.desktop.enable = lib.mkEnableOption "Desktop";
+  options.my.programs.desktop.enable = lib.mkEnableOption "Desktop" // {
+    default = my.gui.desktop.enable;
+  };
 
   config = lib.mkIf config.my.programs.desktop.enable (
     lib.mkMerge [
