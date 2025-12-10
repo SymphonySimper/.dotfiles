@@ -7,7 +7,48 @@
 }:
 let
   cfg = config.my.programs.vcs;
+
   defaultProfile = "default";
+  sshAlgorithm = "ed25519";
+
+  mkSSHIdentityFilename = name: "${config.my.programs.ssh.dir}/${name}-id-${sshAlgorithm}";
+  mkProfileDir = name: "${my.dir.dev}/${name}";
+
+  cloneSSH =
+    let
+      mkClone =
+        name: # sh
+        ''
+          ${cfg.command} clone git@${name}:$suffix "''${@}"
+        '';
+
+      script = lib.getExe (
+        pkgs.writeShellScriptBin "my-vcs-clone-ssh" (
+          lib.strings.concatLines (
+            builtins.concatLists [
+              [
+                # sh
+                ''
+                  curr_dir=$(pwd)  
+                  suffix="$1"
+                  shift
+                ''
+              ]
+              (builtins.map (
+                name: # sh
+                ''
+                  if [ "$curr_dir" == "${mkProfileDir name}" ]; then
+                    ${mkClone name}
+                    exit 0
+                  fi
+                '') (builtins.filter (name: name != defaultProfile) (builtins.attrNames cfg.profiles)))
+              [ (mkClone defaultProfile) ]
+            ]
+          )
+        )
+      );
+    in
+    "!${script}";
 in
 {
   imports = [
@@ -54,31 +95,66 @@ in
       };
     };
 
-  config = lib.mkMerge [
-    {
-      home.packages = with pkgs; [ git-filter-repo ];
+  config = {
+    home = {
+      packages = [ pkgs.git-filter-repo ];
 
-      my.programs = {
-        editor.ignore = [
-          # do not ignore
-          "!.gitignore"
-          "!.gitattributes"
-        ];
+      activation.myVCSProfiles = lib.hm.dag.entryAfter [ "writeBoundary" ] (
+        lib.strings.concatLines (
+          builtins.concatMap (
+            profile:
+            let
+              identityFile = mkSSHIdentityFilename profile.name;
+              dir = mkProfileDir profile.name;
+            in
+            [
+              (lib.strings.optionalString (profile.name != defaultProfile) # sh
+                ''
+                  if [ ! -d "${dir}" ]; then
+                    mkdir --parents --verbose "${dir}"
+                  fi
+                ''
+              )
 
-        vcs.profiles = {
-          ${defaultProfile} = {
-            host = "github.com";
-            email = cfg.root.settings.user.email;
-          };
+              # sh
+              ''
+                if [ ! -f "${identityFile}" ]; then
+                  echo "Generating identity for '${profile.name}':"
+                  ${my.dir.runBin}/ssh-keygen -t ${sshAlgorithm} -f "${identityFile}" -C "${profile.value.email}"
+                fi
+              ''
+            ]
+          ) (lib.attrsets.attrsToList cfg.profiles)
+        )
+      );
+    };
+
+    my.programs = {
+      editor.ignore = [
+        # do not ignore
+        "!.gitignore"
+        "!.gitattributes"
+      ];
+
+      ssh.root.matchBlocks = builtins.mapAttrs (name: value: {
+        hostname = value.host;
+        identityFile = mkSSHIdentityFilename name;
+        identitiesOnly = true;
+      }) cfg.profiles;
+
+      vcs.profiles = {
+        ${defaultProfile} = {
+          host = "github.com";
+          email = cfg.root.settings.user.email;
         };
       };
+    };
 
-      programs.git = {
+    programs = {
+      git = {
         enable = true;
-
-        ignores = [
-          "node_modules"
-        ];
+        lfs.enable = true;
+        ignores = [ "node_modules" ];
 
         settings = {
           user = {
@@ -108,6 +184,8 @@ in
           # (i.e) `p` == `P`
           alias = {
             c = "clone";
+            cs = cloneSSH;
+
             s = "status";
             a = "add";
             m = "commit";
@@ -141,115 +219,23 @@ in
           };
         };
 
-        lfs.enable = true;
-      };
-    }
-
-    # Profiles
-    (
-      let
-        algorithm = "ed25519";
-
-        mkSSHIdentityFilename = name: "${config.my.programs.ssh.dir}/${name}-id-${algorithm}";
-        mkDir = name: "${my.dir.dev}/${name}";
-      in
-      {
-        home.activation = {
-          myVCSProfiles = lib.hm.dag.entryAfter [ "writeBoundary" ] (
-            lib.strings.concatLines (
-              builtins.concatMap (
-                profile:
-                let
-                  identityFile = mkSSHIdentityFilename profile.name;
-                  dir = mkDir profile.name;
-                in
-                [
-                  (lib.strings.optionalString (profile.name != defaultProfile) # sh
-                    ''
-                      if [ ! -d "${dir}" ]; then
-                        mkdir --parents --verbose "${dir}"
-                      fi
-                    ''
-                  )
-
-                  # sh
-                  ''
-                    if [ ! -f "${identityFile}" ]; then
-                      echo "Generating identity for '${profile.name}':"
-                      ${my.dir.runBin}/ssh-keygen -t ${algorithm} -f "${identityFile}" -C "${profile.value.email}"
-                    fi
-                  ''
-                ]
-              ) (lib.attrsets.attrsToList cfg.profiles)
+        includes = (
+          builtins.map
+            (profile: {
+              condition = "gitdir:${mkProfileDir profile.name}/";
+              contents = profile.value.config;
+            })
+            (
+              lib.attrsets.attrsToList (
+                lib.attrsets.filterAttrs (
+                  name: value: (name != defaultProfile) && (value.config != null)
+                ) cfg.profiles
+              )
             )
-          );
-        };
+        );
+      };
 
-        my.programs = {
-          ssh.root.matchBlocks = builtins.mapAttrs (name: value: {
-            hostname = value.host;
-            identityFile = mkSSHIdentityFilename name;
-            identitiesOnly = true;
-          }) cfg.profiles;
-
-          vcs.root = {
-            includes = (
-              builtins.map
-                (profile: {
-                  condition = "gitdir:${mkDir profile.name}/";
-                  contents = profile.value.config;
-                })
-                (
-                  lib.attrsets.attrsToList (
-                    lib.attrsets.filterAttrs (
-                      name: value: (name != defaultProfile) && (value.config != null)
-                    ) cfg.profiles
-                  )
-                )
-            );
-
-            settings.alias.cs =
-              let
-                mkClone =
-                  name: # sh
-                  ''
-                    ${cfg.command} clone git@${name}:$suffix "''${@}"
-                  '';
-
-                script = lib.getExe (
-                  pkgs.writeShellScriptBin "my-vcs-clone-ssh" (
-                    lib.strings.concatLines (
-                      builtins.concatLists [
-                        [
-                          # sh
-                          ''
-                            curr_dir=$(pwd)  
-                            suffix="$1"
-                            shift
-                          ''
-                        ]
-                        (builtins.map (
-                          name: # sh
-                          ''
-                            if [ "$curr_dir" == "${mkDir name}" ]; then
-                              ${mkClone name}
-                              exit 0
-                            fi
-                          '') (builtins.filter (name: name != defaultProfile) (builtins.attrNames cfg.profiles)))
-                        [ (mkClone defaultProfile) ]
-                      ]
-                    )
-                  )
-                );
-              in
-              "!${script}";
-          };
-        };
-      }
-    )
-
-    {
-      programs.lazygit = {
+      lazygit = {
         enable = true;
 
         settings = {
@@ -265,6 +251,6 @@ in
           };
         };
       };
-    }
-  ];
+    };
+  };
 }
