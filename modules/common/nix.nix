@@ -1,62 +1,42 @@
 {
-  inputs,
   my,
-  config,
+  inputs,
   pkgs,
-  lib,
   ...
 }:
-let
-  system = config.my.common.system;
-in
 {
-  options.my.common = {
-    system = lib.mkOption {
-      type = lib.types.bool;
+  nix = {
+    package = pkgs.nix;
+
+    # Path for pkgs
+    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+
+    # Garbage Collection
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 14d";
+      dates = "weekly";
     };
-  };
-  config = {
-    nix = lib.mkMerge [
-      {
-        package = pkgs.nix;
 
-        # Path for pkgs
-        nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+    settings = {
+      show-trace = true;
+      auto-optimise-store = true;
+      trusted-users = [
+        "root"
+        my.name
+      ];
 
-        # Garbage Collection
-        gc = {
-          automatic = true;
-          options = "--delete-older-than 14d";
-          dates = "weekly";
-        };
+      # Enable flakes
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+      commit-lock-file-summary = "chore(flake): update flake.lock";
+    };
 
-        settings = lib.mkMerge [
-          {
-            show-trace = true;
-            auto-optimise-store = true;
-            trusted-users = [
-              "root"
-              my.name
-            ];
-
-            # Enable flakes
-            experimental-features = [
-              "nix-command"
-              "flakes"
-            ];
-            commit-lock-file-summary = "chore(flake): update flake.lock";
-          }
-
-          (lib.attrsets.optionalAttrs system {
-            extra-platforms = config.boot.binfmt.emulatedSystems;
-          })
-        ];
-
-        registry = {
-          nixpkgs.flake = inputs.nixpkgs;
-          my.flake = inputs.self;
-        };
-      }
-    ];
+    registry = {
+      nixpkgs.flake = inputs.nixpkgs;
+      my.flake = inputs.self;
+    };
   };
 }

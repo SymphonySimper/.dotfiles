@@ -30,8 +30,6 @@
     ./copy.nix
   ];
 
-  my.common.system = false;
-
   catppuccin = {
     enable = true;
     flavor = my.theme.flavor;

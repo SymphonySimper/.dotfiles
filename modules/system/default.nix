@@ -1,5 +1,6 @@
 {
   my,
+  config,
   pkgs,
   lib,
   ...
@@ -23,8 +24,6 @@
     ../common
     ./hardware
   ];
-
-  my.common.system = true;
 
   programs = {
     # FHS environment
@@ -57,5 +56,7 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   nixpkgs.hostPlatform = lib.mkDefault my.system;
+  nix.settings.extra-platforms = config.boot.binfmt.emulatedSystems;
+
   system.stateVersion = "23.11"; # Do no change
 }
