@@ -13,7 +13,6 @@
     ./nix.nix
     ./shell.nix
     ./ssh.nix
-    ./top.nix
     ./utility.nix
     ./vcs.nix
     ./work.nix
