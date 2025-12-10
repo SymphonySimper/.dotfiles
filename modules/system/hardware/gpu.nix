@@ -28,19 +28,15 @@ in
 
     (lib.mkIf cfg.amd.enable {
       hardware = {
-        graphics = lib.mkMerge [
-          (lib.mkIf cfg.amd.enableVulkan {
-            extraPackages = [ pkgs.amdvlk ];
-            extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
-          })
-
-          {
-            # OpenCL
-            extraPackages = [ pkgs.rocmPackages.clr.icd ];
-          }
-        ];
-
         amdgpu.initrd.enable = true;
+
+        graphics = {
+          extraPackages = [
+            pkgs.rocmPackages.clr.icd # OpenCL
+          ]
+          ++ (lib.lists.optional cfg.amd.enableVulkan pkgs.amdvlk);
+          extraPackages32 = lib.lists.optional cfg.amd.enableVulkan pkgs.driversi686Linux.amdvlk;
+        };
       };
     })
 
