@@ -15,21 +15,9 @@ in
 
     nm.enable = lib.mkEnableOption "NetworkManager";
     firewall.enable = lib.mkEnableOption "firewall";
-
-    hostName = lib.mkOption {
-      type = lib.types.str;
-      description = "Hostname";
-      default = my.profile;
-    };
   };
 
   config = lib.mkMerge [
-    {
-      networking = {
-        hostName = cfg.hostName;
-      };
-    }
-
     (lib.mkIf cfg.enable {
       my = {
         user = {

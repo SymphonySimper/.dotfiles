@@ -38,6 +38,8 @@
     bash.enableLsColors = false;
   };
 
+  networking.hostName = my.profile;
+
   # Clean /tmp folder on boot
   boot.tmp = {
     cleanOnBoot = true;
