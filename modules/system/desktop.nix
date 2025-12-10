@@ -10,60 +10,55 @@
     default = my.gui.desktop.enable;
   };
 
-  config = lib.mkIf config.my.programs.desktop.enable (
-    lib.mkMerge [
-      {
-        services = {
-          desktopManager.gnome.enable = true;
+  config = lib.mkIf config.my.programs.desktop.enable {
+    my = {
+      boot.enable = true;
 
-          displayManager.gdm = {
-            enable = true;
-            wayland = true;
-          };
+      hardware = {
+        audio = {
+          enable = true;
+          programs.enable = lib.mkDefault true;
         };
 
-        environment = {
-          gnome.excludePackages = with pkgs; [
-            baobab # disk usage analyzer
-            epiphany # browser
-            geary # email
-            gnome-connections
-            gnome-console
-            gnome-contacts
-            gnome-font-viewer
-            gnome-logs
-            gnome-maps
-            gnome-music
-            gnome-system-monitor
-            gnome-text-editor
-            gnome-tour
-            gnome-weather
-            simple-scan
-            sushi # nautilus preview
-            yelp
-          ];
-        };
-      }
-      {
-        environment.sessionVariables.NIXOS_OZONE_WL = "1";
+        powerManagement.enable = true;
+      };
 
-        my = {
-          boot.enable = true;
+      programs = {
+        browser.enable = true;
+      };
+    };
 
-          hardware = {
-            audio = {
-              enable = true;
-              programs.enable = lib.mkDefault true;
-            };
+    services = {
+      desktopManager.gnome.enable = true;
 
-            powerManagement.enable = true;
-          };
+      displayManager.gdm = {
+        enable = true;
+        wayland = true;
+      };
+    };
 
-          programs = {
-            browser.enable = true;
-          };
-        };
-      }
-    ]
-  );
+    environment = {
+      sessionVariables.NIXOS_OZONE_WL = "1";
+
+      gnome.excludePackages = with pkgs; [
+        baobab # disk usage analyzer
+        epiphany # browser
+        geary # email
+        gnome-connections
+        gnome-console
+        gnome-contacts
+        gnome-font-viewer
+        gnome-logs
+        gnome-maps
+        gnome-music
+        gnome-system-monitor
+        gnome-text-editor
+        gnome-tour
+        gnome-weather
+        simple-scan
+        sushi # nautilus preview
+        yelp
+      ];
+    };
+  };
 }
