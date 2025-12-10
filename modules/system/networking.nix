@@ -17,32 +17,30 @@ in
     firewall.enable = lib.mkEnableOption "firewall";
   };
 
-  config = lib.mkMerge [
-    (lib.mkIf cfg.enable {
-      my = {
-        user = {
-          groups = [ "networkmanager" ];
-          sudo.nopasswd = lib.lists.optional (cfg.nm.enable) "${my.dir.runBin}/systemctl restart NetworkManager";
-        };
-
-        networking = {
-          nm.enable = lib.mkDefault true;
-          firewall.enable = lib.mkDefault true;
-        };
+  config = lib.mkIf cfg.enable {
+    my = {
+      user = {
+        groups = [ "networkmanager" ];
+        sudo.nopasswd = lib.lists.optional (cfg.nm.enable) "${my.dir.runBin}/systemctl restart NetworkManager";
       };
 
       networking = {
-        networkmanager = {
-          enable = cfg.nm.enable;
-        };
-
-        firewall = {
-          enable = cfg.firewall.enable;
-          allowedTCPPorts = [
-            5173 # vite
-          ];
-        };
+        nm.enable = lib.mkDefault true;
+        firewall.enable = lib.mkDefault true;
       };
-    })
-  ];
+    };
+
+    networking = {
+      networkmanager = {
+        enable = cfg.nm.enable;
+      };
+
+      firewall = {
+        enable = cfg.firewall.enable;
+        allowedTCPPorts = [
+          5173 # vite
+        ];
+      };
+    };
+  };
 }
