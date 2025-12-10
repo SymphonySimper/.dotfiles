@@ -88,189 +88,186 @@ in
       };
     };
 
-  config = lib.mkMerge [
-    {
-      my.programs = {
-        shell.env = rec {
-          EDITOR = cfg.command;
-          VISUAL = EDITOR;
-        };
-
-        editor.ignore = builtins.concatLists [
-          [
-            # general
-            ".DS_Store"
-            "build"
-
-            # binary
-            "**/*.exe"
-            "**/*.zip"
-            "**/*.parquet"
-            ## media
-            "**/*.png"
-            "**/*.jp[e]?g"
-            "**/*.web[pm]"
-            ## doc
-            "**/*.pdf"
-            "**/*.epub"
-            "**/*.odt"
-            "**/*.doc[x]?"
-            "**/*.calc"
-            "**/*.xls[x]?"
-            "**/*:Zone.Identifier"
-          ]
-
-          # Do not ignore
-          [
-            "!.github/"
-            "!.env*"
-          ]
-        ];
+  config = {
+    my.programs = {
+      shell.env = rec {
+        EDITOR = cfg.command;
+        VISUAL = EDITOR;
       };
 
-      xdg.configFile."helix/ignore".text = builtins.concatStringsSep "\n" (lib.lists.unique cfg.ignore);
+      editor.ignore = builtins.concatLists [
+        [
+          # general
+          ".DS_Store"
+          "build"
 
-      programs.helix = {
-        enable = true;
-        package = inputs.helix.packages.${my.system}.default;
-        extraPackages = cfg.packages;
+          # binary
+          "**/*.exe"
+          "**/*.zip"
+          "**/*.parquet"
+          ## media
+          "**/*.png"
+          "**/*.jp[e]?g"
+          "**/*.web[pm]"
+          ## doc
+          "**/*.pdf"
+          "**/*.epub"
+          "**/*.odt"
+          "**/*.doc[x]?"
+          "**/*.calc"
+          "**/*.xls[x]?"
+          "**/*:Zone.Identifier"
+        ]
 
-        settings = {
-          editor = {
-            mouse = false;
-            line-number = "absolute";
-            auto-format = false;
-            bufferline = "never";
-            auto-pairs = true;
-            indent-guides.render = false;
-            soft-wrap.enable = false;
-            buffer-picker.start-position = "current";
+        # Do not ignore
+        [
+          "!.github/"
+          "!.env*"
+        ]
+      ];
+    };
 
-            cursor-shape = rec {
-              normal = "block";
-              insert = "bar";
-              select = normal;
-            };
+    programs.helix = {
+      enable = true;
+      package = inputs.helix.packages.${my.system}.default;
+      extraPackages = cfg.packages;
+      ignores = lib.lists.unique cfg.ignore;
 
-            auto-completion = true;
-            path-completion = true;
-            preview-completion-insert = true;
-            completion-replace = true;
-            word-completion = {
-              enable = true;
-              trigger-length = 4;
-            };
+      settings = {
+        editor = {
+          mouse = false;
+          line-number = "absolute";
+          auto-format = false;
+          bufferline = "never";
+          auto-pairs = true;
+          indent-guides.render = false;
+          soft-wrap.enable = false;
+          buffer-picker.start-position = "current";
 
-            end-of-line-diagnostics = "hint";
-            inline-diagnostics.cursor-line = "warning";
-            lsp = {
-              enable = true;
-              display-inlay-hints = false;
-              auto-signature-help = false;
-              display-color-swatches = false;
-            };
-
-            clipboard-provider = lib.mkIf (cfg.clipboardProvider != null) cfg.clipboardProvider;
-
-            statusline = {
-              left = [
-                "mode"
-                "file-name"
-              ];
-
-              right = [
-                "spinner"
-                "diagnostics"
-                # "version-control"
-                "selections"
-                # "register"
-                # "position"
-                "read-only-indicator"
-                "file-modification-indicator"
-              ];
-            };
-          };
-
-          keys = rec {
-            normal = {
-              space = {
-                b = {
-                  c = ":bc";
-                  C = ":bc!";
-                  r = ":reload";
-                  R = ":reload-all";
-                  w = ":w";
-                };
-
-                c = {
-                  a = "code_action";
-                  C = "toggle_block_comments";
-                  c = "toggle_comments";
-                  f = ":format";
-                  h = "select_references_to_symbol_under_cursor";
-                  I = "decrement";
-                  i = "increment";
-                  l = ":lsp-restart";
-                  r = "rename_symbol";
-                  s = "signature_help";
-                  y = ":yank-diagnostic";
-
-                  t = {
-                    s = ":tree-sitter-scopes";
-                    h = ":tree-sitter-highlight-name";
-                    t = ":tree-sitter-subtree";
-                    T = [
-                      "select_all"
-                      ":tree-sitter-subtree"
-                    ];
-                  };
-                };
-
-                f = {
-                  "'" = "last_picker";
-                  b = "buffer_picker";
-                  d = "diagnostics_picker";
-                  D = "workspace_diagnostics_picker";
-                  e = "file_explorer";
-                  E = "file_explorer_in_current_buffer_directory";
-                  f = "file_picker";
-                  F = "file_picker_in_current_buffer_directory";
-                  g = "changed_file_picker";
-                  "/" = "global_search";
-                  j = "jumplist_picker";
-                  s = "symbol_picker";
-                  S = "workspace_symbol_picker";
-                };
-
-                # vcs
-                g =
-                  let
-                    vcs = config.my.programs.vcs.command;
-                  in
-                  {
-                    b = ":sh ${vcs} -C %{workspace_directory} blame -L %{cursor_line},%{cursor_line} %{file_path_absolute}";
-
-                    B = ":echo %sh{${vcs} branch --show-current}";
-                    R = ":reset-diff-change";
-                  };
-
-                q = ":quit";
-                Q = ":quit!";
-              };
-            };
-
+          cursor-shape = rec {
+            normal = "block";
+            insert = "bar";
             select = normal;
+          };
 
-            insert = {
-              C-p = "signature_help";
-            };
+          auto-completion = true;
+          path-completion = true;
+          preview-completion-insert = true;
+          completion-replace = true;
+          word-completion = {
+            enable = true;
+            trigger-length = 4;
+          };
+
+          end-of-line-diagnostics = "hint";
+          inline-diagnostics.cursor-line = "warning";
+          lsp = {
+            enable = true;
+            display-inlay-hints = false;
+            auto-signature-help = false;
+            display-color-swatches = false;
+          };
+
+          clipboard-provider = lib.mkIf (cfg.clipboardProvider != null) cfg.clipboardProvider;
+
+          statusline = {
+            left = [
+              "mode"
+              "file-name"
+            ];
+
+            right = [
+              "spinner"
+              "diagnostics"
+              # "version-control"
+              "selections"
+              # "register"
+              # "position"
+              "read-only-indicator"
+              "file-modification-indicator"
+            ];
           };
         };
 
-        languages = {
-          language = lib.attrsets.mapAttrsToList (name: value: { inherit name; } // value) (cfg.language);
+        keys = rec {
+          normal = {
+            space = {
+              b = {
+                c = ":bc";
+                C = ":bc!";
+                r = ":reload";
+                R = ":reload-all";
+                w = ":w";
+              };
+
+              c = {
+                a = "code_action";
+                C = "toggle_block_comments";
+                c = "toggle_comments";
+                f = ":format";
+                h = "select_references_to_symbol_under_cursor";
+                I = "decrement";
+                i = "increment";
+                l = ":lsp-restart";
+                r = "rename_symbol";
+                s = "signature_help";
+                y = ":yank-diagnostic";
+
+                t = {
+                  s = ":tree-sitter-scopes";
+                  h = ":tree-sitter-highlight-name";
+                  t = ":tree-sitter-subtree";
+                  T = [
+                    "select_all"
+                    ":tree-sitter-subtree"
+                  ];
+                };
+              };
+
+              f = {
+                "'" = "last_picker";
+                b = "buffer_picker";
+                d = "diagnostics_picker";
+                D = "workspace_diagnostics_picker";
+                e = "file_explorer";
+                E = "file_explorer_in_current_buffer_directory";
+                f = "file_picker";
+                F = "file_picker_in_current_buffer_directory";
+                g = "changed_file_picker";
+                "/" = "global_search";
+                j = "jumplist_picker";
+                s = "symbol_picker";
+                S = "workspace_symbol_picker";
+              };
+
+              # vcs
+              g =
+                let
+                  vcs = config.my.programs.vcs.command;
+                in
+                {
+                  b = ":sh ${vcs} -C %{workspace_directory} blame -L %{cursor_line},%{cursor_line} %{file_path_absolute}";
+
+                  B = ":echo %sh{${vcs} branch --show-current}";
+                  R = ":reset-diff-change";
+                };
+
+              q = ":quit";
+              Q = ":quit!";
+            };
+          };
+
+          select = normal;
+
+          insert = {
+            C-p = "signature_help";
+          };
         };
       };
-    }
-  ];
+
+      languages = {
+        language = lib.attrsets.mapAttrsToList (name: value: { inherit name; } // value) (cfg.language);
+      };
+    };
+  };
 }
