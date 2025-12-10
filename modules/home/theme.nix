@@ -35,7 +35,6 @@
 
           settings."org/gnome/desktop/interface" = {
             color-scheme = if my.theme.dark then "prefer-dark" else "default";
-            toolkit-accessibility = false;
           };
         };
       }
