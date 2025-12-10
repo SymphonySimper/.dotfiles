@@ -35,30 +35,26 @@ in
 
     (lib.mkIf cfg.docker.enable {
       my = {
+        user.groups = lib.optionals cfg.docker.enableGroup [ "docker" ];
+
         programs.vm.docker = {
           enableRootless = lib.mkDefault true;
           enableGroup = lib.mkDefault false;
         };
-
-        user.groups = lib.optionals cfg.docker.enableGroup [ "docker" ];
       };
 
-      virtualisation.docker = lib.mkMerge [
-        {
-          enable = true;
-          enableOnBoot = lib.mkDefault false;
-          liveRestore = false;
+      virtualisation.docker = {
+        enable = true;
+        enableOnBoot = lib.mkDefault false;
+        liveRestore = false;
 
-          autoPrune.enable = true;
-        }
+        autoPrune.enable = true;
 
-        (lib.mkIf cfg.docker.enableRootless {
-          rootless = {
-            enable = true;
-            setSocketVariable = true;
-          };
-        })
-      ];
+        rootless = {
+          enable = cfg.docker.enableRootless;
+          setSocketVariable = true;
+        };
+      };
 
       environment.systemPackages = [
         (pkgs.writeShellScriptBin "mydocker" # sh
