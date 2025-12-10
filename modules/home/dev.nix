@@ -195,10 +195,7 @@ in
 
         {
           # Markdown
-          packages = [
-            pkgs.markdown-oxide
-            pkgs.harper
-          ];
+          packages = [ pkgs.harper ];
 
           language.markdown = {
             # refer: https://github.com/helix-editor/helix/wiki/Recipes#continue-markdown-lists--quotes
@@ -209,12 +206,9 @@ in
               "- [ ]"
               ">"
             ];
-            formatter = mkPrettier "markdown";
 
-            language-servers = [
-              "markdown-oxide"
-              "harper-ls"
-            ];
+            formatter = mkPrettier "markdown";
+            language-servers = [ "harper-ls" ];
           };
         }
 
