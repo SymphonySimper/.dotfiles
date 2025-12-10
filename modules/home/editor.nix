@@ -196,6 +196,7 @@ in
               space = {
                 b = {
                   c = ":bc";
+                  C = ":bc!";
                   r = ":reload";
                   R = ":reload-all";
                   w = ":w";
@@ -254,6 +255,7 @@ in
                   };
 
                 q = ":quit";
+                Q = ":quit!";
               };
             };
 
