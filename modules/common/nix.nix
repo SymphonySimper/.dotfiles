@@ -57,11 +57,6 @@ in
           my.flake = inputs.self;
         };
       }
-
-      (lib.attrsets.optionalAttrs system {
-        # Storage optimization
-        optimise.automatic = true;
-      })
     ];
   };
 }
