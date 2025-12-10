@@ -129,11 +129,9 @@ in
     }
 
     {
-      programs = {
-        zoxide = {
-          enable = true;
-          enableBashIntegration = false;
-        };
+      programs.zoxide = {
+        enable = true;
+        enableBashIntegration = false;
       };
 
       my.programs.shell = {
