@@ -86,30 +86,15 @@ in
 
     appfolder = lib.mkOption {
       description = "Create app folder";
+      type = lib.types.attrsOf (lib.types.listOf lib.types.str);
       default = { };
-      type = lib.types.attrsOf (
-        lib.types.submodule {
-          options = {
-            apps = lib.mkOption {
-              type = lib.types.listOf lib.types.str;
-              default = [ ];
-              description = "Desktop Entries to be included in folder";
-            };
-            categories = lib.mkOption {
-              type = lib.types.listOf lib.types.str;
-              default = [ ];
-              description = "Categories to be included in folder";
-            };
-          };
-        }
-      );
     };
   };
 
   config = lib.mkIf cfg.enable {
     my.programs.desktop = {
       appfolder = {
-        Games.categories = [ "Game" ];
+        Games = [ "Game" ];
       };
     };
 
@@ -284,17 +269,10 @@ in
         (builtins.listToAttrs (
           builtins.map (folder: {
             name = "org/gnome/desktop/app-folders/folders/${folder.name}";
-            value = lib.mkMerge [
-              { name = folder.name; }
-
-              (lib.mkIf (builtins.length folder.value.apps > 0) {
-                apps = folder.value.apps;
-              })
-
-              (lib.mkIf (builtins.length folder.value.categories > 0) {
-                categories = folder.value.categories;
-              })
-            ];
+            value = {
+              name = folder.name;
+              categories = folder.value;
+            };
           }) (lib.attrsets.attrsToList cfg.appfolder)
         ))
 

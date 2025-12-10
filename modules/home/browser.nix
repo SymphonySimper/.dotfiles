@@ -70,7 +70,7 @@ in
   config = lib.mkIf cfg.enable {
     my.programs = {
       desktop = {
-        appfolder.Bookmarks.categories = [ category ];
+        appfolder.Bookmarks = [ category ];
       };
 
       browser.bookmarks = {
