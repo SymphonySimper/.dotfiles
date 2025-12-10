@@ -45,9 +45,7 @@ in
         extraGroups = lib.lists.unique (
           [
             groupSudo
-            "networkmanager"
             "uinput"
-            "libvirtd"
             "video"
             "input"
             "disk"

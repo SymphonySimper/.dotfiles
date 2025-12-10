@@ -32,7 +32,10 @@ in
 
     (lib.mkIf cfg.enable {
       my = {
-        user.sudo.nopasswd = lib.lists.optional (cfg.nm.enable) "${my.dir.runBin}/systemctl restart NetworkManager";
+        user = {
+          groups = [ "networkmanager" ];
+          sudo.nopasswd = lib.lists.optional (cfg.nm.enable) "${my.dir.runBin}/systemctl restart NetworkManager";
+        };
 
         networking = {
           nm.enable = lib.mkDefault true;
