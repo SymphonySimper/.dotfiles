@@ -25,50 +25,42 @@ in
       ];
     };
 
-    programs.yazi = lib.mkMerge [
-      {
-        enable = true;
-        package = pkgs.yazi.override {
-          optionalDeps = [ pkgs.p7zip ];
-        };
+    programs.yazi = {
+      enable = true;
+      shellWrapperName = "y";
+      package = pkgs.yazi.override {
+        optionalDeps = [ pkgs.p7zip ] ++ (lib.lists.optional my.gui.enable pkgs.ripdrag);
+      };
 
-        shellWrapperName = "y";
+      settings = {
+        mgr.linemode = "mtime";
 
-        settings = {
-          mgr.linemode = "mtime";
-
-          opener.edit = [
-            {
-              run = ''${config.my.programs.editor.command} "$@"'';
-              block = true;
-            }
-          ];
-
-          open.prepend_rules = [
-            {
-              mime = "{audio,video}/*";
-              use = [
-                "open"
-                "reveal"
-              ];
-            }
-          ];
-        };
-      }
-
-      (lib.mkIf my.gui.enable {
-        extraPackages = [ pkgs.ripdrag ];
-        keymap.mgr.prepend_keymap = [
+        opener.edit = [
           {
-            on = "<C-n>";
-            run = # sh
-              ''
-                shell 'ripdrag "$@" -x 2>/dev/null &' --confirm
-              '';
-            desc = "Drag and drop using ripdrag";
+            run = ''${config.my.programs.editor.command} "$@"'';
+            block = true;
           }
         ];
-      })
-    ];
+
+        open.prepend_rules = [
+          {
+            mime = "{audio,video}/*";
+            use = [
+              "open"
+              "reveal"
+            ];
+          }
+        ];
+      };
+
+      keymap.mgr.prepend_keymap = lib.lists.optional my.gui.enable {
+        on = "<C-n>";
+        run = # sh
+          ''
+            shell 'ripdrag "$@" -x 2>/dev/null &' --confirm
+          '';
+        desc = "Drag and drop using ripdrag";
+      };
+    };
   };
 }
