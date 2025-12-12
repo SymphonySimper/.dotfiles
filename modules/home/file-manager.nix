@@ -31,7 +31,7 @@ in
         shellWrapperName = "y";
 
         settings = {
-          mgr.linemode = "size";
+          mgr.linemode = "mtime";
 
           opener.edit = [
             {
