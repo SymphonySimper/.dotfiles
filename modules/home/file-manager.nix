@@ -65,17 +65,6 @@ in
           }
         ];
       })
-
-      # Plugins
-      (lib.mkIf (my.profile != "wsl") {
-        plugins.mount = pkgs.yaziPlugins.mount;
-        keymap.mgr.prepend_keymap = [
-          {
-            on = "M";
-            run = "plugin mount";
-          }
-        ];
-      })
     ];
   };
 }
