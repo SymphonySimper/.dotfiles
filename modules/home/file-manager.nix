@@ -28,6 +28,10 @@ in
     programs.yazi = lib.mkMerge [
       {
         enable = true;
+        package = pkgs.yazi.override {
+          optionalDeps = [ pkgs.p7zip ];
+        };
+
         shellWrapperName = "y";
 
         settings = {
