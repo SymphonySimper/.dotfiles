@@ -1,5 +1,4 @@
 {
-  my,
   config,
   pkgs,
   lib,
@@ -29,7 +28,7 @@ in
       enable = true;
       shellWrapperName = "y";
       package = pkgs.yazi.override {
-        optionalDeps = [ pkgs.p7zip ] ++ (lib.lists.optional my.gui.enable pkgs.ripdrag);
+        optionalDeps = [ pkgs.p7zip ];
       };
 
       settings = {
@@ -51,15 +50,6 @@ in
             ];
           }
         ];
-      };
-
-      keymap.mgr.prepend_keymap = lib.lists.optional my.gui.enable {
-        on = "<C-n>";
-        run = # sh
-          ''
-            shell 'ripdrag "$@" -x 2>/dev/null &' --confirm
-          '';
-        desc = "Drag and drop using ripdrag";
       };
     };
   };
