@@ -64,6 +64,9 @@
           in
           ''
             PS1='\[${boldColor}\]\w\n> \[${reset}\]'
+
+            # Set terminal title
+            trap 'echo -ne "\033]0;''${PWD/#$HOME/\~}: ''${BASH_COMMAND}\007"' DEBUG
           '';
       };
 
