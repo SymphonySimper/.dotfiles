@@ -120,6 +120,10 @@ in
         Monkeytype = "monkeytype.com";
         Squoosh = "squoosh.app";
         Virustotal = "www.virustotal.com";
+
+        # Anime
+        Crunchyroll = "www.crunchyroll.com";
+        MyAnimeList = "myanimelist.net/animelist/SymphonySimper";
       };
     };
 
