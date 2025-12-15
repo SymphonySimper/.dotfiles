@@ -10,45 +10,8 @@ let
 
   defaultProfile = "default";
   sshAlgorithm = "ed25519";
-
   mkSSHIdentityFilename = name: "${config.my.programs.ssh.dir}/${name}-id-${sshAlgorithm}";
   mkProfileDir = name: "${my.dir.dev}/${name}";
-
-  cloneSSH =
-    let
-      mkClone =
-        name: # sh
-        ''
-          ${cfg.command} clone git@${name}:$suffix "''${@}"
-        '';
-
-      script = lib.getExe (
-        pkgs.writeShellScriptBin "my-vcs-clone-ssh" (
-          lib.strings.concatLines (
-            builtins.concatLists [
-              [
-                # sh
-                ''
-                  curr_dir=$(pwd)  
-                  suffix="$1"
-                  shift
-                ''
-              ]
-              (builtins.map (
-                name: # sh
-                ''
-                  if [ "$curr_dir" == "${mkProfileDir name}" ]; then
-                    ${mkClone name}
-                    exit 0
-                  fi
-                '') (builtins.filter (name: name != defaultProfile) (builtins.attrNames cfg.profiles)))
-              [ (mkClone defaultProfile) ]
-            ]
-          )
-        )
-      );
-    in
-    "!${script}";
 in
 {
   imports = [
@@ -184,8 +147,6 @@ in
           # (i.e) `p` == `P`
           alias = {
             c = "clone";
-            cs = cloneSSH;
-
             s = "status";
             a = "add";
             m = "commit";
