@@ -73,20 +73,6 @@ in
   config = lib.mkIf cfg.enable {
     my.programs = {
       mux.keybinds = [
-        # Open program in new window
-        {
-          key = "g";
-          action = "new-window";
-          cd = true;
-          args = [ config.my.programs.vcs.tui.command ];
-        }
-        {
-          key = "y";
-          action = "new-window";
-          cd = true;
-          args = [ config.my.programs.file-manager.command ];
-        }
-
         # Open history in editor
         {
           key = "e";
