@@ -95,12 +95,12 @@ in
             bind -r C-n new
 
             ## split pane commands and open panes in cwd
-            bind  - split-window -c "#{pane_current_path}"
-            bind  | split-window -c "#{pane_current_path}" -h
-            bind  c new-window -c "#{pane_current_path}"
+            bind - split-window -c "#{pane_current_path}"
+            bind | split-window -c "#{pane_current_path}" -h
+            bind c new-window -c "#{pane_current_path}"
 
-            ## Open history in editor
-            bind  e run-shell  ${history}
+            ## Open External programs
+            bind e run-shell  ${history} # Open history in editor
           '';
       };
     };
