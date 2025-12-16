@@ -23,10 +23,17 @@ let
 in
 {
   options.my.programs.mux = {
-    enable = lib.mkEnableOption "Terminal MUX";
+    enable = lib.mkEnableOption "Terminal MUX" // {
+      default = true;
+    };
   };
 
   config = lib.mkIf cfg.enable {
+    my.programs.terminal.shell = {
+      command = "tmux";
+      args = [ "new" ];
+    };
+
     catppuccin.tmux.extraConfig = # conf
       ''
         ## status
