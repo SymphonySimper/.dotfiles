@@ -26,6 +26,7 @@ in
     enable = lib.mkEnableOption "Terminal MUX" // {
       default = true;
     };
+    enableStatus = lib.mkEnableOption "Status";
   };
 
   config = lib.mkIf cfg.enable {
@@ -37,7 +38,7 @@ in
     catppuccin.tmux.extraConfig = # conf
       ''
         ## status
-        set -g status on
+        set -g status ${if cfg.enableStatus then "on" else "off"}
         set -g status-position bottom
         set -g status-left ""
         set -g status-right ""
