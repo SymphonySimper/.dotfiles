@@ -18,6 +18,7 @@ in
 
   options.my.programs.shell = {
     setTerminalTitle = lib.mkEnableOption "Set Terminal title";
+    nativePrompt = lib.mkEnableOption "Use native prompt instead of starship";
   }
   // (lib.my.mkCommandOption {
     category = "Shell";
@@ -51,6 +52,7 @@ in
 
       shell.env = {
         LS_COLORS = ""; # Some programs misbehave when this is not set.
+        STARSHIP_LOG = "error";
       };
     };
 
@@ -70,7 +72,7 @@ in
               boldColor = "\\e[38;2;${rgb.r};${rgb.g};${rgb.b};1m";
               reset = "\\e[0m";
             in
-            ''
+            lib.optionalString cfg.nativePrompt ''
               PS1='\[${boldColor}\]\w\n> \[${reset}\]'
             ''
           )
@@ -107,8 +109,58 @@ in
         enable = true;
         nix-direnv.enable = true;
 
-        silent = false;
+        silent = !cfg.nativePrompt;
         config.warn_timeout = "2m";
+      };
+
+      starship = {
+        enable = !cfg.nativePrompt;
+
+        settings = {
+          add_newline = false;
+          scan_timeout = 30;
+          command_timeout = 30; # default 500
+          format = lib.concatStrings [
+            "$all"
+            # "$fill"
+            "$time"
+            "$line_break"
+            "$character"
+          ];
+
+          character = {
+            success_symbol = "[>](bold lavender)";
+            error_symbol = "[x](bold red)";
+            vimcmd_symbol = "[v](bold peach)";
+          };
+
+          fill = {
+            disabled = false;
+            symbol = " ";
+          };
+
+          directory = {
+            style = "bold lavender";
+            truncate_to_repo = false;
+          };
+
+          time = {
+            disabled = false;
+            format = "[($time)](overlay0)";
+            time_format = "(%H:%M)";
+            utc_time_offset = "local";
+          };
+
+          python.symbol = "󰌠 ";
+
+          nix_shell = {
+            format = "via [$symbol$state]($style) ";
+            symbol = "󱄅 ";
+          };
+
+          direnv.disabled = false;
+          gcloud.disabled = true;
+        };
       };
     };
   };
