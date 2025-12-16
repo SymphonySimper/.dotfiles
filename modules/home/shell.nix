@@ -1,9 +1,13 @@
 {
   my,
+  config,
   pkgs,
   lib,
   ...
 }:
+let
+  cfg = config.my.programs.shell;
+in
 {
   imports = [
     (lib.modules.mkAliasOptionModule [ "my" "programs" "shell" "env" ] [ "home" "sessionVariables" ])
@@ -12,7 +16,10 @@
     # (lib.modules.mkAliasOptionModule [ "my" "programs" "shell" "root" ] [ "programs" "bash" ])
   ];
 
-  options.my.programs.shell = lib.my.mkCommandOption {
+  options.my.programs.shell = {
+    setTerminalTitle = lib.mkEnableOption "Set Terminal title";
+  }
+  // (lib.my.mkCommandOption {
     category = "Shell";
     command = "bash";
     args = {
@@ -20,7 +27,7 @@
       command = "-c";
       bin = "${my.dir.home}/.nix-profile/bin";
     };
-  };
+  });
 
   config = {
     home.shellAliases = {
@@ -56,18 +63,27 @@
           "autocd" # cd when directory
         ];
 
-        initExtra =
-          let
-            rgb = my.theme.color.lavender.rgb;
-            boldColor = "\\e[38;2;${rgb.r};${rgb.g};${rgb.b};1m";
-            reset = "\\e[0m";
-          in
-          ''
-            PS1='\[${boldColor}\]\w\n> \[${reset}\]'
+        initExtra = lib.strings.concatLines [
+          (
+            let
+              rgb = my.theme.color.lavender.rgb;
+              boldColor = "\\e[38;2;${rgb.r};${rgb.g};${rgb.b};1m";
+              reset = "\\e[0m";
+            in
+            ''
+              PS1='\[${boldColor}\]\w\n> \[${reset}\]'
+            ''
+          )
 
-            # Set terminal title
-            trap 'echo -ne "\033]0;''${PWD/#$HOME/\~}: ''${BASH_COMMAND}\007"' DEBUG
-          '';
+          (
+            let
+              prefix = if my.profile == "wsl" then "[W] " else "";
+            in
+            lib.strings.optionalString cfg.setTerminalTitle ''
+              trap 'echo -ne "\033]0;${prefix}''${PWD/#$HOME/\~}: ''${BASH_COMMAND}\007"' DEBUG
+            ''
+          )
+        ];
       };
 
       readline = {
