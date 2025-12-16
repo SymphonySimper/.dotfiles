@@ -17,7 +17,6 @@ in
   ];
 
   options.my.programs.shell = {
-    setTerminalTitle = lib.mkEnableOption "Set Terminal title";
     nativePrompt = lib.mkEnableOption "Use native prompt instead of starship";
   }
   // (lib.my.mkCommandOption {
@@ -74,15 +73,6 @@ in
             in
             lib.optionalString cfg.nativePrompt ''
               PS1='\[${boldColor}\]\w\n> \[${reset}\]'
-            ''
-          )
-
-          (
-            let
-              prefix = if my.profile == "wsl" then "[W] " else "";
-            in
-            lib.strings.optionalString cfg.setTerminalTitle ''
-              trap 'echo -ne "\033]0;${prefix}''${PWD/#$HOME/\~}: ''${BASH_COMMAND}\007"' DEBUG
             ''
           )
         ];

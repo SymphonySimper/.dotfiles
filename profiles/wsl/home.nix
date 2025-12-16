@@ -1,7 +1,6 @@
 { pkgs, ... }:
 {
   my.programs = {
-    shell.setTerminalTitle = true;
     editor.clipboardProvider = "win32-yank";
   };
 
