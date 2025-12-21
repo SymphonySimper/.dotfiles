@@ -15,36 +15,36 @@ let
   };
 in
 {
-  options.my.programs.terminal =
-    (lib.my.mkCommandOption {
-      category = "Terminal";
-      command = "alacritty";
-      args = {
-        command = "-e";
-      };
-    })
-    // {
-      shell = lib.mkOption {
-        type = lib.types.submodule {
-          options = {
-            command = lib.mkOption {
-              description = "Command to run on launch";
-              type = lib.types.str;
-            };
+  options.my.programs.terminal = {
+    shell = lib.mkOption {
+      type = lib.types.submodule {
+        options = {
+          command = lib.mkOption {
+            description = "Command to run on launch";
+            type = lib.types.str;
+          };
 
-            args = lib.mkOption {
-              description = "Args for the program";
-              type = lib.types.listOf lib.types.str;
-              default = [ ];
-            };
+          args = lib.mkOption {
+            description = "Args for the program";
+            type = lib.types.listOf lib.types.str;
+            default = [ ];
           };
         };
+      };
 
       default = {
         command = config.my.programs.shell.nu.command;
         args = [ ];
       };
     };
+  }
+  // (lib.my.mkCommandOption {
+    category = "Terminal";
+    command = "alacritty";
+    args = {
+      command = "-e";
+    };
+  });
 
   config = lib.mkIf my.gui.enable {
     my.programs = {
