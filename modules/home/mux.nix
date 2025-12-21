@@ -23,9 +23,7 @@ let
 in
 {
   options.my.programs.mux = {
-    enable = lib.mkEnableOption "Terminal MUX" // {
-      default = true;
-    };
+    enable = lib.mkEnableOption "Terminal MUX";
     enableStatus = lib.mkEnableOption "Status";
   };
 
