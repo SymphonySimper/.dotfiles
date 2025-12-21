@@ -6,8 +6,6 @@
   ...
 }:
 let
-  cfg = config.my.programs.shell;
-
   prompt = {
     arrow = ">";
     color = my.theme.color.lavender;
@@ -22,8 +20,6 @@ in
   ];
 
   options.my.programs.shell = {
-    nativePrompt = lib.mkEnableOption "Use native prompt instead of starship";
-
     nu = lib.my.mkCommandOption {
       category = "Interactive Shell";
       command = "nu";
@@ -79,7 +75,7 @@ in
               boldColor = "\\e[38;2;${prompt.color.rgb.r};${prompt.color.rgb.g};${prompt.color.rgb.b};1m";
               reset = "\\e[0m";
             in
-            lib.optionalString cfg.nativePrompt ''
+            ''
               PS1='\[${boldColor}\]\w\n${prompt.arrow} \[${reset}\]'
             ''
           )
@@ -127,7 +123,7 @@ in
             let
               color = "ansi --escape { fg: '${prompt.color.hex}', attr: b }";
             in
-            lib.strings.optionalString cfg.nativePrompt ''
+            ''
               $env.PROMPT_COMMAND = {||
                   let dir = match (do -i { $env.PWD | path relative-to $nu.home-path }) {
                       null => $env.PWD
@@ -157,58 +153,8 @@ in
         enable = true;
         nix-direnv.enable = true;
 
-        silent = !cfg.nativePrompt;
+        silent = false;
         config.warn_timeout = "2m";
-      };
-
-      starship = {
-        enable = !cfg.nativePrompt;
-
-        settings = {
-          add_newline = false;
-          scan_timeout = 5; # default 30
-          command_timeout = 10; # default 500
-          format = lib.concatStrings [
-            "$all"
-            # "$fill"
-            "$time"
-            "$line_break"
-            "$character"
-          ];
-
-          character = {
-            success_symbol = "[${prompt.arrow}](bold lavender)";
-            error_symbol = "[x](bold red)";
-            vimcmd_symbol = "[v](bold peach)";
-          };
-
-          fill = {
-            disabled = false;
-            symbol = " ";
-          };
-
-          directory = {
-            style = "bold lavender";
-            truncate_to_repo = false;
-          };
-
-          time = {
-            disabled = false;
-            format = "[($time)](overlay0)";
-            time_format = "(%H:%M)";
-            utc_time_offset = "local";
-          };
-
-          python.symbol = "󰌠 ";
-
-          nix_shell = {
-            format = "via [$symbol$state]($style) ";
-            symbol = "󱄅 ";
-          };
-
-          direnv.disabled = false;
-          gcloud.disabled = true;
-        };
       };
     };
   };
