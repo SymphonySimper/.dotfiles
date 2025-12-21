@@ -131,15 +131,15 @@
         "startingDirectory": "%USERPROFILE%"
       },
       {
-        "name": "Command Prompt",
+        "name": "Windows PowerShell",
         "guid": "{00000000-0000-0000-0000-000000000003}",
-        "commandline": "%SystemRoot%\\System32\\cmd.exe",
+        "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
         "startingDirectory": "%USERPROFILE%"
       },
       {
-        "name": "Windows PowerShell",
+        "name": "Command Prompt",
         "guid": "{00000000-0000-0000-0000-000000000004}",
-        "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "commandline": "%SystemRoot%\\System32\\cmd.exe",
         "startingDirectory": "%USERPROFILE%"
       }
     ]
