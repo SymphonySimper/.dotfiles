@@ -33,6 +33,7 @@ in
 
       settings = {
         mgr.linemode = "mtime";
+        preview.max_width = 1920;
 
         opener.edit = [
           {
