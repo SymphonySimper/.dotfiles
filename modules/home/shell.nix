@@ -147,7 +147,6 @@ in
       };
 
       carapace.enable = true;
-      zoxide.enable = true;
 
       direnv = {
         enable = true;
