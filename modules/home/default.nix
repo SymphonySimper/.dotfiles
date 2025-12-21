@@ -8,7 +8,6 @@
     # cli
     ./dev.nix
     ./editor.nix
-    ./file-manager.nix
     ./mux.nix
     ./nix.nix
     ./shell.nix
