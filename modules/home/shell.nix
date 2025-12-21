@@ -7,6 +7,11 @@
 }:
 let
   cfg = config.my.programs.shell;
+
+  prompt = {
+    arrow = ">";
+    color = my.theme.color.lavender;
+  };
 in
 {
   imports = [
@@ -71,12 +76,11 @@ in
         initExtra = lib.strings.concatLines [
           (
             let
-              rgb = my.theme.color.lavender.rgb;
-              boldColor = "\\e[38;2;${rgb.r};${rgb.g};${rgb.b};1m";
+              boldColor = "\\e[38;2;${prompt.color.rgb.r};${prompt.color.rgb.g};${prompt.color.rgb.b};1m";
               reset = "\\e[0m";
             in
             lib.optionalString cfg.nativePrompt ''
-              PS1='\[${boldColor}\]\w\n> \[${reset}\]'
+              PS1='\[${boldColor}\]\w\n${prompt.arrow} \[${reset}\]'
             ''
           )
         ];
@@ -116,6 +120,34 @@ in
           $env.config.filesize.unit = "metric";
           $env.config.filesize.show_unit = true;
         '';
+
+        extraEnv = lib.strings.concatLines [
+          (
+            # refer: https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/default_files/default_env.nu
+            let
+              color = "ansi --escape { fg: '${prompt.color.hex}', attr: b }";
+            in
+            lib.strings.optionalString cfg.nativePrompt ''
+              $env.PROMPT_COMMAND = {||
+                  let dir = match (do -i { $env.PWD | path relative-to $nu.home-path }) {
+                      null => $env.PWD
+                      ${"''"} => '~'
+                      $relative_pwd => ([~ $relative_pwd] | path join)
+                  }
+
+                  let path_color = (if (is-admin) { ansi red_bold } else { ${color} })
+                  let separator_color = (if (is-admin) { ansi light_red_bold } else { ${color} })
+                  let path_segment = $"($path_color)($dir)(ansi reset)\n"
+
+                  $path_segment | str replace --all (char path_sep) $"($separator_color)(char path_sep)($path_color)"
+              }
+
+              $env.PROMPT_INDICATOR = $"(${color})${prompt.arrow}(ansi reset) "
+
+              $env.PROMPT_COMMAND_RIGHT = ""
+            ''
+          )
+        ];
       };
 
       carapace.enable = true;
@@ -145,7 +177,7 @@ in
           ];
 
           character = {
-            success_symbol = "[>](bold lavender)";
+            success_symbol = "[${prompt.arrow}](bold lavender)";
             error_symbol = "[x](bold red)";
             vimcmd_symbol = "[v](bold peach)";
           };
