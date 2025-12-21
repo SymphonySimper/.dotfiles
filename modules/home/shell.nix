@@ -134,8 +134,8 @@ in
 
         settings = {
           add_newline = false;
-          scan_timeout = 30;
-          command_timeout = 30; # default 500
+          scan_timeout = 5; # default 30
+          command_timeout = 10; # default 500
           format = lib.concatStrings [
             "$all"
             # "$fill"
