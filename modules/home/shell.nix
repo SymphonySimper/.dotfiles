@@ -30,10 +30,6 @@ in
   });
 
   config = {
-    home.shellAliases = {
-      q = "exit";
-    };
-
     my.programs = {
       editor = {
         packages = with pkgs; [
