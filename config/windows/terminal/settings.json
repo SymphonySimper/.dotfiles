@@ -121,7 +121,7 @@
       {
         "name": "NixOS",
         "guid": "{00000000-0000-0000-0000-000000000001}",
-        "commandline": "%SystemRoot%\\System32\\wsl.exe -d NixOS",
+        "commandline": "%SystemRoot%\\System32\\wsl.exe -d NixOS --shell-type login nu",
         "startingDirectory": "~"
       },
       {
