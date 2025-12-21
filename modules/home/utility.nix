@@ -16,11 +16,6 @@
       generateCaches = true;
     };
 
-    fzf = {
-      enable = true;
-      defaultOptions = [ "--reverse" ];
-    };
-
     btop = {
       enable = true;
 
