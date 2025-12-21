@@ -6,8 +6,6 @@
 }:
 {
   home.packages = builtins.concatLists [
-    [ pkgs.bc ]
-
     # Clipboard
     (lib.lists.optional (my.gui.enable && pkgs.stdenv.hostPlatform.isLinux) pkgs.wl-clipboard)
   ];
