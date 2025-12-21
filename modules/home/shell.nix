@@ -100,22 +100,22 @@ in
       nushell = {
         enable = true;
 
-        settings = {
-          show_banner = false;
+        extraConfig = ''
+          $env.config.show_banner = false;
 
-          buffer_editor = "${config.my.programs.editor.command}";
+          $env.config.buffer_editor = "${config.my.programs.editor.command}";
 
-          history.file_format = "sqlite";
-          history.isolation = true;
+          $env.config.history.file_format = "sqlite";
+          $env.config.history.isolation = true;
 
-          completions.algorithm = "fuzzy";
-          completions.external.max_results = 20;
+          $env.config.completions.algorithm = "fuzzy";
+          $env.config.completions.external.max_results = 20;
 
-          datetime_format.normal = "%d/%m/%y %I:%M:%S%p";
+          $env.config.datetime_format.normal = "%d/%m/%y %I:%M:%S%p";
 
-          filesize.unit = "metric";
-          filesize.show_unit = true;
-        };
+          $env.config.filesize.unit = "metric";
+          $env.config.filesize.show_unit = true;
+        '';
       };
 
       carapace.enable = true;
