@@ -125,9 +125,9 @@
         "startingDirectory": "~"
       },
       {
-        "name": "PowerShell",
+        "name": "Nushell",
         "guid": "{00000000-0000-0000-0000-000000000002}",
-        "commandline": "%SystemDrive%\\Program Files\\PowerShell\\7\\pwsh.exe",
+        "commandline": "%LOCALAPPDATA%\\Programs\\nu\\bin\\nu.exe",
         "startingDirectory": "%USERPROFILE%"
       },
       {
