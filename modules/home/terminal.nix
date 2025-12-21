@@ -40,10 +40,9 @@ in
           };
         };
 
-        default = {
-          command = config.my.programs.shell.command;
-          args = [ ];
-        };
+      default = {
+        command = config.my.programs.shell.nu.command;
+        args = [ ];
       };
     };
 

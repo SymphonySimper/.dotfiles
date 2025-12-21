@@ -18,6 +18,14 @@ in
 
   options.my.programs.shell = {
     nativePrompt = lib.mkEnableOption "Use native prompt instead of starship";
+
+    nu = lib.my.mkCommandOption {
+      category = "Interactive Shell";
+      command = "nu";
+      args = {
+        command = "--commands";
+      };
+    };
   }
   // (lib.my.mkCommandOption {
     category = "Shell";
@@ -89,6 +97,28 @@ in
         };
       };
 
+      nushell = {
+        enable = true;
+
+        settings = {
+          show_banner = false;
+
+          buffer_editor = "${config.my.programs.editor.command}";
+
+          history.file_format = "sqlite";
+          history.isolation = true;
+
+          completions.algorithm = "fuzzy";
+          completions.external.max_results = 20;
+
+          datetime_format.normal = "%d/%m/%y %I:%M:%S%p";
+
+          filesize.unit = "metric";
+          filesize.show_unit = true;
+        };
+      };
+
+      carapace.enable = true;
       zoxide.enable = true;
 
       direnv = {

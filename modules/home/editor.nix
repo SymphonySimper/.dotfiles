@@ -135,6 +135,11 @@ in
 
       settings = {
         editor = {
+          shell = [
+            config.my.programs.shell.nu.command
+            config.my.programs.shell.nu.args.command
+          ];
+
           mouse = false;
           line-number = "absolute";
           auto-format = false;
