@@ -143,6 +143,17 @@ in
               $env.PROMPT_COMMAND_RIGHT = ""
             ''
           )
+
+          ''
+            def --env mydev [] {
+              let dir = (glob --depth 2 --no-file --exclude [**/.*/**] ${my.dir.dev}/** | input list --fuzzy)
+
+              match $dir {
+                null => "No dir was chosen."
+                _ => { cd $dir }
+              }
+            }
+          ''
         ];
       };
 
