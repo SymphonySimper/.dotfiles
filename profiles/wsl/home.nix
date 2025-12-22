@@ -1,9 +1,5 @@
 { pkgs, ... }:
 {
-  my.programs = {
-    editor.clipboardProvider = "win32-yank";
-  };
-
   home.packages = [
     (pkgs.stdenv.mkDerivation rec {
       pname = "win32yank";

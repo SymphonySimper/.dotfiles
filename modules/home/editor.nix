@@ -56,26 +56,6 @@ in
       )
     );
 
-    clipboardProvider = lib.mkOption {
-      # refer: https://docs.helix-editor.com/editor.html?highlight=clipboard#editorclipboard-provider-section
-      type = lib.types.nullOr (
-        lib.types.enum [
-          "pasteboard" # MacOS
-          "wayland"
-          "x-clip"
-          "x-sel"
-          "win32-yank"
-          "termux"
-          "tmux"
-          "windows"
-          "termcode"
-          "none"
-        ]
-      );
-      description = "clipboard-provider";
-      default = null;
-    };
-
     packages = lib.mkOption {
       type = lib.types.listOf lib.types.package;
       description = "Packages to add to extraPackages";
@@ -171,8 +151,6 @@ in
             auto-signature-help = false;
             display-color-swatches = false;
           };
-
-          clipboard-provider = lib.mkIf (cfg.clipboardProvider != null) cfg.clipboardProvider;
 
           statusline = {
             left = [
