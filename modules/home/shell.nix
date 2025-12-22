@@ -100,24 +100,24 @@ in
       nushell = {
         enable = true;
 
-        extraConfig = ''
-          $env.config.show_banner = false;
+        extraConfig = lib.strings.concatLines [
+          ''
+            $env.config.show_banner = false;
 
-          $env.config.buffer_editor = "${config.my.programs.editor.command}";
+            $env.config.buffer_editor = "${config.my.programs.editor.command}";
 
-          $env.config.history.file_format = "sqlite";
-          $env.config.history.isolation = true;
+            $env.config.history.file_format = "sqlite";
+            $env.config.history.isolation = true;
 
-          $env.config.completions.algorithm = "fuzzy";
-          $env.config.completions.external.max_results = 20;
+            $env.config.completions.algorithm = "fuzzy";
+            $env.config.completions.external.max_results = 20;
 
-          $env.config.datetime_format.normal = "%d/%m/%y %I:%M:%S%p";
+            $env.config.datetime_format.normal = "%d/%m/%y %I:%M:%S%p";
 
-          $env.config.filesize.unit = "metric";
-          $env.config.filesize.show_unit = true;
-        '';
+            $env.config.filesize.unit = "metric";
+            $env.config.filesize.show_unit = true;
+          ''
 
-        extraEnv = lib.strings.concatLines [
           (
             # refer: https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/default_files/default_env.nu
             let
