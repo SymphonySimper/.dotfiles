@@ -39,7 +39,7 @@ in
       default = { };
     };
   }
-  // lib.my.mkCommandOption {
+  // (lib.my.mkCommandOption {
     category = "Browser";
     command = "chromium-browser";
     args = {
@@ -65,7 +65,7 @@ in
         )
       );
     };
-  };
+  });
 
   config = lib.mkIf cfg.enable {
     my.programs = {

@@ -18,45 +18,44 @@ in
     (lib.modules.mkAliasOptionModule [ "my" "programs" "vcs" "root" ] [ "programs" "git" ])
   ];
 
-  options.my.programs.vcs =
-    (lib.my.mkCommandOption {
-      category = "VCS";
-      command = "git";
-    })
-    // {
-      tui = (
-        lib.my.mkCommandOption {
-          category = "VCS TUI";
-          command = "lazygit";
-          args.path = "-p";
+  options.my.programs.vcs = {
+    tui = (
+      lib.my.mkCommandOption {
+        category = "VCS TUI";
+        command = "lazygit";
+        args.path = "-p";
+      }
+    );
+
+    profiles = lib.mkOption {
+      type = lib.types.attrsOf (
+        lib.types.submodule {
+          options = {
+            host = lib.mkOption {
+              type = lib.types.str;
+              description = "Hostname for SSH";
+            };
+
+            email = lib.mkOption {
+              type = lib.types.str;
+              description = "VCS user email and for SSH key generation";
+            };
+
+            config = lib.mkOption {
+              type = lib.types.nullOr (lib.types.attrsOf lib.types.anything);
+              default = null;
+              description = "Conditional config based on directory";
+            };
+          };
         }
       );
-
-      profiles = lib.mkOption {
-        type = lib.types.attrsOf (
-          lib.types.submodule {
-            options = {
-              host = lib.mkOption {
-                type = lib.types.str;
-                description = "Hostname for SSH";
-              };
-
-              email = lib.mkOption {
-                type = lib.types.str;
-                description = "VCS user email and for SSH key generation";
-              };
-
-              config = lib.mkOption {
-                type = lib.types.nullOr (lib.types.attrsOf lib.types.anything);
-                default = null;
-                description = "Conditional config based on directory";
-              };
-            };
-          }
-        );
-        description = "Profiles per SSH key";
-      };
+      description = "Profiles per SSH key";
     };
+  }
+  // (lib.my.mkCommandOption {
+    category = "VCS";
+    command = "git";
+  });
 
   config = {
     home = {
