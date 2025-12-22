@@ -24,14 +24,6 @@ in
       command = "git";
     })
     // {
-      tui = (
-        lib.my.mkCommandOption {
-          category = "VCS TUI";
-          command = "lazygit";
-          args.path = "-p";
-        }
-      );
-
       profiles = lib.mkOption {
         type = lib.types.attrsOf (
           lib.types.submodule {
@@ -176,7 +168,6 @@ in
 
             # shell
             do = "!git fetch && git diff origin";
-            z = "!${cfg.tui.command}";
           };
         };
 
@@ -194,23 +185,6 @@ in
               )
             )
         );
-      };
-
-      lazygit = {
-        enable = true;
-
-        settings = {
-          git = {
-            disableForcePushing = true;
-          };
-
-          gui = {
-            showBottomLine = false;
-            showPanelJumps = false;
-            nerdFontsVersion = "3";
-            useHunkModeInStagingView = false;
-          };
-        };
       };
     };
   };
