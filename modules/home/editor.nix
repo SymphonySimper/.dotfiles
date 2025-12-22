@@ -145,7 +145,7 @@ in
           bufferline = "never";
           auto-pairs = true;
           indent-guides.render = false;
-          soft-wrap.enable = false;
+          soft-wrap.enable = true;
           buffer-picker.start-position = "current";
 
           cursor-shape = rec {
