@@ -16,77 +16,76 @@ in
     )
   ];
 
-  options.my.programs.editor =
-    (lib.my.mkCommandOption {
-      category = "Editor";
-      command = "hx";
-    })
-    // {
-      ignore = lib.mkOption {
-        type = lib.types.listOf lib.types.str;
-        description = "Global ignore patterns for editor.file-picker";
-        default = [ ];
-      };
-
-      language = lib.mkOption {
-        type = lib.types.attrsOf lib.types.anything;
-        description = "Alias for languages.langauge";
-        default = { };
-      };
-
-      schema = (
-        lib.genAttrs [ "json" ] (
-          lang:
-          lib.mkOption {
-            description = "Schema for completion support from LSP";
-
-            type = lib.types.listOf (
-              lib.types.submodule {
-                options = {
-                  name = lib.mkOption {
-                    type = lib.types.str;
-                    description = "Name / URL of Schema";
-                  };
-
-                  file = lib.mkOption {
-                    type = lib.types.listOf lib.types.str;
-                    description = "File patterns";
-                  };
-                };
-              }
-            );
-
-            default = [ ];
-          }
-        )
-      );
-
-      clipboardProvider = lib.mkOption {
-        # refer: https://docs.helix-editor.com/editor.html?highlight=clipboard#editorclipboard-provider-section
-        type = lib.types.nullOr (
-          lib.types.enum [
-            "pasteboard" # MacOS
-            "wayland"
-            "x-clip"
-            "x-sel"
-            "win32-yank"
-            "termux"
-            "tmux"
-            "windows"
-            "termcode"
-            "none"
-          ]
-        );
-        description = "clipboard-provider";
-        default = null;
-      };
-
-      packages = lib.mkOption {
-        type = lib.types.listOf lib.types.package;
-        description = "Packages to add to extraPackages";
-        default = [ ];
-      };
+  options.my.programs.editor = {
+    ignore = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      description = "Global ignore patterns for editor.file-picker";
+      default = [ ];
     };
+
+    language = lib.mkOption {
+      type = lib.types.attrsOf lib.types.anything;
+      description = "Alias for languages.langauge";
+      default = { };
+    };
+
+    schema = (
+      lib.genAttrs [ "json" ] (
+        lang:
+        lib.mkOption {
+          description = "Schema for completion support from LSP";
+
+          type = lib.types.listOf (
+            lib.types.submodule {
+              options = {
+                name = lib.mkOption {
+                  type = lib.types.str;
+                  description = "Name / URL of Schema";
+                };
+
+                file = lib.mkOption {
+                  type = lib.types.listOf lib.types.str;
+                  description = "File patterns";
+                };
+              };
+            }
+          );
+
+          default = [ ];
+        }
+      )
+    );
+
+    clipboardProvider = lib.mkOption {
+      # refer: https://docs.helix-editor.com/editor.html?highlight=clipboard#editorclipboard-provider-section
+      type = lib.types.nullOr (
+        lib.types.enum [
+          "pasteboard" # MacOS
+          "wayland"
+          "x-clip"
+          "x-sel"
+          "win32-yank"
+          "termux"
+          "tmux"
+          "windows"
+          "termcode"
+          "none"
+        ]
+      );
+      description = "clipboard-provider";
+      default = null;
+    };
+
+    packages = lib.mkOption {
+      type = lib.types.listOf lib.types.package;
+      description = "Packages to add to extraPackages";
+      default = [ ];
+    };
+  }
+  // (lib.my.mkCommandOption {
+    category = "Editor";
+    command = "hx";
+  });
 
   config = {
     my.programs = {
