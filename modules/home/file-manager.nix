@@ -27,9 +27,7 @@ in
     programs.yazi = {
       enable = true;
       shellWrapperName = "y";
-      package = pkgs.yazi.override {
-        optionalDeps = [ pkgs._7zz ];
-      };
+      extraPackages = [ pkgs._7zz ];
 
       settings = {
         mgr.linemode = "mtime";
