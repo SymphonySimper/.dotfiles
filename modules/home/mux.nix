@@ -101,6 +101,7 @@ in
             ## Open External programs
             bind e run-shell  ${history} # Open history in editor
             bind g new-window -c "#{pane_current_path}" ${config.my.programs.vcs.tui.command}
+            bind y new-window -c "#{pane_current_path}" ${config.my.programs.file-manager.command}
           '';
       };
     };
