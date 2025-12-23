@@ -28,7 +28,7 @@ in
       enable = true;
       shellWrapperName = "y";
       package = pkgs.yazi.override {
-        optionalDeps = [ pkgs.p7zip ];
+        optionalDeps = [ pkgs._7zz ];
       };
 
       settings = {
