@@ -146,7 +146,12 @@ in
 
           ''
             def --env mydev [] {
-              let dir = (glob --depth 2 --no-file --exclude [**/.*/**] ${my.dir.dev}/** | input list --fuzzy)
+              let dir = (
+                glob --depth 2 --no-file --exclude [**/.*/**] ${my.dir.dev}/** |
+                each {|row| $row | str replace $nu.home-path "~" } |
+                prepend "~/.dotfiles" |
+                input list --fuzzy
+              )
 
               match $dir {
                 null => "No dir was chosen."
