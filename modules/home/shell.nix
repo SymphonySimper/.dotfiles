@@ -214,7 +214,7 @@ in
 
                 cd $absolute_path 
               } else {
-                let paths =  $raw_paths | where $it has $arg 
+                let paths =  $raw_paths | find -r $arg 
 
                 if ($paths | length | $in > 0) {
                   cd ($paths | first) 
