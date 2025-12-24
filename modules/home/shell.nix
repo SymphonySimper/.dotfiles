@@ -187,34 +187,45 @@ in
           ''
 
           ''
-            let my_cd_db = ($nu.default-config-dir | path join "cd.db")
+            let __my_cd_db = ($nu.default-config-dir | path join "cd.db")
 
-            def --env z [arg] {
-              if not ($my_cd_db | path exists) {
-                { path: $nu.home-path } | into sqlite $my_cd_db
+            def __my_cd_paths [] {
+              if not ($__my_cd_db | path exists) {
+                { path: $nu.home-path } | into sqlite $__my_cd_db
 
-                print $"DB created at ($my_cd_db)"
+                print $"DB created at ($__my_cd_db)"
               }
 
-              let paths = (open $my_cd_db | get main.path | where $it has $arg | where ($it | path exists))
+              open $__my_cd_db |
+              query db "SELECT path FROM main ORDER BY LENGTH(path)" |
+              get path |
+              where ($it | path exists)
+            }
+
+            def --env z [arg] {
+              let raw_paths = (__my_cd_paths) 
 
               if ($arg | path exists) {
                 let absolute_path = $arg | path expand
 
-                if $absolute_path not-in $paths {
-                  open $my_cd_db | query db "INSERT INTO main (path) VALUES (?)" --params [$absolute_path]
+                if $absolute_path not-in $raw_paths {
+                  open $__my_cd_db | query db "INSERT INTO main (path) VALUES (?)" --params [$absolute_path]
                 }
 
                 cd $absolute_path 
-              } else if ($paths | length | $in > 0) {
-                cd ($paths | first) 
               } else {
-                error make {msg: $"($arg) not found or doesn't exist"}
-              }
+                let paths =  $raw_paths | where $it has $arg 
+
+                if ($paths | length | $in > 0) {
+                  cd ($paths | first) 
+                } else {
+                  error make {msg: $"($arg) not found or doesn't exist"}
+                }
+              } 
             }
 
             def --env zi [] {
-              let dir = (open $my_cd_db | get main.path | input list --fuzzy)
+              let dir = (__my_cd_paths | input list --fuzzy)
 
               match $dir {
                 null => "No dir was chosen."
