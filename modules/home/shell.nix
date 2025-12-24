@@ -187,36 +187,36 @@ in
           ''
 
           ''
-            let __my_cd_db = ($nu.default-config-dir | path join "cd.db")
+            let __my_cd_db = ($nu.default-config-dir | path join "cd.sqlite")
 
-            def __my_cd_paths [] {
-              if not ($__my_cd_db | path exists) {
-                { path: $nu.home-path } | into sqlite $__my_cd_db
+            if not ($__my_cd_db | path exists) {
+              { foo: "bar" } | into sqlite --table-name foo $__my_cd_db
 
-                print $"DB created at ($__my_cd_db)"
-              }
-
-              open $__my_cd_db |
-              query db "SELECT path FROM main ORDER BY LENGTH(path)" |
-              get path |
-              where ($it | path exists)
+              open $__my_cd_db | query db "DROP TABLE foo"
+              open $__my_cd_db | query db "CREATE TABLE main (path TEXT PRIMARY KEY)"
+              open $__my_cd_db | query db "INSERT INTO main (path) VALUES (?)" --params [$nu.home-path]
             }
 
             def --env z [arg] {
-              let raw_paths = (__my_cd_paths) 
+              let db = open $__my_cd_db
 
               if ($arg | path exists) {
                 let absolute_path = $arg | path expand
 
-                if $absolute_path not-in $raw_paths {
-                  open $__my_cd_db | query db "INSERT INTO main (path) VALUES (?)" --params [$absolute_path]
+                if ($db | query db "SELECT path FROM main WHERE path = ?" --params [$absolute_path] | is-empty) {
+                  $db | query db "INSERT INTO main (path) VALUES (?)" --params [$absolute_path]
                 }
 
                 cd $absolute_path 
               } else {
-                let paths =  $raw_paths | find -r $arg 
+                let paths = (
+                  $db |
+                  query db "SELECT path FROM main WHERE path LIKE ? ORDER BY LENGTH(path)" --params [$"%($arg)%"] |
+                  get path |
+                  where ($it | path exists)
+                ) 
 
-                if ($paths | length | $in > 0) {
+                if ($paths | is-not-empty) {
                   cd ($paths | first) 
                 } else {
                   error make {msg: $"($arg) not found or doesn't exist"}
@@ -225,7 +225,13 @@ in
             }
 
             def --env zi [] {
-              let dir = (__my_cd_paths | input list --fuzzy)
+              let dir = (
+                open $__my_cd_db |
+                query db "SELECT path FROM main ORDER BY LENGTH(path)" |
+                get path |
+                where ($it | path exists) |
+                input list --fuzzy
+              )
 
               match $dir {
                 null => "No dir was chosen."
