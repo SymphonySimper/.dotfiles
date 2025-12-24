@@ -17,6 +17,11 @@
         chmod +x $out/bin/*
       '';
     })
+
+    (pkgs.writeShellScriptBin "wslview" ''
+      # based on: /mnt/c/Program Files/Git/usr/bin/start
+      '/mnt/c/Program Files/PowerShell/7/pwsh.exe' -Command start "''${@//&/^&}"
+    '')
   ];
 
   services.ssh-agent.enable = true;
