@@ -6,6 +6,13 @@
   ...
 }:
 let
+  cfg = config.my.programs.shell;
+
+  binPath = rec {
+    relative = "../bin"; # relative to XDG_DATA_HOME
+    absolute = "${config.xdg.dataHome}/${relative}";
+  };
+
   prompt = {
     arrow = ">";
     color = my.theme.color.lavender;
@@ -26,6 +33,12 @@ in
       args = {
         command = "--commands";
       };
+    };
+
+    addToPath = lib.mkOption {
+      type = lib.types.attrsOf lib.types.str;
+      description = "Add a executable to ~/.local/bin";
+      default = { };
     };
   }
   // (lib.my.mkCommandOption {
@@ -54,11 +67,24 @@ in
         ];
       };
 
-      shell.env = {
-        LS_COLORS = ""; # Some programs misbehave when this is not set.
-        STARSHIP_LOG = "error";
+      shell = {
+        env = {
+          LS_COLORS = ""; # Some programs misbehave when this is not set.
+          STARSHIP_LOG = "error";
+        };
+
+        path = [ binPath.absolute ];
       };
     };
+
+    xdg.dataFile = builtins.listToAttrs (
+      builtins.map (file: {
+        name = "${binPath.relative}/${file.name}";
+        value = {
+          source = config.lib.file.mkOutOfStoreSymlink file.value;
+        };
+      }) (lib.attrsets.attrsToList cfg.addToPath)
+    );
 
     programs = {
       bash = {
