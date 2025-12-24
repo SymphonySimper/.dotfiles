@@ -185,6 +185,43 @@ in
               }
             }
           ''
+
+          ''
+            let my_cd_db = ($nu.default-config-dir | path join "cd.db")
+
+            def --env z [arg] {
+              if not ($my_cd_db | path exists) {
+                { path: $nu.home-path } | into sqlite $my_cd_db
+
+                print $"DB created at ($my_cd_db)"
+              }
+
+              let paths = (open $my_cd_db | get main.path | where $it has $arg | where ($it | path exists))
+
+              if ($arg | path exists) {
+                let absolute_path = $arg | path expand
+
+                if $absolute_path not-in $paths {
+                  open $my_cd_db | query db "INSERT INTO main (path) VALUES (?)" --params [$absolute_path]
+                }
+
+                cd $absolute_path 
+              } else if ($paths | length | $in > 0) {
+                cd ($paths | first) 
+              } else {
+                error make {msg: $"($arg) not found or doesn't exist"}
+              }
+            }
+
+            def --env zi [] {
+              let dir = (open $my_cd_db | get main.path | input list --fuzzy)
+
+              match $dir {
+                null => "No dir was chosen."
+                _ => { cd $dir }
+              }
+            }
+          ''
         ];
       };
 
