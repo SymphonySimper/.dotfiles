@@ -200,7 +200,9 @@ in
             def --env --wrapped z [...args] {
               let db = open $__my_cd_db
 
-              if ($args | length | $in == 1) and ($args.0 | path exists) {
+              if ($args == ["-"]) {
+                cd -
+              } else if ($args | length | $in == 1) and ($args.0 | path exists) {
                 let absolute_path = $args.0 | path expand
 
                 if ($db | query db "SELECT path FROM main WHERE path = ?" --params [$absolute_path] | is-empty) {
