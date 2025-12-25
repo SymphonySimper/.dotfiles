@@ -197,11 +197,11 @@ in
               open $__my_cd_db | query db "INSERT INTO main (path) VALUES (?)" --params [$nu.home-path]
             }
 
-            def --env z [arg] {
+            def --env --wrapped z [...args] {
               let db = open $__my_cd_db
 
-              if ($arg | path exists) {
-                let absolute_path = $arg | path expand
+              if ($args | length | $in == 1) and ($args.0 | path exists) {
+                let absolute_path = $args.0 | path expand
 
                 if ($db | query db "SELECT path FROM main WHERE path = ?" --params [$absolute_path] | is-empty) {
                   $db | query db "INSERT INTO main (path) VALUES (?)" --params [$absolute_path]
@@ -211,7 +211,7 @@ in
               } else {
                 let paths = (
                   $db |
-                  query db "SELECT path FROM main WHERE path LIKE ? ORDER BY LENGTH(path)" --params [$"%($arg)%"] |
+                  query db "SELECT path FROM main WHERE path LIKE ? ORDER BY LENGTH(path)" --params [$"%($args | str join '%')%"] |
                   get path |
                   where ($it | path exists)
                 ) 
@@ -219,7 +219,7 @@ in
                 if ($paths | is-not-empty) {
                   cd ($paths | first) 
                 } else {
-                  error make {msg: $"($arg) not found or doesn't exist"}
+                  error make {msg: $"($args) not found or doesn't exist"}
                 }
               } 
             }
