@@ -200,30 +200,41 @@ in
             def --env --wrapped z [...args] {
               let db = open $__my_cd_db
 
-              if ($args == ["-"]) {
-                cd -
-              } else if ($args | length | $in == 1) and ($args.0 | path exists) {
-                let absolute_path = $args.0 | path expand
+              match $args {
+                [] => { cd ~ }
+                ["-"] => { cd - }
+                [$arg] if ($arg | path exists) => {
+                  let absolute_path = $args.0 | path expand --no-symlink
+                  let absolute_path = match ($absolute_path | path type) {
+                    "dir" => $absolute_path
+                    "file" => ($absolute_path | path dirname)
+                    "symlink" => (match (glob $"($absolute_path)/*" | is-not-empty) {
+                      true => $absolute_path
+                      false => ($absolute_path | path dirname)
+                    })
+                  }
 
-                if ($db | query db "SELECT path FROM main WHERE path = ?" --params [$absolute_path] | is-empty) {
-                  $db | query db "INSERT INTO main (path) VALUES (?)" --params [$absolute_path]
+                  if ($db | query db "SELECT path FROM main WHERE path = ?" --params [$absolute_path] | is-empty) {
+                    $db | query db "INSERT INTO main (path) VALUES (?)" --params [$absolute_path]
+                  }
+
+                  cd $absolute_path 
                 }
+                _ => {
+                  let paths = (
+                    $db |
+                    query db "SELECT path FROM main WHERE path LIKE ? ORDER BY LENGTH(path)" --params [$"%($args | str join '%')%"] |
+                    get path |
+                    where ($it | path exists)
+                  ) 
 
-                cd $absolute_path 
-              } else {
-                let paths = (
-                  $db |
-                  query db "SELECT path FROM main WHERE path LIKE ? ORDER BY LENGTH(path)" --params [$"%($args | str join '%')%"] |
-                  get path |
-                  where ($it | path exists)
-                ) 
-
-                if ($paths | is-not-empty) {
-                  cd ($paths | first) 
-                } else {
-                  error make {msg: $"($args) not found or doesn't exist"}
+                  if ($paths | is-not-empty) {
+                    cd ($paths | first) 
+                  } else {
+                    error make {msg: $"($args) not found or doesn't exist"}
+                  }
                 }
-              } 
+              }
             }
 
             def --env zi [] {
