@@ -204,8 +204,13 @@ in
                 [] => { cd ~ }
                 ["-"] => { cd - }
                 [$arg] if ($arg | path exists) => {
-                  let absolute_path = $args.0 | path expand --no-symlink
-                  let absolute_path = match ($absolute_path | path type) {
+                  let absolute_path = (
+                    $arg |
+                    path expand --no-symlink |
+                    str replace -r "(\\\\|/)$" "" # remove trailing /,\ as it is not removed when --no-symlink is used.
+                  )
+
+                  let absolute_path = match ($arg | path type) {
                     "dir" => $absolute_path
                     "file" => ($absolute_path | path dirname)
                     "symlink" => (match (glob $"($absolute_path)/*" | is-not-empty) {
