@@ -193,7 +193,7 @@ in
               { foo: "bar" } | into sqlite --table-name foo $__my_cd_db
 
               open $__my_cd_db | query db "DROP TABLE foo"
-              open $__my_cd_db | query db "CREATE TABLE main (path TEXT PRIMARY KEY)"
+              open $__my_cd_db | query db "CREATE TABLE main (path TEXT PRIMARY KEY NOT NULL)"
               open $__my_cd_db | query db "INSERT INTO main (path) VALUES (?)" --params [$nu.home-path]
             }
 
