@@ -17,7 +17,10 @@
       };
     };
 
-    programs.android.enable = true;
+    programs = {
+      android.enable = true;
+      steam.enable = true;
+    };
   };
 
   boot = {
