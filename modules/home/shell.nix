@@ -17,6 +17,11 @@ let
     arrow = ">";
     color = my.theme.color.lavender;
   };
+
+  cd = {
+    plugin = "mycd";
+    getPaths = "__my_cd_paths";
+  };
 in
 {
   imports = [
@@ -243,7 +248,7 @@ in
               }
             }
 
-            def __my_cd_paths [] {
+            def ${cd.getPaths} [] {
               open $__my_cd_db |
               query db "SELECT path FROM main ORDER BY LENGTH(path)" |
               get path |
@@ -251,7 +256,7 @@ in
             }
 
             def --env zi [] {
-              match (__my_cd_paths | input list --fuzzy) {
+              match (${cd.getPaths} | input list --fuzzy) {
                 null => "No dir was chosen."
                 $dir => { cd $dir }
               }
@@ -269,6 +274,44 @@ in
         silent = false;
         config.warn_timeout = "2m";
       };
+
+      yazi.keymap = {
+        mgr.prepend_keymap = [
+          {
+            run = "plugin ${cd.plugin}";
+            on = [ "z" ];
+          }
+          {
+            run = "noop";
+            on = [ "Z" ];
+          }
+        ];
+      };
     };
+
+    xdg.configFile."yazi/plugins/${cd.plugin}.yazi/main.lua".text = ''
+      return {
+        entry = function()
+          local _permit = ya.hide()
+
+          local child, err1 = Command("${cfg.nu.command}")
+              :arg({ "${cfg.nu.args.login}", "${cfg.nu.args.command}", "__my_cd_paths | input list --fuzzy" })
+              :stdout(Command.PIPED)
+              :stderr(Command.INHERIT)
+              :spawn()
+
+          if not child then
+            return
+          end
+
+          local output, _ = child:wait_with_output()
+          local target = output.stdout:gsub("\n$", "")
+
+          if target ~= "" then
+            ya.emit("cd", { target, raw = true })
+          end
+        end
+      }
+    '';
   };
 }

@@ -61,46 +61,6 @@ in
           }
         ];
       };
-
-      keymap = {
-        mgr.prepend_keymap = [
-          {
-            run = "plugin nucd";
-            on = [ "z" ];
-          }
-          {
-            run = "noop";
-            on = [ "Z" ];
-          }
-        ];
-      };
-    };
-
-    xdg.configFile = {
-      "yazi/plugins/nucd.yazi/main.lua".text = ''
-        return {
-          entry = function()
-            local _permit = ya.hide()
-
-            local child, err1 = Command("nu")
-                :arg({ "-l", "-c", "__my_cd_paths | input list --fuzzy" })
-                :stdout(Command.PIPED)
-                :stderr(Command.INHERIT)
-                :spawn()
-
-            if not child then
-              return
-            end
-
-            local output, _ = child:wait_with_output()
-            local target = output.stdout:gsub("\n$", "")
-
-            if target ~= "" then
-              ya.emit("cd", { target, raw = true })
-            end
-          end
-        }
-      '';
     };
   };
 }
