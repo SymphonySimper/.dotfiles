@@ -177,22 +177,6 @@ in
           )
 
           ''
-            def --env mydev [] {
-              let dir = (
-                glob --depth 2 --no-file --exclude [**/.*/**] ${my.dir.dev}/** |
-                each {|row| $row | str replace $nu.home-path "~" } |
-                prepend "~/.dotfiles" |
-                input list --fuzzy
-              )
-
-              match $dir {
-                null => "No dir was chosen."
-                _ => { cd $dir }
-              }
-            }
-          ''
-
-          ''
             let __my_cd_db = ($nu.default-config-dir | path join "cd.sqlite")
 
             if not ($__my_cd_db | path exists) {
