@@ -32,6 +32,7 @@ in
       command = "nu";
       args = {
         command = "--commands";
+        login = "--login";
       };
     };
 
