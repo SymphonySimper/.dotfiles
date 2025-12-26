@@ -242,18 +242,17 @@ in
               }
             }
 
-            def --env zi [] {
-              let dir = (
-                open $__my_cd_db |
-                query db "SELECT path FROM main ORDER BY LENGTH(path)" |
-                get path |
-                where ($it | path exists) |
-                input list --fuzzy
-              )
+            def __my_cd_paths [] {
+              open $__my_cd_db |
+              query db "SELECT path FROM main ORDER BY LENGTH(path)" |
+              get path |
+              where ($it | path exists)
+            }
 
-              match $dir {
+            def --env zi [] {
+              match (__my_cd_paths | input list --fuzzy) {
                 null => "No dir was chosen."
-                _ => { cd $dir }
+                $dir => { cd $dir }
               }
             }
           ''
