@@ -31,7 +31,7 @@ in
         optionalDeps = with pkgs; [
           _7zz # archive extraction
           fd # file searching
-          fzf # quick subtree navigation
+          # fzf # quick subtree navigation (NOTE: enabled under ./utility.nix)
 
           # preview
           ffmpeg # video thumbnails

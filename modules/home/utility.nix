@@ -32,5 +32,10 @@
         proc_tree = false;
       };
     };
+
+    fzf = {
+      enable = true;
+      defaultOptions = [ "--reverse" ];
+    };
   };
 }
