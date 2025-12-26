@@ -27,7 +27,19 @@ in
     programs.yazi = {
       enable = true;
       shellWrapperName = "y";
-      extraPackages = [ pkgs._7zz ];
+      package = pkgs.yazi.override {
+        optionalDeps = with pkgs; [
+          _7zz # archive extraction
+          fd # file searching
+          fzf # quick subtree navigation
+
+          # preview
+          ffmpeg # video thumbnails
+          poppler-utils # PDF preview
+          resvg # SVG preview
+          imagemagick # font, HEIC, JPEG XL preview
+        ];
+      };
 
       settings = {
         mgr.linemode = "mtime";
@@ -47,6 +59,15 @@ in
               "open"
               "reveal"
             ];
+          }
+        ];
+      };
+
+      keymap = {
+        mgr.prepend_keymap = [
+          {
+            run = "noop";
+            on = [ "Z" ];
           }
         ];
       };
