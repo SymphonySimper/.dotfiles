@@ -177,6 +177,17 @@ in
           )
 
           ''
+            def killall [--force (-f)] {
+              let programs = (ps)
+
+              match ($programs | get name | uniq | input list --fuzzy) {
+                null => "No program was selected"
+                $program => { $programs | where name == $program | kill --force=$force ...($in.pid) }
+              }
+            }
+          ''
+
+          ''
             let __my_cd_db = ($nu.default-config-dir | path join "cd.sqlite")
 
             if not ($__my_cd_db | path exists) {
