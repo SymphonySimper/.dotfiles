@@ -184,6 +184,7 @@ in
 
               open $__my_cd_db | query db "DROP TABLE foo"
               open $__my_cd_db | query db "CREATE TABLE main (path TEXT PRIMARY KEY NOT NULL)"
+              open $__my_cd_db | query db "CREATE INDEX index_path_length ON main(length(path))"
               open $__my_cd_db | query db "INSERT INTO main (path) VALUES (?)" --params [$nu.home-path]
             }
 
