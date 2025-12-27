@@ -24,7 +24,9 @@ in
 {
   options.my.programs.mux = {
     enable = lib.mkEnableOption "Terminal MUX";
-    enableStatus = lib.mkEnableOption "Status";
+    enableStatus = lib.mkEnableOption "Status" // {
+      default = true;
+    };
   };
 
   config = lib.mkIf cfg.enable {
