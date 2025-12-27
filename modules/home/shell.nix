@@ -187,9 +187,28 @@ in
               open $__my_cd_db | query db "INSERT INTO main (path) VALUES (?)" --params [$nu.home-path]
             }
 
-            def --env --wrapped z [...args] {
-              let db = open $__my_cd_db
+            def __my_cd_search [args: list<string>]: nothing -> string {
+              mut path = null
 
+              loop {
+                let db = open $__my_cd_db
+                $path = (
+                  $db |
+                  query db "SELECT path FROM main WHERE path LIKE ? ORDER BY LENGTH(path) LIMIT 1" --params [$"%($args | str join '%')%"] |
+                  get 0.path --optional
+                )
+
+                match $path {
+                  null => break
+                  $path if ($path | path exists) => break
+                  _ => { $db | query db "DELETE FROM main WHERE path = ?" --params [$path] }
+                }
+              }
+
+              return $path
+            }
+
+            def --env --wrapped z [...args] {
               match $args {
                 [] => { cd ~ }
                 ["-"] => { cd - }
@@ -209,6 +228,7 @@ in
                     })
                   }
 
+                  let db = open $__my_cd_db
                   if ($db | query db "SELECT path FROM main WHERE path = ?" --params [$absolute_path] | is-empty) {
                     $db | query db "INSERT INTO main (path) VALUES (?)" --params [$absolute_path]
                   }
@@ -216,15 +236,9 @@ in
                   cd $absolute_path 
                 }
                 _ => {
-                  try {
-                    $db |
-                    query db "SELECT path FROM main WHERE path LIKE ? ORDER BY LENGTH(path)" --params [$"%($args | str join '%')%"] |
-                    get path |
-                    where ($it | path exists) |
-                    first |
-                    cd $in
-                  } catch {
-                    error make {msg: $"($args) not found or doesn't exist"}
+                  match (__my_cd_search $args) {
+                    null => { error make {msg: $"($args) not found or doesn't exist"} } 
+                    $path => { cd $path }
                   }
                 }
               }
