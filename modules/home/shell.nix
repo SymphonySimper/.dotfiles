@@ -84,7 +84,7 @@ in
     };
 
     xdg.dataFile = builtins.listToAttrs (
-      builtins.map (file: {
+      map (file: {
         name = "${binPath.relative}/${file.name}";
         value = {
           source = config.lib.file.mkOutOfStoreSymlink file.value;

@@ -49,7 +49,7 @@ let
 
         color =
           let
-            mkConvertToString = set: builtins.mapAttrs (_: value: builtins.toString value) set;
+            mkConvertToString = set: builtins.mapAttrs (_: value: toString value) set;
           in
           builtins.mapAttrs
             (_: value: {
@@ -81,7 +81,7 @@ let
     );
 
   mkGetProfileDirs = helpers.mkReadDir {
-    path = profileDir;
+    dirPath = profileDir;
     type = "dir";
   };
 
@@ -146,7 +146,7 @@ let
 
       config = if builtins.pathExists configFile then (import configFile) else { };
     in
-    (builtins.map
+    (map
       (for: {
         inherit name;
         inherit for;
@@ -170,7 +170,7 @@ let
       profiles = builtins.filter (profile: profile.for == for) profilesWithConfig;
     in
     builtins.listToAttrs (
-      builtins.map (
+      map (
         profile:
         if profile.for == for then
           rec {

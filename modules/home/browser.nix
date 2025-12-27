@@ -56,7 +56,7 @@ in
             ];
           };
         in
-        (builtins.map (feature: "--${feature.name}-features=${builtins.concatStringsSep "," feature.value}")
+        (map (feature: "--${feature.name}-features=${builtins.concatStringsSep "," feature.value}")
           (
             builtins.filter (f: (builtins.length f.value) > 0) (
               lib.attrsets.mapAttrsToList (name: value: { inherit name value; }) features
@@ -143,9 +143,9 @@ in
     xdg.desktopEntries = builtins.mapAttrs (
       name: value:
       let
-        isString = builtins.typeOf value == "string";
-        browser = if isString then cfg.command else value.browser;
-        _url = if isString then value else value.url;
+        isURL = builtins.typeOf value == "string";
+        browser = if isURL then cfg.command else value.browser;
+        _url = if isURL then value else value.url;
         url = if lib.strings.hasPrefix "http" _url then _url else "https://${_url}";
       in
       {

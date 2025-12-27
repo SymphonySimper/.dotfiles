@@ -151,7 +151,7 @@ in
           ShowHomeButton = false;
           HomepageIsNewTabPage = true;
 
-          SiteSearchSettings = builtins.map (
+          SiteSearchSettings = map (
             option:
             let
               name = option.value.name;
@@ -169,13 +169,13 @@ in
             map (
               extension:
               let
-                isList = builtins.typeOf extension == "list";
+                isTypeList = builtins.typeOf extension == "list";
               in
               {
-                name = if isList then builtins.elemAt extension 0 else extension;
+                name = if isTypeList then builtins.elemAt extension 0 else extension;
                 value = {
                   "installation_mode" = "force_installed";
-                  "toolbar_pin" = if isList then "force_pinned" else "default_unpinned";
+                  "toolbar_pin" = if isTypeList then "force_pinned" else "default_unpinned";
                   "update_url" = "https://clients2.google.com/service/update2/crx";
                 };
               }

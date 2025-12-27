@@ -11,7 +11,7 @@ let
 
   mkReadDir =
     {
-      path,
+      dirPath,
       asPath ? false,
       type ? "",
       suffix ? "",
@@ -43,9 +43,9 @@ let
             ]
             ++ (lib.optionals onlyNix [ (lib.hasSuffix "nix" name) ])
           )
-        ) (builtins.readDir path)
+        ) (builtins.readDir dirPath)
       );
     in
-    if asPath then (builtins.map (file: path + "/${file}") files) else files;
+    if asPath then (map (file: dirPath + "/${file}") files) else files;
 in
 mkReadDir

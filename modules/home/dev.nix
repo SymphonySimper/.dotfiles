@@ -25,7 +25,7 @@ let
 in
 {
   config = lib.mkMerge (
-    builtins.map
+    map
       (
         lang:
         let
@@ -47,10 +47,7 @@ in
               ++ (onlyList "packages");
             };
 
-            shell = {
-              env = onlyAttr "env";
-              path = onlyList "path";
-            };
+            shell = onlyAttr "shell";
           };
 
           home.packages = onlyList "homePackages";
@@ -105,7 +102,7 @@ in
               validate.enable = true;
 
               schemas = (
-                builtins.map (schema: {
+                map (schema: {
                   fileMatch = schema.file;
                   url = mkSchema schema.name;
                 }) config.my.programs.editor.schema.json
@@ -127,7 +124,7 @@ in
             gcc
           ];
 
-          env.RUST_BACKTRACE = "1";
+          shell.env.RUST_BACKTRACE = "1";
           lsp.rust-analyzer.config.check = "clippy";
         }
 
@@ -252,8 +249,8 @@ in
 
           packages = [ pkgs.typescript-language-server ];
 
-          env.PNPM_HOME = "${config.xdg.dataHome}/pnpm";
-          path = [ env.PNPM_HOME ];
+          shell.env.PNPM_HOME = "${config.xdg.dataHome}/pnpm";
+          shell.path = [ shell.env.PNPM_HOME ];
 
           language =
             lib.attrsets.genAttrs

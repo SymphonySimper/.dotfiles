@@ -20,11 +20,11 @@ let
   customKeybinds = (
     builtins.listToAttrs (
       lib.lists.imap0 (i: bind: {
-        name = "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom${builtins.toString i}";
+        name = "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom${toString i}";
         value = {
           name = if builtins.hasAttr "name" bind then bind.name else bind.command;
           binding = builtins.concatStringsSep "" (
-            (lib.lists.optionals (bind.mods != null) (builtins.map (mod: keys.mod.${mod}) bind.mods))
+            (lib.lists.optionals (bind.mods != null) (map (mod: keys.mod.${mod}) bind.mods))
             ++ [ bind.key ]
           );
           command = bind.command;
@@ -257,7 +257,7 @@ in
             home = [ "<Super><Shift>e" ];
             www = [ "<Super>b" ]; # launch browser
 
-            custom-keybindings = builtins.map (name: "/${name}/") (builtins.attrNames customKeybinds);
+            custom-keybindings = map (name: "/${name}/") (builtins.attrNames customKeybinds);
           };
 
           "org/gnome/mutter/wayland/keybindings" = {
@@ -267,7 +267,7 @@ in
 
         # App folders
         (builtins.listToAttrs (
-          builtins.map (folder: {
+          map (folder: {
             name = "org/gnome/desktop/app-folders/folders/${folder.name}";
             value = {
               name = folder.name;
@@ -286,7 +286,7 @@ in
         enable = true;
         readOnly = true;
 
-        entries = builtins.map (
+        entries = map (
           entry:
           let
             desktopEntry = pkgs.makeDesktopItem {

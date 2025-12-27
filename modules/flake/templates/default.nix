@@ -1,6 +1,6 @@
 { helpers, ... }:
 builtins.listToAttrs (
-  builtins.map
+  map
     (dir: {
       name = dir;
       value = {
@@ -10,7 +10,7 @@ builtins.listToAttrs (
     })
     (
       helpers.mkReadDir {
-        path = ./.;
+        dirPath = ./.;
         type = "dir";
       }
     )

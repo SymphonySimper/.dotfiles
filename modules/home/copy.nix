@@ -20,8 +20,8 @@ let
     }
   ];
 
-  expansionKeys = builtins.map (expansion: expansion.key) expansions;
-  expansionValues = builtins.map (expansion: expansion.value) expansions;
+  expansionKeys = map (expansion: expansion.key) expansions;
+  expansionValues = map (expansion: expansion.value) expansions;
 
   mkReplaceExpansions = content: builtins.replaceStrings expansionKeys expansionValues content;
   mkCliCommand =
@@ -80,14 +80,14 @@ in
       {
         ${name} = lib.hm.dag.entryAfter entries (
           lib.strings.concatLines (
-            builtins.map (
+            map (
               file:
               let
                 from = mkReplaceExpansions file.from;
                 to = mkReplaceExpansions file.to;
-                parentDir = builtins.dirOf to;
+                parentDir = dirOf to;
                 exclude = lib.lists.optionals ((builtins.length file.exclude) > 0) (
-                  builtins.map (ex: "--exclude=${ex}") file.exclude
+                  map (ex: "--exclude=${ex}") file.exclude
                 );
                 post = mkReplaceExpansions file.post;
 

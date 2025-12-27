@@ -62,7 +62,7 @@ in
       extraRules = [
         {
           groups = [ groupSudo ];
-          commands = builtins.map (command: {
+          commands = map (command: {
             inherit command;
             options = [ "NOPASSWD" ];
           }) cfg.sudo.nopasswd;

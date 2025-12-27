@@ -180,7 +180,7 @@ in
         };
 
         includes = (
-          builtins.map
+          map
             (profile: {
               condition = "gitdir:${mkProfileDir profile.name}/";
               contents = profile.value.config;
