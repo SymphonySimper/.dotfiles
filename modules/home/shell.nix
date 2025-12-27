@@ -216,16 +216,14 @@ in
                   cd $absolute_path 
                 }
                 _ => {
-                  let paths = (
+                  try {
                     $db |
                     query db "SELECT path FROM main WHERE path LIKE ? ORDER BY LENGTH(path)" --params [$"%($args | str join '%')%"] |
                     get path |
-                    where ($it | path exists)
-                  ) 
-
-                  if ($paths | is-not-empty) {
-                    cd ($paths | first) 
-                  } else {
+                    where ($it | path exists) |
+                    first |
+                    cd $in
+                  } catch {
                     error make {msg: $"($args) not found or doesn't exist"}
                   }
                 }
