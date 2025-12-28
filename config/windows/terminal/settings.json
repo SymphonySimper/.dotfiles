@@ -200,6 +200,11 @@
     { "id": "Terminal.SwitchToTab7", "keys": "alt+8" },
     { "id": "Terminal.SwitchToLastTab", "keys": "alt+9" },
 
+    { "id": "Terminal.OpenNewTabProfile0", "keys": "ctrl+shift+1" },
+    { "id": "Terminal.OpenNewTabProfile1", "keys": "ctrl+shift+2" },
+    { "id": "Terminal.OpenNewTabProfile2", "keys": "ctrl+shift+3" },
+    { "id": "Terminal.OpenNewTabProfile3", "keys": "ctrl+shift+4" },
+
     { "id": null, "keys": "ctrl+alt+1" },
     { "id": null, "keys": "ctrl+alt+2" },
     { "id": null, "keys": "ctrl+alt+3" },
@@ -209,10 +214,6 @@
     { "id": null, "keys": "ctrl+alt+7" },
     { "id": null, "keys": "ctrl+alt+8" },
     { "id": null, "keys": "ctrl+alt+9" },
-    { "id": null, "keys": "ctrl+shift+1" },
-    { "id": null, "keys": "ctrl+shift+2" },
-    { "id": null, "keys": "ctrl+shift+3" },
-    { "id": null, "keys": "ctrl+shift+4" },
     { "id": null, "keys": "ctrl+shift+5" },
     { "id": null, "keys": "ctrl+shift+6" },
     { "id": null, "keys": "ctrl+shift+7" },
