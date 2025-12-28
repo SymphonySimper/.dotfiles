@@ -32,14 +32,21 @@ in
   ];
 
   options.my.programs.shell = {
-    nu = lib.my.mkCommandOption {
+    nu = {
+      autoload = lib.mkOption {
+        type = lib.types.attrsOf lib.types.lines;
+        description = "Files/Content to add to $nu.user-autload-dirs";
+        default = { };
+      };
+    }
+    // (lib.my.mkCommandOption {
       category = "Interactive Shell";
       command = "nu";
       args = {
         command = "--commands";
         login = "--login";
       };
-    };
+    });
 
     addToPath = lib.mkOption {
       type = lib.types.attrsOf lib.types.str;
@@ -297,29 +304,44 @@ in
       };
     };
 
-    xdg.configFile."yazi/plugins/${cd.plugin}.yazi/main.lua".text = ''
-      return {
-        entry = function()
-          local _permit = ya.hide()
+    xdg.configFile = {
+      "yazi/plugins/${cd.plugin}.yazi/main.lua".text = ''
+        return {
+          entry = function()
+            local _permit = ya.hide()
 
-          local child, err1 = Command("${cfg.nu.command}")
-              :arg({ "${cfg.nu.args.login}", "${cfg.nu.args.command}", "__my_cd_paths | input list --fuzzy" })
-              :stdout(Command.PIPED)
-              :stderr(Command.INHERIT)
-              :spawn()
+            local child, err1 = Command("${cfg.nu.command}")
+                :arg({ "${cfg.nu.args.login}", "${cfg.nu.args.command}", "__my_cd_paths | input list --fuzzy" })
+                :stdout(Command.PIPED)
+                :stderr(Command.INHERIT)
+                :spawn()
 
-          if not child then
-            return
+            if not child then
+              return
+            end
+
+            local output, _ = child:wait_with_output()
+            local target = output.stdout:gsub("\n$", "")
+
+            if target ~= "" then
+              ya.emit("cd", { target, raw = true })
+            end
           end
+        }
+      '';
+    };
 
-          local output, _ = child:wait_with_output()
-          local target = output.stdout:gsub("\n$", "")
-
-          if target ~= "" then
-            ya.emit("cd", { target, raw = true })
-          end
-        end
-      }
-    '';
+    home.file = builtins.listToAttrs (
+      map (
+        file:
+        let
+          key = if (lib.strings.hasPrefix "/" file.value) then "source" else "text";
+        in
+        {
+          name = "${config.programs.nushell.configDir}/autoload/${file.name}.nu";
+          value.${key} = file.value;
+        }
+      ) (lib.attrsets.attrsToList cfg.nu.autoload)
+    );
   };
 }
