@@ -141,42 +141,6 @@ in
             enabled = true;
             autoUpdate = true;
           };
-
-          # NOTE: Aliases seems to be Case-insensitive
-          # (i.e) `p` == `P`
-          alias = {
-            c = "clone";
-            s = "status";
-            a = "add";
-            m = "commit";
-
-            p = "pull";
-            po = "pull origin";
-
-            pu = "push";
-            puf = "push --force-with-lease";
-
-            st = "stash";
-            stp = "stash pop";
-
-            b = "branch";
-            ce = "checkout";
-            sw = "switch";
-
-            r = "reset";
-            rh = "reset --hard HEAD";
-            ro = "!git reset --hard origin/$(git branch --show-current)";
-
-            f = "fetch";
-            fpa = "fetch --prune --all";
-
-            # misc
-            cln = "clean -fdx";
-
-            # shell
-            do = "!git fetch && git diff origin";
-            z = "!${cfg.tui.command}";
-          };
         };
 
         includes = (
