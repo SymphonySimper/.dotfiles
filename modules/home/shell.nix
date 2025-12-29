@@ -231,20 +231,18 @@ in
               match $args {
                 [] => { cd ~ }
                 ["-"] => { cd - }
-                [$arg] if ($arg | path exists) => {
-                  let absolute_path = (
-                    $arg |
-                    path expand --no-symlink |
-                    str replace -r "(\\\\|/)$" "" # remove trailing /,\ as it is not removed when --no-symlink is used.
-                  )
+                [$path] if ($path | path exists) => {
+                  let absolute_path = match ($path | path type) {
+                    "dir" => ($path | path expand)
+                    "file" => ($path | path expand | path dirname)
+                    "symlink" => {
+                      let absolute_path = ($path | path expand --no-symlink)
 
-                  let absolute_path = match ($arg | path type) {
-                    "dir" => $absolute_path
-                    "file" => ($absolute_path | path dirname)
-                    "symlink" => (match (glob $"($absolute_path)/*" | is-not-empty) {
-                      true => $absolute_path
-                      false => ($absolute_path | path dirname)
-                    })
+                      match (ls --all $absolute_path | get name) {
+                        [_] => ($absolute_path | path dirname)
+                        _ => $absolute_path
+                      }
+                    }
                   }
 
                   let db = open $__my_cd_db
