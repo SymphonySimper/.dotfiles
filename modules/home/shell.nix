@@ -245,8 +245,8 @@ in
                     "symlink" => {
                       let absolute_path = ($path | path expand --no-symlink)
 
-                      match (ls --all $absolute_path | get name) {
-                        [_] => ($absolute_path | path dirname)
+                      match (ls --full-paths --all $absolute_path | get name) {
+                        [$link] if $link == $absolute_path => ($absolute_path | path dirname)
                         _ => $absolute_path
                       }
                     }
