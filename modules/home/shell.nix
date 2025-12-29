@@ -206,13 +206,20 @@ in
               open $__my_cd_db | query db "INSERT INTO main (path) VALUES (?)" --params [$nu.home-path]
             }
 
-            def __my_cd_search [args: list<string>]: nothing -> string {
+            def __my_cd_add_path [path: string] {
+              open $__my_cd_db | query db "INSERT OR IGNORE INTO main (path) VALUES (?)" --params [$path]
+            }
+
+            def __my_cd_delete_path [path: string] {
+              open $__my_cd_db | query db "DELETE FROM main WHERE path = ?" --params [$path]
+            }
+
+            def __my_cd_search [args: list<string>] {
               mut path = null
 
               loop {
-                let db = open $__my_cd_db
                 $path = (
-                  $db |
+                  open $__my_cd_db |
                   query db "SELECT path FROM main WHERE path LIKE ? ORDER BY LENGTH(path) LIMIT 1" --params [$"%($args | str join '%')%"] |
                   get 0.path --optional
                 )
@@ -220,7 +227,7 @@ in
                 match $path {
                   null => break
                   $path if ($path | path exists) => break
-                  _ => { $db | query db "DELETE FROM main WHERE path = ?" --params [$path] }
+                  $path => { __my_cd_delete_path $path }
                 }
               }
 
@@ -245,10 +252,7 @@ in
                     }
                   }
 
-                  let db = open $__my_cd_db
-                  if ($db | query db "SELECT path FROM main WHERE path = ?" --params [$absolute_path] | is-empty) {
-                    $db | query db "INSERT INTO main (path) VALUES (?)" --params [$absolute_path]
-                  }
+                  __my_cd_add_path $absolute_path
 
                   cd $absolute_path 
                 }
@@ -261,17 +265,34 @@ in
               }
             }
 
-            def ${cd.getPaths} [] {
-              open $__my_cd_db |
-              query db "SELECT path FROM main ORDER BY LENGTH(path)" |
-              get path |
-              where ($it | path exists)
+            def ${cd.getPaths} [--no-check] {
+              let paths = (
+                open $__my_cd_db |
+                query db "SELECT path FROM main ORDER BY LENGTH(path)" |
+                get path
+              )
+
+              if $no_check {
+                return $paths
+              }
+
+              $paths | where ($it | path exists)
             }
 
             def --env zi [] {
               match (${cd.getPaths} | input list --fuzzy) {
                 null => "No dir was chosen."
                 $dir => { cd $dir }
+              }
+            }
+
+            def zd [] {
+              match (${cd.getPaths} --no-check | input list --fuzzy) {
+                null => "No dir was chosen."
+                $dir => {
+                  __my_cd_delete_path $dir
+                  print $"Deleted: ($dir)"
+                }
               }
             }
           ''
