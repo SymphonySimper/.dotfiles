@@ -12,8 +12,8 @@ import {
   InjectionManager,
 } from "resource:///org/gnome/shell/extensions/extension.js";
 import {
-  Urgency,
-  Source,
+  // Urgency,
+  // Source,
   MessageTray,
 } from "resource:///org/gnome/shell/ui/messageTray.js";
 
@@ -59,13 +59,13 @@ class Overrides {
   }
 
   enable() {
-    // Make all notifications as critical
-    this.#add(Source.prototype, "addNotification", (addNotification) => {
-      return function (notification) {
-        notification.urgency = Urgency.CRITICAL;
-        addNotification.call(this, notification); // original method
-      };
-    });
+    // // Make all notifications as critical
+    // this.#add(Source.prototype, "addNotification", (addNotification) => {
+    //   return function (notification) {
+    //     notification.urgency = Urgency.CRITICAL;
+    //     addNotification.call(this, notification); // original method
+    //   };
+    // });
 
     // shows focus border and default action can be activated with enter / space
     this.#add(
