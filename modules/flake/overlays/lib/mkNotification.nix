@@ -5,10 +5,10 @@ let
       title ? throw "Title for notification cannot be empty",
       body ? "",
       app ? "notify-send",
+      urgency ? "normal", # low, normal, critical
       extraArgs ? "",
     }:
     let
-      urgency = "critical"; # low, normal, critical
       appName =
         lib.trivial.throwIf (lib.strings.hasInfix " " app) "mkNotification: app cannot have [[:space:]]"
           app;
