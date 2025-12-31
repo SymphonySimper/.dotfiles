@@ -5,17 +5,32 @@ import {
   panel,
   overview,
   layoutManager,
-  notify,
 } from "resource:///org/gnome/shell/ui/main.js";
 import {
   Extension,
   InjectionManager,
 } from "resource:///org/gnome/shell/extensions/extension.js";
 import {
-  // Urgency,
+  Urgency,
   // Source,
   MessageTray,
+  Notification,
+  getSystemSource,
 } from "resource:///org/gnome/shell/ui/messageTray.js";
+
+// refer: notify function
+// source: https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/main/js/ui/main.js#L634-647
+function notify(params) {
+  const source = getSystemSource();
+  const notification = new Notification({
+    source,
+    title: params.msg,
+    body: params.details ?? null,
+    isTransient: true,
+    urgency: params.urgency ?? Urgency.NORMAL,
+  });
+  source.addNotification(notification);
+}
 
 class ShowOverviewOnEnable {
   #states = new Set(["SHOWN", "SHOWING"]);
@@ -88,24 +103,32 @@ class Overrides {
 class Battery {
   #MIN = 40;
   #MAX = 80;
+  #INTERVAL = 5 * 60; // 5 * 60s = 5min
 
   enable() {
-    this._sourceId = GLib.timeout_add_seconds(GLib.PRIORITY_LOW, 5 * 60, () => {
-      const { Percentage: level, State: state } =
-        panel.statusArea.quickSettings._system._systemItem._powerToggle._proxy;
+    this._sourceId = GLib.timeout_add_seconds(
+      GLib.PRIORITY_LOW,
+      this.#INTERVAL,
+      () => {
+        const { Percentage: level, State: state } =
+          panel.statusArea.quickSettings._system._systemItem._powerToggle
+            ._proxy;
 
-      if (level < this.#MIN && state === UPower.DeviceState.DISCHARGING) {
-        notify(
-          `Battery is less than ${this.#MIN}% (${level}%) plug the charger.`,
-        );
-      } else if (level > this.#MAX && state === UPower.DeviceState.CHARGING) {
-        notify(
-          `Battery is greater than ${this.#MAX}% (${level}%) unplug the charger`,
-        );
-      }
+        if (level < this.#MIN && state === UPower.DeviceState.DISCHARGING) {
+          notify({
+            msg: `Battery is less than ${this.#MIN}% (${level}%) plug the charger.`,
+            urgency: Urgency.CRITICAL,
+          });
+        } else if (level > this.#MAX && state === UPower.DeviceState.CHARGING) {
+          notify({
+            msg: `Battery is greater than ${this.#MAX}% (${level}%) unplug the charger`,
+            urgency: Urgency.CRITICAL,
+          });
+        }
 
-      return GLib.SOURCE_CONTINUE;
-    });
+        return GLib.SOURCE_CONTINUE;
+      },
+    );
   }
 
   disable() {
