@@ -31,8 +31,10 @@
             #   ]
             # );
 
+            # TODO: Add build Inputs
             buildInputs = [
-              pkgs.bashInteractive # do not remove
+              # NOTE: You can also pass preffered shell using `-c`.
+              # pkgs.bashInteractive # for interactive use
             ];
 
             # TODO: Update packages and shellHook
