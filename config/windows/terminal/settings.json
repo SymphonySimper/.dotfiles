@@ -111,7 +111,13 @@
         "dark": "Catppuccin Mocha"
       },
       "cursorShape": "filledBox",
-      "font": { "face": "JetBrainsMono Nerd Font" },
+      "font": {
+        "face": "JetBrainsMono Nerd Font",
+        "features": {
+          "liga": 0,
+          "calt": 0
+        }
+      },
       "padding": "2",
       "scrollbarState": "hidden",
       "altGrAliasing": false,
