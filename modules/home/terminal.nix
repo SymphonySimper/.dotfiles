@@ -75,6 +75,7 @@ in
         mouse_hide_wait = -1;
 
         dim_opacity = 0.9;
+        disable_ligatures = "always";
 
         cursor_shape = "block";
         cursor_shape_unfocused = "hollow";
