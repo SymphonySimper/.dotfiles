@@ -327,7 +327,7 @@ in
       "yazi/plugins/${cd.plugin}.yazi/main.lua".text = ''
         return {
           entry = function()
-            local _permit = ya.hide()
+            local _permit = ui.hide()
 
             local child, err1 = Command("${cfg.nu.command}")
                 :arg({ "${cfg.nu.args.login}", "${cfg.nu.args.command}", "__my_cd_paths | input list --fuzzy" })
