@@ -18,9 +18,17 @@
       '';
     })
 
-    (pkgs.writeShellScriptBin "wslview" ''
+    (pkgs.writeShellScriptBin "xdg-open" ''
       # based on: /mnt/c/Program Files/Git/usr/bin/start
-      '/mnt/c/Program Files/PowerShell/7/pwsh.exe' -Command start "''${@//&/^&}"
+      arg=$1
+
+      if [ -e "$arg" ]; then
+        path=$(wslpath -w "$arg")
+      else
+        path=''${arg//&/^&}
+      fi
+
+      '/mnt/c/Program Files/PowerShell/7/pwsh.exe' -Command start "$path"
     '')
   ];
 
