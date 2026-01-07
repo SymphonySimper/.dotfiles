@@ -46,7 +46,7 @@ in
 
         opener.edit = [
           {
-            run = ''${config.my.programs.editor.command} "$@"'';
+            run = ''${config.my.programs.editor.command} %s'';
             block = true;
           }
         ];
