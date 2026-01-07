@@ -299,7 +299,8 @@ in
         ];
       };
 
-      carapace.enable = true;
+      # NOTE: disabling to check if I will notice a big difference
+      carapace.enable = false;
 
       direnv = {
         enable = true;
