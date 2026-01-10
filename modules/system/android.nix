@@ -19,10 +19,10 @@ in
         "adbusers"
       ];
 
-      programs.adb.enable = true;
       services.gvfs.enable = true;
 
       environment.systemPackages = [
+        pkgs.android-tools
         (pkgs.android-studio.override { forceWayland = config.my.programs.desktop.enable; })
       ];
     }
