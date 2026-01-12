@@ -120,7 +120,7 @@ in
           ];
 
           mouse = false;
-          line-number = "absolute";
+          line-number = "relative";
           auto-format = false;
           bufferline = "never";
           auto-pairs = true;
