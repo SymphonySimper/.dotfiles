@@ -299,9 +299,6 @@ in
         ];
       };
 
-      # NOTE: disabling to check if I will notice a big difference
-      carapace.enable = false;
-
       direnv = {
         enable = true;
         nix-direnv.enable = true;
