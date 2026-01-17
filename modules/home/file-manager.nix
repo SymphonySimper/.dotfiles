@@ -33,10 +33,11 @@ in
           fd # file searching
 
           # preview
+          chafa
           ffmpeg # video thumbnails
+          imagemagick # font, HEIC, JPEG XL preview
           poppler-utils # PDF preview
           resvg # SVG preview
-          imagemagick # font, HEIC, JPEG XL preview
         ];
       };
 
