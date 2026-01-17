@@ -1,11 +1,18 @@
 {
   my,
   config,
+  pkgs,
   lib,
   ...
 }:
 let
   cfg = config.my.programs.terminal;
+
+  files = {
+    theme = "theme.toml";
+    extra = "extra.toml";
+    config = "alacritty.toml";
+  };
 in
 {
   options.my.programs.terminal = {
@@ -33,7 +40,7 @@ in
   }
   // (lib.my.mkCommandOption {
     category = "Terminal";
-    command = "kitty";
+    command = "alacritty";
     args = {
       command = "-e";
     };
@@ -50,78 +57,113 @@ in
           }
         ];
       };
+
+      copy.of =
+        (map (file: {
+          from = "CONFIG/alacritty/${file}";
+          to = "WINDOWS/alacritty/${file}";
+        }))
+          [
+            files.config
+            files.theme
+          ];
     };
 
-    xdg.terminal-exec = {
-      enable = true;
-      settings.default = [ "kitty.desktop" ];
-    };
+    catppuccin.alacritty.enable = false;
 
-    programs.kitty = {
-      enable = true;
-      shellIntegration.mode = "no-prompt-mark no-cursor";
-
-      font = {
-        size = 12;
-        name = my.theme.font.mono;
+    xdg = {
+      terminal-exec = {
+        enable = true;
+        settings.default = [ "Alacritty.desktop" ];
       };
+
+      configFile = {
+        "alacritty/${files.theme}".source = lib.my.mkGetThemeSource {
+          package = "alacritty";
+          filename = "NAME-FLAVOR.toml";
+          returnFile = true;
+        };
+
+        "alacritty/${files.extra}".source =
+          let
+            tomlFormat = pkgs.formats.toml { };
+          in
+          tomlFormat.generate files.extra {
+            terminal.shell = {
+              program = cfg.shell.command;
+              args = cfg.shell.args;
+            };
+          };
+      };
+    };
+
+    programs.alacritty = {
+      enable = true;
 
       settings = {
-        shell = builtins.concatStringsSep " " ([ cfg.shell.command ] ++ cfg.shell.args);
+        general = {
+          import = [
+            files.theme
+            files.extra
+          ];
 
-        allow_remote_control = false;
-        hide_window_decorations = true;
-        scrollback_lines = 1000;
-        mouse_hide_wait = -1;
+          live_config_reload = false;
+          ipc_socket = false;
+        };
 
-        dim_opacity = 0.9;
-        disable_ligatures = "always";
+        window = {
+          decorations = "none";
+          opacity = 1;
+          startup_mode = "Maximized";
 
-        cursor_shape = "block";
-        cursor_shape_unfocused = "hollow";
-        cursor_blink_interval = 0;
+          dynamic_padding = true;
+          padding = rec {
+            x = 2;
+            y = x;
+          };
+        };
 
-        tab_bar_edge = "top";
-        tab_bar_style = "separator";
-        tab_separator = "''";
-        tab_title_template = "' [{index}] {title} '";
-        tab_bar_background = my.theme.color.crust.hex;
-        inactive_tab_background = my.theme.color.surface0.hex;
+        scrolling.history = 1000;
+        selection.save_to_clipboard = true;
 
-        # performance
-        repaint_delay = 2; # ms
-        input_delay = 2; # ms
-        sync_to_monitor = false;
-        wayland_enable_ime = false;
+        font = {
+          size = 12;
+          normal = {
+            family = my.theme.font.mono;
+            style = "Regular";
+          };
+        };
 
-        clear_all_shortcuts = true;
-      };
+        cursor = {
+          vi_mode_style = "Block";
+          style = {
+            blinking = "off";
+            shape = "Block";
+          };
+        };
 
-      actionAliases = {
-        "launch_tab" = "launch --cwd=current --type=tab";
-      };
-
-      keybindings = {
-        "ctrl+shift+c" = "copy_to_clipboard";
-        "ctrl+shift+v" = "paste_from_clipboard";
-
-        "ctrl+shift+equal" = "change_font_size all +2.0";
-        "ctrl+shift+plus" = "change_font_size all +2.0";
-
-        "alt+v" = "launch_tab --stdin-source=@screen_scrollback ${config.my.programs.editor.command}";
-        "alt+shift+v" = "open_url_with_hints";
-
-        "alt+t" = "launch --cwd=current --type=tab";
-        "alt+shift+c" = "close_tab";
-        "alt+1" = "goto_tab 1";
-        "alt+2" = "goto_tab 2";
-        "alt+3" = "goto_tab 3";
-        "alt+4" = "goto_tab 4";
-        "alt+5" = "goto_tab 5";
-        "alt+6" = "goto_tab 6";
-        "alt+7" = "goto_tab 7";
-        "alt+8" = "goto_tab 8";
-        "alt+9" = "goto_tab 9";
+        keyboard.bindings = [
+          {
+            key = "V";
+            mods = "Alt";
+            action = "ToggleViMode";
+          }
+          {
+            key = "T";
+            mods = "Alt";
+            action = "CreateNewWindow";
+          }
+          {
+            key = "M";
+            mods = "Alt";
+            action = "ToggleMaximized";
+          }
+          {
+            key = "F";
+            mods = "Alt|Shift";
+            action = "ToggleFullscreen";
+          }
+        ];
       };
     };
   };
