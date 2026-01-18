@@ -11,6 +11,10 @@ in
 {
   imports = [
     (lib.modules.mkAliasOptionModule
+      [ "my" "programs" "editor" "settings" ]
+      [ "programs" "helix" "settings" ]
+    )
+    (lib.modules.mkAliasOptionModule
       [ "my" "programs" "editor" "lsp" ]
       [ "programs" "helix" "languages" "language-server" ]
     )
