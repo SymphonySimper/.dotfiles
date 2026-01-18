@@ -1,5 +1,9 @@
 { pkgs, ... }:
 {
+  my.programs = {
+    work.enable = true;
+  };
+
   home.packages = [
     (pkgs.stdenv.mkDerivation rec {
       pname = "win32yank";
