@@ -21,6 +21,7 @@ let
 
   lsps = {
     tailwind = "tailwindcss-ls";
+    harper = "harper-ls";
   };
 in
 {
@@ -43,6 +44,7 @@ in
               packages = [
                 pkgs.nodePackages.prettier
                 pkgs.vscode-langservers-extracted
+                pkgs.harper
               ]
               ++ (onlyList "packages");
             };
@@ -55,6 +57,11 @@ in
         }
       )
       [
+        {
+          # Git
+          language.git-commit.language-servers = [ lsps.harper ];
+        }
+
         {
           # Tree-Sitter
           packages = [ pkgs.ts_query_ls ];
@@ -192,8 +199,6 @@ in
 
         {
           # Markdown
-          packages = [ pkgs.harper ];
-
           language.markdown = {
             # refer: https://github.com/helix-editor/helix/wiki/Recipes#continue-markdown-lists--quotes
             comment-tokens = [
@@ -205,7 +210,7 @@ in
             ];
 
             formatter = mkPrettier "markdown";
-            language-servers = [ "harper-ls" ];
+            language-servers = [ lsps.harper ];
           };
         }
 
