@@ -19,6 +19,8 @@
     };
 
     settings = {
+      connect-timeout = 60; # seconds
+
       show-trace = true;
       auto-optimise-store = true;
       trusted-users = [
