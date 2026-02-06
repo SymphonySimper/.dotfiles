@@ -19,14 +19,6 @@ in
   ];
 
   options.my.programs.vcs = {
-    tui = (
-      lib.my.mkCommandOption {
-        category = "VCS TUI";
-        command = "lazygit";
-        args.path = "-p";
-      }
-    );
-
     profiles = lib.mkOption {
       type = lib.types.attrsOf (
         lib.types.submodule {
@@ -157,23 +149,6 @@ in
               )
             )
         );
-      };
-
-      lazygit = {
-        enable = true;
-
-        settings = {
-          git = {
-            disableForcePushing = true;
-          };
-
-          gui = {
-            showBottomLine = false;
-            showPanelJumps = false;
-            nerdFontsVersion = "3";
-            useHunkModeInStagingView = false;
-          };
-        };
       };
 
       gh.enable = true;
