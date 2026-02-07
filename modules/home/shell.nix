@@ -164,7 +164,7 @@ in
             in
             ''
               $env.PROMPT_COMMAND = {||
-                  let dir = match (do -i { $env.PWD | path relative-to $nu.home-path }) {
+                  let dir = match (do -i { $env.PWD | path relative-to $nu.home-dir }) {
                       null => $env.PWD
                       ${"''"} => '~'
                       $relative_pwd => ([~ $relative_pwd] | path join)
@@ -203,7 +203,7 @@ in
               open $__my_cd_db | query db "DROP TABLE foo"
               open $__my_cd_db | query db "CREATE TABLE main (path TEXT PRIMARY KEY NOT NULL)"
               open $__my_cd_db | query db "CREATE INDEX index_path_length ON main(length(path))"
-              open $__my_cd_db | query db "INSERT INTO main (path) VALUES (?)" --params [$nu.home-path]
+              open $__my_cd_db | query db "INSERT INTO main (path) VALUES (?)" --params [$nu.home-dir]
             }
 
             def __my_cd_add_path [path: string] {
