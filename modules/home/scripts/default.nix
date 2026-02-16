@@ -6,6 +6,7 @@ in
   imports = [
     ./ffmpeg.nix
     ./ocr.nix
+    ./todo.nix
   ];
 
   options.my.programs.scripts.enable = (lib.mkEnableOption "Scripts") // {
@@ -16,6 +17,7 @@ in
     my.programs.scripts = {
       ffmpeg.enable = lib.mkDefault cfg.enable;
       ocr.enable = lib.mkDefault cfg.enable;
+      todo.enable = lib.mkDefault cfg.enable;
     };
   };
 }

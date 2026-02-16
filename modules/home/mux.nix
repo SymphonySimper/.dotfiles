@@ -105,6 +105,7 @@ in
             ## Open External programs
             bind e run-shell  ${history} # Open history in editor
             bind y new-window -c "#{pane_current_path}" ${config.my.programs.file-manager.command}
+            bind t new-window ${config.my.programs.scripts.todo.command}
           '';
       };
     };
