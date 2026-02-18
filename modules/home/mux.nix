@@ -81,6 +81,11 @@ in
             setw -g monitor-activity on
             set -g visual-activity off # If enabled shows activity in window message
 
+            # Required by yazi
+            set -g allow-passthrough on
+            set -ga update-environment TERM
+            set -ga update-environment TERM_PROGRAM
+
             # UI
             ## window
             set -g renumber-window on # renumber when window is closed
