@@ -26,13 +26,14 @@ in
     enable = lib.mkEnableOption "Terminal MUX" // {
       default = true;
     };
+    enableAutoStart = lib.mkEnableOption "Auto-start";
     enableStatus = lib.mkEnableOption "Status" // {
       default = true;
     };
   };
 
   config = lib.mkIf cfg.enable {
-    my.programs.terminal.shell = {
+    my.programs.terminal.shell = lib.mkIf cfg.enableAutoStart {
       command = "tmux";
       args = [ "new" ];
     };
