@@ -193,7 +193,7 @@
     { "id": "Terminal.ToggleCommandPalette", "keys": "alt+shift+p" },
     { "id": "Terminal.ToggleFullscreen", "keys": "alt+shift+f" },
 
-    { "id": "Terminal.OpenNewTab", "keys": "alt+t" },
+    { "id": "Terminal.DuplicateTab", "keys": "alt+t" },
     { "id": "Terminal.OpenNewTabDropdown", "keys": "alt+shift+t" },
     { "id": "User.closeTab", "keys": "alt+shift+c" },
     { "id": "Terminal.SwitchToTab0", "keys": "alt+1" },
