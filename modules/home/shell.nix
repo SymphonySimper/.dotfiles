@@ -296,6 +296,10 @@ in
               }
             }
           ''
+
+          (lib.strings.optionalString (my.profile == "wsl") ''
+            $env.config.shell_integration.osc9_9 = true;
+          '')
         ];
       };
 
