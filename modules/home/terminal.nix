@@ -91,8 +91,8 @@ in
         inactive_tab_background = my.theme.color.surface0.hex;
 
         # performance
+        input_delay = 0; # ms
         repaint_delay = 2; # ms
-        input_delay = 2; # ms
         sync_to_monitor = false;
         wayland_enable_ime = false;
 
