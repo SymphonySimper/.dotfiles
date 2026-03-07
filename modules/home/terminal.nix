@@ -75,6 +75,7 @@ in
         hide_window_decorations = true;
         scrollback_lines = 1000;
         mouse_hide_wait = -1;
+        enabled_layouts = "splits,stack";
 
         dim_opacity = 0.9;
         disable_ligatures = "always";
@@ -98,7 +99,8 @@ in
 
       keybindings =
         let
-          tab = "launch --cwd=current --type=tab";
+          launchCurr = "launch --cwd=current";
+          launchCurrTab = "${launchCurr} --type=tab";
         in
         {
           "ctrl+shift+c" = "copy_to_clipboard";
@@ -107,10 +109,10 @@ in
           "ctrl+shift+equal" = "change_font_size all +2.0";
           "ctrl+shift+plus" = "change_font_size all +2.0";
 
-          "alt+v" = "${tab} --stdin-source=@screen_scrollback ${config.my.programs.editor.command}";
+          "alt+v" = "${launchCurrTab} --stdin-source=@screen_scrollback ${config.my.programs.editor.command}";
           "alt+shift+v" = "open_url_with_hints";
 
-          "alt+t" = "${tab}";
+          "alt+t" = "${launchCurrTab}";
           "alt+shift+c" = "close_tab";
           "alt+1" = "goto_tab 1";
           "alt+2" = "goto_tab 2";
@@ -121,6 +123,27 @@ in
           "alt+7" = "goto_tab 7";
           "alt+8" = "goto_tab 8";
           "alt+9" = "goto_tab 9";
+
+          "alt+=" = "${launchCurr} --location=vsplit";
+          "alt++" = "${launchCurr} --location=hsplit";
+          "alt+shift+w" = "close_window";
+          "alt+m" = "toggle_layout stack"; # workaround for pane zoom
+          ## focus
+          "alt+h" = "neighboring_window left";
+          "alt+j" = "neighboring_window down";
+          "alt+k" = "neighboring_window up";
+          "alt+l" = "neighboring_window right";
+          ## resize
+          "alt+shift+h" = "resize_window wider";
+          "alt+shift+j" = "resize_window shorter";
+          "alt+shift+k" = "resize_window taller";
+          "alt+shift+l" = "resize_window narrower";
+          "alt+shift+r" = "resize_window reset";
+          ## move
+          "alt+ctrl+h" = "move_window left";
+          "alt+ctrl+j" = "move_window down";
+          "alt+ctrl+k" = "move_window up";
+          "alt+ctrl+l" = "move_window right";
         };
     };
   };
