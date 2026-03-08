@@ -206,8 +206,8 @@
     { "id": "Terminal.SwitchToTab7", "keys": "alt+8" },
     { "id": "Terminal.SwitchToLastTab", "keys": "alt+9" },
 
-    { "id": "Terminal.DuplicatePaneRight", "keys": "alt+=" },
-    { "id": "Terminal.DuplicatePaneDown", "keys": "alt+plus" },
+    { "id": "Terminal.DuplicatePaneRight", "keys": "alt+plus" },
+    { "id": "Terminal.DuplicatePaneDown", "keys": "alt+shift+plus" },
     { "id": "Terminal.ClosePane", "keys": "alt+shift+w" },
     { "id": "Terminal.TogglePaneZoom", "keys": "alt+m" },
     { "id": "Terminal.MoveFocusLeft", "keys": "alt+h" },
@@ -262,7 +262,6 @@
     { "id": null, "keys": "ctrl+shift+n" },
     { "id": null, "keys": "alt+shift+right" },
     { "id": null, "keys": "alt+space" },
-    { "id": null, "keys": "alt+shift+plus" },
     { "id": null, "keys": "alt+down" },
     { "id": null, "keys": "ctrl+numpad_minus" },
     { "id": null, "keys": "alt+right" },
