@@ -15,7 +15,6 @@
     # gui
     ./browser.nix
     ./desktop.nix
-    ./steam.nix
 
     # cli + gui
     ./android.nix
