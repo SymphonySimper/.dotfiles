@@ -244,6 +244,11 @@ in
                   R = ":reset-diff-change";
                 };
 
+              # macros
+              m = {
+                x = "@i<lt>xxx<gt><ret><lt>/xxx<gt><esc>k2xsxxx<ret>c";
+              };
+
               q = ":quit";
               Q = ":quit!";
             };
