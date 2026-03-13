@@ -20,8 +20,9 @@ let
   mkVscodeLsp = name: "vscode-${name}-language-server";
 
   lsps = {
-    tailwind = "tailwindcss-ls";
+    emmet = "emmet-language-server";
     harper = "harper-ls";
+    tailwind = "tailwindcss-ls";
   };
 in
 {
@@ -42,9 +43,9 @@ in
               schema = onlyAttr "schema";
               ignore = onlyList "ignore";
               packages = [
+                pkgs.harper
                 pkgs.nodePackages.prettier
                 pkgs.vscode-langservers-extracted
-                pkgs.harper
               ]
               ++ (onlyList "packages");
             };
@@ -215,6 +216,17 @@ in
         }
 
         {
+          # Emmet
+          packages = [ pkgs.emmet-language-server ];
+
+          lsp.${lsps.emmet} = {
+            command = lsps.emmet;
+            args = [ "--stdio" ];
+            config = { };
+          };
+        }
+
+        {
           # Tailwindcss
           packages = [ pkgs.tailwindcss-language-server ];
         }
@@ -229,6 +241,7 @@ in
             language.html = {
               language-servers = [
                 htmlLsp
+                lsps.emmet
                 lsps.tailwind
               ];
               formatter = mkPrettier "html";
@@ -271,7 +284,10 @@ in
                 language-servers = [
                   "typescript-language-server"
                 ]
-                ++ (lib.optionals (lib.strings.hasSuffix "sx" name) [ lsps.tailwind ]);
+                ++ (lib.optionals (lib.strings.hasSuffix "sx" name) [
+                  lsps.emmet
+                  lsps.tailwind
+                ]);
               });
 
           schema.json = [
@@ -309,6 +325,7 @@ in
 
             language-servers = [
               "svelteserver"
+              lsps.emmet
               lsps.tailwind
             ];
 
