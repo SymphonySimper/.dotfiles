@@ -16,8 +16,8 @@ let
       passedProfile = profile;
     in
     rec {
-      name = "symph";
-      fullName = "SymphonySimper";
+      name = mkGetDefault passedProfile "user.name" "symph";
+      fullName = mkGetDefault passedProfile "user.fullName" "SymphonySimper";
 
       dir = {
         home = "/home/${name}";
