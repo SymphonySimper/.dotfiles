@@ -32,6 +32,12 @@ in
   ];
 
   options.my.programs.shell = {
+    bash = {
+      enable = lib.mkEnableOption "Enable Bash" // {
+        default = true;
+      };
+    };
+
     nu = {
       autoload = lib.mkOption {
         type = lib.types.attrsOf lib.types.lines;
