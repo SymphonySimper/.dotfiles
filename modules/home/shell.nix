@@ -36,7 +36,16 @@ in
       enable = lib.mkEnableOption "Enable Bash" // {
         default = true;
       };
-    };
+    }
+    // (lib.my.mkCommandOption {
+      category = "Shell";
+      command = "bash";
+      args = {
+        login = "--login";
+        command = "-c";
+        bin = "${my.dir.home}/.nix-profile/bin";
+      };
+    });
 
     nu = {
       autoload = lib.mkOption {
@@ -59,16 +68,7 @@ in
       description = "Add a executable to ~/.local/bin";
       default = { };
     };
-  }
-  // (lib.my.mkCommandOption {
-    category = "Shell";
-    command = "bash";
-    args = {
-      login = "--login";
-      command = "-c";
-      bin = "${my.dir.home}/.nix-profile/bin";
-    };
-  });
+  };
 
   config = {
     my.programs = {
