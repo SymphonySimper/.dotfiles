@@ -23,6 +23,22 @@ in
       }
     ));
 
+    programs = {
+      gemini-cli = {
+        enable = true;
+        package = pkgs.gemini-cli-bin;
+
+        settings = {
+          security.auth.selectedType = "oauth-personal";
+
+          general = {
+            preferredEditor = config.my.programs.editor.command;
+            vimMode = true;
+          };
+        };
+      };
+    };
+
     my.programs = {
       vcs.profiles."work" = rec {
         host = "github.com";
