@@ -34,6 +34,11 @@ in
           general = {
             preferredEditor = config.my.programs.editor.command;
             vimMode = true;
+
+            sessionRetention = {
+              enabled = true;
+              maxAge = "30d";
+            };
           };
         };
       };
