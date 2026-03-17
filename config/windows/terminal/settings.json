@@ -128,25 +128,29 @@
         "name": "NixOS",
         "guid": "{00000000-0000-0000-0000-000000000001}",
         "commandline": "%SystemRoot%\\System32\\wsl.exe -d NixOS --shell-type login nu",
-        "startingDirectory": "~"
+        "startingDirectory": "~",
+        "icon": "ms-appdata:///local/icons/NixOS-WSL.ico"
       },
       {
         "name": "Nushell",
         "guid": "{00000000-0000-0000-0000-000000000002}",
         "commandline": "%LOCALAPPDATA%\\Programs\\nu\\bin\\nu.exe",
-        "startingDirectory": "%USERPROFILE%"
+        "startingDirectory": "%USERPROFILE%",
+        "icon": "ms-appdata:///local/icons/nu_logo.ico"
       },
       {
         "name": "Windows PowerShell",
         "guid": "{00000000-0000-0000-0000-000000000003}",
         "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-        "startingDirectory": "%USERPROFILE%"
+        "startingDirectory": "%USERPROFILE%",
+        "icon": "ms-appdata:///local/icons/Powershell_black.ico"
       },
       {
         "name": "Command Prompt",
         "guid": "{00000000-0000-0000-0000-000000000004}",
         "commandline": "%SystemRoot%\\System32\\cmd.exe",
-        "startingDirectory": "%USERPROFILE%"
+        "startingDirectory": "%USERPROFILE%",
+        "icon": "ms-appdata:///local/icons/console.ico"
       }
     ]
   },
