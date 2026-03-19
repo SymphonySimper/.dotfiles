@@ -302,6 +302,10 @@ in
                 "tsconfig.*.json"
               ];
             }
+            {
+              name = "chrome-manifest";
+              file = [ "manifest.json" ];
+            }
           ];
 
           ignore = [
