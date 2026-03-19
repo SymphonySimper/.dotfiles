@@ -34,6 +34,7 @@ in
           general = {
             preferredEditor = config.my.programs.editor.command;
             vimMode = true;
+            defaultApprovalMode = "plan";
 
             sessionRetention = {
               enabled = true;
