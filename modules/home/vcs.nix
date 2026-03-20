@@ -1,6 +1,6 @@
 {
-  config,
   my,
+  config,
   pkgs,
   lib,
   ...
@@ -19,6 +19,20 @@ in
   ];
 
   options.my.programs.vcs = {
+    user = {
+      name = lib.mkOption {
+        type = lib.types.str;
+        description = "Username";
+        default = my.fullName;
+      };
+
+      email = lib.mkOption {
+        type = lib.types.str;
+        description = "Email";
+        default = "50240805+SymphonySimper@users.noreply.github.com";
+      };
+    };
+
     profiles = lib.mkOption {
       type = lib.types.attrsOf (
         lib.types.submodule {
@@ -112,8 +126,8 @@ in
 
         settings = {
           user = {
-            name = my.fullName;
-            email = "50240805+SymphonySimper@users.noreply.github.com";
+            name = cfg.user.name;
+            email = cfg.user.email;
           };
 
           init.defaultBranch = "main";
