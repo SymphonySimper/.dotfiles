@@ -240,6 +240,7 @@ in
 
               # macros
               m = {
+                n = "@:e <C-r>%<C-w>"; # create file relative to current file
                 x = "@i<lt>xxx<gt><ret><lt>/xxx<gt><esc>k2xsxxx<ret>c";
               };
 
