@@ -15,7 +15,6 @@
     ./ssh.nix
     ./utility.nix
     ./vcs.nix
-    ./work.nix
 
     ./scripts
 

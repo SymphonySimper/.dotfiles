@@ -1,7 +1,6 @@
 { pkgs, ... }:
 {
   my.programs = {
-    work.enable = true;
     editor.settings.editor.clipboard-provider = "win32-yank";
   };
 
