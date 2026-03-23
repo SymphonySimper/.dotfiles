@@ -215,9 +215,9 @@ in
                 b = "buffer_picker";
                 d = "diagnostics_picker";
                 D = "workspace_diagnostics_picker";
-                e = "file_explorer";
+                e = "file_explorer_in_current_directory";
                 E = "file_explorer_in_current_buffer_directory";
-                f = "file_picker";
+                f = "file_picker_in_current_directory";
                 F = "file_picker_in_current_buffer_directory";
                 g = "changed_file_picker";
                 "/" = "global_search";
