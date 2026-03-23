@@ -42,5 +42,5 @@ ls $source_dir
     mkdir $dir.destination
   }
 
-  cp --recursive --verbose ($dir.source | into glob) $dir.destination
+  cp --recursive --verbose --all ($dir.source | into glob) $dir.destination
 }
