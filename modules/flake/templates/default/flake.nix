@@ -38,9 +38,9 @@
             ];
 
             # TODO: Update packages and shellHook
-            packages = with pkgs; [
+            packages = [
               # replace with packages that you need in env
-              cowsay
+              pkgs.cowsay
             ];
 
             shellHook = # sh
