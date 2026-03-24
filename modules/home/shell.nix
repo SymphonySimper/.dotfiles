@@ -309,6 +309,11 @@ in
         ];
       };
 
+      carapace = {
+        enable = true;
+        ignoreCase = true;
+      };
+
       direnv = {
         enable = true;
         nix-direnv.enable = true;
