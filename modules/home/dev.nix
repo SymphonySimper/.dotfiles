@@ -44,7 +44,7 @@ in
               ignore = onlyList "ignore";
               packages = [
                 pkgs.harper
-                pkgs.nodePackages.prettier
+                pkgs.prettier
                 pkgs.vscode-langservers-extracted
               ]
               ++ (onlyList "packages");
