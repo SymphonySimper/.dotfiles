@@ -41,6 +41,7 @@
     userDirs = {
       enable = true;
       createDirectories = true;
+      setSessionVariables = true;
     };
 
     configFile."nixpkgs/config.nix".text = # nix
