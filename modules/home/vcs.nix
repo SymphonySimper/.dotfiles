@@ -124,6 +124,10 @@ in
         lfs.enable = true;
         ignores = [ "node_modules" ];
 
+        signing = {
+          format = lib.mkDefault null;
+        };
+
         settings = {
           user = {
             name = cfg.user.name;
