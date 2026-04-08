@@ -181,6 +181,15 @@ in
               }
             ) cfg.extensions
           );
+
+          # Brave specific
+          # refer: https://support.brave.app/hc/en-us/articles/360039248271-Group-Policy
+          BraveRewardsDisabled = true;
+          BraveWalletDisabled = true;
+          BraveVPNDisabled = true;
+          BraveAIChatEnabled = false;
+          BraveNewsDisabled = true;
+          BraveTalkDisabled = true;
         };
     };
   };
