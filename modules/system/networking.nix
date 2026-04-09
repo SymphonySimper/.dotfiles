@@ -15,6 +15,7 @@ in
 
     nm.enable = lib.mkEnableOption "NetworkManager";
     firewall.enable = lib.mkEnableOption "firewall";
+    enableCloudflareDNS = lib.mkEnableOption "Cloudflare DNS";
   };
 
   config = lib.mkIf cfg.enable {
@@ -31,8 +32,16 @@ in
     };
 
     networking = {
+      nameservers = lib.lists.optionals cfg.enableCloudflareDNS [
+        "1.1.1.1"
+        "1.0.0.1"
+        "2606:4700:4700::1111"
+        "2606:4700:4700::1001"
+      ];
+
       networkmanager = {
         enable = cfg.nm.enable;
+        dns = lib.mkIf cfg.enableCloudflareDNS "none";
       };
 
       firewall = {
