@@ -1,6 +1,8 @@
 { ... }:
 {
   my = {
+    networking.enableCloudflareDNS = true;
+
     hardware = {
       cpu.amd.enable = true;
       gpu.amd.enable = true;
