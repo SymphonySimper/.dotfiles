@@ -24,6 +24,8 @@
     };
   };
 
+  services.flatpak.enable = true;
+
   boot = {
     initrd.availableKernelModules = [
       "nvme"
