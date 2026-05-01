@@ -40,6 +40,10 @@ in
         ];
       };
 
+      plugins = {
+        toggle-pane = pkgs.yaziPlugins.toggle-pane;
+      };
+
       settings = {
         mgr.linemode = "mtime";
         preview.max_width = 1920;
@@ -58,6 +62,16 @@ in
               "open"
               "reveal"
             ];
+          }
+        ];
+      };
+
+      keymap = {
+        mgr.prepend_keymap = [
+          {
+            on = "T";
+            run = "plugin toggle-pane max-preview";
+            desc = "Maximize or restore the preview pane";
           }
         ];
       };
