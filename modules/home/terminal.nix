@@ -26,7 +26,7 @@ in
       };
 
       default = {
-        command = config.my.programs.shell.nu.command;
+        command = config.my.programs.shell.bash.command;
         args = [ ];
       };
     };
