@@ -127,16 +127,9 @@
       {
         "name": "NixOS",
         "guid": "{00000000-0000-0000-0000-000000000001}",
-        "commandline": "%SystemRoot%\\System32\\wsl.exe -d NixOS --shell-type login nu",
+        "commandline": "%SystemRoot%\\System32\\wsl.exe -d NixOS --shell-type login bash",
         "startingDirectory": "~",
         "icon": "ms-appdata:///local/icons/NixOS-WSL.ico"
-      },
-      {
-        "name": "Nushell",
-        "guid": "{00000000-0000-0000-0000-000000000002}",
-        "commandline": "%LOCALAPPDATA%\\Programs\\nu\\bin\\nu.exe",
-        "startingDirectory": "%USERPROFILE%",
-        "icon": "ms-appdata:///local/icons/nu_logo.ico"
       },
       {
         "name": "Windows PowerShell",

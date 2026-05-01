@@ -9,6 +9,5 @@ glob *.ico | each {|icon| magick $icon -resize 32x32 -delete 1--1 $icon } | igno
 ```
 
 - [NixOS-WSL](https://github.com/nix-community/NixOS-WSL/blob/main/assets/NixOS-WSL.ico)
-- [Nushell](https://github.com/nushell/nushell/blob/main/assets/nu_logo.ico)
 - [PowerShell](https://github.com/PowerShell/PowerShell/blob/master/assets/Powershell_black.ico)
 - [Command Prompt](https://github.com/microsoft/terminal/blob/main/res/console.ico)

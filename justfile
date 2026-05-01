@@ -45,4 +45,4 @@ gnome-nested-shell:
 [group('scripts')]
 [windows]
 update-config:
-    nu ./scripts/windows/update-config.nu
+    python ./scripts/windows/update-config.py
