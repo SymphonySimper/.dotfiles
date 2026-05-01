@@ -50,7 +50,7 @@ in
 
         opener.edit = [
           {
-            run = ''${config.my.programs.editor.command} %s'';
+            run = "${config.my.programs.editor.command} %s";
             block = true;
           }
         ];
