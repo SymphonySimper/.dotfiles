@@ -151,6 +151,35 @@ in
             enabled = true;
             autoUpdate = true;
           };
+
+          alias = rec {
+            d = "diff";
+            p = "pull";
+            pu = "push";
+
+            # add
+            a = "add";
+            ap = "${a} -p";
+
+            # commit
+            c = "commit";
+            cm = "${c} -m";
+            cp = "${c} -p";
+            cpm = "${cp} -m";
+
+            # status
+            s = "status";
+            sv = "${s} -v";
+
+            # log
+            lo = "log --graph --oneline";
+            l = "${lo} -8";
+
+            # branch
+            sw = "switch";
+            b = "branch --verbose --verbose";
+            fpa = "fetch --prune --all";
+          };
         };
 
         includes = (
