@@ -26,7 +26,7 @@ in
       };
 
       default = {
-        command = config.my.programs.shell.bash.command;
+        command = config.my.programs.shell.fish.command;
         args = [ ];
       };
     };

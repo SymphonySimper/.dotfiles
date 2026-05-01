@@ -24,6 +24,10 @@ in
     (lib.modules.mkAliasOptionModule [ "my" "programs" "shell" "path" ] [ "home" "sessionPath" ])
 
     # (lib.modules.mkAliasOptionModule [ "my" "programs" "shell" "root" ] [ "programs" "bash" ])
+    (lib.modules.mkAliasOptionModule
+      [ "my" "programs" "shell" "fish" "functions" ]
+      [ "programs" "fish" "functions" ]
+    )
   ];
 
   options.my.programs.shell = {
@@ -41,6 +45,15 @@ in
         bin = "${my.dir.home}/.nix-profile/bin";
       };
     });
+
+    fish = lib.my.mkCommandOption {
+      category = "Interactive Shell";
+      command = "fish";
+      args = {
+        command = "--command";
+        login = "--login";
+      };
+    };
 
     addToPath = lib.mkOption {
       type = lib.types.attrsOf lib.types.str;
@@ -118,6 +131,32 @@ in
           "\\C-l" = "clear-screen";
           "\\e[Z" = "menu-complete"; # Shift+Tab to cycle through complete options
           "\\ee" = "edit-and-execute-command"; # open and edit command in $EDITOR
+        };
+      };
+
+      fish = {
+        enable = true;
+        generateCompletions = true;
+
+        interactiveShellInit = ''
+          set -U fish_greeting ""
+        '';
+
+        functions = {
+          fish_prompt = {
+            body = ''
+              # based on `astronaut` prompt
+              set -l reset (set_color --reset)
+              set -l color (set_color --bold '${prompt.color.hex}')
+
+              # Since we display the prompt on a new line allow the directory names to be longer.
+              set -q fish_prompt_pwd_dir_length
+              or set -lx fish_prompt_pwd_dir_length 0
+
+              echo -s $color (prompt_pwd) $reset ' '
+              echo -n -s $color '${prompt.arrow}' ' ' $reset
+            '';
+          };
         };
       };
 

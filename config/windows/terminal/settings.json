@@ -127,7 +127,7 @@
       {
         "name": "NixOS",
         "guid": "{00000000-0000-0000-0000-000000000001}",
-        "commandline": "%SystemRoot%\\System32\\wsl.exe -d NixOS --shell-type login bash",
+        "commandline": "%SystemRoot%\\System32\\wsl.exe -d NixOS --shell-type login fish",
         "startingDirectory": "~",
         "icon": "ms-appdata:///local/icons/NixOS-WSL.ico"
       },
