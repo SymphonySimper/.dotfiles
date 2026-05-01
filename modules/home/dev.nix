@@ -200,6 +200,10 @@ in
 
         {
           # Markdown
+          packages = [
+            pkgs.mpls
+          ];
+
           language.markdown = {
             # refer: https://github.com/helix-editor/helix/wiki/Recipes#continue-markdown-lists--quotes
             comment-tokens = [
@@ -211,7 +215,20 @@ in
             ];
 
             formatter = mkPrettier "markdown";
-            language-servers = [ lsps.harper ];
+            language-servers = [
+              "mpls"
+              lsps.harper
+            ];
+          };
+
+          lsp.mpls = {
+            command = "mpls";
+            args = [
+              "--no-auto"
+              "--enable-emoji"
+              "--theme"
+              (lib.my.mkGetTheme { name = "%name%-%flavor%"; })
+            ];
           };
         }
 
