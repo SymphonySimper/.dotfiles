@@ -73,7 +73,7 @@ in
 
         extraConfig = # conf
           ''
-            set -g default-command "exec ${config.my.programs.shell.bash.command}"
+            set -g default-command "exec ${config.my.programs.shell.fish.command}"
 
             # RGB colors
             # https://github.com/tmux/tmux/wiki/FAQ#how-do-i-use-rgb-colour
