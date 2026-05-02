@@ -56,13 +56,11 @@ in
             ];
           };
         in
-        (map (feature: "--${feature.name}-features=${builtins.concatStringsSep "," feature.value}")
-          (
-            builtins.filter (f: (builtins.length f.value) > 0) (
-              lib.attrsets.mapAttrsToList (name: value: { inherit name value; }) features
-            )
+        (map (feature: "--${feature.name}-features=${builtins.concatStringsSep "," feature.value}") (
+          builtins.filter (f: (builtins.length f.value) > 0) (
+            lib.attrsets.mapAttrsToList (name: value: { inherit name value; }) features
           )
-        )
+        ))
       );
     };
   });
@@ -98,6 +96,7 @@ in
         # Email
         Gmail = "mail.google.com/mail/u/0";
         "Gmail 1" = "mail.google.com/mail/u/1";
+        "Gmail 2" = "mail.google.com/mail/u/2";
 
         # Misc
         "Chrome Enterprise policy list" = "chromeenterprise.google/policies";
