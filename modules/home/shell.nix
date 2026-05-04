@@ -157,6 +157,15 @@ in
               echo -n -s $color '${prompt.arrow}' ' ' $reset
             '';
           };
+
+          store_path_for_windows_terminal = lib.mkIf (my.profile == "wsl") {
+            onVariable = "PWD";
+            body = ''
+              if test -n "$WT_SESSION"
+                printf "\e]9;9;%s\e\\" (wslpath -w "$PWD")
+              end
+            '';
+          };
         };
       };
 
