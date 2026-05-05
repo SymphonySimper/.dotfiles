@@ -154,27 +154,11 @@
       "command": {
         "action": "multipleActions",
         "actions": [
-          { "action": "selectAll" },
-          { "action": "copy" },
-          { "action": "scrollToBottom" },
+          { "action": "exportBuffer", "path": "%TEMP%/wt_scrollback.txt" },
           {
-            "action": "wt",
-            "commandline": "--window 0 pwsh -c \"Get-Clipboard | hx\""
-          }
-        ]
-      }
-    },
-    {
-      "id": "User.ScrollbackEditorWSL",
-      "command": {
-        "action": "multipleActions",
-        "actions": [
-          { "action": "selectAll" },
-          { "action": "copy" },
-          { "action": "scrollToBottom" },
-          {
-            "action": "wt",
-            "commandline": "--window 0 --profile NixOS bash -l -c \"win32yank.exe -o | hx\""
+            "action": "newTab",
+            "tabTitle": "Scrollback Editor",
+            "commandline": "hx %TEMP%/wt_scrollback.txt"
           }
         ]
       }
@@ -184,7 +168,7 @@
     { "id": "Terminal.CopyToClipboard", "keys": "ctrl+shift+c" },
     { "id": "Terminal.PasteFromClipboard", "keys": "ctrl+shift+v" },
 
-    { "id": "User.ScrollbackEditorWSL", "keys": "alt+v" },
+    { "id": "User.ScrollbackEditor", "keys": "alt+v" },
     { "id": "Terminal.ToggleMarkMode", "keys": "alt+shift+v" },
 
     { "id": "Terminal.ToggleCommandPalette", "keys": "alt+shift+p" },
