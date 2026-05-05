@@ -358,6 +358,24 @@ in
 
           ignore = [ ".svelte-kit" ];
         }
+
+        {
+          # Go
+          homePackages = [
+            pkgs.go
+            pkgs.gotools
+            pkgs.golangci-lint
+          ];
+
+          packages = [
+            pkgs.gopls
+            pkgs.golangci-lint-langserver
+          ];
+
+          language.go = {
+            formatter.command = "goimports";
+          };
+        }
       ]
   );
 }
