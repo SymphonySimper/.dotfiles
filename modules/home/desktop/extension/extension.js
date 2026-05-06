@@ -7,10 +7,7 @@ import {
   Extension,
   InjectionManager,
 } from "resource:///org/gnome/shell/extensions/extension.js";
-import {
-  // Source,
-  MessageTray,
-} from "resource:///org/gnome/shell/ui/messageTray.js";
+import { MessageTray } from "resource:///org/gnome/shell/ui/messageTray.js";
 
 class ShowOverviewOnEnable {
   #states = new Set(["SHOWN", "SHOWING"]);
@@ -54,14 +51,6 @@ class Overrides {
   }
 
   enable() {
-    // // Make all notifications as critical
-    // this.#add(Source.prototype, "addNotification", (addNotification) => {
-    //   return function (notification) {
-    //     notification.urgency = Urgency.CRITICAL;
-    //     addNotification.call(this, notification); // original method
-    //   };
-    // });
-
     // shows focus border and default action can be activated with enter / space
     this.#add(
       MessageTray.prototype,
