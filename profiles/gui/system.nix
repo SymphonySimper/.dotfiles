@@ -21,6 +21,7 @@
 
     programs = {
       android.enable = true;
+      steam.enable = true;
     };
   };
 
