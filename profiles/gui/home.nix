@@ -9,6 +9,8 @@
   };
 
   programs = {
+    discord.enable = true;
+
     gh = {
       enable = true;
       settings.git_protocol = "ssh";
