@@ -104,10 +104,10 @@ in
         "!.gitattributes"
       ];
 
-      ssh.root.matchBlocks = builtins.mapAttrs (name: value: {
-        hostname = value.host;
-        identityFile = mkSSHIdentityFilename name;
-        identitiesOnly = true;
+      ssh.root.settings = builtins.mapAttrs (name: value: {
+        Hostname = value.host;
+        IdentityFile = mkSSHIdentityFilename name;
+        IdentitiesOnly = true;
       }) cfg.profiles;
 
       vcs.profiles = {
