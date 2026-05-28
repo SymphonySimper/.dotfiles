@@ -33,10 +33,10 @@ in
         enable = true;
         capSysNice = false;
         args = [
-          "-f" # full screen
-          "--mouse-sensitivity 1" # increase mouse speed
+          "--rt" # use realtime scheduling
+          "--fullscreen"
           "--force-grab-cursor"
-          "--adaptive-sync"
+          "--immediate-flips" # tearing
         ];
       };
     };
