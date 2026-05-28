@@ -42,7 +42,11 @@ in
     };
 
     environment = {
-      sessionVariables.PROTON_ENABLE_WAYLAND = 1;
+      sessionVariables = {
+        PROTON_ENABLE_WAYLAND = 1;
+        SDL_VIDEO_DRIVER = "wayland";
+        SDL_VIDEO_WAYLAND_SCALE_TO_DISPLAY = 1;
+      };
 
       systemPackages = with pkgs; [
         # `mangohud %command%`
