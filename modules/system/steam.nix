@@ -48,9 +48,9 @@ in
         SDL_VIDEO_WAYLAND_SCALE_TO_DISPLAY = 1;
       };
 
-      systemPackages = with pkgs; [
+      systemPackages = [
         # `mangohud %command%`
-        mangohud
+        pkgs.mangohud
       ];
     };
   };
