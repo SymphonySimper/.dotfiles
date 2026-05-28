@@ -51,6 +51,12 @@ in
       systemPackages = [
         # `mangohud %command%`
         pkgs.mangohud
+
+        # to prevent stuttering after 24 mins
+        # refer: https://wiki.archlinux.org/title/Gamescope#Launching_gamescope_from_Steam,_stuttering_after_~24_minutes_(Gamescope_Lag_Bomb)
+        (pkgs.writeShellScriptBin "mygamescope" ''
+          LD_PRELOAD="" gamescope  "$@"
+        '')
       ];
     };
   };
