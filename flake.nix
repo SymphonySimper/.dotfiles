@@ -4,6 +4,7 @@
   inputs = {
     # packages
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     # common
     catppuccin.url = "github:catppuccin/nix";
@@ -18,7 +19,7 @@
     # home
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     helix.url = "github:helix-editor/helix";
     # helix.url = "github:SymphonySimper/fork-helix";

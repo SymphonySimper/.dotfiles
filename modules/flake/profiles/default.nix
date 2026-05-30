@@ -93,6 +93,8 @@ let
       for, # system or home
     }:
     let
+      forHome = for == "home";
+
       my = mkMy {
         inherit settings;
         profile = profile // {
@@ -101,25 +103,26 @@ let
       };
 
       pkgs = helpers.mkPkgs {
+        inherit forHome;
         system = my.system;
         overlays = [
           (import ../overlays/lib { inherit my inputs helpers; })
         ]
-        ++ (lib.optionals (for == "home") [ ]);
+        ++ (lib.optionals forHome [ ]);
       };
 
       modules = [
         (profileDir + "/${my.profile}/${for}.nix")
       ]
-      ++ (lib.optionals (for == "home") [ ../../home ])
-      ++ (lib.optionals (for == "system") [ ../../system ]);
+      ++ (lib.optionals forHome [ ../../home ])
+      ++ (lib.optionals (!forHome) [ ../../system ]);
 
       specialArgs = {
         inherit my;
         inherit inputs;
       };
     in
-    if for == "home" then
+    if forHome then
       inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         inherit modules;

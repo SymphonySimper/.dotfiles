@@ -4,11 +4,15 @@ let
     {
       system,
       overlays ? [ ],
+      forHome,
     }:
-    import inputs.nixpkgs {
-      inherit system;
-      inherit overlays;
-      config.allowUnfree = true;
-    };
+    let
+      cfg = {
+        inherit system;
+        inherit overlays;
+        config.allowUnfree = true;
+      };
+    in
+    if forHome then import inputs.nixpkgs-unstable cfg else import inputs.nixpkgs cfg;
 in
 mkPkgs
