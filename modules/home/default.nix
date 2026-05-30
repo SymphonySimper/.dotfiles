@@ -29,6 +29,8 @@
     ./copy.nix
   ];
 
+  my.isHome = true;
+
   catppuccin = {
     enable = true;
     flavor = my.theme.flavor;

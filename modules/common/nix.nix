@@ -1,15 +1,19 @@
 {
   my,
+  config,
   inputs,
   pkgs,
   ...
 }:
+let
+  nixpkgs = if config.my.isHome then inputs.nixpkgs-unstable else inputs.nixpkgs-nixos-unstable;
+in
 {
   nix = {
     package = pkgs.nix;
 
     # Path for pkgs
-    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+    nixPath = [ "nixpkgs=${nixpkgs}" ];
 
     # Garbage Collection
     gc = {
@@ -37,7 +41,7 @@
     };
 
     registry = {
-      nixpkgs.flake = inputs.nixpkgs;
+      nixpkgs.flake = nixpkgs;
       my.flake = inputs.self;
     };
   };
