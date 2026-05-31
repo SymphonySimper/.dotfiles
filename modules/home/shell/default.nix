@@ -28,6 +28,12 @@ in
       [ "my" "programs" "shell" "fish" "functions" ]
       [ "programs" "fish" "functions" ]
     )
+    (lib.modules.mkAliasOptionModule
+      [ "my" "programs" "shell" "fish" "interactiveShellInit" ]
+      [ "programs" "fish" "interactiveShellInit" ]
+    )
+
+    ./cd-bookmarks.nix
   ];
 
   options.my.programs.shell = {
