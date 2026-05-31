@@ -31,12 +31,7 @@ in
   ];
 
   options.my.programs.shell = {
-    bash = {
-      enable = lib.mkEnableOption "Enable Bash" // {
-        default = true;
-      };
-    }
-    // (lib.my.mkCommandOption {
+    bash = lib.my.mkCommandOption {
       category = "Shell";
       command = "bash";
       args = {
@@ -44,7 +39,7 @@ in
         command = "-c";
         bin = "${my.dir.home}/.nix-profile/bin";
       };
-    });
+    };
 
     fish = lib.my.mkCommandOption {
       category = "Interactive Shell";
