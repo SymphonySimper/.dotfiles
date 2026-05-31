@@ -8,6 +8,10 @@ let
   cfg = config.my.programs.file-manager;
 in
 {
+  imports = [
+    (lib.modules.mkAliasOptionModule [ "my" "programs" "file-manager" "yazi" ] [ "programs" "yazi" ])
+  ];
+
   options.my.programs.file-manager = lib.my.mkCommandOption {
     category = "File Manager";
     command = "yazi";
