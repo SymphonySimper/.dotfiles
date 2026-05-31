@@ -11,12 +11,12 @@
     ./file-manager.nix
     ./mux.nix
     ./nix.nix
-    ./shell.nix
     ./ssh.nix
     ./utility.nix
     ./vcs.nix
 
     ./scripts
+    ./shell
 
     # gui
     ./browser.nix
