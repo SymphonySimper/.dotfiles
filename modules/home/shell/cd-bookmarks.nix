@@ -1,13 +1,18 @@
-{ config, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 let
-  bookmarksFile = "${config.xdg.dataHome}/my-cd-bookmarks.txt";
+  name = "my-cd-bookmarks";
+  file = "${config.xdg.dataHome}/${name}.txt";
 in
 {
   my.programs = {
     shell.fish = {
       interactiveShellInit = ''
-        set _my_cd_bookmarks_file ${bookmarksFile}
-
+        set _my_cd_bookmarks_file ${file}
         if not test -f $_my_cd_bookmarks_file
             : >$_my_cd_bookmarks_file
         end
@@ -65,5 +70,50 @@ in
         end
       '';
     };
+
+    file-manager.yazi.keymap = {
+      mgr.prepend_keymap = [
+        {
+          run = "plugin ${name}";
+          on = [ "z" ];
+        }
+        {
+          run = "noop";
+          on = [ "Z" ];
+        }
+      ];
+    };
   };
+
+  xdg.configFile."yazi/plugins/${name}.yazi/main.lua".text =
+    let
+      script = lib.getExe (
+        pkgs.writeShellScriptBin "${name}-yazi-script" ''
+          ${lib.getExe config.programs.fzf.package} < "${file}"
+        ''
+      );
+    in
+    ''
+      return {
+        entry = function()
+          local _permit = ui.hide()
+
+          local child, err1 = Command("${script}")
+              :stdout(Command.PIPED)
+              :stderr(Command.INHERIT)
+              :spawn()
+
+          if not child then
+            return
+          end
+
+          local output, _ = child:wait_with_output()
+          local target = output.stdout:gsub("\n$", "")
+
+          if target ~= "" then
+            ya.emit("cd", { target, raw = true })
+          end
+        end
+      }
+    '';
 }
