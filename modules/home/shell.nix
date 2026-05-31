@@ -37,7 +37,6 @@ in
       args = {
         login = "--login";
         command = "-c";
-        bin = "${my.dir.home}/.nix-profile/bin";
       };
     };
 
