@@ -45,20 +45,23 @@ in
                         end | sort -n | string replace -r '^\d+[[:space:]]' "" >$_my_cd_bookmarks_file
                     end
                 else
-                    read --list --null bookmarks <$_my_cd_bookmarks_file
                     set query (string join ".*" $argv)
-                    for bookmark in $bookmarks
-                        if string match --quiet --ignore-case --regex "$query" "$bookmark"
-                            if not test -d "$bookmark"
-                                set temp_file "/tmp/my-cd-bookmarks-$(random).txt"
-                                string match --invert --regex "^$bookmark\$" <$_my_cd_bookmarks_file >$temp_file
-                                mv $temp_file $_my_cd_bookmarks_file
-                            else
-                                set cd_path $bookmark
-                                break
-                            end
-                        end
+
+                    function _my_cd_bookmarks_search --no-scope-shadowing
+                      set bookmark (string match --ignore-case --entire --max-matches 1 --regex "$query" <$_my_cd_bookmarks_file)
+
+                      if not test -z "$bookmark" && not test -d "$bookmark"
+                          set temp_file "/tmp/my-cd-bookmarks-$(random).txt"
+                          string match --invert --regex "^$bookmark\$" <$_my_cd_bookmarks_file >$temp_file
+                          mv $temp_file $_my_cd_bookmarks_file
+
+                          _my_cd_bookmarks_search
+                      else
+                          set cd_path $bookmark
+                      end
                     end
+
+                    _my_cd_bookmarks_search
                 end
 
                 if test -z "$cd_path"
