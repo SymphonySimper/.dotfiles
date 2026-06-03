@@ -27,41 +27,40 @@ in
             case --edit
                 $EDITOR $_my_cd_bookmarks_file
             case "*"
-                set cd_path # path to cd to
+                set -l cd_path # path to cd to
 
                 if test -e $argv[1]
-                    set query_as_path (builtin realpath --no-symlinks $argv[1])
+                    set -l query_as_path (builtin realpath --no-symlinks $argv[1])
                     if test -d $query_as_path
                         set cd_path $query_as_path
                     else if test -f $query_as_path
                         set cd_path (path dirname $query_as_path)
                     end
 
-                    if not string match --quiet --regex "^$cd_path\$" <$_my_cd_bookmarks_file
-                        echo $cd_path >>$_my_cd_bookmarks_file
-
-                        for bookmark in (sort $_my_cd_bookmarks_file)
-                            echo "$(string length "$bookmark") $bookmark"
-                        end | sort -n | string replace -r '^\d+[[:space:]]' "" >$_my_cd_bookmarks_file
+                    set -l cd_path_with_length "$(string length "$cd_path") $cd_path"
+                    if not string match --quiet --regex "^$cd_path_with_length\$" <$_my_cd_bookmarks_file
+                        echo "$cd_path_with_length" >> $_my_cd_bookmarks_file
+                        sort --numeric-sort $_my_cd_bookmarks_file --output $_my_cd_bookmarks_file
                     end
                 else
-                    set query (string join ".*" $argv)
+                  set -l matches (string match --ignore-case --entire --regex "$(string join ".*" $argv)" < $_my_cd_bookmarks_file)
+                  set -l dead_bookmarks
 
-                    function _my_cd_bookmarks_search --no-scope-shadowing
-                      set bookmark (string match --ignore-case --entire --max-matches 1 --regex "$query" <$_my_cd_bookmarks_file)
-
-                      if not test -z "$bookmark" && not test -d "$bookmark"
-                          set temp_file "/tmp/my-cd-bookmarks-$(random).txt"
-                          string match --invert --regex "^$bookmark\$" <$_my_cd_bookmarks_file >$temp_file
-                          mv $temp_file $_my_cd_bookmarks_file
-
-                          _my_cd_bookmarks_search
+                  for match in $matches
+                      set -l match_path  (string replace --regex '^\d+[[:space:]]' "" $match)
+                      if test -d "$match_path"
+                          set cd_path $match_path
+                          break
                       else
-                          set cd_path $bookmark
+                          set -a dead_bookmarks "$match"
                       end
-                    end
+                  end
 
-                    _my_cd_bookmarks_search
+                  if set -q dead_bookmarks[1]
+                      set -l dead_regex "^("(string join "|" (string escape --style=regex $dead_bookmarks))")\$"
+                      set -l bookmarks (string split '\n' <$_my_cd_bookmarks_file)
+                      string match --invert --regex "$dead_regex" $bookmarks > $_my_cd_bookmarks_file
+                  end
                 end
 
                 if test -z "$cd_path"
