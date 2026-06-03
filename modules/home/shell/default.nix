@@ -69,6 +69,7 @@ in
           bash-language-server
           shfmt
           shellcheck
+          fish-lsp
         ];
 
         ignore = [
