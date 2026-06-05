@@ -58,7 +58,7 @@ in
 
                   if set -q dead_bookmarks[1]
                       set -l dead_regex "^("(string join "|" $dead_bookmarks)")\$"
-                      set -l bookmarks (string split '\n' <$_my_cd_bookmarks_file)
+                      set -l bookmarks (string match --invert "" <$_my_cd_bookmarks_file) # slightly faster than `string split '\n'`
                       string match --invert --regex "$dead_regex" $bookmarks > $_my_cd_bookmarks_file
                   end
                 end
