@@ -144,20 +144,16 @@ in
         '';
 
         functions = {
-          fish_prompt = {
-            body = ''
+          fish_prompt.body =
+            let
+              reset = "(set_color --reset)";
+              boldColor = "(set_color --bold '${prompt.color.hex}')";
+            in
+            ''
               # based on `astronaut` prompt
-              set -l reset (set_color --reset)
-              set -l color (set_color --bold '${prompt.color.hex}')
-
-              # Since we display the prompt on a new line allow the directory names to be longer.
-              set -q fish_prompt_pwd_dir_length
-              or set -lx fish_prompt_pwd_dir_length 0
-
-              echo -s $color (prompt_pwd) $reset ' '
-              echo -n -s $color '${prompt.arrow}' ' ' $reset
+              echo -s ${boldColor} (string replace "$HOME" '~' "$PWD")  ' '
+              echo -n -s '${prompt.arrow}' ' ' ${reset}
             '';
-          };
 
           store_path_for_windows_terminal = lib.mkIf (my.profile == "wsl") {
             onVariable = "PWD";
