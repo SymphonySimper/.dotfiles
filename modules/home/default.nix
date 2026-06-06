@@ -33,6 +33,7 @@
 
   catppuccin = {
     enable = true;
+    autoEnable = true;
     flavor = my.theme.flavor;
     accent = my.theme.accent;
   };
