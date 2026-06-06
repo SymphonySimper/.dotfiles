@@ -153,11 +153,11 @@ in
             echo -e "$_my_prompt_bold_color$(string replace "$HOME" '~' "$PWD") \n${prompt.arrow}$_my_prompt_reset "
           '';
 
-          store_path_for_windows_terminal = lib.mkIf (my.profile == "wsl") {
+          _windows_terminal_wsl_path = lib.mkIf (my.profile == "wsl") {
             onVariable = "PWD";
             body = ''
               if test -n "$WT_SESSION"
-                printf "\e]9;9;%s\e\\" (wslpath -w "$PWD")
+                printf "\e]9;9;%s\e\\" (string replace --all '/' '\\' "\\\\wsl.localhost\\$WSL_DISTRO_NAME$PWD")
               end
             '';
           };
