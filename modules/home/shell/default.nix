@@ -141,19 +141,17 @@ in
 
         interactiveShellInit = ''
           set -U fish_greeting ""
+
+          # prompt variables
+          set -U _my_prompt_reset (set_color --reset)
+          set -U _my_prompt_bold_color (set_color --bold '${prompt.color.hex}')
         '';
 
         functions = {
-          fish_prompt.body =
-            let
-              reset = "(set_color --reset)";
-              boldColor = "(set_color --bold '${prompt.color.hex}')";
-            in
-            ''
-              # based on `astronaut` prompt
-              echo -s ${boldColor} (string replace "$HOME" '~' "$PWD")  ' '
-              echo -n -s '${prompt.arrow}' ' ' ${reset}
-            '';
+          # based on `astronaut` prompt
+          fish_prompt.body = ''
+            echo -e "$_my_prompt_bold_color$(string replace "$HOME" '~' "$PWD") \n${prompt.arrow}$_my_prompt_reset "
+          '';
 
           store_path_for_windows_terminal = lib.mkIf (my.profile == "wsl") {
             onVariable = "PWD";
