@@ -118,11 +118,9 @@ in
 
   xdg.configFile."yazi/plugins/${name}.yazi/main.lua".text =
     let
-      script = lib.getExe (
-        pkgs.writeShellScriptBin "${name}-yazi-script" ''
-          ${lib.getExe config.programs.fzf.package} < "${file}"
-        ''
-      );
+      script = pkgs.writeShellScript "${name}-yazi-script" ''
+        ${lib.getExe config.programs.fzf.package} < "${file}"
+      '';
     in
     ''
       return {
