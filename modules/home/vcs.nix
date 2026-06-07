@@ -76,15 +76,12 @@ in
               dir = mkProfileDir profile.name;
             in
             [
-              (lib.strings.optionalString (profile.name != defaultProfile) # sh
-                ''
-                  if [ ! -d "${dir}" ]; then
-                    mkdir --parents --verbose "${dir}"
-                  fi
-                ''
-              )
+              (lib.strings.optionalString (profile.name != defaultProfile) ''
+                if [ ! -d "${dir}" ]; then
+                  mkdir --parents --verbose "${dir}"
+                fi
+              '')
 
-              # sh
               ''
                 if [ ! -f "${identityFile}" ]; then
                   echo "Generating identity for '${profile.name}':"

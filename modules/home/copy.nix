@@ -96,7 +96,6 @@ in
                   to
                 ];
               in
-              # sh
               ''
                 if [[ "$(${diff} 2>&1 | wc -l)" -eq 0 ]]; then
                   echo "No change in ${from}"

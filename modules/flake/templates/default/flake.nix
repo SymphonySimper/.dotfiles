@@ -43,15 +43,14 @@
               pkgs.cowsay
             ];
 
-            shellHook = # sh
-              ''
-                echo "Hello from Nix!"
+            shellHook = ''
+              echo "Hello from Nix!"
 
-                # venv_dir=".venv"
-                # if [ -d "$venv_dir" ]; then
-                #   source "./$venv_dir/bin/activate"
-                # fi
-              '';
+              # venv_dir=".venv"
+              # if [ -d "$venv_dir" ]; then
+              #   source "./$venv_dir/bin/activate"
+              # fi
+            '';
           };
         }
       );

@@ -7,12 +7,9 @@
 let
   cfg = config.my.programs.scripts.todo;
 
-  todo = (
-    pkgs.writeShellScriptBin "mytodo" # sh
-      ''
-        ${config.my.programs.editor.command} ${config.xdg.dataHome}/mytodo.md
-      ''
-  );
+  todo = pkgs.writeShellScriptBin "mytodo" ''
+    ${config.my.programs.editor.command} ${config.xdg.dataHome}/mytodo.md
+  '';
 in
 {
   options.my.programs.scripts.todo = {

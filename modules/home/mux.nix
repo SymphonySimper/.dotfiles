@@ -10,15 +10,13 @@ let
   defaultTerminal =
     if my.profile == "wsl" then "xterm-256color" else config.my.programs.terminal.command;
 
-  history =
-    pkgs.writeShellScript "my-tmux-history" # sh
-      ''
-        temp_file=$(mktemp)
+  history = pkgs.writeShellScript "my-tmux-history" ''
+    temp_file=$(mktemp)
 
-        # captures entire history
-        tmux capture-pane -p -S - > "$temp_file"
-        tmux new-window "${config.my.programs.editor.command} $temp_file; rm $temp_file"
-      '';
+    # captures entire history
+    tmux capture-pane -p -S - > "$temp_file"
+    tmux new-window "${config.my.programs.editor.command} $temp_file; rm $temp_file"
+  '';
 in
 {
   options.my.programs.mux = {

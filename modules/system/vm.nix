@@ -57,16 +57,14 @@ in
       };
 
       environment.systemPackages = [
-        (pkgs.writeShellScriptBin "mydocker" # sh
-          ''
-            case "$1" in
-              cln|clean)
-                docker system prune --volumes
-                docker image prune -a
-              ;;
-            esac
-          ''
-        )
+        (pkgs.writeShellScriptBin "mydocker" ''
+          case "$1" in
+            cln|clean)
+              docker system prune --volumes
+              docker image prune -a
+            ;;
+          esac
+        '')
       ];
     })
   ];
