@@ -87,7 +87,6 @@ in
       shell = {
         env = {
           LS_COLORS = ""; # Some programs misbehave when this is not set.
-          STARSHIP_LOG = "error";
         };
 
         path = [ binPath.absolute ];
