@@ -140,11 +140,11 @@ in
         generateCompletions = true;
 
         interactiveShellInit = ''
-          set -U fish_greeting ""
+          set --global fish_greeting ""
 
           # prompt variables
-          set -U _my_prompt_reset (set_color --reset)
-          set -U _my_prompt_bold_color (set_color --bold '${prompt.color.hex}')
+          set --global _my_prompt_reset (set_color --reset)
+          set --global _my_prompt_bold_color (set_color --bold '${prompt.color.hex}')
         '';
 
         functions = {
