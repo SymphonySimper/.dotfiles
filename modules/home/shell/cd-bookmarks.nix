@@ -62,22 +62,33 @@ in
                         ${addAndSortPaths} $cd_path &
                     end
                 else
-                  set -l matches (string match --ignore-case --entire --regex "$(string join ".*" $argv)" < $_my_cd_bookmarks_file)
-                  set -l dead_bookmarks
+                  # This method is significantly slower than previous method of
+                  # finding all the matches at once and iterating over and remove
+                  # all dead bookmarks at once rather than on case by case basis.
+                  # But this is only true when you have a lot of dead bookmarks
+                  # for a given query. This shouldn't really happen in IRL.
+                  # This method is siginificantly faster for match where there is
+                  # no dead bookmarks (which is most of the queries).
+                  while true
+                    set -l match ( \
+                      string match --ignore-case \
+                        --entire \
+                        --regex \
+                        --max-matches 1 \
+                        "$(string join ".*" $argv)" < $_my_cd_bookmarks_file \
+                      )
 
-                  for match in $matches
+                    if test -n "$match"
                       if test -d "$match"
-                          set cd_path $match
-                          break
-                      else
-                          set -a dead_bookmarks "$match"
+                        set cd_path $match
+                        break
+                      else 
+                        set -l bookmarks (string match --invert "" <$_my_cd_bookmarks_file) # slightly faster than `string split '\n'`
+                        string match --invert --regex "^$match\$" $bookmarks > $_my_cd_bookmarks_file
                       end
-                  end
-
-                  if set -q dead_bookmarks[1]
-                      set -l dead_regex "^("(string join "|" $dead_bookmarks)")\$"
-                      set -l bookmarks (string match --invert "" <$_my_cd_bookmarks_file) # slightly faster than `string split '\n'`
-                      string match --invert --regex "$dead_regex" $bookmarks > $_my_cd_bookmarks_file
+                    else
+                      break
+                    end
                   end
                 end
 
