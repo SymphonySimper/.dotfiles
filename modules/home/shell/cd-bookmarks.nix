@@ -7,6 +7,27 @@
 let
   name = "my-cd-bookmarks";
   file = "${config.xdg.dataHome}/${name}.txt";
+
+  # calling a bash script is faster than fish script
+  # so we wrap this fish script in bash
+  addAndSortPaths =
+    let
+      script = pkgs.writers.writeFish "my-z-sort-paths" ''
+        set -l path (string trim $argv)
+        echo "$path" >> '${file}'
+
+        while read --line line
+          echo "$(string length $line) $line"
+        end < '${file}' \
+          | sort --numeric-sort \
+          | string replace --regex '^\d+[[:space:]]' "" > '${file}.tmp'
+
+        mv '${file}.tmp' ${file}
+      '';
+    in
+    pkgs.writeShellScript "my-z-sort-paths" ''
+      ${script} "$@"
+    '';
 in
 {
   my.programs = {
@@ -37,19 +58,16 @@ in
                         set cd_path (path dirname $query_as_path)
                     end
 
-                    set -l cd_path_with_length "$(string length "$cd_path") $cd_path"
-                    if not string match --quiet --regex "^$cd_path_with_length\$" <$_my_cd_bookmarks_file
-                        echo "$cd_path_with_length" >> $_my_cd_bookmarks_file
-                        sort --numeric-sort $_my_cd_bookmarks_file --output $_my_cd_bookmarks_file
+                    if not string match --quiet --regex "^$cd_path\$" <$_my_cd_bookmarks_file
+                        ${addAndSortPaths} $cd_path &
                     end
                 else
                   set -l matches (string match --ignore-case --entire --regex "$(string join ".*" $argv)" < $_my_cd_bookmarks_file)
                   set -l dead_bookmarks
 
                   for match in $matches
-                      set -l match_path  (string replace --regex '^\d+[[:space:]]' "" $match)
-                      if test -d "$match_path"
-                          set cd_path $match_path
+                      if test -d "$match"
+                          set cd_path $match
                           break
                       else
                           set -a dead_bookmarks "$match"
