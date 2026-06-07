@@ -60,6 +60,8 @@ in
       description = "Add a executable to ~/.local/bin";
       default = { };
     };
+
+    direnv.enable = lib.mkEnableOption "Enable direnv";
   };
 
   config = {
@@ -165,7 +167,7 @@ in
       };
 
       direnv = {
-        enable = true;
+        enable = lib.mkForce cfg.direnv.enable;
         nix-direnv.enable = true;
 
         silent = false;
