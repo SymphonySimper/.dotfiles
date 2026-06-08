@@ -1,6 +1,8 @@
 { pkgs, lib, ... }:
 {
   my.programs = {
+    scripts.enable = true;
+
     vcs.profiles.gnome = rec {
       host = "ssh.gitlab.gnome.org";
       email = "164710-SymphonySimper@users.noreply.gitlab.gnome.org";
