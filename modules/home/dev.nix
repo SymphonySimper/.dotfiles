@@ -6,7 +6,7 @@
 }:
 let
   mkPrettier = name: {
-    command = "prettier";
+    command = lib.getExe pkgs.prettier;
     args = [
       "--parser"
       name
@@ -17,12 +17,24 @@ let
   mkSchema =
     name: if (lib.strings.hasInfix "/" name) then name else "https://www.schemastore.org/${name}.json";
 
-  mkVscodeLsp = name: "vscode-${name}-language-server";
+  mkVscodeLsp = lang: rec {
+    name = "vscode-${lang}-language-server";
+    command = lib.getExe' pkgs.vscode-langservers-extracted name;
+  };
 
   lsps = {
-    emmet = "emmet-language-server";
-    harper = "harper-ls";
-    tailwind = "tailwindcss-ls";
+    harper = rec {
+      name = "harper-ls";
+      command = lib.getExe' pkgs.harper name;
+    };
+    emmet = {
+      name = "emmet-language-server";
+      command = lib.getExe pkgs.emmet-language-server;
+    };
+    tailwind = {
+      name = "tailwindcss-ls";
+      command = lib.getExe pkgs.tailwindcss-language-server;
+    };
   };
 in
 {
@@ -42,61 +54,40 @@ in
               lsp = onlyAttr "lsp";
               schema = onlyAttr "schema";
               ignore = onlyList "ignore";
-              packages = [
-                pkgs.harper
-                pkgs.prettier
-                pkgs.vscode-langservers-extracted
-              ]
-              ++ (onlyList "packages");
             };
 
             shell = onlyAttr "shell";
           };
 
-          home.packages = onlyList "homePackages";
+          home.packages = onlyList "packages";
           programs = onlyAttr "programs";
         }
       )
       [
-        {
-          # Git
-          language.git-commit.language-servers = [ lsps.harper ];
-        }
+        { lsp.${lsps.harper.name}.command = lsps.harper.command; }
+        { language.git-commit.language-servers = [ lsps.harper.name ]; }
+        { lsp.ts_query_ls.command = lib.getExe pkgs.ts_query_ls; }
+        { lsp.docker-langserver.command = lib.getExe pkgs.dockerfile-language-server; }
+        { language.yaml.formatter = mkPrettier "yaml"; }
 
-        {
-          # Tree-Sitter
-          packages = [ pkgs.ts_query_ls ];
-        }
-
-        {
-          # Just
-          homePackages = [ pkgs.just ];
+        rec {
+          packages = [ pkgs.just ];
 
           language.just.formatter = {
-            command = "just";
+            command = lib.getExe (builtins.elemAt packages 0);
             args = [ "--dump" ];
           };
         }
 
-        {
-          # Docker
-          packages = [ pkgs.dockerfile-language-server ];
-        }
+        rec {
+          lsp.taplo.command = lib.getExe pkgs.taplo;
 
-        {
-          # markup
-          packages = [ pkgs.taplo ];
-
-          language = {
-            yaml.formatter = mkPrettier "yaml";
-
-            toml.formatter = {
-              command = "taplo";
-              args = [
-                "format"
-                "-"
-              ];
-            };
+          language.toml.formatter = {
+            command = lsp.taplo.command;
+            args = [
+              "format"
+              "-"
+            ];
           };
         }
 
@@ -105,48 +96,50 @@ in
             jsonLsp = mkVscodeLsp "json";
           in
           {
-            # JSON
-            lsp.${jsonLsp}.config.json = {
-              validate.enable = true;
+            lsp.${jsonLsp.name} = {
+              command = jsonLsp.command;
 
-              schemas = (
-                map (schema: {
-                  fileMatch = schema.file;
-                  url = mkSchema schema.name;
-                }) config.my.programs.editor.schema.json
-              );
+              config.json = {
+                validate.enable = true;
+
+                schemas = (
+                  map (schema: {
+                    fileMatch = schema.file;
+                    url = mkSchema schema.name;
+                  }) config.my.programs.editor.schema.json
+                );
+              };
             };
 
             language = lib.genAttrs [ "json" "jsonc" ] (name: {
               formatter = mkPrettier name;
-              language-servers = [ jsonLsp ];
+              language-servers = [ jsonLsp.name ];
             });
           }
         )
 
-        {
-          # Rust
-          homePackages = with pkgs; [
-            rustup
-            sccache
-            gcc
-          ];
+        (
+          let
+            rustup = pkgs.rustup;
+          in
+          {
+            packages = [
+              rustup
+              pkgs.sccache
+              pkgs.gcc
+            ];
 
-          shell.env.RUST_BACKTRACE = "1";
-          lsp.rust-analyzer.config.check = "clippy";
-        }
+            shell.env.RUST_BACKTRACE = "1";
 
-        {
-          # Python
-          homePackages = with pkgs; [
-            python3
-            uv
-          ];
+            lsp.rust-analyzer = {
+              command = lib.getExe' rustup "rust-analyzer";
+              config.check = "clippy";
+            };
+          }
+        )
 
-          packages = [
-            pkgs.ruff
-            pkgs.pyright
-          ];
+        rec {
+          packages = [ pkgs.python3 ];
 
           programs.uv = {
             enable = true;
@@ -158,12 +151,12 @@ in
           # NOTE: Switching until ty or ruff impletements goto feature
           lsp = {
             pyright = {
-              command = "pyright-langserver";
+              command = lib.getExe' pkgs.pyright "pyright-langserver";
               config.python.analysis.typeCheckingMode = "basic";
             };
 
             ruff = {
-              command = "ruff";
+              command = lib.getExe pkgs.ruff;
               args = [ "server" ];
             };
 
@@ -181,7 +174,7 @@ in
             ];
 
             formatter = {
-              command = "ruff";
+              command = lsp.ruff.command;
               args = [
                 "format"
                 "--line-length"
@@ -199,11 +192,6 @@ in
         }
 
         {
-          # Markdown
-          packages = [
-            pkgs.mpls
-          ];
-
           language.markdown = {
             # refer: https://github.com/helix-editor/helix/wiki/Recipes#continue-markdown-lists--quotes
             comment-tokens = [
@@ -217,12 +205,12 @@ in
             formatter = mkPrettier "markdown";
             language-servers = [
               "mpls"
-              lsps.harper
+              lsps.harper.name
             ];
           };
 
           lsp.mpls = {
-            command = "mpls";
+            command = lib.getExe pkgs.mpls;
             args = [
               "--no-auto"
               "--enable-emoji"
@@ -233,19 +221,15 @@ in
         }
 
         {
-          # Emmet
-          packages = [ pkgs.emmet-language-server ];
+          lsp = {
+            ${lsps.emmet.name} = {
+              command = lsps.emmet.command;
+              args = [ "--stdio" ];
+              config = { };
+            };
 
-          lsp.${lsps.emmet} = {
-            command = lsps.emmet;
-            args = [ "--stdio" ];
-            config = { };
+            ${lsps.tailwind.name}.command = lsps.tailwind.command;
           };
-        }
-
-        {
-          # Tailwindcss
-          packages = [ pkgs.tailwindcss-language-server ];
         }
 
         (
@@ -256,36 +240,35 @@ in
           {
             # HTML
             language.html = {
-              language-servers = [
-                htmlLsp
-                lsps.emmet
-                lsps.tailwind
-              ];
               formatter = mkPrettier "html";
+              language-servers = [
+                htmlLsp.name
+                lsps.emmet.name
+                lsps.tailwind.name
+              ];
             };
 
             # CSS
             language.css = {
-              language-servers = [
-                cssLsp
-                lsps.tailwind
-              ];
               formatter = mkPrettier "css";
+              language-servers = [
+                cssLsp.name
+                lsps.tailwind.name
+              ];
             };
           }
         )
 
         rec {
-          # JS / TS
-          homePackages = [
+          packages = [
             pkgs.nodejs_24
             pkgs.corepack_24 # switch to corepack for nodejs >= 25
           ];
 
-          packages = [ pkgs.typescript-language-server ];
-
           shell.env.PNPM_HOME = "${config.xdg.dataHome}/pnpm";
           shell.path = [ shell.env.PNPM_HOME ];
+
+          lsp.typescript-language-server.command = lib.getExe pkgs.typescript-language-server;
 
           language =
             lib.attrsets.genAttrs
@@ -302,8 +285,8 @@ in
                   "typescript-language-server"
                 ]
                 ++ (lib.optionals (lib.strings.hasSuffix "sx" name) [
-                  lsps.emmet
-                  lsps.tailwind
+                  lsps.emmet.name
+                  lsps.tailwind.name
                 ]);
               });
 
@@ -336,30 +319,30 @@ in
         }
 
         {
-          # Svelte
-          packages = [
-            (pkgs.svelte-language-server.overrideAttrs (finalAttrs: {
-              version = "0.18.0";
+          lsp.svelteserver = {
+            command = lib.getExe (
+              pkgs.svelte-language-server.overrideAttrs (finalAttrs: {
+                version = "0.18.0";
 
-              src = finalAttrs.src.override {
-                hash = "sha256-YKWH0LCZuNrOJFxQLDzY0pMDNFmwPML86KzbuFozrZA=";
-              };
+                src = finalAttrs.src.override {
+                  hash = "sha256-YKWH0LCZuNrOJFxQLDzY0pMDNFmwPML86KzbuFozrZA=";
+                };
 
-              pnpmDeps = finalAttrs.pnpmDeps.override {
-                hash = "sha256-PLbmxjqfS5HHU8EKFdZwSNzN4Yl1ShTilqvpwap5noI=";
-              };
-            }))
-          ];
-
-          lsp.svelteserver.config.configuration.svelte.plugin.svelte.defaultScriptLanguage = "ts";
+                pnpmDeps = finalAttrs.pnpmDeps.override {
+                  hash = "sha256-PLbmxjqfS5HHU8EKFdZwSNzN4Yl1ShTilqvpwap5noI=";
+                };
+              })
+            );
+            config.configuration.svelte.plugin.svelte.defaultScriptLanguage = "ts";
+          };
 
           language.svelte = {
             formatter = mkPrettier "svelte";
 
             language-servers = [
               "svelteserver"
-              lsps.emmet
-              lsps.tailwind
+              lsps.emmet.name
+              lsps.tailwind.name
             ];
 
             block-comment-tokens = {
@@ -372,20 +355,19 @@ in
         }
 
         {
-          # Go
-          homePackages = [
+          packages = [
             pkgs.go
             pkgs.gotools
             pkgs.golangci-lint
           ];
 
-          packages = [
-            pkgs.gopls
-            pkgs.golangci-lint-langserver
-          ];
+          lsp = {
+            gopls.command = lib.getExe pkgs.gopls;
+            golangci-lint-lsp.command = lib.getExe pkgs.golangci-lint-langserver;
+          };
 
           language.go = {
-            formatter.command = "goimports";
+            formatter.command = lib.getExe' pkgs.gotools "goimports";
           };
         }
       ]

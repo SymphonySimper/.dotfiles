@@ -70,12 +70,18 @@ in
   config = {
     my.programs = {
       editor = {
-        packages = with pkgs; [
-          bash-language-server
-          shfmt
-          shellcheck
-          fish-lsp
-        ];
+        lsp = {
+          bash-language-server.command = lib.getExe (
+            pkgs.bash-language-server.overrideAttrs (old: {
+              postFixup = (old.postFixup or "") + ''
+                wrapProgram $out/bin/bash-language-server \
+                  --suffix PATH : ${pkgs.lib.makeBinPath [ pkgs.shfmt ]}
+              '';
+            })
+          );
+
+          fish-lsp.command = lib.getExe pkgs.fish-lsp;
+        };
 
         ignore = [
           # direnv

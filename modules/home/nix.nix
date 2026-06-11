@@ -1,12 +1,13 @@
-{ my, pkgs, ... }:
+{
+  my,
+  pkgs,
+  lib,
+  ...
+}:
 {
   my.programs.editor = {
-    packages = [
-      pkgs.nixd
-      pkgs.nixfmt
-    ];
-
     lsp.nixd = {
+      command = lib.getExe pkgs.nixd;
       args = [ "--inlay-hints=false" ];
       config.nixd = {
         nixpkgs.expr = "import <nixpkgs> { }";
@@ -19,7 +20,7 @@
     };
 
     language.nix = {
-      formatter.command = "nixfmt";
+      formatter.command = lib.getExe pkgs.nixfmt;
 
       language-servers = [
         {

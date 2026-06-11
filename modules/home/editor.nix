@@ -59,12 +59,6 @@ in
         }
       )
     );
-
-    packages = lib.mkOption {
-      type = lib.types.listOf lib.types.package;
-      description = "Packages to add to extraPackages";
-      default = [ ];
-    };
   }
   // (lib.my.mkCommandOption {
     category = "Editor";
@@ -113,7 +107,6 @@ in
     programs.helix = {
       enable = true;
       package = inputs.helix.packages.${my.system}.default;
-      extraPackages = cfg.packages;
       ignores = lib.lists.unique cfg.ignore;
 
       settings = {
