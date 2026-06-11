@@ -27,6 +27,10 @@
     };
     helix.url = "github:helix-editor/helix";
     # helix.url = "github:SymphonySimper/fork-helix";
+    schemastore = {
+      url = "github:SchemaStore/schemastore";
+      flake = false;
+    };
   };
 
   nixConfig = {

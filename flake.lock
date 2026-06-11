@@ -172,7 +172,8 @@
         "home-manager": "home-manager",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs-nixos-unstable": "nixpkgs-nixos-unstable",
-        "nixpkgs-unstable": "nixpkgs-unstable"
+        "nixpkgs-unstable": "nixpkgs-unstable",
+        "schemastore": "schemastore"
       }
     },
     "rust-overlay": {
@@ -193,6 +194,22 @@
       "original": {
         "owner": "oxalica",
         "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "schemastore": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1781196781,
+        "narHash": "sha256-hUlK/GAddBdTz6dL1ITs2Nvk2l+wtD0oFZNwwCx9YjI=",
+        "owner": "SchemaStore",
+        "repo": "schemastore",
+        "rev": "e2f5ac0ff2b352a2a39845f3382b280b0094f56c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "SchemaStore",
+        "repo": "schemastore",
         "type": "github"
       }
     }

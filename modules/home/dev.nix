@@ -1,4 +1,5 @@
 {
+  inputs,
   config,
   pkgs,
   lib,
@@ -15,7 +16,11 @@ let
 
   # refer:  https://www.schemastore.org/
   mkSchema =
-    name: if (lib.strings.hasInfix "/" name) then name else "https://www.schemastore.org/${name}.json";
+    name:
+    if (lib.strings.hasInfix "/" name) then
+      name
+    else
+      "${inputs.schemastore}/src/schemas/json/${name}.json";
 
   mkVscodeLsp = lang: rec {
     name = "vscode-${lang}-language-server";
