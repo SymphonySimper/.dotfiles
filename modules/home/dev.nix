@@ -319,19 +319,7 @@ in
 
         {
           lsp.svelteserver = {
-            command = lib.getExe (
-              pkgs.svelte-language-server.overrideAttrs (finalAttrs: {
-                version = "0.18.0";
-
-                src = finalAttrs.src.override {
-                  hash = "sha256-YKWH0LCZuNrOJFxQLDzY0pMDNFmwPML86KzbuFozrZA=";
-                };
-
-                pnpmDeps = finalAttrs.pnpmDeps.override {
-                  hash = "sha256-PLbmxjqfS5HHU8EKFdZwSNzN4Yl1ShTilqvpwap5noI=";
-                };
-              })
-            );
+            command = lib.getExe pkgs.svelte-language-server;
             config.configuration.svelte.plugin.svelte.defaultScriptLanguage = "ts";
           };
 
