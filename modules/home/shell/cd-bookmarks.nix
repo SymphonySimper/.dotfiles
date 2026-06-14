@@ -8,26 +8,18 @@ let
   name = "my-cd-bookmarks";
   file = "${config.xdg.dataHome}/${name}.txt";
 
-  # calling a bash script is faster than fish script
-  # so we wrap this fish script in bash
-  addAndSortPaths =
-    let
-      script = pkgs.writers.writeFish "my-z-sort-paths" ''
-        set -l path (string trim $argv)
-        echo "$path" >> '${file}'
+  addAndSortPaths = pkgs.writers.writeFish "my-z-sort-paths" ''
+    set -l path (string trim $argv)
+    echo "$path" >> '${file}'
 
-        while read --line line
-          echo "$(string length $line) $line"
-        end < '${file}' \
-          | sort --numeric-sort \
-          | string replace --regex '^\d+[[:space:]]' "" > '${file}.tmp'
+    while read --line line
+      echo "$(string length $line) $line"
+    end < '${file}' \
+      | sort --numeric-sort \
+      | string replace --regex '^\d+[[:space:]]' "" > '${file}.tmp'
 
-        mv '${file}.tmp' ${file}
-      '';
-    in
-    pkgs.writeShellScript "my-z-sort-paths" ''
-      ${script} "$@"
-    '';
+    mv '${file}.tmp' ${file}
+  '';
 in
 {
   my.programs = {
