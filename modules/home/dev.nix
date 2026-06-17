@@ -167,9 +167,8 @@ in
 
           language.python = {
             language-servers = [
-              "pyright"
               "ruff"
-              # "ty"
+              "ty"
             ];
 
             formatter = {
