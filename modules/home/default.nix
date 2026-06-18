@@ -27,6 +27,8 @@
 
     # misc
     ./copy.nix
+
+    ../../overrides/home.nix
   ];
 
   my.isHome = true;

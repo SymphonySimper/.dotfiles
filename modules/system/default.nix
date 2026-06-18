@@ -23,6 +23,8 @@
     # misc
     ../common
     ./hardware
+
+    ../../overrides/system.nix
   ];
 
   programs = {
