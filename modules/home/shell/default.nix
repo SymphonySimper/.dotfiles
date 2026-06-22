@@ -37,17 +37,14 @@ in
   ];
 
   options.my.programs.shell = {
-    bash = {
-      enable = lib.mkEnableOption "Enable Bash";
-    }
-    // (lib.my.mkCommandOption {
+    bash = lib.my.mkCommandOption {
       category = "Shell";
       command = "bash";
       args = {
         login = "--login";
         command = "-c";
       };
-    });
+    };
 
     fish = lib.my.mkCommandOption {
       category = "Interactive Shell";
@@ -110,7 +107,7 @@ in
 
     programs = {
       bash = {
-        enable = lib.mkForce cfg.bash.enable;
+        enable = true;
         enableCompletion = true;
 
         shellOptions = [
@@ -131,7 +128,7 @@ in
       };
 
       readline = {
-        enable = lib.mkForce cfg.bash.enable;
+        enable = true;
 
         variables = {
           completion-ignore-case = true;
