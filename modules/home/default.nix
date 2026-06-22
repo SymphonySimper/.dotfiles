@@ -24,9 +24,6 @@
     ./theme.nix
 
     ./desktop
-
-    # misc
-    ./copy.nix
   ];
 
   my.isHome = true;
