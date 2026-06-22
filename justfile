@@ -1,23 +1,15 @@
-set quiet
+set quiet := true
 
 hostname := `hostname`
 
-[private]
-git-track-worktree FOR:
-    git update-index --no-skip-worktree overrides/{{ FOR }}.nix
-
-[private]
-git-untrack-worktree FOR:
-    git update-index --skip-worktree overrides/{{ FOR }}.nix
-
 [group('build')]
 [linux]
-build-system HOST=hostname: (git-track-worktree "system") && (git-untrack-worktree "system")
+build-system HOST=hostname:
     sudo nixos-rebuild switch --flake .#{{ HOST }}
 
 [group('build')]
 [unix]
-build-home HOST=hostname: (git-track-worktree "home") && (git-untrack-worktree "home")
+build-home HOST=hostname:
     home-manager build switch --flake .#{{ HOST }}
 
 [group('clean')]
