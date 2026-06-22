@@ -59,7 +59,7 @@ let
               builtins.readFile "${inputs.catppuccin.packages.${system}.palette}/palette.json"
             )).${theme.flavor}.colors;
 
-        wallpaper = "${dir.home}/.dotfiles/modules/flake/assets/images/wallpaper.png";
+        wallpaper = "file://${../assets/images/wallpaper.png}";
 
         font = {
           mono = "JetBrainsMono Nerd Font";
