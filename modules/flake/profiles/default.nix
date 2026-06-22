@@ -21,8 +21,6 @@ let
 
       dir = {
         home = mkGetDefault passedProfile "dir.home" "/home/${name}";
-        data = "${dir.home}/importantnt";
-        dev = "${dir.home}/lifeisfun";
         runBin = "/run/current-system/sw/bin";
       };
 

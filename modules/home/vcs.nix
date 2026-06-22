@@ -11,7 +11,7 @@ let
   defaultProfile = "default";
   sshAlgorithm = "ed25519";
   mkSSHIdentityFilename = name: "${config.my.programs.ssh.dir}/${name}-id-${sshAlgorithm}";
-  mkProfileDir = name: "${my.dir.dev}/${name}";
+  mkProfileDir = name: "${config.xdg.userDirs.projects}/${name}";
 in
 {
   imports = [
