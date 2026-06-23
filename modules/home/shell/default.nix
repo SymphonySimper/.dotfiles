@@ -55,6 +55,15 @@ in
       };
     };
 
+    nu = lib.my.mkCommandOption {
+      category = "Interactive Shell";
+      command = "nu";
+      args = {
+        command = "--commands";
+        login = "--login";
+      };
+    };
+
     addToPath = lib.mkOption {
       type = lib.types.attrsOf lib.types.str;
       description = "Add a executable to ~/.local/bin";
@@ -169,6 +178,54 @@ in
             '';
           };
         };
+      };
+
+      nushell = {
+        enable = true;
+
+        settings = {
+          show_banner = false;
+          buffer_editor = config.my.programs.editor.command;
+          completions.algorithm = "fuzzy";
+          datetime_format.normal = "%d/%m/%y %I:%M:%S%p";
+
+          history = {
+            file_format = "sqlite";
+            isolation = true;
+          };
+
+          filesize = {
+            unit = "metric";
+            show_unit = true;
+          };
+        };
+
+        extraConfig = lib.strings.concatLines [
+          # refer: https://github.com/nushell/nushell/blob/main/crates/nu-utils/src/default_files/default_env.nu
+          #
+          ''
+            let __my_prompt_color = (ansi --escape { fg: '${prompt.color.hex}', attr: b })
+
+            $env.PROMPT_COMMAND = {|| $"($__my_prompt_color)($env.PWD | str replace $nu.home-dir '~')\n" }
+            $env.PROMPT_INDICATOR = $"($__my_prompt_color)${prompt.arrow}(ansi reset) "
+            $env.PROMPT_COMMAND_RIGHT = ""
+          ''
+
+          ''
+            def killall [--force (-f)] {
+              let programs = (ps)
+
+              match ($programs | get name | uniq | input list --fuzzy) {
+                null => "No program was selected"
+                $program => { $programs | where name == $program | kill --force=$force ...($in.pid) }
+              }
+            }
+          ''
+
+          (lib.strings.optionalString (my.profile == "wsl") ''
+            $env.config.shell_integration.osc9_9 = true;
+          '')
+        ];
       };
 
       direnv = {
