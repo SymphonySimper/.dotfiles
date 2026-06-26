@@ -1,6 +1,5 @@
 on:
-  pull_request:
-  push:
+  workflow_dispatch:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
