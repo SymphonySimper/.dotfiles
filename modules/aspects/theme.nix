@@ -8,7 +8,7 @@
 
   den.schema.user =
     {
-      inputs',
+      host,
       config,
       lib,
       ...
@@ -89,7 +89,7 @@
 
           mkConvertToString = set: builtins.mapAttrs (_: value: toString value) set;
 
-          paletteFile = "${inputs'.catppuccin.packages.palette}/palette.json";
+          paletteFile = "${inputs.catppuccin.packages.${host.system}.palette}/palette.json";
           paletteData = builtins.fromJSON (builtins.readFile paletteFile);
         in
         {
@@ -111,43 +111,47 @@
     homeManager = { pkgs, lib, ... }: {
       imports = [ inputs.catppuccin.homeModules.catppuccin ];
 
-      # 1. ALWAYS ACTIVE (Headless/Base)
-      catppuccin = {
-        enable = true;
-        autoEnable = true;
-        flavor = user.theme.flavor or "mocha";
-        accent = user.theme.accent or "lavender";
-      };
-
-      # 2. CONDITIONAL GRAPHICAL CONFIGURATION
-      # Look Ma, no custom options! We read the 'host' argument directly from the outer function scope.
-      config = lib.mkIf (host.gui or false) {
-        home.packages = with pkgs; [
-          noto-fonts-cjk-sans
-
-          (
-            let
-              variants = builtins.concatStringsSep "\\|" [
-                "Regular"
-                "Italic"
-                "Bold.*"
-              ];
-            in
-            nerd-fonts.jetbrains-mono.overrideAttrs (old: {
-              preInstall = ''
-                find . -type f -not -regex ".*JetBrainsMonoNerdFont-\(${variants}\).ttf" -delete
-              '';
-            })
-          )
-        ];
-
-        dconf = {
-          enable = true;
-          settings."org/gnome/desktop/interface" = {
-            color-scheme = if (user.theme.dark or true) then "prefer-dark" else "default";
+      config = lib.mkMerge [
+        {
+          # 1. ALWAYS ACTIVE (Headless/Base)
+          catppuccin = {
+            enable = true;
+            autoEnable = true;
+            flavor = user.theme.flavor or "mocha";
+            accent = user.theme.accent or "lavender";
           };
-        };
-      };
+        }
+
+        # 2. CONDITIONAL GRAPHICAL CONFIGURATION
+        # Look Ma, no custom options! We read the 'host' argument directly from the outer function scope.
+        (lib.mkIf (host.gui or false) {
+          home.packages = with pkgs; [
+            noto-fonts-cjk-sans
+
+            (
+              let
+                variants = builtins.concatStringsSep "\\|" [
+                  "Regular"
+                  "Italic"
+                  "Bold.*"
+                ];
+              in
+              nerd-fonts.jetbrains-mono.overrideAttrs (old: {
+                preInstall = ''
+                  find . -type f -not -regex ".*JetBrainsMonoNerdFont-\(${variants}\).ttf" -delete
+                '';
+              })
+            )
+          ];
+
+          dconf = {
+            enable = true;
+            settings."org/gnome/desktop/interface" = {
+              color-scheme = if (user.theme.dark or true) then "prefer-dark" else "default";
+            };
+          };
+        })
+      ];
     };
   };
 }

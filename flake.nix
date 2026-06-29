@@ -5,6 +5,10 @@
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 
   inputs = {
+    catppuccin = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:catppuccin/nix";
+    };
     den.url = "github:denful/den";
     flake-file.url = "github:vic/flake-file";
     flake-parts = {

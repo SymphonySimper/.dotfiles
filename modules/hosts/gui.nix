@@ -1,5 +1,6 @@
 { den, ... }: {
-  den.hosts.x86_64-linux.gui.users.symph = { };
+  den.hosts.x86_64-linux.gui.users.symph = {
+  };
 
   # host aspect
   den.aspects.gui = {
@@ -17,6 +18,9 @@
         home.packages = [ pkgs.vim ];
       };
 
-    includes = [ den.aspects.shell ];
+    symph.includes = [
+      den.aspects.theme
+      den.aspects.shell
+    ];
   };
 }
