@@ -1,15 +1,14 @@
 { lib, den, ... }:
 {
-  den.default.nixos.system.stateVersion = "25.11";
-  den.default.homeManager.home.stateVersion = "25.11";
+  den = {
+    default = {
+      includes = [ den.batteries.inputs' ];
 
-  # enable hm by default
-  den.schema.user.classes = lib.mkDefault [ "homeManager" ];
+      nixos.system.stateVersion = "25.11";
+      homeManager.home.stateVersion = "25.11";
+    };
 
-  # User TODO: REMOVE THIS
-  den.aspects.tux.nixos = {
-    boot.loader.grub.enable = false;
-    fileSystems."/".device = "/dev/fake";
-    fileSystems."/".fsType = "auto";
+    # enable hm by default
+    schema.user.classes = lib.mkDefault [ "homeManager" ];
   };
 }
