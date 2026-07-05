@@ -1,12 +1,20 @@
 { pkgs, lib, ... }:
 {
-  my.programs = {
-    scripts.enable = true;
+  my = {
+    theme = {
+      enable = true;
+      font.enable = true;
+      gtk.enable = true;
+    };
 
-    vcs.profiles.gnome = rec {
-      host = "ssh.gitlab.gnome.org";
-      email = "164710-SymphonySimper@users.noreply.gitlab.gnome.org";
-      config.user.email = email;
+    programs = {
+      scripts.enable = true;
+
+      vcs.profiles.gnome = rec {
+        host = "ssh.gitlab.gnome.org";
+        email = "164710-SymphonySimper@users.noreply.gitlab.gnome.org";
+        config.user.email = email;
+      };
     };
   };
 

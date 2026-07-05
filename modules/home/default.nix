@@ -1,8 +1,6 @@
-{ my, inputs, ... }:
+{ my, ... }:
 {
   imports = [
-    inputs.catppuccin.homeModules.catppuccin
-
     ../common
 
     # cli
@@ -27,13 +25,6 @@
   ];
 
   my.isHome = true;
-
-  catppuccin = {
-    enable = true;
-    autoEnable = true;
-    flavor = my.theme.flavor;
-    accent = my.theme.accent;
-  };
 
   xdg = {
     enable = true;

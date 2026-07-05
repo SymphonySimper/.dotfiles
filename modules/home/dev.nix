@@ -3,6 +3,7 @@
   config,
   pkgs,
   lib,
+  mkGetTheme,
   ...
 }:
 let
@@ -213,7 +214,7 @@ in
               "--no-auto"
               "--enable-emoji"
               "--theme"
-              (lib.my.mkGetTheme { name = "%name%-%flavor%"; })
+              (mkGetTheme { name = "%name%-%flavor%"; })
             ];
           };
         }

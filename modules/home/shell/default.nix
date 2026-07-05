@@ -15,7 +15,7 @@ let
 
   prompt = {
     arrow = ">";
-    color = my.theme.color.lavender;
+    color = config.my.theme.color.lavender;
   };
 in
 {

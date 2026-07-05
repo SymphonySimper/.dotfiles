@@ -1,16 +1,7 @@
-{
-  my,
-  inputs,
-  helpers,
-  ...
-}:
+{ my, helpers, ... }:
 let
   customLib =
-    {
-      pkgs,
-      my,
-      ...
-    }:
+    { pkgs, ... }:
     let
       lib = pkgs.lib;
     in
@@ -18,7 +9,6 @@ let
       mkCommandOption = (import ./mkCommandOption.nix { inherit lib; });
       mkNotification = (import ./mkNotification.nix { inherit pkgs lib; });
       mkSystemdTimer = import ./mkSystemdTimer.nix;
-      mkGetTheme = import ./mkGetTheme.nix { inherit my inputs lib; };
     };
 in
 final: prev: {

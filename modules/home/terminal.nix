@@ -65,7 +65,7 @@ in
 
       font = {
         size = 12;
-        name = my.theme.font.mono;
+        name = config.my.theme.font.mono.name;
       };
 
       settings = {
@@ -88,8 +88,8 @@ in
         tab_bar_style = "separator";
         tab_separator = "''";
         tab_title_template = "' [{index}] {title} '";
-        tab_bar_background = my.theme.color.crust.hex;
-        inactive_tab_background = my.theme.color.surface0.hex;
+        tab_bar_background = config.my.theme.color.crust.hex;
+        inactive_tab_background = config.my.theme.color.surface0.hex;
 
         # performance
         wayland_enable_ime = false;

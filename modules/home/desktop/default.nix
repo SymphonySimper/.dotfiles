@@ -24,14 +24,15 @@ let
         value = {
           name = if builtins.hasAttr "name" bind then bind.name else bind.command;
           binding = builtins.concatStringsSep "" (
-            (lib.lists.optionals (bind.mods != null) (map (mod: keys.mod.${mod}) bind.mods))
-            ++ [ bind.key ]
+            (lib.lists.optionals (bind.mods != null) (map (mod: keys.mod.${mod}) bind.mods)) ++ [ bind.key ]
           );
           command = bind.command;
         };
       }) cfg.keybinds
     )
   );
+
+  wallpaper = "file://${cfg.wallpaper}";
 in
 {
   options.my.programs.desktop = {
@@ -88,6 +89,12 @@ in
       description = "Create app folder";
       type = lib.types.attrsOf (lib.types.listOf lib.types.str);
       default = { };
+    };
+
+    wallpaper = lib.mkOption {
+      description = "Wallpaper store path";
+      type = lib.types.pathInStore;
+      default = ../../flake/assets/images/wallpaper.png;
     };
   };
 
@@ -164,12 +171,12 @@ in
 
           ## wallpaper
           "org/gnome/desktop/background" = {
-            picture-uri = my.theme.wallpaper;
-            picture-uri-dark = my.theme.wallpaper;
+            picture-uri = wallpaper;
+            picture-uri-dark = wallpaper;
           };
 
           "org/gnome/desktop/screensaver" = {
-            picture-uri = my.theme.wallpaper;
+            picture-uri = wallpaper;
           };
 
           "org/gnome/settings-daemon/plugins/color" = {
