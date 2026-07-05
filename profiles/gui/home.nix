@@ -1,6 +1,8 @@
 { pkgs, lib, ... }:
 {
   my = {
+    desktop.enable = true;
+
     theme = {
       enable = true;
       font.enable = true;

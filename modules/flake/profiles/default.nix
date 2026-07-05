@@ -30,7 +30,6 @@ let
 
       gui = {
         enable = mkGetDefault settings "gui.enable" false;
-        desktop.enable = mkGetDefault settings "gui.desktop.enable" false;
       };
     };
 

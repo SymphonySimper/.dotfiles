@@ -33,7 +33,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    my.programs = {
+    my = {
       desktop = {
         keybinds = [
           {
@@ -44,7 +44,9 @@ in
         ];
       };
 
-      mux.terminal = "kitty";
+      programs = {
+        mux.terminal = "kitty";
+      };
     };
 
     xdg = {

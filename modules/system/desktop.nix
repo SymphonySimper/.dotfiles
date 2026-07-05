@@ -1,16 +1,13 @@
 {
-  my,
   config,
   pkgs,
   lib,
   ...
 }:
 {
-  options.my.programs.desktop.enable = lib.mkEnableOption "Desktop" // {
-    default = my.gui.desktop.enable;
-  };
+  options.my.desktop.enable = lib.mkEnableOption "Enable Desktop";
 
-  config = lib.mkIf config.my.programs.desktop.enable {
+  config = lib.mkIf config.my.desktop.enable {
     my = {
       boot.enable = true;
 

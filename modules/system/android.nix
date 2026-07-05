@@ -23,7 +23,7 @@ in
 
       environment.systemPackages = [
         pkgs.android-tools
-        (pkgs.android-studio.override { forceWayland = config.my.programs.desktop.enable; })
+        (pkgs.android-studio.override { forceWayland = config.my.desktop.enable; })
       ];
     }
   );

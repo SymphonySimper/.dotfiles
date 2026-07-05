@@ -1,12 +1,11 @@
 {
-  my,
   config,
   pkgs,
   lib,
   ...
 }:
 let
-  cfg = config.my.programs.desktop;
+  cfg = config.my.desktop;
 
   keys = {
     mod = {
@@ -35,10 +34,8 @@ let
   wallpaper = "file://${cfg.wallpaper}";
 in
 {
-  options.my.programs.desktop = {
-    enable = (lib.mkEnableOption "Desktop") // {
-      default = my.gui.desktop.enable;
-    };
+  options.my.desktop = {
+    enable = lib.mkEnableOption "Desktop";
 
     autostart = lib.mkOption {
       type = lib.types.listOf (
@@ -99,9 +96,13 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    my.programs.desktop = {
-      appfolder = {
-        Games = [ "Game" ];
+    my = {
+      theme.gtk.enable = true;
+
+      desktop = {
+        appfolder = {
+          Games = [ "Game" ];
+        };
       };
     };
 

@@ -1,6 +1,7 @@
 { ... }:
 {
   my = {
+    desktop.enable = true;
     networking.enableCloudflareDNS = true;
 
     hardware = {

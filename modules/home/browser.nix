@@ -66,59 +66,61 @@ in
   });
 
   config = lib.mkIf cfg.enable {
-    my.programs = {
+    my = {
       desktop = {
         appfolder.Bookmarks = [ category ];
       };
 
-      browser.bookmarks = {
-        # Bank
-        EPFO = "unifiedportal-mem.epfindia.gov.in/memberinterface";
-        "EPFO Pasbook" = "passbook.epfindia.gov.in/MemberPassBook/login";
+      programs = {
+        browser.bookmarks = {
+          # Bank
+          EPFO = "unifiedportal-mem.epfindia.gov.in/memberinterface";
+          "EPFO Pasbook" = "passbook.epfindia.gov.in/MemberPassBook/login";
 
-        # Bills
-        "Airfiber Networks" = "login.airfiber.co.in/customer_portal";
-        "Indian Post Insurance" = "pli.indiapost.gov.in";
+          # Bills
+          "Airfiber Networks" = "login.airfiber.co.in/customer_portal";
+          "Indian Post Insurance" = "pli.indiapost.gov.in";
 
-        # Dev
-        "CSSBattle" = "cssbattle.dev";
-        "dotfiles" = "https://github.com/SymphonySimper/.dotfiles";
-        Github = "github.com";
-        "Google Fonts" = "fonts.google.com";
-        JoshWComeauCources = "courses.joshwcomeau.com";
-        LeetCode = "leetcode.com";
-        "NPM Clayien Packages" = "www.npmjs.com/settings/clayien/packages";
-        Regex101 = "regex101.com";
-        "Svelte Changelog" = "svelte-changelog.vercel.app";
-        "Svelte" = "svelte.dev";
-        Tailwindcss = "tailwindcss.com/docs/installation";
+          # Dev
+          "CSSBattle" = "cssbattle.dev";
+          "dotfiles" = "https://github.com/SymphonySimper/.dotfiles";
+          Github = "github.com";
+          "Google Fonts" = "fonts.google.com";
+          JoshWComeauCources = "courses.joshwcomeau.com";
+          LeetCode = "leetcode.com";
+          "NPM Clayien Packages" = "www.npmjs.com/settings/clayien/packages";
+          Regex101 = "regex101.com";
+          "Svelte Changelog" = "svelte-changelog.vercel.app";
+          "Svelte" = "svelte.dev";
+          Tailwindcss = "tailwindcss.com/docs/installation";
 
-        # Email
-        Gmail = "mail.google.com/mail/u/0";
-        "Gmail 1" = "mail.google.com/mail/u/1";
-        "Gmail 2" = "mail.google.com/mail/u/2";
+          # Email
+          Gmail = "mail.google.com/mail/u/0";
+          "Gmail 1" = "mail.google.com/mail/u/1";
+          "Gmail 2" = "mail.google.com/mail/u/2";
 
-        # Misc
-        "Chrome Enterprise policy list" = "chromeenterprise.google/policies";
+          # Misc
+          "Chrome Enterprise policy list" = "chromeenterprise.google/policies";
 
-        # Nix
-        "Nix Builtins" = "nix.dev/manual/nix/latest/language/builtins.html";
-        "Nix PR Tracker" = "nixpkgs-tracker.ocfox.me";
-        "Nix Wiki" = "wiki.nixos.org/wiki/NixOS_Wiki";
-        Noogle = "noogle.dev";
+          # Nix
+          "Nix Builtins" = "nix.dev/manual/nix/latest/language/builtins.html";
+          "Nix PR Tracker" = "nixpkgs-tracker.ocfox.me";
+          "Nix Wiki" = "wiki.nixos.org/wiki/NixOS_Wiki";
+          Noogle = "noogle.dev";
 
-        # Socila Media
-        Discord = "discord.com/channels/@me";
-        Reddit = "www.reddit.com";
-        WhatsApp = "web.whatsapp.com";
-        YouTube = "youtube.com";
+          # Socila Media
+          Discord = "discord.com/channels/@me";
+          Reddit = "www.reddit.com";
+          WhatsApp = "web.whatsapp.com";
+          YouTube = "youtube.com";
 
-        # Utility
-        Excalidarw = "excalidraw.com";
-        Keybr = "www.keybr.com";
-        Monkeytype = "monkeytype.com";
-        Squoosh = "squoosh.app";
-        Virustotal = "www.virustotal.com";
+          # Utility
+          Excalidarw = "excalidraw.com";
+          Keybr = "www.keybr.com";
+          Monkeytype = "monkeytype.com";
+          Squoosh = "squoosh.app";
+          Virustotal = "www.virustotal.com";
+        };
       };
     };
 
