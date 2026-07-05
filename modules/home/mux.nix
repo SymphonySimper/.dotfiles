@@ -19,6 +19,16 @@ let
     tmux capture-pane -p -S - > "$temp_file"
     tmux new-window "${config.my.programs.editor.command} $temp_file; rm $temp_file"
   '';
+
+  keybinds = lib.strings.concatLines (
+    map (
+      bind:
+      let
+        currentPath = if bind.currentPath then ''-c  "#{pane_current_path}"'' else "";
+      in
+      "bind ${bind.key} new-window ${currentPath} ${bind.command}"
+    ) cfg.keybinds
+  );
 in
 {
   options.my.programs.mux = {
@@ -31,9 +41,29 @@ in
     };
 
     defaultCommand = lib.mkOption {
-      description = "Tmux default command";
+      description = "Mux default command";
       type = lib.types.nullOr lib.types.str;
       default = null;
+    };
+
+    keybinds = lib.mkOption {
+      description = "Mux keybinds";
+      type = lib.types.listOf (
+        lib.types.submodule {
+          options = {
+            key = lib.mkOption {
+              description = "Trigger key";
+              type = lib.types.str;
+            };
+            command = lib.mkOption {
+              description = "Command to run";
+              type = lib.types.str;
+            };
+            currentPath = lib.mkEnableOption "Use current pane path";
+          };
+        }
+      );
+      default = [ ];
     };
   };
 
@@ -114,8 +144,7 @@ in
 
             ## Open External programs
             bind e run-shell  ${history} # Open history in editor
-            bind y new-window -c "#{pane_current_path}" ${config.my.programs.file-manager.command}
-            bind t new-window ${config.my.programs.scripts.todo.command}
+            ${keybinds}
           '';
       };
     };
