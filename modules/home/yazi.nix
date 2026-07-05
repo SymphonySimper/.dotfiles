@@ -18,14 +18,6 @@ in
 
   config = lib.mkIf cfg.enable {
     my.programs = {
-      desktop.keybinds = [
-        {
-          key = "e";
-          mods = [ "super" ];
-          command = "${config.my.programs.terminal.command} ${config.my.programs.terminal.args.command} ${cfg.command}";
-        }
-      ];
-
       mux.keybinds = [
         {
           key = "y";
