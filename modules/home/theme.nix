@@ -80,33 +80,6 @@ in
           )).${cfg.flavor}.colors;
     };
 
-    font = {
-      enable = lib.mkEnableOption "Enable font theme";
-      mono = lib.mkOption {
-        type = lib.types.submodule {
-          options = {
-            name = lib.mkOption {
-              type = lib.types.str;
-              description = "Mono font name";
-            };
-            package = lib.mkOption {
-              type = lib.types.package;
-              description = "Mono font package";
-            };
-          };
-        };
-        default = {
-          name = "JetBrainsMono Nerd Font";
-          package = pkgs.nerd-fonts.jetbrains-mono.overrideAttrs {
-            # refer: https://github.com/NixOS/nixpkgs/blob/master/pkgs/data/fonts/nerd-fonts/default.nix#L65
-            preInstall = ''
-              find . -type f -not -regex ".*JetBrainsMonoNerdFont-\(Regular\\|Italic\\|Bold.*\).ttf" -delete
-            '';
-          };
-        };
-      };
-    };
-
     gtk.enable = lib.mkEnableOption "Enable GTK theme";
   };
 
@@ -163,11 +136,6 @@ in
         in
         if returnName then output else (builtins.readFile output);
     };
-
-    home.packages = lib.mkIf cfg.font.enable [
-      pkgs.noto-fonts-cjk-sans
-      cfg.font.mono.package
-    ];
 
     dconf = lib.mkIf cfg.gtk.enable {
       enable = true;

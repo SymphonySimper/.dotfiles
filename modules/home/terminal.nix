@@ -35,6 +35,8 @@ in
 
   config = lib.mkIf cfg.enable {
     my = {
+      fonts.enable = true;
+
       desktop = {
         keybinds = [
           {
@@ -66,7 +68,7 @@ in
 
       font = {
         size = 12;
-        name = config.my.theme.font.mono.name;
+        name = config.my.fonts.mono.name;
       };
 
       settings = {

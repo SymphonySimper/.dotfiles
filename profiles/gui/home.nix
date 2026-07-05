@@ -3,16 +3,9 @@
   my = {
     desktop.enable = true;
 
-    theme = {
-      enable = true;
-      font.enable = true;
-      gtk.enable = true;
-    };
-
     programs = {
       scripts.enable = true;
       yazi.enable = true;
-      terminal.enable = true;
 
       shell = {
         bash.enable = true;

@@ -7,6 +7,7 @@
     ./dev.nix
     ./direnv.nix
     ./editor.nix
+    ./fonts.nix
     ./mux.nix
     ./nix.nix
     ./ssh.nix

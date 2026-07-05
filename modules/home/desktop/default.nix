@@ -104,6 +104,10 @@ in
           Games = [ "Game" ];
         };
       };
+
+      programs = {
+        terminal.enable = true;
+      };
     };
 
     programs.gnome-shell = {
