@@ -11,6 +11,7 @@
     ./boot.nix
     ./networking.nix
     ./user.nix
+    ./wsl.nix
 
     # gui
     ./browser.nix
