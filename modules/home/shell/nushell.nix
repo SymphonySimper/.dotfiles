@@ -1,9 +1,4 @@
-{
-  my,
-  config,
-  lib,
-  ...
-}:
+{ config, lib, ... }:
 let
   cfg = config.my.programs.shell.nushell;
   shared = import ./_shared.nix { inherit config; };
@@ -55,10 +50,6 @@ in
             }
           }
         ''
-
-        (lib.strings.optionalString (my.profile == "wsl") ''
-          $env.config.shell_integration.osc9_9 = true;
-        '')
       ];
     };
   };

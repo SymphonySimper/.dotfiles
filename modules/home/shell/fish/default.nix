@@ -1,5 +1,4 @@
 {
-  my,
   config,
   pkgs,
   lib,
@@ -43,15 +42,6 @@ in
         fish_prompt.body = ''
           echo -e "$_my_prompt_bold_color$(string replace "$HOME" '~' "$PWD") \n${shared.prompt.arrow}$_my_prompt_reset "
         '';
-
-        _windows_terminal_wsl_path = lib.mkIf (my.profile == "wsl") {
-          onVariable = "PWD";
-          body = ''
-            if test -n "$WT_SESSION"
-              printf "\e]9;9;%s\e\\" (string replace --all '/' '\\' "\\\\wsl.localhost\\$WSL_DISTRO_NAME$PWD")
-            end
-          '';
-        };
       };
     };
   };

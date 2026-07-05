@@ -12,6 +12,7 @@
     ./ssh.nix
     ./utility.nix
     ./vcs.nix
+    ./wsl.nix
     ./yazi.nix
 
     ./scripts
