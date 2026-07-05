@@ -19,7 +19,7 @@ in
   config = lib.mkIf cfg.enable {
     my.programs = {
       editor.lsp.fish-lsp.command = lib.getExe pkgs.fish-lsp;
-      mux.defaultCommand = "fish";
+      mux.default.command = "fish";
       terminal.shell = {
         command = "fish";
         args = [ ];

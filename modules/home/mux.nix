@@ -1,5 +1,4 @@
 {
-  my,
   config,
   pkgs,
   lib,
@@ -7,10 +6,11 @@
 }:
 let
   cfg = config.my.programs.mux;
-  defaultTerminal =
-    if my.profile == "wsl" then "xterm-256color" else config.my.programs.terminal.command;
   defaultCommand =
-    if cfg.defaultCommand == null then "" else ''set -g default-command "exec ${cfg.defaultCommand}"'';
+    if cfg.default.command == null then
+      ""
+    else
+      ''set -g default-command "exec ${cfg.default.command}"'';
 
   history = pkgs.writeShellScript "my-tmux-history" ''
     temp_file=$(mktemp)
@@ -40,10 +40,18 @@ in
       default = true;
     };
 
-    defaultCommand = lib.mkOption {
-      description = "Mux default command";
-      type = lib.types.nullOr lib.types.str;
-      default = null;
+    terminal = lib.mkOption {
+      description = "Mux default terminal";
+      type = lib.types.str;
+      default = "screen";
+    };
+
+    default = {
+      command = lib.mkOption {
+        description = "Mux default command";
+        type = lib.types.nullOr lib.types.str;
+        default = null;
+      };
     };
 
     keybinds = lib.mkOption {
@@ -96,7 +104,7 @@ in
     programs = {
       tmux = {
         enable = true;
-        terminal = defaultTerminal;
+        terminal = cfg.terminal;
         prefix = "C-a";
         shortcut = "a";
         keyMode = "vi";
@@ -111,7 +119,7 @@ in
             ${defaultCommand}
             # RGB colors
             # https://github.com/tmux/tmux/wiki/FAQ#how-do-i-use-rgb-colour
-            set -as terminal-features ",${defaultTerminal}:RGB"
+            set -as terminal-features ",${cfg.terminal}:RGB"
 
             setw -g monitor-activity on
             set -g visual-activity off # If enabled shows activity in window message
