@@ -1,5 +1,4 @@
 {
-  my,
   config,
   lib,
   ...
@@ -9,6 +8,8 @@ let
 in
 {
   options.my.programs.terminal = {
+    enable = lib.mkEnableOption "Enable terminal";
+
     shell = lib.mkOption {
       type = lib.types.nullOr (
         lib.types.submodule {
@@ -29,26 +30,21 @@ in
 
       default = null;
     };
-  }
-  // (lib.my.mkCommandOption {
-    category = "Terminal";
-    command = "kitty";
-    args = {
-      command = "-e";
-    };
-  });
+  };
 
-  config = lib.mkIf my.gui.enable {
+  config = lib.mkIf cfg.enable {
     my.programs = {
       desktop = {
         keybinds = [
           {
             mods = [ "super" ];
             key = "t";
-            command = cfg.command;
+            command = lib.getExe config.programs.kitty.package;
           }
         ];
       };
+
+      mux.terminal = "kitty";
     };
 
     xdg = {
