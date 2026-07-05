@@ -109,34 +109,36 @@ in
       };
     };
 
-    xdg.configFile."yazi/plugins/${name}.yazi/main.lua".text =
-      let
-        script = pkgs.writeShellScript "${name}-yazi-script" ''
-          ${lib.getExe config.programs.fzf.package} < "${file}"
+    xdg.configFile."yazi/plugins/${name}.yazi/main.lua" = lib.mkIf config.programs.yazi.enable {
+      text =
+        let
+          script = pkgs.writeShellScript "${name}-yazi-script" ''
+            ${lib.getExe config.programs.fzf.package} < "${file}"
+          '';
+        in
+        ''
+          return {
+            entry = function()
+              local _permit = ui.hide()
+
+              local child, err1 = Command("${script}")
+                  :stdout(Command.PIPED)
+                  :stderr(Command.INHERIT)
+                  :spawn()
+
+              if not child then
+                return
+              end
+
+              local output, _ = child:wait_with_output()
+              local target = output.stdout:gsub("\n$", "")
+
+              if target ~= "" then
+                ya.emit("cd", { target, raw = true })
+              end
+            end
+          }
         '';
-      in
-      ''
-        return {
-          entry = function()
-            local _permit = ui.hide()
-
-            local child, err1 = Command("${script}")
-                :stdout(Command.PIPED)
-                :stderr(Command.INHERIT)
-                :spawn()
-
-            if not child then
-              return
-            end
-
-            local output, _ = child:wait_with_output()
-            local target = output.stdout:gsub("\n$", "")
-
-            if target ~= "" then
-              ya.emit("cd", { target, raw = true })
-            end
-          end
-        }
-      '';
+    };
   };
 }
