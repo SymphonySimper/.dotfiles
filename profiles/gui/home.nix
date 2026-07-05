@@ -9,6 +9,7 @@
 
     programs = {
       scripts.enable = true;
+      yazi.enable = true;
 
       shell = {
         bash.enable = true;

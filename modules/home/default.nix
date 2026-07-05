@@ -7,12 +7,12 @@
     ./dev.nix
     ./direnv.nix
     ./editor.nix
-    ./file-manager.nix
     ./mux.nix
     ./nix.nix
     ./ssh.nix
     ./utility.nix
     ./vcs.nix
+    ./yazi.nix
 
     ./scripts
     ./shell

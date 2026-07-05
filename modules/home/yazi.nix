@@ -5,21 +5,32 @@
   ...
 }:
 let
-  cfg = config.my.programs.file-manager;
+  cfg = config.my.programs.yazi;
 in
 {
-  options.my.programs.file-manager = lib.my.mkCommandOption {
+  options.my.programs.yazi = {
+    enable = lib.mkEnableOption "Enable Yazi";
+  }
+  // (lib.my.mkCommandOption {
     category = "File Manager";
-    command = "yazi";
-  };
+    command = lib.getExe config.programs.yazi.package;
+  });
 
-  config = {
+  config = lib.mkIf cfg.enable {
     my.programs = {
       desktop.keybinds = [
         {
           key = "e";
           mods = [ "super" ];
           command = "${config.my.programs.terminal.command} ${config.my.programs.terminal.args.command} ${cfg.command}";
+        }
+      ];
+
+      mux.keybinds = [
+        {
+          key = "y";
+          command = cfg.command;
+          currentPath = true;
         }
       ];
     };
