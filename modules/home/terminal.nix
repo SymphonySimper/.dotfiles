@@ -10,25 +10,24 @@ in
 {
   options.my.programs.terminal = {
     shell = lib.mkOption {
-      type = lib.types.submodule {
-        options = {
-          command = lib.mkOption {
-            description = "Command to run on launch";
-            type = lib.types.str;
-          };
+      type = lib.types.nullOr (
+        lib.types.submodule {
+          options = {
+            command = lib.mkOption {
+              description = "Command to run on launch";
+              type = lib.types.str;
+            };
 
-          args = lib.mkOption {
-            description = "Args for the program";
-            type = lib.types.listOf lib.types.str;
-            default = [ ];
+            args = lib.mkOption {
+              description = "Args for the program";
+              type = lib.types.listOf lib.types.str;
+              default = [ ];
+            };
           };
-        };
-      };
+        }
+      );
 
-      default = {
-        command = config.my.programs.shell.fish.command;
-        args = [ ];
-      };
+      default = null;
     };
   }
   // (lib.my.mkCommandOption {
@@ -69,7 +68,11 @@ in
       };
 
       settings = {
-        shell = builtins.concatStringsSep " " ([ cfg.shell.command ] ++ cfg.shell.args);
+        shell =
+          if cfg.shell == null then
+            ""
+          else
+            builtins.concatStringsSep " " ([ cfg.shell.command ] ++ cfg.shell.args);
 
         allow_remote_control = false;
         hide_window_decorations = true;

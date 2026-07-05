@@ -10,6 +10,11 @@
     programs = {
       scripts.enable = true;
 
+      shell = {
+        bash.enable = true;
+        fish.enable = true;
+      };
+
       vcs.profiles.gnome = rec {
         host = "ssh.gitlab.gnome.org";
         email = "164710-SymphonySimper@users.noreply.gitlab.gnome.org";

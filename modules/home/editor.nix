@@ -66,12 +66,12 @@ in
   });
 
   config = {
-    my.programs = {
-      shell.env = rec {
-        EDITOR = cfg.command;
-        VISUAL = EDITOR;
-      };
+    home.sessionVariables = rec {
+      EDITOR = cfg.command;
+      VISUAL = EDITOR;
+    };
 
+    my.programs = {
       editor.ignore = builtins.concatLists [
         [
           # general

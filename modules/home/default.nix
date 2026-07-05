@@ -5,6 +5,7 @@
 
     # cli
     ./dev.nix
+    ./direnv.nix
     ./editor.nix
     ./file-manager.nix
     ./mux.nix

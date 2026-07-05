@@ -49,7 +49,13 @@ in
       (
         lang:
         let
-          only = func: key: func (builtins.hasAttr key lang) lang.${key};
+          only =
+            func: key:
+            let
+              keyPath = lib.strings.splitString "." key;
+            in
+            func (lib.attrsets.hasAttrByPath keyPath lang) (lib.attrsets.getAttrFromPath keyPath lang);
+
           onlyAttr = key: only lib.attrsets.optionalAttrs key;
           onlyList = key: only lib.lists.optionals key;
         in
@@ -61,11 +67,14 @@ in
               schema = onlyAttr "schema";
               ignore = onlyList "ignore";
             };
-
-            shell = onlyAttr "shell";
           };
 
-          home.packages = onlyList "packages";
+          home = {
+            packages = onlyList "packages";
+            sessionVariables = onlyAttr "shell.env";
+            sessionPath = onlyList "shell.path";
+          };
+
           programs = onlyAttr "programs";
         }
       )

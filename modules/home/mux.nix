@@ -9,6 +9,8 @@ let
   cfg = config.my.programs.mux;
   defaultTerminal =
     if my.profile == "wsl" then "xterm-256color" else config.my.programs.terminal.command;
+  defaultCommand =
+    if cfg.defaultCommand == null then "" else ''set -g default-command "exec ${cfg.defaultCommand}"'';
 
   history = pkgs.writeShellScript "my-tmux-history" ''
     temp_file=$(mktemp)
@@ -26,6 +28,12 @@ in
     enableAutoStart = lib.mkEnableOption "Auto-start";
     enableStatus = lib.mkEnableOption "Status" // {
       default = true;
+    };
+
+    defaultCommand = lib.mkOption {
+      description = "Tmux default command";
+      type = lib.types.nullOr lib.types.str;
+      default = null;
     };
   };
 
@@ -70,8 +78,7 @@ in
 
         extraConfig = # conf
           ''
-            set -g default-command "exec ${config.my.programs.shell.fish.command}"
-
+            ${defaultCommand}
             # RGB colors
             # https://github.com/tmux/tmux/wiki/FAQ#how-do-i-use-rgb-colour
             set -as terminal-features ",${defaultTerminal}:RGB"
