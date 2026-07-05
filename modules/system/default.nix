@@ -16,6 +16,7 @@
     # gui
     ./browser.nix
     ./desktop.nix
+    ./fonts.nix
 
     # cli + gui
     ./android.nix
@@ -45,11 +46,6 @@
   boot.tmp = {
     cleanOnBoot = true;
     useTmpfs = true;
-  };
-
-  fonts = lib.mkIf my.gui.enable {
-    enableDefaultPackages = true;
-    fontDir.enable = true;
   };
 
   time.timeZone = lib.mkDefault "Asia/Kolkata";

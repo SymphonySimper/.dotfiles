@@ -10,6 +10,7 @@
   config = lib.mkIf config.my.desktop.enable {
     my = {
       boot.enable = true;
+      fonts.enable = true;
 
       hardware = {
         audio = {
