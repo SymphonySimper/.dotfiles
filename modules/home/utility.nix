@@ -1,15 +1,4 @@
-{
-  my,
-  pkgs,
-  lib,
-  ...
-}:
-{
-  home.packages = builtins.concatLists [
-    # Clipboard
-    (lib.lists.optional (my.gui.enable && pkgs.stdenv.hostPlatform.isLinux) pkgs.wl-clipboard)
-  ];
-
+{ pkgs, ... }: {
   programs = {
     man = {
       enable = true;

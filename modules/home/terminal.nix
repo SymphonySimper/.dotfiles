@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   lib,
   ...
 }:
@@ -55,6 +56,9 @@ in
         settings.default = [ "kitty.desktop" ];
       };
     };
+
+    # Clipboard
+    home.packages = lib.lists.optional pkgs.stdenv.hostPlatform.isLinux pkgs.wl-clipboard;
 
     programs.kitty = {
       enable = true;
