@@ -1,12 +1,11 @@
 {
   my,
-  config,
   inputs,
   pkgs,
   ...
 }:
 let
-  nixpkgs = if config.my.isHome then inputs.nixpkgs-unstable else inputs.nixpkgs-nixos-unstable;
+  nixpkgs = inputs.nixpkgs;
 in
 {
   nix = {

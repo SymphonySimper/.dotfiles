@@ -1,6 +1,6 @@
 { inputs, ... }:
 let
-  lib = inputs.nixpkgs-nixos-unstable.lib;
+  lib = inputs.nixpkgs.lib;
 in
 rec {
   helpers = import ./helpers { inherit inputs lib; };

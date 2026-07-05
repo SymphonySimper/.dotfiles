@@ -101,7 +101,6 @@ let
       };
 
       pkgs = helpers.mkPkgs {
-        inherit forHome;
         system = my.system;
         overlays = [
           (import ../overlays/lib { inherit my inputs helpers; })
