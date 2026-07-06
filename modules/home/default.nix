@@ -27,8 +27,6 @@
     ./desktop
   ];
 
-  my.isHome = true;
-
   xdg = {
     enable = true;
 
