@@ -9,7 +9,6 @@ let
 
   mkMy =
     {
-      settings ? { },
       profile ? { },
     }:
     let
@@ -27,10 +26,6 @@ let
       profile = mkGetDefault passedProfile "name" "default";
       system = mkGetDefault passedProfile "system" "x86_64-linux";
       nixos = mkGetDefault passedProfile "nixos" false;
-
-      gui = {
-        enable = mkGetDefault settings "gui.enable" false;
-      };
     };
 
   profileDir = ../../../profiles;
@@ -52,7 +47,6 @@ let
   mkProfile =
     {
       name,
-      settings ? { },
       profile ? { },
       for, # system or home
     }:
@@ -60,7 +54,6 @@ let
       forHome = for == "home";
 
       my = mkMy {
-        inherit settings;
         profile = profile // {
           inherit name;
         };
@@ -106,18 +99,14 @@ let
     let
       name = dir;
 
-      configFile = mkProfilePath dir "config.nix";
       systemFile = mkProfilePath dir "system.nix";
       homeFile = mkProfilePath dir "home.nix";
-
-      config = if builtins.pathExists configFile then (import configFile) else { };
     in
     (map
       (for: {
         inherit name;
         inherit for;
-        settings = mkGetDefault config "settings" { };
-        profile = (mkGetDefault config "profile" { }) // {
+        profile = {
           nixos = builtins.pathExists systemFile;
         };
       })
@@ -144,7 +133,6 @@ let
             value = mkProfile {
               inherit for;
               inherit name;
-              settings = profile.settings;
               profile = mkGetDefault profile "profile" { };
             };
           }

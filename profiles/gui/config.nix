@@ -1,7 +1,0 @@
-{
-  settings = {
-    gui = {
-      enable = true;
-    };
-  };
-}
