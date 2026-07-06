@@ -1,6 +1,11 @@
 { ... }:
 {
   my = {
+    user = {
+      name = "symph";
+      fullName = "SymphonySimper";
+    };
+
     wsl.enable = true;
 
     programs = {

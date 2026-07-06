@@ -23,7 +23,7 @@ in
       name = lib.mkOption {
         type = lib.types.str;
         description = "Username";
-        default = my.fullName;
+        default = config.my.user.fullName;
       };
 
       email = lib.mkOption {

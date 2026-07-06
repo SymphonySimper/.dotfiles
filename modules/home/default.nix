@@ -1,7 +1,9 @@
-{ my, ... }:
+{ ... }:
 {
   imports = [
     ../common
+
+    ./user.nix
 
     # cli
     ./dev.nix
@@ -43,9 +45,6 @@
   };
 
   home = {
-    username = my.name;
-    homeDirectory = my.dir.home;
-
     stateVersion = "23.11"; # Do not change
   };
 

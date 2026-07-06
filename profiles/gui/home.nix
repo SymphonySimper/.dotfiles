@@ -1,6 +1,11 @@
 { pkgs, lib, ... }:
 {
   my = {
+    user = {
+      name = "symph";
+      fullName = "SymphonySimper";
+    };
+
     desktop.enable = true;
 
     programs = {
