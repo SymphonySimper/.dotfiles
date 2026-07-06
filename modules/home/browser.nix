@@ -1,5 +1,4 @@
 {
-  my,
   config,
   pkgs,
   lib,
@@ -8,12 +7,15 @@
 let
   cfg = config.my.programs.browser;
   category = "X-MY-Bookmarks";
+
+  command = "chromium-browser";
+  args = {
+    newWindow = "--new-window";
+  };
 in
 {
   options.my.programs.browser = {
-    enable = (lib.mkEnableOption "Browser") // {
-      default = my.gui.enable;
-    };
+    enable = lib.mkEnableOption "Browser";
 
     bookmarks = lib.mkOption {
       type = lib.types.attrsOf (
@@ -38,14 +40,12 @@ in
       description = "Browser bookmarks";
       default = { };
     };
-  }
-  // (lib.my.mkCommandOption {
-    category = "Browser";
-    command = "chromium-browser";
-    args = {
-      newWindow = "--new-window";
 
-      chromium = (
+    featuresArg = lib.mkOption {
+      readOnly = true;
+      type = lib.types.listOf lib.types.str;
+      description = "Custom set of enabled / disabled features";
+      default =
         let
           features = {
             disable = [ "WebRtcAllowInputVolumeAdjustment" ];
@@ -60,10 +60,9 @@ in
           builtins.filter (f: (builtins.length f.value) > 0) (
             lib.attrsets.mapAttrsToList (name: value: { inherit name value; }) features
           )
-        ))
-      );
+        ));
     };
-  });
+  };
 
   config = lib.mkIf cfg.enable {
     my = {
@@ -130,7 +129,7 @@ in
     programs.chromium = {
       enable = true;
       package = pkgs.chromium.override { enableWideVine = true; };
-      commandLineArgs = cfg.args.chromium;
+      commandLineArgs = cfg.featuresArg;
       extensions = [
         "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
       ];
@@ -141,7 +140,7 @@ in
       name: value:
       let
         isURL = builtins.typeOf value == "string";
-        browser = if isURL then cfg.command else value.browser;
+        browser = if isURL then command else value.browser;
         _url = if isURL then value else value.url;
         url = if lib.strings.hasPrefix "http" _url then _url else "https://${_url}";
       in
@@ -158,7 +157,7 @@ in
         actions = {
           "new-window" = {
             name = "New Window";
-            exec = "${browser} ${cfg.args.newWindow} ${url}";
+            exec = "${browser} ${args.newWindow} ${url}";
           };
         };
       }

@@ -106,6 +106,7 @@ in
       };
 
       programs = {
+        browser.enable = true;
         terminal.enable = true;
       };
     };
