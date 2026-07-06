@@ -1,4 +1,6 @@
 { ... }: {
+  networking.hostName = "wsl";
+
   my = {
     wsl = {
       enable = true;

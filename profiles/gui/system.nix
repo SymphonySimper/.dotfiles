@@ -1,5 +1,7 @@
 { ... }:
 {
+  networking.hostName = "gui";
+
   my = {
     desktop.enable = true;
     networking.enableCloudflareDNS = true;
