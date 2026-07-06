@@ -46,9 +46,6 @@ in
           [
             groupSudo
             "uinput"
-            "video"
-            "input"
-            "disk"
           ]
           ++ cfg.groups
         );
