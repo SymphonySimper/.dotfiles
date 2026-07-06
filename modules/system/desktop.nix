@@ -13,11 +13,7 @@
       fonts.enable = true;
 
       hardware = {
-        audio = {
-          enable = true;
-          programs.enable = lib.mkDefault true;
-        };
-
+        audio.enable = true;
         powerManagement.enable = true;
       };
 

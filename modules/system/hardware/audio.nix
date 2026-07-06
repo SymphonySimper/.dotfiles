@@ -5,7 +5,6 @@ in
 {
   options.my.hardware.audio = {
     enable = lib.mkEnableOption "audio";
-    programs.enable = lib.mkEnableOption "Programs";
   };
 
   config = lib.mkIf cfg.enable {
