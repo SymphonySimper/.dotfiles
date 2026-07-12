@@ -3,7 +3,7 @@
 # instead of having to reboot each time.
 { inputs, den, ... }:
 {
-  den.aspects.gui.includes = [ (den.batteries.vm-autologin "symph") ];
+  den.aspects.laptop.includes = [ (den.batteries.vm-autologin "symph") ];
 
   perSystem =
     { pkgs, ... }:
@@ -12,7 +12,7 @@
         name = "vm";
         text =
           let
-            host = inputs.self.nixosConfigurations.gui.config;
+            host = inputs.self.nixosConfigurations.laptop.config;
           in
           ''
             ${host.system.build.vm}/bin/run-${host.networking.hostName}-vm "$@"
