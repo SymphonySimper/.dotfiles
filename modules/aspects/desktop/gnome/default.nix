@@ -1,8 +1,6 @@
 { den, ... }: {
   den.aspects.desktop.gnome = {
-    inlcudes = with den.aspects; [
-      boot
-
+    includes = with den.aspects; [
       hardware.audio
 
       networking.networkmanager

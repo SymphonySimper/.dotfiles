@@ -36,9 +36,6 @@
 
         desktop.gnome
         desktop.gnome.extension
-        apps.chromium
-        theme.fonts
-        apps.kitty
 
         apps.shell.nushell
 
