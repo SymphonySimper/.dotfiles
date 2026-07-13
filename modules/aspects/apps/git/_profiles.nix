@@ -9,7 +9,7 @@ let
 
   defaultProfile = "default";
   sshAlgorithm = "ed25519";
-  mkSSHIdentityFilename = name: "~/.ssh/${name}-id-${sshAlgorithm}";
+  mkSSHIdentityFilename = name: "\${HOME}/.ssh/${name}-id-${sshAlgorithm}";
   mkProfileDir = name: "${config.xdg.userDirs.projects}/${name}";
 in
 {
