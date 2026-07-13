@@ -12,6 +12,7 @@
 
       apps.chromium
       apps.kitty
+      apps.clipboard
 
       xdg.autostart
     ];
