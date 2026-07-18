@@ -50,6 +50,7 @@
         apps.tmux
         apps.git
         apps.ssh
+        apps.delta
 
         apps.lang.all
       ];
