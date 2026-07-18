@@ -1,11 +1,9 @@
 { den, ... }: {
   den.aspects.apps.lang.all = {
     includes = with den.aspects.apps.lang; [
-      config
-      english
+      default
+
       go
-      markdown
-      nix
       python
       rust
       tree-sitter
