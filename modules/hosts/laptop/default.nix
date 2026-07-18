@@ -51,15 +51,7 @@
         apps.git
         apps.ssh
 
-        apps.lang.config
-        apps.lang.english
-        apps.lang.go
-        apps.lang.markdown
-        apps.lang.nix
-        apps.lang.python
-        apps.lang.rust
-        apps.lang.tree-sitter
-        apps.lang.web
+        apps.lang.all
       ];
 
       homeManager = { pkgs, ... }: {
