@@ -11,7 +11,6 @@
 
           settings = {
             show_banner = false;
-            buffer_editor = "$EDITOR";
             completions.algorithm = "fuzzy";
             datetime_format.normal = "%d/%m/%y %I:%M:%S%p";
 
