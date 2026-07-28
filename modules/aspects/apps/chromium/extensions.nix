@@ -7,11 +7,5 @@
         "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
       ];
     };
-
-    homeManager = {
-      programs.chromium.extensions = [
-        "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
-      ];
-    };
   };
 }
