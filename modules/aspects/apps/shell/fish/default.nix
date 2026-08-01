@@ -1,5 +1,11 @@
 { lib, ... }: {
   den.aspects.apps.shell.fish = {
+    nixos = {
+      programs.fish = {
+        useBabelfish = true;
+      };
+    };
+
     homeManager =
       { config, ... }:
       let
