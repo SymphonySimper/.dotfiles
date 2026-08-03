@@ -35,7 +35,21 @@
           };
           svelte = {
             name = "svelteserver";
-            command = lib.getExe pkgs.svelte-language-server;
+            # command = lib.getExe pkgs.svelte-language-server;
+            # remove after this gets merged: https://github.com/NixOS/nixpkgs/pull/528492
+            command = lib.getExe (
+              pkgs.svelte-language-server.overrideAttrs (finalAttrs: {
+                version = "0.18.3";
+
+                src = finalAttrs.src.override {
+                  hash = "sha256-FTOkJPXbsG6R53yr4n0/IR2lzFCovrdV0+epOi07lBQ=";
+                };
+
+                pnpmDeps = finalAttrs.pnpmDeps.override {
+                  hash = "sha256-fY3hrCkr/soJk1gp39/jec8lT2ZJI27xRBCZi006oWA=";
+                };
+              })
+            );
           };
         };
       in
