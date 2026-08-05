@@ -1,7 +1,5 @@
-{ den, lib, ... }: {
-  den.default.includes = [ den.aspects.options.desktop.gnome.wallpaper ];
-
-  den.aspects.options.desktop.gnome.wallpaper = {
+{ lib, ... }: {
+  den.aspects.options = {
     homeManager.options.desktop.gnome.wallpaper = lib.mkOption {
       description = "Wallpaper store path";
       type = lib.types.nullOr lib.types.pathInStore;

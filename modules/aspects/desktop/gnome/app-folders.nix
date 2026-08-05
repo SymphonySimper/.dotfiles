@@ -1,7 +1,5 @@
-{ den, lib, ... }: {
-  den.default.includes = [ den.aspects.options.desktop.gnome.app-folders ];
-
-  den.aspects.options.desktop.gnome.app-folders = {
+{ lib, ... }: {
+  den.aspects.options = {
     homeManager.options.desktop.gnome.app-folders = lib.mkOption {
       description = "Create app folder";
       type = lib.types.attrsOf (lib.types.listOf lib.types.str);

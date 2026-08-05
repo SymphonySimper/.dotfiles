@@ -1,4 +1,4 @@
-{ den, lib, ... }:
+{ lib, ... }:
 let
   keys = {
     mod = {
@@ -10,9 +10,7 @@ let
   };
 in
 {
-  den.default.includes = [ den.aspects.options.desktop.gnome.keybinds ];
-
-  den.aspects.options.desktop.gnome.keybinds = {
+  den.aspects.options = {
     homeManager.options.desktop.gnome.keybinds = lib.mkOption {
       description = "Keybinds";
       type = lib.types.listOf (

@@ -1,8 +1,5 @@
-{ den, lib, ... }: {
-
-  den.default.includes = [ den.aspects.options.apps.git.user ];
-
-  den.aspects.options.apps.git.user = {
+{ lib, ... }: {
+  den.aspects.options = {
     homeManager.options.programs.git = {
       user = lib.mkOption {
         description = "Git user config";
