@@ -106,6 +106,22 @@
         "type": "github"
       }
     },
+    "gnome-extension-panel-free": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1781075286,
+        "narHash": "sha256-V4Ie6xaNDuZ4p/LV/ob2T7tSyMcC5C9aNLX+MIjpRbo=",
+        "owner": "fthx",
+        "repo": "panel-free",
+        "rev": "73d3c2663eb5e256ff5d42ef83d256741faadb25",
+        "type": "github"
+      },
+      "original": {
+        "owner": "fthx",
+        "repo": "panel-free",
+        "type": "github"
+      }
+    },
     "helix": {
       "inputs": {
         "nixpkgs": "nixpkgs",
@@ -217,6 +233,7 @@
         "disko": "disko",
         "flake-file": "flake-file",
         "flake-parts": "flake-parts",
+        "gnome-extension-panel-free": "gnome-extension-panel-free",
         "helix": "helix",
         "home-manager": "home-manager",
         "import-tree": "import-tree",

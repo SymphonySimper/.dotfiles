@@ -33,6 +33,10 @@
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
+    gnome-extension-panel-free = {
+      url = "github:fthx/panel-free";
+      flake = false;
+    };
     helix.url = "github:helix-editor/helix";
     home-manager = {
       url = "github:nix-community/home-manager";
