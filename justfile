@@ -46,3 +46,7 @@ gnome-nested-shell:
 [windows]
 update-config:
     python ./scripts/windows/update-config.py
+
+[unix]
+write-flake:
+    nix run .#write-flake
