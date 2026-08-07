@@ -44,27 +44,6 @@ class ShowOverviewOnEnable {
   disable() {}
 }
 
-// panel visiblity logic is based on: https://github.com/fthx/panel-free
-class HidePanel {
-  #show = () => {
-    panel.visible = true;
-  };
-
-  #hide = () => {
-    panel.visible = false;
-  };
-
-  enable() {
-    overview.connectObject("showing", this.#show, "hiding", this.#hide, this);
-  }
-
-  disable() {
-    overview.disconnectObject(this);
-
-    this.#show();
-  }
-}
-
 class Overrides {
   #injectionManager = new InjectionManager();
 
@@ -131,7 +110,7 @@ class Battery {
 }
 
 export default class MyExtension extends Extension {
-  #extensions = [ShowOverviewOnEnable, HidePanel, Overrides, Battery].map(
+  #extensions = [ShowOverviewOnEnable, Overrides, Battery].map(
     (extension) => new extension(),
   );
 
