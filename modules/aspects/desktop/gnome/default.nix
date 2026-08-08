@@ -1,6 +1,19 @@
 { den, ... }: {
   den.aspects.desktop.gnome = {
-    includes = with den.aspects; [ desktop.common ];
+    includes = with den.aspects; [
+      hardware.audio
+
+      networking.networkmanager
+
+      theme.fonts
+      theme.gtk
+
+      apps.chromium
+      apps.kitty
+      apps.clipboard
+
+      xdg.autostart
+    ];
 
     nixos = { pkgs, ... }: {
       services = {
@@ -9,6 +22,8 @@
       };
 
       environment = {
+        sessionVariables.NIXOS_OZONE_WL = "1";
+
         gnome.excludePackages = with pkgs; [
           baobab # disk usage analyzer
           epiphany # browser
