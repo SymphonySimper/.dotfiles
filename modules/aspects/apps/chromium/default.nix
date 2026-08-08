@@ -44,13 +44,11 @@
     };
 
     homeManager =
-      { config, pkgs, ... }:
+      { pkgs, ... }:
       {
         imports = [ ./_bookmarks.nix ];
 
         catppuccin.chromium.enable = false;
-
-        desktop.default.browser = lib.getExe config.programs.chromium.finalPackage;
 
         programs.chromium = {
           enable = true;
