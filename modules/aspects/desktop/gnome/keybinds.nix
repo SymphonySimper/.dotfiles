@@ -59,6 +59,14 @@ in
         );
       in
       {
+        desktop.gnome.keybinds = [
+          {
+            mods = [ "super" ];
+            key = "t";
+            command = config.desktop.default.terminal;
+          }
+        ];
+
         dconf.settings = customKeybinds // {
           "org/gnome/mutter" = {
             overlay-key = "Super_L";

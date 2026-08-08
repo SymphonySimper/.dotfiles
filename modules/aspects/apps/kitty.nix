@@ -3,13 +3,7 @@
     homeManager =
       { config, ... }:
       {
-        desktop.gnome.keybinds = [
-          {
-            mods = [ "super" ];
-            key = "t";
-            command = lib.getExe config.programs.kitty.package;
-          }
-        ];
+        desktop.default.terminal = lib.getExe config.programs.kitty.package;
 
         xdg = {
           terminal-exec = {

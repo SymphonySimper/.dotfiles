@@ -1,4 +1,22 @@
-{ den, ... }: {
+{ den, lib, ... }: {
+  den.aspects.options = {
+    homeManager.options.desktop = {
+      default = {
+        browser = lib.mkOption {
+          type = lib.types.str;
+          description = "Default browser";
+          example = "chromium";
+        };
+
+        terminal = lib.mkOption {
+          type = lib.types.str;
+          description = "Default terminal";
+          example = "kitty";
+        };
+      };
+    };
+  };
+
   den.aspects.desktop.common = {
     includes = with den.aspects; [
       hardware.audio
