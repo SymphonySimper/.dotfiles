@@ -51,6 +51,7 @@
             inactive_tab_background = config.theme.color.surface0.hex;
 
             # performance
+            auto_reload_config = -1;
             wayland_enable_ime = false;
 
             clear_all_shortcuts = true;
