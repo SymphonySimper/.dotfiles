@@ -34,8 +34,7 @@
         apps.shell.fish
         (den.batteries.user-shell "fish")
 
-        desktop.gnome
-        desktop.gnome.extension
+        desktop.niri
 
         apps.shell.nushell
 
