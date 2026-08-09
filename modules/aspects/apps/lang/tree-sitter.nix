@@ -7,7 +7,7 @@
         ...
       }:
       {
-        programs.helix.languages.language-server = {
+        programs.helix.lsp = {
           ts_query_ls.command = lib.getExe pkgs.ts_query_ls;
         };
       };

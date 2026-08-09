@@ -8,16 +8,11 @@
       {
         home.packages = [ package ];
 
-        programs.helix.languages = {
-          language = [
-            {
-              name = "just";
-              formatter = {
-                command = lib.getExe package;
-                args = [ "--dump" ];
-              };
-            }
-          ];
+        programs.helix.lang.just = {
+          formatter = {
+            command = lib.getExe package;
+            args = [ "--dump" ];
+          };
         };
       };
   };

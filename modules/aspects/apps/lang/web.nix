@@ -78,73 +78,64 @@
             ".svelte-kit"
           ];
 
-          languages = {
-            language = builtins.concatLists [
-              [
-                {
-                  name = "html";
-                  formatter = mkPrettier "html";
-                  language-servers = [
-                    lsp.html.name
-                    lsp.emmet.name
-                    lsp.tailwind.name
-                  ];
-                }
-                {
-                  name = "css";
-                  formatter = mkPrettier "css";
-                  language-servers = [
-                    lsp.css.name
-                    lsp.tailwind.name
-                  ];
-                }
-                {
-                  name = "svelte";
-                  formatter = mkPrettier "svelte";
-                  language-servers = [
-                    "svelteserver"
-                    lsp.emmet.name
-                    lsp.tailwind.name
-                  ];
-                }
-              ]
+          lang = {
+            html = {
+              formatter = mkPrettier "html";
+              language-servers = [
+                lsp.html.name
+                lsp.emmet.name
+                lsp.tailwind.name
+              ];
+            };
+            css = {
+              formatter = mkPrettier "css";
+              language-servers = [
+                lsp.css.name
+                lsp.tailwind.name
+              ];
+            };
+            svelte = {
+              formatter = mkPrettier "svelte";
+              language-servers = [
+                "svelteserver"
+                lsp.emmet.name
+                lsp.tailwind.name
+              ];
+            };
+          }
+          // (lib.genAttrs
+            [
+              "javascript"
+              "jsx"
+              "typescript"
+              "tsx"
+            ]
+            (name: {
+              formatter = mkPrettier "typescript";
+              language-servers = builtins.concatLists [
+                [ lsp.ts.name ]
+                (lib.optionals (lib.strings.hasSuffix "sx" name) [
+                  lsp.emmet.name
+                  lsp.tailwind.name
+                ])
+              ];
+            })
+          );
 
-              (map
-                (name: {
-                  inherit name;
-                  formatter = mkPrettier "typescript";
-                  language-servers = builtins.concatLists [
-                    [ lsp.ts.name ]
-                    (lib.optionals (lib.strings.hasSuffix "sx" name) [
-                      lsp.emmet.name
-                      lsp.tailwind.name
-                    ])
-                  ];
-                })
-                [
-                  "javascript"
-                  "jsx"
-                  "typescript"
-                  "tsx"
-                ]
-              )
-            ];
+          lsp = {
+            ${lsp.html.name}.command = lsp.html.command;
+            ${lsp.css.name}.command = lsp.css.command;
+            ${lsp.tailwind.name}.command = lsp.tailwind.command;
+            ${lsp.ts.name}.command = lsp.ts.command;
 
-            language-server = {
-              ${lsp.html.name}.command = lsp.html.command;
-              ${lsp.css.name}.command = lsp.css.command;
-              ${lsp.tailwind.name}.command = lsp.tailwind.command;
-              ${lsp.ts.name}.command = lsp.ts.command;
+            ${lsp.emmet.name} = {
+              command = lsp.emmet.command;
+              args = [ "--stdio" ];
+            };
 
-              ${lsp.emmet.name} = {
-                command = lsp.emmet.command;
-                args = [ "--stdio" ];
-              };
-
-              ${lsp.svelte.name} = {
-                command = lsp.svelte.command;
-                config.configuration.svelte.plugin.svelte.defaultScriptLanguage = "ts";
-              };
+            ${lsp.svelte.name} = {
+              command = lsp.svelte.command;
+              config.configuration.svelte.plugin.svelte.defaultScriptLanguage = "ts";
             };
           };
         };

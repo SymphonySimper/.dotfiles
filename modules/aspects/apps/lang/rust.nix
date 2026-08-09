@@ -14,8 +14,8 @@
 
         home.sessionVariables.RUST_BACKTRACE = "1";
 
-        programs.helix.languages = {
-          language-server.rust-analyzer = {
+        programs.helix = {
+          lsp.rust-analyzer = {
             command = lib.getExe' rustup "rust-analyzer";
             config.check = "clippy";
           };

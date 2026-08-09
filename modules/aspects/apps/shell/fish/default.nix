@@ -7,7 +7,7 @@
     };
 
     homeManager =
-      { config, ... }:
+      { config, pkgs, ... }:
       let
         shared = import ../_shared.nix { inherit config; };
       in
@@ -33,12 +33,10 @@
             '';
           };
         };
-      };
 
-    helix = { pkgs, ... }: {
-      languages.language-server = {
-        fish-lsp.command = lib.getExe pkgs.fish-lsp;
+        programs.helix.lsp = {
+          fish-lsp.command = lib.getExe pkgs.fish-lsp;
+        };
       };
-    };
   };
 }

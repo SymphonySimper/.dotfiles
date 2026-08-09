@@ -27,8 +27,8 @@
         '')
       ];
 
-      programs.helix.languages = {
-        language-server.docker-langserver.command = lib.getExe pkgs.dockerfile-language-server;
+      programs.helix.lsp = {
+        docker-langserver.command = lib.getExe pkgs.dockerfile-language-server;
       };
     };
   };

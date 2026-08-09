@@ -7,18 +7,15 @@
         pkgs.golangci-lint
       ];
 
-      programs.helix.languages = {
-        language-server = {
+      programs.helix = {
+        lsp = {
           gopls.command = lib.getExe pkgs.gopls;
           golangci-lint-lsp.command = lib.getExe pkgs.golangci-lint-langserver;
         };
 
-        language = [
-          {
-            name = "go";
-            formatter.command = lib.getExe' pkgs.gotools "goimports";
-          }
-        ];
+        lang.go = {
+          formatter.command = lib.getExe' pkgs.gotools "goimports";
+        };
       };
     };
   };

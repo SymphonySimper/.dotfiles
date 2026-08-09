@@ -10,6 +10,27 @@
 
   den.aspects.options = {
     homeManager.options.programs.helix = {
+      lang = lib.mkOption {
+        type = lib.types.attrsOf (
+          lib.types.submodule {
+            freeformType = lib.types.attrsOf lib.types.anything;
+
+            options.language-servers = lib.mkOption {
+              type = lib.types.listOf lib.types.anything;
+              default = [ ];
+            };
+          }
+        );
+        description = "languages.language with merge";
+        default = { };
+      };
+
+      lsp = lib.mkOption {
+        type = lib.types.attrsOf lib.types.anything;
+        description = "languages.language-server alias";
+        default = { };
+      };
+
       schema = (
         lib.genAttrs [ "json" ] (
           lang:
@@ -223,6 +244,11 @@
                 C-p = "signature_help";
               };
             };
+          };
+
+          languages = {
+            language-server = cfg.lsp;
+            language = lib.mapAttrsToList (name: value: { inherit name; } // value) cfg.lang;
           };
         };
       };

@@ -16,10 +16,9 @@
         };
       in
       {
-        programs.helix.languages = {
-          language = [
-            {
-              name = "markdown";
+        programs.helix = {
+          lang = {
+            markdown = {
               # refer: https://github.com/helix-editor/helix/wiki/Recipes#continue-markdown-lists--quotes
               comment-tokens = [
                 "-"
@@ -30,10 +29,10 @@
               ];
               formatter = mkPrettier "markdown";
               language-servers = [ mpls.name ];
-            }
-          ];
+            };
+          };
 
-          language-server.${mpls.name} = {
+          lsp.${mpls.name} = {
             command = mpls.command;
             args = [
               "--no-auto"

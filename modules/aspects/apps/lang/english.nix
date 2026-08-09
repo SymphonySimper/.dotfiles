@@ -7,29 +7,26 @@
         ...
       }:
       let
-        lsp = {
-          harper = rec {
-            name = "harper-ls";
-            command = lib.getExe' pkgs.harper name;
-          };
+        harper = rec {
+          name = "harper-ls";
+          command = lib.getExe' pkgs.harper name;
         };
       in
       {
-        programs.helix.languages = {
-          language-server = {
-            ${lsp.harper.name}.command = lsp.harper.command;
+        programs.helix = {
+          lsp = {
+            ${harper.name}.command = harper.command;
           };
 
-          language =
-            map
-              (name: {
-                inherit name;
-                language-servers = [ lsp.harper.name ];
-              })
+          lang =
+            lib.genAttrs
               [
                 "git-commit"
                 "markdown"
-              ];
+              ]
+              (name: {
+                language-servers = [ harper.name ];
+              });
         };
       };
   };

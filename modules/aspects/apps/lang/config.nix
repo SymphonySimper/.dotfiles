@@ -18,48 +18,36 @@
           else
             "${inputs.schemastore}/src/schemas/json/${name}.json";
 
-        lsp = {
-          json = mkVscodeLsp "json";
-        };
+        json = mkVscodeLsp "json";
       in
       {
-        programs.helix.languages = rec {
-          language = builtins.concatLists [
+        programs.helix = rec {
+          lang = {
+            yaml.formatter = mkPrettier "yaml";
+            toml.formatter = {
+              command = lsp.taplo.command;
+              args = [
+                "format"
+                "-"
+              ];
+            };
+          }
+          // (lib.genAttrs
             [
-              {
-                name = "yaml";
-                formatter = mkPrettier "yaml";
-              }
-              {
-                name = "toml";
-                formatter = {
-                  command = language-server.taplo.command;
-                  args = [
-                    "format"
-                    "-"
-                  ];
-                };
-              }
+              "json"
+              "jsonc"
             ]
+            (name: {
+              formatter = mkPrettier name;
+              language-servers = [ json.name ];
+            })
+          );
 
-            (map
-              (name: {
-                inherit name;
-                formatter = mkPrettier name;
-                language-servers = [ lsp.json.name ];
-              })
-              [
-                "json"
-                "jsonc"
-              ]
-            )
-          ];
-
-          language-server = {
+          lsp = {
             taplo.command = lib.getExe pkgs.taplo;
 
-            ${lsp.json.name} = {
-              command = lsp.json.command;
+            ${json.name} = {
+              command = json.command;
 
               config.json = {
                 validate.enable = true;
