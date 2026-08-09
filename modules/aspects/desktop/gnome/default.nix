@@ -1,12 +1,12 @@
 { den, ... }: {
   den.aspects.desktop.gnome = {
-    includes = with den.aspects; [ desktop.common ];
+    includes = with den.aspects; [
+      desktop.common
+      desktop.displayManager
+    ];
 
     nixos = { pkgs, ... }: {
-      services = {
-        desktopManager.gnome.enable = true;
-        displayManager.gdm.enable = true;
-      };
+      services.desktopManager.gnome.enable = true;
 
       environment = {
         gnome.excludePackages = with pkgs; [
