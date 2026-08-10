@@ -1,0 +1,2009 @@
+commit 88f3993d25313775b150a5e1dde874a0e42e602d
+Author: SymphonySimper <50240805+SymphonySimper@users.noreply.github.com>
+Date:   Sat Oct 4 15:54:04 2025 +0530
+
+    feat!: switch to hyprland from gnome
+
+diff --git a/modules/flake/profiles/default.nix b/modules/flake/profiles/default.nix
+index 45cb1794..9ae08ee8 100644
+--- a/modules/flake/profiles/default.nix
++++ b/modules/flake/profiles/default.nix
+@@ -33,6 +33,34 @@ let
+       gui = {
+         enable = mkGetDefault settings "gui.enable" false;
+         desktop.enable = mkGetDefault settings "gui.desktop.enable" false;
++
++        display = rec {
++          name = mkGetDefault settings "gui.display.name" "eDP-1";
++          scale = mkGetDefault settings "gui.display.scale" 1;
++          width = mkGetDefault settings "gui.display.width" 1920;
++          height = mkGetDefault settings "gui.display.height" 1080;
++          refreshRate = mkGetDefault settings "gui.display.refreshRate" 60;
++          maxRefreshRate = mkGetDefault settings "gui.display.maxRefreshRate" refreshRate;
++          vrr = mkGetDefault settings "gui.display.vrr" false;
++
++          desktop = {
++            width = width / scale;
++            height = height / scale;
++          };
++
++          string = {
++            scale = builtins.toString scale;
++            width = builtins.toString width;
++            height = builtins.toString height;
++            refreshRate = builtins.toString refreshRate;
++            maxRefreshRate = builtins.toString maxRefreshRate;
++
++            desktop = {
++              width = builtins.toString desktop.width;
++              height = builtins.toString desktop.height;
++            };
++          };
++        };
+       };
+ 
+       theme = {
+diff --git a/modules/home/browser.nix b/modules/home/browser.nix
+index a35259fa..300fd4b0 100644
+--- a/modules/home/browser.nix
++++ b/modules/home/browser.nix
+@@ -55,14 +55,24 @@ in
+             "x-scheme-handler/https"
+           ];
+ 
+-          automove = [
++          windows = [
+             {
+-              name = "${id}.desktop";
++              inherit id;
++              silent = true;
+               workspace = 2;
++
++              state = {
++                name = "idleinhibit";
++                opts = "fullscreen";
++              };
++            }
++            {
++              id = ".*sharing your screen.*";
++              type = "title";
++              silent = true;
++              workspace = 10;
+             }
+           ];
+-
+-          appfolder.Bookmarks.categories = [ category ];
+         };
+     };
+ 
+diff --git a/modules/home/desktop/default.nix b/modules/home/desktop/default.nix
+index 541ced4e..ddc6b343 100644
+--- a/modules/home/desktop/default.nix
++++ b/modules/home/desktop/default.nix
+@@ -8,12 +8,19 @@
+ let
+   cfg = config.my.programs.desktop;
+ 
+-  workspaces = 5;
+-  workspacesList = builtins.genList (w: builtins.toString (w + 1)) workspaces;
++  keys = {
++    mod = "SUPER";
++    left = "h";
++    down = "j";
++    up = "k";
++    right = "l";
++  };
+ in
+ {
+   imports = [
++    ./scripts
+     ./services
++    ./utils
+   ];
+ 
+   options.my.programs.desktop = {
+@@ -56,61 +63,133 @@ in
+       default = { };
+     };
+ 
++    uwsm = lib.mkOption {
++      type = lib.types.str;
++      description = "UWSM prefix to launch programs with";
++      readOnly = true;
++      default = "uwsm-app --";
++    };
++
+     keybinds = lib.mkOption {
+       description = "Keybinds";
+       type = lib.types.listOf (
+         lib.types.submodule {
+           options = {
++            super = lib.mkOption {
++              type = lib.types.bool;
++              description = "Include super key in combination";
++              default = true;
++            };
++
++            mod = lib.mkOption {
++              type = lib.types.nullOr (
++                lib.types.enum [
++                  "CTRL"
++                  "SHIFT"
++                ]
++              );
++              description = "Modifier to be used";
++              default = null;
++            };
++
+             key = lib.mkOption {
+               type = lib.types.str;
+-              description = "Key combination";
++              description = "Finaly key in the combination";
+             };
+ 
+             cmd = lib.mkOption {
+               type = lib.types.str;
+               description = "Command to run";
+             };
++
++            uwsm = lib.mkEnableOption "Launch with UWSM";
+           };
+         }
+       );
+     };
+ 
+-    automove = lib.mkOption {
++    windows = lib.mkOption {
++      description = "Windows";
+       type = lib.types.listOf (
+         lib.types.submodule {
+           options = {
+-            workspace = lib.mkOption {
+-              type = lib.types.ints.between 1 workspaces;
+-              description = "Workspace to move the window to";
++            state = lib.mkOption {
++              # refer: https://wiki.hyprland.org/Configuring/Window-Rules/#static-rules
++              type =
++                let
++                  states = lib.types.enum [
++                    # static
++                    "float"
++                    "size"
++                    "center"
++                    "tile"
++                    "fullscreen"
++                    "maximize"
++                    "pin"
++
++                    # dynamic
++                    "idleinhibit"
++                  ];
++
++                  statesSubmodule = lib.types.submodule {
++                    options = {
++                      name = lib.mkOption {
++                        type = states;
++                        description = "Name of state";
++                      };
++
++                      opts = lib.mkOption {
++                        type = lib.types.nullOr (
++                          lib.types.oneOf [
++                            lib.types.str
++                            (lib.types.listOf lib.types.str)
++                          ]
++                        );
++                        description = "Additional options for state";
++                        default = null;
++                      };
++                    };
++                  };
++                in
++                lib.types.nullOr (
++                  lib.types.oneOf [
++                    states
++                    statesSubmodule
++                    (lib.types.listOf (
++                      lib.types.oneOf [
++                        states
++                        statesSubmodule
++                      ]
++                    ))
++                  ]
++                );
++              description = "State of the window";
++              default = null;
+             };
+ 
+-            name = lib.mkOption {
+-              type = lib.types.str;
+-              description = "Desktop file name";
+-              example = "alacritty.desktop";
++            workspace = lib.mkOption {
++              type = lib.types.nullOr (lib.types.enum (builtins.genList (x: x + 1) 10));
++              description = "Workspace where the window should be placed";
++              default = null;
+             };
+-          };
+-        }
+-      );
+-      description = "Auto move window to set workspace";
+-      default = [ ];
+-    };
+ 
+-    appfolder = lib.mkOption {
+-      description = "Create app folder";
+-      default = { };
+-      type = lib.types.attrsOf (
+-        lib.types.submodule {
+-          options = {
+-            apps = lib.mkOption {
+-              type = lib.types.listOf lib.types.str;
+-              default = [ ];
+-              description = "Desktop Entries to be included in folder";
++            silent = lib.mkEnableOption "Silent";
++
++            type = lib.mkOption {
++              type = lib.types.enum [
++                "class"
++                "title"
++              ];
++              description = "Type of window indentifier";
++              default = "class";
+             };
+-            categories = lib.mkOption {
+-              type = lib.types.listOf lib.types.str;
+-              default = [ ];
+-              description = "Categories to be included in folder";
++
++            id = lib.mkOption {
++              type = lib.types.oneOf [
++                lib.types.str
++                (lib.types.listOf lib.types.str)
++              ];
++              description = "Window identifier";
+             };
+           };
+         }
+@@ -120,195 +199,283 @@ in
+ 
+   config = lib.mkIf cfg.enable {
+     my.programs.desktop = {
+-      appfolder = {
+-        CLI.categories = [ "ConsoleOnly" ];
+-        Games.categories = [ "Game" ];
+-        Office.categories = [ "Office" ];
+-        Utilities.categories = [ "X-GNOME-Utilities" ];
+-      };
+-
+-      mime."org.gnome.Loupe" = [
+-        "image/jpeg"
+-        "image/png"
++      autostart = [
++        {
++          # set wallpaper
++          name = "myswaybg";
++          cmd = lib.getExe (
++            pkgs.writeShellScriptBin "myswaybg" ''
++              exec ${lib.getExe' pkgs.swaybg "swaybg"} -c "${my.theme.color.crust}" -m solid_color
++            ''
++          );
++        }
+       ];
+-    };
+ 
+-    # avatar
+-    home.file.".face".source = ../../flake/assets/images/avatar.png; # it has to be a png
++      windows = [
++        {
++          id = "xdg-desktop-portal-gtk";
++          state = [
++            "float"
++            "center"
++          ];
++        }
+ 
+-    programs.gnome-shell = {
+-      enable = true;
+-      extensions = [
+-        { package = pkgs.gnomeExtensions.caffeine; }
+-        { package = pkgs.gnomeExtensions.auto-move-windows; }
++        {
++          id = "jetbrains-studio";
++          workspace = 4;
++        }
+       ];
+     };
+ 
+-    dconf = {
++    services.gnome-keyring = {
+       enable = true;
++      components = [
++        "pkcs11"
++        "secrets"
++        "ssh"
++      ];
++    };
+ 
+-      settings = lib.mkMerge [
+-        {
+-          # shell
+-          "org/gnome/shell" = {
+-            app-picker-layout = [ ]; # resets app order
+-            favorite-apps = [ ];
+-          };
++    # protal settings
++    xdg.configFile."hypr/xdph.conf".text = ''
++      screencopy {
++          max_fps = 60
++          allow_token_by_default = true
++      }
++    '';
+ 
+-          "org/gnome/desktop/interface" = {
+-            enable-animations = true;
+-            show-battery-percentage = true;
++    wayland.windowManager.hyprland = lib.mkMerge [
++      {
++        enable = true;
++        package = null;
++        portalPackage = null;
++        xwayland.enable = true;
++        systemd = {
++          enable = false;
++          variables = [ "--all" ];
++        };
++
++        settings = {
++          monitorv2 = {
++            output = my.gui.display.name;
++            mode = (
++              builtins.concatStringsSep "" [
++                my.gui.display.string.width
++                "x"
++                my.gui.display.string.height
++                "@"
++                my.gui.display.string.refreshRate
++              ]
++            );
++            position = "0x0";
++            scale = my.gui.display.string.scale;
+           };
+ 
+-          ## wallpaper
+-          "org/gnome/desktop/background" = {
+-            picture-uri = my.theme.wallpaper;
+-            picture-uri-dark = my.theme.wallpaper;
+-          };
++          env = [
++            "XCURSOR_SIZE,24"
++            "HYPRCURSOR_SIZE,24"
++          ];
+ 
+-          "org/gnome/desktop/screensaver" = {
+-            picture-uri = my.theme.wallpaper;
++          # Look and Feel
++          general = {
++            gaps_in = 0;
++            gaps_out = 0;
++            border_size = 1;
++            resize_on_border = false;
++            allow_tearing = false;
++            layout = "dwindle";
++
++            "col.inactive_border" = "$overlay0";
++            "col.active_border" = "$accent";
+           };
+ 
+-          # "org/gnome/settings-daemon/plugins/color" = {
+-          #   night-light-enabled = true;
+-          #   night-light-schedule-automatic = false;
+-          #   night-light-temperature = lib.hm.gvariant.mkUint32 3700;
+-          # };
+-
+-          "org/gnome/mutter".experimental-features = [
+-            "scale-monitor-framebuffer" # fractional scaling
+-            "variable-refresh-rate"
+-          ];
++          decoration = {
++            rounding = 0;
+ 
+-          ## mouse
+-          "org/gnome/desktop/peripherals/mouse".accel-profile = "flat";
+-          "org/gnome/desktop/peripherals/touchpad" = {
+-            natural-scroll = false;
+-            two-finger-scrolling-enabled = true;
+-          };
++            active_opacity = 1.0;
++            inactive_opacity = 1.0;
+ 
+-          # applications
+-          "org/gnome/nautilus/preferences" = {
+-            click-policy = "single";
+-            default-folder-viewer = "list-view";
+-            migrated-gtk-settings = true;
+-            search-filter-time-type = "last_modified";
+-            search-view = "list-view";
++            shadow.enabled = false;
++            blur.enabled = true;
+           };
++          animations.enabled = false;
+ 
+-          # privacy
+-          "org/gnome/desktop/privacy" = {
+-            remove-old-temp-files = true;
+-            remove-old-trash-files = true;
++          dwindle = {
++            pseudotile = true;
++            preserve_split = true;
++            force_split = 2;
+           };
+ 
+-          # extensions
+-          "org/gnome/shell/extensions/caffeine" = {
+-            indicator-position-max = 1;
+-            enable-fullscreen = false;
+-            show-indicator = "only-active";
+-            show-notifications = false;
+-            toggle-shortcut = [ "<Super>F10" ];
++          misc = {
++            force_default_wallpaper = 0;
++            disable_splash_rendering = true;
++            disable_hyprland_logo = true;
++            focus_on_activate = false;
++            vrr = if my.gui.display.vrr then 1 else 0; # Adaptive sync
+           };
+ 
+-          "org/gnome/shell/extensions/auto-move-windows".application-list = builtins.map (
+-            entry: "${entry.name}:${builtins.toString entry.workspace}"
+-          ) cfg.automove;
+-        }
+-
+-        (lib.mkMerge [
+-          # App folders
+-          (builtins.listToAttrs (
+-            builtins.map (folder: {
+-              name = "org/gnome/desktop/app-folders/folders/${folder.name}";
+-              value = lib.mkMerge [
+-                { name = folder.name; }
+-
+-                (lib.mkIf (builtins.length folder.value.apps > 0) {
+-                  apps = folder.value.apps;
+-                })
+-
+-                (lib.mkIf (builtins.length folder.value.categories > 0) {
+-                  categories = folder.value.categories;
+-                })
+-              ];
+-            }) (lib.attrsets.attrsToList cfg.appfolder)
+-          ))
++          input = {
++            kb_layout = "us";
++            follow_mouse = 0;
++            sensitivity = 0;
++            accel_profile = "flat";
+ 
+-          { "org/gnome/desktop/app-folders".folder-children = builtins.attrNames cfg.appfolder; }
+-        ])
+-
+-        {
+-          # workspace
+-          "org/gnome/mutter".dynamic-workspaces = false;
+-          "org/gnome/desktop/wm/preferences".num-workspaces = workspaces;
+-          "org/gnome/shell/app-switcher".current-workspace-only = true;
+-
+-          "org/gnome/desktop/wm/keybindings" = builtins.listToAttrs (
+-            builtins.concatMap (w: [
+-              {
+-                name = "move-to-workspace-${w}";
+-                value = [ "<Shift><Super>${w}" ];
+-              }
+-              {
+-                name = "switch-to-workspace-${w}";
+-                value = [ "<Super>${w}" ];
+-              }
+-            ]) workspacesList
+-          );
++            touchpad = {
++              disable_while_typing = true;
++              natural_scroll = false;
++              tap-to-click = true;
++            };
++          };
+ 
+-          "org/gnome/shell/keybindings" = builtins.listToAttrs (
+-            builtins.map (w: {
+-              name = "switch-to-application-${w}";
+-              value = [ ];
+-            }) workspacesList
+-          );
+-        }
++          gesture = [ "3, horizontal, workspace" ];
++
++          bind = lib.lists.flatten [
++            "${keys.mod}, Q, killactive"
++            "${keys.mod} SHIFT, E, exec, uwsm stop"
++            "${keys.mod}, f, fullscreen"
++            "${keys.mod} SHIFT, F, togglefloating"
++            "${keys.mod}, space, cyclenext"
++
++            (builtins.map (
++              bind:
++              let
++                modKey = if bind.super then "${keys.mod}" else "";
++                action = if bind.mod != null then bind.mod else "";
++
++                prefix = if modKey == "" && action == "" then "," else "${modKey} ${action},";
++              in
++              "${prefix} ${bind.key}, exec, ${if bind.uwsm then cfg.uwsm else ""} ${bind.cmd}"
++            ) cfg.keybinds)
++
++            (builtins.concatMap (
++              num:
++              let
++                workspaceNum = builtins.toString (if num == 0 then 10 else num);
++                numStr = builtins.toString num;
++              in
++              [
++                # Switch workspaces with mainMod + [0-9]
++                "${keys.mod}, ${numStr}, workspace, ${workspaceNum}"
++                # Move active window to a workspace with mainMod + SHIFT + [0-9]
++                "${keys.mod} SHIFT, ${numStr}, movetoworkspace, ${workspaceNum}"
++              ]
++            ) (lib.lists.range 0 9))
++          ];
+ 
+-        (
+-          let
+-            customKeybinds = (
+-              builtins.listToAttrs (
+-                lib.lists.imap0 (i: bind: {
+-                  name = "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom${builtins.toString i}";
+-                  value = {
+-                    name = if builtins.hasAttr "name" bind then bind.name else bind.cmd;
+-                    binding = bind.key;
+-                    command = bind.cmd;
+-                  };
+-                }) cfg.keybinds
++          windowrule = lib.lists.flatten [
++            # refer: https://github.com/hyprwm/Hyprland/pull/4704#issuecomment-2304649119
++            "noborder, onworkspace:w[tv1] f[-1], floating:0"
++
++            (builtins.concatMap (
++              window:
++              let
++                ids = if builtins.typeOf window.id == "list" then window.id else [ window.id ];
++                states =
++                  (if builtins.typeOf window.state == "list" then window.state else [ window.state ])
++                  ++ (lib.optionals (window.workspace != null) [ null ]);
++              in
++              builtins.concatMap (
++                id:
++                (builtins.map (
++                  state:
++                  builtins.concatStringsSep ", " (
++                    builtins.filter (r: (builtins.stringLength r) > 0) [
++                      (lib.strings.optionalString (state != null) (
++                        if builtins.typeOf state == "string" then
++                          state
++                        else
++                          builtins.concatStringsSep " " (
++                            [ state.name ]
++                            ++ (
++                              let
++                                opts = state.opts;
++                              in
++                              lib.optionals (opts != null) (if builtins.typeOf opts == "list" then opts else [ opts ])
++                            )
++                          )
++                      ))
++
++                      (lib.strings.optionalString (window.workspace != null && state == null) (
++                        builtins.concatStringsSep " " [
++                          "workspace"
++                          (builtins.toString window.workspace)
++                          (lib.strings.optionalString window.silent "silent")
++                        ]
++                      ))
++
++                      "${window.type}:^(${id})$"
++                    ]
++                  )
++                ) states)
++              ) ids
++            ) cfg.windows)
++          ];
++        };
++      }
++
++      {
++        # window manipulation binds
++        settings = {
++          bind = lib.lists.flatten (
++            builtins.map
++              (
++                action:
++                (lib.attrsets.mapAttrsToList
++                  (
++                    name: value:
++                    (builtins.concatStringsSep ", " [
++                      (builtins.concatStringsSep " " ([ keys.mod ] ++ action.mod))
++                      value
++                      action.name
++                      name
++                    ])
++                  )
++                  {
++                    l = keys.left;
++                    r = keys.right;
++                    u = keys.up;
++                    d = keys.down;
++                  }
++                )
+               )
+-            );
+-          in
+-          lib.mkMerge [
+-            # Keybinds
+-            {
+-              "org/gnome/desktop/wm/keybindings".close = [ "<Super>q" ]; # close app
+-
+-              "org/gnome/shell/keybindings" = {
+-                screenshot = [ "<Super>F11" ];
+-                screenshot-window = [ "<Shift><Control>F11" ];
+-                show-screenshot-ui = [ "<Shift><Super>F11" ];
+-              };
+-
+-              "org/gnome/settings-daemon/plugins/media-keys" = {
+-                home = [ "<Super>e" ];
+-                mic-mute = [ "F8" ];
+-                play = [ "F7" ];
+-                volume-down = [ "<Super>F2" ];
+-                volume-mute = [ "<Shift><Super>F2" ];
+-                volume-up = [ "<Super>F3" ];
+-                custom-keybindings = builtins.map (name: "/${name}/") (builtins.attrNames customKeybinds);
+-              };
+-            }
++              [
++                {
++                  name = "movefocus";
++                  mod = [ ];
++                }
++                {
++                  name = "swapwindow";
++                  mod = [ "SHIFT" ];
++                }
++                {
++                  name = "movewindow";
++                  mod = [ "CTRL" ];
++                }
++              ]
++          );
+ 
+-            ## Custom Keybinds
+-            customKeybinds
+-          ]
+-        )
+-      ];
+-    };
++          bindm = [
++            "${keys.mod}, mouse:272, movewindow"
++            "${keys.mod}, mouse:273, resizewindow"
++          ];
++        };
++
++        ## resize windows
++        extraConfig = # conf
++          ''
++            bind = ${keys.mod}, R, submap, resize
++            submap = resize
++
++            binde = , ${keys.right}, resizeactive, 10 0
++            binde = , ${keys.left}, resizeactive, -10 0
++            binde = , ${keys.up}, resizeactive, 0 -10
++            binde = , ${keys.down}, resizeactive, 0 10
++
++            bind = , escape, submap, reset
++            submap = reset
++          '';
++      }
++    ];
+ 
+     xdg = {
+       mime.enable = true;
+diff --git a/modules/home/desktop/scripts/brightness.nix b/modules/home/desktop/scripts/brightness.nix
+new file mode 100644
+index 00000000..720e3020
+--- /dev/null
++++ b/modules/home/desktop/scripts/brightness.nix
+@@ -0,0 +1,113 @@
++{
++  config,
++  pkgs,
++  lib,
++  ...
++}:
++let
++  brightness = lib.getExe (
++    pkgs.writeShellScriptBin "mybrightness" # sh
++      ''
++        app_bin="${lib.getExe pkgs.brightnessctl}"
++        app="$app_bin -m"
++        backup_file="${config.xdg.cacheHome}/last-brightness"
++        save_file="${config.xdg.stateHome}/.my-brightness"
++
++        toggle_ness() {
++        	if [ -f $backup_file ]; then
++        		$app s $(<$backup_file)
++        		rm $backup_file
++        	else
++        		$app g >$backup_file
++        		$app s 100%
++        	fi
++        }
++
++        set_brightness() {
++          $app s $1;
++          save;
++        }
++
++        get_brightness() {
++          echo "$($app i | cut -d ',' -f4 | tr -d '%')"
++        }
++
++        save() {
++          echo $($app_bin g) > $save_file;
++          value=$(get_brightness)
++          ${lib.my.mkNotification {
++            tag = "my-brightness";
++            title = "Brightness ($value%)";
++            progress = "$value";
++          }}
++        }
++
++        restore() {
++          sleep 0.2s
++          if [ -f "$save_file" ]; then
++            $app s $(<$save_file)
++            return 0;
++          fi
++
++          return 1;
++        }
++
++        case "$1" in
++        -u) set_brightness +2% ;;
++        -d) set_brightness 2%- ;;
++        -s) set_brightness $2 ;;
++        -g) get_brightness ;;
++        -t) toggle_ness ;;
++        -r) restore ;; # Restore brightness
++        esac
++      ''
++  );
++in
++{
++  my.programs.desktop = {
++    keybinds = [
++      {
++        key = "F5";
++        cmd = "${brightness} -d";
++      }
++      {
++        key = "F6";
++        cmd = "${brightness} -u";
++      }
++    ];
++
++    notifybar.modules =
++      let
++        cfg = config.my.programs.desktop.notifybar;
++      in
++      [
++        {
++          name = "Brightness";
++          order.module = "Refresh Rate";
++          logic = # sh
++            ''
++              brightness_status=$(${brightness} -g)
++              brightness_title_style="${cfg.style.normal}"
++              if [[ $brightness_status -gt 80 ]]; then
++                brightness_color="${cfg.color.err}"
++                brightness_title_style="bold"
++              elif [[ $brightness_status -gt 50 ]]; then
++                brightness_color="${cfg.color.warn}"
++                brightness_title_style="bold"
++              elif [[ $brightness_status -gt 20 ]]; then
++                brightness_color="${cfg.color.ok}"
++              else
++                brightness_color="${cfg.color.good}"
++              fi
++            '';
++          style = "$brightness_title_style";
++          value = [
++            {
++              text = "\${brightness_status}%";
++              color = "$brightness_color";
++            }
++          ];
++        }
++      ];
++  };
++}
+diff --git a/modules/home/desktop/scripts/changefps.nix b/modules/home/desktop/scripts/changefps.nix
+new file mode 100644
+index 00000000..812610bd
+--- /dev/null
++++ b/modules/home/desktop/scripts/changefps.nix
+@@ -0,0 +1,109 @@
++{
++  my,
++  config,
++  pkgs,
++  lib,
++  ...
++}:
++let
++  jq = lib.getExe pkgs.jq;
++
++  mkMonitor =
++    refreshRate: # sh
++    let
++      monitorConfig = builtins.concatStringsSep ", " [
++        my.gui.display.name
++        "${my.gui.display.string.width}x${my.gui.display.string.height}@${refreshRate}Hz"
++        "auto"
++        my.gui.display.string.scale
++        "vrr"
++        (if my.gui.display.vrr then "1" else "0")
++      ];
++    in
++    ''
++      hyprctl keyword monitor '${monitorConfig}'
++    '';
++
++  changefps = lib.getExe (
++    pkgs.writeShellScriptBin "mychangefps"
++      # sh
++      ''
++        function get_rr() {
++            hyprctl monitors -j | ${jq} '.[0].refreshRate' | cut -d '.' -f1
++        }
++
++        function notify() {
++            ${lib.my.mkNotification {
++              tag = "mychangefps";
++              title = "RefreshRate is set to \${1}Hz";
++            }}
++        }
++
++        function min() {
++            ${mkMonitor my.gui.display.string.refreshRate}
++            notify "${my.gui.display.string.refreshRate}"
++        }
++
++        function max() {
++            ${mkMonitor my.gui.display.string.maxRefreshRate}
++            notify "${my.gui.display.string.maxRefreshRate}"
++        }
++
++        function toggle() {
++          if [[ $(get_rr) -eq ${my.gui.display.string.maxRefreshRate} ]]; then
++            min
++          else
++            max
++          fi
++        }
++
++        case "$1" in
++          get) get_rr ;;
++          min) min ;;
++          max) max ;;
++          toggle) toggle ;;
++        esac
++      ''
++  );
++in
++{
++  my.programs.desktop = {
++    keybinds = [
++      {
++        mod = "SHIFT";
++        key = "F10";
++        cmd = "${changefps} toggle";
++      }
++    ];
++
++    notifybar.modules =
++      let
++        cfg = config.my.programs.desktop.notifybar;
++      in
++      [
++        {
++          name = "Refresh Rate";
++          order.module = "Battery";
++          logic = # sh
++            ''
++              refresh_rate_status=$(${changefps} get)
++              refresh_rate_title_style="${cfg.style.normal}"
++
++              if [ $refresh_rate_status <= 60 ]; then
++                refresh_rate_color="${cfg.color.good}"
++              else
++                refresh_rate_color="${cfg.color.err}"
++                refresh_rate_title_style="${cfg.style.bold}"
++              fi
++            '';
++          style = "$refresh_rate_title_style";
++          value = [
++            {
++              text = "\${refresh_rate_status}Hz";
++              color = "$refresh_rate_color";
++            }
++          ];
++        }
++      ];
++  };
++}
+diff --git a/modules/home/desktop/scripts/default.nix b/modules/home/desktop/scripts/default.nix
+new file mode 100644
+index 00000000..33783038
+--- /dev/null
++++ b/modules/home/desktop/scripts/default.nix
+@@ -0,0 +1,9 @@
++{ lib, ... }:
++{
++  imports = lib.my.mkReadDir {
++    path = ./.;
++    asPath = true;
++    type = "nix";
++    ignoreDefault = true;
++  };
++}
+diff --git a/modules/home/desktop/scripts/screenshot.nix b/modules/home/desktop/scripts/screenshot.nix
+new file mode 100644
+index 00000000..8438e6ca
+--- /dev/null
++++ b/modules/home/desktop/scripts/screenshot.nix
+@@ -0,0 +1,34 @@
++{ pkgs, lib, ... }:
++let
++  screenshot = lib.getExe (
++    pkgs.writeShellScriptBin "myscreenshot"
++      # sh
++      ''
++        take_screenshot() {
++          current_date=$(date +%s)
++          ${lib.getExe pkgs.grimblast} --notify --freeze copysave $1 \
++          "$HOME/Pictures/Screenshots/$current_date.png"
++        }
++
++        take_screenshot "$1"
++      ''
++  );
++in
++{
++  my.programs.desktop.keybinds = [
++    {
++      key = "F11";
++      cmd = "${screenshot} screen";
++    }
++    {
++      mod = "CTRL";
++      key = "F11";
++      cmd = "${screenshot} window";
++    }
++    {
++      mod = "SHIFT";
++      key = "F11";
++      cmd = "${screenshot} area";
++    }
++  ];
++}
+diff --git a/modules/home/desktop/scripts/volume.nix b/modules/home/desktop/scripts/volume.nix
+new file mode 100644
+index 00000000..54a935a2
+--- /dev/null
++++ b/modules/home/desktop/scripts/volume.nix
+@@ -0,0 +1,173 @@
++{
++  config,
++  pkgs,
++  lib,
++  ...
++}:
++let
++  volume = lib.getExe (
++    pkgs.writeShellScriptBin "myvolume" # sh
++      ''
++        app="${lib.getExe' pkgs.wireplumber "wpctl"}"
++
++        #Icons
++        sink="@DEFAULT_AUDIO_SINK@"
++        source='@DEFAULT_AUDIO_SOURCE@'
++
++        function get_mute() {
++        	$app status $source | grep -qi -E "$1.*muted" && echo 0 || echo 1
++        }
++
++        get_volume() {
++          volume=$($app get-volume $sink | cut -d ' ' -f2)
++          echo "$volume * 100 / 1" | "${lib.getExe' pkgs.bc "bc"}"
++        }
++
++        change_vol() {
++          $app set-volume $sink "$1";
++          volume=$(get_volume)
++          ${lib.my.mkNotification {
++            tag = "my-audio";
++            title = "Volume ($volume%)";
++            progress = "$volume";
++          }}
++        }
++
++        set_vol() { change_vol "$1"; }
++
++        notify_toggle() {
++          if [[ $(get_mute $1) -eq 0 ]]; then
++            status="muted"
++          else
++            status="unmuted"
++          fi
++          ${lib.my.mkNotification {
++            tag = "my-$1";
++            title = "$2 is $status";
++          }}
++        }
++
++        toggle_mute() {
++          $app set-mute $sink toggle;
++          notify_toggle "stereo" "Audio"
++        }
++
++        toggle_mic() {
++        	$app set-mute $source toggle
++          notify_toggle "mic" "Mic"
++        }
++
++        case "$1" in
++        -s)
++        	shift
++        	set_vol "$1"
++        	;;
++        -u) change_vol "0.02+" ;;
++        -d) change_vol "0.02-" ;;
++        -U) change_vol "0.1+" ;;
++        -D) change_vol "0.1-" ;;
++        -m) toggle_mute ;;
++        -M) toggle_mic ;;
++        -gV)
++          # Get audio volume
++          get_volume
++          ;;
++        # Get audio mute
++        -gm) get_mute "stereo" ;;
++        # Get mic mute
++        -gM) get_mute "mic" ;;
++        esac
++      ''
++  );
++in
++{
++  my.programs.desktop = {
++    keybinds = [
++      {
++        key = "F2";
++        cmd = "${volume} -d";
++      }
++      {
++        key = "F3";
++        cmd = "${volume} -u";
++      }
++      {
++        mod = "SHIFT";
++        key = "F2";
++        cmd = "${volume} -m";
++      }
++      {
++        super = false;
++        key = "F8";
++        cmd = "${volume} -M"; # toggle mic
++      }
++    ];
++
++    notifybar.modules =
++      let
++        cfg = config.my.programs.desktop.notifybar;
++      in
++      [
++        {
++          name = "Audio";
++          order.module = "Caffeine";
++          logic = # sh
++            ''
++              audio_mute=$(${volume} -gm)
++              audio_volume=$(${volume} -gV)
++              audio_title_style="${cfg.style.normal}"
++              if [[ $audio_mute -eq 0 ]]; then
++                audio="MUTED"
++                audio_title_style="${cfg.style.bold}"
++                audio_color="${cfg.color.err}"
++              else
++                audio="$audio_volume"
++                if [[ $audio_volume -gt 80 ]]; then
++                  audio_color="${cfg.color.err}"
++                  audio_title_style="bold"
++                elif [[ $audio_volume -gt 50 ]]; then
++                  audio_color="${cfg.color.warn}"
++                  audio_title_style="bold"
++                elif [[ $audio_volume -gt 20 ]]; then
++                  audio_color="${cfg.color.ok}"
++                else
++                  audio_color="${cfg.color.good}"
++                fi
++              fi
++            '';
++          style = "$audio_title_style";
++          value = [
++            {
++              text = "\${audio}%";
++              color = "$audio_color";
++            }
++          ];
++        }
++
++        {
++          name = "Mic";
++          order.module = "Audio";
++          logic = # sh
++            ''
++              mic_mute=$(${volume} -gM)
++              mic_title_style="${cfg.style.normal}"
++              if [[ $mic_mute -eq 0 ]]; then
++                mic="MUTED"
++                mic_color="${cfg.color.good}"
++              else
++                mic="UNMUTED"
++                mic_title_style="bold"
++                mic_color="${cfg.color.err}"
++              fi
++            '';
++          style = "$mic_title_style";
++          value = [
++            {
++              text = "$mic";
++              color = "$mic_color";
++            }
++          ];
++        }
++      ];
++  };
++}
+diff --git a/modules/home/desktop/utils/default.nix b/modules/home/desktop/utils/default.nix
+new file mode 100644
+index 00000000..a3390e5d
+--- /dev/null
++++ b/modules/home/desktop/utils/default.nix
+@@ -0,0 +1,8 @@
++{ ... }:
++{
++  imports = [
++    ./idle.nix
++    ./launcher.nix
++    ./notification.nix
++  ];
++}
+diff --git a/modules/home/desktop/utils/idle.nix b/modules/home/desktop/utils/idle.nix
+new file mode 100644
+index 00000000..533c18f6
+--- /dev/null
++++ b/modules/home/desktop/utils/idle.nix
+@@ -0,0 +1,180 @@
++{
++  my,
++  config,
++  pkgs,
++  lib,
++  ...
++}:
++let
++  caffeine = lib.getExe (
++    pkgs.writeShellScriptBin "mycaffeine" # sh
++      ''
++        handle_idle() {
++          systemctl $1 --user hypridle;
++        }
++
++        noti() {
++          ${lib.my.mkNotification {
++            tag = "mycaffeine";
++            title = "Caffeine $1";
++          }}
++        }
++
++        get_status() {
++          handle_idle status | grep -q 'inactive' && echo 0 || echo 1
++        }
++
++        case "$1" in
++          -g) get_status ;;
++           *)
++            is_inactive=$(get_status)
++            if [[ $is_inactive -eq 0 ]]; then
++              handle_idle start
++              noti "Disabled"
++            else
++              handle_idle stop
++              noti "Enabled"
++            fi
++            ;;
++        esac
++      ''
++  );
++in
++{
++  config = lib.mkIf config.my.programs.desktop.enable {
++    services.hypridle = {
++      enable = true;
++
++      settings = {
++        general = {
++          lock_cmd = "pidof hyprlock || hyprlock"; # avoid starting multiple hyprlock instances.
++          before_sleep_cmd = "loginctl lock-session"; # lock before suspend.
++          after_sleep_cmd = "hyprctl dispatch dpms on"; # to avoid having to press a key twice to turn on the display.
++        };
++
++        listener = [
++          {
++            timeout = 120;
++            on-timeout = "loginctl lock-session"; # lock screen when timeout has passed
++          }
++          {
++            timeout = 300;
++            on-timeout = "systemctl suspend"; # suspend pc
++          }
++        ];
++      };
++    };
++
++    my.programs.desktop = {
++      keybinds = [
++        {
++          key = "F10";
++          cmd = "${caffeine}";
++        }
++      ];
++
++      notifybar.modules =
++        let
++          cfg = config.my.programs.desktop.notifybar;
++        in
++        [
++          {
++            name = "Caffeine";
++            order.module = "Power Profile";
++            logic = # sh
++              ''
++                caffeine_inactive=$(${caffeine} -g)
++                caffeine_title_style="${cfg.style.normal}"
++                if [[ $caffeine_inactive -eq 1 ]]; then
++                  caffeine_status="DISABLED"
++                  caffeine_color="${cfg.color.disabled}"
++                else
++                  caffeine_status="ENABLED"
++                  caffeine_title_style="bold"
++                  caffeine_color="${my.theme.color.peach}"
++                fi
++              '';
++            style = "$caffeine_title_style";
++            value = [
++              {
++                text = "$caffeine_status";
++                color = "$caffeine_color";
++              }
++            ];
++          }
++        ];
++    };
++
++    programs.hyprlock = {
++      enable = true;
++
++      settings = {
++        general = {
++          disable_loading_bar = false;
++          hide_cursor = true;
++          fractional_scaling = 0;
++        };
++
++        background.color = "$base";
++
++        input-field =
++          let
++            outlineThickness = 4;
++            padding = outlineThickness + 16;
++            width = builtins.toString (my.gui.display.width - padding);
++            height = builtins.toString (my.gui.display.height - padding);
++          in
++          {
++            size = "${width}, ${height}";
++            outline_thickness = outlineThickness;
++            outer_color = "$surface0";
++            inner_color = "$base";
++            font_color = "$overlay0";
++            font_family = my.theme.font.mono;
++            placeholder_text = "";
++            hide_input = true;
++            hide_input_base_color = "$accent";
++            rounding = 0;
++            position = "0, 0";
++            halign = "center";
++            valign = "center";
++            zindex = 0;
++          };
++
++        label =
++          let
++            timeFontSize = 90;
++            dateFontSize = timeFontSize / 4;
++            mkY = value: builtins.toString (value / 2 + 16);
++          in
++          [
++            {
++              # Date
++              text = "cmd[update:60000] ${lib.getExe' pkgs.coreutils "date"} +'%A, %d %B %Y'"; # update every 60 seconds
++              font_size = dateFontSize;
++              font_family = my.theme.font.mono;
++              color = "$text";
++              position = "0, ${mkY dateFontSize}";
++              halign = "center";
++              valign = "center";
++            }
++            {
++              # Time
++              text = "$TIME";
++              font_size = timeFontSize;
++              font_family = my.theme.font.mono;
++              color = "$text";
++              position = "0, -${mkY timeFontSize}";
++              halign = "center";
++              valign = "center";
++            }
++          ];
++      };
++    };
++
++    catppuccin.hyprlock = {
++      flavor = my.theme.flavors.dark;
++      useDefaultConfig = false;
++    };
++  };
++}
+diff --git a/modules/home/desktop/utils/launcher.nix b/modules/home/desktop/utils/launcher.nix
+new file mode 100644
+index 00000000..2bfdb462
+--- /dev/null
++++ b/modules/home/desktop/utils/launcher.nix
+@@ -0,0 +1,54 @@
++{
++  config,
++  pkgs,
++  lib,
++  ...
++}:
++{
++  config = lib.mkIf config.my.programs.desktop.enable {
++    my.programs.desktop.keybinds = [
++      {
++        key = "d";
++        cmd = lib.getExe (
++          pkgs.writeShellScriptBin "mylauncher" # sh
++            ''
++              cmd=$(${lib.getExe' config.programs.tofi.package "tofi-drun"})
++              if [[ -n "$cmd" ]]; then
++                exec ${config.my.programs.desktop.uwsm} $cmd
++              fi
++            ''
++        );
++      }
++    ];
++
++    programs.tofi = {
++      enable = true;
++      settings = {
++        ascii-input = true;
++        late-keyboard-init = false;
++
++        width = "100%";
++        height = "100%";
++        border-width = 0;
++        outline-width = 0;
++        padding-left = "35%";
++        padding-top = "35%";
++        result-spacing = 25;
++        num-results = 5;
++
++        # cd $(nix build nixpkgs#nerd-fonts.jetbrains-mono --print-out-paths --no-link)/share/fonts/truetype/NerdFonts/JetBrainsMono
++        font = "${pkgs.nerd-fonts.jetbrains-mono}/share/fonts/truetype/NerdFonts/JetBrainsMono/JetBrainsMonoNerdFont-Regular.ttf";
++      };
++    };
++
++    home.activation = {
++      # refer: https://github.com/philj56/tofi/issues/115#issuecomment-1950273960
++      myRmTofiCache =
++        lib.hm.dag.entryAfter [ "writeBoundary" ] # sh
++          ''
++            tofi_cache=${config.xdg.cacheHome}/tofi-drun
++            [[ -f "$tofi_cache" ]] && rm "$tofi_cache"
++          '';
++    };
++  };
++}
+diff --git a/modules/home/desktop/utils/notification.nix b/modules/home/desktop/utils/notification.nix
+new file mode 100644
+index 00000000..19e7015b
+--- /dev/null
++++ b/modules/home/desktop/utils/notification.nix
+@@ -0,0 +1,436 @@
+diff --git a/modules/home/file-manager.nix b/modules/home/file-manager.nix
+index 09b3e886..dadc485a 100644
+--- a/modules/home/file-manager.nix
++++ b/modules/home/file-manager.nix
+@@ -1,4 +1,5 @@
+ {
++  my,
+   inputs,
+   config,
+   pkgs,
+@@ -20,6 +21,7 @@ in
+     # yazi
+     ## image
+     chafa
++    ueberzugpp
+     ## archive
+     p7zip
+   ];
+@@ -41,6 +43,18 @@ in
+           linemode = "size";
+         };
+ 
++        preview = {
++          max_width = my.gui.display.width / 2;
++          max_height = my.gui.display.height / 2;
++          ueberzug_scale = my.gui.display.scale / 2;
++          # ueberzug_offset = [
++          #   ((my.gui.display.scale * 10) + my.gui.display.scale) # x
++          #   (my.gui.display.scale) # y
++          #   0.0 # w
++          #   0.0 # h
++          # ];
++        };
++
+         opener = {
+           edit = [
+             {
+diff --git a/modules/home/media.nix b/modules/home/media.nix
+index fff34baa..de582ba5 100644
+--- a/modules/home/media.nix
++++ b/modules/home/media.nix
+@@ -1,10 +1,17 @@
+-{ config, lib, ... }:
++{
++  my,
++  config,
++  pkgs,
++  lib,
++  ...
++}:
+ let
+   cfg = config.my.programs.media;
+ in
+ {
+   options.my.programs.media = {
+     enable = lib.mkEnableOption "Media";
++    video.enable = lib.mkEnableOption "Video";
+     recorder.enable = lib.mkEnableOption "Recorder";
+   };
+ 
+@@ -15,18 +22,147 @@ in
+           media = {
+             recorder.enable = lib.mkDefault false;
+           };
++
++          desktop.keybinds =
++            let
++              playerctl = lib.getExe pkgs.playerctl;
++            in
++            builtins.concatMap
++              (
++                action:
++                let
++                  default = {
++                    super = false;
++                    cmd = "${playerctl} ${action.cmd}";
++                  };
++                in
++                (
++                  (builtins.map (key: default // { key = "XF86Audio${key}"; }) action.fn)
++                  ++ [
++                    (
++                      default
++                      // {
++                        key = "F7";
++                        mod = action.mod;
++                      }
++                    )
++                  ]
++                )
++              )
++              [
++                {
++                  cmd = "play-pause";
++                  fn = [
++                    "Play"
++                    "Pause"
++                  ];
++                  mod = null;
++                }
++                {
++                  cmd = "next";
++                  fn = [ "Next" ];
++                  mod = "SHIFT";
++                }
++                {
++                  cmd = "previous";
++                  fn = [ "Prev" ];
++                  mod = "CTRL";
++                }
++              ];
+         };
+       }
+ 
+       (lib.mkIf cfg.recorder.enable {
+         programs.obs-studio.enable = true;
+ 
+-        my.programs.desktop.automove = [
++        my.programs.desktop.windows = [
++          {
++            id = "com.obsproject.Studio";
++            workspace = 9;
++          }
++        ];
++      })
++
++      (lib.mkIf cfg.video.enable {
++        my.programs.desktop.windows = [
+           {
+-            name = "com.obsproject.Studio.desktop";
++            id = "mpv";
+             workspace = 5;
++            state = [
++              "fullscreen"
++              {
++                name = "idleinhibit";
++                opts = "focus";
++              }
++            ];
+           }
+         ];
++
++        catppuccin.mpv.enable = false;
++        programs.mpv = {
++          enable = true;
++
++          package = (
++            pkgs.mpv-unwrapped.wrapper {
++              mpv = pkgs.mpv-unwrapped.override {
++                ffmpeg = pkgs.ffmpeg-full;
++                waylandSupport = true;
++              };
++            }
++          );
++
++          bindings = {
++            "Alt+LEFT" = "script-message Cycle_Video_Rotate -90";
++            "Alt+RIGHT" = "script-message Cycle_Video_Rotate 90";
++          };
++
++          config = {
++            fullscreen = "yes";
++
++            # OSD / OSC
++            osc = "no";
++            osd-font-size = 32;
++            osd-border-size = 1.5;
++            osd-font = my.theme.font.sans;
++
++            # Subtitles
++            sub-visibility = "yes";
++            sub-auto = "fuzzy"; # external subs don't have to match the file name exactly to autoload
++            sub-file-paths-append = [
++              "ass" # search for external subs in these relative subdirectories
++              "srt"
++              "sub"
++              "subs"
++              "subtitles"
++            ];
++
++            sub-font = my.theme.font.sans;
++            sub-font-size = 48;
++            sub-border-size = 2.0;
++
++            # Hardware acceleration
++            hwdec = "auto-safe";
++            vo = "gpu";
++            profile = "gpu-hq";
++            gpu-context = "wayland";
++
++            # Audio
++            audio-file-auto = "fuzzy"; # external audio doesn't has to match the file name exactly to autoload
++            audio-pitch-correction = "yes"; # automatically insert scaletempo when playing with higher speed
++
++            # Border
++            border = "no";
++
++            background-color = "#000000";
++          };
++        };
++      })
++
++      (lib.mkIf cfg.video.enable {
++        programs = {
++          yt-dlp.enable = true;
++          mpv.config.script-opts = "ytdl_hook-ytdl_path=${lib.getExe config.programs.yt-dlp.package}";
++        };
+       })
+     ]
+   );
+diff --git a/modules/home/office.nix b/modules/home/office.nix
+index c39417da..dbcb19df 100644
+--- a/modules/home/office.nix
++++ b/modules/home/office.nix
+@@ -12,21 +12,17 @@
+     # PDF
+     programs.zathura.enable = true;
+ 
+-    my.programs.desktop =
+-      let
+-        id = "org.pwmt.zathura";
+-      in
+-      {
+-        mime.${id} = [
+-          "application/pdf"
+-        ];
++    my.programs.desktop = {
++      mime."org.pwmt.zathura" = [
++        "application/pdf"
++      ];
+ 
+-        automove = [
+-          {
+-            name = "${id}.desktop";
+-            workspace = 4;
+-          }
+-        ];
+-      };
++      windows = [
++        {
++          id = "org.pwmt.zathura";
++          workspace = 4;
++        }
++      ];
++    };
+   };
+ }
+diff --git a/modules/home/scripts/reload.nix b/modules/home/scripts/reload.nix
+index 2075b5be..277f7cf9 100644
+--- a/modules/home/scripts/reload.nix
++++ b/modules/home/scripts/reload.nix
+@@ -92,7 +92,8 @@ in
+ 
+       desktop.keybinds = [
+         {
+-          key = "<Shift>F5";
++          mod = "SHIFT";
++          key = "F5";
+           cmd = lib.getExe reload;
+         }
+       ];
+diff --git a/modules/home/terminal.nix b/modules/home/terminal.nix
+index ebb522e3..d8495493 100644
+--- a/modules/home/terminal.nix
++++ b/modules/home/terminal.nix
+@@ -40,9 +40,9 @@ in
+     my.programs.desktop = {
+       autostart = [ "alacritty" ];
+ 
+-      automove = [
++      windows = [
+         {
+-          name = "Alacritty.desktop";
++          id = "Alacritty";
+           workspace = 1;
+         }
+       ];
+@@ -59,7 +59,7 @@ in
+         window = {
+           decorations = "none";
+           opacity = 1;
+-          startup_mode = "Fullscreen";
++          startup_mode = "Maximized";
+           padding = rec {
+             x = 2;
+             y = x;
+diff --git a/modules/system/desktop.nix b/modules/system/desktop.nix
+index bf2046f0..25558555 100644
+--- a/modules/system/desktop.nix
++++ b/modules/system/desktop.nix
+@@ -1,93 +1,71 @@
+-{
+-  my,
+-  config,
+-  pkgs,
+-  lib,
+-  ...
+-}:
++{ config, lib, ... }:
+ {
+   options.my.programs.desktop.enable = lib.mkEnableOption "Desktop";
+ 
+-  config = lib.mkIf config.my.programs.desktop.enable {
+-    services = {
+-      desktopManager.gnome.enable = true;
+-
+-      displayManager.gdm = {
+-        enable = true;
+-        wayland = true;
+-      };
+-    };
+-
+-    environment = {
+-      sessionVariables.NIXOS_OZONE_WL = "1";
+-      systemPackages = [ pkgs.dconf-editor ];
+-
+-      gnome.excludePackages = with pkgs; [
+-        decibels
+-        epiphany
+-        geary
+-        gnome-characters
+-        gnome-connections
+-        gnome-console
+-        gnome-contacts
+-        gnome-font-viewer
+-        gnome-maps
+-        gnome-music
+-        gnome-shell-extensions
+-        gnome-text-editor
+-        gnome-tour
+-        gnome-weather
+-        simple-scan
+-        yelp
+-      ];
+-    };
+-
+-    # avatar
+-    # refer: https://wiki.nixos.org/wiki/GNOME#Change_Profile_Photo_for_Login_and_Lockscreen_-_Declarative
+-    system.activationScripts.script.text =
+-      # sh
+-      ''
+-        avatar="${my.dir.home}/.face"
+-        if [ ! -f "$avatar" ]; then
+-          echo "$avatar not found!"
+-          exit
+-        fi
++  config = lib.mkIf config.my.programs.desktop.enable (
++    lib.mkMerge [
++      {
++        programs.hyprland = {
++          enable = true;
++          withUWSM = true;
++        };
+ 
+-        dir_base="/var/lib/AccountsService"
+-        dir_icons="''${dir_base}/icons"
+-        dir_users="''${dir_base}/users"
+-        icons="''${dir_icons}/${my.name}"
+-        users="''${dir_users}/${my.name}"
++        security = {
++          polkit.enable = true;
++          pam.services = {
++            hyprland.enableGnomeKeyring = true;
++            # Enable hyprlock
++            hyprlock = { };
++          };
++        };
+ 
+-        mkdir -p "$dir_icons"
+-        mkdir -p "$dir_users"
++        services = {
++          udisks2.enable = true;
++        };
+ 
+-        cp "$avatar" "$icons"
+-        echo -e "[User]\nIcon=$icons\n" > "$users"
++        environment.sessionVariables.NIXOS_OZONE_WL = "1";
+ 
+-        chown root:root "$users"
+-        chmod 0600 "$users"
++        my = {
++          boot.enable = true;
+ 
+-        chown root:root "$icons"
+-        chmod 0444 "$icons"
+-      '';
++          hardware = {
++            audio = {
++              enable = true;
++              programs.enable = lib.mkDefault true;
++            };
+ 
+-    my = {
+-      boot.enable = true;
++            keyboard.enable = true;
++            powerManagement.enable = true;
++          };
+ 
+-      hardware = {
+-        audio = {
+-          enable = true;
+-          programs.enable = lib.mkDefault true;
++          programs = {
++            browser.enable = true;
++          };
+         };
++      }
+ 
+-        keyboard.enable = true;
+-        powerManagement.enable = true;
+-      };
++      {
++        # uwsm module enables display manager.
++        # which then overrides tty1 (https://github.com/NixOS/nixpkgs/pull/429845)
++        services.displayManager.enable = lib.mkForce false;
+ 
+-      programs = {
+-        browser.enable = true;
+-      };
+-    };
+-  };
++        my.programs.tty."1" = {
++          skipUsername = true;
++          launch =
++            let
++              uwsm = "${lib.getExe config.programs.uwsm.package}";
++            in
++            {
++              command = # sh
++                ''
++                  if ${uwsm} check may-start; then
++                      exec ${uwsm} start /run/current-system/sw/bin/Hyprland
++                  fi
++                '';
++              dbus = false;
++            };
++        };
++      }
++    ]
++  );
+ }
+diff --git a/modules/system/hardware/audio.nix b/modules/system/hardware/audio.nix
+index 2fc9641f..b6306794 100644
+--- a/modules/system/hardware/audio.nix
++++ b/modules/system/hardware/audio.nix
+@@ -31,8 +31,12 @@ in
+       };
+     };
+ 
+-    environment.systemPackages = lib.mkIf cfg.programs.enable [
+-      pkgs.helvum
+-    ];
++    environment.systemPackages = lib.mkIf cfg.programs.enable (
++      with pkgs;
++      [
++        helvum
++        pavucontrol
++      ]
++    );
+   };
+ }
+diff --git a/modules/system/hardware/powerManagement.nix b/modules/system/hardware/powerManagement.nix
+index d0714982..a6b7eb90 100644
+--- a/modules/system/hardware/powerManagement.nix
++++ b/modules/system/hardware/powerManagement.nix
+@@ -1,6 +1,12 @@
+-{ config, lib, ... }:
++{
++  config,
++  pkgs,
++  lib,
++  ...
++}:
+ let
+   cfg = config.my.hardware.powerManagement;
++  ppd = lib.getExe config.services.power-profiles-daemon.package;
+ in
+ {
+   options.my.hardware.powerManagement = {
+@@ -16,5 +22,17 @@ in
+       auto-cpufreq.enable = lib.mkForce false;
+       tlp.enable = lib.mkForce false;
+     };
++
++    environment.systemPackages = [
++      (pkgs.writeShellScriptBin "myppd" # sh
++        ''
++          case "$1" in
++            get) ${ppd} get ;;
++            max) ${ppd} set balanced ;;
++            *) ${ppd} set power-saver ;;
++          esac                               
++        ''
++      )
++    ];
+   };
+ }
+diff --git a/profiles/gui/config.nix b/profiles/gui/config.nix
+index f65d0e62..31140d25 100644
+--- a/profiles/gui/config.nix
++++ b/profiles/gui/config.nix
+@@ -3,6 +3,16 @@
+     gui = {
+       enable = true;
+       desktop.enable = true;
++
++      display = {
++        name = "eDP-1";
++        scale = 2;
++        width = 2880;
++        height = 1800;
++        refreshRate = 120;
++        maxRefreshRate = 120;
++        vrr = true;
++      };
+     };
+   };
+ }
+diff --git a/profiles/gui/home.nix b/profiles/gui/home.nix
+index 0c7c04e1..fbcd3196 100644
+--- a/profiles/gui/home.nix
++++ b/profiles/gui/home.nix
+@@ -9,14 +9,18 @@
+ 
+   my.programs = {
+     desktop = {
+-      automove = [
++      windows = [
+         {
+-          name = "google-chrome.desktop";
+-          workspace = 2;
++          id = "google-chrome";
++          workspace = 3;
++          silent = true;
+         }
+       ];
+     };
+ 
+-    media.recorder.enable = false;
++    media = {
++      video.enable = true;
++      recorder.enable = false;
++    };
+   };
+ }
+diff --git a/profiles/gui/system.nix b/profiles/gui/system.nix
+index 8ea0b238..233924de 100644
+--- a/profiles/gui/system.nix
++++ b/profiles/gui/system.nix
+@@ -5,7 +5,11 @@
+       cpu.amd.enable = true;
+       gpu.amd.enable = true;
+ 
+-      bluetooth.enable = true;
++      bluetooth = {
++        enable = true;
++        blueman.enable = true;
++      };
++
+       ssd.enable = true;
+       led.enable = true;
+       logitech.enable = true;
