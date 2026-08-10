@@ -32,7 +32,7 @@
           settings = {
             allow_remote_control = false;
             hide_window_decorations = true;
-            scrollback_lines = 1000;
+            scrollback_lines = 5000;
             mouse_hide_wait = -1;
             enabled_layouts = "splits,stack";
 

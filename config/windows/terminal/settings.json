@@ -121,7 +121,7 @@
       "padding": "2",
       "scrollbarState": "hidden",
       "altGrAliasing": false,
-      "historySize": 1000
+      "historySize": 5000
     },
     "list": [
       {

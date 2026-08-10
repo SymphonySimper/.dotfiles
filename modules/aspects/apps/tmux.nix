@@ -45,6 +45,7 @@
             mouse = false;
             customPaneNavigationAndResize = true;
             newSession = false;
+            historyLimit = 5000;
 
             extraConfig = # conf
               ''
