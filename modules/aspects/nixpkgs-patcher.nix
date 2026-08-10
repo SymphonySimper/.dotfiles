@@ -34,6 +34,18 @@ in
       lib.types.oneOf [
         lib.types.int
         lib.types.str
+        (lib.types.submodule {
+          options = {
+            from = lib.mkOption {
+              type = lib.types.str;
+              description = "From commit rev";
+            };
+            to = lib.mkOption {
+              type = lib.types.str;
+              description = "To commit rev";
+            };
+          };
+        })
       ]
     );
 
@@ -44,6 +56,7 @@ in
 
       PR -> Int
       Commit rev -> String
+      Compare -> Attrset
     '';
   };
 
@@ -51,7 +64,13 @@ in
     flake-file.inputs = lib.mapAttrs' (
       name: source:
       let
-        path = if builtins.isInt source then "pull/${toString source}" else "commit/${source}";
+        path =
+          if builtins.isAttrs source then
+            "compare/${source.from}...${source.to}"
+          else if builtins.isInt source then
+            "pull/${toString source}"
+          else
+            "commit/${source}";
       in
       lib.nameValuePair "nixpkgs-patch-${name}" {
         url = "file+https://github.com/NixOS/nixpkgs/${path}.diff?full_index=1";
