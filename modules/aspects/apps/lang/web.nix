@@ -1,10 +1,5 @@
 {
-  flake-file.inputs = {
-    nixpkgs-patch-svelte-langage-server = {
-      url = "file+https://github.com/NixOS/nixpkgs/pull/528492.diff?full_index=1";
-      flake = false;
-    };
-  };
+  nixpkgs-patches.svelte-language-server = 528492;
 
   den.aspects.apps.lang.web = {
     nixos = {
