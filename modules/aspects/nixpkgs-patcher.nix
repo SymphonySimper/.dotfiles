@@ -1,13 +1,19 @@
-{ den, ... }: {
-  den.quirks.nixpkgs-patches = {
-    description = "Patches for nixpkgs to construct patchedPkgs";
-  };
-
+{
+  den,
+  inputs,
+  lib,
+  ...
+}:
+{
   den.default.includes = [ den.aspects.nixpkgs-patcher ];
 
   den.aspects.nixpkgs-patcher =
     let
-      mkPatchedPkgs = patches: pkgs: {
+      patches = map (input: input.outPath) (
+        lib.attrValues (lib.filterAttrs (name: _: lib.hasPrefix "nixpkgs-patch-" name) inputs)
+      );
+
+      mkPatchedPkgs = pkgs: {
         _module.args.patchedPkgs =
           if patches == [ ] then
             pkgs
@@ -15,13 +21,7 @@
             let
               patchedNixpkgs = pkgs.applyPatches {
                 src = pkgs.path;
-                patches = map (
-                  patch:
-                  pkgs.fetchpatch2 {
-                    url = "https://github.com/NixOS/nixpkgs/commit/${patch.rev}.diff?full_index=1";
-                    inherit (patch) hash;
-                  }
-                ) patches;
+                patches = patches;
               };
             in
             import patchedNixpkgs {
@@ -32,7 +32,7 @@
       };
     in
     {
-      nixos = { nixpkgs-patches, pkgs, ... }: mkPatchedPkgs nixpkgs-patches pkgs;
-      homeManager = { nixpkgs-patches, pkgs, ... }: mkPatchedPkgs nixpkgs-patches pkgs;
+      nixos = { pkgs, ... }: mkPatchedPkgs pkgs;
+      homeManager = { pkgs, ... }: mkPatchedPkgs pkgs;
     };
 }

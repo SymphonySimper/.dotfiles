@@ -1,12 +1,12 @@
 {
-  den.aspects.apps.lang.web = {
-    nixpkgs-patches = {
-      # svelte-language-server
-      # pr: https://github.com/NixOS/nixpkgs/pull/528492
-      rev = "7506272718d304d9d78829f3bd8336753b4e38a8";
-      hash = "sha256-cwOVye7Vxa+I8POQe/4CAPI/W4REFAEykFD8G/tYo8U=";
+  flake-file.inputs = {
+    nixpkgs-patch-svelte-langage-server = {
+      url = "file+https://github.com/NixOS/nixpkgs/pull/528492.diff?full_index=1";
+      flake = false;
     };
+  };
 
+  den.aspects.apps.lang.web = {
     nixos = {
       networking.firewall = {
         allowedTCPPorts = [
