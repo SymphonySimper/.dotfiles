@@ -1,5 +1,12 @@
 {
   den.aspects.apps.lang.web = {
+    nixpkgs-patches = {
+      # svelte-language-server
+      # pr: https://github.com/NixOS/nixpkgs/pull/528492
+      rev = "7506272718d304d9d78829f3bd8336753b4e38a8";
+      hash = "sha256-cwOVye7Vxa+I8POQe/4CAPI/W4REFAEykFD8G/tYo8U=";
+    };
+
     nixos = {
       networking.firewall = {
         allowedTCPPorts = [
@@ -12,6 +19,7 @@
       {
         config,
         pkgs,
+        patchedPkgs,
         lib,
         ...
       }:
@@ -37,19 +45,7 @@
             name = "svelteserver";
             # command = lib.getExe pkgs.svelte-language-server;
             # remove after this gets merged: https://github.com/NixOS/nixpkgs/pull/528492
-            command = lib.getExe (
-              pkgs.svelte-language-server.overrideAttrs (finalAttrs: {
-                version = "0.18.3";
-
-                src = finalAttrs.src.override {
-                  hash = "sha256-FTOkJPXbsG6R53yr4n0/IR2lzFCovrdV0+epOi07lBQ=";
-                };
-
-                pnpmDeps = finalAttrs.pnpmDeps.override {
-                  hash = "sha256-fY3hrCkr/soJk1gp39/jec8lT2ZJI27xRBCZi006oWA=";
-                };
-              })
-            );
+            command = lib.getExe patchedPkgs.svelte-language-server;
           };
         };
       in
