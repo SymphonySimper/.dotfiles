@@ -1,6 +1,4 @@
 {
-  nixpkgs-patches.svelte-language-server = 528492;
-
   den.aspects.apps.lang.web = {
     nixos = {
       networking.firewall = {
@@ -14,7 +12,6 @@
       {
         config,
         pkgs,
-        patchedPkgs,
         lib,
         ...
       }:
@@ -38,9 +35,7 @@
           };
           svelte = {
             name = "svelteserver";
-            # command = lib.getExe pkgs.svelte-language-server;
-            # remove after this gets merged: https://github.com/NixOS/nixpkgs/pull/528492
-            command = lib.getExe patchedPkgs.svelte-language-server;
+            command = lib.getExe pkgs.svelte-language-server;
           };
         };
       in

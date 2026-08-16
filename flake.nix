@@ -48,10 +48,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
-    nixpkgs-patch-svelte-language-server = {
-      url = "file+https://github.com/NixOS/nixpkgs/pull/528492.diff?full_index=1";
-      flake = false;
-    };
     schemastore = {
       url = "github:SchemaStore/schemastore";
       flake = false;

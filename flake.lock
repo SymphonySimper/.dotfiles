@@ -213,18 +213,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-patch-svelte-language-server": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-Yma9bCeG+IJnuP+VZgo/oa/XvSNsp1D7SpnmVhd2Pjw=",
-        "type": "file",
-        "url": "https://github.com/NixOS/nixpkgs/pull/528492.diff?full_index=1"
-      },
-      "original": {
-        "type": "file",
-        "url": "https://github.com/NixOS/nixpkgs/pull/528492.diff?full_index=1"
-      }
-    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1786593342,
@@ -251,7 +239,6 @@
         "import-tree": "import-tree",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_2",
-        "nixpkgs-patch-svelte-language-server": "nixpkgs-patch-svelte-language-server",
         "schemastore": "schemastore"
       }
     },
