@@ -21,10 +21,6 @@
         lsp = {
           html = mkVscodeLsp "html";
           css = mkVscodeLsp "css";
-          emmet = {
-            name = "emmet-language-server";
-            command = lib.getExe pkgs.emmet-language-server;
-          };
           tailwind = {
             name = "tailwindcss-ls";
             command = lib.getExe pkgs.tailwindcss-language-server;
@@ -69,7 +65,6 @@
               formatter = mkPrettier "html";
               language-servers = [
                 lsp.html.name
-                lsp.emmet.name
                 lsp.tailwind.name
               ];
             };
@@ -84,7 +79,6 @@
               formatter = mkPrettier "svelte";
               language-servers = [
                 "svelteserver"
-                lsp.emmet.name
                 lsp.tailwind.name
               ];
             };
@@ -101,7 +95,6 @@
               language-servers = builtins.concatLists [
                 [ lsp.ts.name ]
                 (lib.optionals (lib.strings.hasSuffix "sx" name) [
-                  lsp.emmet.name
                   lsp.tailwind.name
                 ])
               ];
@@ -113,11 +106,6 @@
             ${lsp.css.name}.command = lsp.css.command;
             ${lsp.tailwind.name}.command = lsp.tailwind.command;
             ${lsp.ts.name}.command = lsp.ts.command;
-
-            ${lsp.emmet.name} = {
-              command = lsp.emmet.command;
-              args = [ "--stdio" ];
-            };
 
             ${lsp.svelte.name} = {
               command = lsp.svelte.command;
