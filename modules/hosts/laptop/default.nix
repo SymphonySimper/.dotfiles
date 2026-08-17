@@ -49,6 +49,7 @@
         apps.just
         apps.tmux
         apps.git
+        apps.difftastic
         apps.ssh
         apps.bitwarden
 
