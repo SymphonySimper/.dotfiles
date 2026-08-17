@@ -50,7 +50,6 @@
         apps.tmux
         apps.git
         apps.ssh
-        apps.lumen
         apps.bitwarden
 
         apps.lang.all
