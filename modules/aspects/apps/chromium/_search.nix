@@ -57,9 +57,9 @@ in
     programs.chromium = {
       search = {
         prefix = "!";
-        name = lib.mkDefault "Brave";
-        alias = lib.mkDefault "brave";
-        url = lib.mkDefault "https://search.brave.com/search?q=";
+        name = lib.mkDefault "P1ain";
+        alias = lib.mkDefault "p1a";
+        url = lib.mkDefault "https://p1a.in/s/";
       };
 
       engines = {
