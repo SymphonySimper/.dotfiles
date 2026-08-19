@@ -106,20 +106,25 @@
         "type": "github"
       }
     },
-    "gnome-extension-panel-free": {
-      "flake": false,
+    "gnome-shell-extensions": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
       "locked": {
-        "lastModified": 1781075286,
-        "narHash": "sha256-V4Ie6xaNDuZ4p/LV/ob2T7tSyMcC5C9aNLX+MIjpRbo=",
-        "owner": "fthx",
-        "repo": "panel-free",
-        "rev": "73d3c2663eb5e256ff5d42ef83d256741faadb25",
-        "type": "github"
+        "lastModified": 1787120755,
+        "narHash": "sha256-Ggt/eN9MxwqB09fLyBDmAFuiVvoM6lnuE2zeWlpHwng=",
+        "ref": "refs/heads/main",
+        "rev": "c6721a355978e181528dfe9e86d968c12a84a218",
+        "revCount": 4,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/SymphonySimper/gnome-shell-extensions"
       },
       "original": {
-        "owner": "fthx",
-        "repo": "panel-free",
-        "type": "github"
+        "type": "git",
+        "url": "https://github.com/SymphonySimper/gnome-shell-extensions"
       }
     },
     "helix": {
@@ -233,7 +238,7 @@
         "disko": "disko",
         "flake-file": "flake-file",
         "flake-parts": "flake-parts",
-        "gnome-extension-panel-free": "gnome-extension-panel-free",
+        "gnome-shell-extensions": "gnome-shell-extensions",
         "helix": "helix",
         "home-manager": "home-manager",
         "import-tree": "import-tree",

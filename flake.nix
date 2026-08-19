@@ -33,9 +33,9 @@
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
-    gnome-extension-panel-free = {
-      url = "github:fthx/panel-free";
-      flake = false;
+    gnome-shell-extensions = {
+      url = "git+https://github.com/SymphonySimper/gnome-shell-extensions";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     helix.url = "github:helix-editor/helix";
     home-manager = {
