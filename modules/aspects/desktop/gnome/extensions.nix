@@ -14,6 +14,7 @@
         extensions = [
           { package = inputs'.gnome-shell-extensions.packages.my; }
           { package = inputs'.gnome-shell-extensions.packages.panel-free; }
+          { package = inputs'.gnome-shell-extensions.packages.web-search; }
         ];
       };
     };
