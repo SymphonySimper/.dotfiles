@@ -46,8 +46,6 @@
     homeManager =
       { pkgs, ... }:
       {
-        imports = [ ./_bookmarks.nix ];
-
         catppuccin.chromium.enable = false;
 
         programs.chromium = {
