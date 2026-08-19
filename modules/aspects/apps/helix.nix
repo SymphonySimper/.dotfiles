@@ -156,8 +156,9 @@
                   "diagnostics"
                   # "version-control"
                   "selections"
-                  # "register"
-                  # "position"
+                  "register"
+                  "position"
+                  "total-line-numbers"
                   "read-only-indicator"
                   "file-modification-indicator"
                 ];
