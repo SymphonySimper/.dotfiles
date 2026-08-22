@@ -49,6 +49,7 @@
         apps.just
         apps.tmux
         apps.git
+        apps.tuicr
         apps.ssh
         apps.bitwarden
 
