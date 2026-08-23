@@ -1,8 +1,6 @@
 {
-  flake.templates = {
-    default = {
-      path = ./_default;
-      description = "Simple dev shell";
-    };
+  default = {
+    path = ./default;
+    description = "Simple dev shell";
   };
 }

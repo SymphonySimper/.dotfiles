@@ -1,0 +1,4 @@
+{
+  name = "symph";
+  description = "SymphonySimper";
+}
