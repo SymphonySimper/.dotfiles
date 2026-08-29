@@ -1,9 +1,17 @@
-{ inputs, self, ... }:
+{
+  inputs,
+  self,
+  pkgs,
+  lib,
+  ...
+}:
 let
   nixpkgs = inputs.nixpkgs;
 in
 {
   nix = {
+    package = lib.mkDefault pkgs.nix;
+
     # Path for pkgs
     nixPath = [ "nixpkgs=${nixpkgs}" ];
 
