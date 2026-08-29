@@ -7,13 +7,6 @@ in
     # Path for pkgs
     nixPath = [ "nixpkgs=${nixpkgs}" ];
 
-    # Garbage Collection
-    gc = {
-      automatic = true;
-      options = "--delete-older-than 14d";
-      dates = "weekly";
-    };
-
     settings = {
       connect-timeout = 60; # seconds
 
