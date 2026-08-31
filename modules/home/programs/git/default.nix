@@ -76,6 +76,7 @@
           # log
           lo = "log --graph --oneline";
           l = "${lo} -8";
+          lg = "${lo} --grep";
 
           # branch
           sw = "switch";
