@@ -1,5 +1,6 @@
 { ... }: {
   imports = [
+    ./block-hosts.nix
     ./dns/cloudflare.nix
     ./firewall.nix
   ];
