@@ -18,6 +18,11 @@
 
   networking.hostName = "laptop";
   networking.dns.cloudflare.enable = true;
+  networking.blockHosts = [
+    "www.youtube.com"
+    "www.reddit.com"
+    "old.reddit.com"
+  ];
 
   desktop.enable = true;
 
