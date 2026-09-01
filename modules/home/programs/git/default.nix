@@ -66,7 +66,6 @@
           # commit
           c = "commit";
           cm = "${c} -m";
-          cp = "${c} -p";
           cpm = "${cp} -m";
 
           # status
@@ -82,6 +81,9 @@
           sw = "switch";
           b = "branch --verbose --verbose";
           fpa = "fetch --prune --all";
+
+          # cherry-pick
+          cp = "cherry-pick";
         };
       };
     };
