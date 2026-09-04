@@ -13,6 +13,8 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    theme.fonts.enable = lib.mkForce false;
+
     services.ssh-agent.enable = true;
 
     programs.tmux.terminal = "xterm-256color";

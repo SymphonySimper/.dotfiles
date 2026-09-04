@@ -29,6 +29,13 @@ in
       };
     };
 
+    fonts = {
+      enableDefaultPackages = false;
+      fontconfig.enable = false;
+      fontDir.enable = false;
+      packages = lib.mkForce [ ];
+    };
+
     networking.firewall.enable = lib.mkForce false;
   };
 }
