@@ -13,10 +13,11 @@
     ./localisation.nix
     ./nix.nix
     ./shell.nix
-    ./users.nix
     ./wsl.nix
     ./sudo.nix
   ];
+
+  users.mutableUsers = true;
 
   system.stateVersion = "25.11";
 }
