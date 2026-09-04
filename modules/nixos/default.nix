@@ -5,7 +5,6 @@
     ./hardware
     ./networking
     ./programs
-    ./theme
     ./virtualisation
 
     ./boot.nix

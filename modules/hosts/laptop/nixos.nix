@@ -26,7 +26,5 @@
 
   desktop.enable = true;
 
-  theme.fonts.enable = true;
-
   programs.chromium.enable = true;
 }
