@@ -14,7 +14,7 @@ in
     appendPath = lib.mkEnableOption "Append windows path";
   };
 
-  config = {
+  config = lib.mkIf cfg.enable {
     wsl = {
       interop.includePath = cfg.appendPath;
       startMenuLaunchers = false;
