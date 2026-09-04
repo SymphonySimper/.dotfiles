@@ -1,7 +1,7 @@
 { ... }: {
   imports = [
     ./block-hosts.nix
-    ./dns/cloudflare.nix
+    ./dns-cloudflare.nix
     ./firewall.nix
   ];
 
