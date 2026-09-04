@@ -6,7 +6,10 @@ in
   users.users.${user.name} = {
     description = user.description;
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = [
+      "kvm"
+      "wheel"
+    ];
     initialPassword = "nix-is-cool";
   };
 }

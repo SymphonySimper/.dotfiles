@@ -6,6 +6,7 @@
   theme.fonts.enable = true;
   theme.gtk.enable = true;
 
+  dev.android.enable = true;
   dev.go.enable = true;
   dev.harper.enable = true;
   dev.json.enable = true;

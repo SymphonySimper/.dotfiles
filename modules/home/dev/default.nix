@@ -1,5 +1,6 @@
 { pkgs, lib, ... }: {
   imports = [
+    ./android.nix
     ./docker.nix
     ./go.nix
     ./harper.nix

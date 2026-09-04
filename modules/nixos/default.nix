@@ -2,7 +2,6 @@
   imports = [
     ../common
 
-    ./dev
     ./hardware
     ./networking
     ./programs
