@@ -9,7 +9,6 @@
 
     ./boot.nix
     ./desktop.nix
-    ./fhs.nix
     ./localisation.nix
     ./nix.nix
     ./shell.nix
