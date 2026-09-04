@@ -16,5 +16,8 @@
 
   users.mutableUsers = true;
 
+  documentation.doc.enable = false; # HTML manual, nixos-help and the package docs
+  documentation.info.enable = false; # Info pages and the info command
+
   system.stateVersion = "25.11";
 }
