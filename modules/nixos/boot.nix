@@ -10,10 +10,7 @@ in
   config = lib.mkMerge [
     # Clean /tmp folder on boot
     {
-      boot.tmp = {
-        cleanOnBoot = true;
-        useTmpfs = true;
-      };
+      boot.tmp.cleanOnBoot = true;
     }
 
     (lib.mkIf cfg.enable {
