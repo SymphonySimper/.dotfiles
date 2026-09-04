@@ -1,10 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}:
-{
+{ pkgs, lib, ... }: {
   nixpkgs.config.allowUnfreePackages = [
     "chromium"
     "chromium-unwrapped"
@@ -13,7 +7,7 @@
 
   catppuccin.chromium.enable = false;
 
-  programs.chromium = lib.mkIf config.programs.chromium.enable {
+  programs.chromium = {
     package = pkgs.chromium.override { enableWideVine = true; };
 
     commandLineArgs =
