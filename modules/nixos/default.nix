@@ -11,7 +11,6 @@
     ./desktop.nix
     ./localisation.nix
     ./nix.nix
-    ./shell.nix
     ./wsl.nix
     ./sudo.nix
   ];
