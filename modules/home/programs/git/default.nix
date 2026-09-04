@@ -79,6 +79,7 @@
 
           # branch
           sw = "switch";
+          swb = "${sw} -";
           b = "branch --verbose --verbose";
           fpa = "fetch --prune --all";
 
