@@ -1,5 +1,8 @@
 { ... }: {
-  imports = [ ./search.nix ];
+  imports = [
+    ./new-tab.nix
+    ./search.nix
+  ];
 
   programs.chromium = {
     extraOpts = {
