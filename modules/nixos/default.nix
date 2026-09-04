@@ -12,7 +12,6 @@
     ./localisation.nix
     ./nix.nix
     ./wsl.nix
-    ./sudo.nix
   ];
 
   users.mutableUsers = true;
