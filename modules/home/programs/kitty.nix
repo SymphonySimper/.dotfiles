@@ -24,6 +24,7 @@
       };
 
       settings = {
+        shell = config.home.shell.interactive;
         allow_remote_control = false;
         hide_window_decorations = true;
         scrollback_lines = 5000;
