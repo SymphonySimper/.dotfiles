@@ -10,10 +10,9 @@
     ./boot.nix
     ./desktop.nix
     ./fhs.nix
-    ./locale.nix
+    ./localisation.nix
     ./nix.nix
     ./shell.nix
-    ./timezone.nix
     ./users.nix
     ./wsl.nix
     ./sudo.nix
