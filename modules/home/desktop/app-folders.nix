@@ -14,6 +14,15 @@ in
   config = lib.mkIf cfg.enable {
     desktop.appFolders = {
       Games = [ "Game" ];
+      Office = [ "Office" ];
+      Terminal = [
+        "TerminalEmulator"
+        "ConsoleOnly"
+      ];
+      Viewer = [
+        "AudioVideo"
+        "Viewer"
+      ];
     };
 
     dconf.settings = lib.mkMerge [
