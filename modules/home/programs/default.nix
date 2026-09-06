@@ -1,7 +1,8 @@
 { ... }: {
   imports = [
-    ./helix
     ./git
+    ./helix
+    ./neovim
     ./shell
 
     ./bitwarden.nix
