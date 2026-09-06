@@ -5,10 +5,10 @@
   ...
 }:
 let
-  cfg = config.programs.neovim.treeSitter;
+  cfg = config.programs.neovim.config.treeSitter;
 in
 {
-  options.programs.neovim.treeSitter = {
+  options.programs.neovim.config.treeSitter = {
     packages = lib.mkOption {
       type = lib.types.listOf (
         lib.types.oneOf [
