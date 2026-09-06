@@ -1,4 +1,9 @@
 { lib, ... }: {
+  imports = [
+    ./lsp.nix
+    ./tree-sitter.nix
+  ];
+
   programs.neovim = {
     withNodeJs = lib.mkForce false;
     withPerl = lib.mkForce false;
