@@ -27,8 +27,11 @@
 
       config = {
         conform = ''
-          conform.formatters_by_ft.python = { "ruff" } 
+          conform.formatters_by_ft.python = { "ruff_format" }
+          conform.formatters.ruff_format = { append_args = { "--line-length", "88" } }
         '';
+
+        treeSitter.packages = [ "python" ];
 
         lsp = ''
           vim.lsp.enable("ruff") 

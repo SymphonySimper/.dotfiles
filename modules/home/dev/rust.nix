@@ -29,9 +29,15 @@
           conform.formatters_by_ft.rust = { "rustfmt" } 
         '';
 
+        treeSitter.packages = [ "rust" ];
+
         lsp = ''
           vim.lsp.config("rust_analyzer", {
-            settings = { check = { command = "clippy" } }
+            settings = {
+              ["rust-analyzer"] = {
+                check = { command = "clippy" }
+              }
+            }
           })
           vim.lsp.enable("rust_analyzer") 
         '';

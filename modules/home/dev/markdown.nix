@@ -20,7 +20,7 @@
       config = {
         conform = ''
           conform.formatters_by_ft.markdown = { "prettier" }
-          conform.formatters_by_ft.["markdown.mdx"] = { "prettier" }
+          conform.formatters_by_ft["markdown.mdx"] = { "prettier" }
         '';
 
         lsp = ''
