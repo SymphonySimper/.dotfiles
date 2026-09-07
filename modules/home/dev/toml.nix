@@ -14,6 +14,7 @@
       extraPackages = [ pkgs.taplo ];
 
       config = {
+        treeSitter.packages = [ "toml" ];
         conform = ''conform.formatters_by_ft.toml = { "taplo" }'';
         lsp = ''vim.lsp.enable("taplo")'';
       };

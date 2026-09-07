@@ -71,7 +71,10 @@ in
             vim.lsp.enable("jsonls")
           '';
 
-        treeSitter.packages = [ "json5" ];
+        treeSitter.packages = [
+          "json"
+          "json5"
+        ];
       };
     };
   };

@@ -36,6 +36,15 @@
       ];
 
       config = {
+        treeSitter.packages = [
+          "html"
+          "css"
+          "javascript"
+          "typescript"
+          "tsx"
+          "svelte"
+        ];
+
         conform = ''
           local web_langs = { "html", "css", "javascript", "typescript", "javascriptreact", "typescriptreact", "svelte" }
 
