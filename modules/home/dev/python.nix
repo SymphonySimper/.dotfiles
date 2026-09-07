@@ -19,39 +19,21 @@
       };
     };
 
-    programs.helix = rec {
-      ignores = [
-        ".venv"
-        "venv"
-        "**/__pycache__/"
+    programs.neovim = {
+      extraPackages = [
+        pkgs.ruff
+        pkgs.ty
       ];
 
-      lsp = {
-        ruff = {
-          command = lib.getExe pkgs.ruff;
-          args = [ "server" ];
-        };
+      config = {
+        conform = ''
+          conform.formatters_by_ft.python = { "ruff" } 
+        '';
 
-        ty = {
-          command = lib.getExe pkgs.ty;
-          args = [ "server" ];
-        };
-      };
-
-      lang.python = {
-        language-servers = [
-          "ruff"
-          "ty"
-        ];
-        formatter = {
-          command = lsp.ruff.command;
-          args = [
-            "format"
-            "--line-length"
-            "88"
-            "-"
-          ];
-        };
+        lsp = ''
+          vim.lsp.enable("ruff") 
+          vim.lsp.enable("ty") 
+        '';
       };
     };
   };
