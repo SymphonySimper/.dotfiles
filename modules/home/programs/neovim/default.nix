@@ -1,6 +1,9 @@
 { config, lib, ... }: {
   imports = [
+    ./blink-cmp.nix
     ./conform.nix
+    ./fzf-lua.nix
+    ./keymaps.nix
     ./lsp.nix
     ./options.nix
     ./tree-sitter.nix
