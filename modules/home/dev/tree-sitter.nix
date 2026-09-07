@@ -10,8 +10,9 @@
   };
 
   config = lib.mkIf config.dev.tree-sitter.enable {
-    programs.helix = {
-      lsp.ts_query_ls.command = lib.getExe pkgs.ts_query_ls;
+    programs.neovim = {
+      extraPackages = [ pkgs.ts_query_ls ];
+      config.lsp = ''vim.lsp.enable("ts_query_ls")'';
     };
   };
 }

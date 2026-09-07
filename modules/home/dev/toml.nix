@@ -10,15 +10,12 @@
   };
 
   config = lib.mkIf config.dev.toml.enable {
-    programs.helix = rec {
-      lsp.taplo.command = lib.getExe pkgs.taplo;
+    programs.neovim = {
+      extraPackages = [ pkgs.taplo ];
 
-      lang.toml.formatter = {
-        command = lsp.taplo.command;
-        args = [
-          "format"
-          "-"
-        ];
+      config = {
+        conform = ''conform.formatters_by_ft.toml = { "taplo" }'';
+        lsp = ''vim.lsp.enable("taplo")'';
       };
     };
   };
