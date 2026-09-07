@@ -18,7 +18,6 @@ in
     services.ssh-agent.enable = true;
 
     programs.tmux.terminal = "xterm-256color";
-    programs.helix.settings.editor.clipboard-provider = "win32-yank";
 
     programs.fish.functions = {
       _windows_terminal_wsl_path = {
