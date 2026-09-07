@@ -38,8 +38,21 @@ in
             ) cfg.packages
           ))
         );
+        type = "lua";
 
-        config = cfg.extraConfig;
+        config = ''
+          vim.api.nvim_create_autocmd("FileType", {
+            callback = function(args)
+              local language = vim.treesitter.language.get_lang(args.match)
+
+              if language and vim.treesitter.language.add(language) then
+                vim.treesitter.start(args.buf, language)
+              end
+            end,
+          })
+
+          ${cfg.extraConfig}
+        '';
       }
     ];
   };
