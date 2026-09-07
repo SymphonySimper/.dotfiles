@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, lib, ... }: {
   imports = [
     ./ai.nix
     ./android.nix
@@ -15,4 +15,19 @@
     ./web.nix
     ./yaml.nix
   ];
+
+  _module.args = {
+    mkPrettier = name: {
+      command = lib.getExe pkgs.prettier;
+      args = [
+        "--parser"
+        name
+      ];
+    };
+
+    mkVscodeLsp = lang: rec {
+      name = "vscode-${lang}-language-server";
+      command = lib.getExe' pkgs.vscode-langservers-extracted name;
+    };
+  };
 }
