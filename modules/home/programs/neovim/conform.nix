@@ -20,6 +20,8 @@
           local conform = require("conform")
           conform.setup()
 
+          vim.keymap.set("n", "<leader>cf", conform.format, { silent = true, desc = "Format file" })
+
           ${config.programs.neovim.config.conform}
         '';
       }

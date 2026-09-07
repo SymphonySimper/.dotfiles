@@ -28,9 +28,7 @@
           vim.lsp.config('nixd', {
              settings = {
                nixd = {
-                 nixpkgs = {
-                   expr = "import <nixpkgs> { }"
-                 },
+                 nixpkgs = { expr = "import <nixpkgs> { }" },
                },
              },
           });

@@ -1,9 +1,8 @@
 {
   inputs,
   config,
+  pkgs,
   lib,
-  mkPrettier,
-  mkVscodeLsp,
   ...
 }:
 let
@@ -14,8 +13,6 @@ let
       name
     else
       "${inputs.schemastore}/src/schemas/json/${name}.json";
-
-  json = mkVscodeLsp "json";
 in
 {
   options.dev.json = {
@@ -23,49 +20,58 @@ in
   };
 
   config = lib.mkIf config.dev.json.enable {
-    programs.helix = {
-      lang =
-        lib.genAttrs
-          [
-            "json"
-            "jsonc"
-          ]
-          (name: {
-            formatter = mkPrettier name;
-            language-servers = [ json.name ];
-          });
+    programs.neovim = {
+      extraPackages = [
+        pkgs.prettier
+        pkgs.vscode-langservers-extracted
+      ];
+      config = {
+        conform = ''
+          conform.formatters_by_ft.json = { "prettier" }
+          conform.formatters_by_ft.jsonc = { "prettier" }
+          conform.formatters_by_ft.json5 = { "prettier" }            
+        '';
 
-      lsp.${json.name} = {
-        command = json.command;
+        lsp =
+          let
+            schemas = (
+              map
+                (schema: {
+                  fileMatch = schema.file;
+                  url = mkSchema schema.name;
+                })
+                [
+                  {
+                    name = "package";
+                    file = [ "package.json" ];
+                  }
+                  {
+                    name = "tsconfig";
+                    file = [
+                      "tsconfig.json"
+                      "tsconfig.*.json"
+                    ];
+                  }
+                  {
+                    name = "chrome-manifest";
+                    file = [ "manifest.json" ];
+                  }
+                ]
+            );
+          in
+          ''
+            vim.lsp.config("jsonls", {
+              settings = {
+                json = {
+                  validate = { enable = true },
+                  schemas = ${lib.generators.toLua { } schemas}
+                },
+              },
+            })
+            vim.lsp.enable("jsonls")
+          '';
 
-        config.json = {
-          validate.enable = true;
-
-          schemas = (
-            map
-              (schema: {
-                fileMatch = schema.file;
-                url = mkSchema schema.name;
-              })
-              [
-                {
-                  name = "package";
-                  file = [ "package.json" ];
-                }
-                {
-                  name = "tsconfig";
-                  file = [
-                    "tsconfig.json"
-                    "tsconfig.*.json"
-                  ];
-                }
-                {
-                  name = "chrome-manifest";
-                  file = [ "manifest.json" ];
-                }
-              ]
-          );
-        };
+        treeSitter.packages = [ "json5" ];
       };
     };
   };
