@@ -2,28 +2,8 @@
   config,
   pkgs,
   lib,
-  mkVscodeLsp,
-  mkPrettier,
   ...
 }:
-let
-  lsp = {
-    html = mkVscodeLsp "html";
-    css = mkVscodeLsp "css";
-    tailwind = {
-      name = "tailwindcss-ls";
-      command = lib.getExe pkgs.tailwindcss-language-server;
-    };
-    ts = {
-      name = "typescript-language-server";
-      command = lib.getExe pkgs.typescript-language-server;
-    };
-    svelte = {
-      name = "svelteserver";
-      command = lib.getExe pkgs.svelte-language-server;
-    };
-  };
-in
 {
   options.dev.web = {
     enable = lib.mkEnableOption "Web";
@@ -44,68 +24,32 @@ in
       config.home.sessionVariables.PNPM_HOME
     ];
 
-    programs.helix = {
-      ignores = [
-        "node_modules"
-        "vite.config.js.timestamp-*"
-        "vite.config.ts.timestamp-*"
+    programs.neovim = {
+      extraPackages = [
+        pkgs.prettier
 
-        "!*prettier*"
-        "!.npmrc"
-        ".svelte-kit"
+        pkgs.svelte-language-server
+        pkgs.tailwindcss-language-server
+        pkgs.typescript-language-server
+        pkgs.vscode-langservers-extracted
       ];
 
-      lang = {
-        html = {
-          formatter = mkPrettier "html";
-          language-servers = [
-            lsp.html.name
-            lsp.tailwind.name
-          ];
-        };
-        css = {
-          formatter = mkPrettier "css";
-          language-servers = [
-            lsp.css.name
-            lsp.tailwind.name
-          ];
-        };
-        svelte = {
-          formatter = mkPrettier "svelte";
-          language-servers = [
-            "svelteserver"
-            lsp.tailwind.name
-          ];
-        };
-      }
-      // (lib.genAttrs
-        [
-          "javascript"
-          "jsx"
-          "typescript"
-          "tsx"
-        ]
-        (name: {
-          formatter = mkPrettier "typescript";
-          language-servers = builtins.concatLists [
-            [ lsp.ts.name ]
-            (lib.optionals (lib.strings.hasSuffix "sx" name) [
-              lsp.tailwind.name
-            ])
-          ];
-        })
-      );
+      config = {
+        conform = ''
+          local web_langs = { "html", "css", "javascript", "typescript", "javascriptreact", "typescriptreact", "svelte" }
 
-      lsp = {
-        ${lsp.html.name}.command = lsp.html.command;
-        ${lsp.css.name}.command = lsp.css.command;
-        ${lsp.tailwind.name}.command = lsp.tailwind.command;
-        ${lsp.ts.name}.command = lsp.ts.command;
+          for _, lang in pairs(web_langs) do
+            conform.formatters_by_ft[lang] = { "prettier" }   
+          end
+        '';
 
-        ${lsp.svelte.name} = {
-          command = lsp.svelte.command;
-          config.configuration.svelte.plugin.svelte.defaultScriptLanguage = "ts";
-        };
+        lsp = ''
+          local web_lsps = { "html", "cssls", "ts_ls", "tailwindcss", "svelte" }
+            
+          for _, lsp in pairs(web_lsps) do
+            vim.lsp.enable(lsp)   
+          end
+        '';
       };
     };
   };
