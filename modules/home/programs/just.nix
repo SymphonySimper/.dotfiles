@@ -4,9 +4,6 @@
   lib,
   ...
 }:
-let
-  package = pkgs.just;
-in
 {
   # NOTE: programs.just is marked as removed by home-manager. So it cannot be used.
   options.programs.justfile = {
@@ -16,13 +13,11 @@ in
   };
 
   config = lib.mkIf config.programs.justfile.enable {
-    home.packages = [ package ];
+    home.packages = [ pkgs.just ];
 
-    programs.helix.lang.just = {
-      formatter = {
-        command = lib.getExe package;
-        args = [ "--dump" ];
-      };
+    programs.neovim.config = {
+      conform = ''conform.formatters_by_ft.just = { "just" }'';
+      treeSitter.packages = [ "just" ];
     };
   };
 }

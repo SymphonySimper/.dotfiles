@@ -29,11 +29,6 @@
   config = {
     home.packages = [ pkgs.git-filter-repo ];
 
-    programs.helix.ignores = [
-      "!.gitignore"
-      "!.gitattributes"
-    ];
-
     programs.git = {
       enable = true;
       lfs.enable = true;
@@ -88,5 +83,13 @@
         };
       };
     };
+
+    programs.neovim.config.treeSitter.packages = [
+      "git_config"
+      "gitcommit"
+      "git_rebase"
+      "gitignore"
+      "gitattributes"
+    ];
   };
 }
