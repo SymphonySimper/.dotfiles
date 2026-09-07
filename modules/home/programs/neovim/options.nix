@@ -1,46 +1,34 @@
-{ config, lib, ... }: {
-  options.programs.neovim.config.options = lib.mkOption {
-    type = lib.types.lines;
-    description = "Options (vim.opt)";
-    default = "";
-  };
+{ ... }: {
+  programs.neovim.initLua = ''
+    vim.opt.number = true
+    vim.opt.relativenumber = true
 
-  config = {
-    programs.neovim.config = {
-      lua = config.programs.neovim.config.options;
+    vim.opt.wrap = true
+    vim.opt.linebreak = true
 
-      options = ''
-        vim.opt.number = true
-        vim.opt.relativenumber = true
+    vim.opt.scrolloff = 8 -- Vertical scroll
+    vim.opt.sidescrolloff = 8 -- Horizontal scroll
 
-        vim.opt.wrap = true
-        vim.opt.linebreak = true
+    vim.opt.signcolumn = "yes"
+    vim.opt.cursorline = true
 
-        vim.opt.scrolloff = 8 -- Vertical scroll
-        vim.opt.sidescrolloff = 8 -- Horizontal scroll
+    vim.opt.tabstop = 2
+    vim.opt.shiftwidth = 2
+    vim.opt.shiftround = true
+    vim.opt.expandtab = true
+    vim.opt.smartindent = true
 
-        vim.opt.signcolumn = "yes"
-        vim.opt.cursorline = true
+    vim.opt.splitbelow = true
+    vim.opt.splitright = true
 
-        vim.opt.tabstop = 2
-        vim.opt.shiftwidth = 2
-        vim.opt.shiftround = true
-        vim.opt.expandtab = true
-        vim.opt.smartindent = true
+    vim.opt.ignorecase = true
+    vim.opt.smartcase = true
+    vim.opt.inccommand = "split" -- preview for `%s/foo/bar/g`
 
-        vim.opt.splitbelow = true
-        vim.opt.splitright = true
+    vim.opt.clipboard = ""
+    vim.opt.undofile = false -- Turn off undofile
+    vim.opt.confirm = true -- prompt to save changes
 
-        vim.opt.ignorecase = true
-        vim.opt.smartcase = true
-        vim.opt.inccommand = "split" -- preview for `%s/foo/bar/g`
-
-        vim.opt.clipboard = ""
-        vim.opt.undofile = false -- Turn off undofile
-        vim.opt.confirm = true -- prompt to save changes
-
-        vim.opt.swapfile = false -- Turn off swapfile
-      '';
-    };
-  };
+    vim.opt.swapfile = false -- Turn off swapfile
+  '';
 }
