@@ -24,8 +24,9 @@ in
       '')
     ];
 
-    programs.helix.lsp = {
-      docker-langserver.command = lib.getExe pkgs.dockerfile-language-server;
+    programs.neovim = {
+      extraPackages = [ pkgs.dockerfile-language-server ];
+      config.lsp = ''vim.lsp.enable("dockerls")'';
     };
   };
 }
