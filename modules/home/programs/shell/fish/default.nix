@@ -30,7 +30,13 @@ in
     };
   };
 
-  programs.helix.lsp = {
-    fish-lsp.command = lib.getExe pkgs.fish-lsp;
+  programs.neovim = {
+    extraPackages = [ pkgs.fish-lsp ];
+
+    config = {
+      treeSitter.packages = [ "fish" ];
+      conform = ''conform.formatters_by_ft.fish = { "fish_indent" }'';
+      lsp = ''vim.lsp.enable("fish_lsp")'';
+    };
   };
 }

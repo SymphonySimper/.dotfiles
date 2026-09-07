@@ -45,4 +45,9 @@ in
       ''
     ];
   };
+
+  programs.neovim.config = {
+    treeSitter.packages = [ "nu" ];
+    lsp = ''vim.lsp.enable("nushell")'';
+  };
 }
