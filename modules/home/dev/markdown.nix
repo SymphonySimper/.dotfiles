@@ -3,43 +3,39 @@
   pkgs,
   lib,
   mkGetTheme,
-  mkPrettier,
   ...
 }:
-let
-  mpls = {
-    name = "mpls";
-    command = lib.getExe pkgs.mpls;
-  };
-in
 {
   options.dev.markdown = {
     enable = lib.mkEnableOption "Markdown";
   };
 
   config = lib.mkIf config.dev.markdown.enable {
-    programs.helix = {
-      lang.markdown = {
-        # refer: https://github.com/helix-editor/helix/wiki/Recipes#continue-markdown-lists--quotes
-        comment-tokens = [
-          "-"
-          "+"
-          "*"
-          "- [ ]"
-          ">"
-        ];
-        formatter = mkPrettier "markdown";
-        language-servers = [ mpls.name ];
-      };
+    programs.neovim = {
+      extraPackages = [
+        pkgs.prettier
+        pkgs.mpls
+      ];
 
-      lsp.${mpls.name} = {
-        command = mpls.command;
-        args = [
-          "--no-auto"
-          "--enable-emoji"
-          "--theme"
-          (mkGetTheme { name = "%name%-%flavor%"; })
-        ];
+      config = {
+        conform = ''
+          conform.formatters_by_ft.markdown = { "prettier" }
+          conform.formatters_by_ft.["markdown.mdx"] = { "prettier" }
+        '';
+
+        lsp = ''
+          vim.lsp.config("mpls", {
+            cmd = {
+              "mpls",
+              "--enable-emoji",
+              "--enable-footnotes",
+              "--no-auto",
+              "--theme",
+              "${mkGetTheme { name = "%name%-%flavor%"; }}"
+            }
+          })
+          vim.lsp.enable("mpls") 
+        '';
       };
     };
   };
