@@ -4,6 +4,7 @@
     ./fzf-lua.nix
     ./keymaps.nix
     ./lsp.nix
+    ./mini.nix
     ./options.nix
     ./tree-sitter.nix
   ];
