@@ -1,50 +1,59 @@
 { pkgs, ... }: {
   programs.neovim.plugins = [
-      {
-        plugin = pkgs.vimPlugins.fzf-lua;
-        type = "lua";
-        config = ''
-          local fzf = require("fzf-lua")
+    {
+      plugin = pkgs.vimPlugins.fzf-lua;
+      type = "lua";
+      config = ''
+        local fzf = require("fzf-lua")
 
-          fzf.setup({
-            ui_select = {},
+        fzf.setup({
+          ui_select = {},
 
-            winopts = {
-              backdrop = 0,
-              fullscreen = true,
-              title_pos = "left",
-              preview = { title = false }
-            },
+          prompt = "> ",
 
-            files = { cwd_prompt = false, },
+          winopts = {
+            backdrop = 0,
+            fullscreen = true,
+            title_pos = "left",
+            preview = { title = false }
+          },
 
-            keymap = {
-              builtin = {
-                -- Scroll half-page down / up
-                ["<C-j>"] = "preview-page-down",
-                ["<C-k>"] = "preview-page-up",
+          files = { cwd_prompt = false, },
 
-                -- Scroll single lines
-                ["<C-d>"] = "preview-down",
-                ["<C-u>"] = "preview-up",
+          keymap = {
+            builtin = {
+              -- Scroll half-page down / up
+              ["<C-j>"] = "preview-page-down",
+              ["<C-k>"] = "preview-page-up",
 
-                -- Reset preview position back to top
-                ["<C-r>"] = "preview-reset",
-              }
+              -- Scroll single lines
+              ["<C-d>"] = "preview-down",
+              ["<C-u>"] = "preview-up",
+
+              -- Reset preview position back to top
+              ["<C-r>"] = "preview-reset",
             }
-          })
+          }
+        })
 
-          -- set border color to line number color
-          vim.api.nvim_set_hl(0, "FzfLuaBorder", {
-            link = "LineNr",
-          })
+        -- set border color to line number color
+        vim.api.nvim_set_hl(0, "FzfLuaBorder", {
+          link = "LineNr",
+        })
 
-          vim.keymap.set("n", "<leader>ff", fzf.files, { desc = "FZF Find Files" })
-          vim.keymap.set("n", "<leader>fg", fzf.live_grep, { desc = "FZF Live Grep" })
-          vim.keymap.set("n", "<leader>fb", fzf.buffers, { desc = "FZF Buffers" })
-          vim.keymap.set("n", "<leader>fh", fzf.help_tags, { desc = "FZF Help Tags" })
-          vim.keymap.set("n", "<leader>fca", fzf.lsp_code_actions, { desc = "FZF Code Actions" })      
-        '';
-      }
-    ];
+        vim.keymap.set({ "n", "v" }, "<leader>ff", fzf.files, { desc = "FZF Find Files" })
+        vim.keymap.set({ "n", "v" }, "<leader>fF", function()
+          local dir = vim.fn.expand("%:p:h")
+
+          require("fzf-lua").files({
+            cwd = dir ~= "" and dir or vim.loop.cwd(),
+          })
+        end)
+
+        vim.keymap.set({ "n", "v" }, "<leader>f/", fzf.live_grep, { desc = "FZF Live Grep" })
+        vim.keymap.set({ "n", "v" }, "<leader>fg", fzf.git_status, { desc = "FZF Git Status" })
+        vim.keymap.set({ "n", "v" }, "<leader>fb", fzf.buffers, { desc = "FZF Buffers" })
+      '';
+    }
+  ];
 }
