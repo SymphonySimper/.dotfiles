@@ -1,7 +1,7 @@
 {
   config,
+  pkgs,
   lib,
-  mkPrettier,
   ...
 }:
 {
@@ -10,8 +10,9 @@
   };
 
   config = lib.mkIf config.dev.yaml.enable {
-    programs.helix = {
-      lang.yaml.formatter = mkPrettier "yaml";
+    programs.neovim = {
+      extraPackages = [ pkgs.prettier ];
+      config.conform = ''conform.formatters_by_ft.yaml = { "prettier" }'';
     };
   };
 }
