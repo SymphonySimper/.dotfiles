@@ -41,6 +41,9 @@
           link = "LineNr",
         })
 
+
+        vim.keymap.set({ "n", "v" }, "<leader>f'", fzf.resume, { desc = "FZF Resume last picker" })
+
         vim.keymap.set({ "n", "v" }, "<leader>ff", fzf.files, { desc = "FZF Find Files" })
         vim.keymap.set({ "n", "v" }, "<leader>fF", function()
           local dir = vim.fn.expand("%:p:h")

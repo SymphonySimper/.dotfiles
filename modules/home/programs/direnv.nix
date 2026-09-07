@@ -7,5 +7,4 @@
   };
 
   programs.git.ignores = [ ".direnv" ];
-  programs.helix.ignores = [ "!.envrc" ];
 }
