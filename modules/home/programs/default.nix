@@ -15,7 +15,6 @@
     ./man.nix
     ./ssh.nix
     ./tmux.nix
-    ./tuicr.nix
     ./yazi.nix
   ];
 }
