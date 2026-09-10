@@ -7,8 +7,8 @@ in
   catppuccin.tmux.enable = false;
 
   programs.tmux.extraConfig = ''
-    set -g message-style "fg=${color.teal.hex},bg=${color.mantle.hex},align=centre"
-    set -g message-command-style "fg=${color.teal.hex},bg=${color.mantle.hex},align=centre"
+    set -g message-style "fg=${color.teal.hex},bg=${color.mantle.hex},fill=${color.mantle.hex}"
+    set -g message-command-style "fg=${color.teal.hex},bg=${color.mantle.hex},fill=${color.mantle.hex}"
     set -g menu-selected-style "fg=${color.text.hex},bold,bg=${color.overlay0.hex}"
     set -g popup-style "bg=${color.base.hex},fg=${color.text.hex}"
     set -g popup-border-style "fg=${color.surface1.hex}"
