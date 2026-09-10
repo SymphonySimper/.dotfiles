@@ -47,6 +47,9 @@ in
     customPaneNavigationAndResize = true;
     newSession = false;
     historyLimit = 5000;
+    shell = lib.getExe (
+      if config.programs.fish.enable then config.programs.fish.package else config.programs.bash.package
+    );
 
     extraConfig = # conf
       ''
@@ -87,4 +90,6 @@ in
         bind e run-shell  ${history} # Open history in editor
       '';
   };
+
+  programs.kitty.settings.shell = if cfg.enable then lib.getExe cfg.package else ".";
 }
