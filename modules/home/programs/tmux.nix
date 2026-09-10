@@ -55,6 +55,9 @@ in
       # https://github.com/tmux/tmux/wiki/FAQ#how-do-i-use-rgb-colour
       set -as terminal-features ",${cfg.terminal}:RGB"
 
+      set -g set-titles on
+      set -g set-titles-string "#S: #T"
+
       setw -g monitor-activity on
       set -g visual-activity off # If enabled shows activity in window message
 
