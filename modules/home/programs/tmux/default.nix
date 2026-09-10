@@ -21,13 +21,10 @@ in
   programs.tmux = {
     enable = lib.mkDefault true;
     prefix = "C-a";
-    shortcut = "a";
     keyMode = "vi";
     escapeTime = 0;
     baseIndex = 1;
-    mouse = false;
     customPaneNavigationAndResize = true;
-    newSession = false;
     historyLimit = 5000;
 
     extraConfig = ''
@@ -45,7 +42,6 @@ in
       set -g set-titles-string "#S: #T"
 
       setw -g monitor-activity on
-      set -g visual-activity off # If enabled shows activity in window message
 
       set -g set-clipboard on # Sets system clipboard
 
@@ -56,21 +52,16 @@ in
 
       # UI
       ## status
-      set -g status on
-      set -g status-position bottom
       set -g status-left ""
-      set -g status-interval 5
 
       ## window
       set -g renumber-window on # renumber when window is closed
       set -g window-status-separator "" # remove gap between window text
-      setw -g automatic-rename on
       setw -g automatic-rename-format "#{pane_current_path}: #{pane_current_command}"
 
       # Keybinds
       ## y and p as in vim
       bind Escape copy-mode
-      unbind p
       bind p paste-buffer
       bind-key -T copy-mode-vi "v" send -X begin-selection
       bind-key -T copy-mode-vi "y" send -X copy-selection
