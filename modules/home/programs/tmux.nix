@@ -47,7 +47,6 @@ in
     customPaneNavigationAndResize = true;
     newSession = false;
     historyLimit = 5000;
-    shell = config.home.shell.interactive;
 
     extraConfig = # conf
       ''

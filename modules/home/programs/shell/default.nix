@@ -11,7 +11,6 @@ in
   imports = [
     ./fish
 
-    ./interactive.nix
     ./nushell.nix
   ];
 
