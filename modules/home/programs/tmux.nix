@@ -58,6 +58,8 @@ in
       setw -g monitor-activity on
       set -g visual-activity off # If enabled shows activity in window message
 
+      set -g set-clipboard on # Sets system clipboard
+
       # Required by yazi
       set -g allow-passthrough on
       set -ga update-environment TERM
