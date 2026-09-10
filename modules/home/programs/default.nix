@@ -3,6 +3,7 @@
     ./helix
     ./git
     ./shell
+    ./tmux
 
     ./bitwarden.nix
     ./btop.nix
@@ -14,7 +15,6 @@
     ./kitty.nix
     ./man.nix
     ./ssh.nix
-    ./tmux.nix
     ./yazi.nix
   ];
 }

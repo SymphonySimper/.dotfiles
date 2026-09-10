@@ -16,24 +16,7 @@ let
   '';
 in
 {
-  catppuccin.tmux.extraConfig = ''
-    ## status
-    set -g status on
-    set -g status-position bottom
-    set -g status-left ""
-    set -g status-right ""
-    set -g status-interval 5
-
-    set -g @catppuccin_window_status_style "basic"
-
-    setw -g automatic-rename on
-    setw -g automatic-rename-format "#{pane_current_path}: #{pane_current_command}"
-
-    set -g @catppuccin_window_text " #{?automatic-rename,#{pane_current_command},#{window_name}}"
-    set -g @catppuccin_window_current_text " #{?automatic-rename,#{pane_current_command},#{window_name}}"
-
-    set -ag status-right "#{E:@catppuccin_status_session}"
-  '';
+  imports = [ ./theme.nix ];
 
   programs.tmux = {
     enable = lib.mkDefault true;
@@ -72,9 +55,17 @@ in
       set -ga update-environment TERM_PROGRAM
 
       # UI
+      ## status
+      set -g status on
+      set -g status-position bottom
+      set -g status-left ""
+      set -g status-interval 5
+
       ## window
       set -g renumber-window on # renumber when window is closed
       set -g window-status-separator "" # remove gap between window text
+      setw -g automatic-rename on
+      setw -g automatic-rename-format "#{pane_current_path}: #{pane_current_command}"
 
       # Keybinds
       ## y and p as in vim
