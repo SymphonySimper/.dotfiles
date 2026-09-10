@@ -29,8 +29,8 @@ in
     setw -g automatic-rename on
     setw -g automatic-rename-format "#{pane_current_path}: #{pane_current_command}"
 
-    set -g @catppuccin_window_text " #{pane_current_command}"
-    set -g @catppuccin_window_current_text " #{pane_current_command}"
+    set -g @catppuccin_window_text " #{?automatic-rename,#{pane_current_command},#{window_name}}"
+    set -g @catppuccin_window_current_text " #{?automatic-rename,#{pane_current_command},#{window_name}}"
 
     set -ag status-right "#{E:@catppuccin_status_session}"
   '';
