@@ -91,6 +91,15 @@ in
 
       ## Open External programs
       bind v run-shell  ${history} # Open history in editor
+
+      ## Quick switch
+      bind b new-window -c "#{pane_current_path}" -S -n Build
+      bind e new-window -c "#{pane_current_path}" -S -n Editor ${
+        if config.programs.helix.enable then (lib.getExe config.programs.helix.package) else "$EDITOR"
+      }
+      bind f new-window -c "#{pane_current_path}" -S -n Files ${lib.optionalString config.programs.yazi.enable (lib.getExe config.programs.yazi.package)}
+      bind g new-window -c "#{pane_current_path}" -S -n Git
+      bind i new-window -c "#{pane_current_path}" -S -n AI
     '';
   };
 

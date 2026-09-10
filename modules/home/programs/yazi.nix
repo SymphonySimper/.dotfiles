@@ -53,9 +53,5 @@ in
         ];
       };
     };
-
-    programs.tmux.extraConfig = ''
-      bind y new-window -c "#{pane_current_path}" ${lib.getExe config.programs.yazi.package}
-    '';
   };
 }
