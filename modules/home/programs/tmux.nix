@@ -90,7 +90,7 @@ in
       bind c new-window -c "#{pane_current_path}"
 
       ## Open External programs
-      bind e run-shell  ${history} # Open history in editor
+      bind v run-shell  ${history} # Open history in editor
     '';
   };
 
