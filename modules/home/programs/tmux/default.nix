@@ -7,6 +7,8 @@
 let
   cfg = config.programs.tmux;
 
+  defaultWindow = "Scratch";
+
   history = pkgs.writeShellScript "my-tmux-history" ''
     temp_file=$(mktemp)
 
@@ -58,6 +60,7 @@ in
       set -g renumber-window on # renumber when window is closed
       set -g window-status-separator "" # remove gap between window text
       setw -g automatic-rename-format "#{pane_current_path}: #{pane_current_command}"
+      set-hook -g after-new-session 'rename-window ${defaultWindow}'
 
       # Keybinds
       ## y and p as in vim
@@ -78,6 +81,7 @@ in
       bind v run-shell  ${history} # Open history in editor
 
       ## Quick switch
+      bind Space new-window -c "#{pane_current_path}" -S -n ${defaultWindow}
       bind b new-window -c "#{pane_current_path}" -S -n Build
       bind e new-window -c "#{pane_current_path}" -S -n Editor ${
         if config.programs.helix.enable then (lib.getExe config.programs.helix.package) else "$EDITOR"
