@@ -19,6 +19,18 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    xdg.configFile."gtk-3.0/bookmarks" = {
+      force = true;
+      text = ''
+        file://${config.xdg.userDirs.documents} Documents
+        file://${config.xdg.userDirs.music} Music
+        file://${config.xdg.userDirs.pictures} Pictures
+        file://${config.xdg.userDirs.videos} Videos
+        file://${config.xdg.userDirs.download} Downloads
+        file://${config.xdg.userDirs.projects} Projects
+      '';
+    };
+
     dconf = {
       enable = true;
 
