@@ -46,11 +46,19 @@
   };
 
   outputs =
-    { ... }@inputs:
+    {
+      self,
+      nixpkgs,
+      ...
+    }@inputs:
     let
       hosts = import ./modules/hosts { inherit inputs; };
     in
     {
+      formatter = nixpkgs.lib.genAttrs hosts.systems (
+        system: nixpkgs.legacyPackages.${system}.nixfmt-tree
+      );
+
       inherit (hosts) homeConfigurations nixosConfigurations;
       lib = { inherit (hosts) mkConfig; };
 

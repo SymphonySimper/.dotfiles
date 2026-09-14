@@ -1,5 +1,7 @@
 { inputs, ... }:
 let
+  lib = inputs.nixpkgs.lib;
+
   mkConfig =
     {
       type, # nixos, home
@@ -25,15 +27,31 @@ let
       }
     else
       throw "unsupported configuration type: ${type}";
+
+  mkConfigs = type: builtins.mapAttrs (_: value: mkConfig (value // { inherit type; }));
+
+  nixosHosts = {
+    laptop = {
+      system = "x86_64-linux";
+      modules = [ ./laptop/nixos.nix ];
+    };
+  };
+
+  homeHosts = {
+    laptop = {
+      system = "x86_64-linux";
+      modules = [ ./laptop/home.nix ];
+    };
+  };
+
+  systems = lib.unique (
+    (map (host: host.system) (lib.attrValues nixosHosts))
+    ++ (map (host: host.system) (lib.attrValues homeHosts))
+  );
 in
 {
-  inherit mkConfig;
+  inherit mkConfig systems;
 
-  nixosConfigurations = builtins.mapAttrs (_: value: mkConfig (value // { type = "nixos"; })) {
-    laptop.modules = [ ./laptop/nixos.nix ];
-  };
-
-  homeConfigurations = builtins.mapAttrs (_: value: mkConfig (value // { type = "home"; })) {
-    laptop.modules = [ ./laptop/home.nix ];
-  };
+  nixosConfigurations = mkConfigs "nixos" nixosHosts;
+  homeConfigurations = mkConfigs "home" homeHosts;
 }

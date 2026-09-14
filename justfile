@@ -26,6 +26,16 @@ clean-home:
 [linux]
 clean: clean-system clean-home
 
+[group('fmt')]
+[unix]
+fmt *args:
+    nix fmt {{ args }}
+
+[group('fmt')]
+[unix]
+fmt-check:
+    nix fmt -- --ci --quiet
+
 [unix]
 last-week-commits:
     ./scripts/flake-last-week-commits.sh
