@@ -18,7 +18,10 @@ let
   '';
 in
 {
-  imports = [ ./theme.nix ];
+  imports = [
+    ./projects.nix
+    ./theme.nix
+  ];
 
   programs.tmux = {
     enable = lib.mkDefault true;
