@@ -44,7 +44,7 @@ in
       set -as terminal-features ",${cfg.terminal}:RGB"
 
       set -g set-titles on
-      set -g set-titles-string "#S: #T"
+      set -g set-titles-string "#{session_name}"
 
       setw -g monitor-activity on
 
