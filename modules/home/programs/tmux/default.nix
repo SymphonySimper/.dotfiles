@@ -25,6 +25,7 @@ in
 
   programs.tmux = {
     enable = lib.mkDefault true;
+    mouse = true;
     prefix = "C-a";
     keyMode = "vi";
     escapeTime = 0;
