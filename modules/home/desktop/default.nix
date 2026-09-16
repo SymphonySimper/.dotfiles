@@ -54,7 +54,7 @@ in
 
         "org/gnome/desktop/interface" = {
           enable-animations = true;
-          enable-hot-corners = false;
+          enable-hot-corners = true;
           show-battery-percentage = true;
         };
 
