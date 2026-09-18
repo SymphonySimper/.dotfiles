@@ -27,7 +27,7 @@ in
     programs.chromium = {
       search = {
         name = lib.mkDefault "P1ain";
-        url = lib.mkDefault "https://p1a.in/";
+        url = lib.mkDefault "https://p1a.in/?q=";
       };
 
       extraOpts = {
