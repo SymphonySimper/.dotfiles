@@ -3,5 +3,6 @@
     ./audio.nix
     ./disable-fn-led.nix
     ./disko.nix
+    ./logitech.nix
   ];
 }
