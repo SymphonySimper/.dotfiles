@@ -61,11 +61,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1787988311,
-        "narHash": "sha256-+4wlyab1F2Vseh9W6Lccs2s+lx9e0gMEflMXgukxShQ=",
+        "lastModified": 1789720647,
+        "narHash": "sha256-dS7LCXndt1btK1XFKgFUerbZ2ZgGaQjyIFrwDUg/IBw=",
         "ref": "refs/heads/main",
-        "rev": "579e6e2835f763dc3e056ff2f0ac1fbb3844248e",
-        "revCount": 7,
+        "rev": "9c3218f40ea0e2db4ecfc3f07cc73da28b37b01f",
+        "revCount": 8,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/SymphonySimper/gnome-shell-extensions"
