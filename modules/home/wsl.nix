@@ -19,7 +19,6 @@ in
 
     programs.tmux.terminal = "xterm-256color";
     programs.helix.settings.editor.clipboard-provider = "win32-yank";
-    programs.nushell.settings.shell_integration.osc9_9 = true;
 
     programs.fish.functions = {
       _windows_terminal_wsl_path = {

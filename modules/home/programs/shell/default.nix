@@ -10,8 +10,6 @@ in
 {
   imports = [
     ./fish
-
-    ./nushell.nix
   ];
 
   home.sessionVariables = {
