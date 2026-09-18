@@ -1,6 +1,5 @@
 { ... }: {
   imports = [
-    ./new-tab.nix
     ./search.nix
   ];
 
