@@ -26,7 +26,7 @@ in
         "nix-command"
         "flakes"
       ];
-      commit-lock-file-summary = "chore(flake): update flake.lock";
+      commit-lock-file-summary = "flake: update flake.lock";
     };
 
     registry = {
