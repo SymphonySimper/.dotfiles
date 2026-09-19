@@ -6,20 +6,36 @@ in
   options.desktop = {
     appFolders = lib.mkOption {
       description = "Create app folder";
-      type = lib.types.attrsOf (lib.types.listOf lib.types.str);
+      type = lib.types.attrsOf (
+        lib.types.submodule {
+          options = lib.genAttrs [ "apps" "categories" ] (
+            name:
+            lib.mkOption {
+              description = "${name} to part of folder";
+              type = lib.types.listOf lib.types.str;
+              default = [ ];
+            }
+          );
+        }
+      );
       default = { };
     };
   };
 
   config = lib.mkIf cfg.enable {
     desktop.appFolders = {
-      Games = [ "Game" ];
-      Office = [ "Office" ];
-      Terminal = [
+      Games.categories = [ "Game" ];
+      Office.categories = [ "Office" ];
+      System.apps = [
+        "org.gnome.DiskUtility.desktop"
+        "org.gnome.Extensions.desktop"
+        "org.gnome.Settings.desktop"
+      ];
+      Terminal.categories = [
         "TerminalEmulator"
         "ConsoleOnly"
       ];
-      Viewer = [
+      Viewer.categories = [
         "AudioVideo"
         "Viewer"
       ];
@@ -35,7 +51,7 @@ in
           name = "org/gnome/desktop/app-folders/folders/${folder.name}";
           value = {
             name = folder.name;
-            categories = folder.value;
+            inherit (folder.value) categories apps;
           };
         }) (lib.attrsets.attrsToList cfg.appFolders)
       ))
