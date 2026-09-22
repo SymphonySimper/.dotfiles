@@ -1,5 +1,6 @@
 { pkgs, lib, ... }: {
   imports = [
+    ./ai.nix
     ./android.nix
     ./docker.nix
     ./go.nix
