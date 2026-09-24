@@ -59,5 +59,14 @@ in
         ]
       );
     };
+
+    dconf.settings = {
+      "org/gnome/shell/extensions/caffeine" = {
+        enable-mpris = true;
+        show-notifications = true;
+        show-timer = false;
+        toggle-shortcut = [ "<Super>F10" ];
+      };
+    };
   };
 }
