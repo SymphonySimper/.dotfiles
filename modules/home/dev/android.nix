@@ -22,8 +22,15 @@ in
       }
 
       (lib.mkIf cfg.studio.enable {
-        nixpkgs.config.allowUnfreePackages = [ "android-studio" ];
-        home.packages = [ pkgs.android-studio ];
+        nixpkgs.config.allowUnfreePackages = [
+          "android-cli"
+          "android-studio"
+        ];
+
+        home.packages = [
+          pkgs.android-cli
+          pkgs.android-studio
+        ];
       })
     ]
   );
