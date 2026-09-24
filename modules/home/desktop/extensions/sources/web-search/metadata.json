@@ -1,0 +1,7 @@
+{
+  "name": "Web Search",
+  "description": "Search the web with p1a.in from the overview.",
+  "uuid": "web-search@symphonysimper.com",
+  "shell-version": ["50"],
+  "version": 2
+}

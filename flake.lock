@@ -109,27 +109,6 @@
         "type": "github"
       }
     },
-    "gnome-shell-extensions": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1789720647,
-        "narHash": "sha256-dS7LCXndt1btK1XFKgFUerbZ2ZgGaQjyIFrwDUg/IBw=",
-        "ref": "refs/heads/main",
-        "rev": "9c3218f40ea0e2db4ecfc3f07cc73da28b37b01f",
-        "revCount": 8,
-        "submodules": true,
-        "type": "git",
-        "url": "https://github.com/SymphonySimper/gnome-shell-extensions"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://github.com/SymphonySimper/gnome-shell-extensions"
-      }
-    },
     "helix": {
       "inputs": {
         "nixpkgs": "nixpkgs_2",
@@ -291,7 +270,6 @@
       "inputs": {
         "catppuccin": "catppuccin",
         "disko": "disko",
-        "gnome-shell-extensions": "gnome-shell-extensions",
         "helix": "helix",
         "home-manager": "home-manager",
         "llm-agents": "llm-agents",

@@ -4,10 +4,6 @@
   inputs = {
     # packages
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    gnome-shell-extensions = {
-      url = "git+https://github.com/SymphonySimper/gnome-shell-extensions";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     llm-agents.url = "github:numtide/llm-agents.nix";
 
     # system

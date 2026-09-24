@@ -8,8 +8,9 @@ let
 in
 {
   imports = [
+    ./extensions
+
     ./app-folders.nix
-    ./extensions.nix
     ./keybinds.nix
     ./wallpaper.nix
   ];
