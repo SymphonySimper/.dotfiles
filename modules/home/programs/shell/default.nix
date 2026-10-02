@@ -10,6 +10,8 @@ in
 {
   imports = [
     ./fish
+
+    ./interactive.nix
   ];
 
   home.sessionVariables = {

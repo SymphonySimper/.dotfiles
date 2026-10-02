@@ -20,6 +20,7 @@ in
 {
   imports = [
     ./projects.nix
+    ./terminal.nix
     ./theme.nix
   ];
 
@@ -34,15 +35,7 @@ in
     historyLimit = 5000;
 
     extraConfig = ''
-      set -g default-command ${
-        lib.getExe (
-          if config.programs.fish.enable then config.programs.fish.package else config.programs.bash.package
-        )
-      }
-
-      # RGB colors
-      # https://github.com/tmux/tmux/wiki/FAQ#how-do-i-use-rgb-colour
-      set -as terminal-features ",${cfg.terminal}:RGB"
+      set -g default-command ${config.home.shell.interactive}
 
       set -g set-titles on
       set -g set-titles-string "#{session_name}"
@@ -93,6 +86,4 @@ in
       bind i new-window -c "#{pane_current_path}" -S -n AI
     '';
   };
-
-  programs.kitty.settings.shell = if cfg.enable then lib.getExe cfg.package else ".";
 }
