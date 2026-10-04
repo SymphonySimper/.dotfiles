@@ -22,4 +22,5 @@
   desktop.enable = true;
 
   programs.chromium.enable = true;
+  programs.steam.enable = true;
 }
