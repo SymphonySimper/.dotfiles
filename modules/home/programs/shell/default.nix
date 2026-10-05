@@ -10,6 +10,7 @@ in
 {
   imports = [
     ./fish
+    ./nushell
 
     ./interactive.nix
   ];
