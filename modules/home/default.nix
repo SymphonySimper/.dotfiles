@@ -9,6 +9,7 @@
     ./theme
     ./xdg
 
+    ./copy.nix
     ./user.nix
     ./wsl.nix
   ];
