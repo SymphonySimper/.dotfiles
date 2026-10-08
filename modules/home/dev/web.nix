@@ -32,8 +32,9 @@ in
   config = lib.mkIf config.dev.web.enable {
 
     home.packages = [
-      pkgs.nodejs_24
+      pkgs.bun
       pkgs.corepack_24 # switch to corepack for nodejs >= 25
+      pkgs.nodejs_24
     ];
 
     home.sessionVariables = {
