@@ -21,6 +21,7 @@
     };
     helix.url = "github:helix-editor/helix";
     # helix.url = "github:SymphonySimper/fork-helix";
+    nixvim.url = "github:nix-community/nixvim";
     schemastore = {
       url = "github:SchemaStore/schemastore";
       flake = false;
