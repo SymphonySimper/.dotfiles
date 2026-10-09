@@ -10,6 +10,7 @@
 
     ./plugins
 
+    ./keymaps.nix
     ./opts.nix
   ];
 
