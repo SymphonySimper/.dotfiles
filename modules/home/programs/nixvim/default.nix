@@ -8,6 +8,8 @@
   imports = [
     inputs.nixvim.homeModules.nixvim
 
+    ./plugins
+
     ./opts.nix
   ];
 
