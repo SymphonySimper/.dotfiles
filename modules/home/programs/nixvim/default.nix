@@ -1,6 +1,14 @@
-{ inputs, lib, ... }: {
+{
+  inputs,
+  config,
+  lib,
+  ...
+}:
+{
   imports = [
     inputs.nixvim.homeModules.nixvim
+
+    ./opts.nix
   ];
 
   programs.nixvim = {
@@ -21,6 +29,11 @@
       luaLib = true;
       nvimRuntime = true;
       plugins = true;
+    };
+
+    colorschemes.catppuccin = {
+      enable = true;
+      settings.flavour = config.theme.flavor;
     };
   };
 }
