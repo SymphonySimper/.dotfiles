@@ -15,8 +15,10 @@
     enable = true;
     enablePrintInit = false;
 
+    defaultEditor = false;
     viAlias = true;
     vimAlias = true;
+    vimdiffAlias = true;
 
     withNodeJs = lib.mkForce false;
     withPerl = lib.mkForce false;
