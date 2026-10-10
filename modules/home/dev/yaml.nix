@@ -1,7 +1,7 @@
 {
   config,
+  pkgs,
   lib,
-  mkPrettier,
   ...
 }:
 {
@@ -10,8 +10,9 @@
   };
 
   config = lib.mkIf config.dev.yaml.enable {
-    programs.helix = {
-      lang.yaml.formatter = mkPrettier "yaml";
+    programs.nixvim = {
+      extraPackages = [ pkgs.prettier ];
+      plugins.conform-nvim.formatters.yaml = [ "prettier" ];
     };
   };
 }
