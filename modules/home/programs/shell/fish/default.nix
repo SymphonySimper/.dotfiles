@@ -32,7 +32,7 @@ in
 
   programs.nixvim = {
     lsp.servers.fish_lsp.enable = true;
-    plugins.conform-nvim.settings.fromatters_by_ft = [ "fish_indent" ];
+    plugins.conform-nvim.settings.formatters_by_ft.fish = [ "fish_indent" ];
     plugins.treesitter.grammars = [ "fish" ];
   };
 }
