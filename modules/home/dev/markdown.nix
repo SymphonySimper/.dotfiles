@@ -32,6 +32,11 @@
         markdown = [ "prettier" ];
         "markdown.mdx" = markdown;
       };
+
+      plugins.treesitter.grammars = [
+        "markdown"
+        "markdown_inline"
+      ];
     };
   };
 }

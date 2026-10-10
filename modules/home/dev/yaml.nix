@@ -13,6 +13,7 @@
     programs.nixvim = {
       extraPackages = [ pkgs.prettier ];
       plugins.conform-nvim.formatters.yaml = [ "prettier" ];
+      plugins.treesitter.grammars = [ "yaml" ];
     };
   };
 }
