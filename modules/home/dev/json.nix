@@ -7,7 +7,7 @@
   ...
 }:
 let
-  # refer:  https://www.schemastore.org/
+  # refer: https://www.schemastore.org/
   mkSchema =
     name:
     if (lib.strings.hasInfix "/" name) then

@@ -16,13 +16,26 @@
       pkgs.golangci-lint
     ];
 
-    programs.helix = {
-      lang.go.formatter.command = lib.getExe' pkgs.gotools "goimports";
+    programs.nixvim = {
+      extraPackages = [
+        pkgs.gofumpt
+      ];
 
-      lsp = {
-        gopls.command = lib.getExe pkgs.gopls;
-        golangci-lint-lsp.command = lib.getExe pkgs.golangci-lint-langserver;
+      lsp.servers = {
+        gopls.enable = true;
+        golangci_lint_ls.enable = true;
       };
+
+      plugins.conform-nvim.formatters.go = [
+        "goimports"
+        "gofumpt"
+      ];
+      plugins.treesitter.grammars = [
+        "go"
+        "gomod"
+        "gowork"
+        "gosum"
+      ];
     };
   };
 }

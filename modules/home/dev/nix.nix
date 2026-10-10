@@ -10,24 +10,20 @@
   };
 
   config = lib.mkIf config.dev.nix.enable {
-    programs.helix = {
-      lsp.nixd = {
-        command = lib.getExe pkgs.nixd;
-        args = [ "--inlay-hints=false" ];
-        config.nixd = {
+    programs.nixvim = {
+      extraPackages = [
+        pkgs.nixfmt
+      ];
+
+      lsp.servers.nixd = {
+        enable = true;
+        config.settings.nixd = {
           nixpkgs.expr = "import <nixpkgs> { }";
         };
       };
 
-      lang.nix = {
-        formatter.command = lib.getExe pkgs.nixfmt;
-        language-servers = [
-          {
-            name = "nixd";
-            except-features = [ "format" ];
-          }
-        ];
-      };
+      plugins.conform-nvim.formatters.nix = [ "nixfmt" ];
+      plugins.treesitter.grammars = [ "nix" ];
     };
   };
 }
