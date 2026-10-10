@@ -11,6 +11,5 @@
 
   config = lib.mkIf config.programs.clipboard.enable {
     home.packages = [ pkgs.wl-clipboard ];
-    programs.helix.settings.editor.clipboard-provider = "wayland";
   };
 }

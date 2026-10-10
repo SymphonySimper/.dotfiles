@@ -29,11 +29,6 @@
   config = {
     home.packages = [ pkgs.git-filter-repo ];
 
-    programs.helix.ignores = [
-      "!.gitignore"
-      "!.gitattributes"
-    ];
-
     programs.git = {
       enable = true;
       lfs.enable = true;
