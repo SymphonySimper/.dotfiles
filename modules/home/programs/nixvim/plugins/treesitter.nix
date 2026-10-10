@@ -15,8 +15,8 @@ in
     programs.nixvim.plugins.treesitter = {
       enable = true;
       highlight.enable = true;
-      indent.enable = true;
-      folding.enable = true;
+      indent.enable = false;
+      folding.enable = false;
 
       grammarPackages = lib.lists.unique (
         map (grammar: cfg.package.builtGrammars.${grammar}) cfg.grammars
