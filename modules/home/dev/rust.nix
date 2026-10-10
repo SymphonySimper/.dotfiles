@@ -21,11 +21,14 @@
 
     home.sessionVariables.RUST_BACKTRACE = "1";
 
-    programs.helix = {
-      lsp.rust-analyzer = {
-        command = lib.getExe pkgs.rust-analyzer;
-        config.check.command = "clippy";
+    programs.nixvim = {
+      lsp.servers.rust_analyzer = {
+        enable = true;
+        config.settings.rust-analyzer.check.command = "clippy";
       };
+
+      plugins.conform-nvim.formatters.rust = ["rustfmt"];
+      plugins.treesitter.grammars = ["rust"];
     };
   };
 }
