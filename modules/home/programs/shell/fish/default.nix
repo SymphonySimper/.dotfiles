@@ -30,7 +30,9 @@ in
     };
   };
 
-  programs.helix.lsp = {
-    fish-lsp.command = lib.getExe pkgs.fish-lsp;
+  programs.nixvim = {
+    lsp.servers.fish_lsp.enable = true;
+    plugins.conform-nvim.settings.fromatters_by_ft = [ "fish_indent" ];
+    plugins.treesitter.grammars = [ "fish" ];
   };
 }
