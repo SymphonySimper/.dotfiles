@@ -19,40 +19,14 @@
       };
     };
 
-    programs.helix = rec {
-      ignores = [
-        ".venv"
-        "venv"
-        "**/__pycache__/"
-      ];
-
-      lsp = {
-        ruff = {
-          command = lib.getExe pkgs.ruff;
-          args = [ "server" ];
-        };
-
-        ty = {
-          command = lib.getExe pkgs.ty;
-          args = [ "server" ];
-        };
+    programs.nixvim = {
+      lsp.servers = {
+        ruff.enable = true;
+        ty.enable = true;
       };
 
-      lang.python = {
-        language-servers = [
-          "ruff"
-          "ty"
-        ];
-        formatter = {
-          command = lsp.ruff.command;
-          args = [
-            "format"
-            "--line-length"
-            "88"
-            "-"
-          ];
-        };
-      };
+      plugins.conform-nvim.formatters.python = [ "ruff_format" ];
+      plugins.treesitter.grammars = [ "python" ];
     };
   };
 }
