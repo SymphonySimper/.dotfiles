@@ -30,7 +30,7 @@
     withRuby = lib.mkForce false;
 
     performance.byteCompileLua = {
-      enable = true;
+      enable = false;
       configs = true;
       luaLib = true;
       nvimRuntime = true;
