@@ -1,9 +1,8 @@
 {
   inputs,
   config,
+  pkgs,
   lib,
-  mkPrettier,
-  mkVscodeLsp,
   ...
 }:
 let
@@ -14,8 +13,6 @@ let
       name
     else
       "${inputs.schemastore}/src/schemas/json/${name}.json";
-
-  json = mkVscodeLsp "json";
 in
 {
   options.dev.json = {
@@ -23,25 +20,16 @@ in
   };
 
   config = lib.mkIf config.dev.json.enable {
-    programs.helix = {
-      lang =
-        lib.genAttrs
-          [
-            "json"
-            "jsonc"
-          ]
-          (name: {
-            formatter = mkPrettier name;
-            language-servers = [ json.name ];
-          });
+    programs.nixvim = {
+      extraPackages = [
+        pkgs.prettier
+      ];
 
-      lsp.${json.name} = {
-        command = json.command;
-
-        config.json = {
-          validate.enable = true;
-
-          schemas = (
+      lsp.servers.jsonls = {
+        enable = true;
+        config.settings.json = {
+          validate = true;
+          schemas =
             map
               (schema: {
                 fileMatch = schema.file;
@@ -63,10 +51,20 @@ in
                   name = "chrome-manifest";
                   file = [ "manifest.json" ];
                 }
-              ]
-          );
+              ];
         };
       };
+
+      plugins.conform-nvim.formatters = rec {
+        json = [ "prettier" ];
+        jsonc = json;
+        json5 = json;
+      };
+
+      plugins.treesitter.grammars = [
+        "json"
+        "json5"
+      ];
     };
   };
 }
