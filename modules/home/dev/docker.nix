@@ -26,6 +26,7 @@ in
 
     programs.nixvim = {
       lsp.servers.dockerls.enable = true;
+      plugins.treesitter.grammars = [ "dockerfile" ];
     };
   };
 }
