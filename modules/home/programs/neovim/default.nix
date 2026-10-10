@@ -1,12 +1,13 @@
 { config, lib, ... }: {
   imports = [
-    ./conform.nix
-    ./fzf-lua.nix
     ./keymaps.nix
-    ./lsp.nix
-    ./mini.nix
     ./options.nix
-    ./tree-sitter.nix
+
+    ./plugins/conform.nix
+    ./plugins/fzf.nix
+    ./plugins/lsp.nix
+    ./plugins/mini.nix
+    ./plugins/tree-sitter.nix
   ];
 
   programs.neovim = {
