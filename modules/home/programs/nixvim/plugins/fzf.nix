@@ -57,18 +57,18 @@
         )
         [
           {
-            action = "${fzf}.resume";
+            action.__raw = "${fzf}.resume";
             key = "<leader>f'";
             options.desc = "FZF Resume last picker";
           }
 
           {
-            action = "${fzf}.files";
+            action.__raw = "${fzf}.files";
             key = "<leader>ff";
             options.desc = "FZF Find Files";
           }
           {
-            action = ''
+            action.__raw = ''
               function()
                 local dir = vim.fn.expand("%:p:h")
 
@@ -82,17 +82,17 @@
           }
 
           {
-            action = "${fzf}.live_grep";
+            action.__raw = "${fzf}.live_grep";
             key = "<leader>f/";
             options.desc = "FZF Live Grep";
           }
           {
-            action = "${fzf}.git_status";
+            action.__raw = "${fzf}.git_status";
             key = "<leader>fg";
             options.desc = "FZF Git Status";
           }
           {
-            action = "${fzf}.buffers";
+            action.__raw = "${fzf}.buffers";
             key = "<leader>fb";
             options.desc = "FZF Buffers";
           }
