@@ -11,6 +11,7 @@
     ./plugins
 
     ./keymaps.nix
+    ./lsp.nix
     ./opts.nix
   ];
 
