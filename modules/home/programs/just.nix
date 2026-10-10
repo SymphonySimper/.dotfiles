@@ -18,11 +18,9 @@ in
   config = lib.mkIf config.programs.justfile.enable {
     home.packages = [ package ];
 
-    programs.helix.lang.just = {
-      formatter = {
-        command = lib.getExe package;
-        args = [ "--dump" ];
-      };
+    programs.nixvim = {
+      plugins.conform-nvim.formatters.just = [ "just" ];
+      plugins.treesitter.grammars = [ "just" ];
     };
   };
 }
