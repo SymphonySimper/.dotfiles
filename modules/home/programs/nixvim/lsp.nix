@@ -6,5 +6,7 @@
       documentColor.enable = true;
       linkedEditingRange.enable = true;
     };
+
+    plugins.lspconfig.enable = true;
   };
 }

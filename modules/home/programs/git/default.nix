@@ -88,5 +88,13 @@
         };
       };
     };
+
+    programs.nixvim.plugins.treesitter.grammars = [
+      "git_config"
+      "gitcommit"
+      "git_rebase"
+      "gitignore"
+      "gitattributes"
+    ];
   };
 }
