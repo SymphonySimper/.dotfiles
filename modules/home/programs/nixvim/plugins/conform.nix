@@ -4,7 +4,7 @@
 
     keymaps = [
       {
-        action = ''require("conform").format'';
+        action.__raw = "require(\"conform\").format";
         key = "<leader>cf";
         mode = [ "n" ];
 
