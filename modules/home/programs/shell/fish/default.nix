@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}:
+{ config, lib, ... }:
 let
   shared = import ../_shared.nix { inherit config; };
 in
@@ -32,7 +27,7 @@ in
 
   programs.nixvim = {
     lsp.servers.fish_lsp.enable = true;
-    plugins.conform-nvim.settings.formatters_by_ft.fish = [ "fish_indent" ];
+    plugins.conform-nvim.formatters.fish = [ "fish_indent" ];
     plugins.treesitter.grammars = [ "fish" ];
   };
 }
