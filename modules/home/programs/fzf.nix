@@ -16,7 +16,10 @@ in
 {
   programs.fzf = {
     enable = lib.mkDefault true;
-    defaultOptions = [ "--reverse" ];
+    defaultOptions = [
+      "--reverse"
+      "--bind=change:top"
+    ];
 
     enableBashIntegration = false;
     enableFishIntegration = false;
