@@ -20,7 +20,6 @@ in
         optionalDeps = builtins.concatLists [
           [
             pkgs._7zz # archive extraction
-            pkgs.fd # file searching
           ]
           (lib.optionals cfg.preview [
             pkgs.ffmpeg # video thumbnails

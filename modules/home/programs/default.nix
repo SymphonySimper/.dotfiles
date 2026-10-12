@@ -10,6 +10,7 @@
     ./chromium.nix
     ./clipboard.nix
     ./direnv.nix
+    ./fd.nix
     ./fzf.nix
     ./just.nix
     ./kitty.nix
