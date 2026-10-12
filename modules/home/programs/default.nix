@@ -15,6 +15,7 @@
     ./just.nix
     ./kitty.nix
     ./man.nix
+    ./ripgrep.nix
     ./ssh.nix
     ./yazi.nix
   ];
