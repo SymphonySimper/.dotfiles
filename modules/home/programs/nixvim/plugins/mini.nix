@@ -1,23 +1,22 @@
 { ... }: {
   programs.nixvim = {
-    plugins.mini = {
+    plugins.mini-pairs.enable = true;
+
+    plugins.mini-surround = {
       enable = true;
 
-      modules = {
-        pairs = { };
-
-        surround.mappings = {
-          add = "gsa";
-          delete = "gsd";
-          find = "gsf";
-          find_left = "gsF";
-          highlight = "gsh";
-          replace = "gsr";
-        };
+      settings.mappings = {
+        add = "gsa";
+        delete = "gsd";
+        find = "gsf";
+        find_left = "gsF";
+        highlight = "gsh";
+        replace = "gsr";
       };
     };
 
     keymaps = [
+      # depends on mini-surround
       {
         action.__raw = ''
           function()
