@@ -22,17 +22,21 @@
 
         files.cwd_prompt = false;
 
-        keymap.builtin = {
-          # Scroll half-page down / up
-          "<C-j>" = "preview-page-down";
-          "<C-k>" = "preview-page-up";
+        keymap = {
+          fzf.change = "top"; # reset to top on change
 
-          # Scroll single lines
-          "<C-d>" = "preview-down";
-          "<C-u>" = "preview-up";
+          builtin = {
+            # Scroll half-page down / up
+            "<C-j>" = "preview-page-down";
+            "<C-k>" = "preview-page-up";
 
-          # Reset preview position back to top
-          "<C-r>" = "preview-reset";
+            # Scroll single lines
+            "<C-d>" = "preview-down";
+            "<C-u>" = "preview-up";
+
+            # Reset preview position back to top
+            "<C-r>" = "preview-reset";
+          };
         };
       };
 
