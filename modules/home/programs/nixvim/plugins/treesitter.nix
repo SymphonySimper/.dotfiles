@@ -14,9 +14,12 @@ in
   config = {
     programs.nixvim.plugins.treesitter = {
       enable = true;
+
       highlight.enable = true;
       indent.enable = false;
       folding.enable = false;
+
+      nixvimInjections = false;
 
       grammarPackages = lib.lists.unique (
         map (grammar: cfg.package.builtGrammars.${grammar}) cfg.grammars
