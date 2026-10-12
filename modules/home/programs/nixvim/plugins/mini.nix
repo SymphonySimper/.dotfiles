@@ -1,10 +1,5 @@
 { ... }: {
   programs.nixvim = {
-    plugins.mini-completion = {
-      enable = true;
-      settings.fallback_action = "<C-x><C-f>";
-    };
-
     plugins.mini-pairs.enable = true;
 
     plugins.mini-surround = {
