@@ -13,6 +13,7 @@
     ./keymaps.nix
     ./lsp.nix
     ./opts.nix
+    ./performance.nix
   ];
 
   programs.nixvim = {
@@ -28,14 +29,6 @@
     withPerl = lib.mkForce false;
     withPython3 = lib.mkForce false;
     withRuby = lib.mkForce false;
-
-    performance.byteCompileLua = {
-      enable = false;
-      configs = true;
-      luaLib = true;
-      nvimRuntime = true;
-      plugins = true;
-    };
 
     colorschemes.catppuccin = {
       enable = true;
