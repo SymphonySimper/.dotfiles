@@ -22,21 +22,19 @@
 
         files.cwd_prompt = false;
 
-        keymap = {
-          fzf.change = "top"; # reset to top on change
+        keymap.fzf = {
+          change = "top"; # reset to top on change
 
-          builtin = {
-            # Scroll half-page down / up
-            "<C-j>" = "preview-page-down";
-            "<C-k>" = "preview-page-up";
+          # Scroll half-page down / up
+          "ctrl-j" = "preview-half-page-down";
+          "ctrl-k" = "preview-half-page-up";
 
-            # Scroll single lines
-            "<C-d>" = "preview-down";
-            "<C-u>" = "preview-up";
+          # Scroll single lines
+          "ctrl-d" = "preview-down";
+          "ctrl-u" = "preview-up";
 
-            # Reset preview position back to top
-            "<C-r>" = "preview-reset";
-          };
+          # Reset preview position back to top
+          "ctrl-r" = "preview-top";
         };
       };
 
