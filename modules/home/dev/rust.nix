@@ -27,8 +27,8 @@
         config.settings.rust-analyzer.check.command = "clippy";
       };
 
-      plugins.conform-nvim.formatters.rust = ["rustfmt"];
-      plugins.treesitter.grammars = ["rust"];
+      plugins.conform-nvim.formatters.rust = [ "rustfmt" ];
+      plugins.treesitter.grammars = [ "rust" ];
     };
   };
 }
