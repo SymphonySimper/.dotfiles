@@ -1,6 +1,6 @@
 { ... }: {
   programs.nixvim = {
-    luaLoader.enable = true;
+    luaLoader.enable = false;
 
     performance.byteCompileLua = {
       enable = true;
