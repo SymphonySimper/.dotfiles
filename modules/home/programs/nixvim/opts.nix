@@ -10,7 +10,7 @@
     sidescrolloff = 8; # Horizontal scroll
 
     signcolumn = "yes";
-    cursorline = true;
+    cursorline = false;
 
     tabstop = 2;
     shiftwidth = 2;
