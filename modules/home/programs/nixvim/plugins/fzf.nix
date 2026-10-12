@@ -2,6 +2,7 @@
   programs.nixvim = {
     plugins.fzf-lua = {
       enable = true;
+      profile = "max-perf";
 
       settings = {
         ui_select = { };
@@ -12,7 +13,11 @@
           backdrop = 0;
           fullscreen = true;
           title_pos = "left";
-          preview.title = false;
+
+          preview = {
+            title = false;
+            default = "cat";
+          };
         };
 
         files.cwd_prompt = false;
