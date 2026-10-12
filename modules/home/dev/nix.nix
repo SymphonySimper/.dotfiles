@@ -16,6 +16,11 @@
         args = [ "--inlay-hints=false" ];
         config.nixd = {
           nixpkgs.expr = "import <nixpkgs> { }";
+
+          options = {
+            nixos.expr = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.laptop.options";
+            home-manager.expr = "(builtins.getFlake (builtins.toString ./.)).homeConfigurations.laptop.options";
+          };
         };
       };
 
