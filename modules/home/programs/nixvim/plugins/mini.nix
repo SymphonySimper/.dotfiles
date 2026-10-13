@@ -12,18 +12,7 @@
 
     plugins.mini-pairs.enable = true;
 
-    plugins.mini-surround = {
-      enable = true;
-
-      settings.mappings = {
-        add = "gsa";
-        delete = "gsd";
-        find = "gsf";
-        find_left = "gsF";
-        highlight = "gsh";
-        replace = "gsr";
-      };
-    };
+    plugins.mini-surround.enable = true;
 
     keymaps = [
       # mini-files
