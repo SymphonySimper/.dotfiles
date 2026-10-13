@@ -5,6 +5,8 @@
 
     wrap = true;
     linebreak = true;
+    breakindent = true;
+    showbreak = "↪ ";
 
     scrolloff = 8; # Vertical scroll
     sidescrolloff = 8; # Horizontal scroll

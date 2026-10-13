@@ -2,6 +2,43 @@
 let
   keymaps = [
     {
+      action = "gj";
+      key = "j";
+      mode = [
+        "n"
+        "x"
+      ];
+      options.desc = "Move down a screen row";
+    }
+    {
+      action = "gk";
+      key = "k";
+      mode = [
+        "n"
+        "x"
+      ];
+      options.desc = "Move up a screen row";
+    }
+    {
+      action = "j";
+      key = "gj";
+      mode = [
+        "n"
+        "x"
+      ];
+      options.desc = "Move down a physical line";
+    }
+    {
+      action = "k";
+      key = "gk";
+      mode = [
+        "n"
+        "x"
+      ];
+      options.desc = "Move up a physical line";
+    }
+
+    {
       action = "<cmd>nohlsearch<CR><Esc>";
       key = "<Esc>";
       mode = "n";
@@ -140,7 +177,9 @@ in
               "n"
               "v"
             ];
-        options.silent = true;
+        options = (keymap.options or { }) // {
+          silent = true;
+        };
       }
     ) keymaps;
   };
