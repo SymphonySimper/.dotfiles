@@ -2,6 +2,12 @@
 let
   keymaps = [
     {
+      action = "<cmd>nohlsearch<CR><Esc>";
+      key = "<Esc>";
+      mode = "n";
+      options.desc = "Clear search highlighting";
+    }
+    {
       action = "\"+y";
       key = "<leader>y";
       options.desc = "Yank to system clipboard";
