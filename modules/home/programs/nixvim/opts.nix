@@ -9,7 +9,7 @@
     scrolloff = 8; # Vertical scroll
     sidescrolloff = 8; # Horizontal scroll
 
-    signcolumn = "yes";
+    signcolumn = "no";
     cursorline = false;
 
     tabstop = 2;
