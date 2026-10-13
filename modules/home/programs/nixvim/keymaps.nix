@@ -55,29 +55,30 @@ let
       options.desc = "Paste from system clipboard";
     }
     {
-      action = "\"+_dP";
+      action = "\"+P";
       key = "<space>r";
+      mode = "x";
       options.desc = "Replace selection with system clipboard";
     }
 
     {
-      action = ":write<CR>";
+      action = "<cmd>write<CR>";
       key = "<leader>bw";
       options.desc = "Save file";
     }
     {
-      action = ":bdelete<CR>";
+      action = "<cmd>bdelete<CR>";
       key = "<leader>bd";
       options.desc = "Close the current buffer";
     }
     {
-      action = ":bdelete!<CR>";
+      action = "<cmd>bdelete!<CR>";
       key = "<leader>bD";
       options.desc = "Force close the current buffer";
     }
 
     {
-      action = ":quit<CR>";
+      action = "<cmd>quit<CR>";
       key = "<leader>wq";
       options.desc = "Quit";
     }
@@ -137,22 +138,22 @@ let
     }
 
     {
-      action = ":resize +2<CR>";
+      action = "<cmd>resize +2<CR>";
       key = "<leader>wrk";
       options.desc = "Resize top";
     }
     {
-      action = ":vertical resize +2<CR>";
+      action = "<cmd>vertical resize +2<CR>";
       key = "<leader>wrl";
       options.desc = "Resize right";
     }
     {
-      action = ":resize -2<CR>";
+      action = "<cmd>resize -2<CR>";
       key = "<leader>wrj";
       options.desc = "Resize bottom";
     }
     {
-      action = ":vertical resize -2<CR>";
+      action = "<cmd>vertical resize -2<CR>";
       key = "<leader>wrh";
       options.desc = "Resize left";
     }

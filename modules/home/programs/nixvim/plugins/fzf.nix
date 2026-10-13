@@ -59,7 +59,9 @@
               "n"
               "v"
             ];
-            options.silent = true;
+            options = (keymap.options or { }) // {
+              silent = true;
+            };
           }
         )
         [
@@ -85,7 +87,7 @@
               end
             '';
             key = "<leader>fF";
-            options.desc = "FZF find files in current buffere directory";
+            options.desc = "FZF find files in current buffer directory";
           }
 
           {
