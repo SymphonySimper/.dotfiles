@@ -1,5 +1,10 @@
 { ... }: {
   programs.nixvim = {
+    plugins.mini-diff = {
+      enable = true;
+      settings.view.style = "number";
+    };
+
     plugins.mini-files = {
       enable = true;
       settings.windows.max_number = 3;
