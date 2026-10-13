@@ -56,7 +56,7 @@ let
     }
     {
       action = "\"+P";
-      key = "<space>r";
+      key = "<space>P";
       mode = "x";
       options.desc = "Replace selection with system clipboard";
     }
