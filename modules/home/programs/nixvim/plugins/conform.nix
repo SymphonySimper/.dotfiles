@@ -15,13 +15,17 @@ in
     programs.nixvim = {
       plugins.conform-nvim = {
         enable = true;
-        settings.formatters_by_ft = cfg.formatters;
+
+        settings = {
+          formatters_by_ft = cfg.formatters;
+          default_format_opts.lsp_format = "fallback";
+        };
       };
 
       keymaps = [
         {
           action.__raw = "require(\"conform\").format";
-          key = "<leader>cf";
+          key = "grf";
           mode = [ "n" ];
 
           options = {
