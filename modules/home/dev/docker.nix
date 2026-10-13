@@ -24,8 +24,9 @@ in
       '')
     ];
 
-    programs.helix.lsp = {
-      docker-langserver.command = lib.getExe pkgs.dockerfile-language-server;
+    programs.nixvim = {
+      lsp.servers.dockerls.enable = true;
+      plugins.treesitter.grammars = [ "dockerfile" ];
     };
   };
 }

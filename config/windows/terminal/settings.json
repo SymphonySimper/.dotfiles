@@ -165,7 +165,7 @@
           {
             "action": "newTab",
             "tabTitle": "Scrollback Editor",
-            "commandline": "hx %TEMP%/wt_scrollback.txt"
+            "commandline": "nvim %TEMP%/wt_scrollback.txt"
           }
         ]
       }

@@ -2,28 +2,8 @@
   config,
   pkgs,
   lib,
-  mkVscodeLsp,
-  mkPrettier,
   ...
 }:
-let
-  lsp = {
-    html = mkVscodeLsp "html";
-    css = mkVscodeLsp "css";
-    tailwind = {
-      name = "tailwindcss-ls";
-      command = lib.getExe pkgs.tailwindcss-language-server;
-    };
-    ts = {
-      name = "typescript-language-server";
-      command = lib.getExe pkgs.typescript-language-server;
-    };
-    svelte = {
-      name = "svelteserver";
-      command = lib.getExe pkgs.svelte-language-server;
-    };
-  };
-in
 {
   options.dev.web = {
     enable = lib.mkEnableOption "Web";
@@ -45,69 +25,31 @@ in
       config.home.sessionVariables.PNPM_HOME
     ];
 
-    programs.helix = {
-      ignores = [
-        "node_modules"
-        "vite.config.js.timestamp-*"
-        "vite.config.ts.timestamp-*"
+    programs.nixvim = {
+      extraPackages = [ pkgs.prettier ];
 
-        "!*prettier*"
-        "!.npmrc"
-        ".svelte-kit"
+      lsp.servers = lib.genAttrs [ "html" "cssls" "ts_ls" "tailwindcss" "svelte" ] (_: {
+        enable = true;
+      });
+
+      plugins.conform-nvim.formatters = lib.genAttrs [
+        "html"
+        "css"
+        "javascript"
+        "typescript"
+        "javascriptreact"
+        "typescriptreact"
+        "svelte"
+      ] (_: [ "prettier" ]);
+
+      plugins.treesitter.grammars = [
+        "html"
+        "css"
+        "javascript"
+        "typescript"
+        "tsx"
+        "svelte"
       ];
-
-      lang = {
-        html = {
-          formatter = mkPrettier "html";
-          language-servers = [
-            lsp.html.name
-            lsp.tailwind.name
-          ];
-        };
-        css = {
-          formatter = mkPrettier "css";
-          language-servers = [
-            lsp.css.name
-            lsp.tailwind.name
-          ];
-        };
-        svelte = {
-          formatter = mkPrettier "svelte";
-          language-servers = [
-            "svelteserver"
-            lsp.tailwind.name
-          ];
-        };
-      }
-      // (lib.genAttrs
-        [
-          "javascript"
-          "jsx"
-          "typescript"
-          "tsx"
-        ]
-        (name: {
-          formatter = mkPrettier "typescript";
-          language-servers = builtins.concatLists [
-            [ lsp.ts.name ]
-            (lib.optionals (lib.strings.hasSuffix "sx" name) [
-              lsp.tailwind.name
-            ])
-          ];
-        })
-      );
-
-      lsp = {
-        ${lsp.html.name}.command = lsp.html.command;
-        ${lsp.css.name}.command = lsp.css.command;
-        ${lsp.tailwind.name}.command = lsp.tailwind.command;
-        ${lsp.ts.name}.command = lsp.ts.command;
-
-        ${lsp.svelte.name} = {
-          command = lsp.svelte.command;
-          config.configuration.svelte.plugin.svelte.defaultScriptLanguage = "ts";
-        };
-      };
     };
   };
 }

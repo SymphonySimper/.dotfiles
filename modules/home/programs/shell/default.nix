@@ -57,14 +57,10 @@ in
     };
   };
 
-  programs.helix.lsp = {
-    bash-language-server.command = lib.getExe (
-      pkgs.bash-language-server.overrideAttrs (old: {
-        postFixup = (old.postFixup or "") + ''
-          wrapProgram $out/bin/bash-language-server \
-            --suffix PATH : ${pkgs.lib.makeBinPath [ pkgs.shfmt ]}
-        '';
-      })
-    );
+  programs.nixvim = {
+    extraPackages = [ pkgs.shfmt ];
+    lsp.servers.bashls.enable = true;
+    plugins.conform-nvim.formatters.sh = [ "shfmt" ];
+    plugins.treesitter.grammars = [ "bash" ];
   };
 }
