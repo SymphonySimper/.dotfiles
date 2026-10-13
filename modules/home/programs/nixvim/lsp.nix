@@ -41,22 +41,15 @@
 
     keymaps = [
       {
-        action.__raw = "vim.lsp.buf.code_action";
-        key = "<leader>ca";
-        mode = [
-          "n"
-          "x"
-        ];
-        options.desc = "LSP Code Actions";
-      }
-      {
         action.__raw = "vim.diagnostic.open_float";
-        key = "<leader>cd";
+        key = "grd";
+        mode = "n";
         options.desc = "Show diagnostic for current line";
       }
       {
         action = "<cmd>lsp restart<CR>";
-        key = "<leader>cl";
+        key = "grl";
+        mode = "n";
         options.desc = "Restart LSPs";
       }
     ];
