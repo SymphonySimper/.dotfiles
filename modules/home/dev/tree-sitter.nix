@@ -6,6 +6,7 @@
   config = lib.mkIf config.dev.tree-sitter.enable {
     programs.nixvim = {
       lsp.servers.ts_query_ls.enable = true;
+      plugins.treesitter.grammars = [ "query" ];
     };
   };
 }
