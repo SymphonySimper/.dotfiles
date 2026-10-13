@@ -1,5 +1,31 @@
 { ... }: {
   programs.nixvim = {
+    diagnostic.settings = {
+      severity_sort = true;
+
+      signs = {
+        priority = 250; # Keep diagnostic colors above mini.diff's line-number highlights (199).
+
+        text.__raw = ''
+          {
+            [vim.diagnostic.severity.ERROR] = "",
+            [vim.diagnostic.severity.WARN] = "",
+            [vim.diagnostic.severity.INFO] = "",
+            [vim.diagnostic.severity.HINT] = "",
+          }
+        '';
+
+        numhl.__raw = ''
+          {
+            [vim.diagnostic.severity.ERROR] = "DiagnosticError",
+            [vim.diagnostic.severity.WARN] = "DiagnosticWarn",
+            [vim.diagnostic.severity.INFO] = "DiagnosticInfo",
+            [vim.diagnostic.severity.HINT] = "DiagnosticHint",
+          }
+        '';
+      };
+    };
+
     lsp = {
       codelens.enable = true;
       completion.enable = false; # handled by blink
