@@ -21,7 +21,6 @@
   programs.chromium.enable = true;
   programs.clipboard.enable = true;
   programs.kitty.enable = true;
-  programs.yazi.preview = true;
 
   programs.gh = {
     enable = true;

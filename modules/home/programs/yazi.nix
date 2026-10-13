@@ -9,7 +9,9 @@ let
 in
 {
   options.programs.yazi = {
-    preview = lib.mkEnableOption "Preview";
+    preview = lib.mkEnableOption "Preview" // {
+      default = config.programs.kitty.enable;
+    };
   };
 
   config = {
