@@ -21,6 +21,7 @@
         };
 
         files.cwd_prompt = false;
+        grep.rg_glob = true;
 
         keymap.fzf = {
           change = "top"; # reset to top on change
