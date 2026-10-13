@@ -3,6 +3,8 @@
 
   desktop.enable = true;
 
+  dev.ai.packages = [ "codex" ];
+
   theme.fonts.enable = true;
   theme.gtk.enable = true;
 

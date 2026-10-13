@@ -1,7 +1,6 @@
 { ... }: {
   imports = [
     ./git
-    ./helix
     ./nixvim
     ./shell
     ./tmux

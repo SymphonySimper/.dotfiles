@@ -3,6 +3,10 @@
     diagnostic.settings = {
       severity_sort = true;
 
+      # Show diagnostics below the cursor's current line.
+      virtual_text = false;
+      virtual_lines.current_line = true;
+
       signs = {
         priority = 250; # Keep diagnostic colors above mini.diff's line-number highlights (199).
 
