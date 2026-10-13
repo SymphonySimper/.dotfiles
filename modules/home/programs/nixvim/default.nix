@@ -20,7 +20,7 @@
     enable = true;
     enablePrintInit = false;
 
-    defaultEditor = false;
+    defaultEditor = true;
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
