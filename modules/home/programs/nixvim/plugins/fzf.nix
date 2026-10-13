@@ -37,14 +37,10 @@
           "ctrl-r" = "preview-top";
         };
       };
-
-      # set border color to line number color
-      luaConfig.post = ''
-        vim.api.nvim_set_hl(0, "FzfLuaBorder", {
-          link = "LineNr",
-        })
-      '';
     };
+
+    # set border color to line number color
+    highlightOverride.FzfLuaBorder.link = "LineNr";
 
     keymaps =
       let
