@@ -4,7 +4,6 @@
     ./android.nix
     ./docker.nix
     ./go.nix
-    ./harper.nix
     ./json.nix
     ./markdown.nix
     ./nix.nix

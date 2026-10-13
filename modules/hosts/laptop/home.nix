@@ -8,7 +8,6 @@
 
   dev.android.enable = true;
   dev.go.enable = true;
-  dev.harper.enable = true;
   dev.json.enable = true;
   dev.markdown.enable = true;
   dev.nix.enable = true;
