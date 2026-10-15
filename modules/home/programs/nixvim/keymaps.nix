@@ -62,28 +62,6 @@ let
     }
 
     {
-      action = "<cmd>write<CR>";
-      key = "<leader>bw";
-      options.desc = "Save file";
-    }
-    {
-      action = "<cmd>bdelete<CR>";
-      key = "<leader>bd";
-      options.desc = "Close the current buffer";
-    }
-    {
-      action = "<cmd>bdelete!<CR>";
-      key = "<leader>bD";
-      options.desc = "Force close the current buffer";
-    }
-
-    {
-      action = "<cmd>quit<CR>";
-      key = "<leader>wq";
-      options.desc = "Quit";
-    }
-
-    {
       action = "<C-w>k";
       key = "<leader>wk";
       options.desc = "Move to top window";
@@ -135,27 +113,6 @@ let
         remap = true;
         desc = "Move pane far right";
       };
-    }
-
-    {
-      action = "<cmd>resize +2<CR>";
-      key = "<leader>wrk";
-      options.desc = "Resize top";
-    }
-    {
-      action = "<cmd>vertical resize +2<CR>";
-      key = "<leader>wrl";
-      options.desc = "Resize right";
-    }
-    {
-      action = "<cmd>resize -2<CR>";
-      key = "<leader>wrj";
-      options.desc = "Resize bottom";
-    }
-    {
-      action = "<cmd>vertical resize -2<CR>";
-      key = "<leader>wrh";
-      options.desc = "Resize left";
     }
   ];
 in
