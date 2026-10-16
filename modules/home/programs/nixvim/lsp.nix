@@ -31,7 +31,7 @@
     };
 
     lsp = {
-      codelens.enable = true;
+      codelens.enable = false;
       completion.enable = false; # handled by blink
       documentColor.enable = true;
       linkedEditingRange.enable = true;
