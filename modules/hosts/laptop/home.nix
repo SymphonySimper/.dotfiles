@@ -14,6 +14,7 @@
   dev.python.enable = true;
   dev.rust.enable = true;
   dev.toml.enable = true;
+  dev.typst.enable = true;
   dev.web.enable = true;
   dev.yaml.enable = true;
 

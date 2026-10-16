@@ -11,6 +11,7 @@
     ./rust.nix
     ./toml.nix
     ./tree-sitter.nix
+    ./typst.nix
     ./web.nix
     ./yaml.nix
   ];
