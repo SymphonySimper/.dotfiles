@@ -14,6 +14,7 @@
       pkgs.go
       pkgs.gotools
       pkgs.golangci-lint
+      pkgs.gcc # For cgo and race detection.
     ];
 
     programs.nixvim = {
