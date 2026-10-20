@@ -18,6 +18,9 @@ in
       {
         home.packages = [ pkgs.android-tools ];
 
+        home.sessionVariables.ANDROID_HOME = "${config.home.homeDirectory}/Android/Sdk";
+        home.sessionPath = [ "${config.home.sessionVariables.ANDROID_HOME}/emulator" ];
+
         dev.android.studio.enable = lib.mkDefault config.desktop.enable;
       }
 
