@@ -14,7 +14,7 @@ in
       set -as terminal-features ",${cfg.terminal}:RGB"
     '';
 
-    programs.kitty.settings.shell = lib.mkIf cfg.enableTerminalAutoLaunch (
+    programs.kitty.settings.shell = lib.mkIf (cfg.enable && cfg.enableTerminalAutoLaunch) (
       lib.mkForce (lib.getExe cfg.package)
     );
   };
