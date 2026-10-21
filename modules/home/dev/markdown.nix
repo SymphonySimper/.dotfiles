@@ -23,6 +23,8 @@
           "--enable-emoji"
           "--enable-footnotes"
           "--no-auto"
+        ]
+        ++ lib.optionals config.theme.enable [
           "--theme"
           (mkGetTheme { name = "%name%-%flavor%"; })
         ];
