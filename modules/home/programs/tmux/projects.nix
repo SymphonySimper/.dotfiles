@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 let
   dir = config.xdg.userDirs.projects;
 
@@ -36,7 +41,7 @@ let
   '';
 in
 {
-  programs.tmux.extraConfig = ''
+  programs.tmux.extraConfig = lib.mkIf (config.programs.tmux.enable && config.programs.fzf.enable) ''
     bind P display-popup -E ${projects}
   '';
 }
