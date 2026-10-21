@@ -25,7 +25,7 @@ in
     };
   };
 
-  programs.nixvim = {
+  programs.nixvim = lib.mkIf config.programs.fish.enable {
     lsp.servers.fish_lsp.enable = true;
     plugins.conform-nvim.formatters.fish = [ "fish_indent" ];
     plugins.treesitter.grammars = [ "fish" ];
