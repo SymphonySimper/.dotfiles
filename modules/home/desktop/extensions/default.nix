@@ -47,7 +47,7 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (cfg.enable && cfg.extensions.enable) {
     programs.gnome-shell = {
       enable = true;
 
