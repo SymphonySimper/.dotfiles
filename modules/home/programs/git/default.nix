@@ -27,10 +27,10 @@
   };
 
   config = {
-    home.packages = [ pkgs.git-filter-repo ];
+    home.packages = lib.mkIf config.programs.git.enable [ pkgs.git-filter-repo ];
 
     programs.git = {
-      enable = true;
+      enable = lib.mkDefault true;
       lfs.enable = true;
       signing.format = lib.mkDefault null;
 
@@ -84,7 +84,7 @@
       };
     };
 
-    programs.nixvim.plugins.treesitter.grammars = [
+    programs.nixvim.plugins.treesitter.grammars = lib.mkIf config.programs.git.enable [
       "git_config"
       "gitcommit"
       "git_rebase"

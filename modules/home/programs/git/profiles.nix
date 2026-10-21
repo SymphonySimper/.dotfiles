@@ -40,7 +40,7 @@ in
     };
   };
 
-  config = {
+  config = lib.mkIf cfg.enable {
     programs.git = {
       includes = (
         map
