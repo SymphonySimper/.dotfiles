@@ -3,7 +3,6 @@ import shutil
 import sys
 from pathlib import Path
 
-
 if os.name != "nt":
     print("Can only be ran on windows!.")
     sys.exit(1)
