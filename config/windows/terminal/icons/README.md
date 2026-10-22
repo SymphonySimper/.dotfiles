@@ -23,4 +23,5 @@ done
 
 - [NixOS-WSL](https://github.com/nix-community/NixOS-WSL/blob/main/assets/NixOS-WSL.ico)
 - [PowerShell](https://github.com/PowerShell/PowerShell/blob/master/assets/Powershell_black.ico)
+- [Windows PowerShell](https://github.com/microsoft/terminal/blob/main/src/cascadia/CascadiaPackage/ProfileIcons/%7B61c54bbd-c2c6-5271-96e7-009a87ff44bf%7D.scale-200.png)
 - [Command Prompt](https://github.com/microsoft/terminal/blob/main/res/console.ico)
