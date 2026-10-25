@@ -33,7 +33,6 @@
 
     extensions = [
       "ddkjiahejlhfcafbddmgiahcphecmpfh" # ublock origin lite
-      "dbepggeogbaibhgnhhndojpepiihcmeb" # vimium
     ];
   };
 }
