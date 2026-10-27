@@ -30,6 +30,8 @@ in
       };
     };
 
+    programs.nixvim.globals.clipboard = "win32yank";
+
     home.packages = [
       (pkgs.stdenv.mkDerivation rec {
         pname = "win32yank";
