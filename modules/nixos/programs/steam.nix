@@ -15,6 +15,7 @@
       steam = {
         localNetworkGameTransfers.openFirewall = true;
         remotePlay.openFirewall = true;
+        protontricks.enable = true;
 
         extraCompatPackages = [ pkgs.proton-ge-bin ];
       };
