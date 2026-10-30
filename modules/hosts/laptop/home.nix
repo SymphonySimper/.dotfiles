@@ -36,6 +36,8 @@
 
   scripts.nixpkgsReview.enable = true;
 
+  services.handy.enable = true;
+
   home.packages = [
     pkgs.libreoffice
   ];
