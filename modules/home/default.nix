@@ -6,6 +6,7 @@
     ./dev
     ./programs
     ./scripts
+    ./services
     ./theme
     ./xdg
 
