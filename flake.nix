@@ -18,6 +18,11 @@
 
     # home
     catppuccin.url = "github:catppuccin/nix";
+    hex = {
+      url = "github:anomalyco/hex";
+      inputs.nixpkgs.follows = "nixpkgs"; # suggested by upstream docs
+      inputs.home-manager.follows = "home-manager";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
