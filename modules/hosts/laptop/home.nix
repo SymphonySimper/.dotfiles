@@ -6,6 +6,11 @@
   theme.fonts.enable = true;
   theme.gtk.enable = true;
 
+  dev.ai.packages = [
+    "opencode2"
+    "t3code-desktop"
+  ];
+
   dev.android.enable = true;
   dev.go.enable = true;
   dev.json.enable = true;
