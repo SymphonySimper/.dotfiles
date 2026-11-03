@@ -21,8 +21,6 @@
                 end
               '';
             };
-
-            path.opts.max_entries = 10;
           };
         };
 
