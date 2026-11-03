@@ -66,6 +66,11 @@
       inherit (hosts) homeConfigurations nixosConfigurations;
       lib = { inherit (hosts) mkConfig; };
 
+      packages = import ./modules/packages {
+        inherit inputs;
+        inherit (hosts) systems;
+      };
+
       templates = import ./modules/templates;
     };
 }

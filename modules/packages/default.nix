@@ -1,0 +1,13 @@
+{ inputs, systems, ... }:
+let
+  inherit (inputs) nixpkgs;
+
+  forAllSystems = nixpkgs.lib.genAttrs systems;
+in
+forAllSystems (
+  system:
+  let
+    pkgs = import nixpkgs { inherit system; };
+  in
+  { }
+)
