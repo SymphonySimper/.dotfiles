@@ -9,5 +9,7 @@ forAllSystems (
   let
     pkgs = import nixpkgs { inherit system; };
   in
-  { }
+  {
+    bentopdf = pkgs.callPackage ./bentopdf.nix { };
+  }
 )
