@@ -1,7 +1,7 @@
 {
   lib,
   bentopdf,
-  lighttpd,
+  darkhttpd,
   writeShellScriptBin,
   writeText,
 }:
@@ -9,19 +9,18 @@
 let
   port = "3456";
 
-  config = writeText "bentopdf.lighttpd.conf" ''
-    server.document-root = "${bentopdf}"
-    server.port = ${port}
-
-    server.modules = (
-      "mod_indexfile",
-      "mod_staticfile"
-    )
-
-    index-file.names = ( "index.html" )
+  # darkhttpd serves .mjs as octet-stream, which breaks pdf.js module scripts
+  mimetypes = writeText "bentopdf.mime.types" ''
+    text/javascript mjs
   '';
 in
 writeShellScriptBin "bentopdf" ''
   echo "Starting server at http://localhost:${port}"
-  exec ${lib.getExe lighttpd} -D -f "${config}"
+  # COOP/COEP are needed for SharedArrayBuffer (LibreOffice-based Office -> PDF conversions)
+  exec ${lib.getExe darkhttpd} ${bentopdf} \
+    --addr 127.0.0.1 \
+    --port ${port} \
+    --mimetypes ${mimetypes} \
+    --header 'Cross-Origin-Opener-Policy: same-origin' \
+    --header 'Cross-Origin-Embedder-Policy: require-corp'
 ''
