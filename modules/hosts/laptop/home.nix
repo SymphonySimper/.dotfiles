@@ -41,8 +41,6 @@
     email = "50240805+SymphonySimper@users.noreply.github.com";
   };
 
-  scripts.nixpkgsReview.enable = true;
-
   home.packages = [
     pkgs.libreoffice
   ];

@@ -1,6 +1,1 @@
-{ ... }:
-{
-  imports = [
-    ./nixpkgs-review.nix
-  ];
-}
+{ ... }: { }
