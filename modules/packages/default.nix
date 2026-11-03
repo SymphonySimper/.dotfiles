@@ -11,5 +11,6 @@ forAllSystems (
   in
   {
     bentopdf = pkgs.callPackage ./bentopdf.nix { };
+    vidconv = pkgs.callPackage ./vidconv.nix { };
   }
 )
