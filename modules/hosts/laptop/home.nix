@@ -7,6 +7,7 @@
   theme.gtk.enable = true;
 
   dev.ai.packages = [
+    "claude-code"
     "opencode2"
     "t3code-desktop"
   ];
