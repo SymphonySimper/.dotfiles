@@ -2,6 +2,6 @@
   "name": "My",
   "description": "Just the way I like it.",
   "uuid": "my@symphonysimper.com",
-  "shell-version": ["50"],
-  "version": 11
+  "shell-version": ["51"],
+  "version": 12
 }
