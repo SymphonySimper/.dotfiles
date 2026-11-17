@@ -3,7 +3,7 @@
 
   inputs = {
     # packages
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     llm-agents.url = "github:numtide/llm-agents.nix";
 
     # system
