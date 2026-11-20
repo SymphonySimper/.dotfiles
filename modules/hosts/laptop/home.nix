@@ -31,6 +31,8 @@
   programs.hex.enable = true;
   programs.kitty.enable = true;
 
+  programs.btop.gpu.amd = true;
+
   programs.gh = {
     enable = true;
     settings.git_protocol = "ssh";
