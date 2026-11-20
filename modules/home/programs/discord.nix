@@ -6,7 +6,12 @@
     ];
 
     programs.discord = {
-      settings.SKIP_HOST_UPDATE = true;
+      # Keep in sync with nixpkgs' disable-breaking-updates.py, which rewrites
+      # settings.json (replacing the HM symlink) if any of these are missing.
+      settings = {
+        SKIP_HOST_UPDATE = true;
+        SKIP_MODULE_UPDATE = true;
+      };
     };
   };
 }
