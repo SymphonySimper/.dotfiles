@@ -8,5 +8,5 @@ updates:
     commit-message:
       prefix: "flake"
     groups:
-      flake-inputs:
+      inputs:
         patterns: ["*"]
