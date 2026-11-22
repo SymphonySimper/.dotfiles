@@ -13,7 +13,6 @@
     ./discord.nix
     ./fd.nix
     ./fzf.nix
-    ./hex.nix
     ./just.nix
     ./kitty.nix
     ./man.nix

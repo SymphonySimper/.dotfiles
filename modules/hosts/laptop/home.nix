@@ -28,7 +28,6 @@
   programs.chromium.enable = true;
   programs.clipboard.enable = true;
   programs.discord.enable = true;
-  programs.hex.enable = true;
   programs.kitty.enable = true;
 
   programs.btop.gpu.amd = true;
