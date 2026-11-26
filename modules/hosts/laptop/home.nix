@@ -10,6 +10,7 @@
     "claude-code"
     "opencode2"
     "t3code-desktop"
+    "antigravity-cli"
   ];
 
   dev.android.enable = true;
