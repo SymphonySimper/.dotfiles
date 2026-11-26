@@ -1,17 +1,10 @@
-{ pkgs, ... }: {
+{ pkgs, aiPkgs, ... }: {
   imports = [ ../../users/symph/home.nix ];
 
   desktop.enable = true;
 
   theme.fonts.enable = true;
   theme.gtk.enable = true;
-
-  dev.ai.packages = [
-    "claude-code"
-    "opencode2"
-    "t3code-desktop"
-    "antigravity-cli"
-  ];
 
   dev.android.enable = true;
   dev.go.enable = true;
@@ -46,5 +39,10 @@
 
   home.packages = [
     pkgs.libreoffice
+
+    aiPkgs.claude-code
+    aiPkgs.opencode2
+    aiPkgs.t3code-desktop
+    aiPkgs.antigravity-cli
   ];
 }
